@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/lambda-stitchinstance': {
-    /** List all running lambda-stitch instances */
+  '/searxnginstance': {
+    /** List all running searxng instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the lambda-stitch instance */
+            /** @description Name of the searxng instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,7 +40,7 @@ export interface paths {
                 url: string;
               };
             };
-            AssetListBaseUrl?: string;
+            AutoComplete?: string;
           }[];
         };
         /** Default Response */
@@ -52,14 +52,14 @@ export interface paths {
         };
       };
     };
-    /** Launch a new lambda-stitch instance */
+    /** Launch a new searxng instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the lambda-stitch instance */
+            /** @description Name of the searxng instance */
             name: string;
-            AssetListBaseUrl?: string;
+            AutoComplete?: string;
           };
         };
       };
@@ -67,7 +67,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the lambda-stitch instance */
+            /** @description Name of the searxng instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -85,7 +85,7 @@ export interface paths {
                 url: string;
               };
             };
-            AssetListBaseUrl?: string;
+            AutoComplete?: string;
           };
         };
         /** Default Response */
@@ -112,12 +112,12 @@ export interface paths {
       };
     };
   };
-  '/lambda-stitchinstance/{id}': {
-    /** Obtain status and resource URLs for an lambda-stitch instance */
+  '/searxnginstance/{id}': {
+    /** Obtain status and resource URLs for an searxng instance */
     get: {
       parameters: {
         path: {
-          /** Name of the lambda-stitch instance */
+          /** Name of the searxng instance */
           id: string;
         };
       };
@@ -125,7 +125,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the lambda-stitch instance */
+            /** @description Name of the searxng instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -143,7 +143,7 @@ export interface paths {
                 url: string;
               };
             };
-            AssetListBaseUrl?: string;
+            AutoComplete?: string;
           };
         };
         /** Default Response */
@@ -162,11 +162,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an lambda-stitch instance */
+    /** Stop and remove an searxng instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the lambda-stitch instance */
+          /** Name of the searxng instance */
           id: string;
         };
       };
@@ -186,11 +186,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of lambda-stitch instance */
+    /** Return status of searxng instance */
     get: {
       parameters: {
         path: {
-          /** Name of the lambda-stitch instance */
+          /** Name of the searxng instance */
           id: string;
         };
       };
@@ -213,7 +213,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the lambda-stitch instance */
+    /** Return the latest logs from the searxng instance */
     get: {
       parameters: {
         query: {
@@ -221,7 +221,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the lambda-stitch instance */
+          /** Name of the searxng instance */
           id: string;
         };
       };
@@ -241,11 +241,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for lambda-stitch instance */
+    /** Return the exposed extra ports for searxng instance */
     get: {
       parameters: {
         path: {
-          /** Name of the lambda-stitch instance */
+          /** Name of the searxng instance */
           id: string;
         };
       };
@@ -276,11 +276,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnLambdaStitch =
-  paths['/lambda-stitchinstance/{id}']['get']['responses']['200']['schema'];
+export type SearxngSearxng =
+  paths['/searxnginstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnLambdaStitchConfig =
-  paths['/lambda-stitchinstance']['post']['parameters']['body']['body'];
+export type SearxngSearxngConfig =
+  paths['/searxnginstance']['post']['parameters']['body']['body'];
 
 import {
   Context,
@@ -291,72 +291,61 @@ import {
 } from '@osaas/client-core';
 
 /**
- * Create a new HLS VOD Stitcher instance
+ * Create a new SearXNG instance
  *
- * @description A proxy to insert ads in an HLS VOD either using manifest manipulation or HLS interstitials
+ * @description Experience the power of privacy with SearXNG, a customizable metasearch engine delivering unmatched confidentiality. Explore the web securely with our easy setup and extensive admin tools.
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnLambdaStitchConfig}} body - Service instance configuration
- * @returns {EyevinnLambdaStitch} - Service instance
+ * @param {SearxngSearxngConfig}} body - Service instance configuration
+ * @returns {SearxngSearxng} - Service instance
  * @example
- * import { Context, createEyevinnLambdaStitchInstance } from '@osaas/client-services';
+ * import { Context, createSearxngSearxngInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnLambdaStitchInstance(ctx, { name: 'myinstance' });
+ * const instance = await createSearxngSearxngInstance(ctx, { name: 'myinstance' });
  * console.log(instance.url);
  */
-export async function createEyevinnLambdaStitchInstance(
+export async function createSearxngSearxngInstance(
   ctx: Context,
-  body: EyevinnLambdaStitchConfig
-): Promise<EyevinnLambdaStitch> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-lambda-stitch'
-  );
+  body: SearxngSearxngConfig
+): Promise<SearxngSearxng> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('searxng-searxng');
   const instance = await createInstance(
     ctx,
-    'eyevinn-lambda-stitch',
+    'searxng-searxng',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-lambda-stitch', instance.name, ctx);
+  await waitForInstanceReady('searxng-searxng', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a HLS VOD Stitcher instance
+ * Remove a SearXNG instance
  *
- * @description A proxy to insert ads in an HLS VOD either using manifest manipulation or HLS interstitials
+ * @description Experience the power of privacy with SearXNG, a customizable metasearch engine delivering unmatched confidentiality. Explore the web securely with our easy setup and extensive admin tools.
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the stitcher to be removed
+ * @param {string} name - Name of the searxng to be removed
  */
-export async function removeEyevinnLambdaStitchInstance(
+export async function removeSearxngSearxngInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-lambda-stitch'
-  );
-  await removeInstance(ctx, 'eyevinn-lambda-stitch', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken('searxng-searxng');
+  await removeInstance(ctx, 'searxng-searxng', name, serviceAccessToken);
 }
 
 /**
- * Get a HLS VOD Stitcher instance
+ * Get a SearXNG instance
  *
- * @description A proxy to insert ads in an HLS VOD either using manifest manipulation or HLS interstitials
+ * @description Experience the power of privacy with SearXNG, a customizable metasearch engine delivering unmatched confidentiality. Explore the web securely with our easy setup and extensive admin tools.
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the stitcher to be retrieved
- * @returns {EyevinnLambdaStitch} - Service instance
+ * @param {string} name - Name of the searxng to be retrieved
+ * @returns {SearxngSearxng} - Service instance
  */
-export async function getEyevinnLambdaStitchInstance(
+export async function getSearxngSearxngInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnLambdaStitch> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-lambda-stitch'
-  );
-  return await getInstance(
-    ctx,
-    'eyevinn-lambda-stitch',
-    name,
-    serviceAccessToken
-  );
+): Promise<SearxngSearxng> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('searxng-searxng');
+  return await getInstance(ctx, 'searxng-searxng', name, serviceAccessToken);
 }

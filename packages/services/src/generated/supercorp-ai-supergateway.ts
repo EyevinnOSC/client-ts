@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/lambda-stitchinstance': {
-    /** List all running lambda-stitch instances */
+  '/supergatewayinstance': {
+    /** List all running supergateway instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the lambda-stitch instance */
+            /** @description Name of the supergateway instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,7 +40,8 @@ export interface paths {
                 url: string;
               };
             };
-            AssetListBaseUrl?: string;
+            McpServer: string;
+            EnvVars?: string;
           }[];
         };
         /** Default Response */
@@ -52,14 +53,15 @@ export interface paths {
         };
       };
     };
-    /** Launch a new lambda-stitch instance */
+    /** Launch a new supergateway instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the lambda-stitch instance */
+            /** @description Name of the supergateway instance */
             name: string;
-            AssetListBaseUrl?: string;
+            McpServer: string;
+            EnvVars?: string;
           };
         };
       };
@@ -67,7 +69,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the lambda-stitch instance */
+            /** @description Name of the supergateway instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -85,7 +87,8 @@ export interface paths {
                 url: string;
               };
             };
-            AssetListBaseUrl?: string;
+            McpServer: string;
+            EnvVars?: string;
           };
         };
         /** Default Response */
@@ -112,12 +115,12 @@ export interface paths {
       };
     };
   };
-  '/lambda-stitchinstance/{id}': {
-    /** Obtain status and resource URLs for an lambda-stitch instance */
+  '/supergatewayinstance/{id}': {
+    /** Obtain status and resource URLs for an supergateway instance */
     get: {
       parameters: {
         path: {
-          /** Name of the lambda-stitch instance */
+          /** Name of the supergateway instance */
           id: string;
         };
       };
@@ -125,7 +128,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the lambda-stitch instance */
+            /** @description Name of the supergateway instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -143,7 +146,8 @@ export interface paths {
                 url: string;
               };
             };
-            AssetListBaseUrl?: string;
+            McpServer: string;
+            EnvVars?: string;
           };
         };
         /** Default Response */
@@ -162,11 +166,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an lambda-stitch instance */
+    /** Stop and remove an supergateway instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the lambda-stitch instance */
+          /** Name of the supergateway instance */
           id: string;
         };
       };
@@ -186,11 +190,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of lambda-stitch instance */
+    /** Return status of supergateway instance */
     get: {
       parameters: {
         path: {
-          /** Name of the lambda-stitch instance */
+          /** Name of the supergateway instance */
           id: string;
         };
       };
@@ -213,7 +217,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the lambda-stitch instance */
+    /** Return the latest logs from the supergateway instance */
     get: {
       parameters: {
         query: {
@@ -221,7 +225,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the lambda-stitch instance */
+          /** Name of the supergateway instance */
           id: string;
         };
       };
@@ -241,11 +245,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for lambda-stitch instance */
+    /** Return the exposed extra ports for supergateway instance */
     get: {
       parameters: {
         path: {
-          /** Name of the lambda-stitch instance */
+          /** Name of the supergateway instance */
           id: string;
         };
       };
@@ -276,11 +280,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnLambdaStitch =
-  paths['/lambda-stitchinstance/{id}']['get']['responses']['200']['schema'];
+export type SupercorpAiSupergateway =
+  paths['/supergatewayinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnLambdaStitchConfig =
-  paths['/lambda-stitchinstance']['post']['parameters']['body']['body'];
+export type SupercorpAiSupergatewayConfig =
+  paths['/supergatewayinstance']['post']['parameters']['body']['body'];
 
 import {
   Context,
@@ -291,71 +295,76 @@ import {
 } from '@osaas/client-core';
 
 /**
- * Create a new HLS VOD Stitcher instance
+ * Create a new Supergateway instance
  *
- * @description A proxy to insert ads in an HLS VOD either using manifest manipulation or HLS interstitials
+ * @description Unlock seamless stdio MCP server connectivity with Supergateway! Run servers over SSE effortlessly, ideal for remote access and debugging. Start with one command to deliver powerful, real-time interactions!
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnLambdaStitchConfig}} body - Service instance configuration
- * @returns {EyevinnLambdaStitch} - Service instance
+ * @param {SupercorpAiSupergatewayConfig}} body - Service instance configuration
+ * @returns {SupercorpAiSupergateway} - Service instance
  * @example
- * import { Context, createEyevinnLambdaStitchInstance } from '@osaas/client-services';
+ * import { Context, createSupercorpAiSupergatewayInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnLambdaStitchInstance(ctx, { name: 'myinstance' });
+ * const instance = await createSupercorpAiSupergatewayInstance(ctx, { name: 'myinstance' });
  * console.log(instance.url);
  */
-export async function createEyevinnLambdaStitchInstance(
+export async function createSupercorpAiSupergatewayInstance(
   ctx: Context,
-  body: EyevinnLambdaStitchConfig
-): Promise<EyevinnLambdaStitch> {
+  body: SupercorpAiSupergatewayConfig
+): Promise<SupercorpAiSupergateway> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-lambda-stitch'
+    'supercorp-ai-supergateway'
   );
   const instance = await createInstance(
     ctx,
-    'eyevinn-lambda-stitch',
+    'supercorp-ai-supergateway',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-lambda-stitch', instance.name, ctx);
+  await waitForInstanceReady('supercorp-ai-supergateway', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a HLS VOD Stitcher instance
+ * Remove a Supergateway instance
  *
- * @description A proxy to insert ads in an HLS VOD either using manifest manipulation or HLS interstitials
+ * @description Unlock seamless stdio MCP server connectivity with Supergateway! Run servers over SSE effortlessly, ideal for remote access and debugging. Start with one command to deliver powerful, real-time interactions!
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the stitcher to be removed
+ * @param {string} name - Name of the supergateway to be removed
  */
-export async function removeEyevinnLambdaStitchInstance(
+export async function removeSupercorpAiSupergatewayInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-lambda-stitch'
+    'supercorp-ai-supergateway'
   );
-  await removeInstance(ctx, 'eyevinn-lambda-stitch', name, serviceAccessToken);
+  await removeInstance(
+    ctx,
+    'supercorp-ai-supergateway',
+    name,
+    serviceAccessToken
+  );
 }
 
 /**
- * Get a HLS VOD Stitcher instance
+ * Get a Supergateway instance
  *
- * @description A proxy to insert ads in an HLS VOD either using manifest manipulation or HLS interstitials
+ * @description Unlock seamless stdio MCP server connectivity with Supergateway! Run servers over SSE effortlessly, ideal for remote access and debugging. Start with one command to deliver powerful, real-time interactions!
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the stitcher to be retrieved
- * @returns {EyevinnLambdaStitch} - Service instance
+ * @param {string} name - Name of the supergateway to be retrieved
+ * @returns {SupercorpAiSupergateway} - Service instance
  */
-export async function getEyevinnLambdaStitchInstance(
+export async function getSupercorpAiSupergatewayInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnLambdaStitch> {
+): Promise<SupercorpAiSupergateway> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-lambda-stitch'
+    'supercorp-ai-supergateway'
   );
   return await getInstance(
     ctx,
-    'eyevinn-lambda-stitch',
+    'supercorp-ai-supergateway',
     name,
     serviceAccessToken
   );

@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/lambda-stitchinstance': {
-    /** List all running lambda-stitch instances */
+  '/diceinstance': {
+    /** List all running dice instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the lambda-stitch instance */
+            /** @description Name of the dice instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,7 +40,6 @@ export interface paths {
                 url: string;
               };
             };
-            AssetListBaseUrl?: string;
           }[];
         };
         /** Default Response */
@@ -52,14 +51,13 @@ export interface paths {
         };
       };
     };
-    /** Launch a new lambda-stitch instance */
+    /** Launch a new dice instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the lambda-stitch instance */
+            /** @description Name of the dice instance */
             name: string;
-            AssetListBaseUrl?: string;
           };
         };
       };
@@ -67,7 +65,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the lambda-stitch instance */
+            /** @description Name of the dice instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -85,7 +83,6 @@ export interface paths {
                 url: string;
               };
             };
-            AssetListBaseUrl?: string;
           };
         };
         /** Default Response */
@@ -112,12 +109,12 @@ export interface paths {
       };
     };
   };
-  '/lambda-stitchinstance/{id}': {
-    /** Obtain status and resource URLs for an lambda-stitch instance */
+  '/diceinstance/{id}': {
+    /** Obtain status and resource URLs for an dice instance */
     get: {
       parameters: {
         path: {
-          /** Name of the lambda-stitch instance */
+          /** Name of the dice instance */
           id: string;
         };
       };
@@ -125,7 +122,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the lambda-stitch instance */
+            /** @description Name of the dice instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -143,7 +140,6 @@ export interface paths {
                 url: string;
               };
             };
-            AssetListBaseUrl?: string;
           };
         };
         /** Default Response */
@@ -162,11 +158,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an lambda-stitch instance */
+    /** Stop and remove an dice instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the lambda-stitch instance */
+          /** Name of the dice instance */
           id: string;
         };
       };
@@ -186,11 +182,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of lambda-stitch instance */
+    /** Return status of dice instance */
     get: {
       parameters: {
         path: {
-          /** Name of the lambda-stitch instance */
+          /** Name of the dice instance */
           id: string;
         };
       };
@@ -213,7 +209,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the lambda-stitch instance */
+    /** Return the latest logs from the dice instance */
     get: {
       parameters: {
         query: {
@@ -221,7 +217,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the lambda-stitch instance */
+          /** Name of the dice instance */
           id: string;
         };
       };
@@ -241,11 +237,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for lambda-stitch instance */
+    /** Return the exposed extra ports for dice instance */
     get: {
       parameters: {
         path: {
-          /** Name of the lambda-stitch instance */
+          /** Name of the dice instance */
           id: string;
         };
       };
@@ -276,11 +272,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnLambdaStitch =
-  paths['/lambda-stitchinstance/{id}']['get']['responses']['200']['schema'];
+export type DicedbDice =
+  paths['/diceinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnLambdaStitchConfig =
-  paths['/lambda-stitchinstance']['post']['parameters']['body']['body'];
+export type DicedbDiceConfig =
+  paths['/diceinstance']['post']['parameters']['body']['body'];
 
 import {
   Context,
@@ -291,72 +287,61 @@ import {
 } from '@osaas/client-core';
 
 /**
- * Create a new HLS VOD Stitcher instance
+ * Create a new Dice DB instance
  *
- * @description A proxy to insert ads in an HLS VOD either using manifest manipulation or HLS interstitials
+ * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnLambdaStitchConfig}} body - Service instance configuration
- * @returns {EyevinnLambdaStitch} - Service instance
+ * @param {DicedbDiceConfig}} body - Service instance configuration
+ * @returns {DicedbDice} - Service instance
  * @example
- * import { Context, createEyevinnLambdaStitchInstance } from '@osaas/client-services';
+ * import { Context, createDicedbDiceInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnLambdaStitchInstance(ctx, { name: 'myinstance' });
+ * const instance = await createDicedbDiceInstance(ctx, { name: 'myinstance' });
  * console.log(instance.url);
  */
-export async function createEyevinnLambdaStitchInstance(
+export async function createDicedbDiceInstance(
   ctx: Context,
-  body: EyevinnLambdaStitchConfig
-): Promise<EyevinnLambdaStitch> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-lambda-stitch'
-  );
+  body: DicedbDiceConfig
+): Promise<DicedbDice> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
   const instance = await createInstance(
     ctx,
-    'eyevinn-lambda-stitch',
+    'dicedb-dice',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-lambda-stitch', instance.name, ctx);
+  await waitForInstanceReady('dicedb-dice', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a HLS VOD Stitcher instance
+ * Remove a Dice DB instance
  *
- * @description A proxy to insert ads in an HLS VOD either using manifest manipulation or HLS interstitials
+ * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the stitcher to be removed
+ * @param {string} name - Name of the dice to be removed
  */
-export async function removeEyevinnLambdaStitchInstance(
+export async function removeDicedbDiceInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-lambda-stitch'
-  );
-  await removeInstance(ctx, 'eyevinn-lambda-stitch', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
+  await removeInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
 }
 
 /**
- * Get a HLS VOD Stitcher instance
+ * Get a Dice DB instance
  *
- * @description A proxy to insert ads in an HLS VOD either using manifest manipulation or HLS interstitials
+ * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the stitcher to be retrieved
- * @returns {EyevinnLambdaStitch} - Service instance
+ * @param {string} name - Name of the dice to be retrieved
+ * @returns {DicedbDice} - Service instance
  */
-export async function getEyevinnLambdaStitchInstance(
+export async function getDicedbDiceInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnLambdaStitch> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-lambda-stitch'
-  );
-  return await getInstance(
-    ctx,
-    'eyevinn-lambda-stitch',
-    name,
-    serviceAccessToken
-  );
+): Promise<DicedbDice> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
+  return await getInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
 }

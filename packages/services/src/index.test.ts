@@ -2408,3 +2408,139 @@ describe('removeEyevinnAiCodeReviewerInstance', () => {
     );
   });
 });
+
+describe('createSearxngSearxngInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createSearxngSearxngInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('searxng-searxng');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'searxng-searxng',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'searxng-searxng',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeSearxngSearxngInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeSearxngSearxngInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'searxng-searxng',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createDicedbDiceInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createDicedbDiceInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('dicedb-dice');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'dicedb-dice',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'dicedb-dice',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeDicedbDiceInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeDicedbDiceInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'dicedb-dice',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createBluewaveLabsCheckmateInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createBluewaveLabsCheckmateInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'bluewave-labs-checkmate'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'bluewave-labs-checkmate',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'bluewave-labs-checkmate',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeBluewaveLabsCheckmateInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeBluewaveLabsCheckmateInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'bluewave-labs-checkmate',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createSupercorpAiSupergatewayInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createSupercorpAiSupergatewayInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'supercorp-ai-supergateway'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'supercorp-ai-supergateway',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'supercorp-ai-supergateway',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeSupercorpAiSupergatewayInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeSupercorpAiSupergatewayInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'supercorp-ai-supergateway',
+      'sdk',
+      'token'
+    );
+  });
+});

@@ -492,3 +492,31 @@ export {
   removeEyevinnAiCodeReviewerInstance,
   getEyevinnAiCodeReviewerInstance
 } from './generated/eyevinn-ai-code-reviewer';
+export {
+  SearxngSearxng,
+  SearxngSearxngConfig,
+  createSearxngSearxngInstance,
+  removeSearxngSearxngInstance,
+  getSearxngSearxngInstance
+} from './generated/searxng-searxng';
+export {
+  DicedbDice,
+  DicedbDiceConfig,
+  createDicedbDiceInstance,
+  removeDicedbDiceInstance,
+  getDicedbDiceInstance
+} from './generated/dicedb-dice';
+export {
+  BluewaveLabsCheckmate,
+  BluewaveLabsCheckmateConfig,
+  createBluewaveLabsCheckmateInstance,
+  removeBluewaveLabsCheckmateInstance,
+  getBluewaveLabsCheckmateInstance
+} from './generated/bluewave-labs-checkmate';
+export {
+  SupercorpAiSupergateway,
+  SupercorpAiSupergatewayConfig,
+  createSupercorpAiSupergatewayInstance,
+  removeSupercorpAiSupergatewayInstance,
+  getSupercorpAiSupergatewayInstance
+} from './generated/supercorp-ai-supergateway';
