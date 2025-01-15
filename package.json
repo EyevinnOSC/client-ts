@@ -10,7 +10,8 @@
     "packages/intercom",
     "packages/db",
     "packages/ai",
-    "packages/services"
+    "packages/services",
+    "packages/web"
   ],
   "author": "Eyevinn Open Source Cloud <osc@eyevinn.se>",
   "repository": {
