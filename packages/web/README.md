@@ -23,7 +23,9 @@ async function main() {
 
   try {
     const ctx = new Context({ environment });
-    await publish('www', '/Users/birme/Code/eyevinn/www/dist', ctx, { sync: true });
+    await publish('www', '/Users/birme/Code/eyevinn/www/dist', ctx, {
+      sync: true
+    });
   } catch (err) {
     Log().error(err);
   }
