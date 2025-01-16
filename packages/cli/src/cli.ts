@@ -13,6 +13,7 @@ import cmdTranscribe from './transcribe/cmd';
 import cmdDb from './db/cmd';
 import { cmdChat } from './architect/cmd';
 import { cmdVod } from './vod/cmd';
+import { cmdWeb } from './web/cmd';
 
 const cli = new Command();
 
@@ -41,4 +42,5 @@ cli.addCommand(cmdTranscribe());
 cli.addCommand(cmdDb());
 cli.addCommand(cmdChat());
 cli.addCommand(cmdVod());
+cli.addCommand(cmdWeb());
 cli.parse(process.argv);

@@ -1,5 +1,6 @@
 import { Context, isValidInstanceName } from '@osaas/client-core';
 import {
+  Bucket,
   createStorageBucket,
   removeBucketContents,
   uploadFile
@@ -10,6 +11,12 @@ import { statSync } from 'fs';
 
 export interface PublishOpts {
   sync?: boolean;
+}
+
+export interface Website {
+  name: string;
+  url: string;
+  bucket: Bucket;
 }
 
 export async function publish(
@@ -34,4 +41,9 @@ export async function publish(
       await uploadFile(join(dir, file), file, bucket);
     }
   }
+  return {
+    name,
+    url: bucket.endpoint + '/' + bucket.name + '/index.html',
+    bucket
+  };
 }
