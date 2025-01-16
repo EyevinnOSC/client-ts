@@ -88,6 +88,37 @@ export async function createStorageBucket(
   };
 }
 
+export async function removeBucketContents(bucket: Bucket) {
+  Log().debug(`Removing contents on bucket ${bucket.name}`);
+  const minioClient = new Minio.Client({
+    endPoint: new URL(bucket.endpoint).hostname,
+    accessKey: bucket.accessKeyId,
+    secretKey: bucket.secretAccessKey
+  });
+
+  const p: Promise<string[]> = new Promise((resolve, reject) => {
+    const stream = minioClient.listObjects(bucket.name, '', true);
+    const objectsToDelete: string[] = [];
+
+    stream.on('data', (obj) => {
+      if (obj.name) {
+        objectsToDelete.push(obj.name);
+      }
+    });
+
+    stream.on('end', () => {
+      resolve(objectsToDelete);
+    });
+
+    stream.on('error', (err) => {
+      reject(err);
+    });
+  });
+  const objectsToDelete = await p;
+  Log().debug(`Deleting ${objectsToDelete.length} objects`);
+  await minioClient.removeObjects(bucket.name, objectsToDelete);
+}
+
 export async function uploadFile(
   source: string,
   dest: string,
@@ -97,7 +128,6 @@ export async function uploadFile(
   const fileStream = createReadStream(source);
   const stats = await statSync(source);
   const metadata = { 'Content-Type': mime.getType(source) };
-  Log().debug(metadata);
   const minioClient = new Minio.Client({
     endPoint: new URL(bucket.endpoint).hostname,
     accessKey: bucket.accessKeyId,

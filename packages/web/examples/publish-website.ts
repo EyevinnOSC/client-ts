@@ -5,7 +5,7 @@ async function main() {
   const ctx = new Context();
 
   try {
-    publish('www', '/Users/birme/Code/eyevinn/www/dist', ctx);
+    publish('www', '/Users/birme/Code/eyevinn/www/dist', ctx, { sync: true });
   } catch (err) {
     Log().error(err);
   }
