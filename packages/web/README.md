@@ -16,12 +16,14 @@ Example code
 
 ```javascript
 import { Context, Log } from '@osaas/client-core';
+import { publish } from '@osaas/client-web';
 
 async function main() {
   const ctx = new Context();
 
   try {
     const ctx = new Context({ environment });
+    await publish('www', '/Users/birme/Code/eyevinn/www/dist', ctx, { sync: true });
   } catch (err) {
     Log().error(err);
   }
