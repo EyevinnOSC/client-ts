@@ -27,6 +27,7 @@
     "@osaas/client-db": "^0.4.0",
     "@osaas/client-intercom": "^0.2.2",
     "@osaas/client-transcode": "^0.13.2",
+    "@osaas/client-web": "^0.1.0",
     "@types/promptly": "^3.0.5",
     "chalk": "4.1.2",
     "commander": "^12.1.0",
