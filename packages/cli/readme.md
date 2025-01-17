@@ -17,7 +17,7 @@ npm install -g @osaas/cli
 
 ```
 % osc
-Usage: cli [options] [command]
+Usage: osc [options] [command]
 
 Options:
   -v, --version                        Output the current version
