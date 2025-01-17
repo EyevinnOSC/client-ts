@@ -1,5 +1,5 @@
 import { Context } from '@osaas/client-core';
-import { publish } from '@osaas/client-web';
+import { createCloudfrontDistribution, publish } from '@osaas/client-web';
 import { Command } from 'commander';
 
 export function cmdWeb() {
@@ -33,5 +33,34 @@ export function cmdWeb() {
       }
     });
 
+  web
+    .command('cdn-create')
+    .description('Create a CDN distribution for a service instance')
+    .argument('<serviceId>', 'Service Id')
+    .argument('<instanceName>', 'Instance name')
+    .option('--provider <provider>', 'CDN provider (default: cloudfront)')
+    .option('--origin-path <originPath>', 'Origin path (default: /)')
+    .action(async (serviceId, instanceName, options, command) => {
+      try {
+        const globalOpts = command.optsWithGlobals();
+        const environment = globalOpts?.env || 'prod';
+        const ctx = new Context({ environment });
+
+        if (!options.provider) {
+          options.provider = 'cloudfront';
+        }
+        if (options.provider === 'cloudfront') {
+          console.log('Creating CloudFront distribution...');
+          await createCloudfrontDistribution(serviceId, instanceName, ctx, {
+            originPath: options.originPath
+          });
+          console.log('CloudFront distribution created');
+        } else {
+          console.log('CDN provider not supported (available: cloudfront)');
+        }
+      } catch (err) {
+        console.log((err as Error).message);
+      }
+    });
   return web;
 }

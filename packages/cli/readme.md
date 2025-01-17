@@ -17,34 +17,32 @@ npm install -g @osaas/cli
 
 ```
 % osc
-Usage: osc [options] [command]
+Usage: cli [options] [command]
 
 Options:
-  -v, --version                                             Output the current version
-  --env <environment>                                       Environment to use
-  -h, --help                                                display help for command
+  -v, --version                        Output the current version
+  --env <environment>                  Environment to use
+  -h, --help                           display help for command
 
 Commands:
   admin
-  list <serviceId>                                          List all my service instances
-  create [options] <serviceId> <name>                       Create a service instance
-  describe <serviceId> <name>                               Get details for a service instance
-  remove <serviceId> <name>                                 Remove a service instance
-  logs <serviceId> <name>                                   Get logs for a service instance
-  transcode [options] <source> <dest> [packageDestination]  Transcode file to ABR fileset and store on S3
-                                                            bucket
-  encore
-  pipeline
-  packager [options] <source> <dest>                        Create streaming package from ABR bundle on S3
-                                                            and store on another S3 bucket
+  list <serviceId>                     List all my service instances
+  create [options] <serviceId> <name>  Create a service instance
+  describe <serviceId> <name>          Get details for a service instance
+  remove <serviceId> <name>            Remove a service instance
+  logs <serviceId> <name>              Get logs for a service instance
+  packager [options] <source> <dest>   Create streaming package from ABR bundle on S3
+                                       and store on another S3 bucket
   compare
   live
   intercom
-  transcribe [options] <source>                             Generate subtitles from video or audio using Open
-                                                            AI Whisper
+  transcribe [options] <source>        Generate subtitles from video or audio using Open
+                                       AI Whisper
   db
   architect
-  help [command]                                            display help for command
+  vod
+  web
+  help [command]                       display help for command
 ```
 
 ## Examples

@@ -25,6 +25,7 @@
     "test": "jest --passWithNoTests"
   },
   "dependencies": {
+    "@aws-sdk/client-cloudfront": "^3.730.0",
     "@osaas/client-core": "^0.15.0",
     "@osaas/client-services": "^0.5.0",
     "chalk": "4.1.2",
