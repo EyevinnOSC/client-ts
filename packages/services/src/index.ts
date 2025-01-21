@@ -94,13 +94,6 @@ export {
   getEyevinnScheduleServiceInstance
 } from './generated/eyevinn-schedule-service';
 export {
-  EyevinnRustImageProcessor,
-  EyevinnRustImageProcessorConfig,
-  createEyevinnRustImageProcessorInstance,
-  removeEyevinnRustImageProcessorInstance,
-  getEyevinnRustImageProcessorInstance
-} from './generated/eyevinn-rust-image-processor';
-export {
   EyevinnContinueWatchingApi,
   EyevinnContinueWatchingApiConfig,
   createEyevinnContinueWatchingApiInstance,
@@ -520,3 +513,10 @@ export {
   removeSupercorpAiSupergatewayInstance,
   getSupercorpAiSupergatewayInstance
 } from './generated/supercorp-ai-supergateway';
+export {
+  EyevinnWebRunner,
+  EyevinnWebRunnerConfig,
+  createEyevinnWebRunnerInstance,
+  removeEyevinnWebRunnerInstance,
+  getEyevinnWebRunnerInstance
+} from './generated/eyevinn-web-runner';
