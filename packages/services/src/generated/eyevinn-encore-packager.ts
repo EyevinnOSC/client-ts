@@ -50,6 +50,7 @@ export interface paths {
             AwsRegion?: string;
             AwsSessionToken?: string;
             S3EndpointUrl?: string;
+            OutputSubfolderTemplate?: string;
           }[];
         };
         /** Default Response */
@@ -78,6 +79,7 @@ export interface paths {
             AwsRegion?: string;
             AwsSessionToken?: string;
             S3EndpointUrl?: string;
+            OutputSubfolderTemplate?: string;
           };
         };
       };
@@ -113,6 +115,7 @@ export interface paths {
             AwsRegion?: string;
             AwsSessionToken?: string;
             S3EndpointUrl?: string;
+            OutputSubfolderTemplate?: string;
           };
         };
         /** Default Response */
@@ -180,6 +183,7 @@ export interface paths {
             AwsRegion?: string;
             AwsSessionToken?: string;
             S3EndpointUrl?: string;
+            OutputSubfolderTemplate?: string;
           };
         };
         /** Default Response */
