@@ -462,41 +462,6 @@ describe('removeEyevinnScheduleServiceInstance', () => {
   });
 });
 
-describe('createEyevinnRustImageProcessorInstance', () => {
-  it('should call createInstance', async () => {
-    const ctx = new Context();
-    const body = { name: 'sdk' };
-    await sdk.createEyevinnRustImageProcessorInstance(ctx, body as any);
-    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
-      'eyevinn-rust-image-processor'
-    );
-    expect(createInstance).toHaveBeenCalledWith(
-      ctx,
-      'eyevinn-rust-image-processor',
-      'token',
-      body
-    );
-    expect(waitForInstanceReady).toHaveBeenCalledWith(
-      'eyevinn-rust-image-processor',
-      'sdk',
-      ctx
-    );
-  });
-});
-
-describe('removeEyevinnRustImageProcessorInstance', () => {
-  it('should call removeInstance', async () => {
-    const ctx = new Context();
-    await sdk.removeEyevinnRustImageProcessorInstance(ctx, 'sdk');
-    expect(removeInstance).toHaveBeenCalledWith(
-      ctx,
-      'eyevinn-rust-image-processor',
-      'sdk',
-      'token'
-    );
-  });
-});
-
 describe('createEyevinnContinueWatchingApiInstance', () => {
   it('should call createInstance', async () => {
     const ctx = new Context();
@@ -2539,6 +2504,41 @@ describe('removeSupercorpAiSupergatewayInstance', () => {
     expect(removeInstance).toHaveBeenCalledWith(
       ctx,
       'supercorp-ai-supergateway',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createEyevinnWebRunnerInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEyevinnWebRunnerInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'eyevinn-web-runner'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-web-runner',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'eyevinn-web-runner',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEyevinnWebRunnerInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEyevinnWebRunnerInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-web-runner',
       'sdk',
       'token'
     );

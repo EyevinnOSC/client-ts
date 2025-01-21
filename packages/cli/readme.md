@@ -47,51 +47,98 @@ Commands:
 
 ## Examples
 
-### List all my channel-engine instances
+First set the environment variable `OSC_ACCESS_TOKEN` with your personal access token. Obtain the personal access token in the Eyevinn Open Source Cloud web console.
 
 ```
-% export OSC_ACCESS_TOKEN=<pat>
-% osc list channel-engine
+% export OSC_ACCESS_TOKEN=<personal-access-token>
 ```
 
-### Create a channel from a VOD on loop and insert ad breaks
+### Create a MinIO storage service and bucket
+
+Create a MinIO storage server instance called `mystore` with the given credentials.
 
 ```
-% osc create channel-engine cli -o \
-    type=Loop \
-    url=https://lab.cdn.eyevinn.technology/stswetvplus-promo-2023-5GBm231Mkz.mov/manifest.m3u8 \
-    opts.useDemuxedAudio=false \
-    opts.useVttSubtitles=false \
-    opts.preroll.url=http://maitv-vod.lab.eyevinn.technology/VINN.mp4/master.m3u8 \
-    opts.preroll.duration=10500
+% osc create minio-minio mystore -o RootUser=admin -o RootPassword=abC12345678
+Instance created:
+{
+  name: 'mystore',
+  url: 'https://eyevinnlab-mystore.minio-minio.auto.prod.osaas.io',
+  resources: {
+    license: { url: 'https://api-minio-minio.auto.prod.osaas.io/license' },
+    app: {
+      url: 'https://eyevinnlab-mystore.minio-minio.auto.prod.osaas.io/'
+    }
+  },
+  RootUser: 'admin',
+  RootPassword: 'abC12345678'
+}
 ```
 
-### Remove a channel-engine instance with name `clidemo`
+Install the MinIO client to create a bucket on this server. If you already have MinIO client installed you can skip this step.
 
 ```
-% osc remove channel-engine clidemo
+% brew install minio/stable/mc
 ```
 
-### Create ABR files for VOD using SVT Encore
+Setup an alias to your server. Replace the URL below with the instance URL returned when created the store.
 
 ```
-osc encore create test s3://lab-testcontent-store/birme/
-osc encore transcode https://testcontent.eyevinn.technology/mp4/stswe-tvplus-promo.mp4
+% mc alias set mystore https://eyevinnlab-mystore.minio-minio.auto.prod.osaas.io admin abC12345678
 ```
 
-### Transcode and create streaming package using SVT Encore and Shaka Packager
+Create a bucket called `mybucket`
 
 ```
-osc pipeline create s3://lab-testcontent-store/birme/output/
-osc pipeline transcode https://testcontent.eyevinn.technology/mp4/stswe-tvplus-promo.mp4
+% mc mb mystore/mybucket
+Bucket created successfully `mystore/mybucket`.
 ```
 
-### Compare two video files using VMAF
+To access the bucket using the AWS S3 client:
 
 ```
-% osc compare vmaf s3://lab-testcontent-store/birme/snaxax_x264_3100.mp4 \
-    s3://lab-testcontent-store/birme/snaxax_x264_324.mp4 \
-    s3://lab-testcontent-store/birme/
+% AWS_ACCESS_KEY_ID=admin AWS_SECRET_ACCESS_KEY=abC12345678 \
+  aws s3 --endpoint=https://eyevinnlab-mystore.minio-minio.auto.prod.osaas.io \
+  cp images.jpeg s3://mybucket/
+upload: images.jpeg to s3://mybucket/images.jpeg
+% AWS_ACCESS_KEY_ID=admin AWS_SECRET_ACCESS_KEY=abC12345678 \
+  aws s3 --endpoint=https://eyevinnlab-mystore.minio-minio.auto.prod.osaas.io \
+  ls s3://mybucket/
+2025-01-21 10:35:11      12533 images.jpeg
+```
+
+### List all my MinIO storage services
+
+```
+% osc list minio-minio
+```
+
+### Enable CDN for access to MinIO bucket
+
+Allow public read access to bucket.
+
+```
+% mc anonymous set download mystore/mybucket
+```
+
+Setup CDN property in AWS Cloudfront
+
+```
+% osc web cdn-create --provider=cloudfront --origin-path=/mybucket minio-minio mystore
+```
+
+### Remove a MinIO storage bucket
+
+```
+% osc remove minio-minio mystore
+Are you sure you want to remove mystore? (yes/no) yes
+```
+
+### Create ABR file for VOD using SVT Encore
+
+Create a VOD file for streaming from using a pipeline named `demo`. Follow the steps in the [Eyevinn Open Source Cloud documentation](https://docs.osaas.io/osaas.wiki/Solution%3A-VOD-Transcoding.html#vod-transcoding-and-packaging) on how to setup a pipeline.
+
+```
+% osc vod create demo https://testcontent.eyevinn.technology/mp4/VINN.mp4
 ```
 
 ### List all channel-engine instance for tenant `eyevinn` as an OSC super admin

@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/encore-packagerinstance': {
-    /** List all running encore-packager instances */
+  '/web-runnerinstance': {
+    /** List all running web-runner instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the encore-packager instance */
+            /** @description Name of the web-runner instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,17 +40,8 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            RedisQueue?: string;
-            OutputFolder: string;
-            Concurrency?: string;
-            PersonalAccessToken: string;
-            AwsAccessKeyId: string;
-            AwsSecretAccessKey: string;
-            AwsRegion?: string;
-            AwsSessionToken?: string;
-            S3EndpointUrl?: string;
-            OutputSubfolderTemplate?: string;
+            GitHubUrl: string;
+            GitHubToken: string;
           }[];
         };
         /** Default Response */
@@ -62,24 +53,15 @@ export interface paths {
         };
       };
     };
-    /** Launch a new encore-packager instance */
+    /** Launch a new web-runner instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the encore-packager instance */
+            /** @description Name of the web-runner instance */
             name: string;
-            RedisUrl: string;
-            RedisQueue?: string;
-            OutputFolder: string;
-            Concurrency?: string;
-            PersonalAccessToken: string;
-            AwsAccessKeyId: string;
-            AwsSecretAccessKey: string;
-            AwsRegion?: string;
-            AwsSessionToken?: string;
-            S3EndpointUrl?: string;
-            OutputSubfolderTemplate?: string;
+            GitHubUrl: string;
+            GitHubToken: string;
           };
         };
       };
@@ -87,7 +69,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the encore-packager instance */
+            /** @description Name of the web-runner instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -105,17 +87,8 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            RedisQueue?: string;
-            OutputFolder: string;
-            Concurrency?: string;
-            PersonalAccessToken: string;
-            AwsAccessKeyId: string;
-            AwsSecretAccessKey: string;
-            AwsRegion?: string;
-            AwsSessionToken?: string;
-            S3EndpointUrl?: string;
-            OutputSubfolderTemplate?: string;
+            GitHubUrl: string;
+            GitHubToken: string;
           };
         };
         /** Default Response */
@@ -142,12 +115,12 @@ export interface paths {
       };
     };
   };
-  '/encore-packagerinstance/{id}': {
-    /** Obtain status and resource URLs for an encore-packager instance */
+  '/web-runnerinstance/{id}': {
+    /** Obtain status and resource URLs for an web-runner instance */
     get: {
       parameters: {
         path: {
-          /** Name of the encore-packager instance */
+          /** Name of the web-runner instance */
           id: string;
         };
       };
@@ -155,7 +128,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the encore-packager instance */
+            /** @description Name of the web-runner instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -173,17 +146,8 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            RedisQueue?: string;
-            OutputFolder: string;
-            Concurrency?: string;
-            PersonalAccessToken: string;
-            AwsAccessKeyId: string;
-            AwsSecretAccessKey: string;
-            AwsRegion?: string;
-            AwsSessionToken?: string;
-            S3EndpointUrl?: string;
-            OutputSubfolderTemplate?: string;
+            GitHubUrl: string;
+            GitHubToken: string;
           };
         };
         /** Default Response */
@@ -202,11 +166,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an encore-packager instance */
+    /** Stop and remove an web-runner instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the encore-packager instance */
+          /** Name of the web-runner instance */
           id: string;
         };
       };
@@ -226,11 +190,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of encore-packager instance */
+    /** Return status of web-runner instance */
     get: {
       parameters: {
         path: {
-          /** Name of the encore-packager instance */
+          /** Name of the web-runner instance */
           id: string;
         };
       };
@@ -253,7 +217,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the encore-packager instance */
+    /** Return the latest logs from the web-runner instance */
     get: {
       parameters: {
         query: {
@@ -261,7 +225,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the encore-packager instance */
+          /** Name of the web-runner instance */
           id: string;
         };
       };
@@ -281,11 +245,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for encore-packager instance */
+    /** Return the exposed extra ports for web-runner instance */
     get: {
       parameters: {
         path: {
-          /** Name of the encore-packager instance */
+          /** Name of the web-runner instance */
           id: string;
         };
       };
@@ -316,11 +280,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnEncorePackager =
-  paths['/encore-packagerinstance/{id}']['get']['responses']['200']['schema'];
+export type EyevinnWebRunner =
+  paths['/web-runnerinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnEncorePackagerConfig =
-  paths['/encore-packagerinstance']['post']['parameters']['body']['body'];
+export type EyevinnWebRunnerConfig =
+  paths['/web-runnerinstance']['post']['parameters']['body']['body'];
 
 import {
   Context,
@@ -331,77 +295,67 @@ import {
 } from '@osaas/client-core';
 
 /**
- * Create a new Encore Packager instance
+ * Create a new Web Runner instance
  *
- * @description Enhance your transcoding workflow with Encore packager! Run as a service, listen for messages on redis queue, and customize packaging events. Boost productivity with this versatile tool.
+ * @description Effortlessly deploy NodeJS web apps with Web-Runner! This Docker container seamlessly handles cloning, building, and running your GitHub repositories. Simplify your deployment process today!
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnEncorePackagerConfig}} body - Service instance configuration
- * @returns {EyevinnEncorePackager} - Service instance
+ * @param {EyevinnWebRunnerConfig}} body - Service instance configuration
+ * @returns {EyevinnWebRunner} - Service instance
  * @example
- * import { Context, createEyevinnEncorePackagerInstance } from '@osaas/client-services';
+ * import { Context, createEyevinnWebRunnerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnEncorePackagerInstance(ctx, { name: 'myinstance' });
+ * const instance = await createEyevinnWebRunnerInstance(ctx, { name: 'myinstance' });
  * console.log(instance.url);
  */
-export async function createEyevinnEncorePackagerInstance(
+export async function createEyevinnWebRunnerInstance(
   ctx: Context,
-  body: EyevinnEncorePackagerConfig
-): Promise<EyevinnEncorePackager> {
+  body: EyevinnWebRunnerConfig
+): Promise<EyevinnWebRunner> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-encore-packager'
+    'eyevinn-web-runner'
   );
   const instance = await createInstance(
     ctx,
-    'eyevinn-encore-packager',
+    'eyevinn-web-runner',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-encore-packager', instance.name, ctx);
+  await waitForInstanceReady('eyevinn-web-runner', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Encore Packager instance
+ * Remove a Web Runner instance
  *
- * @description Enhance your transcoding workflow with Encore packager! Run as a service, listen for messages on redis queue, and customize packaging events. Boost productivity with this versatile tool.
+ * @description Effortlessly deploy NodeJS web apps with Web-Runner! This Docker container seamlessly handles cloning, building, and running your GitHub repositories. Simplify your deployment process today!
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the packager to be removed
+ * @param {string} name - Name of the web-runner to be removed
  */
-export async function removeEyevinnEncorePackagerInstance(
+export async function removeEyevinnWebRunnerInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-encore-packager'
+    'eyevinn-web-runner'
   );
-  await removeInstance(
-    ctx,
-    'eyevinn-encore-packager',
-    name,
-    serviceAccessToken
-  );
+  await removeInstance(ctx, 'eyevinn-web-runner', name, serviceAccessToken);
 }
 
 /**
- * Get a Encore Packager instance
+ * Get a Web Runner instance
  *
- * @description Enhance your transcoding workflow with Encore packager! Run as a service, listen for messages on redis queue, and customize packaging events. Boost productivity with this versatile tool.
+ * @description Effortlessly deploy NodeJS web apps with Web-Runner! This Docker container seamlessly handles cloning, building, and running your GitHub repositories. Simplify your deployment process today!
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the packager to be retrieved
- * @returns {EyevinnEncorePackager} - Service instance
+ * @param {string} name - Name of the web-runner to be retrieved
+ * @returns {EyevinnWebRunner} - Service instance
  */
-export async function getEyevinnEncorePackagerInstance(
+export async function getEyevinnWebRunnerInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnEncorePackager> {
+): Promise<EyevinnWebRunner> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-encore-packager'
+    'eyevinn-web-runner'
   );
-  return await getInstance(
-    ctx,
-    'eyevinn-encore-packager',
-    name,
-    serviceAccessToken
-  );
+  return await getInstance(ctx, 'eyevinn-web-runner', name, serviceAccessToken);
 }
