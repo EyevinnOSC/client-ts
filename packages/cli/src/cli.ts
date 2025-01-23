@@ -34,6 +34,7 @@ cli.addCommand(cmdUser.cmdCreate());
 cli.addCommand(cmdUser.cmdDescribe());
 cli.addCommand(cmdUser.cmdRemove());
 cli.addCommand(cmdUser.cmdLogs());
+cli.addCommand(cmdUser.cmdServiceAccessToken());
 cli.addCommand(cmdPackager());
 cli.addCommand(cmdCompare());
 cli.addCommand(cmdLive());

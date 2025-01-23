@@ -154,3 +154,23 @@ export function cmdLogs() {
     });
   return logs;
 }
+
+export function cmdServiceAccessToken() {
+  const serviceAccessToken = new Command('service-access-token');
+
+  serviceAccessToken
+    .description('Generate a service access token for a service')
+    .argument('<serviceId>', 'The Service Id')
+    .action(async (serviceId, options, command) => {
+      try {
+        const globalOpts = command.optsWithGlobals();
+        const environment = globalOpts?.env || 'prod';
+        const ctx = new Context({ environment });
+        const serviceAccessToken = await ctx.getServiceAccessToken(serviceId);
+        console.log(serviceAccessToken);
+      } catch (err) {
+        console.log((err as Error).message);
+      }
+    });
+  return serviceAccessToken;
+}
