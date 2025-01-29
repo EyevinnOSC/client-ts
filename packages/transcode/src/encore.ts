@@ -1,3 +1,6 @@
+/**
+ * @deprecated and replaced by transcode module
+ */
 import {
   Context,
   Log,

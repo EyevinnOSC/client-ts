@@ -13,7 +13,9 @@ Prerequisites
 npm install --save @osaas/client-transcode
 ```
 
-Example code
+### Create a VOD
+
+Example code to setup a VOD pipeline and create a VOD
 
 ```javascript
 import { Context, Log } from '@osaas/client-core';
@@ -33,6 +35,33 @@ async function main() {
     }
   } catch (err) {
     Log().error(err);
+  }
+}
+
+main();
+```
+
+### Transcode a video and inject IDR keyframes at a specific timecode
+
+```javascript
+import { Context } from '@osaas/client-core';
+import { transcode } from '@osaas/client-transcode';
+
+async function main() {
+  const ctx = new Context();
+
+  try {
+    const job = await transcode(ctx, {
+      encoreInstanceName: 'tutorial',
+      externalId: 'example',
+      outputUrl: new URL('s3://output/tutorial/'),
+      inputUrl: new URL('s3://input/VINN.mp4'),
+      injectIDRKeyFrames: [{ smpteTimeCode: '00:10:00:00' }],
+      frameRate: 25
+    });
+    console.log(job);
+  } catch (err) {
+    console.error(err);
   }
 }
 
