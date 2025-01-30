@@ -18,7 +18,7 @@ import { delay } from './util';
  * @param ctx - Eyevinn OSC context
  * @param name - name of the encoder
  * @param streamKey - optional stream key
- * @returns {rtmpUrl: URL, hlsUrl: URL} - RTMP and HLS URLs
+ * @returns  RTMP and HLS URLs
  */
 export async function createLiveMultiBitrateHLS(
   ctx: Context,
@@ -54,7 +54,7 @@ export async function createLiveMultiBitrateHLS(
  * @async
  * @param ctx - Eyevinn OSC context
  * @param name - name of the encoder
- * @returns {rtmpUrl: URL, hlsUrl: URL} - RTMP and HLS URLs
+ * @returns RTMP and HLS URLs
  */
 
 export async function startLiveMultiBitrateHLS(
