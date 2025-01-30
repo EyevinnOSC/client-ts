@@ -190,6 +190,7 @@ export type EyevinnFunctionProbe =
 export type EyevinnFunctionProbeConfig =
   paths['/function-probeinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-function-probe */
 import {
   Context,
   createInstance,
@@ -201,6 +202,7 @@ import {
 /**
  * Create a new Media Probe instance
  *
+ * @memberOf eyevinn-function-probe
  * @description A serverless media function to obtain media information for a media file or media stream.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnFunctionProbeConfig}} body - Service instance configuration
@@ -232,6 +234,7 @@ export async function createEyevinnFunctionProbeInstance(
 /**
  * Remove a Media Probe instance
  *
+ * @memberOf eyevinn-function-probe
  * @description A serverless media function to obtain media information for a media file or media stream.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the probe to be removed
@@ -249,6 +252,7 @@ export async function removeEyevinnFunctionProbeInstance(
 /**
  * Get a Media Probe instance
  *
+ * @memberOf eyevinn-function-probe
  * @description A serverless media function to obtain media information for a media file or media stream.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the probe to be retrieved

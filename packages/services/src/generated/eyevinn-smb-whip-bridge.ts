@@ -294,6 +294,7 @@ export type EyevinnSmbWhipBridge =
 export type EyevinnSmbWhipBridgeConfig =
   paths['/smb-whip-bridgeinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-smb-whip-bridge */
 import {
   Context,
   createInstance,
@@ -305,6 +306,7 @@ import {
 /**
  * Create a new Symphony Media Bridge WHIP Gateway instance
  *
+ * @memberOf eyevinn-smb-whip-bridge
  * @description Elevate your video streaming with SMB WHIP Bridge! Seamlessly integrate WHIP clients with Symphony Media Bridge SFU for superior media streams.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnSmbWhipBridgeConfig}} body - Service instance configuration
@@ -336,6 +338,7 @@ export async function createEyevinnSmbWhipBridgeInstance(
 /**
  * Remove a Symphony Media Bridge WHIP Gateway instance
  *
+ * @memberOf eyevinn-smb-whip-bridge
  * @description Elevate your video streaming with SMB WHIP Bridge! Seamlessly integrate WHIP clients with Symphony Media Bridge SFU for superior media streams.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the gateway to be removed
@@ -358,6 +361,7 @@ export async function removeEyevinnSmbWhipBridgeInstance(
 /**
  * Get a Symphony Media Bridge WHIP Gateway instance
  *
+ * @memberOf eyevinn-smb-whip-bridge
  * @description Elevate your video streaming with SMB WHIP Bridge! Seamlessly integrate WHIP clients with Symphony Media Bridge SFU for superior media streams.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the gateway to be retrieved

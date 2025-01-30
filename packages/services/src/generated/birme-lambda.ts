@@ -278,6 +278,7 @@ export type BirmeLambda =
 export type BirmeLambdaConfig =
   paths['/lambdainstance']['post']['parameters']['body']['body'];
 
+/** @namespace birme-lambda */
 import {
   Context,
   createInstance,
@@ -289,6 +290,7 @@ import {
 /**
  * Create a new lambda instance
  *
+ * @memberOf birme-lambda
  * @description Effortlessly deploy JavaScript/TypeScript code as HTTP-based lambda functions with our simple solution. Just zip, upload, and watch your code run on any HTTP request. Get started quickly with minimal setup!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {BirmeLambdaConfig}} body - Service instance configuration
@@ -318,6 +320,7 @@ export async function createBirmeLambdaInstance(
 /**
  * Remove a lambda instance
  *
+ * @memberOf birme-lambda
  * @description Effortlessly deploy JavaScript/TypeScript code as HTTP-based lambda functions with our simple solution. Just zip, upload, and watch your code run on any HTTP request. Get started quickly with minimal setup!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the lambda to be removed
@@ -333,6 +336,7 @@ export async function removeBirmeLambdaInstance(
 /**
  * Get a lambda instance
  *
+ * @memberOf birme-lambda
  * @description Effortlessly deploy JavaScript/TypeScript code as HTTP-based lambda functions with our simple solution. Just zip, upload, and watch your code run on any HTTP request. Get started quickly with minimal setup!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the lambda to be retrieved

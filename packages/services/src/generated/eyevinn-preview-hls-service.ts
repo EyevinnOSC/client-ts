@@ -166,6 +166,7 @@ export type EyevinnPreviewHlsService =
 export type EyevinnPreviewHlsServiceConfig =
   paths['/preview-hls-serviceinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-preview-hls-service */
 import {
   Context,
   createInstance,
@@ -177,6 +178,7 @@ import {
 /**
  * Create a new HLS Preview Generator instance
  *
+ * @memberOf eyevinn-preview-hls-service
  * @description A service to generate a preview video (mp4) or an image (png) from an HLS stream
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnPreviewHlsServiceConfig}} body - Service instance configuration
@@ -208,6 +210,7 @@ export async function createEyevinnPreviewHlsServiceInstance(
 /**
  * Remove a HLS Preview Generator instance
  *
+ * @memberOf eyevinn-preview-hls-service
  * @description A service to generate a preview video (mp4) or an image (png) from an HLS stream
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the preview-generator to be removed
@@ -230,6 +233,7 @@ export async function removeEyevinnPreviewHlsServiceInstance(
 /**
  * Get a HLS Preview Generator instance
  *
+ * @memberOf eyevinn-preview-hls-service
  * @description A service to generate a preview video (mp4) or an image (png) from an HLS stream
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the preview-generator to be retrieved

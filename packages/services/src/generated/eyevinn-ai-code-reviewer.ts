@@ -286,6 +286,7 @@ export type EyevinnAiCodeReviewer =
 export type EyevinnAiCodeReviewerConfig =
   paths['/ai-code-reviewerinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-ai-code-reviewer */
 import {
   Context,
   createInstance,
@@ -297,6 +298,7 @@ import {
 /**
  * Create a new AI Code Reviewer instance
  *
+ * @memberOf eyevinn-ai-code-reviewer
  * @description Elevate your code quality with AI Code Reviewer! Leverage AI to review your code effortlessly, ensuring top-notch quality. Integrate easily with your cloud setup for seamless code enhancement.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnAiCodeReviewerConfig}} body - Service instance configuration
@@ -328,6 +330,7 @@ export async function createEyevinnAiCodeReviewerInstance(
 /**
  * Remove a AI Code Reviewer instance
  *
+ * @memberOf eyevinn-ai-code-reviewer
  * @description Elevate your code quality with AI Code Reviewer! Leverage AI to review your code effortlessly, ensuring top-notch quality. Integrate easily with your cloud setup for seamless code enhancement.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the code-reviewer to be removed
@@ -350,6 +353,7 @@ export async function removeEyevinnAiCodeReviewerInstance(
 /**
  * Get a AI Code Reviewer instance
  *
+ * @memberOf eyevinn-ai-code-reviewer
  * @description Elevate your code quality with AI Code Reviewer! Leverage AI to review your code effortlessly, ensuring top-notch quality. Integrate easily with your cloud setup for seamless code enhancement.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the code-reviewer to be retrieved

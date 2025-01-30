@@ -278,6 +278,7 @@ export type ValkeyIoValkey =
 export type ValkeyIoValkeyConfig =
   paths['/valkeyinstance']['post']['parameters']['body']['body'];
 
+/** @namespace valkey-io-valkey */
 import {
   Context,
   createInstance,
@@ -289,6 +290,7 @@ import {
 /**
  * Create a new valkey instance
  * 
+ * @memberOf valkey-io-valkey
  * @description Introducing Valkey: a Redis-compatible high-performance key-value store with wide range support. Build on various systems, extensible plugin system, and TLS support available.
 
 NB! Data persistence not guaranteed
@@ -322,6 +324,7 @@ export async function createValkeyIoValkeyInstance(
 /**
  * Remove a valkey instance
  * 
+ * @memberOf valkey-io-valkey
  * @description Introducing Valkey: a Redis-compatible high-performance key-value store with wide range support. Build on various systems, extensible plugin system, and TLS support available.
 
 NB! Data persistence not guaranteed
@@ -341,6 +344,7 @@ export async function removeValkeyIoValkeyInstance(
 /**
  * Get a valkey instance
  * 
+ * @memberOf valkey-io-valkey
  * @description Introducing Valkey: a Redis-compatible high-performance key-value store with wide range support. Build on various systems, extensible plugin system, and TLS support available.
 
 NB! Data persistence not guaranteed

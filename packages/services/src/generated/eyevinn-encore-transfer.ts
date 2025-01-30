@@ -302,6 +302,7 @@ export type EyevinnEncoreTransfer =
 export type EyevinnEncoreTransferConfig =
   paths['/encore-transferinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-encore-transfer */
 import {
   Context,
   createInstance,
@@ -313,6 +314,7 @@ import {
 /**
  * Create a new Encore Transfer instance
  *
+ * @memberOf eyevinn-encore-transfer
  * @description Introducing Encore Transfer - the ultimate service for seamless output transfer in a video processing pipeline. With easy installation and essential environment variables, this service is a game-changer for Open Source Cloud users. Dive into our comprehensive documentation and join our supportive community on Slack. Don't miss out on this opportunity to revolutionize your video workflow with Eyevinn Technology's innovative solution. Get in touch with us for further customization and support options!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnEncoreTransferConfig}} body - Service instance configuration
@@ -344,6 +346,7 @@ export async function createEyevinnEncoreTransferInstance(
 /**
  * Remove a Encore Transfer instance
  *
+ * @memberOf eyevinn-encore-transfer
  * @description Introducing Encore Transfer - the ultimate service for seamless output transfer in a video processing pipeline. With easy installation and essential environment variables, this service is a game-changer for Open Source Cloud users. Dive into our comprehensive documentation and join our supportive community on Slack. Don't miss out on this opportunity to revolutionize your video workflow with Eyevinn Technology's innovative solution. Get in touch with us for further customization and support options!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the encore-transfer to be removed
@@ -366,6 +369,7 @@ export async function removeEyevinnEncoreTransferInstance(
 /**
  * Get a Encore Transfer instance
  *
+ * @memberOf eyevinn-encore-transfer
  * @description Introducing Encore Transfer - the ultimate service for seamless output transfer in a video processing pipeline. With easy installation and essential environment variables, this service is a game-changer for Open Source Cloud users. Dive into our comprehensive documentation and join our supportive community on Slack. Don't miss out on this opportunity to revolutionize your video workflow with Eyevinn Technology's innovative solution. Get in touch with us for further customization and support options!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the encore-transfer to be retrieved

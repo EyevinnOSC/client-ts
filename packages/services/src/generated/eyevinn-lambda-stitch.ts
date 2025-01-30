@@ -282,6 +282,7 @@ export type EyevinnLambdaStitch =
 export type EyevinnLambdaStitchConfig =
   paths['/lambda-stitchinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-lambda-stitch */
 import {
   Context,
   createInstance,
@@ -293,6 +294,7 @@ import {
 /**
  * Create a new HLS VOD Stitcher instance
  *
+ * @memberOf eyevinn-lambda-stitch
  * @description A proxy to insert ads in an HLS VOD either using manifest manipulation or HLS interstitials
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnLambdaStitchConfig}} body - Service instance configuration
@@ -324,6 +326,7 @@ export async function createEyevinnLambdaStitchInstance(
 /**
  * Remove a HLS VOD Stitcher instance
  *
+ * @memberOf eyevinn-lambda-stitch
  * @description A proxy to insert ads in an HLS VOD either using manifest manipulation or HLS interstitials
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the stitcher to be removed
@@ -341,6 +344,7 @@ export async function removeEyevinnLambdaStitchInstance(
 /**
  * Get a HLS VOD Stitcher instance
  *
+ * @memberOf eyevinn-lambda-stitch
  * @description A proxy to insert ads in an HLS VOD either using manifest manipulation or HLS interstitials
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the stitcher to be retrieved

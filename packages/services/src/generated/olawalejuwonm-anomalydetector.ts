@@ -278,6 +278,7 @@ export type OlawalejuwonmAnomalydetector =
 export type OlawalejuwonmAnomalydetectorConfig =
   paths['/anomalydetectorinstance']['post']['parameters']['body']['body'];
 
+/** @namespace olawalejuwonm-anomalydetector */
 import {
   Context,
   createInstance,
@@ -289,6 +290,7 @@ import {
 /**
  * Create a new Anomaly Detector instance
  *
+ * @memberOf olawalejuwonm-anomalydetector
  * @description Safeguard your space with Anomaly Detector, a cutting-edge video surveillance solution. Experience real-time anomaly detection using advanced computer vision, ensuring privacy and reducing false alarms. Enhance security efficiently!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {OlawalejuwonmAnomalydetectorConfig}} body - Service instance configuration
@@ -324,6 +326,7 @@ export async function createOlawalejuwonmAnomalydetectorInstance(
 /**
  * Remove a Anomaly Detector instance
  *
+ * @memberOf olawalejuwonm-anomalydetector
  * @description Safeguard your space with Anomaly Detector, a cutting-edge video surveillance solution. Experience real-time anomaly detection using advanced computer vision, ensuring privacy and reducing false alarms. Enhance security efficiently!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the anomalydetector to be removed
@@ -346,6 +349,7 @@ export async function removeOlawalejuwonmAnomalydetectorInstance(
 /**
  * Get a Anomaly Detector instance
  *
+ * @memberOf olawalejuwonm-anomalydetector
  * @description Safeguard your space with Anomaly Detector, a cutting-edge video surveillance solution. Experience real-time anomaly detection using advanced computer vision, ensuring privacy and reducing false alarms. Enhance security efficiently!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the anomalydetector to be retrieved

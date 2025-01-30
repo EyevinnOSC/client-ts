@@ -240,6 +240,7 @@ export type OwncastOwncast =
 export type OwncastOwncastConfig =
   paths['/owncastinstance']['post']['parameters']['body']['body'];
 
+/** @namespace owncast-owncast */
 import {
   Context,
   createInstance,
@@ -251,6 +252,7 @@ import {
 /**
  * Create a new owncast instance
  *
+ * @memberOf owncast-owncast
  * @description Revolutionize your live streaming experience with Owncast! Take control over your content, interface, and audience with this self-hosted, open-source platform. Explore the possibilities today.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {OwncastOwncastConfig}} body - Service instance configuration
@@ -280,6 +282,7 @@ export async function createOwncastOwncastInstance(
 /**
  * Remove a owncast instance
  *
+ * @memberOf owncast-owncast
  * @description Revolutionize your live streaming experience with Owncast! Take control over your content, interface, and audience with this self-hosted, open-source platform. Explore the possibilities today.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the owncast to be removed
@@ -295,6 +298,7 @@ export async function removeOwncastOwncastInstance(
 /**
  * Get a owncast instance
  *
+ * @memberOf owncast-owncast
  * @description Revolutionize your live streaming experience with Owncast! Take control over your content, interface, and audience with this self-hosted, open-source platform. Explore the possibilities today.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the owncast to be retrieved

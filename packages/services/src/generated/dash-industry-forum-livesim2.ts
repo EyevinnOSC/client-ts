@@ -278,6 +278,7 @@ export type DashIndustryForumLivesim2 =
 export type DashIndustryForumLivesim2Config =
   paths['/livesim2instance']['post']['parameters']['body']['body'];
 
+/** @namespace dash-industry-forum-livesim2 */
 import {
   Context,
   createInstance,
@@ -289,6 +290,7 @@ import {
 /**
  * Create a new livesim2 instance
  *
+ * @memberOf dash-industry-forum-livesim2
  * @description Elevate your streaming with livesim2, the next-gen DASH Live Source Simulator, offering infinite live streams, flexible content handling, and on-the-fly subtitles in multiple languages. Perfect for testing and demo purposes.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {DashIndustryForumLivesim2Config}} body - Service instance configuration
@@ -324,6 +326,7 @@ export async function createDashIndustryForumLivesim2Instance(
 /**
  * Remove a livesim2 instance
  *
+ * @memberOf dash-industry-forum-livesim2
  * @description Elevate your streaming with livesim2, the next-gen DASH Live Source Simulator, offering infinite live streams, flexible content handling, and on-the-fly subtitles in multiple languages. Perfect for testing and demo purposes.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the livesimulators to be removed
@@ -346,6 +349,7 @@ export async function removeDashIndustryForumLivesim2Instance(
 /**
  * Get a livesim2 instance
  *
+ * @memberOf dash-industry-forum-livesim2
  * @description Elevate your streaming with livesim2, the next-gen DASH Live Source Simulator, offering infinite live streams, flexible content handling, and on-the-fly subtitles in multiple languages. Perfect for testing and demo purposes.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the livesimulators to be retrieved

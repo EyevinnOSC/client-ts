@@ -240,6 +240,7 @@ export type OssrsSrs =
 export type OssrsSrsConfig =
   paths['/srsinstance']['post']['parameters']['body']['body'];
 
+/** @namespace ossrs-srs */
 import {
   Context,
   createInstance,
@@ -251,6 +252,7 @@ import {
 /**
  * Create a new Simple Realtime Server instance
  * 
+ * @memberOf ossrs-srs
  * @description Experience high-efficiency video streaming with SRS/6.0. Stream seamlessly with essential features included. 
 Transform your streaming experience now! Explore RTMP, HLS, HTTP-FLV, SRT, MPEG-DASH protocols, and more.
 Get started easily!
@@ -282,6 +284,7 @@ export async function createOssrsSrsInstance(
 /**
  * Remove a Simple Realtime Server instance
  * 
+ * @memberOf ossrs-srs
  * @description Experience high-efficiency video streaming with SRS/6.0. Stream seamlessly with essential features included. 
 Transform your streaming experience now! Explore RTMP, HLS, HTTP-FLV, SRT, MPEG-DASH protocols, and more.
 Get started easily!
@@ -299,6 +302,7 @@ export async function removeOssrsSrsInstance(
 /**
  * Get a Simple Realtime Server instance
  * 
+ * @memberOf ossrs-srs
  * @description Experience high-efficiency video streaming with SRS/6.0. Stream seamlessly with essential features included. 
 Transform your streaming experience now! Explore RTMP, HLS, HTTP-FLV, SRT, MPEG-DASH protocols, and more.
 Get started easily!

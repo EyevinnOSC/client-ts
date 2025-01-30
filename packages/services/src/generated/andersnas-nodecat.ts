@@ -282,6 +282,7 @@ export type AndersnasNodecat =
 export type AndersnasNodecatConfig =
   paths['/nodecatinstance']['post']['parameters']['body']['body'];
 
+/** @namespace andersnas-nodecat */
 import {
   Context,
   createInstance,
@@ -293,6 +294,7 @@ import {
 /**
  * Create a new NodeCat instance
  *
+ * @memberOf andersnas-nodecat
  * @description Enhance your app's security with NodeCat, a robust solution for generating and validating Common Access Tokens in a NodeJS environment. Ideal for developers needing reliable token management.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {AndersnasNodecatConfig}} body - Service instance configuration
@@ -324,6 +326,7 @@ export async function createAndersnasNodecatInstance(
 /**
  * Remove a NodeCat instance
  *
+ * @memberOf andersnas-nodecat
  * @description Enhance your app's security with NodeCat, a robust solution for generating and validating Common Access Tokens in a NodeJS environment. Ideal for developers needing reliable token management.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the nodecat to be removed
@@ -341,6 +344,7 @@ export async function removeAndersnasNodecatInstance(
 /**
  * Get a NodeCat instance
  *
+ * @memberOf andersnas-nodecat
  * @description Enhance your app's security with NodeCat, a robust solution for generating and validating Common Access Tokens in a NodeJS environment. Ideal for developers needing reliable token management.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the nodecat to be retrieved

@@ -286,6 +286,7 @@ export type EyevinnQrGenerator =
 export type EyevinnQrGeneratorConfig =
   paths['/qr-generatorinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-qr-generator */
 import {
   Context,
   createInstance,
@@ -297,6 +298,7 @@ import {
 /**
  * Create a new QR Code Generator instance
  *
+ * @memberOf eyevinn-qr-generator
  * @description Effortlessly create and customize QR codes with dynamic text and logos. Perfect for projects requiring quick updates. Launch your instance and deploy multiple codes seamlessly on the Open Source Cloud.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnQrGeneratorConfig}} body - Service instance configuration
@@ -328,6 +330,7 @@ export async function createEyevinnQrGeneratorInstance(
 /**
  * Remove a QR Code Generator instance
  *
+ * @memberOf eyevinn-qr-generator
  * @description Effortlessly create and customize QR codes with dynamic text and logos. Perfect for projects requiring quick updates. Launch your instance and deploy multiple codes seamlessly on the Open Source Cloud.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the qr-generator to be removed
@@ -345,6 +348,7 @@ export async function removeEyevinnQrGeneratorInstance(
 /**
  * Get a QR Code Generator instance
  *
+ * @memberOf eyevinn-qr-generator
  * @description Effortlessly create and customize QR codes with dynamic text and logos. Perfect for projects requiring quick updates. Launch your instance and deploy multiple codes seamlessly on the Open Source Cloud.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the qr-generator to be retrieved

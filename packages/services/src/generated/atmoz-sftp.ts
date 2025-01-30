@@ -286,6 +286,7 @@ export type AtmozSftp =
 export type AtmozSftpConfig =
   paths['/sftpinstance']['post']['parameters']['body']['body'];
 
+/** @namespace atmoz-sftp */
 import {
   Context,
   createInstance,
@@ -297,6 +298,7 @@ import {
 /**
  * Create a new SFTP Server instance
  * 
+ * @memberOf atmoz-sftp
  * @description Effortlessly manage secure file transfers with our user-friendly SFTP server powered by OpenSSH. Ideal for sharing files securely using SSH, it integrates easily with Docker, ensuring both security and simplicity.
 
  * @param {Context} context - Open Source Cloud configuration context
@@ -327,6 +329,7 @@ export async function createAtmozSftpInstance(
 /**
  * Remove a SFTP Server instance
  * 
+ * @memberOf atmoz-sftp
  * @description Effortlessly manage secure file transfers with our user-friendly SFTP server powered by OpenSSH. Ideal for sharing files securely using SSH, it integrates easily with Docker, ensuring both security and simplicity.
 
  * @param {Context} context - Open Source Cloud configuration context
@@ -343,6 +346,7 @@ export async function removeAtmozSftpInstance(
 /**
  * Get a SFTP Server instance
  * 
+ * @memberOf atmoz-sftp
  * @description Effortlessly manage secure file transfers with our user-friendly SFTP server powered by OpenSSH. Ideal for sharing files securely using SSH, it integrates easily with Docker, ensuring both security and simplicity.
 
  * @param {Context} context - Open Source Cloud configuration context

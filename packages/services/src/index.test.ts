@@ -2544,3 +2544,38 @@ describe('removeEyevinnWebRunnerInstance', () => {
     );
   });
 });
+
+describe('createEyevinnAdNormalizerInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEyevinnAdNormalizerInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'eyevinn-ad-normalizer'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-ad-normalizer',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'eyevinn-ad-normalizer',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEyevinnAdNormalizerInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEyevinnAdNormalizerInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-ad-normalizer',
+      'sdk',
+      'token'
+    );
+  });
+});

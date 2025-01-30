@@ -294,6 +294,7 @@ export type BlueskySocialPds =
 export type BlueskySocialPdsConfig =
   paths['/pdsinstance']['post']['parameters']['body']['body'];
 
+/** @namespace bluesky-social-pds */
 import {
   Context,
   createInstance,
@@ -305,6 +306,7 @@ import {
 /**
  * Create a new Bluesky Personal Data Server instance
  *
+ * @memberOf bluesky-social-pds
  * @description Empower your network with self-hosted Bluesky PDS! Harness the power of AT Protocol to easily manage your data server. Seamless installation, full control, and enhanced security for your social media presence.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {BlueskySocialPdsConfig}} body - Service instance configuration
@@ -336,6 +338,7 @@ export async function createBlueskySocialPdsInstance(
 /**
  * Remove a Bluesky Personal Data Server instance
  *
+ * @memberOf bluesky-social-pds
  * @description Empower your network with self-hosted Bluesky PDS! Harness the power of AT Protocol to easily manage your data server. Seamless installation, full control, and enhanced security for your social media presence.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the pds to be removed
@@ -353,6 +356,7 @@ export async function removeBlueskySocialPdsInstance(
 /**
  * Get a Bluesky Personal Data Server instance
  *
+ * @memberOf bluesky-social-pds
  * @description Empower your network with self-hosted Bluesky PDS! Harness the power of AT Protocol to easily manage your data server. Seamless installation, full control, and enhanced security for your social media presence.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the pds to be retrieved

@@ -240,6 +240,7 @@ export type BbcBrave =
 export type BbcBraveConfig =
   paths['/braveinstance']['post']['parameters']['body']['body'];
 
+/** @namespace bbc-brave */
 import {
   Context,
   createInstance,
@@ -251,6 +252,7 @@ import {
 /**
  * Create a new Brave instance
  *
+ * @memberOf bbc-brave
  * @description Brave is a Basic real-time (remote) audio/video editor. It allows LIVE video (and/or audio) to be received, manipulated, and sent elsewhere. Forwarding RTMP from one place to another, mixing two or more inputs or add basic graphics are some example of usage.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {BbcBraveConfig}} body - Service instance configuration
@@ -280,6 +282,7 @@ export async function createBbcBraveInstance(
 /**
  * Remove a Brave instance
  *
+ * @memberOf bbc-brave
  * @description Brave is a Basic real-time (remote) audio/video editor. It allows LIVE video (and/or audio) to be received, manipulated, and sent elsewhere. Forwarding RTMP from one place to another, mixing two or more inputs or add basic graphics are some example of usage.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the mixer to be removed
@@ -295,6 +298,7 @@ export async function removeBbcBraveInstance(
 /**
  * Get a Brave instance
  *
+ * @memberOf bbc-brave
  * @description Brave is a Basic real-time (remote) audio/video editor. It allows LIVE video (and/or audio) to be received, manipulated, and sent elsewhere. Forwarding RTMP from one place to another, mixing two or more inputs or add basic graphics are some example of usage.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the mixer to be retrieved

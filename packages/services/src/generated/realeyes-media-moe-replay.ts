@@ -278,6 +278,7 @@ export type RealeyesMediaMoeReplay =
 export type RealeyesMediaMoeReplayConfig =
   paths['/moe-replayinstance']['post']['parameters']['body']['body'];
 
+/** @namespace realeyes-media-moe-replay */
 import {
   Context,
   createInstance,
@@ -289,6 +290,7 @@ import {
 /**
  * Create a new MOE Replay instance
  *
+ * @memberOf realeyes-media-moe-replay
  * @description Transform live video streams instantly with MOE REPlay. Perfect for creating live HLS manifests on the fly. Enhance your streaming service now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {RealeyesMediaMoeReplayConfig}} body - Service instance configuration
@@ -320,6 +322,7 @@ export async function createRealeyesMediaMoeReplayInstance(
 /**
  * Remove a MOE Replay instance
  *
+ * @memberOf realeyes-media-moe-replay
  * @description Transform live video streams instantly with MOE REPlay. Perfect for creating live HLS manifests on the fly. Enhance your streaming service now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the moe-replay to be removed
@@ -342,6 +345,7 @@ export async function removeRealeyesMediaMoeReplayInstance(
 /**
  * Get a MOE Replay instance
  *
+ * @memberOf realeyes-media-moe-replay
  * @description Transform live video streams instantly with MOE REPlay. Perfect for creating live HLS manifests on the fly. Enhance your streaming service now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the moe-replay to be retrieved

@@ -278,6 +278,7 @@ export type BwallbergKingsAndPigsTs =
 export type BwallbergKingsAndPigsTsConfig =
   paths['/kings-and-pigs-tsinstance']['post']['parameters']['body']['body'];
 
+/** @namespace bwallberg-kings-and-pigs-ts */
 import {
   Context,
   createInstance,
@@ -289,6 +290,7 @@ import {
 /**
  * Create a new Kings and Pigs instance
  *
+ * @memberOf bwallberg-kings-and-pigs-ts
  * @description Dive into Kings and Pigs, a vibrant 2D TypeScript game! Explore custom ECS architecture & physics with Planck.js. Perfect for TypeScript learners & game enthusiasts. Play now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {BwallbergKingsAndPigsTsConfig}} body - Service instance configuration
@@ -320,6 +322,7 @@ export async function createBwallbergKingsAndPigsTsInstance(
 /**
  * Remove a Kings and Pigs instance
  *
+ * @memberOf bwallberg-kings-and-pigs-ts
  * @description Dive into Kings and Pigs, a vibrant 2D TypeScript game! Explore custom ECS architecture & physics with Planck.js. Perfect for TypeScript learners & game enthusiasts. Play now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the kings-and-pigs-ts to be removed
@@ -342,6 +345,7 @@ export async function removeBwallbergKingsAndPigsTsInstance(
 /**
  * Get a Kings and Pigs instance
  *
+ * @memberOf bwallberg-kings-and-pigs-ts
  * @description Dive into Kings and Pigs, a vibrant 2D TypeScript game! Explore custom ECS architecture & physics with Planck.js. Perfect for TypeScript learners & game enthusiasts. Play now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the kings-and-pigs-ts to be retrieved

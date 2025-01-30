@@ -286,6 +286,7 @@ export type PoundifdefSmoothmq =
 export type PoundifdefSmoothmqConfig =
   paths['/smoothmqinstance']['post']['parameters']['body']['body'];
 
+/** @namespace poundifdef-smoothmq */
 import {
   Context,
   createInstance,
@@ -297,6 +298,7 @@ import {
 /**
  * Create a new SmoothMQ instance
  *
+ * @memberOf poundifdef-smoothmq
  * @description Introducing SmoothMQ, the ultimate drop-in replacement for SQS! Enhance your developer experience with a functional UI, observability, tracing, scheduling, and rate-limiting. Run your own private SQS on any cloud effortlessly.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {PoundifdefSmoothmqConfig}} body - Service instance configuration
@@ -328,6 +330,7 @@ export async function createPoundifdefSmoothmqInstance(
 /**
  * Remove a SmoothMQ instance
  *
+ * @memberOf poundifdef-smoothmq
  * @description Introducing SmoothMQ, the ultimate drop-in replacement for SQS! Enhance your developer experience with a functional UI, observability, tracing, scheduling, and rate-limiting. Run your own private SQS on any cloud effortlessly.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the message-queue to be removed
@@ -345,6 +348,7 @@ export async function removePoundifdefSmoothmqInstance(
 /**
  * Get a SmoothMQ instance
  *
+ * @memberOf poundifdef-smoothmq
  * @description Introducing SmoothMQ, the ultimate drop-in replacement for SQS! Enhance your developer experience with a functional UI, observability, tracing, scheduling, and rate-limiting. Run your own private SQS on any cloud effortlessly.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the message-queue to be retrieved

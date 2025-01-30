@@ -278,6 +278,7 @@ export type ChambanaNetDockerPodcastgen =
 export type ChambanaNetDockerPodcastgenConfig =
   paths['/docker-podcastgeninstance']['post']['parameters']['body']['body'];
 
+/** @namespace chambana-net-docker-podcastgen */
 import {
   Context,
   createInstance,
@@ -289,6 +290,7 @@ import {
 /**
  * Create a new Podcast Generator instance
  *
+ * @memberOf chambana-net-docker-podcastgen
  * @description Effortlessly host and manage your podcasts with our Docker container for Podcast Generator. Quick setup and version flexibility let you focus on content creation while we handle the rest.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {ChambanaNetDockerPodcastgenConfig}} body - Service instance configuration
@@ -324,6 +326,7 @@ export async function createChambanaNetDockerPodcastgenInstance(
 /**
  * Remove a Podcast Generator instance
  *
+ * @memberOf chambana-net-docker-podcastgen
  * @description Effortlessly host and manage your podcasts with our Docker container for Podcast Generator. Quick setup and version flexibility let you focus on content creation while we handle the rest.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the podcast-generator to be removed
@@ -346,6 +349,7 @@ export async function removeChambanaNetDockerPodcastgenInstance(
 /**
  * Get a Podcast Generator instance
  *
+ * @memberOf chambana-net-docker-podcastgen
  * @description Effortlessly host and manage your podcasts with our Docker container for Podcast Generator. Quick setup and version flexibility let you focus on content creation while we handle the rest.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the podcast-generator to be retrieved

@@ -206,6 +206,7 @@ export type EyevinnScheduleService =
 export type EyevinnScheduleServiceConfig =
   paths['/schedule-serviceinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-schedule-service */
 import {
   Context,
   createInstance,
@@ -217,6 +218,7 @@ import {
 /**
  * Create a new FAST Engine Schedule Service instance
  *
+ * @memberOf eyevinn-schedule-service
  * @description A modular service to automatically populate schedules for FAST Engine channels. Uses AWS Dynamo DB as database.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnScheduleServiceConfig}} body - Service instance configuration
@@ -248,6 +250,7 @@ export async function createEyevinnScheduleServiceInstance(
 /**
  * Remove a FAST Engine Schedule Service instance
  *
+ * @memberOf eyevinn-schedule-service
  * @description A modular service to automatically populate schedules for FAST Engine channels. Uses AWS Dynamo DB as database.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the scheduler to be removed
@@ -270,6 +273,7 @@ export async function removeEyevinnScheduleServiceInstance(
 /**
  * Get a FAST Engine Schedule Service instance
  *
+ * @memberOf eyevinn-schedule-service
  * @description A modular service to automatically populate schedules for FAST Engine channels. Uses AWS Dynamo DB as database.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the scheduler to be retrieved

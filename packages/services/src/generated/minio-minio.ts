@@ -286,6 +286,7 @@ export type MinioMinio =
 export type MinioMinioConfig =
   paths['/minioinstance']['post']['parameters']['body']['body'];
 
+/** @namespace minio-minio */
 import {
   Context,
   createInstance,
@@ -297,6 +298,7 @@ import {
 /**
  * Create a new minio instance
  *
+ * @memberOf minio-minio
  * @description MinIO is the High Performance Object Storage solution you've been searching for! API compatible with Amazon S3, it's perfect for machine learning, analytics, and app data workloads. Easy container installation with stable podman run commands. Mac, Linux, Windows support available for simple standalone server setup. Explore further with MinIO SDKs and contribute to the MinIO Project. Get your MinIO now and revolutionize your storage game!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {MinioMinioConfig}} body - Service instance configuration
@@ -326,6 +328,7 @@ export async function createMinioMinioInstance(
 /**
  * Remove a minio instance
  *
+ * @memberOf minio-minio
  * @description MinIO is the High Performance Object Storage solution you've been searching for! API compatible with Amazon S3, it's perfect for machine learning, analytics, and app data workloads. Easy container installation with stable podman run commands. Mac, Linux, Windows support available for simple standalone server setup. Explore further with MinIO SDKs and contribute to the MinIO Project. Get your MinIO now and revolutionize your storage game!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the objstorage to be removed
@@ -341,6 +344,7 @@ export async function removeMinioMinioInstance(
 /**
  * Get a minio instance
  *
+ * @memberOf minio-minio
  * @description MinIO is the High Performance Object Storage solution you've been searching for! API compatible with Amazon S3, it's perfect for machine learning, analytics, and app data workloads. Easy container installation with stable podman run commands. Mac, Linux, Windows support available for simple standalone server setup. Explore further with MinIO SDKs and contribute to the MinIO Project. Get your MinIO now and revolutionize your storage game!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the objstorage to be retrieved

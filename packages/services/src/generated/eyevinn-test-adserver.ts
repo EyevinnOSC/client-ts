@@ -40,6 +40,7 @@ export interface paths {
                 url: string;
               };
             };
+            MrssOrigin?: string;
           }[];
         };
         /** Default Response */
@@ -58,6 +59,7 @@ export interface paths {
           body?: {
             /** @description Name of the test-adserver instance */
             name: string;
+            MrssOrigin?: string;
           };
         };
       };
@@ -83,6 +85,7 @@ export interface paths {
                 url: string;
               };
             };
+            MrssOrigin?: string;
           };
         };
         /** Default Response */
@@ -140,6 +143,7 @@ export interface paths {
                 url: string;
               };
             };
+            MrssOrigin?: string;
           };
         };
         /** Default Response */
@@ -278,6 +282,7 @@ export type EyevinnTestAdserver =
 export type EyevinnTestAdserverConfig =
   paths['/test-adserverinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-test-adserver */
 import {
   Context,
   createInstance,
@@ -289,6 +294,7 @@ import {
 /**
  * Create a new Test Adserver instance
  *
+ * @memberOf eyevinn-test-adserver
  * @description Eyevinn Test Adserver is the ultimate solution for testing CSAI/SSAI stitching and tracking implementation. Open source, easy to use, and flexible for various use cases. Get it now and experience seamless testing!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnTestAdserverConfig}} body - Service instance configuration
@@ -320,6 +326,7 @@ export async function createEyevinnTestAdserverInstance(
 /**
  * Remove a Test Adserver instance
  *
+ * @memberOf eyevinn-test-adserver
  * @description Eyevinn Test Adserver is the ultimate solution for testing CSAI/SSAI stitching and tracking implementation. Open source, easy to use, and flexible for various use cases. Get it now and experience seamless testing!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the test-adserver to be removed
@@ -337,6 +344,7 @@ export async function removeEyevinnTestAdserverInstance(
 /**
  * Get a Test Adserver instance
  *
+ * @memberOf eyevinn-test-adserver
  * @description Eyevinn Test Adserver is the ultimate solution for testing CSAI/SSAI stitching and tracking implementation. Open source, easy to use, and flexible for various use cases. Get it now and experience seamless testing!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the test-adserver to be retrieved

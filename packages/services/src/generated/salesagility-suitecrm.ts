@@ -278,6 +278,7 @@ export type SalesagilitySuitecrm =
 export type SalesagilitySuitecrmConfig =
   paths['/suitecrminstance']['post']['parameters']['body']['body'];
 
+/** @namespace salesagility-suitecrm */
 import {
   Context,
   createInstance,
@@ -289,6 +290,7 @@ import {
 /**
  * Create a new Suite CRM instance
  *
+ * @memberOf salesagility-suitecrm
  * @description Transform your business with SuiteCRM 7.14.5, the leading open-source CRM. Seamlessly manage customer relationships, gain full data control, and customize your solution for an unbeatable enterprise edge!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {SalesagilitySuitecrmConfig}} body - Service instance configuration
@@ -320,6 +322,7 @@ export async function createSalesagilitySuitecrmInstance(
 /**
  * Remove a Suite CRM instance
  *
+ * @memberOf salesagility-suitecrm
  * @description Transform your business with SuiteCRM 7.14.5, the leading open-source CRM. Seamlessly manage customer relationships, gain full data control, and customize your solution for an unbeatable enterprise edge!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the suitecrm to be removed
@@ -337,6 +340,7 @@ export async function removeSalesagilitySuitecrmInstance(
 /**
  * Get a Suite CRM instance
  *
+ * @memberOf salesagility-suitecrm
  * @description Transform your business with SuiteCRM 7.14.5, the leading open-source CRM. Seamlessly manage customer relationships, gain full data control, and customize your solution for an unbeatable enterprise edge!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the suitecrm to be retrieved

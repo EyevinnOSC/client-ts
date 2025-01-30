@@ -1,14 +1,38 @@
 {
   "plugins": ["plugins/markdown"],
   "source": {
-    "include": ["readme.md", "packages/core/lib", "packages/services/lib"]
+    "include": ["readme.md", "packages/core/", "packages/services/", "packages/transcode"],
+    "includePattern": "\\.js$",
+    "excludePattern": "(node_modules/|docs)"
   },
   "templates": {
     "default": {
       "outputSourceFiles": false
-    }
+    },
+    "cleverLinks": false,
+    "monospaceLinks": false
   },
   "opts": {
-    "destination": "./docs/"
+    "destination": "./docs/",
+    "template": "node_modules/docdash/",
+    "recurse": true,
+    "verbose": true
+  },
+  "docdash": {
+    "collapse": true,
+    "menu": {
+      "Login": {
+        "href": "https://app.osaas.io",
+        "target": "_blank",
+        "class": "menu-item",
+        "id": "login_link"
+      },
+      "Documentation": {
+        "href": "https://docs.osaas.io",
+        "target": "_blank",
+        "class": "menu-item",
+        "id": "docs_link"
+      }
+    }
   }
 }

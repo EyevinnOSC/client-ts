@@ -286,6 +286,7 @@ export type PlausibleAnalytics =
 export type PlausibleAnalyticsConfig =
   paths['/analyticsinstance']['post']['parameters']['body']['body'];
 
+/** @namespace plausible-analytics */
 import {
   Context,
   createInstance,
@@ -297,6 +298,7 @@ import {
 /**
  * Create a new Plausible Analytics instance
  *
+ * @memberOf plausible-analytics
  * @description Elevate your data privacy with Plausible Analytics. Get simple, clutter-free insights without compromising user privacy. Enjoy an easy, lightweight, and privacy-focused Google Analytics alternative!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {PlausibleAnalyticsConfig}} body - Service instance configuration
@@ -328,6 +330,7 @@ export async function createPlausibleAnalyticsInstance(
 /**
  * Remove a Plausible Analytics instance
  *
+ * @memberOf plausible-analytics
  * @description Elevate your data privacy with Plausible Analytics. Get simple, clutter-free insights without compromising user privacy. Enjoy an easy, lightweight, and privacy-focused Google Analytics alternative!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the server to be removed
@@ -345,6 +348,7 @@ export async function removePlausibleAnalyticsInstance(
 /**
  * Get a Plausible Analytics instance
  *
+ * @memberOf plausible-analytics
  * @description Elevate your data privacy with Plausible Analytics. Get simple, clutter-free insights without compromising user privacy. Enjoy an easy, lightweight, and privacy-focused Google Analytics alternative!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the server to be retrieved

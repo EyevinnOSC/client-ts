@@ -278,6 +278,7 @@ export type DrawdbIoDrawdb =
 export type DrawdbIoDrawdbConfig =
   paths['/drawdbinstance']['post']['parameters']['body']['body'];
 
+/** @namespace drawdb-io-drawdb */
 import {
   Context,
   createInstance,
@@ -289,6 +290,7 @@ import {
 /**
  * Create a new drawDB instance
  *
+ * @memberOf drawdb-io-drawdb
  * @description Effortlessly design and manage your database schema with drawDB. It's a user-friendly online DBER editor that lets you create diagrams and generate SQL without any hassle, all directly in your browser!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {DrawdbIoDrawdbConfig}} body - Service instance configuration
@@ -320,6 +322,7 @@ export async function createDrawdbIoDrawdbInstance(
 /**
  * Remove a drawDB instance
  *
+ * @memberOf drawdb-io-drawdb
  * @description Effortlessly design and manage your database schema with drawDB. It's a user-friendly online DBER editor that lets you create diagrams and generate SQL without any hassle, all directly in your browser!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the editor to be removed
@@ -337,6 +340,7 @@ export async function removeDrawdbIoDrawdbInstance(
 /**
  * Get a drawDB instance
  *
+ * @memberOf drawdb-io-drawdb
  * @description Effortlessly design and manage your database schema with drawDB. It's a user-friendly online DBER editor that lets you create diagrams and generate SQL without any hassle, all directly in your browser!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the editor to be retrieved

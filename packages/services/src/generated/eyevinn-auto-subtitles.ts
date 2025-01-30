@@ -294,6 +294,7 @@ export type EyevinnAutoSubtitles =
 export type EyevinnAutoSubtitlesConfig =
   paths['/auto-subtitlesinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-auto-subtitles */
 import {
   Context,
   createInstance,
@@ -305,6 +306,7 @@ import {
 /**
  * Create a new Subtitle Generator instance
  *
+ * @memberOf eyevinn-auto-subtitles
  * @description Automatically generate subtitles from an input audio or video file using Open AI Whisper.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnAutoSubtitlesConfig}} body - Service instance configuration
@@ -336,6 +338,7 @@ export async function createEyevinnAutoSubtitlesInstance(
 /**
  * Remove a Subtitle Generator instance
  *
+ * @memberOf eyevinn-auto-subtitles
  * @description Automatically generate subtitles from an input audio or video file using Open AI Whisper.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the generator to be removed
@@ -353,6 +356,7 @@ export async function removeEyevinnAutoSubtitlesInstance(
 /**
  * Get a Subtitle Generator instance
  *
+ * @memberOf eyevinn-auto-subtitles
  * @description Automatically generate subtitles from an input audio or video file using Open AI Whisper.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the generator to be retrieved

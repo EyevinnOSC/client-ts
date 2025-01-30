@@ -206,6 +206,7 @@ export type EyevinnContinueWatchingApi =
 export type EyevinnContinueWatchingApiConfig =
   paths['/continue-watching-apiinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-continue-watching-api */
 import {
   Context,
   createInstance,
@@ -217,6 +218,7 @@ import {
 /**
  * Create a new Continue Watching Service instance
  *
+ * @memberOf eyevinn-continue-watching-api
  * @description A user of a streaming service expects that they can pick up where they left on any of their devices. To handle that you would need to develop a service with endpoints for the application to write and read from. This open source cloud component take care of that and all you need is to have a Redis database running on Redis Cloud for example.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnContinueWatchingApiConfig}} body - Service instance configuration
@@ -252,6 +254,7 @@ export async function createEyevinnContinueWatchingApiInstance(
 /**
  * Remove a Continue Watching Service instance
  *
+ * @memberOf eyevinn-continue-watching-api
  * @description A user of a streaming service expects that they can pick up where they left on any of their devices. To handle that you would need to develop a service with endpoints for the application to write and read from. This open source cloud component take care of that and all you need is to have a Redis database running on Redis Cloud for example.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the service to be removed
@@ -274,6 +277,7 @@ export async function removeEyevinnContinueWatchingApiInstance(
 /**
  * Get a Continue Watching Service instance
  *
+ * @memberOf eyevinn-continue-watching-api
  * @description A user of a streaming service expects that they can pick up where they left on any of their devices. To handle that you would need to develop a service with endpoints for the application to write and read from. This open source cloud component take care of that and all you need is to have a Redis database running on Redis Cloud for example.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the service to be retrieved

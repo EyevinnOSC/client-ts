@@ -282,6 +282,7 @@ export type EyevinnAppConfigSvc =
 export type EyevinnAppConfigSvcConfig =
   paths['/app-config-svcinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-app-config-svc */
 import {
   Context,
   createInstance,
@@ -293,6 +294,7 @@ import {
 /**
  * Create a new Application Config Service instance
  *
+ * @memberOf eyevinn-app-config-svc
  * @description Supercharge your application's efficiency by instantly providing configuration values with our Application Configuration Service. Integrate seamlessly with Redis, leverage cache control, and scale effortlessly.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnAppConfigSvcConfig}} body - Service instance configuration
@@ -324,6 +326,7 @@ export async function createEyevinnAppConfigSvcInstance(
 /**
  * Remove a Application Config Service instance
  *
+ * @memberOf eyevinn-app-config-svc
  * @description Supercharge your application's efficiency by instantly providing configuration values with our Application Configuration Service. Integrate seamlessly with Redis, leverage cache control, and scale effortlessly.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the config-service to be removed
@@ -341,6 +344,7 @@ export async function removeEyevinnAppConfigSvcInstance(
 /**
  * Get a Application Config Service instance
  *
+ * @memberOf eyevinn-app-config-svc
  * @description Supercharge your application's efficiency by instantly providing configuration values with our Application Configuration Service. Integrate seamlessly with Redis, leverage cache control, and scale effortlessly.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the config-service to be retrieved

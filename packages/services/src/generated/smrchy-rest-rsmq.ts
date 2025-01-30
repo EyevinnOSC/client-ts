@@ -282,6 +282,7 @@ export type SmrchyRestRsmq =
 export type SmrchyRestRsmqConfig =
   paths['/rest-rsmqinstance']['post']['parameters']['body']['body'];
 
+/** @namespace smrchy-rest-rsmq */
 import {
   Context,
   createInstance,
@@ -293,6 +294,7 @@ import {
 /**
  * Create a new Really Simple Message Queue instance
  * 
+ * @memberOf smrchy-rest-rsmq
  * @description **Boost Your Productivity with REST rsmq**
 
 Easily integrate with rsmq for efficient message queuing. No security worries, just seamless communication across platforms like php, .net, and more. Maximize performance now!
@@ -326,6 +328,7 @@ export async function createSmrchyRestRsmqInstance(
 /**
  * Remove a Really Simple Message Queue instance
  * 
+ * @memberOf smrchy-rest-rsmq
  * @description **Boost Your Productivity with REST rsmq**
 
 Easily integrate with rsmq for efficient message queuing. No security worries, just seamless communication across platforms like php, .net, and more. Maximize performance now!
@@ -345,6 +348,7 @@ export async function removeSmrchyRestRsmqInstance(
 /**
  * Get a Really Simple Message Queue instance
  * 
+ * @memberOf smrchy-rest-rsmq
  * @description **Boost Your Productivity with REST rsmq**
 
 Easily integrate with rsmq for efficient message queuing. No security worries, just seamless communication across platforms like php, .net, and more. Maximize performance now!

@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/docusealinstance': {
-    /** List all running docuseal instances */
+  '/ad-normalizerinstance': {
+    /** List all running ad-normalizer instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the docuseal instance */
+            /** @description Name of the ad-normalizer instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,6 +40,15 @@ export interface paths {
                 url: string;
               };
             };
+            EncoreUrl: string;
+            EncoreCallbackListenerUrl: string;
+            AdServerUrl: string;
+            OutputBucketUrl: string;
+            S3AccessKey: string;
+            S3SecretKey: string;
+            S3EndpointUrl?: string;
+            RedisUrl?: string;
+            OscAccessToken?: string;
           }[];
         };
         /** Default Response */
@@ -51,13 +60,22 @@ export interface paths {
         };
       };
     };
-    /** Launch a new docuseal instance */
+    /** Launch a new ad-normalizer instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the docuseal instance */
+            /** @description Name of the ad-normalizer instance */
             name: string;
+            EncoreUrl: string;
+            EncoreCallbackListenerUrl: string;
+            AdServerUrl: string;
+            OutputBucketUrl: string;
+            S3AccessKey: string;
+            S3SecretKey: string;
+            S3EndpointUrl?: string;
+            RedisUrl?: string;
+            OscAccessToken?: string;
           };
         };
       };
@@ -65,7 +83,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the docuseal instance */
+            /** @description Name of the ad-normalizer instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -83,6 +101,15 @@ export interface paths {
                 url: string;
               };
             };
+            EncoreUrl: string;
+            EncoreCallbackListenerUrl: string;
+            AdServerUrl: string;
+            OutputBucketUrl: string;
+            S3AccessKey: string;
+            S3SecretKey: string;
+            S3EndpointUrl?: string;
+            RedisUrl?: string;
+            OscAccessToken?: string;
           };
         };
         /** Default Response */
@@ -109,12 +136,12 @@ export interface paths {
       };
     };
   };
-  '/docusealinstance/{id}': {
-    /** Obtain status and resource URLs for an docuseal instance */
+  '/ad-normalizerinstance/{id}': {
+    /** Obtain status and resource URLs for an ad-normalizer instance */
     get: {
       parameters: {
         path: {
-          /** Name of the docuseal instance */
+          /** Name of the ad-normalizer instance */
           id: string;
         };
       };
@@ -122,7 +149,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the docuseal instance */
+            /** @description Name of the ad-normalizer instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -140,6 +167,15 @@ export interface paths {
                 url: string;
               };
             };
+            EncoreUrl: string;
+            EncoreCallbackListenerUrl: string;
+            AdServerUrl: string;
+            OutputBucketUrl: string;
+            S3AccessKey: string;
+            S3SecretKey: string;
+            S3EndpointUrl?: string;
+            RedisUrl?: string;
+            OscAccessToken?: string;
           };
         };
         /** Default Response */
@@ -158,11 +194,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an docuseal instance */
+    /** Stop and remove an ad-normalizer instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the docuseal instance */
+          /** Name of the ad-normalizer instance */
           id: string;
         };
       };
@@ -182,11 +218,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of docuseal instance */
+    /** Return status of ad-normalizer instance */
     get: {
       parameters: {
         path: {
-          /** Name of the docuseal instance */
+          /** Name of the ad-normalizer instance */
           id: string;
         };
       };
@@ -209,7 +245,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the docuseal instance */
+    /** Return the latest logs from the ad-normalizer instance */
     get: {
       parameters: {
         query: {
@@ -217,7 +253,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the docuseal instance */
+          /** Name of the ad-normalizer instance */
           id: string;
         };
       };
@@ -237,11 +273,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for docuseal instance */
+    /** Return the exposed extra ports for ad-normalizer instance */
     get: {
       parameters: {
         path: {
-          /** Name of the docuseal instance */
+          /** Name of the ad-normalizer instance */
           id: string;
         };
       };
@@ -272,13 +308,13 @@ export interface operations {}
 
 export interface external {}
 
-export type DocusealcoDocuseal =
-  paths['/docusealinstance/{id}']['get']['responses']['200']['schema'];
+export type EyevinnAdNormalizer =
+  paths['/ad-normalizerinstance/{id}']['get']['responses']['200']['schema'];
 
-export type DocusealcoDocusealConfig =
-  paths['/docusealinstance']['post']['parameters']['body']['body'];
+export type EyevinnAdNormalizerConfig =
+  paths['/ad-normalizerinstance']['post']['parameters']['body']['body'];
 
-/** @namespace docusealco-docuseal */
+/** @namespace eyevinn-ad-normalizer */
 import {
   Context,
   createInstance,
@@ -288,74 +324,74 @@ import {
 } from '@osaas/client-core';
 
 /**
- * Create a new Docuseal instance
+ * Create a new Ad Normalizer instance
  *
- * @memberOf docusealco-docuseal
- * @description Streamline your document workflow with DocuSeal, the leading open-source solution for secure, mobile-optimized digital form filling and signing. Perfect for any business needing swift and seamless e-signatures.
+ * @memberOf eyevinn-ad-normalizer
+ * @description Optimize your ad delivery with Ad Normalizer! Seamlessly transcode and package VAST creatives for your ad server using a Redis-backed workflow. Ensure efficient media processing and reliable ad streaming.
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DocusealcoDocusealConfig}} body - Service instance configuration
- * @returns {DocusealcoDocuseal} - Service instance
+ * @param {EyevinnAdNormalizerConfig}} body - Service instance configuration
+ * @returns {EyevinnAdNormalizer} - Service instance
  * @example
- * import { Context, createDocusealcoDocusealInstance } from '@osaas/client-services';
+ * import { Context, createEyevinnAdNormalizerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createDocusealcoDocusealInstance(ctx, { name: 'myinstance' });
+ * const instance = await createEyevinnAdNormalizerInstance(ctx, { name: 'myinstance' });
  * console.log(instance.url);
  */
-export async function createDocusealcoDocusealInstance(
+export async function createEyevinnAdNormalizerInstance(
   ctx: Context,
-  body: DocusealcoDocusealConfig
-): Promise<DocusealcoDocuseal> {
+  body: EyevinnAdNormalizerConfig
+): Promise<EyevinnAdNormalizer> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'docusealco-docuseal'
+    'eyevinn-ad-normalizer'
   );
   const instance = await createInstance(
     ctx,
-    'docusealco-docuseal',
+    'eyevinn-ad-normalizer',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('docusealco-docuseal', instance.name, ctx);
+  await waitForInstanceReady('eyevinn-ad-normalizer', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Docuseal instance
+ * Remove a Ad Normalizer instance
  *
- * @memberOf docusealco-docuseal
- * @description Streamline your document workflow with DocuSeal, the leading open-source solution for secure, mobile-optimized digital form filling and signing. Perfect for any business needing swift and seamless e-signatures.
+ * @memberOf eyevinn-ad-normalizer
+ * @description Optimize your ad delivery with Ad Normalizer! Seamlessly transcode and package VAST creatives for your ad server using a Redis-backed workflow. Ensure efficient media processing and reliable ad streaming.
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the docuseal to be removed
+ * @param {string} name - Name of the normalizer to be removed
  */
-export async function removeDocusealcoDocusealInstance(
+export async function removeEyevinnAdNormalizerInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'docusealco-docuseal'
+    'eyevinn-ad-normalizer'
   );
-  await removeInstance(ctx, 'docusealco-docuseal', name, serviceAccessToken);
+  await removeInstance(ctx, 'eyevinn-ad-normalizer', name, serviceAccessToken);
 }
 
 /**
- * Get a Docuseal instance
+ * Get a Ad Normalizer instance
  *
- * @memberOf docusealco-docuseal
- * @description Streamline your document workflow with DocuSeal, the leading open-source solution for secure, mobile-optimized digital form filling and signing. Perfect for any business needing swift and seamless e-signatures.
+ * @memberOf eyevinn-ad-normalizer
+ * @description Optimize your ad delivery with Ad Normalizer! Seamlessly transcode and package VAST creatives for your ad server using a Redis-backed workflow. Ensure efficient media processing and reliable ad streaming.
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the docuseal to be retrieved
- * @returns {DocusealcoDocuseal} - Service instance
+ * @param {string} name - Name of the normalizer to be retrieved
+ * @returns {EyevinnAdNormalizer} - Service instance
  */
-export async function getDocusealcoDocusealInstance(
+export async function getEyevinnAdNormalizerInstance(
   ctx: Context,
   name: string
-): Promise<DocusealcoDocuseal> {
+): Promise<EyevinnAdNormalizer> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'docusealco-docuseal'
+    'eyevinn-ad-normalizer'
   );
   return await getInstance(
     ctx,
-    'docusealco-docuseal',
+    'eyevinn-ad-normalizer',
     name,
     serviceAccessToken
   );

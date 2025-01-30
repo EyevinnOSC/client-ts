@@ -240,6 +240,7 @@ export type DatarheiRestreamer =
 export type DatarheiRestreamerConfig =
   paths['/restreamerinstance']['post']['parameters']['body']['body'];
 
+/** @namespace datarhei-restreamer */
 import {
   Context,
   createInstance,
@@ -251,6 +252,7 @@ import {
 /**
  * Create a new restreamer instance
  *
+ * @memberOf datarhei-restreamer
  * @description Introducing Restreamer: A free, self-hosting solution for seamless live streaming to multiple platforms like YouTube, Twitch, and more. Easy setup, diverse features, hardware support, and GDPR compliance make it a must-have.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {DatarheiRestreamerConfig}} body - Service instance configuration
@@ -282,6 +284,7 @@ export async function createDatarheiRestreamerInstance(
 /**
  * Remove a restreamer instance
  *
+ * @memberOf datarhei-restreamer
  * @description Introducing Restreamer: A free, self-hosting solution for seamless live streaming to multiple platforms like YouTube, Twitch, and more. Easy setup, diverse features, hardware support, and GDPR compliance make it a must-have.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the restreamer to be removed
@@ -299,6 +302,7 @@ export async function removeDatarheiRestreamerInstance(
 /**
  * Get a restreamer instance
  *
+ * @memberOf datarhei-restreamer
  * @description Introducing Restreamer: A free, self-hosting solution for seamless live streaming to multiple platforms like YouTube, Twitch, and more. Easy setup, diverse features, hardware support, and GDPR compliance make it a must-have.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the restreamer to be retrieved

@@ -278,6 +278,7 @@ export type EyevinnCeSampleWebhook =
 export type EyevinnCeSampleWebhookConfig =
   paths['/ce-sample-webhookinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-ce-sample-webhook */
 import {
   Context,
   createInstance,
@@ -289,6 +290,7 @@ import {
 /**
  * Create a new FAST Engine Sample Webhook instance
  *
+ * @memberOf eyevinn-ce-sample-webhook
  * @description Unlock seamless streaming experiences with our example webhook for FAST Channel Engine. Effortlessly integrate with `/loop/nextVod` and `/ads/nextVod` to optimize content delivery and boost viewer engagement.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnCeSampleWebhookConfig}} body - Service instance configuration
@@ -320,6 +322,7 @@ export async function createEyevinnCeSampleWebhookInstance(
 /**
  * Remove a FAST Engine Sample Webhook instance
  *
+ * @memberOf eyevinn-ce-sample-webhook
  * @description Unlock seamless streaming experiences with our example webhook for FAST Channel Engine. Effortlessly integrate with `/loop/nextVod` and `/ads/nextVod` to optimize content delivery and boost viewer engagement.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the webhooks to be removed
@@ -342,6 +345,7 @@ export async function removeEyevinnCeSampleWebhookInstance(
 /**
  * Get a FAST Engine Sample Webhook instance
  *
+ * @memberOf eyevinn-ce-sample-webhook
  * @description Unlock seamless streaming experiences with our example webhook for FAST Channel Engine. Effortlessly integrate with `/loop/nextVod` and `/ads/nextVod` to optimize content delivery and boost viewer engagement.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the webhooks to be retrieved

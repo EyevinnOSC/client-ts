@@ -286,6 +286,7 @@ export type EyevinnWebRunner =
 export type EyevinnWebRunnerConfig =
   paths['/web-runnerinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-web-runner */
 import {
   Context,
   createInstance,
@@ -297,6 +298,7 @@ import {
 /**
  * Create a new Web Runner instance
  *
+ * @memberOf eyevinn-web-runner
  * @description Effortlessly deploy NodeJS web apps with Web-Runner! This Docker container seamlessly handles cloning, building, and running your GitHub repositories. Simplify your deployment process today!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnWebRunnerConfig}} body - Service instance configuration
@@ -328,6 +330,7 @@ export async function createEyevinnWebRunnerInstance(
 /**
  * Remove a Web Runner instance
  *
+ * @memberOf eyevinn-web-runner
  * @description Effortlessly deploy NodeJS web apps with Web-Runner! This Docker container seamlessly handles cloning, building, and running your GitHub repositories. Simplify your deployment process today!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the web-runner to be removed
@@ -345,6 +348,7 @@ export async function removeEyevinnWebRunnerInstance(
 /**
  * Get a Web Runner instance
  *
+ * @memberOf eyevinn-web-runner
  * @description Effortlessly deploy NodeJS web apps with Web-Runner! This Docker container seamlessly handles cloning, building, and running your GitHub repositories. Simplify your deployment process today!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the web-runner to be retrieved

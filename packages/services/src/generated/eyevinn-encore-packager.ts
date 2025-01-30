@@ -322,6 +322,7 @@ export type EyevinnEncorePackager =
 export type EyevinnEncorePackagerConfig =
   paths['/encore-packagerinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-encore-packager */
 import {
   Context,
   createInstance,
@@ -333,6 +334,7 @@ import {
 /**
  * Create a new Encore Packager instance
  *
+ * @memberOf eyevinn-encore-packager
  * @description Enhance your transcoding workflow with Encore packager! Run as a service, listen for messages on redis queue, and customize packaging events. Boost productivity with this versatile tool.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnEncorePackagerConfig}} body - Service instance configuration
@@ -364,6 +366,7 @@ export async function createEyevinnEncorePackagerInstance(
 /**
  * Remove a Encore Packager instance
  *
+ * @memberOf eyevinn-encore-packager
  * @description Enhance your transcoding workflow with Encore packager! Run as a service, listen for messages on redis queue, and customize packaging events. Boost productivity with this versatile tool.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the packager to be removed
@@ -386,6 +389,7 @@ export async function removeEyevinnEncorePackagerInstance(
 /**
  * Get a Encore Packager instance
  *
+ * @memberOf eyevinn-encore-packager
  * @description Enhance your transcoding workflow with Encore packager! Run as a service, listen for messages on redis queue, and customize packaging events. Boost productivity with this versatile tool.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the packager to be retrieved
