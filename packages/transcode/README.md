@@ -2,6 +2,8 @@
 
 SDK for transcoding with Encore in Open Source Cloud and transfer result to S3 bucket
 
+- [SDK Reference Documentation](https://js.docs.osaas.io)
+
 ## Usage
 
 Prerequisites

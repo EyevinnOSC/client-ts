@@ -2,6 +2,8 @@
 
 Automatically generated typed service resources.
 
+- [SDK Reference Documentation](https://js.docs.osaas.io)
+
 ## Usage
 
 ```javascript

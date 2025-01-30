@@ -1,5 +1,7 @@
 # @osaas/client-core
 
+- [SDK Reference Documentation](https://js.docs.osaas.io)
+
 ## Usage
 
 ### Launch a Chaos Stream Proxy

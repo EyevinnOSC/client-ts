@@ -2,6 +2,8 @@
 
 SDK for static website publishing in Open Source Cloud
 
+- [SDK Reference Documentation](https://js.docs.osaas.io)
+
 ## Usage
 
 Prerequisites
