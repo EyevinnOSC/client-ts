@@ -239,8 +239,6 @@ export type OwncastOwncast =
 
 export type OwncastOwncastConfig =
   paths['/owncastinstance']['post']['parameters']['body']['body'];
-
-/** @namespace owncast-owncast */
 import {
   Context,
   createInstance,
@@ -248,14 +246,35 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace owncast-owncast
+ * @description Revolutionize your live streaming experience with Owncast! Take control over your content, interface, and audience with this self-hosted, open-source platform. Explore the possibilities today.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://owncast.online/quickstart/configure/|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} OwncastOwncastConfig
+ * @property {string} name - Name of owncast
+
+ * 
+ */
+
+/**
+ * @typedef {Object} OwncastOwncast
+ * @property {string} name - Name of the owncast instance
+ * @property {string} url - URL of the owncast instance
+ *
+ */
 
 /**
  * Create a new owncast instance
  *
  * @memberOf owncast-owncast
- * @description Revolutionize your live streaming experience with Owncast! Take control over your content, interface, and audience with this self-hosted, open-source platform. Explore the possibilities today.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {OwncastOwncastConfig}} body - Service instance configuration
+ * @param {OwncastOwncastConfig} body - Service instance configuration
  * @returns {OwncastOwncast} - Service instance
  * @example
  * import { Context, createOwncastOwncastInstance } from '@osaas/client-services';
@@ -283,7 +302,7 @@ export async function createOwncastOwncastInstance(
  * Remove a owncast instance
  *
  * @memberOf owncast-owncast
- * @description Revolutionize your live streaming experience with Owncast! Take control over your content, interface, and audience with this self-hosted, open-source platform. Explore the possibilities today.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the owncast to be removed
  */
@@ -299,7 +318,7 @@ export async function removeOwncastOwncastInstance(
  * Get a owncast instance
  *
  * @memberOf owncast-owncast
- * @description Revolutionize your live streaming experience with Owncast! Take control over your content, interface, and audience with this self-hosted, open-source platform. Explore the possibilities today.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the owncast to be retrieved
  * @returns {OwncastOwncast} - Service instance

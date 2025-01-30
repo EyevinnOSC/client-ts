@@ -289,8 +289,6 @@ export type EyevinnEncoreCallbackListener =
 
 export type EyevinnEncoreCallbackListenerConfig =
   paths['/encore-callback-listenerinstance']['post']['parameters']['body']['body'];
-
-/** @namespace eyevinn-encore-callback-listener */
 import {
   Context,
   createInstance,
@@ -298,14 +296,38 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace eyevinn-encore-callback-listener
+ * @description Encore callback listener is a powerful HTTP server that listens for successful job callbacks, posting jobId and Url on a redis queue. Fully customizable with environment variables. Enhance your project efficiency now! Contact sales@eyevinn.se for further details.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} EyevinnEncoreCallbackListenerConfig
+ * @property {string} name - Name of encore-callback-listener
+ * @property {string} RedisUrl - RedisUrl
+ * @property {string} EncoreUrl - EncoreUrl
+ * @property {string} [RedisQueue] - RedisQueue
+
+ * 
+ */
+
+/**
+ * @typedef {Object} EyevinnEncoreCallbackListener
+ * @property {string} name - Name of the Encore Callback Listener instance
+ * @property {string} url - URL of the Encore Callback Listener instance
+ *
+ */
 
 /**
  * Create a new Encore Callback Listener instance
  *
  * @memberOf eyevinn-encore-callback-listener
- * @description Encore callback listener is a powerful HTTP server that listens for successful job callbacks, posting jobId and Url on a redis queue. Fully customizable with environment variables. Enhance your project efficiency now! Contact sales@eyevinn.se for further details.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnEncoreCallbackListenerConfig}} body - Service instance configuration
+ * @param {EyevinnEncoreCallbackListenerConfig} body - Service instance configuration
  * @returns {EyevinnEncoreCallbackListener} - Service instance
  * @example
  * import { Context, createEyevinnEncoreCallbackListenerInstance } from '@osaas/client-services';
@@ -339,7 +361,7 @@ export async function createEyevinnEncoreCallbackListenerInstance(
  * Remove a Encore Callback Listener instance
  *
  * @memberOf eyevinn-encore-callback-listener
- * @description Encore callback listener is a powerful HTTP server that listens for successful job callbacks, posting jobId and Url on a redis queue. Fully customizable with environment variables. Enhance your project efficiency now! Contact sales@eyevinn.se for further details.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the callback to be removed
  */
@@ -362,7 +384,7 @@ export async function removeEyevinnEncoreCallbackListenerInstance(
  * Get a Encore Callback Listener instance
  *
  * @memberOf eyevinn-encore-callback-listener
- * @description Encore callback listener is a powerful HTTP server that listens for successful job callbacks, posting jobId and Url on a redis queue. Fully customizable with environment variables. Enhance your project efficiency now! Contact sales@eyevinn.se for further details.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the callback to be retrieved
  * @returns {EyevinnEncoreCallbackListener} - Service instance

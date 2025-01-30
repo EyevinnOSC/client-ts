@@ -277,8 +277,6 @@ export type JoeldelpilarTicTacVue =
 
 export type JoeldelpilarTicTacVueConfig =
   paths['/tic-tac-vueinstance']['post']['parameters']['body']['body'];
-
-/** @namespace joeldelpilar-tic-tac-vue */
 import {
   Context,
   createInstance,
@@ -286,14 +284,35 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace joeldelpilar-tic-tac-vue
+ * @description Discover Tic Tac Vue - the ultimate way to enjoy classic Tic Tac Toe! This engaging game is built with Vue 3, offering smooth gameplay and a modern user interface. Perfect for quick fun!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} JoeldelpilarTicTacVueConfig
+ * @property {string} name - Name of tic-tac-vue
+
+ * 
+ */
+
+/**
+ * @typedef {Object} JoeldelpilarTicTacVue
+ * @property {string} name - Name of the Tic Tac Vue instance
+ * @property {string} url - URL of the Tic Tac Vue instance
+ *
+ */
 
 /**
  * Create a new Tic Tac Vue instance
  *
  * @memberOf joeldelpilar-tic-tac-vue
- * @description Discover Tic Tac Vue - the ultimate way to enjoy classic Tic Tac Toe! This engaging game is built with Vue 3, offering smooth gameplay and a modern user interface. Perfect for quick fun!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {JoeldelpilarTicTacVueConfig}} body - Service instance configuration
+ * @param {JoeldelpilarTicTacVueConfig} body - Service instance configuration
  * @returns {JoeldelpilarTicTacVue} - Service instance
  * @example
  * import { Context, createJoeldelpilarTicTacVueInstance } from '@osaas/client-services';
@@ -323,7 +342,7 @@ export async function createJoeldelpilarTicTacVueInstance(
  * Remove a Tic Tac Vue instance
  *
  * @memberOf joeldelpilar-tic-tac-vue
- * @description Discover Tic Tac Vue - the ultimate way to enjoy classic Tic Tac Toe! This engaging game is built with Vue 3, offering smooth gameplay and a modern user interface. Perfect for quick fun!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the tic-tac-vue to be removed
  */
@@ -346,7 +365,7 @@ export async function removeJoeldelpilarTicTacVueInstance(
  * Get a Tic Tac Vue instance
  *
  * @memberOf joeldelpilar-tic-tac-vue
- * @description Discover Tic Tac Vue - the ultimate way to enjoy classic Tic Tac Toe! This engaging game is built with Vue 3, offering smooth gameplay and a modern user interface. Perfect for quick fun!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the tic-tac-vue to be retrieved
  * @returns {JoeldelpilarTicTacVue} - Service instance

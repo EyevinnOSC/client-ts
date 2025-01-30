@@ -277,8 +277,6 @@ export type BwallbergKingsAndPigsTs =
 
 export type BwallbergKingsAndPigsTsConfig =
   paths['/kings-and-pigs-tsinstance']['post']['parameters']['body']['body'];
-
-/** @namespace bwallberg-kings-and-pigs-ts */
 import {
   Context,
   createInstance,
@@ -286,14 +284,35 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace bwallberg-kings-and-pigs-ts
+ * @description Dive into Kings and Pigs, a vibrant 2D TypeScript game! Explore custom ECS architecture & physics with Planck.js. Perfect for TypeScript learners & game enthusiasts. Play now!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} BwallbergKingsAndPigsTsConfig
+ * @property {string} name - Name of kings-and-pigs-ts
+
+ * 
+ */
+
+/**
+ * @typedef {Object} BwallbergKingsAndPigsTs
+ * @property {string} name - Name of the Kings and Pigs instance
+ * @property {string} url - URL of the Kings and Pigs instance
+ *
+ */
 
 /**
  * Create a new Kings and Pigs instance
  *
  * @memberOf bwallberg-kings-and-pigs-ts
- * @description Dive into Kings and Pigs, a vibrant 2D TypeScript game! Explore custom ECS architecture & physics with Planck.js. Perfect for TypeScript learners & game enthusiasts. Play now!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {BwallbergKingsAndPigsTsConfig}} body - Service instance configuration
+ * @param {BwallbergKingsAndPigsTsConfig} body - Service instance configuration
  * @returns {BwallbergKingsAndPigsTs} - Service instance
  * @example
  * import { Context, createBwallbergKingsAndPigsTsInstance } from '@osaas/client-services';
@@ -323,7 +342,7 @@ export async function createBwallbergKingsAndPigsTsInstance(
  * Remove a Kings and Pigs instance
  *
  * @memberOf bwallberg-kings-and-pigs-ts
- * @description Dive into Kings and Pigs, a vibrant 2D TypeScript game! Explore custom ECS architecture & physics with Planck.js. Perfect for TypeScript learners & game enthusiasts. Play now!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the kings-and-pigs-ts to be removed
  */
@@ -346,7 +365,7 @@ export async function removeBwallbergKingsAndPigsTsInstance(
  * Get a Kings and Pigs instance
  *
  * @memberOf bwallberg-kings-and-pigs-ts
- * @description Dive into Kings and Pigs, a vibrant 2D TypeScript game! Explore custom ECS architecture & physics with Planck.js. Perfect for TypeScript learners & game enthusiasts. Play now!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the kings-and-pigs-ts to be retrieved
  * @returns {BwallbergKingsAndPigsTs} - Service instance

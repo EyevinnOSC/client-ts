@@ -216,8 +216,6 @@ export type ChannelEngine =
 
 export type ChannelEngineConfig =
   paths['/channel']['post']['parameters']['body']['body'];
-
-/** @namespace channel-engine */
 import {
   Context,
   createInstance,
@@ -225,14 +223,46 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace channel-engine
+ * @description Based on VOD2Live Technology you can generate a numerous amounts of FAST channels with a fraction of energy consumption compared to live transcoded FAST channels
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-FAST-Channel-Engine.html|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} ChannelEngineConfig
+ * @property {string} name - Enter channel name
+ * @property {enum} type - Plugin type
+ * @property {string} url - URL of VOD, playlist to loop or WebHook
+ * @property {boolean} [opts.useDemuxedAudio] - Use demuxed audio
+ * @property {boolean} [opts.useVttSubtitles] - Use VTT subtitles
+ * @property {string} [opts.defaultSlateUri] - URI to default slate
+ * @property {list} [opts.langList] - Comma separated list of languages
+ * @property {list} [opts.langListSubs] - Comma separated list of subtitle languages
+ * @property {enum} [opts.preset] - Channel preset
+ * @property {string} [opts.preroll.url] - URL to preroll
+ * @property {string} [opts.preroll.duration] - Duration of preroll in milliseconds
+ * @property {string} [opts.webhook.apikey] - WebHook api key
+
+ * 
+ */
+
+/**
+ * @typedef {Object} ChannelEngine
+ * @property {string} name - Name of the FAST Channel Engine instance
+ * @property {string} url - URL of the FAST Channel Engine instance
+ *
+ */
 
 /**
  * Create a new FAST Channel Engine instance
  *
  * @memberOf channel-engine
- * @description Based on VOD2Live Technology you can generate a numerous amounts of FAST channels with a fraction of energy consumption compared to live transcoded FAST channels
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {ChannelEngineConfig}} body - Service instance configuration
+ * @param {ChannelEngineConfig} body - Service instance configuration
  * @returns {ChannelEngine} - Service instance
  * @example
  * import { Context, createChannelEngineInstance } from '@osaas/client-services';
@@ -260,7 +290,7 @@ export async function createChannelEngineInstance(
  * Remove a FAST Channel Engine instance
  *
  * @memberOf channel-engine
- * @description Based on VOD2Live Technology you can generate a numerous amounts of FAST channels with a fraction of energy consumption compared to live transcoded FAST channels
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the channel to be removed
  */
@@ -276,7 +306,7 @@ export async function removeChannelEngineInstance(
  * Get a FAST Channel Engine instance
  *
  * @memberOf channel-engine
- * @description Based on VOD2Live Technology you can generate a numerous amounts of FAST channels with a fraction of energy consumption compared to live transcoded FAST channels
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the channel to be retrieved
  * @returns {ChannelEngine} - Service instance

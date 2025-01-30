@@ -289,8 +289,6 @@ export type BirmeContactFormSvc =
 
 export type BirmeContactFormSvcConfig =
   paths['/contact-form-svcinstance']['post']['parameters']['body']['body'];
-
-/** @namespace birme-contact-form-svc */
 import {
   Context,
   createInstance,
@@ -298,14 +296,38 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace birme-contact-form-svc
+ * @description Streamline your communication with our Contact Form Service! Seamlessly send messages from your website directly to Slack. Easy-to-install, Docker-ready backend ensures you never miss a lead. Try it now!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} BirmeContactFormSvcConfig
+ * @property {string} name - Name of service
+ * @property {enum} Transport - Transport
+ * @property {string} [SlackBotToken] - Slack Bot Token
+ * @property {string} [SlackChannelId] - Slack Channel Id
+
+ * 
+ */
+
+/**
+ * @typedef {Object} BirmeContactFormSvc
+ * @property {string} name - Name of the Contact Form Service instance
+ * @property {string} url - URL of the Contact Form Service instance
+ *
+ */
 
 /**
  * Create a new Contact Form Service instance
  *
  * @memberOf birme-contact-form-svc
- * @description Streamline your communication with our Contact Form Service! Seamlessly send messages from your website directly to Slack. Easy-to-install, Docker-ready backend ensures you never miss a lead. Try it now!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {BirmeContactFormSvcConfig}} body - Service instance configuration
+ * @param {BirmeContactFormSvcConfig} body - Service instance configuration
  * @returns {BirmeContactFormSvc} - Service instance
  * @example
  * import { Context, createBirmeContactFormSvcInstance } from '@osaas/client-services';
@@ -335,7 +357,7 @@ export async function createBirmeContactFormSvcInstance(
  * Remove a Contact Form Service instance
  *
  * @memberOf birme-contact-form-svc
- * @description Streamline your communication with our Contact Form Service! Seamlessly send messages from your website directly to Slack. Easy-to-install, Docker-ready backend ensures you never miss a lead. Try it now!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the service to be removed
  */
@@ -353,7 +375,7 @@ export async function removeBirmeContactFormSvcInstance(
  * Get a Contact Form Service instance
  *
  * @memberOf birme-contact-form-svc
- * @description Streamline your communication with our Contact Form Service! Seamlessly send messages from your website directly to Slack. Easy-to-install, Docker-ready backend ensures you never miss a lead. Try it now!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the service to be retrieved
  * @returns {BirmeContactFormSvc} - Service instance

@@ -189,8 +189,6 @@ export type EyevinnFunctionProbe =
 
 export type EyevinnFunctionProbeConfig =
   paths['/function-probeinstance']['post']['parameters']['body']['body'];
-
-/** @namespace eyevinn-function-probe */
 import {
   Context,
   createInstance,
@@ -198,14 +196,35 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace eyevinn-function-probe
+ * @description A serverless media function to obtain media information for a media file or media stream.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://github.com/Eyevinn/function-probe|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} EyevinnFunctionProbeConfig
+ * @property {string} name - Name of function-probe
+
+ * 
+ */
+
+/**
+ * @typedef {Object} EyevinnFunctionProbe
+ * @property {string} name - Name of the Media Probe instance
+ * @property {string} url - URL of the Media Probe instance
+ *
+ */
 
 /**
  * Create a new Media Probe instance
  *
  * @memberOf eyevinn-function-probe
- * @description A serverless media function to obtain media information for a media file or media stream.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnFunctionProbeConfig}} body - Service instance configuration
+ * @param {EyevinnFunctionProbeConfig} body - Service instance configuration
  * @returns {EyevinnFunctionProbe} - Service instance
  * @example
  * import { Context, createEyevinnFunctionProbeInstance } from '@osaas/client-services';
@@ -235,7 +254,7 @@ export async function createEyevinnFunctionProbeInstance(
  * Remove a Media Probe instance
  *
  * @memberOf eyevinn-function-probe
- * @description A serverless media function to obtain media information for a media file or media stream.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the probe to be removed
  */
@@ -253,7 +272,7 @@ export async function removeEyevinnFunctionProbeInstance(
  * Get a Media Probe instance
  *
  * @memberOf eyevinn-function-probe
- * @description A serverless media function to obtain media information for a media file or media stream.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the probe to be retrieved
  * @returns {EyevinnFunctionProbe} - Service instance

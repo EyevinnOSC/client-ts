@@ -10,6 +10,23 @@ export interface CdnOpts {
   rootObject?: string;
 }
 
+/**
+ * @typedef CdnOpts
+ * @type object
+ * @property {string} originPath - Origin path
+ * @property {string?} rootObject - Root object
+ */
+
+/**
+ * Create a CloudFront distribution for a given instance
+ * @memberof module:@osaas/client-web
+ * @async
+ * @param serviceId - Service identifier
+ * @param instanceName - Instance name
+ * @param ctx - Open Source Cloud configuration context
+ * @param {CdnOpts} [opts] - CDN options
+ * @returns CloudFront distribution
+ */
 export async function createCloudfrontDistribution(
   serviceId: string,
   instanceName: string,

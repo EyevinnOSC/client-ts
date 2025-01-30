@@ -289,8 +289,6 @@ export type EyevinnIntercomManager =
 
 export type EyevinnIntercomManagerConfig =
   paths['/intercom-managerinstance']['post']['parameters']['body']['body'];
-
-/** @namespace eyevinn-intercom-manager */
 import {
   Context,
   createInstance,
@@ -298,16 +296,40 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
-
 /**
- * Create a new Intercom instance
- * 
- * @memberOf eyevinn-intercom-manager
+ * @namespace eyevinn-intercom-manager
  * @description Open Source Intercom Solution providing production-grade audio quality and real-time latency. Powered by Symphony Media Bridge open source media server.
 
 Join our Slack community for support and customization. Contact sales@eyevinn.se for further development and support. Visit Eyevinn Technology for innovative video solutions.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://docs.osaas.io/osaas.wiki/User-Guide:-Cloud-Intercom.html|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} EyevinnIntercomManagerConfig
+ * @property {string} name - Name of intercom-manager
+ * @property {string} smbUrl - SmbUrl
+ * @property {string} [smbApiKey] - SmbApiKey
+ * @property {string} mongodbUrl - MongodbUrl
+
+ * 
+ */
+
+/**
+ * @typedef {Object} EyevinnIntercomManager
+ * @property {string} name - Name of the Intercom instance
+ * @property {string} url - URL of the Intercom instance
+ *
+ */
+
+/**
+ * Create a new Intercom instance
+ *
+ * @memberOf eyevinn-intercom-manager
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnIntercomManagerConfig}} body - Service instance configuration
+ * @param {EyevinnIntercomManagerConfig} body - Service instance configuration
  * @returns {EyevinnIntercomManager} - Service instance
  * @example
  * import { Context, createEyevinnIntercomManagerInstance } from '@osaas/client-services';
@@ -335,11 +357,9 @@ export async function createEyevinnIntercomManagerInstance(
 
 /**
  * Remove a Intercom instance
- * 
+ *
  * @memberOf eyevinn-intercom-manager
- * @description Open Source Intercom Solution providing production-grade audio quality and real-time latency. Powered by Symphony Media Bridge open source media server.
-
-Join our Slack community for support and customization. Contact sales@eyevinn.se for further development and support. Visit Eyevinn Technology for innovative video solutions.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the system to be removed
  */
@@ -360,11 +380,9 @@ export async function removeEyevinnIntercomManagerInstance(
 
 /**
  * Get a Intercom instance
- * 
+ *
  * @memberOf eyevinn-intercom-manager
- * @description Open Source Intercom Solution providing production-grade audio quality and real-time latency. Powered by Symphony Media Bridge open source media server.
-
-Join our Slack community for support and customization. Contact sales@eyevinn.se for further development and support. Visit Eyevinn Technology for innovative video solutions.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the system to be retrieved
  * @returns {EyevinnIntercomManager} - Service instance

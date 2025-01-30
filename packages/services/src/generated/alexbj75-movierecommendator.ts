@@ -281,8 +281,6 @@ export type Alexbj75Movierecommendator =
 
 export type Alexbj75MovierecommendatorConfig =
   paths['/movierecommendatorinstance']['post']['parameters']['body']['body'];
-
-/** @namespace alexbj75-movierecommendator */
 import {
   Context,
   createInstance,
@@ -290,14 +288,36 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace alexbj75-movierecommendator
+ * @description Discover new films effortlessly! Enter a movie name and get two personalized recommendations powered by OpenAI. Transform your movie nights with Movie Recommender’s smart suggestions. Try it now!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} Alexbj75MovierecommendatorConfig
+ * @property {string} name - Name of movierecommendator
+ * @property {string} OpenAiKey - Open AI Api Key
+
+ * 
+ */
+
+/**
+ * @typedef {Object} Alexbj75Movierecommendator
+ * @property {string} name - Name of the movierecommendator instance
+ * @property {string} url - URL of the movierecommendator instance
+ *
+ */
 
 /**
  * Create a new movierecommendator instance
  *
  * @memberOf alexbj75-movierecommendator
- * @description Discover new films effortlessly! Enter a movie name and get two personalized recommendations powered by OpenAI. Transform your movie nights with Movie Recommender’s smart suggestions. Try it now!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {Alexbj75MovierecommendatorConfig}} body - Service instance configuration
+ * @param {Alexbj75MovierecommendatorConfig} body - Service instance configuration
  * @returns {Alexbj75Movierecommendator} - Service instance
  * @example
  * import { Context, createAlexbj75MovierecommendatorInstance } from '@osaas/client-services';
@@ -327,7 +347,7 @@ export async function createAlexbj75MovierecommendatorInstance(
  * Remove a movierecommendator instance
  *
  * @memberOf alexbj75-movierecommendator
- * @description Discover new films effortlessly! Enter a movie name and get two personalized recommendations powered by OpenAI. Transform your movie nights with Movie Recommender’s smart suggestions. Try it now!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the movierecommendator to be removed
  */
@@ -350,7 +370,7 @@ export async function removeAlexbj75MovierecommendatorInstance(
  * Get a movierecommendator instance
  *
  * @memberOf alexbj75-movierecommendator
- * @description Discover new films effortlessly! Enter a movie name and get two personalized recommendations powered by OpenAI. Transform your movie nights with Movie Recommender’s smart suggestions. Try it now!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the movierecommendator to be retrieved
  * @returns {Alexbj75Movierecommendator} - Service instance

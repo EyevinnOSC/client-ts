@@ -297,8 +297,6 @@ export type WordpressWordpress =
 
 export type WordpressWordpressConfig =
   paths['/wordpressinstance']['post']['parameters']['body']['body'];
-
-/** @namespace wordpress-wordpress */
 import {
   Context,
   createInstance,
@@ -306,14 +304,40 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace wordpress-wordpress
+ * @description Power your site with WordPress – the core behind 40% of the web. Enjoy seamless installation, robust customization, and unmatched scalability. Elevate your online presence effortlessly today!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Wordpress.html|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} WordpressWordpressConfig
+ * @property {string} name - Name of wordpress
+ * @property {string} DbHost - DbHost
+ * @property {string} DbUser - DbUser
+ * @property {string} DbPassword - DbPassword
+ * @property {string} [DbName] - DbName
+ * @property {string} [DbTablePrefix] - DbTablePrefix
+
+ * 
+ */
+
+/**
+ * @typedef {Object} WordpressWordpress
+ * @property {string} name - Name of the Wordpress instance
+ * @property {string} url - URL of the Wordpress instance
+ *
+ */
 
 /**
  * Create a new Wordpress instance
  *
  * @memberOf wordpress-wordpress
- * @description Power your site with WordPress – the core behind 40% of the web. Enjoy seamless installation, robust customization, and unmatched scalability. Elevate your online presence effortlessly today!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {WordpressWordpressConfig}} body - Service instance configuration
+ * @param {WordpressWordpressConfig} body - Service instance configuration
  * @returns {WordpressWordpress} - Service instance
  * @example
  * import { Context, createWordpressWordpressInstance } from '@osaas/client-services';
@@ -343,7 +367,7 @@ export async function createWordpressWordpressInstance(
  * Remove a Wordpress instance
  *
  * @memberOf wordpress-wordpress
- * @description Power your site with WordPress – the core behind 40% of the web. Enjoy seamless installation, robust customization, and unmatched scalability. Elevate your online presence effortlessly today!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the wordpress to be removed
  */
@@ -361,7 +385,7 @@ export async function removeWordpressWordpressInstance(
  * Get a Wordpress instance
  *
  * @memberOf wordpress-wordpress
- * @description Power your site with WordPress – the core behind 40% of the web. Enjoy seamless installation, robust customization, and unmatched scalability. Elevate your online presence effortlessly today!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the wordpress to be retrieved
  * @returns {WordpressWordpress} - Service instance

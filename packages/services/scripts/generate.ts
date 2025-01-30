@@ -22,6 +22,15 @@ interface Service {
     documentationUrl?: string;
     instanceNoun: string;
   };
+  serviceInstanceOptions: {
+    name: string;
+    label: string;
+    description: string;
+    type: string;
+    enums: string[];
+    mandatory: boolean;
+    regexValidator: string;
+  }[];
 }
 
 async function generate(service: Service) {
@@ -50,19 +59,52 @@ export type ${toPascalCase(serviceId)}Config =
 `;
     appendFileSync(`./src/generated/${serviceId}.ts`, config);
 
-    const create = `
-/** @namespace ${serviceId} */    
-import { Context, createInstance, waitForInstanceReady, removeInstance, getInstance } from "@osaas/client-core";
+    let typeProps = '';
+    service.serviceInstanceOptions.forEach((option) => {
+      typeProps += ` * @property {${option.type}} ${
+        !option.mandatory ? `[${option.name}]` : option.name
+      } - ${option.description || option.label}\n`;
+    });
+    const create = `import { Context, createInstance, waitForInstanceReady, removeInstance, getInstance } from "@osaas/client-core";
+/**
+ * @namespace ${serviceId}
+ * @description ${service.serviceMetadata.description}
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright ${new Date().getFullYear()} Eyevinn Technology AB
+ * ${
+   service.serviceMetadata.documentationUrl
+     ? `@see {@link ${service.serviceMetadata.documentationUrl.replace(
+         /%3A/g,
+         ':'
+       )}|Online docs} for further information`
+     : ''
+ }
+ */
+
+/**
+ * @typedef {Object} ${toPascalCase(serviceId)}Config
+${typeProps}
+ * 
+ */
+
+/**
+ * @typedef {Object} ${toPascalCase(serviceId)}
+ * @property {string} name - Name of the ${
+   service.serviceMetadata.title
+ } instance
+ * @property {string} url - URL of the ${service.serviceMetadata.title} instance
+ * 
+ */
 
 /**
  * Create a new ${service.serviceMetadata.title} instance
  * 
  * @memberOf ${serviceId}
- * @description ${service.serviceMetadata.description}
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {${toPascalCase(
    serviceId
- )}Config}} body - Service instance configuration
+ )}Config} body - Service instance configuration
  * @returns {${toPascalCase(serviceId)}} - Service instance
  * @example
  * import { Context, create${toPascalCase(
@@ -97,7 +139,7 @@ export async function create${toPascalCase(
  * Remove a ${service.serviceMetadata.title} instance
  * 
  * @memberOf ${serviceId}
- * @description ${service.serviceMetadata.description}
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the ${
    service.serviceMetadata.instanceNoun
@@ -116,7 +158,7 @@ export async function remove${toPascalCase(
  * Get a ${service.serviceMetadata.title} instance
  * 
  * @memberOf ${serviceId}
- * @description ${service.serviceMetadata.description}
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the ${
    service.serviceMetadata.instanceNoun

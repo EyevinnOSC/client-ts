@@ -19,6 +19,24 @@ export interface Website {
   bucket: Bucket;
 }
 
+/**
+ * Publish options
+ * @typedef PublishOpts
+ * @type object
+ * @property {boolean} [sync] - If true, clear bucket before uploading new files
+ */
+
+/**
+ * Publish a static website using Eyevinn Open Source Cloud Storage
+ *
+ * @memberof module:@osaas/client-web
+ * @async
+ * @param name - Name of the website
+ * @param dir - Directory to publish
+ * @param ctx - Open Source Cloud configuration context
+ * @param {PublishOpts} [opts] - Publish options
+ * @returns name and url of the published website
+ */
 export async function publish(
   name: string,
   dir: string,

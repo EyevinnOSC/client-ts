@@ -165,8 +165,6 @@ export type EyevinnPreviewHlsService =
 
 export type EyevinnPreviewHlsServiceConfig =
   paths['/preview-hls-serviceinstance']['post']['parameters']['body']['body'];
-
-/** @namespace eyevinn-preview-hls-service */
 import {
   Context,
   createInstance,
@@ -174,14 +172,35 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace eyevinn-preview-hls-service
+ * @description A service to generate a preview video (mp4) or an image (png) from an HLS stream
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://github.com/Eyevinn/preview-hls-service|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} EyevinnPreviewHlsServiceConfig
+ * @property {string} name - Name of preview-hls-service
+
+ * 
+ */
+
+/**
+ * @typedef {Object} EyevinnPreviewHlsService
+ * @property {string} name - Name of the HLS Preview Generator instance
+ * @property {string} url - URL of the HLS Preview Generator instance
+ *
+ */
 
 /**
  * Create a new HLS Preview Generator instance
  *
  * @memberOf eyevinn-preview-hls-service
- * @description A service to generate a preview video (mp4) or an image (png) from an HLS stream
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnPreviewHlsServiceConfig}} body - Service instance configuration
+ * @param {EyevinnPreviewHlsServiceConfig} body - Service instance configuration
  * @returns {EyevinnPreviewHlsService} - Service instance
  * @example
  * import { Context, createEyevinnPreviewHlsServiceInstance } from '@osaas/client-services';
@@ -211,7 +230,7 @@ export async function createEyevinnPreviewHlsServiceInstance(
  * Remove a HLS Preview Generator instance
  *
  * @memberOf eyevinn-preview-hls-service
- * @description A service to generate a preview video (mp4) or an image (png) from an HLS stream
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the preview-generator to be removed
  */
@@ -234,7 +253,7 @@ export async function removeEyevinnPreviewHlsServiceInstance(
  * Get a HLS Preview Generator instance
  *
  * @memberOf eyevinn-preview-hls-service
- * @description A service to generate a preview video (mp4) or an image (png) from an HLS stream
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the preview-generator to be retrieved
  * @returns {EyevinnPreviewHlsService} - Service instance

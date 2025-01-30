@@ -293,8 +293,6 @@ export type BirmeOscPostgresql =
 
 export type BirmeOscPostgresqlConfig =
   paths['/osc-postgresqlinstance']['post']['parameters']['body']['body'];
-
-/** @namespace birme-osc-postgresql */
 import {
   Context,
   createInstance,
@@ -302,14 +300,39 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace birme-osc-postgresql
+ * @description Unlock the full potential of your data with the PostgreSQL OSC image, seamlessly integrated for use in Eyevinn Open Source Cloud. Experience robust scalability, high security, and unmatched extensibility.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} BirmeOscPostgresqlConfig
+ * @property {string} name - Name of osc-postgresql
+ * @property {string} PostgresPassword - PostgresPassword
+ * @property {string} [PostgresUser] - PostgresUser
+ * @property {string} [PostgresDb] - PostgresDb
+ * @property {string} [PostgresInitDbArgs] - PostgresInitDbArgs
+
+ * 
+ */
+
+/**
+ * @typedef {Object} BirmeOscPostgresql
+ * @property {string} name - Name of the PostgreSQL instance
+ * @property {string} url - URL of the PostgreSQL instance
+ *
+ */
 
 /**
  * Create a new PostgreSQL instance
  *
  * @memberOf birme-osc-postgresql
- * @description Unlock the full potential of your data with the PostgreSQL OSC image, seamlessly integrated for use in Eyevinn Open Source Cloud. Experience robust scalability, high security, and unmatched extensibility.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {BirmeOscPostgresqlConfig}} body - Service instance configuration
+ * @param {BirmeOscPostgresqlConfig} body - Service instance configuration
  * @returns {BirmeOscPostgresql} - Service instance
  * @example
  * import { Context, createBirmeOscPostgresqlInstance } from '@osaas/client-services';
@@ -339,7 +362,7 @@ export async function createBirmeOscPostgresqlInstance(
  * Remove a PostgreSQL instance
  *
  * @memberOf birme-osc-postgresql
- * @description Unlock the full potential of your data with the PostgreSQL OSC image, seamlessly integrated for use in Eyevinn Open Source Cloud. Experience robust scalability, high security, and unmatched extensibility.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the psql-db to be removed
  */
@@ -357,7 +380,7 @@ export async function removeBirmeOscPostgresqlInstance(
  * Get a PostgreSQL instance
  *
  * @memberOf birme-osc-postgresql
- * @description Unlock the full potential of your data with the PostgreSQL OSC image, seamlessly integrated for use in Eyevinn Open Source Cloud. Experience robust scalability, high security, and unmatched extensibility.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the psql-db to be retrieved
  * @returns {BirmeOscPostgresql} - Service instance

@@ -305,8 +305,6 @@ export type EyevinnSgaiAdProxy =
 
 export type EyevinnSgaiAdProxyConfig =
   paths['/sgai-ad-proxyinstance']['post']['parameters']['body']['body'];
-
-/** @namespace eyevinn-sgai-ad-proxy */
 import {
   Context,
   createInstance,
@@ -314,14 +312,42 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace eyevinn-sgai-ad-proxy
+ * @description Boost viewer engagement with our Server-Guided Ad Insertion Proxy! Automatically embed ads into video streams with precision timing. Enhance monetization effortlessly while maintaining a seamless user experience.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-SGAI-Proxy.html|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} EyevinnSgaiAdProxyConfig
+ * @property {string} name - Name of sgai-ad-proxy
+ * @property {string} VastEndpoint - VastEndpoint
+ * @property {string} OriginUrl - OriginUrl
+ * @property {enum} InsertionMode - InsertionMode
+ * @property {string} [CouchDbEndpoint] - CouchDbEndpoint
+ * @property {string} [CouchDbTable] - CouchDbTable
+ * @property {string} [CouchDbUser] - CouchDbUser
+ * @property {string} [CouchDbPassword] - CouchDbPassword
+
+ * 
+ */
+
+/**
+ * @typedef {Object} EyevinnSgaiAdProxy
+ * @property {string} name - Name of the SGAI Proxy instance
+ * @property {string} url - URL of the SGAI Proxy instance
+ *
+ */
 
 /**
  * Create a new SGAI Proxy instance
  *
  * @memberOf eyevinn-sgai-ad-proxy
- * @description Boost viewer engagement with our Server-Guided Ad Insertion Proxy! Automatically embed ads into video streams with precision timing. Enhance monetization effortlessly while maintaining a seamless user experience.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnSgaiAdProxyConfig}} body - Service instance configuration
+ * @param {EyevinnSgaiAdProxyConfig} body - Service instance configuration
  * @returns {EyevinnSgaiAdProxy} - Service instance
  * @example
  * import { Context, createEyevinnSgaiAdProxyInstance } from '@osaas/client-services';
@@ -351,7 +377,7 @@ export async function createEyevinnSgaiAdProxyInstance(
  * Remove a SGAI Proxy instance
  *
  * @memberOf eyevinn-sgai-ad-proxy
- * @description Boost viewer engagement with our Server-Guided Ad Insertion Proxy! Automatically embed ads into video streams with precision timing. Enhance monetization effortlessly while maintaining a seamless user experience.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the proxy to be removed
  */
@@ -369,7 +395,7 @@ export async function removeEyevinnSgaiAdProxyInstance(
  * Get a SGAI Proxy instance
  *
  * @memberOf eyevinn-sgai-ad-proxy
- * @description Boost viewer engagement with our Server-Guided Ad Insertion Proxy! Automatically embed ads into video streams with precision timing. Enhance monetization effortlessly while maintaining a seamless user experience.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the proxy to be retrieved
  * @returns {EyevinnSgaiAdProxy} - Service instance

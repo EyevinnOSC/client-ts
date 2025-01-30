@@ -12,7 +12,7 @@ import { EncoreCallbackListener, EncorePackager, FileOutput } from './encore';
 import path from 'node:path';
 import { createStreamingPackage } from './packager';
 
-export type TranscodeOptions = {
+export type PoolTranscodeOptions = {
   profile?: string;
   duration?: number;
   packageDestination?: URL;
@@ -48,7 +48,7 @@ export class QueuePool {
    */
 
   /**
-   * @typedef TranscodeOptions
+   * @typedef PoolTranscodeOptions
    * @type object
    * @property {string?} profile - Transcoding profile to use (default: program)
    * @property {number?} duration - Duration in seconds (default: entire file)
@@ -179,7 +179,7 @@ export class QueuePool {
    * @async
    * @param {URL} source - Source URL of the media file (supported protocols: http, https)
    * @param {URL} destination - Destination URL of the transcoded media files (supported protocols: s3)
-   * @param {TranscodeOptions} options - Transcode options
+   * @param {PoolTranscodeOptions} options - Transcode options
    * @example
    * const source = new URL('https://example.com/video.mp4');
    * const destination = new URL('s3://mybucket/video/');
@@ -193,7 +193,7 @@ export class QueuePool {
   public async transcode(
     source: URL,
     destination: URL,
-    { profile, duration, packageDestination }: TranscodeOptions
+    { profile, duration, packageDestination }: PoolTranscodeOptions
   ) {
     if (!this.token) {
       throw new Error('Pool not initialized');

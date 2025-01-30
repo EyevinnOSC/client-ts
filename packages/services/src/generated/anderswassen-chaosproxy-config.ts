@@ -277,8 +277,6 @@ export type AnderswassenChaosproxyConfig =
 
 export type AnderswassenChaosproxyConfigConfig =
   paths['/chaosproxy-configinstance']['post']['parameters']['body']['body'];
-
-/** @namespace anderswassen-chaosproxy-config */
 import {
   Context,
   createInstance,
@@ -286,14 +284,35 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace anderswassen-chaosproxy-config
+ * @description Revolutionize your streaming experience with the Chaos Stream Proxy Configurator! Customize HLS streams with precision-timed delays for enhanced content manipulation and control effortlessly.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} AnderswassenChaosproxyConfigConfig
+ * @property {string} name - Name of chaosproxy-config
+
+ * 
+ */
+
+/**
+ * @typedef {Object} AnderswassenChaosproxyConfig
+ * @property {string} name - Name of the Chaos Stream Proxy Configurator instance
+ * @property {string} url - URL of the Chaos Stream Proxy Configurator instance
+ *
+ */
 
 /**
  * Create a new Chaos Stream Proxy Configurator instance
  *
  * @memberOf anderswassen-chaosproxy-config
- * @description Revolutionize your streaming experience with the Chaos Stream Proxy Configurator! Customize HLS streams with precision-timed delays for enhanced content manipulation and control effortlessly.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {AnderswassenChaosproxyConfigConfig}} body - Service instance configuration
+ * @param {AnderswassenChaosproxyConfigConfig} body - Service instance configuration
  * @returns {AnderswassenChaosproxyConfig} - Service instance
  * @example
  * import { Context, createAnderswassenChaosproxyConfigInstance } from '@osaas/client-services';
@@ -327,7 +346,7 @@ export async function createAnderswassenChaosproxyConfigInstance(
  * Remove a Chaos Stream Proxy Configurator instance
  *
  * @memberOf anderswassen-chaosproxy-config
- * @description Revolutionize your streaming experience with the Chaos Stream Proxy Configurator! Customize HLS streams with precision-timed delays for enhanced content manipulation and control effortlessly.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the configurator to be removed
  */
@@ -350,7 +369,7 @@ export async function removeAnderswassenChaosproxyConfigInstance(
  * Get a Chaos Stream Proxy Configurator instance
  *
  * @memberOf anderswassen-chaosproxy-config
- * @description Revolutionize your streaming experience with the Chaos Stream Proxy Configurator! Customize HLS streams with precision-timed delays for enhanced content manipulation and control effortlessly.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the configurator to be retrieved
  * @returns {AnderswassenChaosproxyConfig} - Service instance

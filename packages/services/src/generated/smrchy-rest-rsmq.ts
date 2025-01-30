@@ -281,8 +281,6 @@ export type SmrchyRestRsmq =
 
 export type SmrchyRestRsmqConfig =
   paths['/rest-rsmqinstance']['post']['parameters']['body']['body'];
-
-/** @namespace smrchy-rest-rsmq */
 import {
   Context,
   createInstance,
@@ -290,16 +288,38 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
-
 /**
- * Create a new Really Simple Message Queue instance
- * 
- * @memberOf smrchy-rest-rsmq
+ * @namespace smrchy-rest-rsmq
  * @description **Boost Your Productivity with REST rsmq**
 
 Easily integrate with rsmq for efficient message queuing. No security worries, just seamless communication across platforms like php, .net, and more. Maximize performance now!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * 
+ */
+
+/**
+ * @typedef {Object} SmrchyRestRsmqConfig
+ * @property {string} name - Name of rest-rsmq
+ * @property {string} RedisUrl - RedisUrl
+
+ * 
+ */
+
+/**
+ * @typedef {Object} SmrchyRestRsmq
+ * @property {string} name - Name of the Really Simple Message Queue instance
+ * @property {string} url - URL of the Really Simple Message Queue instance
+ *
+ */
+
+/**
+ * Create a new Really Simple Message Queue instance
+ *
+ * @memberOf smrchy-rest-rsmq
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {SmrchyRestRsmqConfig}} body - Service instance configuration
+ * @param {SmrchyRestRsmqConfig} body - Service instance configuration
  * @returns {SmrchyRestRsmq} - Service instance
  * @example
  * import { Context, createSmrchyRestRsmqInstance } from '@osaas/client-services';
@@ -327,11 +347,9 @@ export async function createSmrchyRestRsmqInstance(
 
 /**
  * Remove a Really Simple Message Queue instance
- * 
+ *
  * @memberOf smrchy-rest-rsmq
- * @description **Boost Your Productivity with REST rsmq**
-
-Easily integrate with rsmq for efficient message queuing. No security worries, just seamless communication across platforms like php, .net, and more. Maximize performance now!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the message-queue to be removed
  */
@@ -347,11 +365,9 @@ export async function removeSmrchyRestRsmqInstance(
 
 /**
  * Get a Really Simple Message Queue instance
- * 
+ *
  * @memberOf smrchy-rest-rsmq
- * @description **Boost Your Productivity with REST rsmq**
-
-Easily integrate with rsmq for efficient message queuing. No security worries, just seamless communication across platforms like php, .net, and more. Maximize performance now!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the message-queue to be retrieved
  * @returns {SmrchyRestRsmq} - Service instance

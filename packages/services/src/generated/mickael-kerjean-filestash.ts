@@ -297,8 +297,6 @@ export type MickaelKerjeanFilestash =
 
 export type MickaelKerjeanFilestashConfig =
   paths['/filestashinstance']['post']['parameters']['body']['body'];
-
-/** @namespace mickael-kerjean-filestash */
 import {
   Context,
   createInstance,
@@ -306,14 +304,40 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace mickael-kerjean-filestash
+ * @description Transform your data management with Filestash, a versatile file manager that integrates seamlessly with multiple cloud services and protocols. Enjoy blazing speed, user-friendly interfaces, and plugin flexibility.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Filestash.html|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} MickaelKerjeanFilestashConfig
+ * @property {string} name - Name of filestash
+ * @property {string} [AdminPassword] - AdminPassword
+ * @property {string} [ConfigSecret] - ConfigSecret
+ * @property {string} [DropboxClientId] - DropboxClientId
+ * @property {string} [GdriveClientId] - GdriveClientId
+ * @property {string} [GdriveClientSecret] - GdriveClientSecret
+
+ * 
+ */
+
+/**
+ * @typedef {Object} MickaelKerjeanFilestash
+ * @property {string} name - Name of the Filestash instance
+ * @property {string} url - URL of the Filestash instance
+ *
+ */
 
 /**
  * Create a new Filestash instance
  *
  * @memberOf mickael-kerjean-filestash
- * @description Transform your data management with Filestash, a versatile file manager that integrates seamlessly with multiple cloud services and protocols. Enjoy blazing speed, user-friendly interfaces, and plugin flexibility.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {MickaelKerjeanFilestashConfig}} body - Service instance configuration
+ * @param {MickaelKerjeanFilestashConfig} body - Service instance configuration
  * @returns {MickaelKerjeanFilestash} - Service instance
  * @example
  * import { Context, createMickaelKerjeanFilestashInstance } from '@osaas/client-services';
@@ -343,7 +367,7 @@ export async function createMickaelKerjeanFilestashInstance(
  * Remove a Filestash instance
  *
  * @memberOf mickael-kerjean-filestash
- * @description Transform your data management with Filestash, a versatile file manager that integrates seamlessly with multiple cloud services and protocols. Enjoy blazing speed, user-friendly interfaces, and plugin flexibility.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the filestash to be removed
  */
@@ -366,7 +390,7 @@ export async function removeMickaelKerjeanFilestashInstance(
  * Get a Filestash instance
  *
  * @memberOf mickael-kerjean-filestash
- * @description Transform your data management with Filestash, a versatile file manager that integrates seamlessly with multiple cloud services and protocols. Enjoy blazing speed, user-friendly interfaces, and plugin flexibility.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the filestash to be retrieved
  * @returns {MickaelKerjeanFilestash} - Service instance

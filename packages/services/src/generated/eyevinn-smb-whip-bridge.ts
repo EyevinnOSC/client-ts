@@ -293,8 +293,6 @@ export type EyevinnSmbWhipBridge =
 
 export type EyevinnSmbWhipBridgeConfig =
   paths['/smb-whip-bridgeinstance']['post']['parameters']['body']['body'];
-
-/** @namespace eyevinn-smb-whip-bridge */
 import {
   Context,
   createInstance,
@@ -302,14 +300,39 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace eyevinn-smb-whip-bridge
+ * @description Elevate your video streaming with SMB WHIP Bridge! Seamlessly integrate WHIP clients with Symphony Media Bridge SFU for superior media streams.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Symphony-Media-Bridge-WHIP-Gateway.html|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} EyevinnSmbWhipBridgeConfig
+ * @property {string} name - Name of smb-whip-bridge
+ * @property {string} SmbUrl - SmbUrl
+ * @property {string} [SmbApiKey] - SmbApiKey
+ * @property {string} [WhepEndpointUrl] - WhepEndpointUrl
+ * @property {string} [WhipApiKey] - WhipApiKey
+
+ * 
+ */
+
+/**
+ * @typedef {Object} EyevinnSmbWhipBridge
+ * @property {string} name - Name of the Symphony Media Bridge WHIP Gateway instance
+ * @property {string} url - URL of the Symphony Media Bridge WHIP Gateway instance
+ *
+ */
 
 /**
  * Create a new Symphony Media Bridge WHIP Gateway instance
  *
  * @memberOf eyevinn-smb-whip-bridge
- * @description Elevate your video streaming with SMB WHIP Bridge! Seamlessly integrate WHIP clients with Symphony Media Bridge SFU for superior media streams.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnSmbWhipBridgeConfig}} body - Service instance configuration
+ * @param {EyevinnSmbWhipBridgeConfig} body - Service instance configuration
  * @returns {EyevinnSmbWhipBridge} - Service instance
  * @example
  * import { Context, createEyevinnSmbWhipBridgeInstance } from '@osaas/client-services';
@@ -339,7 +362,7 @@ export async function createEyevinnSmbWhipBridgeInstance(
  * Remove a Symphony Media Bridge WHIP Gateway instance
  *
  * @memberOf eyevinn-smb-whip-bridge
- * @description Elevate your video streaming with SMB WHIP Bridge! Seamlessly integrate WHIP clients with Symphony Media Bridge SFU for superior media streams.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the gateway to be removed
  */
@@ -362,7 +385,7 @@ export async function removeEyevinnSmbWhipBridgeInstance(
  * Get a Symphony Media Bridge WHIP Gateway instance
  *
  * @memberOf eyevinn-smb-whip-bridge
- * @description Elevate your video streaming with SMB WHIP Bridge! Seamlessly integrate WHIP clients with Symphony Media Bridge SFU for superior media streams.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the gateway to be retrieved
  * @returns {EyevinnSmbWhipBridge} - Service instance

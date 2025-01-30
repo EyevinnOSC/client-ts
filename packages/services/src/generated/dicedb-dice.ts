@@ -277,8 +277,6 @@ export type DicedbDice =
 
 export type DicedbDiceConfig =
   paths['/diceinstance']['post']['parameters']['body']['body'];
-
-/** @namespace dicedb-dice */
 import {
   Context,
   createInstance,
@@ -286,14 +284,35 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace dicedb-dice
+ * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} DicedbDiceConfig
+ * @property {string} name - Name of dice
+
+ * 
+ */
+
+/**
+ * @typedef {Object} DicedbDice
+ * @property {string} name - Name of the Dice DB instance
+ * @property {string} url - URL of the Dice DB instance
+ *
+ */
 
 /**
  * Create a new Dice DB instance
  *
  * @memberOf dicedb-dice
- * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DicedbDiceConfig}} body - Service instance configuration
+ * @param {DicedbDiceConfig} body - Service instance configuration
  * @returns {DicedbDice} - Service instance
  * @example
  * import { Context, createDicedbDiceInstance } from '@osaas/client-services';
@@ -321,7 +340,7 @@ export async function createDicedbDiceInstance(
  * Remove a Dice DB instance
  *
  * @memberOf dicedb-dice
- * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the dice to be removed
  */
@@ -337,7 +356,7 @@ export async function removeDicedbDiceInstance(
  * Get a Dice DB instance
  *
  * @memberOf dicedb-dice
- * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the dice to be retrieved
  * @returns {DicedbDice} - Service instance

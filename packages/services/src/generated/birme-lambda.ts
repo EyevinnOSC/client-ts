@@ -277,8 +277,6 @@ export type BirmeLambda =
 
 export type BirmeLambdaConfig =
   paths['/lambdainstance']['post']['parameters']['body']['body'];
-
-/** @namespace birme-lambda */
 import {
   Context,
   createInstance,
@@ -286,14 +284,35 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace birme-lambda
+ * @description Effortlessly deploy JavaScript/TypeScript code as HTTP-based lambda functions with our simple solution. Just zip, upload, and watch your code run on any HTTP request. Get started quickly with minimal setup!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Birme-Lambda.html|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} BirmeLambdaConfig
+ * @property {string} name - Name of lambda
+
+ * 
+ */
+
+/**
+ * @typedef {Object} BirmeLambda
+ * @property {string} name - Name of the lambda instance
+ * @property {string} url - URL of the lambda instance
+ *
+ */
 
 /**
  * Create a new lambda instance
  *
  * @memberOf birme-lambda
- * @description Effortlessly deploy JavaScript/TypeScript code as HTTP-based lambda functions with our simple solution. Just zip, upload, and watch your code run on any HTTP request. Get started quickly with minimal setup!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {BirmeLambdaConfig}} body - Service instance configuration
+ * @param {BirmeLambdaConfig} body - Service instance configuration
  * @returns {BirmeLambda} - Service instance
  * @example
  * import { Context, createBirmeLambdaInstance } from '@osaas/client-services';
@@ -321,7 +340,7 @@ export async function createBirmeLambdaInstance(
  * Remove a lambda instance
  *
  * @memberOf birme-lambda
- * @description Effortlessly deploy JavaScript/TypeScript code as HTTP-based lambda functions with our simple solution. Just zip, upload, and watch your code run on any HTTP request. Get started quickly with minimal setup!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the lambda to be removed
  */
@@ -337,7 +356,7 @@ export async function removeBirmeLambdaInstance(
  * Get a lambda instance
  *
  * @memberOf birme-lambda
- * @description Effortlessly deploy JavaScript/TypeScript code as HTTP-based lambda functions with our simple solution. Just zip, upload, and watch your code run on any HTTP request. Get started quickly with minimal setup!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the lambda to be retrieved
  * @returns {BirmeLambda} - Service instance

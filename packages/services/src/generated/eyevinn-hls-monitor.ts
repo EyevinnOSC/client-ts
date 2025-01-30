@@ -277,8 +277,6 @@ export type EyevinnHlsMonitor =
 
 export type EyevinnHlsMonitorConfig =
   paths['/hls-monitorinstance']['post']['parameters']['body']['body'];
-
-/** @namespace eyevinn-hls-monitor */
 import {
   Context,
   createInstance,
@@ -286,14 +284,35 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace eyevinn-hls-monitor
+ * @description Service to monitor one or more HLS-streams for manifest errors and inconsistencies.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://github.com/Eyevinn/hls-monitor|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} EyevinnHlsMonitorConfig
+ * @property {string} name - Name of hls-monitor
+
+ * 
+ */
+
+/**
+ * @typedef {Object} EyevinnHlsMonitor
+ * @property {string} name - Name of the HLS Stream Monitor instance
+ * @property {string} url - URL of the HLS Stream Monitor instance
+ *
+ */
 
 /**
  * Create a new HLS Stream Monitor instance
  *
  * @memberOf eyevinn-hls-monitor
- * @description Service to monitor one or more HLS-streams for manifest errors and inconsistencies.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnHlsMonitorConfig}} body - Service instance configuration
+ * @param {EyevinnHlsMonitorConfig} body - Service instance configuration
  * @returns {EyevinnHlsMonitor} - Service instance
  * @example
  * import { Context, createEyevinnHlsMonitorInstance } from '@osaas/client-services';
@@ -323,7 +342,7 @@ export async function createEyevinnHlsMonitorInstance(
  * Remove a HLS Stream Monitor instance
  *
  * @memberOf eyevinn-hls-monitor
- * @description Service to monitor one or more HLS-streams for manifest errors and inconsistencies.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the monitor to be removed
  */
@@ -341,7 +360,7 @@ export async function removeEyevinnHlsMonitorInstance(
  * Get a HLS Stream Monitor instance
  *
  * @memberOf eyevinn-hls-monitor
- * @description Service to monitor one or more HLS-streams for manifest errors and inconsistencies.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the monitor to be retrieved
  * @returns {EyevinnHlsMonitor} - Service instance

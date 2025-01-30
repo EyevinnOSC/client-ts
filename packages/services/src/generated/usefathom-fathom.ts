@@ -285,8 +285,6 @@ export type UsefathomFathom =
 
 export type UsefathomFathomConfig =
   paths['/fathominstance']['post']['parameters']['body']['body'];
-
-/** @namespace usefathom-fathom */
 import {
   Context,
   createInstance,
@@ -294,14 +292,37 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace usefathom-fathom
+ * @description Introducing Fathom Lite - the popular, open-source website analytics tool with millions of downloads! Long-term maintenance, bug fixes, and cookie-free tracking set it apart. Get started today!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Fathom-Lite.html|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} UsefathomFathomConfig
+ * @property {string} name - Name of fathom
+ * @property {string} AdminEmail - AdminEmail
+ * @property {string} AdminPassword - AdminPassword
+
+ * 
+ */
+
+/**
+ * @typedef {Object} UsefathomFathom
+ * @property {string} name - Name of the Fathom Lite instance
+ * @property {string} url - URL of the Fathom Lite instance
+ *
+ */
 
 /**
  * Create a new Fathom Lite instance
  *
  * @memberOf usefathom-fathom
- * @description Introducing Fathom Lite - the popular, open-source website analytics tool with millions of downloads! Long-term maintenance, bug fixes, and cookie-free tracking set it apart. Get started today!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {UsefathomFathomConfig}} body - Service instance configuration
+ * @param {UsefathomFathomConfig} body - Service instance configuration
  * @returns {UsefathomFathom} - Service instance
  * @example
  * import { Context, createUsefathomFathomInstance } from '@osaas/client-services';
@@ -331,7 +352,7 @@ export async function createUsefathomFathomInstance(
  * Remove a Fathom Lite instance
  *
  * @memberOf usefathom-fathom
- * @description Introducing Fathom Lite - the popular, open-source website analytics tool with millions of downloads! Long-term maintenance, bug fixes, and cookie-free tracking set it apart. Get started today!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the collector to be removed
  */
@@ -349,7 +370,7 @@ export async function removeUsefathomFathomInstance(
  * Get a Fathom Lite instance
  *
  * @memberOf usefathom-fathom
- * @description Introducing Fathom Lite - the popular, open-source website analytics tool with millions of downloads! Long-term maintenance, bug fixes, and cookie-free tracking set it apart. Get started today!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the collector to be retrieved
  * @returns {UsefathomFathom} - Service instance

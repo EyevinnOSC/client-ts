@@ -281,8 +281,6 @@ export type EyevinnAppConfigSvc =
 
 export type EyevinnAppConfigSvcConfig =
   paths['/app-config-svcinstance']['post']['parameters']['body']['body'];
-
-/** @namespace eyevinn-app-config-svc */
 import {
   Context,
   createInstance,
@@ -290,14 +288,36 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace eyevinn-app-config-svc
+ * @description Supercharge your application's efficiency by instantly providing configuration values with our Application Configuration Service. Integrate seamlessly with Redis, leverage cache control, and scale effortlessly.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} EyevinnAppConfigSvcConfig
+ * @property {string} name - Name of app-config-svc
+ * @property {string} RedisUrl - RedisUrl
+
+ * 
+ */
+
+/**
+ * @typedef {Object} EyevinnAppConfigSvc
+ * @property {string} name - Name of the Application Config Service instance
+ * @property {string} url - URL of the Application Config Service instance
+ *
+ */
 
 /**
  * Create a new Application Config Service instance
  *
  * @memberOf eyevinn-app-config-svc
- * @description Supercharge your application's efficiency by instantly providing configuration values with our Application Configuration Service. Integrate seamlessly with Redis, leverage cache control, and scale effortlessly.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnAppConfigSvcConfig}} body - Service instance configuration
+ * @param {EyevinnAppConfigSvcConfig} body - Service instance configuration
  * @returns {EyevinnAppConfigSvc} - Service instance
  * @example
  * import { Context, createEyevinnAppConfigSvcInstance } from '@osaas/client-services';
@@ -327,7 +347,7 @@ export async function createEyevinnAppConfigSvcInstance(
  * Remove a Application Config Service instance
  *
  * @memberOf eyevinn-app-config-svc
- * @description Supercharge your application's efficiency by instantly providing configuration values with our Application Configuration Service. Integrate seamlessly with Redis, leverage cache control, and scale effortlessly.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the config-service to be removed
  */
@@ -345,7 +365,7 @@ export async function removeEyevinnAppConfigSvcInstance(
  * Get a Application Config Service instance
  *
  * @memberOf eyevinn-app-config-svc
- * @description Supercharge your application's efficiency by instantly providing configuration values with our Application Configuration Service. Integrate seamlessly with Redis, leverage cache control, and scale effortlessly.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the config-service to be retrieved
  * @returns {EyevinnAppConfigSvc} - Service instance

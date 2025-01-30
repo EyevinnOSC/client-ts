@@ -285,8 +285,6 @@ export type EyevinnWrtcEgress =
 
 export type EyevinnWrtcEgressConfig =
   paths['/wrtc-egressinstance']['post']['parameters']['body']['body'];
-
-/** @namespace eyevinn-wrtc-egress */
 import {
   Context,
   createInstance,
@@ -294,14 +292,37 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace eyevinn-wrtc-egress
+ * @description "Streamline your video services with Eyevinn's WebRTC Egress Endpoint Library. Perfect for standardized streaming with WHEP protocol. Enhance your Symphony Media Bridge connections now!"
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} EyevinnWrtcEgressConfig
+ * @property {string} name - Name of wrtc-egress
+ * @property {string} SmbUrl - SmbUrl
+ * @property {string} [SmbApiKey] - SmbApiKey
+
+ * 
+ */
+
+/**
+ * @typedef {Object} EyevinnWrtcEgress
+ * @property {string} name - Name of the Symphony Media Bridge WHEP Gateway instance
+ * @property {string} url - URL of the Symphony Media Bridge WHEP Gateway instance
+ *
+ */
 
 /**
  * Create a new Symphony Media Bridge WHEP Gateway instance
  *
  * @memberOf eyevinn-wrtc-egress
- * @description "Streamline your video services with Eyevinn's WebRTC Egress Endpoint Library. Perfect for standardized streaming with WHEP protocol. Enhance your Symphony Media Bridge connections now!"
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnWrtcEgressConfig}} body - Service instance configuration
+ * @param {EyevinnWrtcEgressConfig} body - Service instance configuration
  * @returns {EyevinnWrtcEgress} - Service instance
  * @example
  * import { Context, createEyevinnWrtcEgressInstance } from '@osaas/client-services';
@@ -331,7 +352,7 @@ export async function createEyevinnWrtcEgressInstance(
  * Remove a Symphony Media Bridge WHEP Gateway instance
  *
  * @memberOf eyevinn-wrtc-egress
- * @description "Streamline your video services with Eyevinn's WebRTC Egress Endpoint Library. Perfect for standardized streaming with WHEP protocol. Enhance your Symphony Media Bridge connections now!"
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the gateway to be removed
  */
@@ -349,7 +370,7 @@ export async function removeEyevinnWrtcEgressInstance(
  * Get a Symphony Media Bridge WHEP Gateway instance
  *
  * @memberOf eyevinn-wrtc-egress
- * @description "Streamline your video services with Eyevinn's WebRTC Egress Endpoint Library. Perfect for standardized streaming with WHEP protocol. Enhance your Symphony Media Bridge connections now!"
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the gateway to be retrieved
  * @returns {EyevinnWrtcEgress} - Service instance

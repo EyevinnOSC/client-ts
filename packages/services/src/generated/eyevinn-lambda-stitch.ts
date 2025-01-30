@@ -281,8 +281,6 @@ export type EyevinnLambdaStitch =
 
 export type EyevinnLambdaStitchConfig =
   paths['/lambda-stitchinstance']['post']['parameters']['body']['body'];
-
-/** @namespace eyevinn-lambda-stitch */
 import {
   Context,
   createInstance,
@@ -290,14 +288,36 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace eyevinn-lambda-stitch
+ * @description A proxy to insert ads in an HLS VOD either using manifest manipulation or HLS interstitials
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-HLS-VOD-Stitcher.html|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} EyevinnLambdaStitchConfig
+ * @property {string} name - Name of lambda-stitch
+ * @property {string} [AssetListBaseUrl] - AssetListBaseUrl
+
+ * 
+ */
+
+/**
+ * @typedef {Object} EyevinnLambdaStitch
+ * @property {string} name - Name of the HLS VOD Stitcher instance
+ * @property {string} url - URL of the HLS VOD Stitcher instance
+ *
+ */
 
 /**
  * Create a new HLS VOD Stitcher instance
  *
  * @memberOf eyevinn-lambda-stitch
- * @description A proxy to insert ads in an HLS VOD either using manifest manipulation or HLS interstitials
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnLambdaStitchConfig}} body - Service instance configuration
+ * @param {EyevinnLambdaStitchConfig} body - Service instance configuration
  * @returns {EyevinnLambdaStitch} - Service instance
  * @example
  * import { Context, createEyevinnLambdaStitchInstance } from '@osaas/client-services';
@@ -327,7 +347,7 @@ export async function createEyevinnLambdaStitchInstance(
  * Remove a HLS VOD Stitcher instance
  *
  * @memberOf eyevinn-lambda-stitch
- * @description A proxy to insert ads in an HLS VOD either using manifest manipulation or HLS interstitials
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the stitcher to be removed
  */
@@ -345,7 +365,7 @@ export async function removeEyevinnLambdaStitchInstance(
  * Get a HLS VOD Stitcher instance
  *
  * @memberOf eyevinn-lambda-stitch
- * @description A proxy to insert ads in an HLS VOD either using manifest manipulation or HLS interstitials
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the stitcher to be retrieved
  * @returns {EyevinnLambdaStitch} - Service instance

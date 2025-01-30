@@ -293,8 +293,6 @@ export type EyevinnAutoSubtitles =
 
 export type EyevinnAutoSubtitlesConfig =
   paths['/auto-subtitlesinstance']['post']['parameters']['body']['body'];
-
-/** @namespace eyevinn-auto-subtitles */
 import {
   Context,
   createInstance,
@@ -302,14 +300,39 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace eyevinn-auto-subtitles
+ * @description Automatically generate subtitles from an input audio or video file using Open AI Whisper.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://github.com/Eyevinn/auto-subtitles#endpoints|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} EyevinnAutoSubtitlesConfig
+ * @property {string} name - Name of auto-subtitles
+ * @property {string} openaikey - Openaikey
+ * @property {string} [awsAccessKeyId] - AwsAccessKeyId
+ * @property {string} [awsSecretAccessKey] - AwsSecretAccessKey
+ * @property {string} [awsRegion] - AwsRegion
+
+ * 
+ */
+
+/**
+ * @typedef {Object} EyevinnAutoSubtitles
+ * @property {string} name - Name of the Subtitle Generator instance
+ * @property {string} url - URL of the Subtitle Generator instance
+ *
+ */
 
 /**
  * Create a new Subtitle Generator instance
  *
  * @memberOf eyevinn-auto-subtitles
- * @description Automatically generate subtitles from an input audio or video file using Open AI Whisper.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnAutoSubtitlesConfig}} body - Service instance configuration
+ * @param {EyevinnAutoSubtitlesConfig} body - Service instance configuration
  * @returns {EyevinnAutoSubtitles} - Service instance
  * @example
  * import { Context, createEyevinnAutoSubtitlesInstance } from '@osaas/client-services';
@@ -339,7 +362,7 @@ export async function createEyevinnAutoSubtitlesInstance(
  * Remove a Subtitle Generator instance
  *
  * @memberOf eyevinn-auto-subtitles
- * @description Automatically generate subtitles from an input audio or video file using Open AI Whisper.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the generator to be removed
  */
@@ -357,7 +380,7 @@ export async function removeEyevinnAutoSubtitlesInstance(
  * Get a Subtitle Generator instance
  *
  * @memberOf eyevinn-auto-subtitles
- * @description Automatically generate subtitles from an input audio or video file using Open AI Whisper.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the generator to be retrieved
  * @returns {EyevinnAutoSubtitles} - Service instance

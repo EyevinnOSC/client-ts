@@ -285,8 +285,6 @@ export type AtmozSftp =
 
 export type AtmozSftpConfig =
   paths['/sftpinstance']['post']['parameters']['body']['body'];
-
-/** @namespace atmoz-sftp */
 import {
   Context,
   createInstance,
@@ -294,15 +292,38 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace atmoz-sftp
+ * @description Effortlessly manage secure file transfers with our user-friendly SFTP server powered by OpenSSH. Ideal for sharing files securely using SSH, it integrates easily with Docker, ensuring both security and simplicity.
+
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * 
+ */
+
+/**
+ * @typedef {Object} AtmozSftpConfig
+ * @property {string} name - Name of sftp
+ * @property {string} Username - Username
+ * @property {string} Password - Password
+
+ * 
+ */
+
+/**
+ * @typedef {Object} AtmozSftp
+ * @property {string} name - Name of the SFTP Server instance
+ * @property {string} url - URL of the SFTP Server instance
+ *
+ */
 
 /**
  * Create a new SFTP Server instance
- * 
+ *
  * @memberOf atmoz-sftp
- * @description Effortlessly manage secure file transfers with our user-friendly SFTP server powered by OpenSSH. Ideal for sharing files securely using SSH, it integrates easily with Docker, ensuring both security and simplicity.
-
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {AtmozSftpConfig}} body - Service instance configuration
+ * @param {AtmozSftpConfig} body - Service instance configuration
  * @returns {AtmozSftp} - Service instance
  * @example
  * import { Context, createAtmozSftpInstance } from '@osaas/client-services';
@@ -328,10 +349,9 @@ export async function createAtmozSftpInstance(
 
 /**
  * Remove a SFTP Server instance
- * 
+ *
  * @memberOf atmoz-sftp
- * @description Effortlessly manage secure file transfers with our user-friendly SFTP server powered by OpenSSH. Ideal for sharing files securely using SSH, it integrates easily with Docker, ensuring both security and simplicity.
-
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the sftp to be removed
  */
@@ -345,10 +365,9 @@ export async function removeAtmozSftpInstance(
 
 /**
  * Get a SFTP Server instance
- * 
+ *
  * @memberOf atmoz-sftp
- * @description Effortlessly manage secure file transfers with our user-friendly SFTP server powered by OpenSSH. Ideal for sharing files securely using SSH, it integrates easily with Docker, ensuring both security and simplicity.
-
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the sftp to be retrieved
  * @returns {AtmozSftp} - Service instance

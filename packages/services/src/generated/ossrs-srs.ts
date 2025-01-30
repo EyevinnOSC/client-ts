@@ -239,8 +239,6 @@ export type OssrsSrs =
 
 export type OssrsSrsConfig =
   paths['/srsinstance']['post']['parameters']['body']['body'];
-
-/** @namespace ossrs-srs */
 import {
   Context,
   createInstance,
@@ -248,16 +246,37 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
-
 /**
- * Create a new Simple Realtime Server instance
- * 
- * @memberOf ossrs-srs
+ * @namespace ossrs-srs
  * @description Experience high-efficiency video streaming with SRS/6.0. Stream seamlessly with essential features included. 
 Transform your streaming experience now! Explore RTMP, HLS, HTTP-FLV, SRT, MPEG-DASH protocols, and more.
 Get started easily!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * 
+ */
+
+/**
+ * @typedef {Object} OssrsSrsConfig
+ * @property {string} name - Name of srs
+
+ * 
+ */
+
+/**
+ * @typedef {Object} OssrsSrs
+ * @property {string} name - Name of the Simple Realtime Server instance
+ * @property {string} url - URL of the Simple Realtime Server instance
+ *
+ */
+
+/**
+ * Create a new Simple Realtime Server instance
+ *
+ * @memberOf ossrs-srs
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {OssrsSrsConfig}} body - Service instance configuration
+ * @param {OssrsSrsConfig} body - Service instance configuration
  * @returns {OssrsSrs} - Service instance
  * @example
  * import { Context, createOssrsSrsInstance } from '@osaas/client-services';
@@ -283,11 +302,9 @@ export async function createOssrsSrsInstance(
 
 /**
  * Remove a Simple Realtime Server instance
- * 
+ *
  * @memberOf ossrs-srs
- * @description Experience high-efficiency video streaming with SRS/6.0. Stream seamlessly with essential features included. 
-Transform your streaming experience now! Explore RTMP, HLS, HTTP-FLV, SRT, MPEG-DASH protocols, and more.
-Get started easily!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the srs to be removed
  */
@@ -301,11 +318,9 @@ export async function removeOssrsSrsInstance(
 
 /**
  * Get a Simple Realtime Server instance
- * 
+ *
  * @memberOf ossrs-srs
- * @description Experience high-efficiency video streaming with SRS/6.0. Stream seamlessly with essential features included. 
-Transform your streaming experience now! Explore RTMP, HLS, HTTP-FLV, SRT, MPEG-DASH protocols, and more.
-Get started easily!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the srs to be retrieved
  * @returns {OssrsSrs} - Service instance

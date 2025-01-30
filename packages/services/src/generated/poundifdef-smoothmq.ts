@@ -285,8 +285,6 @@ export type PoundifdefSmoothmq =
 
 export type PoundifdefSmoothmqConfig =
   paths['/smoothmqinstance']['post']['parameters']['body']['body'];
-
-/** @namespace poundifdef-smoothmq */
 import {
   Context,
   createInstance,
@@ -294,14 +292,37 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace poundifdef-smoothmq
+ * @description Introducing SmoothMQ, the ultimate drop-in replacement for SQS! Enhance your developer experience with a functional UI, observability, tracing, scheduling, and rate-limiting. Run your own private SQS on any cloud effortlessly.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-SmoothMQ.html|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} PoundifdefSmoothmqConfig
+ * @property {string} name - Name of smoothmq
+ * @property {string} [AccessKey] - AccessKey
+ * @property {string} [SecretKey] - SecretKey
+
+ * 
+ */
+
+/**
+ * @typedef {Object} PoundifdefSmoothmq
+ * @property {string} name - Name of the SmoothMQ instance
+ * @property {string} url - URL of the SmoothMQ instance
+ *
+ */
 
 /**
  * Create a new SmoothMQ instance
  *
  * @memberOf poundifdef-smoothmq
- * @description Introducing SmoothMQ, the ultimate drop-in replacement for SQS! Enhance your developer experience with a functional UI, observability, tracing, scheduling, and rate-limiting. Run your own private SQS on any cloud effortlessly.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {PoundifdefSmoothmqConfig}} body - Service instance configuration
+ * @param {PoundifdefSmoothmqConfig} body - Service instance configuration
  * @returns {PoundifdefSmoothmq} - Service instance
  * @example
  * import { Context, createPoundifdefSmoothmqInstance } from '@osaas/client-services';
@@ -331,7 +352,7 @@ export async function createPoundifdefSmoothmqInstance(
  * Remove a SmoothMQ instance
  *
  * @memberOf poundifdef-smoothmq
- * @description Introducing SmoothMQ, the ultimate drop-in replacement for SQS! Enhance your developer experience with a functional UI, observability, tracing, scheduling, and rate-limiting. Run your own private SQS on any cloud effortlessly.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the message-queue to be removed
  */
@@ -349,7 +370,7 @@ export async function removePoundifdefSmoothmqInstance(
  * Get a SmoothMQ instance
  *
  * @memberOf poundifdef-smoothmq
- * @description Introducing SmoothMQ, the ultimate drop-in replacement for SQS! Enhance your developer experience with a functional UI, observability, tracing, scheduling, and rate-limiting. Run your own private SQS on any cloud effortlessly.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the message-queue to be retrieved
  * @returns {PoundifdefSmoothmq} - Service instance
