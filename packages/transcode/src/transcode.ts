@@ -5,45 +5,15 @@ export interface IDRKeyFrame {
   smpteTimeCode: string;
 }
 
-/**
- * @memberof module:@osaas/client-transcode
- */
 export interface TranscodeOptions {
-  /**
-   * The name of the Encore instance
-   */
   encoreInstanceName: string;
-  /**
-   * External Id for external backreference
-   */
   externalId: string;
-  /**
-   * URL to the input file (S3 and HTTPS supported)
-   */
   inputUrl: URL;
-  /**
-   * URL to the output folder (S3 supported)
-   */
   outputUrl: URL;
-  /**
-   * Callback URL to receive progress
-   */
   callBackUrl?: URL;
-  /**
-   * Base name for the output files (prefix)
-   */
   baseName?: string;
-  /**
-   * Profile to use for transcoding
-   */
   profile?: string;
-  /**
-   * Frame rate of the input video (required when injecting IDR key frames)
-   */
   frameRate?: number;
-  /**
-   * List of SMPTE timecodes for IDR key frames
-   */
   injectIDRKeyFrames?: IDRKeyFrame[];
 }
 
@@ -66,11 +36,24 @@ export function smpteTimecodeToFrames(
 }
 
 /**
+ * @typedef {object} TranscodeOptions
+ * @property {string} encoreInstanceName - The name of the Encore instance
+ * @property {string} externalId - External Id for external backreference
+ * @property {URL} inputUrl - URL to the input file (S3 and HTTPS supported)
+ * @property {URL} outputUrl - URL to the output folder (S3 supported)
+ * @property {URL} [callBackUrl] - Callback URL to receive progress
+ * @property {string} [baseName] - Base name for the output files (prefix)
+ * @property {string} [profile] - Profile to use for transcoding
+ * @property {number} [frameRate] - Frame rate of the input video (required when injecting IDR key frames)
+ * @property {IDRKeyFrame[]} [injectIDRKeyFrames] - List of SMPTE timecodes for IDR key frames
+ */
+
+/**
  * Transcode a video file using SVT Encore in Eyevinn Open Source Cloud
  *
  * @memberof module:@osaas/client-transcode
  * @param ctx - Eyevinn OSC context
- * @param opts - Transcode options
+ * @param {TranscodeOptions} opts - Transcode options
  * @returns {Job} - The created Encore job
  *
  * @example
