@@ -5,6 +5,9 @@ export interface IDRKeyFrame {
   smpteTimeCode: string;
 }
 
+/**
+ * @memberof module:@osaas/client-transcode
+ */
 export interface TranscodeOptions {
   /**
    * The name of the Encore instance
