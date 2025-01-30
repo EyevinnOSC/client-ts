@@ -51,18 +51,20 @@ export type ${toPascalCase(serviceId)}Config =
     appendFileSync(`./src/generated/${serviceId}.ts`, config);
 
     const create = `
-/** @namespace ${serviceId} */    
+/**
+ * @namespace ${serviceId}
+ * @description ${service.serviceMetadata.description}
+ */    
 import { Context, createInstance, waitForInstanceReady, removeInstance, getInstance } from "@osaas/client-core";
 
 /**
  * Create a new ${service.serviceMetadata.title} instance
  * 
  * @memberOf ${serviceId}
- * @description ${service.serviceMetadata.description}
  * @param {Context} context - Open Source Cloud configuration context
  * @param {${toPascalCase(
    serviceId
- )}Config}} body - Service instance configuration
+ )}Config} body - Service instance configuration
  * @returns {${toPascalCase(serviceId)}} - Service instance
  * @example
  * import { Context, create${toPascalCase(
@@ -97,7 +99,6 @@ export async function create${toPascalCase(
  * Remove a ${service.serviceMetadata.title} instance
  * 
  * @memberOf ${serviceId}
- * @description ${service.serviceMetadata.description}
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the ${
    service.serviceMetadata.instanceNoun
@@ -116,7 +117,6 @@ export async function remove${toPascalCase(
  * Get a ${service.serviceMetadata.title} instance
  * 
  * @memberOf ${serviceId}
- * @description ${service.serviceMetadata.description}
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the ${
    service.serviceMetadata.instanceNoun
