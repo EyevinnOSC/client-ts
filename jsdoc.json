@@ -20,6 +20,17 @@
   },
   "docdash": {
     "collapse": true,
+    "openGraph": {
+      "title": "Eyevinn OSC Javascript SDK Documentation",
+      "type": "website",
+      "image": "https://www.osaas.io/images/OSC-1200-630.png",
+      "url": "https://js.docs.osaas.io"
+    },
+    "meta": {
+      "title": "Eyevinn OSC Javascript SDK Documentation",
+      "description": "Javascript client libraries for Open Source Cloud. The Javascript client libraries for Open Source Cloud API are implemented in Typescript, for server-side use with Node and is open source.",
+      "keyword": "Open Source Cloud, OSC, Eyevinn, Javascript, SDK, API, client libraries, Typescript, Node.js"
+    },
     "menu": {
       "Login": {
         "href": "https://app.osaas.io",
