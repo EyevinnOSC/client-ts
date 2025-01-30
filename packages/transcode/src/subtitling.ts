@@ -23,6 +23,9 @@ type TranscribeResult = {
   error?: string;
 };
 
+/**
+ * @memberof module:@osaas/client-transcode
+ */
 export class SubtitlingPool {
   private context: Context;
   private token?: string;

@@ -10,6 +10,16 @@ import {
 } from '@osaas/client-core';
 import { delay } from './util';
 
+/**
+ * Create live multi-bitrate HLS encoder
+ *
+ * @memberof module:@osaas/client-transcode
+ * @async
+ * @param ctx - Eyevinn OSC context
+ * @param name - name of the encoder
+ * @param streamKey - optional stream key
+ * @returns {rtmpUrl: URL, hlsUrl: URL} - RTMP and HLS URLs
+ */
 export async function createLiveMultiBitrateHLS(
   ctx: Context,
   name: string,
@@ -36,6 +46,16 @@ export async function createLiveMultiBitrateHLS(
     hlsUrl: encoding.hlsUrl
   };
 }
+
+/**
+ * Start live multi-bitrate HLS encoding
+ *
+ * @memberof module:@osaas/client-transcode
+ * @async
+ * @param ctx - Eyevinn OSC context
+ * @param name - name of the encoder
+ * @returns {rtmpUrl: URL, hlsUrl: URL} - RTMP and HLS URLs
+ */
 
 export async function startLiveMultiBitrateHLS(
   ctx: Context,
@@ -100,6 +120,14 @@ export async function startLiveMultiBitrateHLS(
   }
 }
 
+/**
+ * Stop live multi-bitrate HLS encoding
+ *
+ * @memberof module:@osaas/client-transcode
+ * @async
+ * @param ctx - Eyevinn OSC context
+ * @param name - name of the encoder
+ */
 export async function stopLiveMultiBitrateHLS(ctx: Context, name: string) {
   const serviceAccessToken = await ctx.getServiceAccessToken(
     'eyevinn-live-encoding'
