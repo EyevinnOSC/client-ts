@@ -20,7 +20,32 @@ jobs:
           npm run publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+  docs:
+    depends_on: publish
+    runs-on: ubuntu-latest
 
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: https://registry.npmjs.org/
+      - name: Install Dependencies and build docs
+        run: |
+          npm install
+          npm run build
+          npm run build:doc
+      - name: Deploy docs to S3 bucket
+        uses: jakejarvis/s3-sync-action@v0.5.1
+        with:
+          args: --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: 'origin-osaas-client-jsdocs'
+          AWS_ACCESS_KEY_ID: ${{ secrets.S3_AWS_ACCESS_KEY_ID  }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: 'eu-north-1'
+          SOURCE_DIR: 'docs/'
+  
   publish-image:
     if: "contains(github.event.head_commit.message, 'chore(release): publish') || contains(github.event.head_commit.message, 'chore(release): image')"
     runs-on: ubuntu-latest
