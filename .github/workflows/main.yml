@@ -21,7 +21,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
   docs:
-    depends_on: publish
+    needs: publish
     runs-on: ubuntu-latest
 
     steps:
