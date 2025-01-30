@@ -61,9 +61,9 @@ export type ${toPascalCase(serviceId)}Config =
 
     let typeProps = '';
     service.serviceInstanceOptions.forEach((option) => {
-      typeProps += ` * @property {${option.type}${
-        !option.mandatory ? ' | undefined' : ''
-      }} ${option.name} - ${option.description || option.label}\n`;
+      typeProps += ` * @property {${option.type}} ${
+        !option.mandatory ? `[${option.name}]` : option.name
+      } - ${option.description || option.label}\n`;
     });
     const create = `import { Context, createInstance, waitForInstanceReady, removeInstance, getInstance } from "@osaas/client-core";
 /**
