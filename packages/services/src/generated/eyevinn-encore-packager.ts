@@ -321,8 +321,6 @@ export type EyevinnEncorePackager =
 
 export type EyevinnEncorePackagerConfig =
   paths['/encore-packagerinstance']['post']['parameters']['body']['body'];
-
-/** @namespace eyevinn-encore-packager */
 import {
   Context,
   createInstance,
@@ -330,14 +328,46 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace eyevinn-encore-packager
+ * @description Enhance your transcoding workflow with Encore packager! Run as a service, listen for messages on redis queue, and customize packaging events. Boost productivity with this versatile tool.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} EyevinnEncorePackagerConfig
+ * @property {string} name - Name of encore-packager
+ * @property {string} RedisUrl - RedisUrl
+ * @property {string | undefined} RedisQueue - RedisQueue
+ * @property {string} OutputFolder - OutputFolder
+ * @property {string | undefined} Concurrency - Concurrency
+ * @property {string} PersonalAccessToken - PersonalAccessToken
+ * @property {string} AwsAccessKeyId - AwsAccessKeyId
+ * @property {string} AwsSecretAccessKey - AwsSecretAccessKey
+ * @property {string | undefined} AwsRegion - AwsRegion
+ * @property {string | undefined} AwsSessionToken - AwsSessionToken
+ * @property {string | undefined} S3EndpointUrl - S3EndpointUrl
+ * @property {string | undefined} OutputSubfolderTemplate - OutputSubfolderTemplate
+
+ * 
+ */
+
+/**
+ * @typedef {Object} EyevinnEncorePackager
+ * @property {string} name - Name of the Encore Packager instance
+ * @property {string} url - URL of the Encore Packager instance
+ *
+ */
 
 /**
  * Create a new Encore Packager instance
  *
  * @memberOf eyevinn-encore-packager
- * @description Enhance your transcoding workflow with Encore packager! Run as a service, listen for messages on redis queue, and customize packaging events. Boost productivity with this versatile tool.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnEncorePackagerConfig}} body - Service instance configuration
+ * @param {EyevinnEncorePackagerConfig} body - Service instance configuration
  * @returns {EyevinnEncorePackager} - Service instance
  * @example
  * import { Context, createEyevinnEncorePackagerInstance } from '@osaas/client-services';
@@ -367,7 +397,7 @@ export async function createEyevinnEncorePackagerInstance(
  * Remove a Encore Packager instance
  *
  * @memberOf eyevinn-encore-packager
- * @description Enhance your transcoding workflow with Encore packager! Run as a service, listen for messages on redis queue, and customize packaging events. Boost productivity with this versatile tool.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the packager to be removed
  */
@@ -390,7 +420,7 @@ export async function removeEyevinnEncorePackagerInstance(
  * Get a Encore Packager instance
  *
  * @memberOf eyevinn-encore-packager
- * @description Enhance your transcoding workflow with Encore packager! Run as a service, listen for messages on redis queue, and customize packaging events. Boost productivity with this versatile tool.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the packager to be retrieved
  * @returns {EyevinnEncorePackager} - Service instance

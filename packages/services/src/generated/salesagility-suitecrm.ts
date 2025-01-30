@@ -277,8 +277,6 @@ export type SalesagilitySuitecrm =
 
 export type SalesagilitySuitecrmConfig =
   paths['/suitecrminstance']['post']['parameters']['body']['body'];
-
-/** @namespace salesagility-suitecrm */
 import {
   Context,
   createInstance,
@@ -286,14 +284,35 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace salesagility-suitecrm
+ * @description Transform your business with SuiteCRM 7.14.5, the leading open-source CRM. Seamlessly manage customer relationships, gain full data control, and customize your solution for an unbeatable enterprise edge!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} SalesagilitySuitecrmConfig
+ * @property {string} name - Name of suitecrm
+
+ * 
+ */
+
+/**
+ * @typedef {Object} SalesagilitySuitecrm
+ * @property {string} name - Name of the Suite CRM instance
+ * @property {string} url - URL of the Suite CRM instance
+ *
+ */
 
 /**
  * Create a new Suite CRM instance
  *
  * @memberOf salesagility-suitecrm
- * @description Transform your business with SuiteCRM 7.14.5, the leading open-source CRM. Seamlessly manage customer relationships, gain full data control, and customize your solution for an unbeatable enterprise edge!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {SalesagilitySuitecrmConfig}} body - Service instance configuration
+ * @param {SalesagilitySuitecrmConfig} body - Service instance configuration
  * @returns {SalesagilitySuitecrm} - Service instance
  * @example
  * import { Context, createSalesagilitySuitecrmInstance } from '@osaas/client-services';
@@ -323,7 +342,7 @@ export async function createSalesagilitySuitecrmInstance(
  * Remove a Suite CRM instance
  *
  * @memberOf salesagility-suitecrm
- * @description Transform your business with SuiteCRM 7.14.5, the leading open-source CRM. Seamlessly manage customer relationships, gain full data control, and customize your solution for an unbeatable enterprise edge!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the suitecrm to be removed
  */
@@ -341,7 +360,7 @@ export async function removeSalesagilitySuitecrmInstance(
  * Get a Suite CRM instance
  *
  * @memberOf salesagility-suitecrm
- * @description Transform your business with SuiteCRM 7.14.5, the leading open-source CRM. Seamlessly manage customer relationships, gain full data control, and customize your solution for an unbeatable enterprise edge!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the suitecrm to be retrieved
  * @returns {SalesagilitySuitecrm} - Service instance

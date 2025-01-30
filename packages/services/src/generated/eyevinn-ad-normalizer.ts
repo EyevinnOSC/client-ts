@@ -313,8 +313,6 @@ export type EyevinnAdNormalizer =
 
 export type EyevinnAdNormalizerConfig =
   paths['/ad-normalizerinstance']['post']['parameters']['body']['body'];
-
-/** @namespace eyevinn-ad-normalizer */
 import {
   Context,
   createInstance,
@@ -322,14 +320,44 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace eyevinn-ad-normalizer
+ * @description Optimize your ad delivery with Ad Normalizer! Seamlessly transcode and package VAST creatives for your ad server using a Redis-backed workflow. Ensure efficient media processing and reliable ad streaming.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Ad-Normalizer.html|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} EyevinnAdNormalizerConfig
+ * @property {string} name - Name of ad-normalizer
+ * @property {string} EncoreUrl - EncoreUrl
+ * @property {string} EncoreCallbackListenerUrl - EncoreCallbackListenerUrl
+ * @property {string} AdServerUrl - AdServerUrl
+ * @property {string} OutputBucketUrl - OutputBucketUrl
+ * @property {string} S3AccessKey - S3AccessKey
+ * @property {string} S3SecretKey - S3SecretKey
+ * @property {string | undefined} S3EndpointUrl - S3EndpointUrl
+ * @property {string | undefined} RedisUrl - RedisUrl
+ * @property {string | undefined} OscAccessToken - OscAccessToken
+
+ * 
+ */
+
+/**
+ * @typedef {Object} EyevinnAdNormalizer
+ * @property {string} name - Name of the Ad Normalizer instance
+ * @property {string} url - URL of the Ad Normalizer instance
+ *
+ */
 
 /**
  * Create a new Ad Normalizer instance
  *
  * @memberOf eyevinn-ad-normalizer
- * @description Optimize your ad delivery with Ad Normalizer! Seamlessly transcode and package VAST creatives for your ad server using a Redis-backed workflow. Ensure efficient media processing and reliable ad streaming.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnAdNormalizerConfig}} body - Service instance configuration
+ * @param {EyevinnAdNormalizerConfig} body - Service instance configuration
  * @returns {EyevinnAdNormalizer} - Service instance
  * @example
  * import { Context, createEyevinnAdNormalizerInstance } from '@osaas/client-services';
@@ -359,7 +387,7 @@ export async function createEyevinnAdNormalizerInstance(
  * Remove a Ad Normalizer instance
  *
  * @memberOf eyevinn-ad-normalizer
- * @description Optimize your ad delivery with Ad Normalizer! Seamlessly transcode and package VAST creatives for your ad server using a Redis-backed workflow. Ensure efficient media processing and reliable ad streaming.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the normalizer to be removed
  */
@@ -377,7 +405,7 @@ export async function removeEyevinnAdNormalizerInstance(
  * Get a Ad Normalizer instance
  *
  * @memberOf eyevinn-ad-normalizer
- * @description Optimize your ad delivery with Ad Normalizer! Seamlessly transcode and package VAST creatives for your ad server using a Redis-backed workflow. Ensure efficient media processing and reliable ad streaming.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the normalizer to be retrieved
  * @returns {EyevinnAdNormalizer} - Service instance

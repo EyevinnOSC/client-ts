@@ -277,8 +277,6 @@ export type ValkeyIoValkey =
 
 export type ValkeyIoValkeyConfig =
   paths['/valkeyinstance']['post']['parameters']['body']['body'];
-
-/** @namespace valkey-io-valkey */
 import {
   Context,
   createInstance,
@@ -286,16 +284,37 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
-
 /**
- * Create a new valkey instance
- * 
- * @memberOf valkey-io-valkey
+ * @namespace valkey-io-valkey
  * @description Introducing Valkey: a Redis-compatible high-performance key-value store with wide range support. Build on various systems, extensible plugin system, and TLS support available.
 
 NB! Data persistence not guaranteed
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * 
+ */
+
+/**
+ * @typedef {Object} ValkeyIoValkeyConfig
+ * @property {string} name - Name of valkey
+
+ * 
+ */
+
+/**
+ * @typedef {Object} ValkeyIoValkey
+ * @property {string} name - Name of the valkey instance
+ * @property {string} url - URL of the valkey instance
+ *
+ */
+
+/**
+ * Create a new valkey instance
+ *
+ * @memberOf valkey-io-valkey
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {ValkeyIoValkeyConfig}} body - Service instance configuration
+ * @param {ValkeyIoValkeyConfig} body - Service instance configuration
  * @returns {ValkeyIoValkey} - Service instance
  * @example
  * import { Context, createValkeyIoValkeyInstance } from '@osaas/client-services';
@@ -323,11 +342,9 @@ export async function createValkeyIoValkeyInstance(
 
 /**
  * Remove a valkey instance
- * 
+ *
  * @memberOf valkey-io-valkey
- * @description Introducing Valkey: a Redis-compatible high-performance key-value store with wide range support. Build on various systems, extensible plugin system, and TLS support available.
-
-NB! Data persistence not guaranteed
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the valkey to be removed
  */
@@ -343,11 +360,9 @@ export async function removeValkeyIoValkeyInstance(
 
 /**
  * Get a valkey instance
- * 
+ *
  * @memberOf valkey-io-valkey
- * @description Introducing Valkey: a Redis-compatible high-performance key-value store with wide range support. Build on various systems, extensible plugin system, and TLS support available.
-
-NB! Data persistence not guaranteed
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the valkey to be retrieved
  * @returns {ValkeyIoValkey} - Service instance

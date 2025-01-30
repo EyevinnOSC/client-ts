@@ -277,8 +277,6 @@ export type BluewaveLabsCheckmate =
 
 export type BluewaveLabsCheckmateConfig =
   paths['/checkmateinstance']['post']['parameters']['body']['body'];
-
-/** @namespace bluewave-labs-checkmate */
 import {
   Context,
   createInstance,
@@ -286,14 +284,35 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace bluewave-labs-checkmate
+ * @description Monitor servers effortlessly with Checkmate—a powerful open-source tool for tracking server and website performance. Enjoy real-time alerts, in-depth insights, and manage over 1000 servers seamlessly!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} BluewaveLabsCheckmateConfig
+ * @property {string} name - Name of checkmate
+
+ * 
+ */
+
+/**
+ * @typedef {Object} BluewaveLabsCheckmate
+ * @property {string} name - Name of the Checkmate instance
+ * @property {string} url - URL of the Checkmate instance
+ *
+ */
 
 /**
  * Create a new Checkmate instance
  *
  * @memberOf bluewave-labs-checkmate
- * @description Monitor servers effortlessly with Checkmate—a powerful open-source tool for tracking server and website performance. Enjoy real-time alerts, in-depth insights, and manage over 1000 servers seamlessly!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {BluewaveLabsCheckmateConfig}} body - Service instance configuration
+ * @param {BluewaveLabsCheckmateConfig} body - Service instance configuration
  * @returns {BluewaveLabsCheckmate} - Service instance
  * @example
  * import { Context, createBluewaveLabsCheckmateInstance } from '@osaas/client-services';
@@ -323,7 +342,7 @@ export async function createBluewaveLabsCheckmateInstance(
  * Remove a Checkmate instance
  *
  * @memberOf bluewave-labs-checkmate
- * @description Monitor servers effortlessly with Checkmate—a powerful open-source tool for tracking server and website performance. Enjoy real-time alerts, in-depth insights, and manage over 1000 servers seamlessly!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the monitor to be removed
  */
@@ -346,7 +365,7 @@ export async function removeBluewaveLabsCheckmateInstance(
  * Get a Checkmate instance
  *
  * @memberOf bluewave-labs-checkmate
- * @description Monitor servers effortlessly with Checkmate—a powerful open-source tool for tracking server and website performance. Enjoy real-time alerts, in-depth insights, and manage over 1000 servers seamlessly!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the monitor to be retrieved
  * @returns {BluewaveLabsCheckmate} - Service instance

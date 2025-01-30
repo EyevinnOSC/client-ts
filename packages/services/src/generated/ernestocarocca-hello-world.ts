@@ -281,8 +281,6 @@ export type ErnestocaroccaHelloWorld =
 
 export type ErnestocaroccaHelloWorldConfig =
   paths['/hello-worldinstance']['post']['parameters']['body']['body'];
-
-/** @namespace ernestocarocca-hello-world */
 import {
   Context,
   createInstance,
@@ -290,14 +288,36 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace ernestocarocca-hello-world
+ * @description Harness the power of Next.js 14 and NextUI v2 with this feature-rich template. Perfect for creating sleek, dynamic apps with Tailwind CSS and TypeScript. Kickstart your project efficiently today!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} ErnestocaroccaHelloWorldConfig
+ * @property {string} name - Name of hello-world
+ * @property {string} Text - Text
+
+ * 
+ */
+
+/**
+ * @typedef {Object} ErnestocaroccaHelloWorld
+ * @property {string} name - Name of the Hello World instance
+ * @property {string} url - URL of the Hello World instance
+ *
+ */
 
 /**
  * Create a new Hello World instance
  *
  * @memberOf ernestocarocca-hello-world
- * @description Harness the power of Next.js 14 and NextUI v2 with this feature-rich template. Perfect for creating sleek, dynamic apps with Tailwind CSS and TypeScript. Kickstart your project efficiently today!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {ErnestocaroccaHelloWorldConfig}} body - Service instance configuration
+ * @param {ErnestocaroccaHelloWorldConfig} body - Service instance configuration
  * @returns {ErnestocaroccaHelloWorld} - Service instance
  * @example
  * import { Context, createErnestocaroccaHelloWorldInstance } from '@osaas/client-services';
@@ -327,7 +347,7 @@ export async function createErnestocaroccaHelloWorldInstance(
  * Remove a Hello World instance
  *
  * @memberOf ernestocarocca-hello-world
- * @description Harness the power of Next.js 14 and NextUI v2 with this feature-rich template. Perfect for creating sleek, dynamic apps with Tailwind CSS and TypeScript. Kickstart your project efficiently today!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the example to be removed
  */
@@ -350,7 +370,7 @@ export async function removeErnestocaroccaHelloWorldInstance(
  * Get a Hello World instance
  *
  * @memberOf ernestocarocca-hello-world
- * @description Harness the power of Next.js 14 and NextUI v2 with this feature-rich template. Perfect for creating sleek, dynamic apps with Tailwind CSS and TypeScript. Kickstart your project efficiently today!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the example to be retrieved
  * @returns {ErnestocaroccaHelloWorld} - Service instance

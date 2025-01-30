@@ -285,8 +285,6 @@ export type EyevinnAiCodeReviewer =
 
 export type EyevinnAiCodeReviewerConfig =
   paths['/ai-code-reviewerinstance']['post']['parameters']['body']['body'];
-
-/** @namespace eyevinn-ai-code-reviewer */
 import {
   Context,
   createInstance,
@@ -294,14 +292,37 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace eyevinn-ai-code-reviewer
+ * @description Elevate your code quality with AI Code Reviewer! Leverage AI to review your code effortlessly, ensuring top-notch quality. Integrate easily with your cloud setup for seamless code enhancement.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} EyevinnAiCodeReviewerConfig
+ * @property {string} name - Name of ai-code-reviewer
+ * @property {string} OpenAiApiKey - OpenAiApiKey
+ * @property {string | undefined} AssistantId - AssistantId
+
+ * 
+ */
+
+/**
+ * @typedef {Object} EyevinnAiCodeReviewer
+ * @property {string} name - Name of the AI Code Reviewer instance
+ * @property {string} url - URL of the AI Code Reviewer instance
+ *
+ */
 
 /**
  * Create a new AI Code Reviewer instance
  *
  * @memberOf eyevinn-ai-code-reviewer
- * @description Elevate your code quality with AI Code Reviewer! Leverage AI to review your code effortlessly, ensuring top-notch quality. Integrate easily with your cloud setup for seamless code enhancement.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnAiCodeReviewerConfig}} body - Service instance configuration
+ * @param {EyevinnAiCodeReviewerConfig} body - Service instance configuration
  * @returns {EyevinnAiCodeReviewer} - Service instance
  * @example
  * import { Context, createEyevinnAiCodeReviewerInstance } from '@osaas/client-services';
@@ -331,7 +352,7 @@ export async function createEyevinnAiCodeReviewerInstance(
  * Remove a AI Code Reviewer instance
  *
  * @memberOf eyevinn-ai-code-reviewer
- * @description Elevate your code quality with AI Code Reviewer! Leverage AI to review your code effortlessly, ensuring top-notch quality. Integrate easily with your cloud setup for seamless code enhancement.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the code-reviewer to be removed
  */
@@ -354,7 +375,7 @@ export async function removeEyevinnAiCodeReviewerInstance(
  * Get a AI Code Reviewer instance
  *
  * @memberOf eyevinn-ai-code-reviewer
- * @description Elevate your code quality with AI Code Reviewer! Leverage AI to review your code effortlessly, ensuring top-notch quality. Integrate easily with your cloud setup for seamless code enhancement.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the code-reviewer to be retrieved
  * @returns {EyevinnAiCodeReviewer} - Service instance

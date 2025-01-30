@@ -209,8 +209,6 @@ export type EyevinnCastReceiver =
 
 export type EyevinnCastReceiverConfig =
   paths['/cast-receiverinstance']['post']['parameters']['body']['body'];
-
-/** @namespace eyevinn-cast-receiver */
 import {
   Context,
   createInstance,
@@ -218,14 +216,40 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace eyevinn-cast-receiver
+ * @description A basic custom chromecast receiver that can be configured using environment variables. Add your company branding to your own chromecast receiver without writing a single line of code!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://github.com/Eyevinn/cast-receiver|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} EyevinnCastReceiverConfig
+ * @property {string} name - Name of cast-receiver
+ * @property {string} title - Title
+ * @property {string | undefined} castReceiverOptions - CastReceiverOptions
+ * @property {string | undefined} playbackLogoUrl - PlaybackLogoUrl
+ * @property {string | undefined} logoUrl - LogoUrl
+ * @property {string | undefined} castMediaPlayerStyle - CastMediaPlayerStyle
+
+ * 
+ */
+
+/**
+ * @typedef {Object} EyevinnCastReceiver
+ * @property {string} name - Name of the Chromecast receiver instance
+ * @property {string} url - URL of the Chromecast receiver instance
+ *
+ */
 
 /**
  * Create a new Chromecast receiver instance
  *
  * @memberOf eyevinn-cast-receiver
- * @description A basic custom chromecast receiver that can be configured using environment variables. Add your company branding to your own chromecast receiver without writing a single line of code!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnCastReceiverConfig}} body - Service instance configuration
+ * @param {EyevinnCastReceiverConfig} body - Service instance configuration
  * @returns {EyevinnCastReceiver} - Service instance
  * @example
  * import { Context, createEyevinnCastReceiverInstance } from '@osaas/client-services';
@@ -255,7 +279,7 @@ export async function createEyevinnCastReceiverInstance(
  * Remove a Chromecast receiver instance
  *
  * @memberOf eyevinn-cast-receiver
- * @description A basic custom chromecast receiver that can be configured using environment variables. Add your company branding to your own chromecast receiver without writing a single line of code!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the receiver to be removed
  */
@@ -273,7 +297,7 @@ export async function removeEyevinnCastReceiverInstance(
  * Get a Chromecast receiver instance
  *
  * @memberOf eyevinn-cast-receiver
- * @description A basic custom chromecast receiver that can be configured using environment variables. Add your company branding to your own chromecast receiver without writing a single line of code!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the receiver to be retrieved
  * @returns {EyevinnCastReceiver} - Service instance

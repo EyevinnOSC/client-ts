@@ -277,8 +277,6 @@ export type DocusealcoDocuseal =
 
 export type DocusealcoDocusealConfig =
   paths['/docusealinstance']['post']['parameters']['body']['body'];
-
-/** @namespace docusealco-docuseal */
 import {
   Context,
   createInstance,
@@ -286,14 +284,35 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace docusealco-docuseal
+ * @description Streamline your document workflow with DocuSeal, the leading open-source solution for secure, mobile-optimized digital form filling and signing. Perfect for any business needing swift and seamless e-signatures.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} DocusealcoDocusealConfig
+ * @property {string} name - Name of docuseal
+
+ * 
+ */
+
+/**
+ * @typedef {Object} DocusealcoDocuseal
+ * @property {string} name - Name of the Docuseal instance
+ * @property {string} url - URL of the Docuseal instance
+ *
+ */
 
 /**
  * Create a new Docuseal instance
  *
  * @memberOf docusealco-docuseal
- * @description Streamline your document workflow with DocuSeal, the leading open-source solution for secure, mobile-optimized digital form filling and signing. Perfect for any business needing swift and seamless e-signatures.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DocusealcoDocusealConfig}} body - Service instance configuration
+ * @param {DocusealcoDocusealConfig} body - Service instance configuration
  * @returns {DocusealcoDocuseal} - Service instance
  * @example
  * import { Context, createDocusealcoDocusealInstance } from '@osaas/client-services';
@@ -323,7 +342,7 @@ export async function createDocusealcoDocusealInstance(
  * Remove a Docuseal instance
  *
  * @memberOf docusealco-docuseal
- * @description Streamline your document workflow with DocuSeal, the leading open-source solution for secure, mobile-optimized digital form filling and signing. Perfect for any business needing swift and seamless e-signatures.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the docuseal to be removed
  */
@@ -341,7 +360,7 @@ export async function removeDocusealcoDocusealInstance(
  * Get a Docuseal instance
  *
  * @memberOf docusealco-docuseal
- * @description Streamline your document workflow with DocuSeal, the leading open-source solution for secure, mobile-optimized digital form filling and signing. Perfect for any business needing swift and seamless e-signatures.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the docuseal to be retrieved
  * @returns {DocusealcoDocuseal} - Service instance

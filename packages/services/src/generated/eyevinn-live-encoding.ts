@@ -289,8 +289,6 @@ export type EyevinnLiveEncoding =
 
 export type EyevinnLiveEncodingConfig =
   paths['/live-encodinginstance']['post']['parameters']['body']['body'];
-
-/** @namespace eyevinn-live-encoding */
 import {
   Context,
   createInstance,
@@ -298,14 +296,38 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace eyevinn-live-encoding
+ * @description Transform your live streaming with Eyevinn Live Encoding: Open-source, ffmpeg-based, and ready for HLS & MPEG-DASH. Streamline now, CDN-ready.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} EyevinnLiveEncodingConfig
+ * @property {string} name - Name of live-encoding
+ * @property {boolean | undefined} HlsOnly - When enabled only output HLS
+ * @property {string | undefined} StreamKey - Configure encoder to push to rtmp://<host>/live/<StreamKey>
+ * @property {string | undefined} OutputUrl - If specified push to CDN origin
+
+ * 
+ */
+
+/**
+ * @typedef {Object} EyevinnLiveEncoding
+ * @property {string} name - Name of the Eyevinn Live Encoding instance
+ * @property {string} url - URL of the Eyevinn Live Encoding instance
+ *
+ */
 
 /**
  * Create a new Eyevinn Live Encoding instance
  *
  * @memberOf eyevinn-live-encoding
- * @description Transform your live streaming with Eyevinn Live Encoding: Open-source, ffmpeg-based, and ready for HLS & MPEG-DASH. Streamline now, CDN-ready.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnLiveEncodingConfig}} body - Service instance configuration
+ * @param {EyevinnLiveEncodingConfig} body - Service instance configuration
  * @returns {EyevinnLiveEncoding} - Service instance
  * @example
  * import { Context, createEyevinnLiveEncodingInstance } from '@osaas/client-services';
@@ -335,7 +357,7 @@ export async function createEyevinnLiveEncodingInstance(
  * Remove a Eyevinn Live Encoding instance
  *
  * @memberOf eyevinn-live-encoding
- * @description Transform your live streaming with Eyevinn Live Encoding: Open-source, ffmpeg-based, and ready for HLS & MPEG-DASH. Streamline now, CDN-ready.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the encoder to be removed
  */
@@ -353,7 +375,7 @@ export async function removeEyevinnLiveEncodingInstance(
  * Get a Eyevinn Live Encoding instance
  *
  * @memberOf eyevinn-live-encoding
- * @description Transform your live streaming with Eyevinn Live Encoding: Open-source, ffmpeg-based, and ready for HLS & MPEG-DASH. Streamline now, CDN-ready.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the encoder to be retrieved
  * @returns {EyevinnLiveEncoding} - Service instance

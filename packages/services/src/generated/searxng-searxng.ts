@@ -281,8 +281,6 @@ export type SearxngSearxng =
 
 export type SearxngSearxngConfig =
   paths['/searxnginstance']['post']['parameters']['body']['body'];
-
-/** @namespace searxng-searxng */
 import {
   Context,
   createInstance,
@@ -290,14 +288,36 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace searxng-searxng
+ * @description Experience the power of privacy with SearXNG, a customizable metasearch engine delivering unmatched confidentiality. Explore the web securely with our easy setup and extensive admin tools.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} SearxngSearxngConfig
+ * @property {string} name - Name of searxng
+ * @property {string | undefined} AutoComplete - AutoComplete
+
+ * 
+ */
+
+/**
+ * @typedef {Object} SearxngSearxng
+ * @property {string} name - Name of the SearXNG instance
+ * @property {string} url - URL of the SearXNG instance
+ *
+ */
 
 /**
  * Create a new SearXNG instance
  *
  * @memberOf searxng-searxng
- * @description Experience the power of privacy with SearXNG, a customizable metasearch engine delivering unmatched confidentiality. Explore the web securely with our easy setup and extensive admin tools.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {SearxngSearxngConfig}} body - Service instance configuration
+ * @param {SearxngSearxngConfig} body - Service instance configuration
  * @returns {SearxngSearxng} - Service instance
  * @example
  * import { Context, createSearxngSearxngInstance } from '@osaas/client-services';
@@ -325,7 +345,7 @@ export async function createSearxngSearxngInstance(
  * Remove a SearXNG instance
  *
  * @memberOf searxng-searxng
- * @description Experience the power of privacy with SearXNG, a customizable metasearch engine delivering unmatched confidentiality. Explore the web securely with our easy setup and extensive admin tools.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the searxng to be removed
  */
@@ -341,7 +361,7 @@ export async function removeSearxngSearxngInstance(
  * Get a SearXNG instance
  *
  * @memberOf searxng-searxng
- * @description Experience the power of privacy with SearXNG, a customizable metasearch engine delivering unmatched confidentiality. Explore the web securely with our easy setup and extensive admin tools.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the searxng to be retrieved
  * @returns {SearxngSearxng} - Service instance

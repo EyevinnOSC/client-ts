@@ -277,8 +277,6 @@ export type DashIndustryForumLivesim2 =
 
 export type DashIndustryForumLivesim2Config =
   paths['/livesim2instance']['post']['parameters']['body']['body'];
-
-/** @namespace dash-industry-forum-livesim2 */
 import {
   Context,
   createInstance,
@@ -286,14 +284,35 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace dash-industry-forum-livesim2
+ * @description Elevate your streaming with livesim2, the next-gen DASH Live Source Simulator, offering infinite live streams, flexible content handling, and on-the-fly subtitles in multiple languages. Perfect for testing and demo purposes.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} DashIndustryForumLivesim2Config
+ * @property {string} name - Name of livesim2
+
+ * 
+ */
+
+/**
+ * @typedef {Object} DashIndustryForumLivesim2
+ * @property {string} name - Name of the livesim2 instance
+ * @property {string} url - URL of the livesim2 instance
+ *
+ */
 
 /**
  * Create a new livesim2 instance
  *
  * @memberOf dash-industry-forum-livesim2
- * @description Elevate your streaming with livesim2, the next-gen DASH Live Source Simulator, offering infinite live streams, flexible content handling, and on-the-fly subtitles in multiple languages. Perfect for testing and demo purposes.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DashIndustryForumLivesim2Config}} body - Service instance configuration
+ * @param {DashIndustryForumLivesim2Config} body - Service instance configuration
  * @returns {DashIndustryForumLivesim2} - Service instance
  * @example
  * import { Context, createDashIndustryForumLivesim2Instance } from '@osaas/client-services';
@@ -327,7 +346,7 @@ export async function createDashIndustryForumLivesim2Instance(
  * Remove a livesim2 instance
  *
  * @memberOf dash-industry-forum-livesim2
- * @description Elevate your streaming with livesim2, the next-gen DASH Live Source Simulator, offering infinite live streams, flexible content handling, and on-the-fly subtitles in multiple languages. Perfect for testing and demo purposes.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the livesimulators to be removed
  */
@@ -350,7 +369,7 @@ export async function removeDashIndustryForumLivesim2Instance(
  * Get a livesim2 instance
  *
  * @memberOf dash-industry-forum-livesim2
- * @description Elevate your streaming with livesim2, the next-gen DASH Live Source Simulator, offering infinite live streams, flexible content handling, and on-the-fly subtitles in multiple languages. Perfect for testing and demo purposes.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the livesimulators to be retrieved
  * @returns {DashIndustryForumLivesim2} - Service instance

@@ -281,8 +281,6 @@ export type SwaggerApiSwaggerEditor =
 
 export type SwaggerApiSwaggerEditorConfig =
   paths['/swagger-editorinstance']['post']['parameters']['body']['body'];
-
-/** @namespace swagger-api-swagger-editor */
 import {
   Context,
   createInstance,
@@ -290,14 +288,36 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace swagger-api-swagger-editor
+ * @description Next generation Swagger Editor is here! Edit OpenAPI definitions in JSON or YAML format in your browser and preview documentation in real time. Generate valid OpenAPI definitions for full Swagger tooling support. Upgrade to SwaggerEditor@5 for OpenAPI 3.1.0 support and enjoy a brand-new version built from the ground up. Get your Swagger Editor now!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} SwaggerApiSwaggerEditorConfig
+ * @property {string} name - Name of swagger-editor
+ * @property {string | undefined} ApiDefinitionUrl - ApiDefinitionUrl
+
+ * 
+ */
+
+/**
+ * @typedef {Object} SwaggerApiSwaggerEditor
+ * @property {string} name - Name of the Swagger Editor instance
+ * @property {string} url - URL of the Swagger Editor instance
+ *
+ */
 
 /**
  * Create a new Swagger Editor instance
  *
  * @memberOf swagger-api-swagger-editor
- * @description Next generation Swagger Editor is here! Edit OpenAPI definitions in JSON or YAML format in your browser and preview documentation in real time. Generate valid OpenAPI definitions for full Swagger tooling support. Upgrade to SwaggerEditor@5 for OpenAPI 3.1.0 support and enjoy a brand-new version built from the ground up. Get your Swagger Editor now!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {SwaggerApiSwaggerEditorConfig}} body - Service instance configuration
+ * @param {SwaggerApiSwaggerEditorConfig} body - Service instance configuration
  * @returns {SwaggerApiSwaggerEditor} - Service instance
  * @example
  * import { Context, createSwaggerApiSwaggerEditorInstance } from '@osaas/client-services';
@@ -327,7 +347,7 @@ export async function createSwaggerApiSwaggerEditorInstance(
  * Remove a Swagger Editor instance
  *
  * @memberOf swagger-api-swagger-editor
- * @description Next generation Swagger Editor is here! Edit OpenAPI definitions in JSON or YAML format in your browser and preview documentation in real time. Generate valid OpenAPI definitions for full Swagger tooling support. Upgrade to SwaggerEditor@5 for OpenAPI 3.1.0 support and enjoy a brand-new version built from the ground up. Get your Swagger Editor now!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the editor to be removed
  */
@@ -350,7 +370,7 @@ export async function removeSwaggerApiSwaggerEditorInstance(
  * Get a Swagger Editor instance
  *
  * @memberOf swagger-api-swagger-editor
- * @description Next generation Swagger Editor is here! Edit OpenAPI definitions in JSON or YAML format in your browser and preview documentation in real time. Generate valid OpenAPI definitions for full Swagger tooling support. Upgrade to SwaggerEditor@5 for OpenAPI 3.1.0 support and enjoy a brand-new version built from the ground up. Get your Swagger Editor now!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the editor to be retrieved
  * @returns {SwaggerApiSwaggerEditor} - Service instance

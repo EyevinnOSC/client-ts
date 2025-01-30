@@ -285,8 +285,6 @@ export type SupercorpAiSupergateway =
 
 export type SupercorpAiSupergatewayConfig =
   paths['/supergatewayinstance']['post']['parameters']['body']['body'];
-
-/** @namespace supercorp-ai-supergateway */
 import {
   Context,
   createInstance,
@@ -294,14 +292,37 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace supercorp-ai-supergateway
+ * @description Unlock seamless stdio MCP server connectivity with Supergateway! Run servers over SSE effortlessly, ideal for remote access and debugging. Start with one command to deliver powerful, real-time interactions!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} SupercorpAiSupergatewayConfig
+ * @property {string} name - Name of supergateway
+ * @property {string} McpServer - McpServer
+ * @property {string | undefined} EnvVars - EnvVars
+
+ * 
+ */
+
+/**
+ * @typedef {Object} SupercorpAiSupergateway
+ * @property {string} name - Name of the Supergateway instance
+ * @property {string} url - URL of the Supergateway instance
+ *
+ */
 
 /**
  * Create a new Supergateway instance
  *
  * @memberOf supercorp-ai-supergateway
- * @description Unlock seamless stdio MCP server connectivity with Supergateway! Run servers over SSE effortlessly, ideal for remote access and debugging. Start with one command to deliver powerful, real-time interactions!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {SupercorpAiSupergatewayConfig}} body - Service instance configuration
+ * @param {SupercorpAiSupergatewayConfig} body - Service instance configuration
  * @returns {SupercorpAiSupergateway} - Service instance
  * @example
  * import { Context, createSupercorpAiSupergatewayInstance } from '@osaas/client-services';
@@ -331,7 +352,7 @@ export async function createSupercorpAiSupergatewayInstance(
  * Remove a Supergateway instance
  *
  * @memberOf supercorp-ai-supergateway
- * @description Unlock seamless stdio MCP server connectivity with Supergateway! Run servers over SSE effortlessly, ideal for remote access and debugging. Start with one command to deliver powerful, real-time interactions!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the supergateway to be removed
  */
@@ -354,7 +375,7 @@ export async function removeSupercorpAiSupergatewayInstance(
  * Get a Supergateway instance
  *
  * @memberOf supercorp-ai-supergateway
- * @description Unlock seamless stdio MCP server connectivity with Supergateway! Run servers over SSE effortlessly, ideal for remote access and debugging. Start with one command to deliver powerful, real-time interactions!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the supergateway to be retrieved
  * @returns {SupercorpAiSupergateway} - Service instance

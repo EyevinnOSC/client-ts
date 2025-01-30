@@ -285,8 +285,6 @@ export type EyevinnSrtWhep =
 
 export type EyevinnSrtWhepConfig =
   paths['/srt-whepinstance']['post']['parameters']['body']['body'];
-
-/** @namespace eyevinn-srt-whep */
 import {
   Context,
   createInstance,
@@ -294,14 +292,37 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace eyevinn-srt-whep
+ * @description SRT to WHEP application ingests MPEG-TS over SRT stream and outputs to WebRTC using WHEP signaling protocol, supporting MacOS and Ubuntu. No video transcoding, SDP offer/answer exchange focus, and compliance with popular production software. Get yours now!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} EyevinnSrtWhepConfig
+ * @property {string} name - Name of srt-whep
+ * @property {string} SourceIp - SourceIp
+ * @property {string} SourcePort - SourcePort
+
+ * 
+ */
+
+/**
+ * @typedef {Object} EyevinnSrtWhep
+ * @property {string} name - Name of the SRT WHEP Bridge instance
+ * @property {string} url - URL of the SRT WHEP Bridge instance
+ *
+ */
 
 /**
  * Create a new SRT WHEP Bridge instance
  *
  * @memberOf eyevinn-srt-whep
- * @description SRT to WHEP application ingests MPEG-TS over SRT stream and outputs to WebRTC using WHEP signaling protocol, supporting MacOS and Ubuntu. No video transcoding, SDP offer/answer exchange focus, and compliance with popular production software. Get yours now!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnSrtWhepConfig}} body - Service instance configuration
+ * @param {EyevinnSrtWhepConfig} body - Service instance configuration
  * @returns {EyevinnSrtWhep} - Service instance
  * @example
  * import { Context, createEyevinnSrtWhepInstance } from '@osaas/client-services';
@@ -331,7 +352,7 @@ export async function createEyevinnSrtWhepInstance(
  * Remove a SRT WHEP Bridge instance
  *
  * @memberOf eyevinn-srt-whep
- * @description SRT to WHEP application ingests MPEG-TS over SRT stream and outputs to WebRTC using WHEP signaling protocol, supporting MacOS and Ubuntu. No video transcoding, SDP offer/answer exchange focus, and compliance with popular production software. Get yours now!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the bridge to be removed
  */
@@ -349,7 +370,7 @@ export async function removeEyevinnSrtWhepInstance(
  * Get a SRT WHEP Bridge instance
  *
  * @memberOf eyevinn-srt-whep
- * @description SRT to WHEP application ingests MPEG-TS over SRT stream and outputs to WebRTC using WHEP signaling protocol, supporting MacOS and Ubuntu. No video transcoding, SDP offer/answer exchange focus, and compliance with popular production software. Get yours now!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the bridge to be retrieved
  * @returns {EyevinnSrtWhep} - Service instance

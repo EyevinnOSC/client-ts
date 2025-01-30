@@ -285,8 +285,6 @@ export type PlausibleAnalytics =
 
 export type PlausibleAnalyticsConfig =
   paths['/analyticsinstance']['post']['parameters']['body']['body'];
-
-/** @namespace plausible-analytics */
 import {
   Context,
   createInstance,
@@ -294,14 +292,37 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace plausible-analytics
+ * @description Elevate your data privacy with Plausible Analytics. Get simple, clutter-free insights without compromising user privacy. Enjoy an easy, lightweight, and privacy-focused Google Analytics alternative!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} PlausibleAnalyticsConfig
+ * @property {string} name - Name of analytics
+ * @property {string} PostgreSQLUrl - PostgreSQLUrl
+ * @property {string} ClickHouseDbUrl - ClickHouseDbUrl
+
+ * 
+ */
+
+/**
+ * @typedef {Object} PlausibleAnalytics
+ * @property {string} name - Name of the Plausible Analytics instance
+ * @property {string} url - URL of the Plausible Analytics instance
+ *
+ */
 
 /**
  * Create a new Plausible Analytics instance
  *
  * @memberOf plausible-analytics
- * @description Elevate your data privacy with Plausible Analytics. Get simple, clutter-free insights without compromising user privacy. Enjoy an easy, lightweight, and privacy-focused Google Analytics alternative!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {PlausibleAnalyticsConfig}} body - Service instance configuration
+ * @param {PlausibleAnalyticsConfig} body - Service instance configuration
  * @returns {PlausibleAnalytics} - Service instance
  * @example
  * import { Context, createPlausibleAnalyticsInstance } from '@osaas/client-services';
@@ -331,7 +352,7 @@ export async function createPlausibleAnalyticsInstance(
  * Remove a Plausible Analytics instance
  *
  * @memberOf plausible-analytics
- * @description Elevate your data privacy with Plausible Analytics. Get simple, clutter-free insights without compromising user privacy. Enjoy an easy, lightweight, and privacy-focused Google Analytics alternative!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the server to be removed
  */
@@ -349,7 +370,7 @@ export async function removePlausibleAnalyticsInstance(
  * Get a Plausible Analytics instance
  *
  * @memberOf plausible-analytics
- * @description Elevate your data privacy with Plausible Analytics. Get simple, clutter-free insights without compromising user privacy. Enjoy an easy, lightweight, and privacy-focused Google Analytics alternative!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the server to be retrieved
  * @returns {PlausibleAnalytics} - Service instance

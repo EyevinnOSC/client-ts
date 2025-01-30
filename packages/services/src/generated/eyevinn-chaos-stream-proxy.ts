@@ -281,8 +281,6 @@ export type EyevinnChaosStreamProxy =
 
 export type EyevinnChaosStreamProxyConfig =
   paths['/chaos-stream-proxyinstance']['post']['parameters']['body']['body'];
-
-/** @namespace eyevinn-chaos-stream-proxy */
 import {
   Context,
   createInstance,
@@ -290,14 +288,36 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace eyevinn-chaos-stream-proxy
+ * @description Chaos Stream Proxy is an open-source tool designed to simulate network impairments in video streaming environments. It acts as a proxy between the client and the streaming server, allowing developers and QA engineers to introduce various network conditions such as latency, jitter, and packet loss to test and improve the resilience and performance of streaming applications. This tool is crucial for ensuring a smooth streaming experience under different network scenarios, making it an invaluable asset for optimizing video delivery in real-world conditions.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://eyevinntechnology.medium.com/delivering-flawless-streams-regardless-of-the-challenges-in-network-conditions-e466bad5b83f|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} EyevinnChaosStreamProxyConfig
+ * @property {string} name - Name of chaos-stream-proxy
+ * @property {boolean | undefined} statefulmode - Statefulmode
+
+ * 
+ */
+
+/**
+ * @typedef {Object} EyevinnChaosStreamProxy
+ * @property {string} name - Name of the Chaos Stream Proxy instance
+ * @property {string} url - URL of the Chaos Stream Proxy instance
+ *
+ */
 
 /**
  * Create a new Chaos Stream Proxy instance
  *
  * @memberOf eyevinn-chaos-stream-proxy
- * @description Chaos Stream Proxy is an open-source tool designed to simulate network impairments in video streaming environments. It acts as a proxy between the client and the streaming server, allowing developers and QA engineers to introduce various network conditions such as latency, jitter, and packet loss to test and improve the resilience and performance of streaming applications. This tool is crucial for ensuring a smooth streaming experience under different network scenarios, making it an invaluable asset for optimizing video delivery in real-world conditions.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnChaosStreamProxyConfig}} body - Service instance configuration
+ * @param {EyevinnChaosStreamProxyConfig} body - Service instance configuration
  * @returns {EyevinnChaosStreamProxy} - Service instance
  * @example
  * import { Context, createEyevinnChaosStreamProxyInstance } from '@osaas/client-services';
@@ -327,7 +347,7 @@ export async function createEyevinnChaosStreamProxyInstance(
  * Remove a Chaos Stream Proxy instance
  *
  * @memberOf eyevinn-chaos-stream-proxy
- * @description Chaos Stream Proxy is an open-source tool designed to simulate network impairments in video streaming environments. It acts as a proxy between the client and the streaming server, allowing developers and QA engineers to introduce various network conditions such as latency, jitter, and packet loss to test and improve the resilience and performance of streaming applications. This tool is crucial for ensuring a smooth streaming experience under different network scenarios, making it an invaluable asset for optimizing video delivery in real-world conditions.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the chaos-stream-proxy to be removed
  */
@@ -350,7 +370,7 @@ export async function removeEyevinnChaosStreamProxyInstance(
  * Get a Chaos Stream Proxy instance
  *
  * @memberOf eyevinn-chaos-stream-proxy
- * @description Chaos Stream Proxy is an open-source tool designed to simulate network impairments in video streaming environments. It acts as a proxy between the client and the streaming server, allowing developers and QA engineers to introduce various network conditions such as latency, jitter, and packet loss to test and improve the resilience and performance of streaming applications. This tool is crucial for ensuring a smooth streaming experience under different network scenarios, making it an invaluable asset for optimizing video delivery in real-world conditions.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the chaos-stream-proxy to be retrieved
  * @returns {EyevinnChaosStreamProxy} - Service instance

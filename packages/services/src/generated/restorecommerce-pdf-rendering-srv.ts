@@ -277,8 +277,6 @@ export type RestorecommercePdfRenderingSrv =
 
 export type RestorecommercePdfRenderingSrvConfig =
   paths['/pdf-rendering-srvinstance']['post']['parameters']['body']['body'];
-
-/** @namespace restorecommerce-pdf-rendering-srv */
 import {
   Context,
   createInstance,
@@ -286,14 +284,35 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace restorecommerce-pdf-rendering-srv
+ * @description Elevate your documentation with our PDF Rendering Service. Turn any URL into a PDF effortlessly. Ideal for business reports and archives. Join the future of document management today.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://docs.restorecommerce.io/pdf-rendering-srv/index.html|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} RestorecommercePdfRenderingSrvConfig
+ * @property {string} name - Name of pdf-rendering-srv
+
+ * 
+ */
+
+/**
+ * @typedef {Object} RestorecommercePdfRenderingSrv
+ * @property {string} name - Name of the PDF Rendering Service instance
+ * @property {string} url - URL of the PDF Rendering Service instance
+ *
+ */
 
 /**
  * Create a new PDF Rendering Service instance
  *
  * @memberOf restorecommerce-pdf-rendering-srv
- * @description Elevate your documentation with our PDF Rendering Service. Turn any URL into a PDF effortlessly. Ideal for business reports and archives. Join the future of document management today.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {RestorecommercePdfRenderingSrvConfig}} body - Service instance configuration
+ * @param {RestorecommercePdfRenderingSrvConfig} body - Service instance configuration
  * @returns {RestorecommercePdfRenderingSrv} - Service instance
  * @example
  * import { Context, createRestorecommercePdfRenderingSrvInstance } from '@osaas/client-services';
@@ -327,7 +346,7 @@ export async function createRestorecommercePdfRenderingSrvInstance(
  * Remove a PDF Rendering Service instance
  *
  * @memberOf restorecommerce-pdf-rendering-srv
- * @description Elevate your documentation with our PDF Rendering Service. Turn any URL into a PDF effortlessly. Ideal for business reports and archives. Join the future of document management today.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the pdf-rendering-srv to be removed
  */
@@ -350,7 +369,7 @@ export async function removeRestorecommercePdfRenderingSrvInstance(
  * Get a PDF Rendering Service instance
  *
  * @memberOf restorecommerce-pdf-rendering-srv
- * @description Elevate your documentation with our PDF Rendering Service. Turn any URL into a PDF effortlessly. Ideal for business reports and archives. Join the future of document management today.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the pdf-rendering-srv to be retrieved
  * @returns {RestorecommercePdfRenderingSrv} - Service instance

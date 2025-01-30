@@ -201,8 +201,6 @@ export type EyevinnFunctionTrim =
 
 export type EyevinnFunctionTrimConfig =
   paths['/function-triminstance']['post']['parameters']['body']['body'];
-
-/** @namespace eyevinn-function-trim */
 import {
   Context,
   createInstance,
@@ -210,14 +208,38 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace eyevinn-function-trim
+ * @description A serverless media function to trim single media file or an ABR bundle of media files and upload the output to an S3 bucket.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} EyevinnFunctionTrimConfig
+ * @property {string} name - Name of mediafunction
+ * @property {string} awsRegion - AWS Region where output S3 bucket resides
+ * @property {string} awsAccessKeyId - AWS Access Key Id for S3 bucket access
+ * @property {string} awsSecretAccessKey - AWS Secret Access Key for S3 bucket access
+
+ * 
+ */
+
+/**
+ * @typedef {Object} EyevinnFunctionTrim
+ * @property {string} name - Name of the Trim Media instance
+ * @property {string} url - URL of the Trim Media instance
+ *
+ */
 
 /**
  * Create a new Trim Media instance
  *
  * @memberOf eyevinn-function-trim
- * @description A serverless media function to trim single media file or an ABR bundle of media files and upload the output to an S3 bucket.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnFunctionTrimConfig}} body - Service instance configuration
+ * @param {EyevinnFunctionTrimConfig} body - Service instance configuration
  * @returns {EyevinnFunctionTrim} - Service instance
  * @example
  * import { Context, createEyevinnFunctionTrimInstance } from '@osaas/client-services';
@@ -247,7 +269,7 @@ export async function createEyevinnFunctionTrimInstance(
  * Remove a Trim Media instance
  *
  * @memberOf eyevinn-function-trim
- * @description A serverless media function to trim single media file or an ABR bundle of media files and upload the output to an S3 bucket.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the mediafunction to be removed
  */
@@ -265,7 +287,7 @@ export async function removeEyevinnFunctionTrimInstance(
  * Get a Trim Media instance
  *
  * @memberOf eyevinn-function-trim
- * @description A serverless media function to trim single media file or an ABR bundle of media files and upload the output to an S3 bucket.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the mediafunction to be retrieved
  * @returns {EyevinnFunctionTrim} - Service instance

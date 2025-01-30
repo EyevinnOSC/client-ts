@@ -293,8 +293,6 @@ export type LinuxserverDockerMariadb =
 
 export type LinuxserverDockerMariadbConfig =
   paths['/docker-mariadbinstance']['post']['parameters']['body']['body'];
-
-/** @namespace linuxserver-docker-mariadb */
 import {
   Context,
   createInstance,
@@ -302,14 +300,39 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace linuxserver-docker-mariadb
+ * @description Unlock the full potential of your database management with LinuxServer.io's MariaDB Docker container. Featuring seamless updates, security enhancements, and multi-platform support, it's the ideal solution for efficient and reliable data storage. Minimize downtime and bandwidth usage, and maximize your productivity. Transform your database experience now!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-MariaDB.html|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} LinuxserverDockerMariadbConfig
+ * @property {string} name - Name of database server
+ * @property {string} RootPassword - Administrator password for database server
+ * @property {string | undefined} Database - Database
+ * @property {string | undefined} User - User
+ * @property {string | undefined} Password - Password
+
+ * 
+ */
+
+/**
+ * @typedef {Object} LinuxserverDockerMariadb
+ * @property {string} name - Name of the MariaDB instance
+ * @property {string} url - URL of the MariaDB instance
+ *
+ */
 
 /**
  * Create a new MariaDB instance
  *
  * @memberOf linuxserver-docker-mariadb
- * @description Unlock the full potential of your database management with LinuxServer.io's MariaDB Docker container. Featuring seamless updates, security enhancements, and multi-platform support, it's the ideal solution for efficient and reliable data storage. Minimize downtime and bandwidth usage, and maximize your productivity. Transform your database experience now!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {LinuxserverDockerMariadbConfig}} body - Service instance configuration
+ * @param {LinuxserverDockerMariadbConfig} body - Service instance configuration
  * @returns {LinuxserverDockerMariadb} - Service instance
  * @example
  * import { Context, createLinuxserverDockerMariadbInstance } from '@osaas/client-services';
@@ -339,7 +362,7 @@ export async function createLinuxserverDockerMariadbInstance(
  * Remove a MariaDB instance
  *
  * @memberOf linuxserver-docker-mariadb
- * @description Unlock the full potential of your database management with LinuxServer.io's MariaDB Docker container. Featuring seamless updates, security enhancements, and multi-platform support, it's the ideal solution for efficient and reliable data storage. Minimize downtime and bandwidth usage, and maximize your productivity. Transform your database experience now!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the dbserver to be removed
  */
@@ -362,7 +385,7 @@ export async function removeLinuxserverDockerMariadbInstance(
  * Get a MariaDB instance
  *
  * @memberOf linuxserver-docker-mariadb
- * @description Unlock the full potential of your database management with LinuxServer.io's MariaDB Docker container. Featuring seamless updates, security enhancements, and multi-platform support, it's the ideal solution for efficient and reliable data storage. Minimize downtime and bandwidth usage, and maximize your productivity. Transform your database experience now!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the dbserver to be retrieved
  * @returns {LinuxserverDockerMariadb} - Service instance

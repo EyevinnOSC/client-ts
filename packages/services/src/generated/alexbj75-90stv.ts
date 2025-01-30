@@ -277,8 +277,6 @@ export type Alexbj7590stv =
 
 export type Alexbj7590stvConfig =
   paths['/90stvinstance']['post']['parameters']['body']['body'];
-
-/** @namespace alexbj75-90stv */
 import {
   Context,
   createInstance,
@@ -286,14 +284,35 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace alexbj75-90stv
+ * @description Experience nostalgia with 90stv! Transform your FAST channels into a classic 90s TV viewing adventure, effortlessly with a quick Docker setup. Relive the golden era of television today!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} Alexbj7590stvConfig
+ * @property {string} name - Name of 90stv
+
+ * 
+ */
+
+/**
+ * @typedef {Object} Alexbj7590stv
+ * @property {string} name - Name of the 90stv instance
+ * @property {string} url - URL of the 90stv instance
+ *
+ */
 
 /**
  * Create a new 90stv instance
  *
  * @memberOf alexbj75-90stv
- * @description Experience nostalgia with 90stv! Transform your FAST channels into a classic 90s TV viewing adventure, effortlessly with a quick Docker setup. Relive the golden era of television today!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {Alexbj7590stvConfig}} body - Service instance configuration
+ * @param {Alexbj7590stvConfig} body - Service instance configuration
  * @returns {Alexbj7590stv} - Service instance
  * @example
  * import { Context, createAlexbj7590stvInstance } from '@osaas/client-services';
@@ -321,7 +340,7 @@ export async function createAlexbj7590stvInstance(
  * Remove a 90stv instance
  *
  * @memberOf alexbj75-90stv
- * @description Experience nostalgia with 90stv! Transform your FAST channels into a classic 90s TV viewing adventure, effortlessly with a quick Docker setup. Relive the golden era of television today!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the 90stv to be removed
  */
@@ -337,7 +356,7 @@ export async function removeAlexbj7590stvInstance(
  * Get a 90stv instance
  *
  * @memberOf alexbj75-90stv
- * @description Experience nostalgia with 90stv! Transform your FAST channels into a classic 90s TV viewing adventure, effortlessly with a quick Docker setup. Relive the golden era of television today!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the 90stv to be retrieved
  * @returns {Alexbj7590stv} - Service instance

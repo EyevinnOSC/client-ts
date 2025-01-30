@@ -277,8 +277,6 @@ export type DrawdbIoDrawdb =
 
 export type DrawdbIoDrawdbConfig =
   paths['/drawdbinstance']['post']['parameters']['body']['body'];
-
-/** @namespace drawdb-io-drawdb */
 import {
   Context,
   createInstance,
@@ -286,14 +284,35 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace drawdb-io-drawdb
+ * @description Effortlessly design and manage your database schema with drawDB. It's a user-friendly online DBER editor that lets you create diagrams and generate SQL without any hassle, all directly in your browser!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} DrawdbIoDrawdbConfig
+ * @property {string} name - Name of drawdb
+
+ * 
+ */
+
+/**
+ * @typedef {Object} DrawdbIoDrawdb
+ * @property {string} name - Name of the drawDB instance
+ * @property {string} url - URL of the drawDB instance
+ *
+ */
 
 /**
  * Create a new drawDB instance
  *
  * @memberOf drawdb-io-drawdb
- * @description Effortlessly design and manage your database schema with drawDB. It's a user-friendly online DBER editor that lets you create diagrams and generate SQL without any hassle, all directly in your browser!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DrawdbIoDrawdbConfig}} body - Service instance configuration
+ * @param {DrawdbIoDrawdbConfig} body - Service instance configuration
  * @returns {DrawdbIoDrawdb} - Service instance
  * @example
  * import { Context, createDrawdbIoDrawdbInstance } from '@osaas/client-services';
@@ -323,7 +342,7 @@ export async function createDrawdbIoDrawdbInstance(
  * Remove a drawDB instance
  *
  * @memberOf drawdb-io-drawdb
- * @description Effortlessly design and manage your database schema with drawDB. It's a user-friendly online DBER editor that lets you create diagrams and generate SQL without any hassle, all directly in your browser!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the editor to be removed
  */
@@ -341,7 +360,7 @@ export async function removeDrawdbIoDrawdbInstance(
  * Get a drawDB instance
  *
  * @memberOf drawdb-io-drawdb
- * @description Effortlessly design and manage your database schema with drawDB. It's a user-friendly online DBER editor that lets you create diagrams and generate SQL without any hassle, all directly in your browser!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the editor to be retrieved
  * @returns {DrawdbIoDrawdb} - Service instance

@@ -285,8 +285,6 @@ export type MinioMinio =
 
 export type MinioMinioConfig =
   paths['/minioinstance']['post']['parameters']['body']['body'];
-
-/** @namespace minio-minio */
 import {
   Context,
   createInstance,
@@ -294,14 +292,37 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace minio-minio
+ * @description MinIO is the High Performance Object Storage solution you've been searching for! API compatible with Amazon S3, it's perfect for machine learning, analytics, and app data workloads. Easy container installation with stable podman run commands. Mac, Linux, Windows support available for simple standalone server setup. Explore further with MinIO SDKs and contribute to the MinIO Project. Get your MinIO now and revolutionize your storage game!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-MinIO.html|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} MinioMinioConfig
+ * @property {string} name - Name of minio
+ * @property {string | undefined} RootUser - RootUser
+ * @property {string | undefined} RootPassword - RootPassword
+
+ * 
+ */
+
+/**
+ * @typedef {Object} MinioMinio
+ * @property {string} name - Name of the minio instance
+ * @property {string} url - URL of the minio instance
+ *
+ */
 
 /**
  * Create a new minio instance
  *
  * @memberOf minio-minio
- * @description MinIO is the High Performance Object Storage solution you've been searching for! API compatible with Amazon S3, it's perfect for machine learning, analytics, and app data workloads. Easy container installation with stable podman run commands. Mac, Linux, Windows support available for simple standalone server setup. Explore further with MinIO SDKs and contribute to the MinIO Project. Get your MinIO now and revolutionize your storage game!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {MinioMinioConfig}} body - Service instance configuration
+ * @param {MinioMinioConfig} body - Service instance configuration
  * @returns {MinioMinio} - Service instance
  * @example
  * import { Context, createMinioMinioInstance } from '@osaas/client-services';
@@ -329,7 +350,7 @@ export async function createMinioMinioInstance(
  * Remove a minio instance
  *
  * @memberOf minio-minio
- * @description MinIO is the High Performance Object Storage solution you've been searching for! API compatible with Amazon S3, it's perfect for machine learning, analytics, and app data workloads. Easy container installation with stable podman run commands. Mac, Linux, Windows support available for simple standalone server setup. Explore further with MinIO SDKs and contribute to the MinIO Project. Get your MinIO now and revolutionize your storage game!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the objstorage to be removed
  */
@@ -345,7 +366,7 @@ export async function removeMinioMinioInstance(
  * Get a minio instance
  *
  * @memberOf minio-minio
- * @description MinIO is the High Performance Object Storage solution you've been searching for! API compatible with Amazon S3, it's perfect for machine learning, analytics, and app data workloads. Easy container installation with stable podman run commands. Mac, Linux, Windows support available for simple standalone server setup. Explore further with MinIO SDKs and contribute to the MinIO Project. Get your MinIO now and revolutionize your storage game!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the objstorage to be retrieved
  * @returns {MinioMinio} - Service instance

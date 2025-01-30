@@ -281,8 +281,6 @@ export type ApacheCouchdb =
 
 export type ApacheCouchdbConfig =
   paths['/couchdbinstance']['post']['parameters']['body']['body'];
-
-/** @namespace apache-couchdb */
 import {
   Context,
   createInstance,
@@ -290,14 +288,36 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace apache-couchdb
+ * @description Unlock seamless data management with Apache CouchDB! Effortlessly scalable and highly available, CouchDB makes storing, retrieving, and syncing data across devices a breeze. Ideal for modern cloud apps!
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} ApacheCouchdbConfig
+ * @property {string} name - Name of couchdb
+ * @property {string} AdminPassword - AdminPassword
+
+ * 
+ */
+
+/**
+ * @typedef {Object} ApacheCouchdb
+ * @property {string} name - Name of the Couch DB instance
+ * @property {string} url - URL of the Couch DB instance
+ *
+ */
 
 /**
  * Create a new Couch DB instance
  *
  * @memberOf apache-couchdb
- * @description Unlock seamless data management with Apache CouchDB! Effortlessly scalable and highly available, CouchDB makes storing, retrieving, and syncing data across devices a breeze. Ideal for modern cloud apps!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {ApacheCouchdbConfig}} body - Service instance configuration
+ * @param {ApacheCouchdbConfig} body - Service instance configuration
  * @returns {ApacheCouchdb} - Service instance
  * @example
  * import { Context, createApacheCouchdbInstance } from '@osaas/client-services';
@@ -325,7 +345,7 @@ export async function createApacheCouchdbInstance(
  * Remove a Couch DB instance
  *
  * @memberOf apache-couchdb
- * @description Unlock seamless data management with Apache CouchDB! Effortlessly scalable and highly available, CouchDB makes storing, retrieving, and syncing data across devices a breeze. Ideal for modern cloud apps!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the couchdb to be removed
  */
@@ -341,7 +361,7 @@ export async function removeApacheCouchdbInstance(
  * Get a Couch DB instance
  *
  * @memberOf apache-couchdb
- * @description Unlock seamless data management with Apache CouchDB! Effortlessly scalable and highly available, CouchDB makes storing, retrieving, and syncing data across devices a breeze. Ideal for modern cloud apps!
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the couchdb to be retrieved
  * @returns {ApacheCouchdb} - Service instance

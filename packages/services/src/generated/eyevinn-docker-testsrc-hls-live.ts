@@ -277,8 +277,6 @@ export type EyevinnDockerTestsrcHlsLive =
 
 export type EyevinnDockerTestsrcHlsLiveConfig =
   paths['/docker-testsrc-hls-liveinstance']['post']['parameters']['body']['body'];
-
-/** @namespace eyevinn-docker-testsrc-hls-live */
 import {
   Context,
   createInstance,
@@ -286,14 +284,35 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace eyevinn-docker-testsrc-hls-live
+ * @description Effortlessly create live HLS test streams with the docker-testsrc-hls-live image. Powered by FFmpeg, it's a must-have for developers crafting and testing video applications in real-time streaming environments.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ *
+ */
+
+/**
+ * @typedef {Object} EyevinnDockerTestsrcHlsLiveConfig
+ * @property {string} name - Name of docker-testsrc-hls-live
+
+ * 
+ */
+
+/**
+ * @typedef {Object} EyevinnDockerTestsrcHlsLive
+ * @property {string} name - Name of the Test Source HLS Live instance
+ * @property {string} url - URL of the Test Source HLS Live instance
+ *
+ */
 
 /**
  * Create a new Test Source HLS Live instance
  *
  * @memberOf eyevinn-docker-testsrc-hls-live
- * @description Effortlessly create live HLS test streams with the docker-testsrc-hls-live image. Powered by FFmpeg, it's a must-have for developers crafting and testing video applications in real-time streaming environments.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnDockerTestsrcHlsLiveConfig}} body - Service instance configuration
+ * @param {EyevinnDockerTestsrcHlsLiveConfig} body - Service instance configuration
  * @returns {EyevinnDockerTestsrcHlsLive} - Service instance
  * @example
  * import { Context, createEyevinnDockerTestsrcHlsLiveInstance } from '@osaas/client-services';
@@ -327,7 +346,7 @@ export async function createEyevinnDockerTestsrcHlsLiveInstance(
  * Remove a Test Source HLS Live instance
  *
  * @memberOf eyevinn-docker-testsrc-hls-live
- * @description Effortlessly create live HLS test streams with the docker-testsrc-hls-live image. Powered by FFmpeg, it's a must-have for developers crafting and testing video applications in real-time streaming environments.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the testsource to be removed
  */
@@ -350,7 +369,7 @@ export async function removeEyevinnDockerTestsrcHlsLiveInstance(
  * Get a Test Source HLS Live instance
  *
  * @memberOf eyevinn-docker-testsrc-hls-live
- * @description Effortlessly create live HLS test streams with the docker-testsrc-hls-live image. Powered by FFmpeg, it's a must-have for developers crafting and testing video applications in real-time streaming environments.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the testsource to be retrieved
  * @returns {EyevinnDockerTestsrcHlsLive} - Service instance

@@ -239,8 +239,6 @@ export type BbcBrave =
 
 export type BbcBraveConfig =
   paths['/braveinstance']['post']['parameters']['body']['body'];
-
-/** @namespace bbc-brave */
 import {
   Context,
   createInstance,
@@ -248,14 +246,37 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace bbc-brave
+ * @description Brave is a Basic real-time (remote) audio/video editor. It allows LIVE video (and/or audio) to be received, manipulated, and sent elsewhere. Forwarding RTMP from one place to another, mixing two or more inputs or add basic graphics are some example of usage.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://github.com/bbc/brave/blob/master/docs/faq.md|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} BbcBraveConfig
+ * @property {string} name - Name of brave
+ * @property {string | undefined} StunServer - StunServer
+ * @property {string | undefined} TurnServer - TurnServer
+
+ * 
+ */
+
+/**
+ * @typedef {Object} BbcBrave
+ * @property {string} name - Name of the Brave instance
+ * @property {string} url - URL of the Brave instance
+ *
+ */
 
 /**
  * Create a new Brave instance
  *
  * @memberOf bbc-brave
- * @description Brave is a Basic real-time (remote) audio/video editor. It allows LIVE video (and/or audio) to be received, manipulated, and sent elsewhere. Forwarding RTMP from one place to another, mixing two or more inputs or add basic graphics are some example of usage.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {BbcBraveConfig}} body - Service instance configuration
+ * @param {BbcBraveConfig} body - Service instance configuration
  * @returns {BbcBrave} - Service instance
  * @example
  * import { Context, createBbcBraveInstance } from '@osaas/client-services';
@@ -283,7 +304,7 @@ export async function createBbcBraveInstance(
  * Remove a Brave instance
  *
  * @memberOf bbc-brave
- * @description Brave is a Basic real-time (remote) audio/video editor. It allows LIVE video (and/or audio) to be received, manipulated, and sent elsewhere. Forwarding RTMP from one place to another, mixing two or more inputs or add basic graphics are some example of usage.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the mixer to be removed
  */
@@ -299,7 +320,7 @@ export async function removeBbcBraveInstance(
  * Get a Brave instance
  *
  * @memberOf bbc-brave
- * @description Brave is a Basic real-time (remote) audio/video editor. It allows LIVE video (and/or audio) to be received, manipulated, and sent elsewhere. Forwarding RTMP from one place to another, mixing two or more inputs or add basic graphics are some example of usage.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the mixer to be retrieved
  * @returns {BbcBrave} - Service instance

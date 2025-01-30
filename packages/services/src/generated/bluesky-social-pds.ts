@@ -293,8 +293,6 @@ export type BlueskySocialPds =
 
 export type BlueskySocialPdsConfig =
   paths['/pdsinstance']['post']['parameters']['body']['body'];
-
-/** @namespace bluesky-social-pds */
 import {
   Context,
   createInstance,
@@ -302,14 +300,39 @@ import {
   removeInstance,
   getInstance
 } from '@osaas/client-core';
+/**
+ * @namespace bluesky-social-pds
+ * @description Empower your network with self-hosted Bluesky PDS! Harness the power of AT Protocol to easily manage your data server. Seamless installation, full control, and enhanced security for your social media presence.
+ * @author Eyevinn Technology AB <osc@eyevinn.se>
+ * @copyright 2025 Eyevinn Technology AB
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Bluesky-Personal-Data-Server.html|Online docs} for further information
+ */
+
+/**
+ * @typedef {Object} BlueskySocialPdsConfig
+ * @property {string} name - Name of pds
+ * @property {string} AdminPassword - AdminPassword
+ * @property {string | undefined} DnsName - DnsName
+ * @property {string | undefined} EmailSmtpUrl - EmailSmtpUrl
+ * @property {string | undefined} EmailFromAddress - EmailFromAddress
+
+ * 
+ */
+
+/**
+ * @typedef {Object} BlueskySocialPds
+ * @property {string} name - Name of the Bluesky Personal Data Server instance
+ * @property {string} url - URL of the Bluesky Personal Data Server instance
+ *
+ */
 
 /**
  * Create a new Bluesky Personal Data Server instance
  *
  * @memberOf bluesky-social-pds
- * @description Empower your network with self-hosted Bluesky PDS! Harness the power of AT Protocol to easily manage your data server. Seamless installation, full control, and enhanced security for your social media presence.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {BlueskySocialPdsConfig}} body - Service instance configuration
+ * @param {BlueskySocialPdsConfig} body - Service instance configuration
  * @returns {BlueskySocialPds} - Service instance
  * @example
  * import { Context, createBlueskySocialPdsInstance } from '@osaas/client-services';
@@ -339,7 +362,7 @@ export async function createBlueskySocialPdsInstance(
  * Remove a Bluesky Personal Data Server instance
  *
  * @memberOf bluesky-social-pds
- * @description Empower your network with self-hosted Bluesky PDS! Harness the power of AT Protocol to easily manage your data server. Seamless installation, full control, and enhanced security for your social media presence.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the pds to be removed
  */
@@ -357,7 +380,7 @@ export async function removeBlueskySocialPdsInstance(
  * Get a Bluesky Personal Data Server instance
  *
  * @memberOf bluesky-social-pds
- * @description Empower your network with self-hosted Bluesky PDS! Harness the power of AT Protocol to easily manage your data server. Seamless installation, full control, and enhanced security for your social media presence.
+ * @async
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the pds to be retrieved
  * @returns {BlueskySocialPds} - Service instance
