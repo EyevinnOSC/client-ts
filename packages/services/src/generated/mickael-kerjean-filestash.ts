@@ -298,6 +298,7 @@ export type MickaelKerjeanFilestash =
 export type MickaelKerjeanFilestashConfig =
   paths['/filestashinstance']['post']['parameters']['body']['body'];
 
+/** @namespace mickael-kerjean-filestash */
 import {
   Context,
   createInstance,
@@ -309,6 +310,7 @@ import {
 /**
  * Create a new Filestash instance
  *
+ * @memberOf mickael-kerjean-filestash
  * @description Transform your data management with Filestash, a versatile file manager that integrates seamlessly with multiple cloud services and protocols. Enjoy blazing speed, user-friendly interfaces, and plugin flexibility.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {MickaelKerjeanFilestashConfig}} body - Service instance configuration
@@ -340,6 +342,7 @@ export async function createMickaelKerjeanFilestashInstance(
 /**
  * Remove a Filestash instance
  *
+ * @memberOf mickael-kerjean-filestash
  * @description Transform your data management with Filestash, a versatile file manager that integrates seamlessly with multiple cloud services and protocols. Enjoy blazing speed, user-friendly interfaces, and plugin flexibility.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the filestash to be removed
@@ -362,6 +365,7 @@ export async function removeMickaelKerjeanFilestashInstance(
 /**
  * Get a Filestash instance
  *
+ * @memberOf mickael-kerjean-filestash
  * @description Transform your data management with Filestash, a versatile file manager that integrates seamlessly with multiple cloud services and protocols. Enjoy blazing speed, user-friendly interfaces, and plugin flexibility.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the filestash to be retrieved

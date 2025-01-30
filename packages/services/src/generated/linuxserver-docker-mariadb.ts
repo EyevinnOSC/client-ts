@@ -294,6 +294,7 @@ export type LinuxserverDockerMariadb =
 export type LinuxserverDockerMariadbConfig =
   paths['/docker-mariadbinstance']['post']['parameters']['body']['body'];
 
+/** @namespace linuxserver-docker-mariadb */
 import {
   Context,
   createInstance,
@@ -305,6 +306,7 @@ import {
 /**
  * Create a new MariaDB instance
  *
+ * @memberOf linuxserver-docker-mariadb
  * @description Unlock the full potential of your database management with LinuxServer.io's MariaDB Docker container. Featuring seamless updates, security enhancements, and multi-platform support, it's the ideal solution for efficient and reliable data storage. Minimize downtime and bandwidth usage, and maximize your productivity. Transform your database experience now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {LinuxserverDockerMariadbConfig}} body - Service instance configuration
@@ -336,6 +338,7 @@ export async function createLinuxserverDockerMariadbInstance(
 /**
  * Remove a MariaDB instance
  *
+ * @memberOf linuxserver-docker-mariadb
  * @description Unlock the full potential of your database management with LinuxServer.io's MariaDB Docker container. Featuring seamless updates, security enhancements, and multi-platform support, it's the ideal solution for efficient and reliable data storage. Minimize downtime and bandwidth usage, and maximize your productivity. Transform your database experience now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the dbserver to be removed
@@ -358,6 +361,7 @@ export async function removeLinuxserverDockerMariadbInstance(
 /**
  * Get a MariaDB instance
  *
+ * @memberOf linuxserver-docker-mariadb
  * @description Unlock the full potential of your database management with LinuxServer.io's MariaDB Docker container. Featuring seamless updates, security enhancements, and multi-platform support, it's the ideal solution for efficient and reliable data storage. Minimize downtime and bandwidth usage, and maximize your productivity. Transform your database experience now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the dbserver to be retrieved

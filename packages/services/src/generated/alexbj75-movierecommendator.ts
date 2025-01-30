@@ -282,6 +282,7 @@ export type Alexbj75Movierecommendator =
 export type Alexbj75MovierecommendatorConfig =
   paths['/movierecommendatorinstance']['post']['parameters']['body']['body'];
 
+/** @namespace alexbj75-movierecommendator */
 import {
   Context,
   createInstance,
@@ -293,6 +294,7 @@ import {
 /**
  * Create a new movierecommendator instance
  *
+ * @memberOf alexbj75-movierecommendator
  * @description Discover new films effortlessly! Enter a movie name and get two personalized recommendations powered by OpenAI. Transform your movie nights with Movie Recommender’s smart suggestions. Try it now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {Alexbj75MovierecommendatorConfig}} body - Service instance configuration
@@ -324,6 +326,7 @@ export async function createAlexbj75MovierecommendatorInstance(
 /**
  * Remove a movierecommendator instance
  *
+ * @memberOf alexbj75-movierecommendator
  * @description Discover new films effortlessly! Enter a movie name and get two personalized recommendations powered by OpenAI. Transform your movie nights with Movie Recommender’s smart suggestions. Try it now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the movierecommendator to be removed
@@ -346,6 +349,7 @@ export async function removeAlexbj75MovierecommendatorInstance(
 /**
  * Get a movierecommendator instance
  *
+ * @memberOf alexbj75-movierecommendator
  * @description Discover new films effortlessly! Enter a movie name and get two personalized recommendations powered by OpenAI. Transform your movie nights with Movie Recommender’s smart suggestions. Try it now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the movierecommendator to be retrieved

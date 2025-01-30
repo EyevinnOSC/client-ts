@@ -282,6 +282,7 @@ export type ErnestocaroccaHelloWorld =
 export type ErnestocaroccaHelloWorldConfig =
   paths['/hello-worldinstance']['post']['parameters']['body']['body'];
 
+/** @namespace ernestocarocca-hello-world */
 import {
   Context,
   createInstance,
@@ -293,6 +294,7 @@ import {
 /**
  * Create a new Hello World instance
  *
+ * @memberOf ernestocarocca-hello-world
  * @description Harness the power of Next.js 14 and NextUI v2 with this feature-rich template. Perfect for creating sleek, dynamic apps with Tailwind CSS and TypeScript. Kickstart your project efficiently today!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {ErnestocaroccaHelloWorldConfig}} body - Service instance configuration
@@ -324,6 +326,7 @@ export async function createErnestocaroccaHelloWorldInstance(
 /**
  * Remove a Hello World instance
  *
+ * @memberOf ernestocarocca-hello-world
  * @description Harness the power of Next.js 14 and NextUI v2 with this feature-rich template. Perfect for creating sleek, dynamic apps with Tailwind CSS and TypeScript. Kickstart your project efficiently today!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the example to be removed
@@ -346,6 +349,7 @@ export async function removeErnestocaroccaHelloWorldInstance(
 /**
  * Get a Hello World instance
  *
+ * @memberOf ernestocarocca-hello-world
  * @description Harness the power of Next.js 14 and NextUI v2 with this feature-rich template. Perfect for creating sleek, dynamic apps with Tailwind CSS and TypeScript. Kickstart your project efficiently today!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the example to be retrieved

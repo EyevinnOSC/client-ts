@@ -240,6 +240,7 @@ export type GwuhaolinLivego =
 export type GwuhaolinLivegoConfig =
   paths['/livegoinstance']['post']['parameters']['body']['body'];
 
+/** @namespace gwuhaolin-livego */
 import {
   Context,
   createInstance,
@@ -251,6 +252,7 @@ import {
 /**
  * Create a new Livego instance
  *
+ * @memberOf gwuhaolin-livego
  * @description Experience the power of simplicity and efficiency with our live broadcast server! Easy to install and use, built in pure Golang for high performance. Supports RTMP, AMF, HLS, HTTP-FLV protocols, FLV, TS containers, H264, AAC, MP3 encoding formats. Stream and playback seamlessly with just a few simple steps. Get your hands on this amazing product now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {GwuhaolinLivegoConfig}} body - Service instance configuration
@@ -282,6 +284,7 @@ export async function createGwuhaolinLivegoInstance(
 /**
  * Remove a Livego instance
  *
+ * @memberOf gwuhaolin-livego
  * @description Experience the power of simplicity and efficiency with our live broadcast server! Easy to install and use, built in pure Golang for high performance. Supports RTMP, AMF, HLS, HTTP-FLV protocols, FLV, TS containers, H264, AAC, MP3 encoding formats. Stream and playback seamlessly with just a few simple steps. Get your hands on this amazing product now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the livego to be removed
@@ -299,6 +302,7 @@ export async function removeGwuhaolinLivegoInstance(
 /**
  * Get a Livego instance
  *
+ * @memberOf gwuhaolin-livego
  * @description Experience the power of simplicity and efficiency with our live broadcast server! Easy to install and use, built in pure Golang for high performance. Supports RTMP, AMF, HLS, HTTP-FLV protocols, FLV, TS containers, H264, AAC, MP3 encoding formats. Stream and playback seamlessly with just a few simple steps. Get your hands on this amazing product now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the livego to be retrieved

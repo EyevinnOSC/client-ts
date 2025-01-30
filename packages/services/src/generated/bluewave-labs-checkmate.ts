@@ -278,6 +278,7 @@ export type BluewaveLabsCheckmate =
 export type BluewaveLabsCheckmateConfig =
   paths['/checkmateinstance']['post']['parameters']['body']['body'];
 
+/** @namespace bluewave-labs-checkmate */
 import {
   Context,
   createInstance,
@@ -289,6 +290,7 @@ import {
 /**
  * Create a new Checkmate instance
  *
+ * @memberOf bluewave-labs-checkmate
  * @description Monitor servers effortlessly with Checkmate—a powerful open-source tool for tracking server and website performance. Enjoy real-time alerts, in-depth insights, and manage over 1000 servers seamlessly!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {BluewaveLabsCheckmateConfig}} body - Service instance configuration
@@ -320,6 +322,7 @@ export async function createBluewaveLabsCheckmateInstance(
 /**
  * Remove a Checkmate instance
  *
+ * @memberOf bluewave-labs-checkmate
  * @description Monitor servers effortlessly with Checkmate—a powerful open-source tool for tracking server and website performance. Enjoy real-time alerts, in-depth insights, and manage over 1000 servers seamlessly!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the monitor to be removed
@@ -342,6 +345,7 @@ export async function removeBluewaveLabsCheckmateInstance(
 /**
  * Get a Checkmate instance
  *
+ * @memberOf bluewave-labs-checkmate
  * @description Monitor servers effortlessly with Checkmate—a powerful open-source tool for tracking server and website performance. Enjoy real-time alerts, in-depth insights, and manage over 1000 servers seamlessly!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the monitor to be retrieved

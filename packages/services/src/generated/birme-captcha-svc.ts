@@ -278,6 +278,7 @@ export type BirmeCaptchaSvc =
 export type BirmeCaptchaSvcConfig =
   paths['/captcha-svcinstance']['post']['parameters']['body']['body'];
 
+/** @namespace birme-captcha-svc */
 import {
   Context,
   createInstance,
@@ -289,6 +290,7 @@ import {
 /**
  * Create a new Captcha Service instance
  *
+ * @memberOf birme-captcha-svc
  * @description Enhance your security effortlessly with our reliable CAPTCHA Service! Easily generate and verify CAPTCHAs to protect against automated attacks. Quick setup, seamless integration, robust solution!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {BirmeCaptchaSvcConfig}} body - Service instance configuration
@@ -320,6 +322,7 @@ export async function createBirmeCaptchaSvcInstance(
 /**
  * Remove a Captcha Service instance
  *
+ * @memberOf birme-captcha-svc
  * @description Enhance your security effortlessly with our reliable CAPTCHA Service! Easily generate and verify CAPTCHAs to protect against automated attacks. Quick setup, seamless integration, robust solution!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the service to be removed
@@ -337,6 +340,7 @@ export async function removeBirmeCaptchaSvcInstance(
 /**
  * Get a Captcha Service instance
  *
+ * @memberOf birme-captcha-svc
  * @description Enhance your security effortlessly with our reliable CAPTCHA Service! Easily generate and verify CAPTCHAs to protect against automated attacks. Quick setup, seamless integration, robust solution!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the service to be retrieved

@@ -166,6 +166,7 @@ export type EyevinnFunctionScenes =
 export type EyevinnFunctionScenesConfig =
   paths['/function-scenesinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-function-scenes */
 import {
   Context,
   createInstance,
@@ -177,6 +178,7 @@ import {
 /**
  * Create a new Scene Detect Media Function instance
  *
+ * @memberOf eyevinn-function-scenes
  * @description A serverless media function to detect scene changes and extract keyframes in a video file or a stream.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnFunctionScenesConfig}} body - Service instance configuration
@@ -208,6 +210,7 @@ export async function createEyevinnFunctionScenesInstance(
 /**
  * Remove a Scene Detect Media Function instance
  *
+ * @memberOf eyevinn-function-scenes
  * @description A serverless media function to detect scene changes and extract keyframes in a video file or a stream.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the mediafunction to be removed
@@ -230,6 +233,7 @@ export async function removeEyevinnFunctionScenesInstance(
 /**
  * Get a Scene Detect Media Function instance
  *
+ * @memberOf eyevinn-function-scenes
  * @description A serverless media function to detect scene changes and extract keyframes in a video file or a stream.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the mediafunction to be retrieved

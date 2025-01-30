@@ -290,6 +290,7 @@ export type EyevinnEncoreCallbackListener =
 export type EyevinnEncoreCallbackListenerConfig =
   paths['/encore-callback-listenerinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-encore-callback-listener */
 import {
   Context,
   createInstance,
@@ -301,6 +302,7 @@ import {
 /**
  * Create a new Encore Callback Listener instance
  *
+ * @memberOf eyevinn-encore-callback-listener
  * @description Encore callback listener is a powerful HTTP server that listens for successful job callbacks, posting jobId and Url on a redis queue. Fully customizable with environment variables. Enhance your project efficiency now! Contact sales@eyevinn.se for further details.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnEncoreCallbackListenerConfig}} body - Service instance configuration
@@ -336,6 +338,7 @@ export async function createEyevinnEncoreCallbackListenerInstance(
 /**
  * Remove a Encore Callback Listener instance
  *
+ * @memberOf eyevinn-encore-callback-listener
  * @description Encore callback listener is a powerful HTTP server that listens for successful job callbacks, posting jobId and Url on a redis queue. Fully customizable with environment variables. Enhance your project efficiency now! Contact sales@eyevinn.se for further details.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the callback to be removed
@@ -358,6 +361,7 @@ export async function removeEyevinnEncoreCallbackListenerInstance(
 /**
  * Get a Encore Callback Listener instance
  *
+ * @memberOf eyevinn-encore-callback-listener
  * @description Encore callback listener is a powerful HTTP server that listens for successful job callbacks, posting jobId and Url on a redis queue. Fully customizable with environment variables. Enhance your project efficiency now! Contact sales@eyevinn.se for further details.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the callback to be retrieved

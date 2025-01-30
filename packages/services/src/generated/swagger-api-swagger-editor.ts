@@ -282,6 +282,7 @@ export type SwaggerApiSwaggerEditor =
 export type SwaggerApiSwaggerEditorConfig =
   paths['/swagger-editorinstance']['post']['parameters']['body']['body'];
 
+/** @namespace swagger-api-swagger-editor */
 import {
   Context,
   createInstance,
@@ -293,6 +294,7 @@ import {
 /**
  * Create a new Swagger Editor instance
  *
+ * @memberOf swagger-api-swagger-editor
  * @description Next generation Swagger Editor is here! Edit OpenAPI definitions in JSON or YAML format in your browser and preview documentation in real time. Generate valid OpenAPI definitions for full Swagger tooling support. Upgrade to SwaggerEditor@5 for OpenAPI 3.1.0 support and enjoy a brand-new version built from the ground up. Get your Swagger Editor now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {SwaggerApiSwaggerEditorConfig}} body - Service instance configuration
@@ -324,6 +326,7 @@ export async function createSwaggerApiSwaggerEditorInstance(
 /**
  * Remove a Swagger Editor instance
  *
+ * @memberOf swagger-api-swagger-editor
  * @description Next generation Swagger Editor is here! Edit OpenAPI definitions in JSON or YAML format in your browser and preview documentation in real time. Generate valid OpenAPI definitions for full Swagger tooling support. Upgrade to SwaggerEditor@5 for OpenAPI 3.1.0 support and enjoy a brand-new version built from the ground up. Get your Swagger Editor now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the editor to be removed
@@ -346,6 +349,7 @@ export async function removeSwaggerApiSwaggerEditorInstance(
 /**
  * Get a Swagger Editor instance
  *
+ * @memberOf swagger-api-swagger-editor
  * @description Next generation Swagger Editor is here! Edit OpenAPI definitions in JSON or YAML format in your browser and preview documentation in real time. Generate valid OpenAPI definitions for full Swagger tooling support. Upgrade to SwaggerEditor@5 for OpenAPI 3.1.0 support and enjoy a brand-new version built from the ground up. Get your Swagger Editor now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the editor to be retrieved

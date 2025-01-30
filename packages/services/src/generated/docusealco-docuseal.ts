@@ -278,6 +278,7 @@ export type DocusealcoDocuseal =
 export type DocusealcoDocusealConfig =
   paths['/docusealinstance']['post']['parameters']['body']['body'];
 
+/** @namespace docusealco-docuseal */
 import {
   Context,
   createInstance,
@@ -289,6 +290,7 @@ import {
 /**
  * Create a new Docuseal instance
  *
+ * @memberOf docusealco-docuseal
  * @description Streamline your document workflow with DocuSeal, the leading open-source solution for secure, mobile-optimized digital form filling and signing. Perfect for any business needing swift and seamless e-signatures.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {DocusealcoDocusealConfig}} body - Service instance configuration
@@ -320,6 +322,7 @@ export async function createDocusealcoDocusealInstance(
 /**
  * Remove a Docuseal instance
  *
+ * @memberOf docusealco-docuseal
  * @description Streamline your document workflow with DocuSeal, the leading open-source solution for secure, mobile-optimized digital form filling and signing. Perfect for any business needing swift and seamless e-signatures.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the docuseal to be removed
@@ -337,6 +340,7 @@ export async function removeDocusealcoDocusealInstance(
 /**
  * Get a Docuseal instance
  *
+ * @memberOf docusealco-docuseal
  * @description Streamline your document workflow with DocuSeal, the leading open-source solution for secure, mobile-optimized digital form filling and signing. Perfect for any business needing swift and seamless e-signatures.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the docuseal to be retrieved

@@ -190,6 +190,7 @@ export type FlyimgFlyimg =
 export type FlyimgFlyimgConfig =
   paths['/flyimginstance']['post']['parameters']['body']['body'];
 
+/** @namespace flyimg-flyimg */
 import {
   Context,
   createInstance,
@@ -201,6 +202,7 @@ import {
 /**
  * Create a new flyimg instance
  * 
+ * @memberOf flyimg-flyimg
  * @description An application that allows you to resize, crop, and compress images on the fly. 
 
 By default, Flyimg generates the AVIF image format (when the browser supports it) which provides superior compression compared to other formats.
@@ -234,6 +236,7 @@ export async function createFlyimgFlyimgInstance(
 /**
  * Remove a flyimg instance
  * 
+ * @memberOf flyimg-flyimg
  * @description An application that allows you to resize, crop, and compress images on the fly. 
 
 By default, Flyimg generates the AVIF image format (when the browser supports it) which provides superior compression compared to other formats.
@@ -253,6 +256,7 @@ export async function removeFlyimgFlyimgInstance(
 /**
  * Get a flyimg instance
  * 
+ * @memberOf flyimg-flyimg
  * @description An application that allows you to resize, crop, and compress images on the fly. 
 
 By default, Flyimg generates the AVIF image format (when the browser supports it) which provides superior compression compared to other formats.

@@ -278,6 +278,7 @@ export type EyevinnHlsMonitor =
 export type EyevinnHlsMonitorConfig =
   paths['/hls-monitorinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-hls-monitor */
 import {
   Context,
   createInstance,
@@ -289,6 +290,7 @@ import {
 /**
  * Create a new HLS Stream Monitor instance
  *
+ * @memberOf eyevinn-hls-monitor
  * @description Service to monitor one or more HLS-streams for manifest errors and inconsistencies.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnHlsMonitorConfig}} body - Service instance configuration
@@ -320,6 +322,7 @@ export async function createEyevinnHlsMonitorInstance(
 /**
  * Remove a HLS Stream Monitor instance
  *
+ * @memberOf eyevinn-hls-monitor
  * @description Service to monitor one or more HLS-streams for manifest errors and inconsistencies.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the monitor to be removed
@@ -337,6 +340,7 @@ export async function removeEyevinnHlsMonitorInstance(
 /**
  * Get a HLS Stream Monitor instance
  *
+ * @memberOf eyevinn-hls-monitor
  * @description Service to monitor one or more HLS-streams for manifest errors and inconsistencies.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the monitor to be retrieved

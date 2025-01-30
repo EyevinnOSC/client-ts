@@ -290,6 +290,7 @@ export type BirmeContactFormSvc =
 export type BirmeContactFormSvcConfig =
   paths['/contact-form-svcinstance']['post']['parameters']['body']['body'];
 
+/** @namespace birme-contact-form-svc */
 import {
   Context,
   createInstance,
@@ -301,6 +302,7 @@ import {
 /**
  * Create a new Contact Form Service instance
  *
+ * @memberOf birme-contact-form-svc
  * @description Streamline your communication with our Contact Form Service! Seamlessly send messages from your website directly to Slack. Easy-to-install, Docker-ready backend ensures you never miss a lead. Try it now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {BirmeContactFormSvcConfig}} body - Service instance configuration
@@ -332,6 +334,7 @@ export async function createBirmeContactFormSvcInstance(
 /**
  * Remove a Contact Form Service instance
  *
+ * @memberOf birme-contact-form-svc
  * @description Streamline your communication with our Contact Form Service! Seamlessly send messages from your website directly to Slack. Easy-to-install, Docker-ready backend ensures you never miss a lead. Try it now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the service to be removed
@@ -349,6 +352,7 @@ export async function removeBirmeContactFormSvcInstance(
 /**
  * Get a Contact Form Service instance
  *
+ * @memberOf birme-contact-form-svc
  * @description Streamline your communication with our Contact Form Service! Seamlessly send messages from your website directly to Slack. Easy-to-install, Docker-ready backend ensures you never miss a lead. Try it now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the service to be retrieved

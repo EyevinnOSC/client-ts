@@ -290,6 +290,7 @@ export type EyevinnIntercomManager =
 export type EyevinnIntercomManagerConfig =
   paths['/intercom-managerinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-intercom-manager */
 import {
   Context,
   createInstance,
@@ -301,6 +302,7 @@ import {
 /**
  * Create a new Intercom instance
  * 
+ * @memberOf eyevinn-intercom-manager
  * @description Open Source Intercom Solution providing production-grade audio quality and real-time latency. Powered by Symphony Media Bridge open source media server.
 
 Join our Slack community for support and customization. Contact sales@eyevinn.se for further development and support. Visit Eyevinn Technology for innovative video solutions.
@@ -334,6 +336,7 @@ export async function createEyevinnIntercomManagerInstance(
 /**
  * Remove a Intercom instance
  * 
+ * @memberOf eyevinn-intercom-manager
  * @description Open Source Intercom Solution providing production-grade audio quality and real-time latency. Powered by Symphony Media Bridge open source media server.
 
 Join our Slack community for support and customization. Contact sales@eyevinn.se for further development and support. Visit Eyevinn Technology for innovative video solutions.
@@ -358,6 +361,7 @@ export async function removeEyevinnIntercomManagerInstance(
 /**
  * Get a Intercom instance
  * 
+ * @memberOf eyevinn-intercom-manager
  * @description Open Source Intercom Solution providing production-grade audio quality and real-time latency. Powered by Symphony Media Bridge open source media server.
 
 Join our Slack community for support and customization. Contact sales@eyevinn.se for further development and support. Visit Eyevinn Technology for innovative video solutions.

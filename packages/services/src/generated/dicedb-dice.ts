@@ -278,6 +278,7 @@ export type DicedbDice =
 export type DicedbDiceConfig =
   paths['/diceinstance']['post']['parameters']['body']['body'];
 
+/** @namespace dicedb-dice */
 import {
   Context,
   createInstance,
@@ -289,6 +290,7 @@ import {
 /**
  * Create a new Dice DB instance
  *
+ * @memberOf dicedb-dice
  * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {DicedbDiceConfig}} body - Service instance configuration
@@ -318,6 +320,7 @@ export async function createDicedbDiceInstance(
 /**
  * Remove a Dice DB instance
  *
+ * @memberOf dicedb-dice
  * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the dice to be removed
@@ -333,6 +336,7 @@ export async function removeDicedbDiceInstance(
 /**
  * Get a Dice DB instance
  *
+ * @memberOf dicedb-dice
  * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the dice to be retrieved

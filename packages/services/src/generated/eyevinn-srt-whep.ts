@@ -286,6 +286,7 @@ export type EyevinnSrtWhep =
 export type EyevinnSrtWhepConfig =
   paths['/srt-whepinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-srt-whep */
 import {
   Context,
   createInstance,
@@ -297,6 +298,7 @@ import {
 /**
  * Create a new SRT WHEP Bridge instance
  *
+ * @memberOf eyevinn-srt-whep
  * @description SRT to WHEP application ingests MPEG-TS over SRT stream and outputs to WebRTC using WHEP signaling protocol, supporting MacOS and Ubuntu. No video transcoding, SDP offer/answer exchange focus, and compliance with popular production software. Get yours now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnSrtWhepConfig}} body - Service instance configuration
@@ -328,6 +330,7 @@ export async function createEyevinnSrtWhepInstance(
 /**
  * Remove a SRT WHEP Bridge instance
  *
+ * @memberOf eyevinn-srt-whep
  * @description SRT to WHEP application ingests MPEG-TS over SRT stream and outputs to WebRTC using WHEP signaling protocol, supporting MacOS and Ubuntu. No video transcoding, SDP offer/answer exchange focus, and compliance with popular production software. Get yours now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the bridge to be removed
@@ -345,6 +348,7 @@ export async function removeEyevinnSrtWhepInstance(
 /**
  * Get a SRT WHEP Bridge instance
  *
+ * @memberOf eyevinn-srt-whep
  * @description SRT to WHEP application ingests MPEG-TS over SRT stream and outputs to WebRTC using WHEP signaling protocol, supporting MacOS and Ubuntu. No video transcoding, SDP offer/answer exchange focus, and compliance with popular production software. Get yours now!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the bridge to be retrieved

@@ -520,3 +520,10 @@ export {
   removeEyevinnWebRunnerInstance,
   getEyevinnWebRunnerInstance
 } from './generated/eyevinn-web-runner';
+export {
+  EyevinnAdNormalizer,
+  EyevinnAdNormalizerConfig,
+  createEyevinnAdNormalizerInstance,
+  removeEyevinnAdNormalizerInstance,
+  getEyevinnAdNormalizerInstance
+} from './generated/eyevinn-ad-normalizer';

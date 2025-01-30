@@ -306,6 +306,7 @@ export type EyevinnSgaiAdProxy =
 export type EyevinnSgaiAdProxyConfig =
   paths['/sgai-ad-proxyinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-sgai-ad-proxy */
 import {
   Context,
   createInstance,
@@ -317,6 +318,7 @@ import {
 /**
  * Create a new SGAI Proxy instance
  *
+ * @memberOf eyevinn-sgai-ad-proxy
  * @description Boost viewer engagement with our Server-Guided Ad Insertion Proxy! Automatically embed ads into video streams with precision timing. Enhance monetization effortlessly while maintaining a seamless user experience.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnSgaiAdProxyConfig}} body - Service instance configuration
@@ -348,6 +350,7 @@ export async function createEyevinnSgaiAdProxyInstance(
 /**
  * Remove a SGAI Proxy instance
  *
+ * @memberOf eyevinn-sgai-ad-proxy
  * @description Boost viewer engagement with our Server-Guided Ad Insertion Proxy! Automatically embed ads into video streams with precision timing. Enhance monetization effortlessly while maintaining a seamless user experience.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the proxy to be removed
@@ -365,6 +368,7 @@ export async function removeEyevinnSgaiAdProxyInstance(
 /**
  * Get a SGAI Proxy instance
  *
+ * @memberOf eyevinn-sgai-ad-proxy
  * @description Boost viewer engagement with our Server-Guided Ad Insertion Proxy! Automatically embed ads into video streams with precision timing. Enhance monetization effortlessly while maintaining a seamless user experience.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the proxy to be retrieved

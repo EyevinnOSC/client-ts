@@ -286,6 +286,7 @@ export type UsefathomFathom =
 export type UsefathomFathomConfig =
   paths['/fathominstance']['post']['parameters']['body']['body'];
 
+/** @namespace usefathom-fathom */
 import {
   Context,
   createInstance,
@@ -297,6 +298,7 @@ import {
 /**
  * Create a new Fathom Lite instance
  *
+ * @memberOf usefathom-fathom
  * @description Introducing Fathom Lite - the popular, open-source website analytics tool with millions of downloads! Long-term maintenance, bug fixes, and cookie-free tracking set it apart. Get started today!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {UsefathomFathomConfig}} body - Service instance configuration
@@ -328,6 +330,7 @@ export async function createUsefathomFathomInstance(
 /**
  * Remove a Fathom Lite instance
  *
+ * @memberOf usefathom-fathom
  * @description Introducing Fathom Lite - the popular, open-source website analytics tool with millions of downloads! Long-term maintenance, bug fixes, and cookie-free tracking set it apart. Get started today!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the collector to be removed
@@ -345,6 +348,7 @@ export async function removeUsefathomFathomInstance(
 /**
  * Get a Fathom Lite instance
  *
+ * @memberOf usefathom-fathom
  * @description Introducing Fathom Lite - the popular, open-source website analytics tool with millions of downloads! Long-term maintenance, bug fixes, and cookie-free tracking set it apart. Get started today!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the collector to be retrieved

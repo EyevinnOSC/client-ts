@@ -286,6 +286,7 @@ export type ItzgDockerMinecraftServer =
 export type ItzgDockerMinecraftServerConfig =
   paths['/docker-minecraft-serverinstance']['post']['parameters']['body']['body'];
 
+/** @namespace itzg-docker-minecraft-server */
 import {
   Context,
   createInstance,
@@ -297,6 +298,7 @@ import {
 /**
  * Create a new Minecraft Server instance
  *
+ * @memberOf itzg-docker-minecraft-server
  * @description Experience seamless Minecraft server management with our Docker solution! Easily deploy, customize, and scale your servers with robust support for different versions, mods, and plugins. Perfect for dedicated gamers and server admins alike!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {ItzgDockerMinecraftServerConfig}} body - Service instance configuration
@@ -332,6 +334,7 @@ export async function createItzgDockerMinecraftServerInstance(
 /**
  * Remove a Minecraft Server instance
  *
+ * @memberOf itzg-docker-minecraft-server
  * @description Experience seamless Minecraft server management with our Docker solution! Easily deploy, customize, and scale your servers with robust support for different versions, mods, and plugins. Perfect for dedicated gamers and server admins alike!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the minecraft-server to be removed
@@ -354,6 +357,7 @@ export async function removeItzgDockerMinecraftServerInstance(
 /**
  * Get a Minecraft Server instance
  *
+ * @memberOf itzg-docker-minecraft-server
  * @description Experience seamless Minecraft server management with our Docker solution! Easily deploy, customize, and scale your servers with robust support for different versions, mods, and plugins. Perfect for dedicated gamers and server admins alike!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the minecraft-server to be retrieved

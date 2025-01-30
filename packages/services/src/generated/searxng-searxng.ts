@@ -282,6 +282,7 @@ export type SearxngSearxng =
 export type SearxngSearxngConfig =
   paths['/searxnginstance']['post']['parameters']['body']['body'];
 
+/** @namespace searxng-searxng */
 import {
   Context,
   createInstance,
@@ -293,6 +294,7 @@ import {
 /**
  * Create a new SearXNG instance
  *
+ * @memberOf searxng-searxng
  * @description Experience the power of privacy with SearXNG, a customizable metasearch engine delivering unmatched confidentiality. Explore the web securely with our easy setup and extensive admin tools.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {SearxngSearxngConfig}} body - Service instance configuration
@@ -322,6 +324,7 @@ export async function createSearxngSearxngInstance(
 /**
  * Remove a SearXNG instance
  *
+ * @memberOf searxng-searxng
  * @description Experience the power of privacy with SearXNG, a customizable metasearch engine delivering unmatched confidentiality. Explore the web securely with our easy setup and extensive admin tools.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the searxng to be removed
@@ -337,6 +340,7 @@ export async function removeSearxngSearxngInstance(
 /**
  * Get a SearXNG instance
  *
+ * @memberOf searxng-searxng
  * @description Experience the power of privacy with SearXNG, a customizable metasearch engine delivering unmatched confidentiality. Explore the web securely with our easy setup and extensive admin tools.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the searxng to be retrieved

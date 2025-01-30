@@ -282,6 +282,7 @@ export type EyevinnPdsAdmin =
 export type EyevinnPdsAdminConfig =
   paths['/pds-admininstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-pds-admin */
 import {
   Context,
   createInstance,
@@ -293,6 +294,7 @@ import {
 /**
  * Create a new PDS Admin instance
  *
+ * @memberOf eyevinn-pds-admin
  * @description Effortlessly manage your Bluesky Personal Data Server with our intuitive admin tool. Optimize your data environment locally or in the cloud with seamless installation and dependable performance.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnPdsAdminConfig}} body - Service instance configuration
@@ -324,6 +326,7 @@ export async function createEyevinnPdsAdminInstance(
 /**
  * Remove a PDS Admin instance
  *
+ * @memberOf eyevinn-pds-admin
  * @description Effortlessly manage your Bluesky Personal Data Server with our intuitive admin tool. Optimize your data environment locally or in the cloud with seamless installation and dependable performance.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the app to be removed
@@ -341,6 +344,7 @@ export async function removeEyevinnPdsAdminInstance(
 /**
  * Get a PDS Admin instance
  *
+ * @memberOf eyevinn-pds-admin
  * @description Effortlessly manage your Bluesky Personal Data Server with our intuitive admin tool. Optimize your data environment locally or in the cloud with seamless installation and dependable performance.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the app to be retrieved

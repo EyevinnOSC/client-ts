@@ -426,6 +426,7 @@ export type Encore =
 export type EncoreConfig =
   paths['/encoreinstance']['post']['parameters']['body']['body'];
 
+/** @namespace encore */
 import {
   Context,
   createInstance,
@@ -437,6 +438,7 @@ import {
 /**
  * Create a new SVT Encore instance
  *
+ * @memberOf encore
  * @description SVT Encore is an open-source video transcoding system for efficient cloud-based video processing. It offers scalable, automated transcoding to optimize video workflows for various platforms, supporting multiple formats and codecs. With a focus on cost-effectiveness and flexibility, Encore is ideal for broadcasters and content creators needing dynamic scaling and reliable performance in their video production and distribution processes.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EncoreConfig}} body - Service instance configuration
@@ -466,6 +468,7 @@ export async function createEncoreInstance(
 /**
  * Remove a SVT Encore instance
  *
+ * @memberOf encore
  * @description SVT Encore is an open-source video transcoding system for efficient cloud-based video processing. It offers scalable, automated transcoding to optimize video workflows for various platforms, supporting multiple formats and codecs. With a focus on cost-effectiveness and flexibility, Encore is ideal for broadcasters and content creators needing dynamic scaling and reliable performance in their video production and distribution processes.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the queue to be removed
@@ -481,6 +484,7 @@ export async function removeEncoreInstance(
 /**
  * Get a SVT Encore instance
  *
+ * @memberOf encore
  * @description SVT Encore is an open-source video transcoding system for efficient cloud-based video processing. It offers scalable, automated transcoding to optimize video workflows for various platforms, supporting multiple formats and codecs. With a focus on cost-effectiveness and flexibility, Encore is ideal for broadcasters and content creators needing dynamic scaling and reliable performance in their video production and distribution processes.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the queue to be retrieved

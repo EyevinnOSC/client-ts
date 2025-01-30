@@ -302,6 +302,7 @@ export type EyevinnChannelEngineBridge =
 export type EyevinnChannelEngineBridgeConfig =
   paths['/channel-engine-bridgeinstance']['post']['parameters']['body']['body'];
 
+/** @namespace eyevinn-channel-engine-bridge */
 import {
   Context,
   createInstance,
@@ -313,6 +314,7 @@ import {
 /**
  * Create a new Channel Engine Bridge instance
  *
+ * @memberOf eyevinn-channel-engine-bridge
  * @description Channel Engine Bridge enables seamless pushing of FAST channels from FAST Channel Engine to distribution platforms such as AWS MediaPackage and simplifies the process of pushing channels to a wide range of distribution networks.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {EyevinnChannelEngineBridgeConfig}} body - Service instance configuration
@@ -348,6 +350,7 @@ export async function createEyevinnChannelEngineBridgeInstance(
 /**
  * Remove a Channel Engine Bridge instance
  *
+ * @memberOf eyevinn-channel-engine-bridge
  * @description Channel Engine Bridge enables seamless pushing of FAST channels from FAST Channel Engine to distribution platforms such as AWS MediaPackage and simplifies the process of pushing channels to a wide range of distribution networks.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the channel-engine-bridge to be removed
@@ -370,6 +373,7 @@ export async function removeEyevinnChannelEngineBridgeInstance(
 /**
  * Get a Channel Engine Bridge instance
  *
+ * @memberOf eyevinn-channel-engine-bridge
  * @description Channel Engine Bridge enables seamless pushing of FAST channels from FAST Channel Engine to distribution platforms such as AWS MediaPackage and simplifies the process of pushing channels to a wide range of distribution networks.
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the channel-engine-bridge to be retrieved

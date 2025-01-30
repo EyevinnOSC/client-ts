@@ -298,6 +298,7 @@ export type WordpressWordpress =
 export type WordpressWordpressConfig =
   paths['/wordpressinstance']['post']['parameters']['body']['body'];
 
+/** @namespace wordpress-wordpress */
 import {
   Context,
   createInstance,
@@ -309,6 +310,7 @@ import {
 /**
  * Create a new Wordpress instance
  *
+ * @memberOf wordpress-wordpress
  * @description Power your site with WordPress – the core behind 40% of the web. Enjoy seamless installation, robust customization, and unmatched scalability. Elevate your online presence effortlessly today!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {WordpressWordpressConfig}} body - Service instance configuration
@@ -340,6 +342,7 @@ export async function createWordpressWordpressInstance(
 /**
  * Remove a Wordpress instance
  *
+ * @memberOf wordpress-wordpress
  * @description Power your site with WordPress – the core behind 40% of the web. Enjoy seamless installation, robust customization, and unmatched scalability. Elevate your online presence effortlessly today!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the wordpress to be removed
@@ -357,6 +360,7 @@ export async function removeWordpressWordpressInstance(
 /**
  * Get a Wordpress instance
  *
+ * @memberOf wordpress-wordpress
  * @description Power your site with WordPress – the core behind 40% of the web. Enjoy seamless installation, robust customization, and unmatched scalability. Elevate your online presence effortlessly today!
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the wordpress to be retrieved
