@@ -219,6 +219,14 @@ async function createStorageBucket(name: string, ctx: Context) {
   };
 }
 
+/**
+ * Create a VOD pipeline based on Encore and Shaka Packager
+ *
+ * @memberof module:@osaas/client-transcode
+ * @param name - name of the pipeline
+ * @param ctx - Eyevinn OSC context
+ * @returns {VodPipeline} - VOD pipeline object
+ */
 export async function createVodPipeline(
   name: string,
   ctx: Context
@@ -253,6 +261,13 @@ export async function createVodPipeline(
   };
 }
 
+/**
+ * Remove a VOD pipeline
+ *
+ * @memberof module:@osaas/client-transcode
+ * @param name - name of pipeline to remove
+ * @param context - Eyevinn OSC context
+ */
 export async function removeVodPipeline(name: string, context: Context) {
   await removeInstance(
     context,
@@ -280,6 +295,30 @@ export async function removeVodPipeline(name: string, context: Context) {
   );
 }
 
+/**
+ * Create a VOD using a VOD pipeline in Eyevinn OSC
+ *
+ * @memberof module:@osaas/client-transcode
+ * @param pipeline - name of the VOD pipeline to use
+ * @param source - URL of the source video file
+ * @param context - Eyevinn OSC context
+ * @returns {VodJob} - VOD job object
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { createVod, createVodPipeline } from '@osaas/client-transcode';
+ *
+ * async function main() {
+ *   const ctx = new Context();
+ *   const pipeline = await createVodPipeline('sdkexample', ctx);
+ *   const vod = await createVod(
+ *     pipeline,
+ *     'https://testcontent.eyevinn.technology/mp4/VINN.mp4',
+ *     ctx
+ *   );
+ *   console.log(vod);
+ * }
+ * main();
+ */
 export async function createVod(
   pipeline: VodPipeline,
   source: string,

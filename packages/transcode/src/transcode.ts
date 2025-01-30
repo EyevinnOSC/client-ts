@@ -64,9 +64,21 @@ export function smpteTimecodeToFrames(
 
 /**
  * Transcode a video file using SVT Encore in Eyevinn Open Source Cloud
+ *
+ * @memberof module:@osaas/client-transcode
  * @param ctx - Eyevinn OSC context
  * @param opts - Transcode options
- * @returns - The created Encore job
+ * @returns {Job} - The created Encore job
+ *
+ * @example
+ * const job = await transcode(ctx, {
+ *   encoreInstanceName: 'tutorial',
+ *    profile: 'program',
+ *    externalId: 'tutorial',
+ *    outputUrl: new URL('s3://output/tutorial/'),
+ *    inputUrl: new URL('s3://input/VINN.mp4')
+ *  });
+ *  console.log(job);
  */
 export async function transcode(ctx: Context, opts: TranscodeOptions) {
   const baseName = opts.baseName || opts.externalId;

@@ -1,7 +1,7 @@
 {
   "plugins": ["plugins/markdown"],
   "source": {
-    "include": ["readme.md", "packages/core/", "packages/services/"],
+    "include": ["readme.md", "packages/core/", "packages/services/", "packages/transcode"],
     "includePattern": "\\.js$",
     "excludePattern": "(node_modules/|docs)"
   },
