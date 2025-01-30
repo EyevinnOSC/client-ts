@@ -299,7 +299,7 @@ import {
 /**
  * @typedef {Object} EyevinnLambdaStitchConfig
  * @property {string} name - Name of lambda-stitch
- * @property {string | undefined} AssetListBaseUrl - AssetListBaseUrl
+ * @property {string} [AssetListBaseUrl] - AssetListBaseUrl
 
  * 
  */

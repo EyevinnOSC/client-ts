@@ -312,9 +312,9 @@ import {
  * @typedef {Object} EyevinnSmbWhipBridgeConfig
  * @property {string} name - Name of smb-whip-bridge
  * @property {string} SmbUrl - SmbUrl
- * @property {string | undefined} SmbApiKey - SmbApiKey
- * @property {string | undefined} WhepEndpointUrl - WhepEndpointUrl
- * @property {string | undefined} WhipApiKey - WhipApiKey
+ * @property {string} [SmbApiKey] - SmbApiKey
+ * @property {string} [WhepEndpointUrl] - WhepEndpointUrl
+ * @property {string} [WhipApiKey] - WhipApiKey
 
  * 
  */

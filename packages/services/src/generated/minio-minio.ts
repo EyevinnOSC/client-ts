@@ -303,8 +303,8 @@ import {
 /**
  * @typedef {Object} MinioMinioConfig
  * @property {string} name - Name of minio
- * @property {string | undefined} RootUser - RootUser
- * @property {string | undefined} RootPassword - RootPassword
+ * @property {string} [RootUser] - RootUser
+ * @property {string} [RootPassword] - RootPassword
 
  * 
  */

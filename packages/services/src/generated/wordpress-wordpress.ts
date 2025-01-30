@@ -318,8 +318,8 @@ import {
  * @property {string} DbHost - DbHost
  * @property {string} DbUser - DbUser
  * @property {string} DbPassword - DbPassword
- * @property {string | undefined} DbName - DbName
- * @property {string | undefined} DbTablePrefix - DbTablePrefix
+ * @property {string} [DbName] - DbName
+ * @property {string} [DbTablePrefix] - DbTablePrefix
 
  * 
  */

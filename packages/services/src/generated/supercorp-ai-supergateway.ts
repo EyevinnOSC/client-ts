@@ -304,7 +304,7 @@ import {
  * @typedef {Object} SupercorpAiSupergatewayConfig
  * @property {string} name - Name of supergateway
  * @property {string} McpServer - McpServer
- * @property {string | undefined} EnvVars - EnvVars
+ * @property {string} [EnvVars] - EnvVars
 
  * 
  */

@@ -326,10 +326,10 @@ import {
  * @property {string} VastEndpoint - VastEndpoint
  * @property {string} OriginUrl - OriginUrl
  * @property {enum} InsertionMode - InsertionMode
- * @property {string | undefined} CouchDbEndpoint - CouchDbEndpoint
- * @property {string | undefined} CouchDbTable - CouchDbTable
- * @property {string | undefined} CouchDbUser - CouchDbUser
- * @property {string | undefined} CouchDbPassword - CouchDbPassword
+ * @property {string} [CouchDbEndpoint] - CouchDbEndpoint
+ * @property {string} [CouchDbTable] - CouchDbTable
+ * @property {string} [CouchDbUser] - CouchDbUser
+ * @property {string} [CouchDbPassword] - CouchDbPassword
 
  * 
  */

@@ -337,9 +337,9 @@ import {
  * @property {string} OutputBucketUrl - OutputBucketUrl
  * @property {string} S3AccessKey - S3AccessKey
  * @property {string} S3SecretKey - S3SecretKey
- * @property {string | undefined} S3EndpointUrl - S3EndpointUrl
- * @property {string | undefined} RedisUrl - RedisUrl
- * @property {string | undefined} OscAccessToken - OscAccessToken
+ * @property {string} [S3EndpointUrl] - S3EndpointUrl
+ * @property {string} [RedisUrl] - RedisUrl
+ * @property {string} [OscAccessToken] - OscAccessToken
 
  * 
  */

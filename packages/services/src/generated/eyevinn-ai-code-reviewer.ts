@@ -304,7 +304,7 @@ import {
  * @typedef {Object} EyevinnAiCodeReviewerConfig
  * @property {string} name - Name of ai-code-reviewer
  * @property {string} OpenAiApiKey - OpenAiApiKey
- * @property {string | undefined} AssistantId - AssistantId
+ * @property {string} [AssistantId] - AssistantId
 
  * 
  */

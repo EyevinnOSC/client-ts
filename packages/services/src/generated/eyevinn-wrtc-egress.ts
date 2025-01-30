@@ -304,7 +304,7 @@ import {
  * @typedef {Object} EyevinnWrtcEgressConfig
  * @property {string} name - Name of wrtc-egress
  * @property {string} SmbUrl - SmbUrl
- * @property {string | undefined} SmbApiKey - SmbApiKey
+ * @property {string} [SmbApiKey] - SmbApiKey
 
  * 
  */

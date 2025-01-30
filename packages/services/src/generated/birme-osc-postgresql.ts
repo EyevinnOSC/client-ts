@@ -312,9 +312,9 @@ import {
  * @typedef {Object} BirmeOscPostgresqlConfig
  * @property {string} name - Name of osc-postgresql
  * @property {string} PostgresPassword - PostgresPassword
- * @property {string | undefined} PostgresUser - PostgresUser
- * @property {string | undefined} PostgresDb - PostgresDb
- * @property {string | undefined} PostgresInitDbArgs - PostgresInitDbArgs
+ * @property {string} [PostgresUser] - PostgresUser
+ * @property {string} [PostgresDb] - PostgresDb
+ * @property {string} [PostgresInitDbArgs] - PostgresInitDbArgs
 
  * 
  */

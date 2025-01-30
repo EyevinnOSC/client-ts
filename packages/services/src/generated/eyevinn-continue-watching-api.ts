@@ -224,9 +224,9 @@ import {
  * @typedef {Object} EyevinnContinueWatchingApiConfig
  * @property {string} name - Name of continue-watching-api
  * @property {string} RedisHost - Redis Host
- * @property {string | undefined} RedisPort - Redis Port
- * @property {string | undefined} RedisUsername - Redis Username
- * @property {string | undefined} RedisPassword - Redis Password
+ * @property {string} [RedisPort] - Redis Port
+ * @property {string} [RedisUsername] - Redis Username
+ * @property {string} [RedisPassword] - Redis Password
 
  * 
  */

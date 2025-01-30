@@ -307,9 +307,9 @@ import {
 /**
  * @typedef {Object} EyevinnLiveEncodingConfig
  * @property {string} name - Name of live-encoding
- * @property {boolean | undefined} HlsOnly - When enabled only output HLS
- * @property {string | undefined} StreamKey - Configure encoder to push to rtmp://<host>/live/<StreamKey>
- * @property {string | undefined} OutputUrl - If specified push to CDN origin
+ * @property {boolean} [HlsOnly] - When enabled only output HLS
+ * @property {string} [StreamKey] - Configure encoder to push to rtmp://<host>/live/<StreamKey>
+ * @property {string} [OutputUrl] - If specified push to CDN origin
 
  * 
  */

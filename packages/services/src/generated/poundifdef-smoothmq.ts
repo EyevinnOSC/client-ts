@@ -303,8 +303,8 @@ import {
 /**
  * @typedef {Object} PoundifdefSmoothmqConfig
  * @property {string} name - Name of smoothmq
- * @property {string | undefined} AccessKey - AccessKey
- * @property {string | undefined} SecretKey - SecretKey
+ * @property {string} [AccessKey] - AccessKey
+ * @property {string} [SecretKey] - SecretKey
 
  * 
  */

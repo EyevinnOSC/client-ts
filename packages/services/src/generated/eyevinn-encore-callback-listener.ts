@@ -309,7 +309,7 @@ import {
  * @property {string} name - Name of encore-callback-listener
  * @property {string} RedisUrl - RedisUrl
  * @property {string} EncoreUrl - EncoreUrl
- * @property {string | undefined} RedisQueue - RedisQueue
+ * @property {string} [RedisQueue] - RedisQueue
 
  * 
  */

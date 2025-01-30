@@ -320,11 +320,11 @@ import {
  * @typedef {Object} EyevinnEncoreTransferConfig
  * @property {string} name - Name of encore-transfer
  * @property {string} RedisUrl - RedisUrl
- * @property {string | undefined} RedisQueue - RedisQueue
+ * @property {string} [RedisQueue] - RedisQueue
  * @property {string} Output - Output
  * @property {string} OscAccessToken - OscAccessToken
- * @property {string | undefined} AwsAccessKeyIdSecret - AwsAccessKeyIdSecret
- * @property {string | undefined} AwsSecretAccessKeySecret - AwsSecretAccessKeySecret
+ * @property {string} [AwsAccessKeyIdSecret] - AwsAccessKeyIdSecret
+ * @property {string} [AwsSecretAccessKeySecret] - AwsSecretAccessKeySecret
 
  * 
  */

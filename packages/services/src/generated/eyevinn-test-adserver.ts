@@ -299,7 +299,7 @@ import {
 /**
  * @typedef {Object} EyevinnTestAdserverConfig
  * @property {string} name - Name of test-adserver
- * @property {string | undefined} MrssOrigin - MrssOrigin
+ * @property {string} [MrssOrigin] - MrssOrigin
 
  * 
  */

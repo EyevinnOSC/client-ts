@@ -310,7 +310,7 @@ Join our Slack community for support and customization. Contact sales@eyevinn.se
  * @typedef {Object} EyevinnIntercomManagerConfig
  * @property {string} name - Name of intercom-manager
  * @property {string} smbUrl - SmbUrl
- * @property {string | undefined} smbApiKey - SmbApiKey
+ * @property {string} [smbApiKey] - SmbApiKey
  * @property {string} mongodbUrl - MongodbUrl
 
  * 

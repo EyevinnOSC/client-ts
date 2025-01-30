@@ -315,11 +315,11 @@ import {
 /**
  * @typedef {Object} MickaelKerjeanFilestashConfig
  * @property {string} name - Name of filestash
- * @property {string | undefined} AdminPassword - AdminPassword
- * @property {string | undefined} ConfigSecret - ConfigSecret
- * @property {string | undefined} DropboxClientId - DropboxClientId
- * @property {string | undefined} GdriveClientId - GdriveClientId
- * @property {string | undefined} GdriveClientSecret - GdriveClientSecret
+ * @property {string} [AdminPassword] - AdminPassword
+ * @property {string} [ConfigSecret] - ConfigSecret
+ * @property {string} [DropboxClientId] - DropboxClientId
+ * @property {string} [GdriveClientId] - GdriveClientId
+ * @property {string} [GdriveClientSecret] - GdriveClientSecret
 
  * 
  */

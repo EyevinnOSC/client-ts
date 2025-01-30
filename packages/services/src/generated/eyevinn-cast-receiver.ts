@@ -228,10 +228,10 @@ import {
  * @typedef {Object} EyevinnCastReceiverConfig
  * @property {string} name - Name of cast-receiver
  * @property {string} title - Title
- * @property {string | undefined} castReceiverOptions - CastReceiverOptions
- * @property {string | undefined} playbackLogoUrl - PlaybackLogoUrl
- * @property {string | undefined} logoUrl - LogoUrl
- * @property {string | undefined} castMediaPlayerStyle - CastMediaPlayerStyle
+ * @property {string} [castReceiverOptions] - CastReceiverOptions
+ * @property {string} [playbackLogoUrl] - PlaybackLogoUrl
+ * @property {string} [logoUrl] - LogoUrl
+ * @property {string} [castMediaPlayerStyle] - CastMediaPlayerStyle
 
  * 
  */

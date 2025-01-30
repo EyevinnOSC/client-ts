@@ -322,9 +322,9 @@ import {
  * @property {string} Source - URL to source HLS
  * @property {enum} DestType - Type of destination
  * @property {string} DestUrl - Destination URL
- * @property {string | undefined} AwsAccessKeyId - AwsAccessKeyId
- * @property {string | undefined} AwsSecretAccessKey - AwsSecretAccessKey
- * @property {string | undefined} AwsRegion - AwsRegion
+ * @property {string} [AwsAccessKeyId] - AwsAccessKeyId
+ * @property {string} [AwsSecretAccessKey] - AwsSecretAccessKey
+ * @property {string} [AwsRegion] - AwsRegion
 
  * 
  */

@@ -304,7 +304,7 @@ import {
  * @typedef {Object} EyevinnQrGeneratorConfig
  * @property {string} name - Name of qr-generator
  * @property {string} GotoUrl - GotoUrl
- * @property {string | undefined} LogoUrl - LogoUrl
+ * @property {string} [LogoUrl] - LogoUrl
 
  * 
  */

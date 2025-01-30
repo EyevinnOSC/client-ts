@@ -236,15 +236,15 @@ import {
  * @property {string} name - Enter channel name
  * @property {enum} type - Plugin type
  * @property {string} url - URL of VOD, playlist to loop or WebHook
- * @property {boolean | undefined} opts.useDemuxedAudio - Use demuxed audio
- * @property {boolean | undefined} opts.useVttSubtitles - Use VTT subtitles
- * @property {string | undefined} opts.defaultSlateUri - URI to default slate
- * @property {list | undefined} opts.langList - Comma separated list of languages
- * @property {list | undefined} opts.langListSubs - Comma separated list of subtitle languages
- * @property {enum | undefined} opts.preset - Channel preset
- * @property {string | undefined} opts.preroll.url - URL to preroll
- * @property {string | undefined} opts.preroll.duration - Duration of preroll in milliseconds
- * @property {string | undefined} opts.webhook.apikey - WebHook api key
+ * @property {boolean} [opts.useDemuxedAudio] - Use demuxed audio
+ * @property {boolean} [opts.useVttSubtitles] - Use VTT subtitles
+ * @property {string} [opts.defaultSlateUri] - URI to default slate
+ * @property {list} [opts.langList] - Comma separated list of languages
+ * @property {list} [opts.langListSubs] - Comma separated list of subtitle languages
+ * @property {enum} [opts.preset] - Channel preset
+ * @property {string} [opts.preroll.url] - URL to preroll
+ * @property {string} [opts.preroll.duration] - Duration of preroll in milliseconds
+ * @property {string} [opts.webhook.apikey] - WebHook api key
 
  * 
  */

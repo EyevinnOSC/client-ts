@@ -312,9 +312,9 @@ import {
  * @typedef {Object} EyevinnAutoSubtitlesConfig
  * @property {string} name - Name of auto-subtitles
  * @property {string} openaikey - Openaikey
- * @property {string | undefined} awsAccessKeyId - AwsAccessKeyId
- * @property {string | undefined} awsSecretAccessKey - AwsSecretAccessKey
- * @property {string | undefined} awsRegion - AwsRegion
+ * @property {string} [awsAccessKeyId] - AwsAccessKeyId
+ * @property {string} [awsSecretAccessKey] - AwsSecretAccessKey
+ * @property {string} [awsRegion] - AwsRegion
 
  * 
  */

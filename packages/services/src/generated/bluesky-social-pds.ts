@@ -312,9 +312,9 @@ import {
  * @typedef {Object} BlueskySocialPdsConfig
  * @property {string} name - Name of pds
  * @property {string} AdminPassword - AdminPassword
- * @property {string | undefined} DnsName - DnsName
- * @property {string | undefined} EmailSmtpUrl - EmailSmtpUrl
- * @property {string | undefined} EmailFromAddress - EmailFromAddress
+ * @property {string} [DnsName] - DnsName
+ * @property {string} [EmailSmtpUrl] - EmailSmtpUrl
+ * @property {string} [EmailFromAddress] - EmailFromAddress
 
  * 
  */

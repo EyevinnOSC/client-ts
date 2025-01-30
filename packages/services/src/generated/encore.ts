@@ -443,12 +443,12 @@ import {
 /**
  * @typedef {Object} EncoreConfig
  * @property {string} name - Name of the Encore instance
- * @property {string | undefined} profilesUrl - URL pointing to list of transcoding profiles
- * @property {string | undefined} s3AccessKeyId - S3 Access Key Id
- * @property {string | undefined} s3SecretAccessKey - S3 Secret Access Key
- * @property {string | undefined} s3SessionToken - S3 Session Token
- * @property {string | undefined} s3Region - S3 Region
- * @property {string | undefined} s3Endpoint - S3 Endpoint
+ * @property {string} [profilesUrl] - URL pointing to list of transcoding profiles
+ * @property {string} [s3AccessKeyId] - S3 Access Key Id
+ * @property {string} [s3SecretAccessKey] - S3 Secret Access Key
+ * @property {string} [s3SessionToken] - S3 Session Token
+ * @property {string} [s3Region] - S3 Region
+ * @property {string} [s3Endpoint] - S3 Endpoint
 
  * 
  */

@@ -299,7 +299,7 @@ import {
 /**
  * @typedef {Object} SearxngSearxngConfig
  * @property {string} name - Name of searxng
- * @property {string | undefined} AutoComplete - AutoComplete
+ * @property {string} [AutoComplete] - AutoComplete
 
  * 
  */

@@ -308,8 +308,8 @@ import {
  * @typedef {Object} BirmeContactFormSvcConfig
  * @property {string} name - Name of service
  * @property {enum} Transport - Transport
- * @property {string | undefined} SlackBotToken - Slack Bot Token
- * @property {string | undefined} SlackChannelId - Slack Channel Id
+ * @property {string} [SlackBotToken] - Slack Bot Token
+ * @property {string} [SlackChannelId] - Slack Channel Id
 
  * 
  */

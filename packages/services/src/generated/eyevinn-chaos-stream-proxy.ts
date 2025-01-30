@@ -299,7 +299,7 @@ import {
 /**
  * @typedef {Object} EyevinnChaosStreamProxyConfig
  * @property {string} name - Name of chaos-stream-proxy
- * @property {boolean | undefined} statefulmode - Statefulmode
+ * @property {boolean} [statefulmode] - Statefulmode
 
  * 
  */

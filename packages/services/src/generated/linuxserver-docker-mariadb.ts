@@ -312,9 +312,9 @@ import {
  * @typedef {Object} LinuxserverDockerMariadbConfig
  * @property {string} name - Name of database server
  * @property {string} RootPassword - Administrator password for database server
- * @property {string | undefined} Database - Database
- * @property {string | undefined} User - User
- * @property {string | undefined} Password - Password
+ * @property {string} [Database] - Database
+ * @property {string} [User] - User
+ * @property {string} [Password] - Password
 
  * 
  */

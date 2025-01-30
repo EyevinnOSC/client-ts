@@ -257,8 +257,8 @@ import {
 /**
  * @typedef {Object} BbcBraveConfig
  * @property {string} name - Name of brave
- * @property {string | undefined} StunServer - StunServer
- * @property {string | undefined} TurnServer - TurnServer
+ * @property {string} [StunServer] - StunServer
+ * @property {string} [TurnServer] - TurnServer
 
  * 
  */

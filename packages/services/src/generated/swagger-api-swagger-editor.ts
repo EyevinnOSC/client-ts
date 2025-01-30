@@ -299,7 +299,7 @@ import {
 /**
  * @typedef {Object} SwaggerApiSwaggerEditorConfig
  * @property {string} name - Name of swagger-editor
- * @property {string | undefined} ApiDefinitionUrl - ApiDefinitionUrl
+ * @property {string} [ApiDefinitionUrl] - ApiDefinitionUrl
 
  * 
  */

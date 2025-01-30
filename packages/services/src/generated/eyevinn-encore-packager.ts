@@ -340,16 +340,16 @@ import {
  * @typedef {Object} EyevinnEncorePackagerConfig
  * @property {string} name - Name of encore-packager
  * @property {string} RedisUrl - RedisUrl
- * @property {string | undefined} RedisQueue - RedisQueue
+ * @property {string} [RedisQueue] - RedisQueue
  * @property {string} OutputFolder - OutputFolder
- * @property {string | undefined} Concurrency - Concurrency
+ * @property {string} [Concurrency] - Concurrency
  * @property {string} PersonalAccessToken - PersonalAccessToken
  * @property {string} AwsAccessKeyId - AwsAccessKeyId
  * @property {string} AwsSecretAccessKey - AwsSecretAccessKey
- * @property {string | undefined} AwsRegion - AwsRegion
- * @property {string | undefined} AwsSessionToken - AwsSessionToken
- * @property {string | undefined} S3EndpointUrl - S3EndpointUrl
- * @property {string | undefined} OutputSubfolderTemplate - OutputSubfolderTemplate
+ * @property {string} [AwsRegion] - AwsRegion
+ * @property {string} [AwsSessionToken] - AwsSessionToken
+ * @property {string} [S3EndpointUrl] - S3EndpointUrl
+ * @property {string} [OutputSubfolderTemplate] - OutputSubfolderTemplate
 
  * 
  */
