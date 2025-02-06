@@ -33,6 +33,22 @@ export interface VodPipeline {
   callbackUrl: string;
   output: string;
   endpoint: string;
+  inputStorage?: StorageBucket;
+}
+
+export interface VodPipelineOpts {
+  createInputBucket?: boolean;
+}
+
+export interface StorageBucketOpts {
+  private?: boolean;
+}
+
+export interface StorageBucket {
+  name: string;
+  endpoint: string;
+  accessKeyId: string;
+  secretAccessKey: string;
 }
 
 export interface VodJob {
@@ -64,11 +80,20 @@ function createPublicBucketPolicy(name: string) {
   };
 }
 
-async function createEncore(name: string, ctx: Context) {
+async function createEncore(
+  name: string,
+  ctx: Context,
+  inputStorage?: StorageBucket
+) {
   const sat = await ctx.getServiceAccessToken('encore');
   let instance: Encore = await getInstance(ctx, 'encore', name, sat);
   if (!instance) {
-    const config: EncoreConfig = { name };
+    const config: EncoreConfig = {
+      name,
+      s3AccessKeyId: inputStorage?.accessKeyId,
+      s3SecretAccessKey: inputStorage?.secretAccessKey,
+      s3Endpoint: inputStorage?.endpoint
+    };
     const newInstance = await createEncoreInstance(ctx, config);
     if (!newInstance) {
       throw new Error('Failed to create new Encore instance');
@@ -181,7 +206,11 @@ async function createPackager(
   return instance;
 }
 
-async function createStorageBucket(name: string, ctx: Context) {
+async function createStorageBucket(
+  name: string,
+  ctx: Context,
+  opts?: StorageBucketOpts
+): Promise<StorageBucket> {
   const sat = await ctx.getServiceAccessToken('minio-minio');
   let instance: MinioMinio = await getInstance(ctx, 'minio-minio', name, sat);
   if (!instance) {
@@ -205,10 +234,12 @@ async function createStorageBucket(name: string, ctx: Context) {
       secretKey: instance.RootPassword || ''
     });
     await minioClient.makeBucket(name);
-    await minioClient.setBucketPolicy(
-      name,
-      JSON.stringify(createPublicBucketPolicy(name))
-    );
+    if (!opts?.private) {
+      await minioClient.setBucketPolicy(
+        name,
+        JSON.stringify(createPublicBucketPolicy(name))
+      );
+    }
   }
 
   return {
@@ -220,23 +251,39 @@ async function createStorageBucket(name: string, ctx: Context) {
 }
 
 /**
+ * VOD pipeline options
+ *
+ * @typedef VodPipelineOpts
+ * @type object
+ * @property {boolean} [createInputBucket] - If true, create an input storage bucket (default: false)
+ */
+
+/**
  * Create a VOD pipeline based on Encore and Shaka Packager
  *
  * @memberof module:@osaas/client-transcode
  * @param name - name of the pipeline
  * @param ctx - Eyevinn OSC context
+ * @param {VodPipelineOpts} [opts] - VOD pipeline options
  * @returns {VodPipeline} - VOD pipeline object
  */
 export async function createVodPipeline(
   name: string,
-  ctx: Context
+  ctx: Context,
+  opts?: VodPipelineOpts
 ): Promise<VodPipeline> {
   if (!isValidInstanceName(name)) {
     throw new Error(`Invalid instance name: ${name}`);
   }
   const storage = await createStorageBucket(name, ctx);
   const redisUrl = await createRedis(name, ctx);
-  const transcoder = await createEncore(name, ctx);
+  let inputStorage;
+  if (opts?.createInputBucket) {
+    inputStorage = await createStorageBucket(name + 'input', ctx, {
+      private: true
+    });
+  }
+  const transcoder = await createEncore(name, ctx, inputStorage);
   const encoreCallback = await createCallbackListener(
     name,
     redisUrl,
@@ -257,7 +304,8 @@ export async function createVodPipeline(
     jobs: transcoder.jobs,
     callbackUrl: encoreCallback.url,
     output: packager.OutputFolder,
-    endpoint: storage.endpoint
+    endpoint: storage.endpoint,
+    inputStorage
   };
 }
 
@@ -327,6 +375,10 @@ export async function createVod(
   const sat = await context.getServiceAccessToken('encore');
   const externalId =
     pipeline.name + '-' + Math.random().toString(36).substring(7);
+  const sourceUrl = new URL(source);
+  if (sourceUrl.protocol === 's3:' && !pipeline.inputStorage) {
+    throw new Error('Input storage bucket required for S3 input');
+  }
   const job = {
     externalId,
     profile: 'program',
