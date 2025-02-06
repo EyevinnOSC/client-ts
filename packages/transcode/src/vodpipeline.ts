@@ -36,24 +36,10 @@ export interface VodPipeline {
   inputStorage?: StorageBucket;
 }
 
-/**
- * VOD pipeline options
- *
- * @typedef VodPipelineOpts
- * @type object
- * @property {boolean} [createInputBucket] - If true, create an input storage bucket (default: false)
- */
 export interface VodPipelineOpts {
   createInputBucket?: boolean;
 }
 
-/**
- * Storage bucket options
- *
- * @typedef StorageBucketOpts
- * @type object
- * @property {boolean} [private] - If true, create a private bucket (default: false)
- */
 export interface StorageBucketOpts {
   private?: boolean;
 }
@@ -263,6 +249,14 @@ async function createStorageBucket(
     secretAccessKey: instance.RootPassword || ''
   };
 }
+
+/**
+ * VOD pipeline options
+ *
+ * @typedef VodPipelineOpts
+ * @type object
+ * @property {boolean} [createInputBucket] - If true, create an input storage bucket (default: false)
+ */
 
 /**
  * Create a VOD pipeline based on Encore and Shaka Packager
