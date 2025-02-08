@@ -98,9 +98,16 @@ export function cmdDescribe() {
           console.log(`${key}: ${instance[key]}`);
         });
         try {
-          const ports = await getPortsForInstance(ctx, serviceId, name, serviceAccessToken);
+          const ports = await getPortsForInstance(
+            ctx,
+            serviceId,
+            name,
+            serviceAccessToken
+          );
           ports.forEach((port) => {
-            console.log(`${port.externalIp}:${port.externalPort} => ${port.internalPort}`);
+            console.log(
+              `${port.externalIp}:${port.externalPort} => ${port.internalPort}`
+            );
           });
         } catch (err) {
           // No ports for this service
