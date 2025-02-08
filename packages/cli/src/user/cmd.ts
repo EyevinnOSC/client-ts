@@ -3,6 +3,7 @@ import {
   createInstance,
   getInstance,
   getLogsForInstance,
+  getPortsForInstance,
   listInstances,
   removeInstance
 } from '@osaas/client-core';
@@ -96,6 +97,14 @@ export function cmdDescribe() {
         Object.keys(instance).forEach((key) => {
           console.log(`${key}: ${instance[key]}`);
         });
+        try {
+          const ports = await getPortsForInstance(ctx, serviceId, name, serviceAccessToken);
+          ports.forEach((port) => {
+            console.log(`${port.externalIp}:${port.externalPort} => ${port.internalPort}`);
+          });
+        } catch (err) {
+          // No ports for this service
+        }
       } catch (err) {
         console.log((err as Error).message);
       }
