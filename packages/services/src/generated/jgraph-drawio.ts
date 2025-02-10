@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/valkeyinstance': {
-    /** List all running valkey instances */
+  '/drawioinstance': {
+    /** List all running drawio instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the valkey instance */
+            /** @description Name of the drawio instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,7 +40,6 @@ export interface paths {
                 url: string;
               };
             };
-            Password?: string;
           }[];
         };
         /** Default Response */
@@ -52,14 +51,13 @@ export interface paths {
         };
       };
     };
-    /** Launch a new valkey instance */
+    /** Launch a new drawio instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the valkey instance */
+            /** @description Name of the drawio instance */
             name: string;
-            Password?: string;
           };
         };
       };
@@ -67,7 +65,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the valkey instance */
+            /** @description Name of the drawio instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -85,7 +83,6 @@ export interface paths {
                 url: string;
               };
             };
-            Password?: string;
           };
         };
         /** Default Response */
@@ -112,12 +109,12 @@ export interface paths {
       };
     };
   };
-  '/valkeyinstance/{id}': {
-    /** Obtain status and resource URLs for an valkey instance */
+  '/drawioinstance/{id}': {
+    /** Obtain status and resource URLs for an drawio instance */
     get: {
       parameters: {
         path: {
-          /** Name of the valkey instance */
+          /** Name of the drawio instance */
           id: string;
         };
       };
@@ -125,7 +122,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the valkey instance */
+            /** @description Name of the drawio instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -143,7 +140,6 @@ export interface paths {
                 url: string;
               };
             };
-            Password?: string;
           };
         };
         /** Default Response */
@@ -162,11 +158,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an valkey instance */
+    /** Stop and remove an drawio instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the valkey instance */
+          /** Name of the drawio instance */
           id: string;
         };
       };
@@ -186,11 +182,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of valkey instance */
+    /** Return status of drawio instance */
     get: {
       parameters: {
         path: {
-          /** Name of the valkey instance */
+          /** Name of the drawio instance */
           id: string;
         };
       };
@@ -213,7 +209,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the valkey instance */
+    /** Return the latest logs from the drawio instance */
     get: {
       parameters: {
         query: {
@@ -221,7 +217,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the valkey instance */
+          /** Name of the drawio instance */
           id: string;
         };
       };
@@ -241,11 +237,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for valkey instance */
+    /** Return the exposed extra ports for drawio instance */
     get: {
       parameters: {
         path: {
-          /** Name of the valkey instance */
+          /** Name of the drawio instance */
           id: string;
         };
       };
@@ -276,11 +272,11 @@ export interface operations {}
 
 export interface external {}
 
-export type ValkeyIoValkey =
-  paths['/valkeyinstance/{id}']['get']['responses']['200']['schema'];
+export type JgraphDrawio =
+  paths['/drawioinstance/{id}']['get']['responses']['200']['schema'];
 
-export type ValkeyIoValkeyConfig =
-  paths['/valkeyinstance']['post']['parameters']['body']['body'];
+export type JgraphDrawioConfig =
+  paths['/drawioinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -289,95 +285,86 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace valkey-io-valkey
- * @description Introducing Valkey: a Redis-compatible high-performance key-value store with wide range support. Build on various systems, extensible plugin system, and TLS support available.
-
-NB! Data persistence not guaranteed
+ * @namespace jgraph-drawio
+ * @description Unleash your creativity with draw.io, the ultimate diagramming tool for visual storytelling and dynamic whiteboarding. Effortlessly craft, design, and export your ideas with a seamless, intuitive interface.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Valkey.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} ValkeyIoValkeyConfig
- * @property {string} name - Name of valkey
- * @property {string} [Password] - Password
+ * @typedef {Object} JgraphDrawioConfig
+ * @property {string} name - Name of drawio
 
  * 
  */
 
 /**
- * @typedef {Object} ValkeyIoValkey
- * @property {string} name - Name of the valkey instance
- * @property {string} url - URL of the valkey instance
+ * @typedef {Object} JgraphDrawio
+ * @property {string} name - Name of the draw.io instance
+ * @property {string} url - URL of the draw.io instance
  *
  */
 
 /**
- * Create a new valkey instance
+ * Create a new draw.io instance
  *
- * @memberOf valkey-io-valkey
+ * @memberOf jgraph-drawio
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {ValkeyIoValkeyConfig} body - Service instance configuration
- * @returns {ValkeyIoValkey} - Service instance
+ * @param {JgraphDrawioConfig} body - Service instance configuration
+ * @returns {JgraphDrawio} - Service instance
  * @example
- * import { Context, createValkeyIoValkeyInstance } from '@osaas/client-services';
+ * import { Context, createJgraphDrawioInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createValkeyIoValkeyInstance(ctx, { name: 'myinstance' });
+ * const instance = await createJgraphDrawioInstance(ctx, { name: 'myinstance' });
  * console.log(instance.url);
  */
-export async function createValkeyIoValkeyInstance(
+export async function createJgraphDrawioInstance(
   ctx: Context,
-  body: ValkeyIoValkeyConfig
-): Promise<ValkeyIoValkey> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'valkey-io-valkey'
-  );
+  body: JgraphDrawioConfig
+): Promise<JgraphDrawio> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('jgraph-drawio');
   const instance = await createInstance(
     ctx,
-    'valkey-io-valkey',
+    'jgraph-drawio',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('valkey-io-valkey', instance.name, ctx);
+  await waitForInstanceReady('jgraph-drawio', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a valkey instance
+ * Remove a draw.io instance
  *
- * @memberOf valkey-io-valkey
+ * @memberOf jgraph-drawio
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the valkey to be removed
+ * @param {string} name - Name of the editor to be removed
  */
-export async function removeValkeyIoValkeyInstance(
+export async function removeJgraphDrawioInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'valkey-io-valkey'
-  );
-  await removeInstance(ctx, 'valkey-io-valkey', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken('jgraph-drawio');
+  await removeInstance(ctx, 'jgraph-drawio', name, serviceAccessToken);
 }
 
 /**
- * Get a valkey instance
+ * Get a draw.io instance
  *
- * @memberOf valkey-io-valkey
+ * @memberOf jgraph-drawio
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the valkey to be retrieved
- * @returns {ValkeyIoValkey} - Service instance
+ * @param {string} name - Name of the editor to be retrieved
+ * @returns {JgraphDrawio} - Service instance
  */
-export async function getValkeyIoValkeyInstance(
+export async function getJgraphDrawioInstance(
   ctx: Context,
   name: string
-): Promise<ValkeyIoValkey> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'valkey-io-valkey'
-  );
-  return await getInstance(ctx, 'valkey-io-valkey', name, serviceAccessToken);
+): Promise<JgraphDrawio> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('jgraph-drawio');
+  return await getInstance(ctx, 'jgraph-drawio', name, serviceAccessToken);
 }

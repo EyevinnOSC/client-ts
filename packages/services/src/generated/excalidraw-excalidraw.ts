@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/valkeyinstance': {
-    /** List all running valkey instances */
+  '/excalidrawinstance': {
+    /** List all running excalidraw instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the valkey instance */
+            /** @description Name of the excalidraw instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,7 +40,6 @@ export interface paths {
                 url: string;
               };
             };
-            Password?: string;
           }[];
         };
         /** Default Response */
@@ -52,14 +51,13 @@ export interface paths {
         };
       };
     };
-    /** Launch a new valkey instance */
+    /** Launch a new excalidraw instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the valkey instance */
+            /** @description Name of the excalidraw instance */
             name: string;
-            Password?: string;
           };
         };
       };
@@ -67,7 +65,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the valkey instance */
+            /** @description Name of the excalidraw instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -85,7 +83,6 @@ export interface paths {
                 url: string;
               };
             };
-            Password?: string;
           };
         };
         /** Default Response */
@@ -112,12 +109,12 @@ export interface paths {
       };
     };
   };
-  '/valkeyinstance/{id}': {
-    /** Obtain status and resource URLs for an valkey instance */
+  '/excalidrawinstance/{id}': {
+    /** Obtain status and resource URLs for an excalidraw instance */
     get: {
       parameters: {
         path: {
-          /** Name of the valkey instance */
+          /** Name of the excalidraw instance */
           id: string;
         };
       };
@@ -125,7 +122,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the valkey instance */
+            /** @description Name of the excalidraw instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -143,7 +140,6 @@ export interface paths {
                 url: string;
               };
             };
-            Password?: string;
           };
         };
         /** Default Response */
@@ -162,11 +158,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an valkey instance */
+    /** Stop and remove an excalidraw instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the valkey instance */
+          /** Name of the excalidraw instance */
           id: string;
         };
       };
@@ -186,11 +182,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of valkey instance */
+    /** Return status of excalidraw instance */
     get: {
       parameters: {
         path: {
-          /** Name of the valkey instance */
+          /** Name of the excalidraw instance */
           id: string;
         };
       };
@@ -213,7 +209,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the valkey instance */
+    /** Return the latest logs from the excalidraw instance */
     get: {
       parameters: {
         query: {
@@ -221,7 +217,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the valkey instance */
+          /** Name of the excalidraw instance */
           id: string;
         };
       };
@@ -241,11 +237,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for valkey instance */
+    /** Return the exposed extra ports for excalidraw instance */
     get: {
       parameters: {
         path: {
-          /** Name of the valkey instance */
+          /** Name of the excalidraw instance */
           id: string;
         };
       };
@@ -276,11 +272,11 @@ export interface operations {}
 
 export interface external {}
 
-export type ValkeyIoValkey =
-  paths['/valkeyinstance/{id}']['get']['responses']['200']['schema'];
+export type ExcalidrawExcalidraw =
+  paths['/excalidrawinstance/{id}']['get']['responses']['200']['schema'];
 
-export type ValkeyIoValkeyConfig =
-  paths['/valkeyinstance']['post']['parameters']['body']['body'];
+export type ExcalidrawExcalidrawConfig =
+  paths['/excalidrawinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -289,95 +285,97 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace valkey-io-valkey
- * @description Introducing Valkey: a Redis-compatible high-performance key-value store with wide range support. Build on various systems, extensible plugin system, and TLS support available.
-
-NB! Data persistence not guaranteed
+ * @namespace excalidraw-excalidraw
+ * @description Transform your creative process with Excalidraw, the ultimate open-source whiteboard perfect for collaborative, hand-drawn style designs. Enjoy infinite canvas, customizable tools, and real-time collaboration.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Valkey.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} ValkeyIoValkeyConfig
- * @property {string} name - Name of valkey
- * @property {string} [Password] - Password
+ * @typedef {Object} ExcalidrawExcalidrawConfig
+ * @property {string} name - Name of excalidraw
 
  * 
  */
 
 /**
- * @typedef {Object} ValkeyIoValkey
- * @property {string} name - Name of the valkey instance
- * @property {string} url - URL of the valkey instance
+ * @typedef {Object} ExcalidrawExcalidraw
+ * @property {string} name - Name of the Excalidraw instance
+ * @property {string} url - URL of the Excalidraw instance
  *
  */
 
 /**
- * Create a new valkey instance
+ * Create a new Excalidraw instance
  *
- * @memberOf valkey-io-valkey
+ * @memberOf excalidraw-excalidraw
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {ValkeyIoValkeyConfig} body - Service instance configuration
- * @returns {ValkeyIoValkey} - Service instance
+ * @param {ExcalidrawExcalidrawConfig} body - Service instance configuration
+ * @returns {ExcalidrawExcalidraw} - Service instance
  * @example
- * import { Context, createValkeyIoValkeyInstance } from '@osaas/client-services';
+ * import { Context, createExcalidrawExcalidrawInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createValkeyIoValkeyInstance(ctx, { name: 'myinstance' });
+ * const instance = await createExcalidrawExcalidrawInstance(ctx, { name: 'myinstance' });
  * console.log(instance.url);
  */
-export async function createValkeyIoValkeyInstance(
+export async function createExcalidrawExcalidrawInstance(
   ctx: Context,
-  body: ValkeyIoValkeyConfig
-): Promise<ValkeyIoValkey> {
+  body: ExcalidrawExcalidrawConfig
+): Promise<ExcalidrawExcalidraw> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'valkey-io-valkey'
+    'excalidraw-excalidraw'
   );
   const instance = await createInstance(
     ctx,
-    'valkey-io-valkey',
+    'excalidraw-excalidraw',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('valkey-io-valkey', instance.name, ctx);
+  await waitForInstanceReady('excalidraw-excalidraw', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a valkey instance
+ * Remove a Excalidraw instance
  *
- * @memberOf valkey-io-valkey
+ * @memberOf excalidraw-excalidraw
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the valkey to be removed
+ * @param {string} name - Name of the editor to be removed
  */
-export async function removeValkeyIoValkeyInstance(
+export async function removeExcalidrawExcalidrawInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'valkey-io-valkey'
+    'excalidraw-excalidraw'
   );
-  await removeInstance(ctx, 'valkey-io-valkey', name, serviceAccessToken);
+  await removeInstance(ctx, 'excalidraw-excalidraw', name, serviceAccessToken);
 }
 
 /**
- * Get a valkey instance
+ * Get a Excalidraw instance
  *
- * @memberOf valkey-io-valkey
+ * @memberOf excalidraw-excalidraw
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the valkey to be retrieved
- * @returns {ValkeyIoValkey} - Service instance
+ * @param {string} name - Name of the editor to be retrieved
+ * @returns {ExcalidrawExcalidraw} - Service instance
  */
-export async function getValkeyIoValkeyInstance(
+export async function getExcalidrawExcalidrawInstance(
   ctx: Context,
   name: string
-): Promise<ValkeyIoValkey> {
+): Promise<ExcalidrawExcalidraw> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'valkey-io-valkey'
+    'excalidraw-excalidraw'
   );
-  return await getInstance(ctx, 'valkey-io-valkey', name, serviceAccessToken);
+  return await getInstance(
+    ctx,
+    'excalidraw-excalidraw',
+    name,
+    serviceAccessToken
+  );
 }

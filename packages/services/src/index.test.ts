@@ -2579,3 +2579,71 @@ describe('removeEyevinnAdNormalizerInstance', () => {
     );
   });
 });
+
+describe('createExcalidrawExcalidrawInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createExcalidrawExcalidrawInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'excalidraw-excalidraw'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'excalidraw-excalidraw',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'excalidraw-excalidraw',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeExcalidrawExcalidrawInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeExcalidrawExcalidrawInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'excalidraw-excalidraw',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createJgraphDrawioInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createJgraphDrawioInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('jgraph-drawio');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'jgraph-drawio',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'jgraph-drawio',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeJgraphDrawioInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeJgraphDrawioInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'jgraph-drawio',
+      'sdk',
+      'token'
+    );
+  });
+});

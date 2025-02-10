@@ -527,3 +527,17 @@ export {
   removeEyevinnAdNormalizerInstance,
   getEyevinnAdNormalizerInstance
 } from './generated/eyevinn-ad-normalizer';
+export {
+  ExcalidrawExcalidraw,
+  ExcalidrawExcalidrawConfig,
+  createExcalidrawExcalidrawInstance,
+  removeExcalidrawExcalidrawInstance,
+  getExcalidrawExcalidrawInstance
+} from './generated/excalidraw-excalidraw';
+export {
+  JgraphDrawio,
+  JgraphDrawioConfig,
+  createJgraphDrawioInstance,
+  removeJgraphDrawioInstance,
+  getJgraphDrawioInstance
+} from './generated/jgraph-drawio';
