@@ -2717,3 +2717,71 @@ describe('removeClickhouseClickhouseInstance', () => {
     );
   });
 });
+
+describe('createMatomoOrgMatomoInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createMatomoOrgMatomoInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('matomo-org-matomo');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'matomo-org-matomo',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'matomo-org-matomo',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeMatomoOrgMatomoInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeMatomoOrgMatomoInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'matomo-org-matomo',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createUmamiSoftwareUmamiInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createUmamiSoftwareUmamiInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'umami-software-umami'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'umami-software-umami',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'umami-software-umami',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeUmamiSoftwareUmamiInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeUmamiSoftwareUmamiInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'umami-software-umami',
+      'sdk',
+      'token'
+    );
+  });
+});
