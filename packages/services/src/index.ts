@@ -555,3 +555,17 @@ export {
   removeClickhouseClickhouseInstance,
   getClickhouseClickhouseInstance
 } from './generated/clickhouse-clickhouse';
+export {
+  MatomoOrgMatomo,
+  MatomoOrgMatomoConfig,
+  createMatomoOrgMatomoInstance,
+  removeMatomoOrgMatomoInstance,
+  getMatomoOrgMatomoInstance
+} from './generated/matomo-org-matomo';
+export {
+  UmamiSoftwareUmami,
+  UmamiSoftwareUmamiConfig,
+  createUmamiSoftwareUmamiInstance,
+  removeUmamiSoftwareUmamiInstance,
+  getUmamiSoftwareUmamiInstance
+} from './generated/umami-software-umami';
