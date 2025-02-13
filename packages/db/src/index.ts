@@ -58,6 +58,22 @@ export interface DatabaseOpts {
 }
 
 /**
+ * @typedef {object} DatabaseOpts
+ * @property {string} [username] - The username for the database
+ * @property {string} [password] - The password for the database
+ * @property {string} [rootPassword] - The root password for the database
+ * @property {string} [database] - The database name
+ */
+
+/**
+ * Create a database instance if it does not exists
+ * and return the connection URL.
+ *
+ * @param {DatabaseType} type The type of the database.
+ * @param {string} name The name of the database instance.
+ * @param {DatabaseOpts} opts The options for the database.
+ * @returns The connection URL for the database.
+ *
  * @example
  * import { setupDatabase } from '@osaas/client-db';
  * import Redis from 'ioredis';
