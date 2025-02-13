@@ -27,7 +27,8 @@
   "dependencies": {
     "@osaas/client-core": "^0.15.1",
     "@osaas/client-services": "^0.8.0",
-    "chalk": "4.1.2"
+    "chalk": "4.1.2",
+    "ioredis": "^5.5.0"
   },
   "publishConfig": {
     "access": "public"
