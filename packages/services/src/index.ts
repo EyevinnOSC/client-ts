@@ -541,3 +541,17 @@ export {
   removeJgraphDrawioInstance,
   getJgraphDrawioInstance
 } from './generated/jgraph-drawio';
+export {
+  LmsCommunitySlimserver,
+  LmsCommunitySlimserverConfig,
+  createLmsCommunitySlimserverInstance,
+  removeLmsCommunitySlimserverInstance,
+  getLmsCommunitySlimserverInstance
+} from './generated/lms-community-slimserver';
+export {
+  ClickhouseClickhouse,
+  ClickhouseClickhouseConfig,
+  createClickhouseClickhouseInstance,
+  removeClickhouseClickhouseInstance,
+  getClickhouseClickhouseInstance
+} from './generated/clickhouse-clickhouse';

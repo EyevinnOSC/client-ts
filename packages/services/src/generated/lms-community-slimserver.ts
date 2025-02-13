@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance': {
-    /** List all running couchdb instances */
+  '/slimserverinstance': {
+    /** List all running slimserver instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the slimserver instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,7 +40,11 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            MusicBucketUrl?: string;
+            S3EndpointUrl?: string;
+            S3AccessKeyId?: string;
+            S3SecretAccessKey?: string;
+            S3Region?: string;
           }[];
         };
         /** Default Response */
@@ -52,14 +56,18 @@ export interface paths {
         };
       };
     };
-    /** Launch a new couchdb instance */
+    /** Launch a new slimserver instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the slimserver instance */
             name: string;
-            AdminPassword: string;
+            MusicBucketUrl?: string;
+            S3EndpointUrl?: string;
+            S3AccessKeyId?: string;
+            S3SecretAccessKey?: string;
+            S3Region?: string;
           };
         };
       };
@@ -67,7 +75,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the slimserver instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -85,7 +93,11 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            MusicBucketUrl?: string;
+            S3EndpointUrl?: string;
+            S3AccessKeyId?: string;
+            S3SecretAccessKey?: string;
+            S3Region?: string;
           };
         };
         /** Default Response */
@@ -112,12 +124,12 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance/{id}': {
-    /** Obtain status and resource URLs for an couchdb instance */
+  '/slimserverinstance/{id}': {
+    /** Obtain status and resource URLs for an slimserver instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the slimserver instance */
           id: string;
         };
       };
@@ -125,7 +137,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the slimserver instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -143,7 +155,11 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            MusicBucketUrl?: string;
+            S3EndpointUrl?: string;
+            S3AccessKeyId?: string;
+            S3SecretAccessKey?: string;
+            S3Region?: string;
           };
         };
         /** Default Response */
@@ -162,11 +178,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an couchdb instance */
+    /** Stop and remove an slimserver instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the slimserver instance */
           id: string;
         };
       };
@@ -186,11 +202,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of couchdb instance */
+    /** Return status of slimserver instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the slimserver instance */
           id: string;
         };
       };
@@ -213,7 +229,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the couchdb instance */
+    /** Return the latest logs from the slimserver instance */
     get: {
       parameters: {
         query: {
@@ -221,7 +237,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the slimserver instance */
           id: string;
         };
       };
@@ -241,11 +257,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for couchdb instance */
+    /** Return the exposed extra ports for slimserver instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the slimserver instance */
           id: string;
         };
       };
@@ -276,11 +292,11 @@ export interface operations {}
 
 export interface external {}
 
-export type ApacheCouchdb =
-  paths['/couchdbinstance/{id}']['get']['responses']['200']['schema'];
+export type LmsCommunitySlimserver =
+  paths['/slimserverinstance/{id}']['get']['responses']['200']['schema'];
 
-export type ApacheCouchdbConfig =
-  paths['/couchdbinstance']['post']['parameters']['body']['body'];
+export type LmsCommunitySlimserverConfig =
+  paths['/slimserverinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -289,87 +305,107 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace apache-couchdb
- * @description Unlock seamless data management with Apache CouchDB! Effortlessly scalable and highly available, CouchDB makes storing, retrieving, and syncing data across devices a breeze. Ideal for modern cloud apps!
+ * @namespace lms-community-slimserver
+ * @description Experience the ultimate audio streaming solution with Lyrion Music Server. Effortlessly stream local and internet music to any device, transforming your listening experience across platforms like Windows, macOS, and Linux.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-CouchDB.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} ApacheCouchdbConfig
- * @property {string} name - Name of couchdb
- * @property {string} AdminPassword - AdminPassword
+ * @typedef {Object} LmsCommunitySlimserverConfig
+ * @property {string} name - Name of slimserver
+ * @property {string} [MusicBucketUrl] - MusicBucketUrl
+ * @property {string} [S3EndpointUrl] - S3EndpointUrl
+ * @property {string} [S3AccessKeyId] - S3AccessKeyId
+ * @property {string} [S3SecretAccessKey] - S3SecretAccessKey
+ * @property {string} [S3Region] - S3Region
 
  * 
  */
 
 /**
- * @typedef {Object} ApacheCouchdb
- * @property {string} name - Name of the Couch DB instance
- * @property {string} url - URL of the Couch DB instance
+ * @typedef {Object} LmsCommunitySlimserver
+ * @property {string} name - Name of the Lyrion Music Server instance
+ * @property {string} url - URL of the Lyrion Music Server instance
  *
  */
 
 /**
- * Create a new Couch DB instance
+ * Create a new Lyrion Music Server instance
  *
- * @memberOf apache-couchdb
+ * @memberOf lms-community-slimserver
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {ApacheCouchdbConfig} body - Service instance configuration
- * @returns {ApacheCouchdb} - Service instance
+ * @param {LmsCommunitySlimserverConfig} body - Service instance configuration
+ * @returns {LmsCommunitySlimserver} - Service instance
  * @example
- * import { Context, createApacheCouchdbInstance } from '@osaas/client-services';
+ * import { Context, createLmsCommunitySlimserverInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createApacheCouchdbInstance(ctx, { name: 'myinstance' });
+ * const instance = await createLmsCommunitySlimserverInstance(ctx, { name: 'myinstance' });
  * console.log(instance.url);
  */
-export async function createApacheCouchdbInstance(
+export async function createLmsCommunitySlimserverInstance(
   ctx: Context,
-  body: ApacheCouchdbConfig
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
+  body: LmsCommunitySlimserverConfig
+): Promise<LmsCommunitySlimserver> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'lms-community-slimserver'
+  );
   const instance = await createInstance(
     ctx,
-    'apache-couchdb',
+    'lms-community-slimserver',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('apache-couchdb', instance.name, ctx);
+  await waitForInstanceReady('lms-community-slimserver', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Couch DB instance
+ * Remove a Lyrion Music Server instance
  *
- * @memberOf apache-couchdb
+ * @memberOf lms-community-slimserver
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be removed
+ * @param {string} name - Name of the slimserver to be removed
  */
-export async function removeApacheCouchdbInstance(
+export async function removeLmsCommunitySlimserverInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  await removeInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'lms-community-slimserver'
+  );
+  await removeInstance(
+    ctx,
+    'lms-community-slimserver',
+    name,
+    serviceAccessToken
+  );
 }
 
 /**
- * Get a Couch DB instance
+ * Get a Lyrion Music Server instance
  *
- * @memberOf apache-couchdb
+ * @memberOf lms-community-slimserver
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be retrieved
- * @returns {ApacheCouchdb} - Service instance
+ * @param {string} name - Name of the slimserver to be retrieved
+ * @returns {LmsCommunitySlimserver} - Service instance
  */
-export async function getApacheCouchdbInstance(
+export async function getLmsCommunitySlimserverInstance(
   ctx: Context,
   name: string
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  return await getInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+): Promise<LmsCommunitySlimserver> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'lms-community-slimserver'
+  );
+  return await getInstance(
+    ctx,
+    'lms-community-slimserver',
+    name,
+    serviceAccessToken
+  );
 }

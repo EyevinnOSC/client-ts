@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance': {
-    /** List all running couchdb instances */
+  '/clickhouseinstance': {
+    /** List all running clickhouse instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the clickhouse instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,7 +40,9 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            Db?: string;
+            User?: string;
+            Password?: string;
           }[];
         };
         /** Default Response */
@@ -52,14 +54,16 @@ export interface paths {
         };
       };
     };
-    /** Launch a new couchdb instance */
+    /** Launch a new clickhouse instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the clickhouse instance */
             name: string;
-            AdminPassword: string;
+            Db?: string;
+            User?: string;
+            Password?: string;
           };
         };
       };
@@ -67,7 +71,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the clickhouse instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -85,7 +89,9 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            Db?: string;
+            User?: string;
+            Password?: string;
           };
         };
         /** Default Response */
@@ -112,12 +118,12 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance/{id}': {
-    /** Obtain status and resource URLs for an couchdb instance */
+  '/clickhouseinstance/{id}': {
+    /** Obtain status and resource URLs for an clickhouse instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the clickhouse instance */
           id: string;
         };
       };
@@ -125,7 +131,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the clickhouse instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -143,7 +149,9 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            Db?: string;
+            User?: string;
+            Password?: string;
           };
         };
         /** Default Response */
@@ -162,11 +170,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an couchdb instance */
+    /** Stop and remove an clickhouse instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the clickhouse instance */
           id: string;
         };
       };
@@ -186,11 +194,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of couchdb instance */
+    /** Return status of clickhouse instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the clickhouse instance */
           id: string;
         };
       };
@@ -213,7 +221,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the couchdb instance */
+    /** Return the latest logs from the clickhouse instance */
     get: {
       parameters: {
         query: {
@@ -221,7 +229,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the clickhouse instance */
           id: string;
         };
       };
@@ -241,11 +249,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for couchdb instance */
+    /** Return the exposed extra ports for clickhouse instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the clickhouse instance */
           id: string;
         };
       };
@@ -276,11 +284,11 @@ export interface operations {}
 
 export interface external {}
 
-export type ApacheCouchdb =
-  paths['/couchdbinstance/{id}']['get']['responses']['200']['schema'];
+export type ClickhouseClickhouse =
+  paths['/clickhouseinstance/{id}']['get']['responses']['200']['schema'];
 
-export type ApacheCouchdbConfig =
-  paths['/couchdbinstance']['post']['parameters']['body']['body'];
+export type ClickhouseClickhouseConfig =
+  paths['/clickhouseinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -289,87 +297,100 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace apache-couchdb
- * @description Unlock seamless data management with Apache CouchDB! Effortlessly scalable and highly available, CouchDB makes storing, retrieving, and syncing data across devices a breeze. Ideal for modern cloud apps!
+ * @namespace clickhouse-clickhouse
+ * @description Unlock real-time data insights effortlessly with ClickHouse, the lightning-fast, open-source columnar database. Elevate your analytics and make data-driven decisions with speed and precision like never before!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-CouchDB.html|Online docs} for further information
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-ClickHouse.html|Online docs} for further information
  */
 
 /**
- * @typedef {Object} ApacheCouchdbConfig
- * @property {string} name - Name of couchdb
- * @property {string} AdminPassword - AdminPassword
+ * @typedef {Object} ClickhouseClickhouseConfig
+ * @property {string} name - Name of clickhouse
+ * @property {string} [Db] - Db
+ * @property {string} [User] - User
+ * @property {string} [Password] - Password
 
  * 
  */
 
 /**
- * @typedef {Object} ApacheCouchdb
- * @property {string} name - Name of the Couch DB instance
- * @property {string} url - URL of the Couch DB instance
+ * @typedef {Object} ClickhouseClickhouse
+ * @property {string} name - Name of the ClickHouse Server instance
+ * @property {string} url - URL of the ClickHouse Server instance
  *
  */
 
 /**
- * Create a new Couch DB instance
+ * Create a new ClickHouse Server instance
  *
- * @memberOf apache-couchdb
+ * @memberOf clickhouse-clickhouse
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {ApacheCouchdbConfig} body - Service instance configuration
- * @returns {ApacheCouchdb} - Service instance
+ * @param {ClickhouseClickhouseConfig} body - Service instance configuration
+ * @returns {ClickhouseClickhouse} - Service instance
  * @example
- * import { Context, createApacheCouchdbInstance } from '@osaas/client-services';
+ * import { Context, createClickhouseClickhouseInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createApacheCouchdbInstance(ctx, { name: 'myinstance' });
+ * const instance = await createClickhouseClickhouseInstance(ctx, { name: 'myinstance' });
  * console.log(instance.url);
  */
-export async function createApacheCouchdbInstance(
+export async function createClickhouseClickhouseInstance(
   ctx: Context,
-  body: ApacheCouchdbConfig
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
+  body: ClickhouseClickhouseConfig
+): Promise<ClickhouseClickhouse> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'clickhouse-clickhouse'
+  );
   const instance = await createInstance(
     ctx,
-    'apache-couchdb',
+    'clickhouse-clickhouse',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('apache-couchdb', instance.name, ctx);
+  await waitForInstanceReady('clickhouse-clickhouse', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Couch DB instance
+ * Remove a ClickHouse Server instance
  *
- * @memberOf apache-couchdb
+ * @memberOf clickhouse-clickhouse
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be removed
+ * @param {string} name - Name of the clickhouse-server to be removed
  */
-export async function removeApacheCouchdbInstance(
+export async function removeClickhouseClickhouseInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  await removeInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'clickhouse-clickhouse'
+  );
+  await removeInstance(ctx, 'clickhouse-clickhouse', name, serviceAccessToken);
 }
 
 /**
- * Get a Couch DB instance
+ * Get a ClickHouse Server instance
  *
- * @memberOf apache-couchdb
+ * @memberOf clickhouse-clickhouse
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be retrieved
- * @returns {ApacheCouchdb} - Service instance
+ * @param {string} name - Name of the clickhouse-server to be retrieved
+ * @returns {ClickhouseClickhouse} - Service instance
  */
-export async function getApacheCouchdbInstance(
+export async function getClickhouseClickhouseInstance(
   ctx: Context,
   name: string
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  return await getInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+): Promise<ClickhouseClickhouse> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'clickhouse-clickhouse'
+  );
+  return await getInstance(
+    ctx,
+    'clickhouse-clickhouse',
+    name,
+    serviceAccessToken
+  );
 }

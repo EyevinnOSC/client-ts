@@ -2647,3 +2647,73 @@ describe('removeJgraphDrawioInstance', () => {
     );
   });
 });
+
+describe('createLmsCommunitySlimserverInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createLmsCommunitySlimserverInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'lms-community-slimserver'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'lms-community-slimserver',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'lms-community-slimserver',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeLmsCommunitySlimserverInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeLmsCommunitySlimserverInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'lms-community-slimserver',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createClickhouseClickhouseInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createClickhouseClickhouseInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'clickhouse-clickhouse'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'clickhouse-clickhouse',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'clickhouse-clickhouse',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeClickhouseClickhouseInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeClickhouseClickhouseInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'clickhouse-clickhouse',
+      'sdk',
+      'token'
+    );
+  });
+});
