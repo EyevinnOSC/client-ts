@@ -1,6 +1,6 @@
 {
   "name": "@osaas/client-db",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Open Source Cloud Client SDK database library",
   "author": "Eyevinn Open Source Cloud <osc@eyevinn.se>",
   "homepage": "https://www.osaas.io",

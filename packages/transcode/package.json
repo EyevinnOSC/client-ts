@@ -1,6 +1,6 @@
 {
   "name": "@osaas/client-transcode",
-  "version": "0.15.3",
+  "version": "0.15.4",
   "description": "Open Source Cloud Client SDK transcode library",
   "author": "Eyevinn Open Source Cloud <osc@eyevinn.se>",
   "homepage": "https://www.osaas.io",
@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@osaas/client-core": "^0.15.1",
-    "@osaas/client-db": "^0.5.0",
+    "@osaas/client-db": "^0.5.1",
     "@osaas/client-services": "^0.9.0",
     "chalk": "4.1.2",
     "minio": "^8.0.2"
