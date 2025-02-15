@@ -188,8 +188,7 @@ export async function setupDatabase(
   switch (type) {
     case 'valkey':
     case 'postgres':
-    case 'mariadb':
-    case 'clickhouse': {
+    case 'mariadb': {
       const token = await ctx.getServiceAccessToken(
         DatabaseTypeToServiceId[type]
       );
@@ -215,6 +214,12 @@ export async function setupDatabase(
       const url = new URL(instance.url);
       url.password = (instance as any).AdminPassword;
       url.username = 'admin';
+      return url.toString();
+    }
+    case 'clickhouse': {
+      const url = new URL(instance.url);
+      url.username = opts.username || 'default';
+      url.password = opts.password || '';
       return url.toString();
     }
     default:
