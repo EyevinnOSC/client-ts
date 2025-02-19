@@ -152,3 +152,19 @@ PAT_SECRET=<pat-secret> osc admin list-instances eyevinn channel-engine
 ```
 PAT_SECRET=<pat-secret> osc --env dev admin remove-instance asdasd channel-engine mychannel
 ```
+
+### Store application configuration values as environment variables
+
+Configuration values managed by the Application Config Service can be stored as environment variable using this commmand.
+
+```bash
+% osc web config-to-env <config-instance-name>
+export AWS_ACCESS_KEY_ID=admin
+export CHANNELURL=https://eyevinnlab.ce.prod.osaas.io/channels/mychannel/master.m3u8
+```
+
+And storing it in the shell.
+
+```bash
+% eval `osc web config-to-env <config-instance-name>`
+```

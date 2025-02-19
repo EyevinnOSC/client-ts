@@ -1,6 +1,13 @@
-import { Context } from '@osaas/client-core';
+import { Context, getInstance } from '@osaas/client-core';
 import { createCloudfrontDistribution, publish } from '@osaas/client-web';
 import { Command } from 'commander';
+
+interface ConfigList {
+  offset: number;
+  limit: number;
+  total: number;
+  items: [{ key: string; value: string }];
+}
 
 export function cmdWeb() {
   const web = new Command('web');
@@ -57,6 +64,42 @@ export function cmdWeb() {
           console.log('CloudFront distribution created');
         } else {
           console.log('CDN provider not supported (available: cloudfront)');
+        }
+      } catch (err) {
+        console.log((err as Error).message);
+      }
+    });
+
+  web
+    .command('config-to-env')
+    .description(
+      'Load configuration from Application Config service and set as environment variables'
+    )
+    .argument(
+      '<configInstance>',
+      'Name of the application configuration service instance'
+    )
+    .action(async (configInstance, options, command) => {
+      try {
+        const globalOpts = command.optsWithGlobals();
+        const environment = globalOpts?.env || 'prod';
+        const ctx = new Context({ environment });
+        const token = await ctx.getServiceAccessToken('eyevinn-app-config-svc');
+        const instance = await getInstance(
+          ctx,
+          'eyevinn-app-config-svc',
+          configInstance,
+          token
+        );
+        if (instance) {
+          const url = new URL('/api/v1/config', instance.url);
+          const response = await fetch(url);
+          if (response.ok) {
+            const data: ConfigList = (await response.json()) as ConfigList;
+            data.items.map((config) => {
+              console.log(`export ${config.key.toUpperCase()}=${config.value}`);
+            });
+          }
         }
       } catch (err) {
         console.log((err as Error).message);
