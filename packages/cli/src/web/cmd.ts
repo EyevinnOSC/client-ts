@@ -1,4 +1,11 @@
-import { Context, getInstance } from '@osaas/client-core';
+import {
+  Context,
+  createInstance,
+  getInstance,
+  getPortsForInstance,
+  removeInstance,
+  waitForInstanceReady
+} from '@osaas/client-core';
 import { createCloudfrontDistribution, publish } from '@osaas/client-web';
 import { Command } from 'commander';
 
@@ -64,6 +71,113 @@ export function cmdWeb() {
           console.log('CloudFront distribution created');
         } else {
           console.log('CDN provider not supported (available: cloudfront)');
+        }
+      } catch (err) {
+        console.log((err as Error).message);
+      }
+    });
+
+  web
+    .command('config-create')
+    .description('Create a configuration service instance')
+    .argument('<name>', 'Name of the configuration service instance')
+    .action(async (name, options, command) => {
+      try {
+        const globalOpts = command.optsWithGlobals();
+        const environment = globalOpts?.env || 'prod';
+        const ctx = new Context({ environment });
+        const configToken = await ctx.getServiceAccessToken(
+          'eyevinn-app-config-svc'
+        );
+        let configInstance = await getInstance(
+          ctx,
+          'eyevinn-app-config-svc',
+          name,
+          configToken
+        );
+        if (!configInstance) {
+          const valkeyToken = await ctx.getServiceAccessToken(
+            'valkey-io-valkey'
+          );
+          let valkeyInstance = await getInstance(
+            ctx,
+            'valkey-io-valkey',
+            name,
+            valkeyToken
+          );
+          if (!valkeyInstance) {
+            valkeyInstance = await createInstance(
+              ctx,
+              'valkey-io-valkey',
+              valkeyToken,
+              {
+                name
+              }
+            );
+            await waitForInstanceReady('valkey-io-valkey', name, ctx);
+          }
+          const ports = await getPortsForInstance(
+            ctx,
+            'valkey-io-valkey',
+            name,
+            valkeyToken
+          );
+          const redisPort = ports.find((port) => port.internalPort == 6379);
+          if (!redisPort) {
+            throw new Error(`Failed to get redis port for instance ${name}`);
+          }
+          configInstance = await createInstance(
+            ctx,
+            'eyevinn-app-config-svc',
+            configToken,
+            {
+              name,
+              RedisUrl: `redis://${redisPort.externalIp}:${redisPort.externalPort}`
+            }
+          );
+          await waitForInstanceReady('eyevinn-app-config-svc', name, ctx);
+        }
+        console.log(
+          `Configuration service instance available at ${configInstance.url}`
+        );
+      } catch (err) {
+        console.log((err as Error).message);
+      }
+    });
+
+  web
+    .command('config-delete')
+    .description('Delete a configuration service instance')
+    .argument('<name>', 'Name of the configuration service instance')
+    .option('--data', 'Delete config data')
+    .action(async (name, options, command) => {
+      try {
+        const globalOpts = command.optsWithGlobals();
+        const environment = globalOpts?.env || 'prod';
+        const ctx = new Context({ environment });
+        const configToken = await ctx.getServiceAccessToken(
+          'eyevinn-app-config-svc'
+        );
+        const configInstance = await getInstance(
+          ctx,
+          'eyevinn-app-config-svc',
+          name,
+          configToken
+        );
+        if (configInstance) {
+          await removeInstance(
+            ctx,
+            'eyevinn-app-config-svc',
+            name,
+            configToken
+          );
+          if (options.data) {
+            console.log('Deleting config data...');
+            const valkeyToken = await ctx.getServiceAccessToken(
+              'valkey-io-valkey'
+            );
+            await removeInstance(ctx, 'valkey-io-valkey', name, valkeyToken);
+          }
         }
       } catch (err) {
         console.log((err as Error).message);
