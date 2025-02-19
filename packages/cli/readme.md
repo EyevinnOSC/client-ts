@@ -153,6 +153,21 @@ PAT_SECRET=<pat-secret> osc admin list-instances eyevinn channel-engine
 PAT_SECRET=<pat-secret> osc --env dev admin remove-instance asdasd channel-engine mychannel
 ```
 
+### Create application configuration service instance
+
+To manage configuration values for an application we can create an instance of an Application Config Service.
+
+```bash
+% osc web config-create jonastest
+Configuration service instance available at https://eyevinnlab-jonastest.eyevinn-app-config-svc.auto.prod.osaas.io
+```
+
+And to remove it (with the data)
+
+```bash
+% osc web config-delete --data jonastest
+```
+
 ### Store application configuration values as environment variables
 
 Configuration values managed by the Application Config Service can be stored as environment variable using this commmand.
