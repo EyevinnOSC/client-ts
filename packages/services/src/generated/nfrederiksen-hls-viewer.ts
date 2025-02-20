@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/web-runnerinstance': {
-    /** List all running web-runner instances */
+  '/hls-viewerinstance': {
+    /** List all running hls-viewer instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the web-runner instance */
+            /** @description Name of the hls-viewer instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,10 +40,6 @@ export interface paths {
                 url: string;
               };
             };
-            GitHubUrl: string;
-            GitHubToken: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
           }[];
         };
         /** Default Response */
@@ -55,17 +51,13 @@ export interface paths {
         };
       };
     };
-    /** Launch a new web-runner instance */
+    /** Launch a new hls-viewer instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the web-runner instance */
+            /** @description Name of the hls-viewer instance */
             name: string;
-            GitHubUrl: string;
-            GitHubToken: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
           };
         };
       };
@@ -73,7 +65,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the web-runner instance */
+            /** @description Name of the hls-viewer instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -91,10 +83,6 @@ export interface paths {
                 url: string;
               };
             };
-            GitHubUrl: string;
-            GitHubToken: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
           };
         };
         /** Default Response */
@@ -121,12 +109,12 @@ export interface paths {
       };
     };
   };
-  '/web-runnerinstance/{id}': {
-    /** Obtain status and resource URLs for an web-runner instance */
+  '/hls-viewerinstance/{id}': {
+    /** Obtain status and resource URLs for an hls-viewer instance */
     get: {
       parameters: {
         path: {
-          /** Name of the web-runner instance */
+          /** Name of the hls-viewer instance */
           id: string;
         };
       };
@@ -134,7 +122,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the web-runner instance */
+            /** @description Name of the hls-viewer instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -152,10 +140,6 @@ export interface paths {
                 url: string;
               };
             };
-            GitHubUrl: string;
-            GitHubToken: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
           };
         };
         /** Default Response */
@@ -174,11 +158,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an web-runner instance */
+    /** Stop and remove an hls-viewer instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the web-runner instance */
+          /** Name of the hls-viewer instance */
           id: string;
         };
       };
@@ -198,11 +182,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of web-runner instance */
+    /** Return status of hls-viewer instance */
     get: {
       parameters: {
         path: {
-          /** Name of the web-runner instance */
+          /** Name of the hls-viewer instance */
           id: string;
         };
       };
@@ -225,7 +209,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the web-runner instance */
+    /** Return the latest logs from the hls-viewer instance */
     get: {
       parameters: {
         query: {
@@ -233,7 +217,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the web-runner instance */
+          /** Name of the hls-viewer instance */
           id: string;
         };
       };
@@ -253,11 +237,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for web-runner instance */
+    /** Return the exposed extra ports for hls-viewer instance */
     get: {
       parameters: {
         path: {
-          /** Name of the web-runner instance */
+          /** Name of the hls-viewer instance */
           id: string;
         };
       };
@@ -288,11 +272,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnWebRunner =
-  paths['/web-runnerinstance/{id}']['get']['responses']['200']['schema'];
+export type NfrederiksenHlsViewer =
+  paths['/hls-viewerinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnWebRunnerConfig =
-  paths['/web-runnerinstance']['post']['parameters']['body']['body'];
+export type NfrederiksenHlsViewerConfig =
+  paths['/hls-viewerinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -301,96 +285,102 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-web-runner
- * @description Effortlessly deploy NodeJS web apps with Web-Runner! This Docker container seamlessly handles cloning, building, and running your GitHub repositories. Simplify your deployment process today!
+ * @namespace nfrederiksen-hls-viewer
+ * @description Effortlessly inspect and analyze HLS playlist manifests directly in your browser. No installation needed—just paste your URL and dive into comprehensive metrics with ease. Ideal for streamlined streaming analysis!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Web-Runner.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} EyevinnWebRunnerConfig
- * @property {string} name - Name of web-runner
- * @property {string} GitHubUrl - GitHubUrl
- * @property {string} GitHubToken - GitHubToken
- * @property {string} [OscAccessToken] - OscAccessToken
- * @property {string} [ConfigService] - ConfigService
+ * @typedef {Object} NfrederiksenHlsViewerConfig
+ * @property {string} name - Name of hls-viewer
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnWebRunner
- * @property {string} name - Name of the Web Runner instance
- * @property {string} url - URL of the Web Runner instance
+ * @typedef {Object} NfrederiksenHlsViewer
+ * @property {string} name - Name of the HLS Playlist Viewer instance
+ * @property {string} url - URL of the HLS Playlist Viewer instance
  *
  */
 
 /**
- * Create a new Web Runner instance
+ * Create a new HLS Playlist Viewer instance
  *
- * @memberOf eyevinn-web-runner
+ * @memberOf nfrederiksen-hls-viewer
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnWebRunnerConfig} body - Service instance configuration
- * @returns {EyevinnWebRunner} - Service instance
+ * @param {NfrederiksenHlsViewerConfig} body - Service instance configuration
+ * @returns {NfrederiksenHlsViewer} - Service instance
  * @example
- * import { Context, createEyevinnWebRunnerInstance } from '@osaas/client-services';
+ * import { Context, createNfrederiksenHlsViewerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnWebRunnerInstance(ctx, { name: 'myinstance' });
+ * const instance = await createNfrederiksenHlsViewerInstance(ctx, { name: 'myinstance' });
  * console.log(instance.url);
  */
-export async function createEyevinnWebRunnerInstance(
+export async function createNfrederiksenHlsViewerInstance(
   ctx: Context,
-  body: EyevinnWebRunnerConfig
-): Promise<EyevinnWebRunner> {
+  body: NfrederiksenHlsViewerConfig
+): Promise<NfrederiksenHlsViewer> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-web-runner'
+    'nfrederiksen-hls-viewer'
   );
   const instance = await createInstance(
     ctx,
-    'eyevinn-web-runner',
+    'nfrederiksen-hls-viewer',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-web-runner', instance.name, ctx);
+  await waitForInstanceReady('nfrederiksen-hls-viewer', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Web Runner instance
+ * Remove a HLS Playlist Viewer instance
  *
- * @memberOf eyevinn-web-runner
+ * @memberOf nfrederiksen-hls-viewer
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the web-runner to be removed
+ * @param {string} name - Name of the viewer to be removed
  */
-export async function removeEyevinnWebRunnerInstance(
+export async function removeNfrederiksenHlsViewerInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-web-runner'
+    'nfrederiksen-hls-viewer'
   );
-  await removeInstance(ctx, 'eyevinn-web-runner', name, serviceAccessToken);
+  await removeInstance(
+    ctx,
+    'nfrederiksen-hls-viewer',
+    name,
+    serviceAccessToken
+  );
 }
 
 /**
- * Get a Web Runner instance
+ * Get a HLS Playlist Viewer instance
  *
- * @memberOf eyevinn-web-runner
+ * @memberOf nfrederiksen-hls-viewer
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the web-runner to be retrieved
- * @returns {EyevinnWebRunner} - Service instance
+ * @param {string} name - Name of the viewer to be retrieved
+ * @returns {NfrederiksenHlsViewer} - Service instance
  */
-export async function getEyevinnWebRunnerInstance(
+export async function getNfrederiksenHlsViewerInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnWebRunner> {
+): Promise<NfrederiksenHlsViewer> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-web-runner'
+    'nfrederiksen-hls-viewer'
   );
-  return await getInstance(ctx, 'eyevinn-web-runner', name, serviceAccessToken);
+  return await getInstance(
+    ctx,
+    'nfrederiksen-hls-viewer',
+    name,
+    serviceAccessToken
+  );
 }

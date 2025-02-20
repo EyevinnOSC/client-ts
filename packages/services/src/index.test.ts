@@ -2785,3 +2785,38 @@ describe('removeUmamiSoftwareUmamiInstance', () => {
     );
   });
 });
+
+describe('createNfrederiksenHlsViewerInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createNfrederiksenHlsViewerInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'nfrederiksen-hls-viewer'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'nfrederiksen-hls-viewer',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'nfrederiksen-hls-viewer',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeNfrederiksenHlsViewerInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeNfrederiksenHlsViewerInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'nfrederiksen-hls-viewer',
+      'sdk',
+      'token'
+    );
+  });
+});

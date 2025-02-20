@@ -569,3 +569,10 @@ export {
   removeUmamiSoftwareUmamiInstance,
   getUmamiSoftwareUmamiInstance
 } from './generated/umami-software-umami';
+export {
+  NfrederiksenHlsViewer,
+  NfrederiksenHlsViewerConfig,
+  createNfrederiksenHlsViewerInstance,
+  removeNfrederiksenHlsViewerInstance,
+  getNfrederiksenHlsViewerInstance
+} from './generated/nfrederiksen-hls-viewer';

@@ -303,7 +303,7 @@ import {
 Join our Slack community for support and customization. Contact sales@eyevinn.se for further development and support. Visit Eyevinn Technology for innovative video solutions.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/User-Guide:-Cloud-Intercom.html|Online docs} for further information
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Intercom.html|Online docs} for further information
  */
 
 /**

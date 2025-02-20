@@ -44,6 +44,7 @@ export interface paths {
             awsAccessKeyId?: string;
             awsSecretAccessKey?: string;
             awsRegion?: string;
+            s3Endpoint?: string;
           }[];
         };
         /** Default Response */
@@ -66,6 +67,7 @@ export interface paths {
             awsAccessKeyId?: string;
             awsSecretAccessKey?: string;
             awsRegion?: string;
+            s3Endpoint?: string;
           };
         };
       };
@@ -95,6 +97,7 @@ export interface paths {
             awsAccessKeyId?: string;
             awsSecretAccessKey?: string;
             awsRegion?: string;
+            s3Endpoint?: string;
           };
         };
         /** Default Response */
@@ -156,6 +159,7 @@ export interface paths {
             awsAccessKeyId?: string;
             awsSecretAccessKey?: string;
             awsRegion?: string;
+            s3Endpoint?: string;
           };
         };
         /** Default Response */
@@ -315,6 +319,7 @@ import {
  * @property {string} [awsAccessKeyId] - AwsAccessKeyId
  * @property {string} [awsSecretAccessKey] - AwsSecretAccessKey
  * @property {string} [awsRegion] - AwsRegion
+ * @property {string} [s3Endpoint] - S3Endpoint
 
  * 
  */
