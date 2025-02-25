@@ -13,6 +13,8 @@ export interface TranscodeOptions {
   callBackUrl?: URL;
   baseName?: string;
   profile?: string;
+  seekTo?: number;
+  duration?: number;
   frameRate?: number;
   injectIDRKeyFrames?: IDRKeyFrame[];
 }
@@ -44,6 +46,8 @@ export function smpteTimecodeToFrames(
  * @property {URL} [callBackUrl] - Callback URL to receive progress
  * @property {string} [baseName] - Base name for the output files (prefix)
  * @property {string} [profile] - Profile to use for transcoding
+ * @property {number} [seekTo] - Seek to position in seconds
+ * @property {number} [duration] - Duration in seconds
  * @property {number} [frameRate] - Frame rate of the input video (required when injecting IDR key frames)
  * @property {IDRKeyFrame[]} [injectIDRKeyFrames] - List of SMPTE timecodes for IDR key frames
  */
@@ -89,11 +93,13 @@ export async function transcode(ctx: Context, opts: TranscodeOptions) {
     profile,
     baseName,
     outputFolder: opts.outputUrl.toString(),
+    duration: opts.duration !== undefined ? opts.duration : undefined,
     inputs: [
       {
         type: 'AudioVideo',
         copyTs: true,
-        uri: opts.inputUrl.toString()
+        uri: opts.inputUrl.toString(),
+        seekTo: opts.seekTo !== undefined ? opts.seekTo : undefined
       }
     ]
   };
