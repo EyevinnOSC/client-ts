@@ -39,7 +39,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Create OSC job to sync vector store
         run: |
-          npx -y @osaas/cli@latest remove eyevinn-s3-sync-vectorstore ghsync
+          npx -y @osaas/cli@latest remove -y eyevinn-s3-sync-vectorstore ghsync
           npx -y @osaas/cli@latest create eyevinn-s3-sync-vectorstore ghsync \
             -o cmdLineArgs="s3://origin-osaas-client-jsdocs/ vs_67c84ced60c48191affdb63969dd5494" \
             -o OpenaiApiKey="{{secrets.openaikey}}" \
