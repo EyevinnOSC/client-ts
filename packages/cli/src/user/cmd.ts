@@ -126,6 +126,7 @@ export function cmdRemove() {
     .description('Remove a service instance')
     .argument('<serviceId>', 'The Service Id')
     .argument('<name>', 'The instance name')
+    .option('-y, --yes', 'Skip confirmation')
     .action(async (serviceId, name, options, command) => {
       try {
         const globalOpts = command.optsWithGlobals();
@@ -133,7 +134,9 @@ export function cmdRemove() {
         const ctx = new Context({ environment });
         const serviceAccessToken = await ctx.getServiceAccessToken(serviceId);
 
-        await confirm(`Are you sure you want to remove ${name}? (yes/no) `);
+        if (!options.yes) {
+          await confirm(`Are you sure you want to remove ${name}? (yes/no) `);
+        }
         await removeInstance(ctx, serviceId, name, serviceAccessToken);
         console.log('Instance removed');
       } catch (err) {
