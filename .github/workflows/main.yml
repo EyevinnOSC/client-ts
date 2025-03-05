@@ -45,7 +45,27 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.S3_AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: 'eu-north-1'
           SOURCE_DIR: 'docs/'
-  
+  rag:
+    needs: docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: https://registry.npmjs.org/
+      - name: Create OSC job to sync vector store
+        run: |
+          npx -y @osaas/cli@latest remove -y eyevinn-s3-sync-vectorstore ghsync
+          npx -y @osaas/cli@latest create eyevinn-s3-sync-vectorstore ghsync \
+            -o cmdLineArgs="s3://origin-osaas-client-jsdocs/ vs_67c84ced60c48191affdb63969dd5494" \
+            -o OpenaiApiKey="{{secrets.openaikey}}" \
+            -o AwsRegion="eu-north-1" \
+            -o AwsAccessKeyId="{{secrets.accesskeyid}}" \
+            -o AwsSecretAccessKey="{{secrets.secretaccesskey}}"
+        env:
+          OSC_ACCESS_TOKEN: ${{ secrets.OSC_ACCESS_TOKEN }}
+
   publish-image:
     if: "contains(github.event.head_commit.message, 'chore(release): publish') || contains(github.event.head_commit.message, 'chore(release): image')"
     runs-on: ubuntu-latest
