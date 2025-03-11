@@ -13,4 +13,4 @@ export {
 } from './live';
 export { SubtitlingPool } from './subtitling';
 export { createVodPipeline, removeVodPipeline, createVod } from './vodpipeline';
-export { transcode } from './transcode';
+export { transcode, getTranscodeJob } from './transcode';
