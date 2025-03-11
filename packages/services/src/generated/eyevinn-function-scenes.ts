@@ -203,10 +203,12 @@ import {
  * @param {EyevinnFunctionScenesConfig} body - Service instance configuration
  * @returns {EyevinnFunctionScenes} - Service instance
  * @example
- * import { Context, createEyevinnFunctionScenesInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnFunctionScenesInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnFunctionScenesInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnFunctionScenesConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnFunctionScenesInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnFunctionScenesInstance(
@@ -257,6 +259,13 @@ export async function removeEyevinnFunctionScenesInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the mediafunction to be retrieved
  * @returns {EyevinnFunctionScenes} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnFunctionScenesInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnFunctionScenesInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnFunctionScenesInstance(
   ctx: Context,

@@ -315,10 +315,12 @@ import {
  * @param {Alexbj7590stvConfig} body - Service instance configuration
  * @returns {Alexbj7590stv} - Service instance
  * @example
- * import { Context, createAlexbj7590stvInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createAlexbj7590stvInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createAlexbj7590stvInstance(ctx, { name: 'myinstance' });
+ * const body: Alexbj7590stvConfig = { name: 'myinstance', ... };
+ * const instance = await createAlexbj7590stvInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createAlexbj7590stvInstance(
@@ -360,6 +362,13 @@ export async function removeAlexbj7590stvInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the 90stv to be retrieved
  * @returns {Alexbj7590stv} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getAlexbj7590stvInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getAlexbj7590stvInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getAlexbj7590stvInstance(
   ctx: Context,

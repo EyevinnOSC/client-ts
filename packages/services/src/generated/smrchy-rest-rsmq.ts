@@ -322,10 +322,12 @@ Easily integrate with rsmq for efficient message queuing. No security worries, j
  * @param {SmrchyRestRsmqConfig} body - Service instance configuration
  * @returns {SmrchyRestRsmq} - Service instance
  * @example
- * import { Context, createSmrchyRestRsmqInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createSmrchyRestRsmqInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createSmrchyRestRsmqInstance(ctx, { name: 'myinstance' });
+ * const body: SmrchyRestRsmqConfig = { name: 'myinstance', ... };
+ * const instance = await createSmrchyRestRsmqInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createSmrchyRestRsmqInstance(
@@ -371,6 +373,13 @@ export async function removeSmrchyRestRsmqInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the message-queue to be retrieved
  * @returns {SmrchyRestRsmq} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getSmrchyRestRsmqInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getSmrchyRestRsmqInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getSmrchyRestRsmqInstance(
   ctx: Context,

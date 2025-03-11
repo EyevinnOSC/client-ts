@@ -465,13 +465,6 @@ export {
   getEyevinnPdsAdminInstance
 } from './generated/eyevinn-pds-admin';
 export {
-  EyevinnCeSampleWebhook,
-  EyevinnCeSampleWebhookConfig,
-  createEyevinnCeSampleWebhookInstance,
-  removeEyevinnCeSampleWebhookInstance,
-  getEyevinnCeSampleWebhookInstance
-} from './generated/eyevinn-ce-sample-webhook';
-export {
   DrawdbIoDrawdb,
   DrawdbIoDrawdbConfig,
   createDrawdbIoDrawdbInstance,
@@ -576,3 +569,59 @@ export {
   removeNfrederiksenHlsViewerInstance,
   getNfrederiksenHlsViewerInstance
 } from './generated/nfrederiksen-hls-viewer';
+export {
+  EyevinnOpenauthPwd,
+  EyevinnOpenauthPwdConfig,
+  createEyevinnOpenauthPwdInstance,
+  removeEyevinnOpenauthPwdInstance,
+  getEyevinnOpenauthPwdInstance
+} from './generated/eyevinn-openauth-pwd';
+export {
+  EyevinnPlayerAnalyticsEventsink,
+  EyevinnPlayerAnalyticsEventsinkConfig,
+  createEyevinnPlayerAnalyticsEventsinkInstance,
+  removeEyevinnPlayerAnalyticsEventsinkInstance,
+  getEyevinnPlayerAnalyticsEventsinkInstance
+} from './generated/eyevinn-player-analytics-eventsink';
+export {
+  EyevinnImgAltGen,
+  EyevinnImgAltGenConfig,
+  createEyevinnImgAltGenInstance,
+  removeEyevinnImgAltGenInstance,
+  getEyevinnImgAltGenInstance
+} from './generated/eyevinn-img-alt-gen';
+export {
+  EmedvedevSlackinExtended,
+  EmedvedevSlackinExtendedConfig,
+  createEmedvedevSlackinExtendedInstance,
+  removeEmedvedevSlackinExtendedInstance,
+  getEmedvedevSlackinExtendedInstance
+} from './generated/emedvedev-slackin-extended';
+export {
+  EyevinnEphtokenSvc,
+  EyevinnEphtokenSvcConfig,
+  createEyevinnEphtokenSvcInstance,
+  removeEyevinnEphtokenSvcInstance,
+  getEyevinnEphtokenSvcInstance
+} from './generated/eyevinn-ephtoken-svc';
+export {
+  PostgrestPostgrest,
+  PostgrestPostgrestConfig,
+  createPostgrestPostgrestInstance,
+  removePostgrestPostgrestInstance,
+  getPostgrestPostgrestInstance
+} from './generated/postgrest-postgrest';
+export {
+  LogflareLogflare,
+  LogflareLogflareConfig,
+  createLogflareLogflareInstance,
+  removeLogflareLogflareInstance,
+  getLogflareLogflareInstance
+} from './generated/logflare-logflare';
+export {
+  EyevinnPlayerAnalyticsWorker,
+  EyevinnPlayerAnalyticsWorkerConfig,
+  createEyevinnPlayerAnalyticsWorkerInstance,
+  removeEyevinnPlayerAnalyticsWorkerInstance,
+  getEyevinnPlayerAnalyticsWorkerInstance
+} from './generated/eyevinn-player-analytics-worker';

@@ -279,10 +279,12 @@ import {
  * @param {BbcBraveConfig} body - Service instance configuration
  * @returns {BbcBrave} - Service instance
  * @example
- * import { Context, createBbcBraveInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createBbcBraveInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createBbcBraveInstance(ctx, { name: 'myinstance' });
+ * const body: BbcBraveConfig = { name: 'myinstance', ... };
+ * const instance = await createBbcBraveInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createBbcBraveInstance(
@@ -324,6 +326,13 @@ export async function removeBbcBraveInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the mixer to be retrieved
  * @returns {BbcBrave} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getBbcBraveInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getBbcBraveInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getBbcBraveInstance(
   ctx: Context,

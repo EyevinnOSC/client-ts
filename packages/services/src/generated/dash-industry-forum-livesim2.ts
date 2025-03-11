@@ -315,10 +315,12 @@ import {
  * @param {DashIndustryForumLivesim2Config} body - Service instance configuration
  * @returns {DashIndustryForumLivesim2} - Service instance
  * @example
- * import { Context, createDashIndustryForumLivesim2Instance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createDashIndustryForumLivesim2Instance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createDashIndustryForumLivesim2Instance(ctx, { name: 'myinstance' });
+ * const body: DashIndustryForumLivesim2Config = { name: 'myinstance', ... };
+ * const instance = await createDashIndustryForumLivesim2Instance(ctx, body);
  * console.log(instance.url);
  */
 export async function createDashIndustryForumLivesim2Instance(
@@ -373,6 +375,13 @@ export async function removeDashIndustryForumLivesim2Instance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the livesimulators to be retrieved
  * @returns {DashIndustryForumLivesim2} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getDashIndustryForumLivesim2Instance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getDashIndustryForumLivesim2Instance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getDashIndustryForumLivesim2Instance(
   ctx: Context,

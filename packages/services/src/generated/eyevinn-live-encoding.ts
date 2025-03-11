@@ -330,10 +330,12 @@ import {
  * @param {EyevinnLiveEncodingConfig} body - Service instance configuration
  * @returns {EyevinnLiveEncoding} - Service instance
  * @example
- * import { Context, createEyevinnLiveEncodingInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnLiveEncodingInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnLiveEncodingInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnLiveEncodingConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnLiveEncodingInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnLiveEncodingInstance(
@@ -379,6 +381,13 @@ export async function removeEyevinnLiveEncodingInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the encoder to be retrieved
  * @returns {EyevinnLiveEncoding} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnLiveEncodingInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnLiveEncodingInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnLiveEncodingInstance(
   ctx: Context,

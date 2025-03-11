@@ -315,10 +315,12 @@ import {
  * @param {BwallbergKingsAndPigsTsConfig} body - Service instance configuration
  * @returns {BwallbergKingsAndPigsTs} - Service instance
  * @example
- * import { Context, createBwallbergKingsAndPigsTsInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createBwallbergKingsAndPigsTsInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createBwallbergKingsAndPigsTsInstance(ctx, { name: 'myinstance' });
+ * const body: BwallbergKingsAndPigsTsConfig = { name: 'myinstance', ... };
+ * const instance = await createBwallbergKingsAndPigsTsInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createBwallbergKingsAndPigsTsInstance(
@@ -369,6 +371,13 @@ export async function removeBwallbergKingsAndPigsTsInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the kings-and-pigs-ts to be retrieved
  * @returns {BwallbergKingsAndPigsTs} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getBwallbergKingsAndPigsTsInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getBwallbergKingsAndPigsTsInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getBwallbergKingsAndPigsTsInstance(
   ctx: Context,

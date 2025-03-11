@@ -252,10 +252,12 @@ import {
  * @param {EyevinnCastReceiverConfig} body - Service instance configuration
  * @returns {EyevinnCastReceiver} - Service instance
  * @example
- * import { Context, createEyevinnCastReceiverInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnCastReceiverInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnCastReceiverInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnCastReceiverConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnCastReceiverInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnCastReceiverInstance(
@@ -301,6 +303,13 @@ export async function removeEyevinnCastReceiverInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the receiver to be retrieved
  * @returns {EyevinnCastReceiver} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnCastReceiverInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnCastReceiverInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnCastReceiverInstance(
   ctx: Context,

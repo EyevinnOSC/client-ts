@@ -345,10 +345,12 @@ import {
  * @param {EyevinnChannelEngineBridgeConfig} body - Service instance configuration
  * @returns {EyevinnChannelEngineBridge} - Service instance
  * @example
- * import { Context, createEyevinnChannelEngineBridgeInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnChannelEngineBridgeInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnChannelEngineBridgeInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnChannelEngineBridgeConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnChannelEngineBridgeInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnChannelEngineBridgeInstance(
@@ -403,6 +405,13 @@ export async function removeEyevinnChannelEngineBridgeInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the channel-engine-bridge to be retrieved
  * @returns {EyevinnChannelEngineBridge} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnChannelEngineBridgeInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnChannelEngineBridgeInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnChannelEngineBridgeInstance(
   ctx: Context,

@@ -325,10 +325,12 @@ import {
  * @param {ItzgDockerMinecraftServerConfig} body - Service instance configuration
  * @returns {ItzgDockerMinecraftServer} - Service instance
  * @example
- * import { Context, createItzgDockerMinecraftServerInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createItzgDockerMinecraftServerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createItzgDockerMinecraftServerInstance(ctx, { name: 'myinstance' });
+ * const body: ItzgDockerMinecraftServerConfig = { name: 'myinstance', ... };
+ * const instance = await createItzgDockerMinecraftServerInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createItzgDockerMinecraftServerInstance(
@@ -383,6 +385,13 @@ export async function removeItzgDockerMinecraftServerInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the minecraft-server to be retrieved
  * @returns {ItzgDockerMinecraftServer} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getItzgDockerMinecraftServerInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getItzgDockerMinecraftServerInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getItzgDockerMinecraftServerInstance(
   ctx: Context,

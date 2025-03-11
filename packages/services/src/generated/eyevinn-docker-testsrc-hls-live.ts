@@ -315,10 +315,12 @@ import {
  * @param {EyevinnDockerTestsrcHlsLiveConfig} body - Service instance configuration
  * @returns {EyevinnDockerTestsrcHlsLive} - Service instance
  * @example
- * import { Context, createEyevinnDockerTestsrcHlsLiveInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnDockerTestsrcHlsLiveInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnDockerTestsrcHlsLiveInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnDockerTestsrcHlsLiveConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnDockerTestsrcHlsLiveInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnDockerTestsrcHlsLiveInstance(
@@ -373,6 +375,13 @@ export async function removeEyevinnDockerTestsrcHlsLiveInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the testsource to be retrieved
  * @returns {EyevinnDockerTestsrcHlsLive} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnDockerTestsrcHlsLiveInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnDockerTestsrcHlsLiveInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnDockerTestsrcHlsLiveInstance(
   ctx: Context,

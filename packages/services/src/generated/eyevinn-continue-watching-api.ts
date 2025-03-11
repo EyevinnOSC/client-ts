@@ -247,10 +247,12 @@ import {
  * @param {EyevinnContinueWatchingApiConfig} body - Service instance configuration
  * @returns {EyevinnContinueWatchingApi} - Service instance
  * @example
- * import { Context, createEyevinnContinueWatchingApiInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnContinueWatchingApiInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnContinueWatchingApiInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnContinueWatchingApiConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnContinueWatchingApiInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnContinueWatchingApiInstance(
@@ -305,6 +307,13 @@ export async function removeEyevinnContinueWatchingApiInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the service to be retrieved
  * @returns {EyevinnContinueWatchingApi} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnContinueWatchingApiInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnContinueWatchingApiInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnContinueWatchingApiInstance(
   ctx: Context,

@@ -289,7 +289,7 @@ import {
  * @description Service to monitor one or more HLS-streams for manifest errors and inconsistencies.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://github.com/Eyevinn/hls-monitor|Online docs} for further information
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-HLS-Stream-Monitor.html|Online docs} for further information
  */
 
 /**
@@ -315,10 +315,12 @@ import {
  * @param {EyevinnHlsMonitorConfig} body - Service instance configuration
  * @returns {EyevinnHlsMonitor} - Service instance
  * @example
- * import { Context, createEyevinnHlsMonitorInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnHlsMonitorInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnHlsMonitorInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnHlsMonitorConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnHlsMonitorInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnHlsMonitorInstance(
@@ -364,6 +366,13 @@ export async function removeEyevinnHlsMonitorInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the monitor to be retrieved
  * @returns {EyevinnHlsMonitor} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnHlsMonitorInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnHlsMonitorInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnHlsMonitorInstance(
   ctx: Context,

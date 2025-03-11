@@ -315,10 +315,12 @@ import {
  * @param {JoeldelpilarTicTacVueConfig} body - Service instance configuration
  * @returns {JoeldelpilarTicTacVue} - Service instance
  * @example
- * import { Context, createJoeldelpilarTicTacVueInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createJoeldelpilarTicTacVueInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createJoeldelpilarTicTacVueInstance(ctx, { name: 'myinstance' });
+ * const body: JoeldelpilarTicTacVueConfig = { name: 'myinstance', ... };
+ * const instance = await createJoeldelpilarTicTacVueInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createJoeldelpilarTicTacVueInstance(
@@ -369,6 +371,13 @@ export async function removeJoeldelpilarTicTacVueInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the tic-tac-vue to be retrieved
  * @returns {JoeldelpilarTicTacVue} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getJoeldelpilarTicTacVueInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getJoeldelpilarTicTacVueInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getJoeldelpilarTicTacVueInstance(
   ctx: Context,

@@ -320,10 +320,12 @@ import {
  * @param {Alexbj75MovierecommendatorConfig} body - Service instance configuration
  * @returns {Alexbj75Movierecommendator} - Service instance
  * @example
- * import { Context, createAlexbj75MovierecommendatorInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createAlexbj75MovierecommendatorInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createAlexbj75MovierecommendatorInstance(ctx, { name: 'myinstance' });
+ * const body: Alexbj75MovierecommendatorConfig = { name: 'myinstance', ... };
+ * const instance = await createAlexbj75MovierecommendatorInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createAlexbj75MovierecommendatorInstance(
@@ -374,6 +376,13 @@ export async function removeAlexbj75MovierecommendatorInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the movierecommendator to be retrieved
  * @returns {Alexbj75Movierecommendator} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getAlexbj75MovierecommendatorInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getAlexbj75MovierecommendatorInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getAlexbj75MovierecommendatorInstance(
   ctx: Context,

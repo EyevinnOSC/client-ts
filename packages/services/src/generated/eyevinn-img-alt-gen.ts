@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/livegoinstance': {
-    /** List all running livego instances */
+  '/img-alt-geninstance': {
+    /** List all running img-alt-gen instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the livego instance */
+            /** @description Name of the img-alt-gen instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,21 +40,26 @@ export interface paths {
                 url: string;
               };
             };
+            OpenaiApiKey: string;
           }[];
         };
         /** Default Response */
         500: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
-    /** Launch a new livego instance */
+    /** Launch a new img-alt-gen instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the livego instance */
+            /** @description Name of the img-alt-gen instance */
             name: string;
+            OpenaiApiKey: string;
           };
         };
       };
@@ -62,7 +67,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the livego instance */
+            /** @description Name of the img-alt-gen instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -80,21 +85,39 @@ export interface paths {
                 url: string;
               };
             };
+            OpenaiApiKey: string;
+          };
+        };
+        /** Default Response */
+        403: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        409: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
           };
         };
         /** Default Response */
         500: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
   };
-  '/livegoinstance/{id}': {
-    /** Obtain status and resource URLs for an livego instance */
+  '/img-alt-geninstance/{id}': {
+    /** Obtain status and resource URLs for an img-alt-gen instance */
     get: {
       parameters: {
         path: {
-          /** Name of the livego instance */
+          /** Name of the img-alt-gen instance */
           id: string;
         };
       };
@@ -102,7 +125,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the livego instance */
+            /** @description Name of the img-alt-gen instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -120,23 +143,30 @@ export interface paths {
                 url: string;
               };
             };
+            OpenaiApiKey: string;
           };
         };
         /** Default Response */
         404: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
         /** Default Response */
         500: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
-    /** Stop and remove an livego instance */
+    /** Stop and remove an img-alt-gen instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the livego instance */
+          /** Name of the img-alt-gen instance */
           id: string;
         };
       };
@@ -147,17 +177,20 @@ export interface paths {
         };
         /** Default Response */
         500: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
   };
   '/health/{id}': {
-    /** Return status of livego instance */
+    /** Return status of img-alt-gen instance */
     get: {
       parameters: {
         path: {
-          /** Name of the livego instance */
+          /** Name of the img-alt-gen instance */
           id: string;
         };
       };
@@ -171,13 +204,16 @@ export interface paths {
         };
         /** Default Response */
         500: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the livego instance */
+    /** Return the latest logs from the img-alt-gen instance */
     get: {
       parameters: {
         query: {
@@ -185,7 +221,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the livego instance */
+          /** Name of the img-alt-gen instance */
           id: string;
         };
       };
@@ -196,17 +232,20 @@ export interface paths {
         };
         /** Default Response */
         500: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for livego instance */
+    /** Return the exposed extra ports for img-alt-gen instance */
     get: {
       parameters: {
         path: {
-          /** Name of the livego instance */
+          /** Name of the img-alt-gen instance */
           id: string;
         };
       };
@@ -221,7 +260,10 @@ export interface paths {
         };
         /** Default Response */
         500: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
@@ -234,11 +276,11 @@ export interface operations {}
 
 export interface external {}
 
-export type GwuhaolinLivego =
-  paths['/livegoinstance/{id}']['get']['responses']['200']['schema'];
+export type EyevinnImgAltGen =
+  paths['/img-alt-geninstance/{id}']['get']['responses']['200']['schema'];
 
-export type GwuhaolinLivegoConfig =
-  paths['/livegoinstance']['post']['parameters']['body']['body'];
+export type EyevinnImgAltGenConfig =
+  paths['/img-alt-geninstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -247,101 +289,107 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace gwuhaolin-livego
- * @description Experience the power of simplicity and efficiency with our live broadcast server! Easy to install and use, built in pure Golang for high performance. Supports RTMP, AMF, HLS, HTTP-FLV protocols, FLV, TS containers, H264, AAC, MP3 encoding formats. Stream and playback seamlessly with just a few simple steps. Get your hands on this amazing product now!
+ * @namespace eyevinn-img-alt-gen
+ * @description Enhance image accessibility effortlessly with our Image Description Generator. Utilize OpenAI's prowess to create precise alt tags instantly, making your visuals more inclusive and SEO-friendly!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- *
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Image-Description-Generator.html|Online docs} for further information
  */
 
 /**
- * @typedef {Object} GwuhaolinLivegoConfig
- * @property {string} name - Name of livego
+ * @typedef {Object} EyevinnImgAltGenConfig
+ * @property {string} name - Name of img-alt-gen
+ * @property {string} OpenaiApiKey - OpenaiApiKey
 
  * 
  */
 
 /**
- * @typedef {Object} GwuhaolinLivego
- * @property {string} name - Name of the Livego instance
- * @property {string} url - URL of the Livego instance
+ * @typedef {Object} EyevinnImgAltGen
+ * @property {string} name - Name of the Image Description Generator instance
+ * @property {string} url - URL of the Image Description Generator instance
  *
  */
 
 /**
- * Create a new Livego instance
+ * Create a new Image Description Generator instance
  *
- * @memberOf gwuhaolin-livego
+ * @memberOf eyevinn-img-alt-gen
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {GwuhaolinLivegoConfig} body - Service instance configuration
- * @returns {GwuhaolinLivego} - Service instance
+ * @param {EyevinnImgAltGenConfig} body - Service instance configuration
+ * @returns {EyevinnImgAltGen} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createGwuhaolinLivegoInstance } from '@osaas/client-services';
+ * import { createEyevinnImgAltGenInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: GwuhaolinLivegoConfig = { name: 'myinstance', ... };
- * const instance = await createGwuhaolinLivegoInstance(ctx, body);
+ * const body: EyevinnImgAltGenConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnImgAltGenInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createGwuhaolinLivegoInstance(
+export async function createEyevinnImgAltGenInstance(
   ctx: Context,
-  body: GwuhaolinLivegoConfig
-): Promise<GwuhaolinLivego> {
+  body: EyevinnImgAltGenConfig
+): Promise<EyevinnImgAltGen> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'gwuhaolin-livego'
+    'eyevinn-img-alt-gen'
   );
   const instance = await createInstance(
     ctx,
-    'gwuhaolin-livego',
+    'eyevinn-img-alt-gen',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('gwuhaolin-livego', instance.name, ctx);
+  await waitForInstanceReady('eyevinn-img-alt-gen', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Livego instance
+ * Remove a Image Description Generator instance
  *
- * @memberOf gwuhaolin-livego
+ * @memberOf eyevinn-img-alt-gen
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the livego to be removed
+ * @param {string} name - Name of the generator to be removed
  */
-export async function removeGwuhaolinLivegoInstance(
+export async function removeEyevinnImgAltGenInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'gwuhaolin-livego'
+    'eyevinn-img-alt-gen'
   );
-  await removeInstance(ctx, 'gwuhaolin-livego', name, serviceAccessToken);
+  await removeInstance(ctx, 'eyevinn-img-alt-gen', name, serviceAccessToken);
 }
 
 /**
- * Get a Livego instance
+ * Get a Image Description Generator instance
  *
- * @memberOf gwuhaolin-livego
+ * @memberOf eyevinn-img-alt-gen
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the livego to be retrieved
- * @returns {GwuhaolinLivego} - Service instance
+ * @param {string} name - Name of the generator to be retrieved
+ * @returns {EyevinnImgAltGen} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getGwuhaolinLivegoInstance } from '@osaas/client-services';
+ * import { getEyevinnImgAltGenInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getGwuhaolinLivegoInstance(ctx, 'myinstance');
+ * const instance = await getEyevinnImgAltGenInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getGwuhaolinLivegoInstance(
+export async function getEyevinnImgAltGenInstance(
   ctx: Context,
   name: string
-): Promise<GwuhaolinLivego> {
+): Promise<EyevinnImgAltGen> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'gwuhaolin-livego'
+    'eyevinn-img-alt-gen'
   );
-  return await getInstance(ctx, 'gwuhaolin-livego', name, serviceAccessToken);
+  return await getInstance(
+    ctx,
+    'eyevinn-img-alt-gen',
+    name,
+    serviceAccessToken
+  );
 }

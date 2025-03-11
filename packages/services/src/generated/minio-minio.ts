@@ -325,10 +325,12 @@ import {
  * @param {MinioMinioConfig} body - Service instance configuration
  * @returns {MinioMinio} - Service instance
  * @example
- * import { Context, createMinioMinioInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createMinioMinioInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createMinioMinioInstance(ctx, { name: 'myinstance' });
+ * const body: MinioMinioConfig = { name: 'myinstance', ... };
+ * const instance = await createMinioMinioInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createMinioMinioInstance(
@@ -370,6 +372,13 @@ export async function removeMinioMinioInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the objstorage to be retrieved
  * @returns {MinioMinio} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getMinioMinioInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getMinioMinioInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getMinioMinioInstance(
   ctx: Context,

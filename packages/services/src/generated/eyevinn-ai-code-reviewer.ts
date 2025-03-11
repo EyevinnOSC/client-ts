@@ -325,10 +325,12 @@ import {
  * @param {EyevinnAiCodeReviewerConfig} body - Service instance configuration
  * @returns {EyevinnAiCodeReviewer} - Service instance
  * @example
- * import { Context, createEyevinnAiCodeReviewerInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnAiCodeReviewerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnAiCodeReviewerInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnAiCodeReviewerConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnAiCodeReviewerInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnAiCodeReviewerInstance(
@@ -379,6 +381,13 @@ export async function removeEyevinnAiCodeReviewerInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the code-reviewer to be retrieved
  * @returns {EyevinnAiCodeReviewer} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnAiCodeReviewerInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnAiCodeReviewerInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnAiCodeReviewerInstance(
   ctx: Context,

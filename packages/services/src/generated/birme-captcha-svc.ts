@@ -315,10 +315,12 @@ import {
  * @param {BirmeCaptchaSvcConfig} body - Service instance configuration
  * @returns {BirmeCaptchaSvc} - Service instance
  * @example
- * import { Context, createBirmeCaptchaSvcInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createBirmeCaptchaSvcInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createBirmeCaptchaSvcInstance(ctx, { name: 'myinstance' });
+ * const body: BirmeCaptchaSvcConfig = { name: 'myinstance', ... };
+ * const instance = await createBirmeCaptchaSvcInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createBirmeCaptchaSvcInstance(
@@ -364,6 +366,13 @@ export async function removeBirmeCaptchaSvcInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the service to be retrieved
  * @returns {BirmeCaptchaSvc} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getBirmeCaptchaSvcInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getBirmeCaptchaSvcInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getBirmeCaptchaSvcInstance(
   ctx: Context,

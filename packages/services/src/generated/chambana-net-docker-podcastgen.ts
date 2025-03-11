@@ -315,10 +315,12 @@ import {
  * @param {ChambanaNetDockerPodcastgenConfig} body - Service instance configuration
  * @returns {ChambanaNetDockerPodcastgen} - Service instance
  * @example
- * import { Context, createChambanaNetDockerPodcastgenInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createChambanaNetDockerPodcastgenInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createChambanaNetDockerPodcastgenInstance(ctx, { name: 'myinstance' });
+ * const body: ChambanaNetDockerPodcastgenConfig = { name: 'myinstance', ... };
+ * const instance = await createChambanaNetDockerPodcastgenInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createChambanaNetDockerPodcastgenInstance(
@@ -373,6 +375,13 @@ export async function removeChambanaNetDockerPodcastgenInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the podcast-generator to be retrieved
  * @returns {ChambanaNetDockerPodcastgen} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getChambanaNetDockerPodcastgenInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getChambanaNetDockerPodcastgenInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getChambanaNetDockerPodcastgenInstance(
   ctx: Context,

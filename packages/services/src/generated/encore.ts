@@ -469,10 +469,12 @@ import {
  * @param {EncoreConfig} body - Service instance configuration
  * @returns {Encore} - Service instance
  * @example
- * import { Context, createEncoreInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEncoreInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEncoreInstance(ctx, { name: 'myinstance' });
+ * const body: EncoreConfig = { name: 'myinstance', ... };
+ * const instance = await createEncoreInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEncoreInstance(
@@ -514,6 +516,13 @@ export async function removeEncoreInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the queue to be retrieved
  * @returns {Encore} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEncoreInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEncoreInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEncoreInstance(
   ctx: Context,

@@ -325,10 +325,12 @@ import {
  * @param {UsefathomFathomConfig} body - Service instance configuration
  * @returns {UsefathomFathom} - Service instance
  * @example
- * import { Context, createUsefathomFathomInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createUsefathomFathomInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createUsefathomFathomInstance(ctx, { name: 'myinstance' });
+ * const body: UsefathomFathomConfig = { name: 'myinstance', ... };
+ * const instance = await createUsefathomFathomInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createUsefathomFathomInstance(
@@ -374,6 +376,13 @@ export async function removeUsefathomFathomInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the collector to be retrieved
  * @returns {UsefathomFathom} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getUsefathomFathomInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getUsefathomFathomInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getUsefathomFathomInstance(
   ctx: Context,

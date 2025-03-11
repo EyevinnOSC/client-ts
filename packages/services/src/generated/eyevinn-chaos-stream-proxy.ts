@@ -320,10 +320,12 @@ import {
  * @param {EyevinnChaosStreamProxyConfig} body - Service instance configuration
  * @returns {EyevinnChaosStreamProxy} - Service instance
  * @example
- * import { Context, createEyevinnChaosStreamProxyInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnChaosStreamProxyInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnChaosStreamProxyInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnChaosStreamProxyConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnChaosStreamProxyInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnChaosStreamProxyInstance(
@@ -374,6 +376,13 @@ export async function removeEyevinnChaosStreamProxyInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the chaos-stream-proxy to be retrieved
  * @returns {EyevinnChaosStreamProxy} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnChaosStreamProxyInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnChaosStreamProxyInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnChaosStreamProxyInstance(
   ctx: Context,

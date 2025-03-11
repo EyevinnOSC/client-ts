@@ -315,10 +315,12 @@ import {
  * @param {DicedbDiceConfig} body - Service instance configuration
  * @returns {DicedbDice} - Service instance
  * @example
- * import { Context, createDicedbDiceInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createDicedbDiceInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createDicedbDiceInstance(ctx, { name: 'myinstance' });
+ * const body: DicedbDiceConfig = { name: 'myinstance', ... };
+ * const instance = await createDicedbDiceInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createDicedbDiceInstance(
@@ -360,6 +362,13 @@ export async function removeDicedbDiceInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the dice to be retrieved
  * @returns {DicedbDice} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getDicedbDiceInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getDicedbDiceInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getDicedbDiceInstance(
   ctx: Context,

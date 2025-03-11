@@ -306,10 +306,10 @@ import {
 } from '@osaas/client-core';
 /**
  * @namespace eyevinn-auto-subtitles
- * @description Automatically generate subtitles from an input audio or video file using Open AI Whisper.
+ * @description Effortlessly transform audio and video files into accurate subtitles with Automatic Subtitle Generator. Utilizing Open AI Whisper, enjoy seamless integration to transcribe and format content efficiently.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://github.com/Eyevinn/auto-subtitles#endpoints|Online docs} for further information
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Subtitle-Generator.html|Online docs} for further information
  */
 
 /**
@@ -340,10 +340,12 @@ import {
  * @param {EyevinnAutoSubtitlesConfig} body - Service instance configuration
  * @returns {EyevinnAutoSubtitles} - Service instance
  * @example
- * import { Context, createEyevinnAutoSubtitlesInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnAutoSubtitlesInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnAutoSubtitlesInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnAutoSubtitlesConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnAutoSubtitlesInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnAutoSubtitlesInstance(
@@ -389,6 +391,13 @@ export async function removeEyevinnAutoSubtitlesInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the generator to be retrieved
  * @returns {EyevinnAutoSubtitles} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnAutoSubtitlesInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnAutoSubtitlesInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnAutoSubtitlesInstance(
   ctx: Context,

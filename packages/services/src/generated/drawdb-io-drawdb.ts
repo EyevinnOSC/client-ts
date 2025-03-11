@@ -315,10 +315,12 @@ import {
  * @param {DrawdbIoDrawdbConfig} body - Service instance configuration
  * @returns {DrawdbIoDrawdb} - Service instance
  * @example
- * import { Context, createDrawdbIoDrawdbInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createDrawdbIoDrawdbInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createDrawdbIoDrawdbInstance(ctx, { name: 'myinstance' });
+ * const body: DrawdbIoDrawdbConfig = { name: 'myinstance', ... };
+ * const instance = await createDrawdbIoDrawdbInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createDrawdbIoDrawdbInstance(
@@ -364,6 +366,13 @@ export async function removeDrawdbIoDrawdbInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the editor to be retrieved
  * @returns {DrawdbIoDrawdb} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getDrawdbIoDrawdbInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getDrawdbIoDrawdbInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getDrawdbIoDrawdbInstance(
   ctx: Context,

@@ -320,10 +320,12 @@ import {
  * @param {ErnestocaroccaHelloWorldConfig} body - Service instance configuration
  * @returns {ErnestocaroccaHelloWorld} - Service instance
  * @example
- * import { Context, createErnestocaroccaHelloWorldInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createErnestocaroccaHelloWorldInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createErnestocaroccaHelloWorldInstance(ctx, { name: 'myinstance' });
+ * const body: ErnestocaroccaHelloWorldConfig = { name: 'myinstance', ... };
+ * const instance = await createErnestocaroccaHelloWorldInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createErnestocaroccaHelloWorldInstance(
@@ -374,6 +376,13 @@ export async function removeErnestocaroccaHelloWorldInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the example to be retrieved
  * @returns {ErnestocaroccaHelloWorld} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getErnestocaroccaHelloWorldInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getErnestocaroccaHelloWorldInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getErnestocaroccaHelloWorldInstance(
   ctx: Context,

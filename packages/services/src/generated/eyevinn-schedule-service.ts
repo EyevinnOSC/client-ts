@@ -247,10 +247,12 @@ import {
  * @param {EyevinnScheduleServiceConfig} body - Service instance configuration
  * @returns {EyevinnScheduleService} - Service instance
  * @example
- * import { Context, createEyevinnScheduleServiceInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnScheduleServiceInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnScheduleServiceInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnScheduleServiceConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnScheduleServiceInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnScheduleServiceInstance(
@@ -301,6 +303,13 @@ export async function removeEyevinnScheduleServiceInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the scheduler to be retrieved
  * @returns {EyevinnScheduleService} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnScheduleServiceInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnScheduleServiceInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnScheduleServiceInstance(
   ctx: Context,

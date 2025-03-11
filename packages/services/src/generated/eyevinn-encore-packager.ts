@@ -370,10 +370,12 @@ import {
  * @param {EyevinnEncorePackagerConfig} body - Service instance configuration
  * @returns {EyevinnEncorePackager} - Service instance
  * @example
- * import { Context, createEyevinnEncorePackagerInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnEncorePackagerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnEncorePackagerInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnEncorePackagerConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnEncorePackagerInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnEncorePackagerInstance(
@@ -424,6 +426,13 @@ export async function removeEyevinnEncorePackagerInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the packager to be retrieved
  * @returns {EyevinnEncorePackager} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnEncorePackagerInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnEncorePackagerInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnEncorePackagerInstance(
   ctx: Context,

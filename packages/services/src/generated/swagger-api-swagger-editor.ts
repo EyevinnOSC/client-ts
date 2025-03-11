@@ -320,10 +320,12 @@ import {
  * @param {SwaggerApiSwaggerEditorConfig} body - Service instance configuration
  * @returns {SwaggerApiSwaggerEditor} - Service instance
  * @example
- * import { Context, createSwaggerApiSwaggerEditorInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createSwaggerApiSwaggerEditorInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createSwaggerApiSwaggerEditorInstance(ctx, { name: 'myinstance' });
+ * const body: SwaggerApiSwaggerEditorConfig = { name: 'myinstance', ... };
+ * const instance = await createSwaggerApiSwaggerEditorInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createSwaggerApiSwaggerEditorInstance(
@@ -374,6 +376,13 @@ export async function removeSwaggerApiSwaggerEditorInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the editor to be retrieved
  * @returns {SwaggerApiSwaggerEditor} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getSwaggerApiSwaggerEditorInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getSwaggerApiSwaggerEditorInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getSwaggerApiSwaggerEditorInstance(
   ctx: Context,

@@ -335,10 +335,12 @@ import {
  * @param {EyevinnSmbWhipBridgeConfig} body - Service instance configuration
  * @returns {EyevinnSmbWhipBridge} - Service instance
  * @example
- * import { Context, createEyevinnSmbWhipBridgeInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnSmbWhipBridgeInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnSmbWhipBridgeInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnSmbWhipBridgeConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnSmbWhipBridgeInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnSmbWhipBridgeInstance(
@@ -389,6 +391,13 @@ export async function removeEyevinnSmbWhipBridgeInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the gateway to be retrieved
  * @returns {EyevinnSmbWhipBridge} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnSmbWhipBridgeInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnSmbWhipBridgeInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnSmbWhipBridgeInstance(
   ctx: Context,

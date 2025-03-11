@@ -320,10 +320,12 @@ import {
  * @param {UmamiSoftwareUmamiConfig} body - Service instance configuration
  * @returns {UmamiSoftwareUmami} - Service instance
  * @example
- * import { Context, createUmamiSoftwareUmamiInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createUmamiSoftwareUmamiInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createUmamiSoftwareUmamiInstance(ctx, { name: 'myinstance' });
+ * const body: UmamiSoftwareUmamiConfig = { name: 'myinstance', ... };
+ * const instance = await createUmamiSoftwareUmamiInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createUmamiSoftwareUmamiInstance(
@@ -369,6 +371,13 @@ export async function removeUmamiSoftwareUmamiInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the umami to be retrieved
  * @returns {UmamiSoftwareUmami} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getUmamiSoftwareUmamiInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getUmamiSoftwareUmamiInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getUmamiSoftwareUmamiInstance(
   ctx: Context,

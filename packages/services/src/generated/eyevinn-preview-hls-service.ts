@@ -203,10 +203,12 @@ import {
  * @param {EyevinnPreviewHlsServiceConfig} body - Service instance configuration
  * @returns {EyevinnPreviewHlsService} - Service instance
  * @example
- * import { Context, createEyevinnPreviewHlsServiceInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnPreviewHlsServiceInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnPreviewHlsServiceInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnPreviewHlsServiceConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnPreviewHlsServiceInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnPreviewHlsServiceInstance(
@@ -257,6 +259,13 @@ export async function removeEyevinnPreviewHlsServiceInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the preview-generator to be retrieved
  * @returns {EyevinnPreviewHlsService} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnPreviewHlsServiceInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnPreviewHlsServiceInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnPreviewHlsServiceInstance(
   ctx: Context,

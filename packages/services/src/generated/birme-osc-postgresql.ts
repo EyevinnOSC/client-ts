@@ -44,6 +44,7 @@ export interface paths {
             PostgresUser?: string;
             PostgresDb?: string;
             PostgresInitDbArgs?: string;
+            PostgresInitDbSql?: string;
           }[];
         };
         /** Default Response */
@@ -66,6 +67,7 @@ export interface paths {
             PostgresUser?: string;
             PostgresDb?: string;
             PostgresInitDbArgs?: string;
+            PostgresInitDbSql?: string;
           };
         };
       };
@@ -95,6 +97,7 @@ export interface paths {
             PostgresUser?: string;
             PostgresDb?: string;
             PostgresInitDbArgs?: string;
+            PostgresInitDbSql?: string;
           };
         };
         /** Default Response */
@@ -156,6 +159,7 @@ export interface paths {
             PostgresUser?: string;
             PostgresDb?: string;
             PostgresInitDbArgs?: string;
+            PostgresInitDbSql?: string;
           };
         };
         /** Default Response */
@@ -315,6 +319,7 @@ import {
  * @property {string} [PostgresUser] - PostgresUser
  * @property {string} [PostgresDb] - PostgresDb
  * @property {string} [PostgresInitDbArgs] - PostgresInitDbArgs
+ * @property {string} [PostgresInitDbSql] - PostgresInitDbSql
 
  * 
  */
@@ -335,10 +340,12 @@ import {
  * @param {BirmeOscPostgresqlConfig} body - Service instance configuration
  * @returns {BirmeOscPostgresql} - Service instance
  * @example
- * import { Context, createBirmeOscPostgresqlInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createBirmeOscPostgresqlInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createBirmeOscPostgresqlInstance(ctx, { name: 'myinstance' });
+ * const body: BirmeOscPostgresqlConfig = { name: 'myinstance', ... };
+ * const instance = await createBirmeOscPostgresqlInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createBirmeOscPostgresqlInstance(
@@ -384,6 +391,13 @@ export async function removeBirmeOscPostgresqlInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the psql-db to be retrieved
  * @returns {BirmeOscPostgresql} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getBirmeOscPostgresqlInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getBirmeOscPostgresqlInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getBirmeOscPostgresqlInstance(
   ctx: Context,

@@ -325,10 +325,12 @@ import {
  * @param {PlausibleAnalyticsConfig} body - Service instance configuration
  * @returns {PlausibleAnalytics} - Service instance
  * @example
- * import { Context, createPlausibleAnalyticsInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createPlausibleAnalyticsInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createPlausibleAnalyticsInstance(ctx, { name: 'myinstance' });
+ * const body: PlausibleAnalyticsConfig = { name: 'myinstance', ... };
+ * const instance = await createPlausibleAnalyticsInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createPlausibleAnalyticsInstance(
@@ -374,6 +376,13 @@ export async function removePlausibleAnalyticsInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the server to be retrieved
  * @returns {PlausibleAnalytics} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getPlausibleAnalyticsInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getPlausibleAnalyticsInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getPlausibleAnalyticsInstance(
   ctx: Context,

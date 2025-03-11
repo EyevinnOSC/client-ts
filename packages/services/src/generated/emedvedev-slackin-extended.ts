@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/filestashinstance': {
-    /** List all running filestash instances */
+  '/slackin-extendedinstance': {
+    /** List all running slackin-extended instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the filestash instance */
+            /** @description Name of the slackin-extended instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,11 +40,13 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword?: string;
-            ConfigSecret?: string;
-            DropboxClientId?: string;
-            GdriveClientId?: string;
-            GdriveClientSecret?: string;
+            SlackWorkspaceId: string;
+            SlackApiToken: string;
+            SlackInviteUrl?: string;
+            RecaptchaSecret?: string;
+            RecaptchaSitekey?: string;
+            Theme?: string;
+            CoCUrl?: string;
           }[];
         };
         /** Default Response */
@@ -56,18 +58,20 @@ export interface paths {
         };
       };
     };
-    /** Launch a new filestash instance */
+    /** Launch a new slackin-extended instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the filestash instance */
+            /** @description Name of the slackin-extended instance */
             name: string;
-            AdminPassword?: string;
-            ConfigSecret?: string;
-            DropboxClientId?: string;
-            GdriveClientId?: string;
-            GdriveClientSecret?: string;
+            SlackWorkspaceId: string;
+            SlackApiToken: string;
+            SlackInviteUrl?: string;
+            RecaptchaSecret?: string;
+            RecaptchaSitekey?: string;
+            Theme?: string;
+            CoCUrl?: string;
           };
         };
       };
@@ -75,7 +79,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the filestash instance */
+            /** @description Name of the slackin-extended instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -93,11 +97,13 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword?: string;
-            ConfigSecret?: string;
-            DropboxClientId?: string;
-            GdriveClientId?: string;
-            GdriveClientSecret?: string;
+            SlackWorkspaceId: string;
+            SlackApiToken: string;
+            SlackInviteUrl?: string;
+            RecaptchaSecret?: string;
+            RecaptchaSitekey?: string;
+            Theme?: string;
+            CoCUrl?: string;
           };
         };
         /** Default Response */
@@ -124,12 +130,12 @@ export interface paths {
       };
     };
   };
-  '/filestashinstance/{id}': {
-    /** Obtain status and resource URLs for an filestash instance */
+  '/slackin-extendedinstance/{id}': {
+    /** Obtain status and resource URLs for an slackin-extended instance */
     get: {
       parameters: {
         path: {
-          /** Name of the filestash instance */
+          /** Name of the slackin-extended instance */
           id: string;
         };
       };
@@ -137,7 +143,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the filestash instance */
+            /** @description Name of the slackin-extended instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -155,11 +161,13 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword?: string;
-            ConfigSecret?: string;
-            DropboxClientId?: string;
-            GdriveClientId?: string;
-            GdriveClientSecret?: string;
+            SlackWorkspaceId: string;
+            SlackApiToken: string;
+            SlackInviteUrl?: string;
+            RecaptchaSecret?: string;
+            RecaptchaSitekey?: string;
+            Theme?: string;
+            CoCUrl?: string;
           };
         };
         /** Default Response */
@@ -178,11 +186,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an filestash instance */
+    /** Stop and remove an slackin-extended instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the filestash instance */
+          /** Name of the slackin-extended instance */
           id: string;
         };
       };
@@ -202,11 +210,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of filestash instance */
+    /** Return status of slackin-extended instance */
     get: {
       parameters: {
         path: {
-          /** Name of the filestash instance */
+          /** Name of the slackin-extended instance */
           id: string;
         };
       };
@@ -229,7 +237,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the filestash instance */
+    /** Return the latest logs from the slackin-extended instance */
     get: {
       parameters: {
         query: {
@@ -237,7 +245,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the filestash instance */
+          /** Name of the slackin-extended instance */
           id: string;
         };
       };
@@ -257,11 +265,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for filestash instance */
+    /** Return the exposed extra ports for slackin-extended instance */
     get: {
       parameters: {
         path: {
-          /** Name of the filestash instance */
+          /** Name of the slackin-extended instance */
           id: string;
         };
       };
@@ -292,11 +300,11 @@ export interface operations {}
 
 export interface external {}
 
-export type MickaelKerjeanFilestash =
-  paths['/filestashinstance/{id}']['get']['responses']['200']['schema'];
+export type EmedvedevSlackinExtended =
+  paths['/slackin-extendedinstance/{id}']['get']['responses']['200']['schema'];
 
-export type MickaelKerjeanFilestashConfig =
-  paths['/filestashinstance']['post']['parameters']['body']['body'];
+export type EmedvedevSlackinExtendedConfig =
+  paths['/slackin-extendedinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -305,115 +313,117 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace mickael-kerjean-filestash
- * @description Transform your data management with Filestash, a versatile file manager that integrates seamlessly with multiple cloud services and protocols. Enjoy blazing speed, user-friendly interfaces, and plugin flexibility.
+ * @namespace emedvedev-slackin-extended
+ * @description Boost your Slack community engagement with Slackin-Extended! Our customizable platform offers real-time user tracking, effortless invites, and abuse prevention. Enhance user experience with personalized themes and simple integration options. Perfect for building and maintaining a vibrant online community!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Filestash.html|Online docs} for further information
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Slackin.html|Online docs} for further information
  */
 
 /**
- * @typedef {Object} MickaelKerjeanFilestashConfig
- * @property {string} name - Name of filestash
- * @property {string} [AdminPassword] - AdminPassword
- * @property {string} [ConfigSecret] - ConfigSecret
- * @property {string} [DropboxClientId] - DropboxClientId
- * @property {string} [GdriveClientId] - GdriveClientId
- * @property {string} [GdriveClientSecret] - GdriveClientSecret
+ * @typedef {Object} EmedvedevSlackinExtendedConfig
+ * @property {string} name - Name of slackin-extended
+ * @property {string} SlackWorkspaceId - SlackWorkspaceId
+ * @property {string} SlackApiToken - SlackApiToken
+ * @property {string} [SlackInviteUrl] - SlackInviteUrl
+ * @property {string} [RecaptchaSecret] - RecaptchaSecret
+ * @property {string} [RecaptchaSitekey] - RecaptchaSitekey
+ * @property {string} [Theme] - Theme
+ * @property {string} [CoCUrl] - CoCUrl
 
  * 
  */
 
 /**
- * @typedef {Object} MickaelKerjeanFilestash
- * @property {string} name - Name of the Filestash instance
- * @property {string} url - URL of the Filestash instance
+ * @typedef {Object} EmedvedevSlackinExtended
+ * @property {string} name - Name of the Slackin instance
+ * @property {string} url - URL of the Slackin instance
  *
  */
 
 /**
- * Create a new Filestash instance
+ * Create a new Slackin instance
  *
- * @memberOf mickael-kerjean-filestash
+ * @memberOf emedvedev-slackin-extended
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {MickaelKerjeanFilestashConfig} body - Service instance configuration
- * @returns {MickaelKerjeanFilestash} - Service instance
+ * @param {EmedvedevSlackinExtendedConfig} body - Service instance configuration
+ * @returns {EmedvedevSlackinExtended} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createMickaelKerjeanFilestashInstance } from '@osaas/client-services';
+ * import { createEmedvedevSlackinExtendedInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: MickaelKerjeanFilestashConfig = { name: 'myinstance', ... };
- * const instance = await createMickaelKerjeanFilestashInstance(ctx, body);
+ * const body: EmedvedevSlackinExtendedConfig = { name: 'myinstance', ... };
+ * const instance = await createEmedvedevSlackinExtendedInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createMickaelKerjeanFilestashInstance(
+export async function createEmedvedevSlackinExtendedInstance(
   ctx: Context,
-  body: MickaelKerjeanFilestashConfig
-): Promise<MickaelKerjeanFilestash> {
+  body: EmedvedevSlackinExtendedConfig
+): Promise<EmedvedevSlackinExtended> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'mickael-kerjean-filestash'
+    'emedvedev-slackin-extended'
   );
   const instance = await createInstance(
     ctx,
-    'mickael-kerjean-filestash',
+    'emedvedev-slackin-extended',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('mickael-kerjean-filestash', instance.name, ctx);
+  await waitForInstanceReady('emedvedev-slackin-extended', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Filestash instance
+ * Remove a Slackin instance
  *
- * @memberOf mickael-kerjean-filestash
+ * @memberOf emedvedev-slackin-extended
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the filestash to be removed
+ * @param {string} name - Name of the slackin to be removed
  */
-export async function removeMickaelKerjeanFilestashInstance(
+export async function removeEmedvedevSlackinExtendedInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'mickael-kerjean-filestash'
+    'emedvedev-slackin-extended'
   );
   await removeInstance(
     ctx,
-    'mickael-kerjean-filestash',
+    'emedvedev-slackin-extended',
     name,
     serviceAccessToken
   );
 }
 
 /**
- * Get a Filestash instance
+ * Get a Slackin instance
  *
- * @memberOf mickael-kerjean-filestash
+ * @memberOf emedvedev-slackin-extended
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the filestash to be retrieved
- * @returns {MickaelKerjeanFilestash} - Service instance
+ * @param {string} name - Name of the slackin to be retrieved
+ * @returns {EmedvedevSlackinExtended} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getMickaelKerjeanFilestashInstance } from '@osaas/client-services';
+ * import { getEmedvedevSlackinExtendedInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getMickaelKerjeanFilestashInstance(ctx, 'myinstance');
+ * const instance = await getEmedvedevSlackinExtendedInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getMickaelKerjeanFilestashInstance(
+export async function getEmedvedevSlackinExtendedInstance(
   ctx: Context,
   name: string
-): Promise<MickaelKerjeanFilestash> {
+): Promise<EmedvedevSlackinExtended> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'mickael-kerjean-filestash'
+    'emedvedev-slackin-extended'
   );
   return await getInstance(
     ctx,
-    'mickael-kerjean-filestash',
+    'emedvedev-slackin-extended',
     name,
     serviceAccessToken
   );
