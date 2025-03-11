@@ -43,6 +43,12 @@
         "target": "_blank",
         "class": "menu-item",
         "id": "docs_link"
+      },
+      "Examples": {
+        "href": "https://github.com/EyevinnOSC/client-ts-examples",
+        "target": "_blank",
+        "class": "menu-item",
+        "id": "examples_link"
       }
     }
   }
