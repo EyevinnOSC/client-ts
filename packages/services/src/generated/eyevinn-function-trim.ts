@@ -242,10 +242,12 @@ import {
  * @param {EyevinnFunctionTrimConfig} body - Service instance configuration
  * @returns {EyevinnFunctionTrim} - Service instance
  * @example
- * import { Context, createEyevinnFunctionTrimInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnFunctionTrimInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnFunctionTrimInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnFunctionTrimConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnFunctionTrimInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnFunctionTrimInstance(
@@ -291,6 +293,13 @@ export async function removeEyevinnFunctionTrimInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the mediafunction to be retrieved
  * @returns {EyevinnFunctionTrim} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnFunctionTrimInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnFunctionTrimInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnFunctionTrimInstance(
   ctx: Context,

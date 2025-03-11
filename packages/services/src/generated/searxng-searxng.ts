@@ -320,10 +320,12 @@ import {
  * @param {SearxngSearxngConfig} body - Service instance configuration
  * @returns {SearxngSearxng} - Service instance
  * @example
- * import { Context, createSearxngSearxngInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createSearxngSearxngInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createSearxngSearxngInstance(ctx, { name: 'myinstance' });
+ * const body: SearxngSearxngConfig = { name: 'myinstance', ... };
+ * const instance = await createSearxngSearxngInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createSearxngSearxngInstance(
@@ -365,6 +367,13 @@ export async function removeSearxngSearxngInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the searxng to be retrieved
  * @returns {SearxngSearxng} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getSearxngSearxngInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getSearxngSearxngInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getSearxngSearxngInstance(
   ctx: Context,

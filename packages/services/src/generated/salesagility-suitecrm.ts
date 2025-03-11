@@ -315,10 +315,12 @@ import {
  * @param {SalesagilitySuitecrmConfig} body - Service instance configuration
  * @returns {SalesagilitySuitecrm} - Service instance
  * @example
- * import { Context, createSalesagilitySuitecrmInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createSalesagilitySuitecrmInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createSalesagilitySuitecrmInstance(ctx, { name: 'myinstance' });
+ * const body: SalesagilitySuitecrmConfig = { name: 'myinstance', ... };
+ * const instance = await createSalesagilitySuitecrmInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createSalesagilitySuitecrmInstance(
@@ -364,6 +366,13 @@ export async function removeSalesagilitySuitecrmInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the suitecrm to be retrieved
  * @returns {SalesagilitySuitecrm} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getSalesagilitySuitecrmInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getSalesagilitySuitecrmInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getSalesagilitySuitecrmInstance(
   ctx: Context,

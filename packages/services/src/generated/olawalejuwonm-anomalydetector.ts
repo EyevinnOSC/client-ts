@@ -315,10 +315,12 @@ import {
  * @param {OlawalejuwonmAnomalydetectorConfig} body - Service instance configuration
  * @returns {OlawalejuwonmAnomalydetector} - Service instance
  * @example
- * import { Context, createOlawalejuwonmAnomalydetectorInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createOlawalejuwonmAnomalydetectorInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createOlawalejuwonmAnomalydetectorInstance(ctx, { name: 'myinstance' });
+ * const body: OlawalejuwonmAnomalydetectorConfig = { name: 'myinstance', ... };
+ * const instance = await createOlawalejuwonmAnomalydetectorInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createOlawalejuwonmAnomalydetectorInstance(
@@ -373,6 +375,13 @@ export async function removeOlawalejuwonmAnomalydetectorInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the anomalydetector to be retrieved
  * @returns {OlawalejuwonmAnomalydetector} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getOlawalejuwonmAnomalydetectorInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getOlawalejuwonmAnomalydetectorInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getOlawalejuwonmAnomalydetectorInstance(
   ctx: Context,

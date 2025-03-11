@@ -345,10 +345,12 @@ import {
  * @param {EyevinnEncoreTransferConfig} body - Service instance configuration
  * @returns {EyevinnEncoreTransfer} - Service instance
  * @example
- * import { Context, createEyevinnEncoreTransferInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnEncoreTransferInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnEncoreTransferInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnEncoreTransferConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnEncoreTransferInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnEncoreTransferInstance(
@@ -399,6 +401,13 @@ export async function removeEyevinnEncoreTransferInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the encore-transfer to be retrieved
  * @returns {EyevinnEncoreTransfer} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnEncoreTransferInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnEncoreTransferInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnEncoreTransferInstance(
   ctx: Context,

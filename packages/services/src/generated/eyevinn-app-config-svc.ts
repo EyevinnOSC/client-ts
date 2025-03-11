@@ -320,10 +320,12 @@ import {
  * @param {EyevinnAppConfigSvcConfig} body - Service instance configuration
  * @returns {EyevinnAppConfigSvc} - Service instance
  * @example
- * import { Context, createEyevinnAppConfigSvcInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnAppConfigSvcInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnAppConfigSvcInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnAppConfigSvcConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnAppConfigSvcInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnAppConfigSvcInstance(
@@ -369,6 +371,13 @@ export async function removeEyevinnAppConfigSvcInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the config-service to be retrieved
  * @returns {EyevinnAppConfigSvc} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnAppConfigSvcInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnAppConfigSvcInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnAppConfigSvcInstance(
   ctx: Context,

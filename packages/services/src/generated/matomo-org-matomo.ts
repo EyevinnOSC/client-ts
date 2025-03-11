@@ -345,10 +345,12 @@ import {
  * @param {MatomoOrgMatomoConfig} body - Service instance configuration
  * @returns {MatomoOrgMatomo} - Service instance
  * @example
- * import { Context, createMatomoOrgMatomoInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createMatomoOrgMatomoInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createMatomoOrgMatomoInstance(ctx, { name: 'myinstance' });
+ * const body: MatomoOrgMatomoConfig = { name: 'myinstance', ... };
+ * const instance = await createMatomoOrgMatomoInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createMatomoOrgMatomoInstance(
@@ -394,6 +396,13 @@ export async function removeMatomoOrgMatomoInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the matomo to be retrieved
  * @returns {MatomoOrgMatomo} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getMatomoOrgMatomoInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getMatomoOrgMatomoInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getMatomoOrgMatomoInstance(
   ctx: Context,

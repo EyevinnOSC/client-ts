@@ -330,10 +330,12 @@ import {
  * @param {EyevinnEncoreCallbackListenerConfig} body - Service instance configuration
  * @returns {EyevinnEncoreCallbackListener} - Service instance
  * @example
- * import { Context, createEyevinnEncoreCallbackListenerInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnEncoreCallbackListenerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnEncoreCallbackListenerInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnEncoreCallbackListenerConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnEncoreCallbackListenerInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnEncoreCallbackListenerInstance(
@@ -388,6 +390,13 @@ export async function removeEyevinnEncoreCallbackListenerInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the callback to be retrieved
  * @returns {EyevinnEncoreCallbackListener} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnEncoreCallbackListenerInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnEncoreCallbackListenerInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnEncoreCallbackListenerInstance(
   ctx: Context,

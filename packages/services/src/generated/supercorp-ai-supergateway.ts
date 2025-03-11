@@ -325,10 +325,12 @@ import {
  * @param {SupercorpAiSupergatewayConfig} body - Service instance configuration
  * @returns {SupercorpAiSupergateway} - Service instance
  * @example
- * import { Context, createSupercorpAiSupergatewayInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createSupercorpAiSupergatewayInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createSupercorpAiSupergatewayInstance(ctx, { name: 'myinstance' });
+ * const body: SupercorpAiSupergatewayConfig = { name: 'myinstance', ... };
+ * const instance = await createSupercorpAiSupergatewayInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createSupercorpAiSupergatewayInstance(
@@ -379,6 +381,13 @@ export async function removeSupercorpAiSupergatewayInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the supergateway to be retrieved
  * @returns {SupercorpAiSupergateway} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getSupercorpAiSupergatewayInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getSupercorpAiSupergatewayInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getSupercorpAiSupergatewayInstance(
   ctx: Context,

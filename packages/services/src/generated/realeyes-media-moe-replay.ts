@@ -315,10 +315,12 @@ import {
  * @param {RealeyesMediaMoeReplayConfig} body - Service instance configuration
  * @returns {RealeyesMediaMoeReplay} - Service instance
  * @example
- * import { Context, createRealeyesMediaMoeReplayInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createRealeyesMediaMoeReplayInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createRealeyesMediaMoeReplayInstance(ctx, { name: 'myinstance' });
+ * const body: RealeyesMediaMoeReplayConfig = { name: 'myinstance', ... };
+ * const instance = await createRealeyesMediaMoeReplayInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createRealeyesMediaMoeReplayInstance(
@@ -369,6 +371,13 @@ export async function removeRealeyesMediaMoeReplayInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the moe-replay to be retrieved
  * @returns {RealeyesMediaMoeReplay} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getRealeyesMediaMoeReplayInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getRealeyesMediaMoeReplayInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getRealeyesMediaMoeReplayInstance(
   ctx: Context,

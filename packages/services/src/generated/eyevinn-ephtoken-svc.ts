@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/livegoinstance': {
-    /** List all running livego instances */
+  '/ephtoken-svcinstance': {
+    /** List all running ephtoken-svc instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the livego instance */
+            /** @description Name of the ephtoken-svc instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,21 +40,26 @@ export interface paths {
                 url: string;
               };
             };
+            OpenAiApiKey: string;
           }[];
         };
         /** Default Response */
         500: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
-    /** Launch a new livego instance */
+    /** Launch a new ephtoken-svc instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the livego instance */
+            /** @description Name of the ephtoken-svc instance */
             name: string;
+            OpenAiApiKey: string;
           };
         };
       };
@@ -62,7 +67,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the livego instance */
+            /** @description Name of the ephtoken-svc instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -80,21 +85,39 @@ export interface paths {
                 url: string;
               };
             };
+            OpenAiApiKey: string;
+          };
+        };
+        /** Default Response */
+        403: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        409: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
           };
         };
         /** Default Response */
         500: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
   };
-  '/livegoinstance/{id}': {
-    /** Obtain status and resource URLs for an livego instance */
+  '/ephtoken-svcinstance/{id}': {
+    /** Obtain status and resource URLs for an ephtoken-svc instance */
     get: {
       parameters: {
         path: {
-          /** Name of the livego instance */
+          /** Name of the ephtoken-svc instance */
           id: string;
         };
       };
@@ -102,7 +125,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the livego instance */
+            /** @description Name of the ephtoken-svc instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -120,23 +143,30 @@ export interface paths {
                 url: string;
               };
             };
+            OpenAiApiKey: string;
           };
         };
         /** Default Response */
         404: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
         /** Default Response */
         500: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
-    /** Stop and remove an livego instance */
+    /** Stop and remove an ephtoken-svc instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the livego instance */
+          /** Name of the ephtoken-svc instance */
           id: string;
         };
       };
@@ -147,17 +177,20 @@ export interface paths {
         };
         /** Default Response */
         500: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
   };
   '/health/{id}': {
-    /** Return status of livego instance */
+    /** Return status of ephtoken-svc instance */
     get: {
       parameters: {
         path: {
-          /** Name of the livego instance */
+          /** Name of the ephtoken-svc instance */
           id: string;
         };
       };
@@ -171,13 +204,16 @@ export interface paths {
         };
         /** Default Response */
         500: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the livego instance */
+    /** Return the latest logs from the ephtoken-svc instance */
     get: {
       parameters: {
         query: {
@@ -185,7 +221,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the livego instance */
+          /** Name of the ephtoken-svc instance */
           id: string;
         };
       };
@@ -196,17 +232,20 @@ export interface paths {
         };
         /** Default Response */
         500: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for livego instance */
+    /** Return the exposed extra ports for ephtoken-svc instance */
     get: {
       parameters: {
         path: {
-          /** Name of the livego instance */
+          /** Name of the ephtoken-svc instance */
           id: string;
         };
       };
@@ -221,7 +260,10 @@ export interface paths {
         };
         /** Default Response */
         500: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
@@ -234,11 +276,11 @@ export interface operations {}
 
 export interface external {}
 
-export type GwuhaolinLivego =
-  paths['/livegoinstance/{id}']['get']['responses']['200']['schema'];
+export type EyevinnEphtokenSvc =
+  paths['/ephtoken-svcinstance/{id}']['get']['responses']['200']['schema'];
 
-export type GwuhaolinLivegoConfig =
-  paths['/livegoinstance']['post']['parameters']['body']['body'];
+export type EyevinnEphtokenSvcConfig =
+  paths['/ephtoken-svcinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -247,101 +289,107 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace gwuhaolin-livego
- * @description Experience the power of simplicity and efficiency with our live broadcast server! Easy to install and use, built in pure Golang for high performance. Supports RTMP, AMF, HLS, HTTP-FLV protocols, FLV, TS containers, H264, AAC, MP3 encoding formats. Stream and playback seamlessly with just a few simple steps. Get your hands on this amazing product now!
+ * @namespace eyevinn-ephtoken-svc
+ * @description Seamlessly integrate with client-side apps by generating ephemeral API tokens for the OpenAI Realtime API. Simplify authentication and enhance security with this easy-to-install solution today!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} GwuhaolinLivegoConfig
- * @property {string} name - Name of livego
+ * @typedef {Object} EyevinnEphtokenSvcConfig
+ * @property {string} name - Name of ephtoken-svc
+ * @property {string} OpenAiApiKey - OpenAiApiKey
 
  * 
  */
 
 /**
- * @typedef {Object} GwuhaolinLivego
- * @property {string} name - Name of the Livego instance
- * @property {string} url - URL of the Livego instance
+ * @typedef {Object} EyevinnEphtokenSvc
+ * @property {string} name - Name of the Ephmeral Token Service instance
+ * @property {string} url - URL of the Ephmeral Token Service instance
  *
  */
 
 /**
- * Create a new Livego instance
+ * Create a new Ephmeral Token Service instance
  *
- * @memberOf gwuhaolin-livego
+ * @memberOf eyevinn-ephtoken-svc
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {GwuhaolinLivegoConfig} body - Service instance configuration
- * @returns {GwuhaolinLivego} - Service instance
+ * @param {EyevinnEphtokenSvcConfig} body - Service instance configuration
+ * @returns {EyevinnEphtokenSvc} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createGwuhaolinLivegoInstance } from '@osaas/client-services';
+ * import { createEyevinnEphtokenSvcInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: GwuhaolinLivegoConfig = { name: 'myinstance', ... };
- * const instance = await createGwuhaolinLivegoInstance(ctx, body);
+ * const body: EyevinnEphtokenSvcConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnEphtokenSvcInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createGwuhaolinLivegoInstance(
+export async function createEyevinnEphtokenSvcInstance(
   ctx: Context,
-  body: GwuhaolinLivegoConfig
-): Promise<GwuhaolinLivego> {
+  body: EyevinnEphtokenSvcConfig
+): Promise<EyevinnEphtokenSvc> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'gwuhaolin-livego'
+    'eyevinn-ephtoken-svc'
   );
   const instance = await createInstance(
     ctx,
-    'gwuhaolin-livego',
+    'eyevinn-ephtoken-svc',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('gwuhaolin-livego', instance.name, ctx);
+  await waitForInstanceReady('eyevinn-ephtoken-svc', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Livego instance
+ * Remove a Ephmeral Token Service instance
  *
- * @memberOf gwuhaolin-livego
+ * @memberOf eyevinn-ephtoken-svc
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the livego to be removed
+ * @param {string} name - Name of the tokenservice to be removed
  */
-export async function removeGwuhaolinLivegoInstance(
+export async function removeEyevinnEphtokenSvcInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'gwuhaolin-livego'
+    'eyevinn-ephtoken-svc'
   );
-  await removeInstance(ctx, 'gwuhaolin-livego', name, serviceAccessToken);
+  await removeInstance(ctx, 'eyevinn-ephtoken-svc', name, serviceAccessToken);
 }
 
 /**
- * Get a Livego instance
+ * Get a Ephmeral Token Service instance
  *
- * @memberOf gwuhaolin-livego
+ * @memberOf eyevinn-ephtoken-svc
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the livego to be retrieved
- * @returns {GwuhaolinLivego} - Service instance
+ * @param {string} name - Name of the tokenservice to be retrieved
+ * @returns {EyevinnEphtokenSvc} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getGwuhaolinLivegoInstance } from '@osaas/client-services';
+ * import { getEyevinnEphtokenSvcInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getGwuhaolinLivegoInstance(ctx, 'myinstance');
+ * const instance = await getEyevinnEphtokenSvcInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getGwuhaolinLivegoInstance(
+export async function getEyevinnEphtokenSvcInstance(
   ctx: Context,
   name: string
-): Promise<GwuhaolinLivego> {
+): Promise<EyevinnEphtokenSvc> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'gwuhaolin-livego'
+    'eyevinn-ephtoken-svc'
   );
-  return await getInstance(ctx, 'gwuhaolin-livego', name, serviceAccessToken);
+  return await getInstance(
+    ctx,
+    'eyevinn-ephtoken-svc',
+    name,
+    serviceAccessToken
+  );
 }

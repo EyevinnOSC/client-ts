@@ -2271,41 +2271,6 @@ describe('removeEyevinnPdsAdminInstance', () => {
   });
 });
 
-describe('createEyevinnCeSampleWebhookInstance', () => {
-  it('should call createInstance', async () => {
-    const ctx = new Context();
-    const body = { name: 'sdk' };
-    await sdk.createEyevinnCeSampleWebhookInstance(ctx, body as any);
-    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
-      'eyevinn-ce-sample-webhook'
-    );
-    expect(createInstance).toHaveBeenCalledWith(
-      ctx,
-      'eyevinn-ce-sample-webhook',
-      'token',
-      body
-    );
-    expect(waitForInstanceReady).toHaveBeenCalledWith(
-      'eyevinn-ce-sample-webhook',
-      'sdk',
-      ctx
-    );
-  });
-});
-
-describe('removeEyevinnCeSampleWebhookInstance', () => {
-  it('should call removeInstance', async () => {
-    const ctx = new Context();
-    await sdk.removeEyevinnCeSampleWebhookInstance(ctx, 'sdk');
-    expect(removeInstance).toHaveBeenCalledWith(
-      ctx,
-      'eyevinn-ce-sample-webhook',
-      'sdk',
-      'token'
-    );
-  });
-});
-
 describe('createDrawdbIoDrawdbInstance', () => {
   it('should call createInstance', async () => {
     const ctx = new Context();
@@ -2815,6 +2780,284 @@ describe('removeNfrederiksenHlsViewerInstance', () => {
     expect(removeInstance).toHaveBeenCalledWith(
       ctx,
       'nfrederiksen-hls-viewer',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createEyevinnOpenauthPwdInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEyevinnOpenauthPwdInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'eyevinn-openauth-pwd'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-openauth-pwd',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'eyevinn-openauth-pwd',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEyevinnOpenauthPwdInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEyevinnOpenauthPwdInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-openauth-pwd',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createEyevinnPlayerAnalyticsEventsinkInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEyevinnPlayerAnalyticsEventsinkInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'eyevinn-player-analytics-eventsink'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-player-analytics-eventsink',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'eyevinn-player-analytics-eventsink',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEyevinnPlayerAnalyticsEventsinkInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEyevinnPlayerAnalyticsEventsinkInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-player-analytics-eventsink',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createEyevinnImgAltGenInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEyevinnImgAltGenInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'eyevinn-img-alt-gen'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-img-alt-gen',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'eyevinn-img-alt-gen',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEyevinnImgAltGenInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEyevinnImgAltGenInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-img-alt-gen',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createEmedvedevSlackinExtendedInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEmedvedevSlackinExtendedInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'emedvedev-slackin-extended'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'emedvedev-slackin-extended',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'emedvedev-slackin-extended',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEmedvedevSlackinExtendedInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEmedvedevSlackinExtendedInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'emedvedev-slackin-extended',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createEyevinnEphtokenSvcInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEyevinnEphtokenSvcInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'eyevinn-ephtoken-svc'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-ephtoken-svc',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'eyevinn-ephtoken-svc',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEyevinnEphtokenSvcInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEyevinnEphtokenSvcInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-ephtoken-svc',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createPostgrestPostgrestInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createPostgrestPostgrestInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'postgrest-postgrest'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'postgrest-postgrest',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'postgrest-postgrest',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removePostgrestPostgrestInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removePostgrestPostgrestInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'postgrest-postgrest',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createLogflareLogflareInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createLogflareLogflareInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('logflare-logflare');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'logflare-logflare',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'logflare-logflare',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeLogflareLogflareInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeLogflareLogflareInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'logflare-logflare',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createEyevinnPlayerAnalyticsWorkerInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEyevinnPlayerAnalyticsWorkerInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'eyevinn-player-analytics-worker'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-player-analytics-worker',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'eyevinn-player-analytics-worker',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEyevinnPlayerAnalyticsWorkerInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEyevinnPlayerAnalyticsWorkerInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-player-analytics-worker',
       'sdk',
       'token'
     );

@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/filestashinstance': {
-    /** List all running filestash instances */
+  '/logflareinstance': {
+    /** List all running logflare instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the filestash instance */
+            /** @description Name of the logflare instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,11 +40,12 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword?: string;
-            ConfigSecret?: string;
-            DropboxClientId?: string;
-            GdriveClientId?: string;
-            GdriveClientSecret?: string;
+            PostgresBackendUrl: string;
+            DbSchema?: string;
+            DbEncryptionKey?: string;
+            ApiKey?: string;
+            PublicAccessToken?: string;
+            PrivateAccessToken?: string;
           }[];
         };
         /** Default Response */
@@ -56,18 +57,19 @@ export interface paths {
         };
       };
     };
-    /** Launch a new filestash instance */
+    /** Launch a new logflare instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the filestash instance */
+            /** @description Name of the logflare instance */
             name: string;
-            AdminPassword?: string;
-            ConfigSecret?: string;
-            DropboxClientId?: string;
-            GdriveClientId?: string;
-            GdriveClientSecret?: string;
+            PostgresBackendUrl: string;
+            DbSchema?: string;
+            DbEncryptionKey?: string;
+            ApiKey?: string;
+            PublicAccessToken?: string;
+            PrivateAccessToken?: string;
           };
         };
       };
@@ -75,7 +77,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the filestash instance */
+            /** @description Name of the logflare instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -93,11 +95,12 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword?: string;
-            ConfigSecret?: string;
-            DropboxClientId?: string;
-            GdriveClientId?: string;
-            GdriveClientSecret?: string;
+            PostgresBackendUrl: string;
+            DbSchema?: string;
+            DbEncryptionKey?: string;
+            ApiKey?: string;
+            PublicAccessToken?: string;
+            PrivateAccessToken?: string;
           };
         };
         /** Default Response */
@@ -124,12 +127,12 @@ export interface paths {
       };
     };
   };
-  '/filestashinstance/{id}': {
-    /** Obtain status and resource URLs for an filestash instance */
+  '/logflareinstance/{id}': {
+    /** Obtain status and resource URLs for an logflare instance */
     get: {
       parameters: {
         path: {
-          /** Name of the filestash instance */
+          /** Name of the logflare instance */
           id: string;
         };
       };
@@ -137,7 +140,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the filestash instance */
+            /** @description Name of the logflare instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -155,11 +158,12 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword?: string;
-            ConfigSecret?: string;
-            DropboxClientId?: string;
-            GdriveClientId?: string;
-            GdriveClientSecret?: string;
+            PostgresBackendUrl: string;
+            DbSchema?: string;
+            DbEncryptionKey?: string;
+            ApiKey?: string;
+            PublicAccessToken?: string;
+            PrivateAccessToken?: string;
           };
         };
         /** Default Response */
@@ -178,11 +182,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an filestash instance */
+    /** Stop and remove an logflare instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the filestash instance */
+          /** Name of the logflare instance */
           id: string;
         };
       };
@@ -202,11 +206,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of filestash instance */
+    /** Return status of logflare instance */
     get: {
       parameters: {
         path: {
-          /** Name of the filestash instance */
+          /** Name of the logflare instance */
           id: string;
         };
       };
@@ -229,7 +233,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the filestash instance */
+    /** Return the latest logs from the logflare instance */
     get: {
       parameters: {
         query: {
@@ -237,7 +241,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the filestash instance */
+          /** Name of the logflare instance */
           id: string;
         };
       };
@@ -257,11 +261,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for filestash instance */
+    /** Return the exposed extra ports for logflare instance */
     get: {
       parameters: {
         path: {
-          /** Name of the filestash instance */
+          /** Name of the logflare instance */
           id: string;
         };
       };
@@ -292,11 +296,11 @@ export interface operations {}
 
 export interface external {}
 
-export type MickaelKerjeanFilestash =
-  paths['/filestashinstance/{id}']['get']['responses']['200']['schema'];
+export type LogflareLogflare =
+  paths['/logflareinstance/{id}']['get']['responses']['200']['schema'];
 
-export type MickaelKerjeanFilestashConfig =
-  paths['/filestashinstance']['post']['parameters']['body']['body'];
+export type LogflareLogflareConfig =
+  paths['/logflareinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -305,116 +309,107 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace mickael-kerjean-filestash
- * @description Transform your data management with Filestash, a versatile file manager that integrates seamlessly with multiple cloud services and protocols. Enjoy blazing speed, user-friendly interfaces, and plugin flexibility.
+ * @namespace logflare-logflare
+ * @description Streamline your log management with Logflare! Integrate effortlessly, visualize in your browser, and leverage your existing BigQuery setup for seamless data insights. Elevate logging today!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Filestash.html|Online docs} for further information
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Logflare.html|Online docs} for further information
  */
 
 /**
- * @typedef {Object} MickaelKerjeanFilestashConfig
- * @property {string} name - Name of filestash
- * @property {string} [AdminPassword] - AdminPassword
- * @property {string} [ConfigSecret] - ConfigSecret
- * @property {string} [DropboxClientId] - DropboxClientId
- * @property {string} [GdriveClientId] - GdriveClientId
- * @property {string} [GdriveClientSecret] - GdriveClientSecret
+ * @typedef {Object} LogflareLogflareConfig
+ * @property {string} name - Name of logflare
+ * @property {string} PostgresBackendUrl - PostgresBackendUrl
+ * @property {string} [DbSchema] - DbSchema
+ * @property {string} [DbEncryptionKey] - DbEncryptionKey
+ * @property {string} [ApiKey] - ApiKey
+ * @property {string} [PublicAccessToken] - PublicAccessToken
+ * @property {string} [PrivateAccessToken] - PrivateAccessToken
 
  * 
  */
 
 /**
- * @typedef {Object} MickaelKerjeanFilestash
- * @property {string} name - Name of the Filestash instance
- * @property {string} url - URL of the Filestash instance
+ * @typedef {Object} LogflareLogflare
+ * @property {string} name - Name of the Logflare instance
+ * @property {string} url - URL of the Logflare instance
  *
  */
 
 /**
- * Create a new Filestash instance
+ * Create a new Logflare instance
  *
- * @memberOf mickael-kerjean-filestash
+ * @memberOf logflare-logflare
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {MickaelKerjeanFilestashConfig} body - Service instance configuration
- * @returns {MickaelKerjeanFilestash} - Service instance
+ * @param {LogflareLogflareConfig} body - Service instance configuration
+ * @returns {LogflareLogflare} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createMickaelKerjeanFilestashInstance } from '@osaas/client-services';
+ * import { createLogflareLogflareInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: MickaelKerjeanFilestashConfig = { name: 'myinstance', ... };
- * const instance = await createMickaelKerjeanFilestashInstance(ctx, body);
+ * const body: LogflareLogflareConfig = { name: 'myinstance', ... };
+ * const instance = await createLogflareLogflareInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createMickaelKerjeanFilestashInstance(
+export async function createLogflareLogflareInstance(
   ctx: Context,
-  body: MickaelKerjeanFilestashConfig
-): Promise<MickaelKerjeanFilestash> {
+  body: LogflareLogflareConfig
+): Promise<LogflareLogflare> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'mickael-kerjean-filestash'
+    'logflare-logflare'
   );
   const instance = await createInstance(
     ctx,
-    'mickael-kerjean-filestash',
+    'logflare-logflare',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('mickael-kerjean-filestash', instance.name, ctx);
+  await waitForInstanceReady('logflare-logflare', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Filestash instance
+ * Remove a Logflare instance
  *
- * @memberOf mickael-kerjean-filestash
+ * @memberOf logflare-logflare
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the filestash to be removed
+ * @param {string} name - Name of the logflare to be removed
  */
-export async function removeMickaelKerjeanFilestashInstance(
+export async function removeLogflareLogflareInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'mickael-kerjean-filestash'
+    'logflare-logflare'
   );
-  await removeInstance(
-    ctx,
-    'mickael-kerjean-filestash',
-    name,
-    serviceAccessToken
-  );
+  await removeInstance(ctx, 'logflare-logflare', name, serviceAccessToken);
 }
 
 /**
- * Get a Filestash instance
+ * Get a Logflare instance
  *
- * @memberOf mickael-kerjean-filestash
+ * @memberOf logflare-logflare
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the filestash to be retrieved
- * @returns {MickaelKerjeanFilestash} - Service instance
+ * @param {string} name - Name of the logflare to be retrieved
+ * @returns {LogflareLogflare} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getMickaelKerjeanFilestashInstance } from '@osaas/client-services';
+ * import { getLogflareLogflareInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getMickaelKerjeanFilestashInstance(ctx, 'myinstance');
+ * const instance = await getLogflareLogflareInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getMickaelKerjeanFilestashInstance(
+export async function getLogflareLogflareInstance(
   ctx: Context,
   name: string
-): Promise<MickaelKerjeanFilestash> {
+): Promise<LogflareLogflare> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'mickael-kerjean-filestash'
+    'logflare-logflare'
   );
-  return await getInstance(
-    ctx,
-    'mickael-kerjean-filestash',
-    name,
-    serviceAccessToken
-  );
+  return await getInstance(ctx, 'logflare-logflare', name, serviceAccessToken);
 }

@@ -326,10 +326,12 @@ import {
  * @param {AtmozSftpConfig} body - Service instance configuration
  * @returns {AtmozSftp} - Service instance
  * @example
- * import { Context, createAtmozSftpInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createAtmozSftpInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createAtmozSftpInstance(ctx, { name: 'myinstance' });
+ * const body: AtmozSftpConfig = { name: 'myinstance', ... };
+ * const instance = await createAtmozSftpInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createAtmozSftpInstance(
@@ -371,6 +373,13 @@ export async function removeAtmozSftpInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the sftp to be retrieved
  * @returns {AtmozSftp} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getAtmozSftpInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getAtmozSftpInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getAtmozSftpInstance(
   ctx: Context,

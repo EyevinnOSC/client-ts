@@ -320,10 +320,12 @@ import {
  * @param {ApacheCouchdbConfig} body - Service instance configuration
  * @returns {ApacheCouchdb} - Service instance
  * @example
- * import { Context, createApacheCouchdbInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createApacheCouchdbInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createApacheCouchdbInstance(ctx, { name: 'myinstance' });
+ * const body: ApacheCouchdbConfig = { name: 'myinstance', ... };
+ * const instance = await createApacheCouchdbInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createApacheCouchdbInstance(
@@ -365,6 +367,13 @@ export async function removeApacheCouchdbInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the couchdb to be retrieved
  * @returns {ApacheCouchdb} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getApacheCouchdbInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getApacheCouchdbInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getApacheCouchdbInstance(
   ctx: Context,

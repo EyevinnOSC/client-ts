@@ -332,10 +332,12 @@ Join our Slack community for support and customization. Contact sales@eyevinn.se
  * @param {EyevinnIntercomManagerConfig} body - Service instance configuration
  * @returns {EyevinnIntercomManager} - Service instance
  * @example
- * import { Context, createEyevinnIntercomManagerInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnIntercomManagerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnIntercomManagerInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnIntercomManagerConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnIntercomManagerInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnIntercomManagerInstance(
@@ -386,6 +388,13 @@ export async function removeEyevinnIntercomManagerInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the system to be retrieved
  * @returns {EyevinnIntercomManager} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnIntercomManagerInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnIntercomManagerInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnIntercomManagerInstance(
   ctx: Context,

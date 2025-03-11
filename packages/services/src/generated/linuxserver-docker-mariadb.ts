@@ -335,10 +335,12 @@ import {
  * @param {LinuxserverDockerMariadbConfig} body - Service instance configuration
  * @returns {LinuxserverDockerMariadb} - Service instance
  * @example
- * import { Context, createLinuxserverDockerMariadbInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createLinuxserverDockerMariadbInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createLinuxserverDockerMariadbInstance(ctx, { name: 'myinstance' });
+ * const body: LinuxserverDockerMariadbConfig = { name: 'myinstance', ... };
+ * const instance = await createLinuxserverDockerMariadbInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createLinuxserverDockerMariadbInstance(
@@ -389,6 +391,13 @@ export async function removeLinuxserverDockerMariadbInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the dbserver to be retrieved
  * @returns {LinuxserverDockerMariadb} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getLinuxserverDockerMariadbInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getLinuxserverDockerMariadbInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getLinuxserverDockerMariadbInstance(
   ctx: Context,

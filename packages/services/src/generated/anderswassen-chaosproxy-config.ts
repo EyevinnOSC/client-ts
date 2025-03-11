@@ -315,10 +315,12 @@ import {
  * @param {AnderswassenChaosproxyConfigConfig} body - Service instance configuration
  * @returns {AnderswassenChaosproxyConfig} - Service instance
  * @example
- * import { Context, createAnderswassenChaosproxyConfigInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createAnderswassenChaosproxyConfigInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createAnderswassenChaosproxyConfigInstance(ctx, { name: 'myinstance' });
+ * const body: AnderswassenChaosproxyConfigConfig = { name: 'myinstance', ... };
+ * const instance = await createAnderswassenChaosproxyConfigInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createAnderswassenChaosproxyConfigInstance(
@@ -373,6 +375,13 @@ export async function removeAnderswassenChaosproxyConfigInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the configurator to be retrieved
  * @returns {AnderswassenChaosproxyConfig} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getAnderswassenChaosproxyConfigInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getAnderswassenChaosproxyConfigInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getAnderswassenChaosproxyConfigInstance(
   ctx: Context,

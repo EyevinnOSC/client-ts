@@ -350,10 +350,12 @@ import {
  * @param {EyevinnSgaiAdProxyConfig} body - Service instance configuration
  * @returns {EyevinnSgaiAdProxy} - Service instance
  * @example
- * import { Context, createEyevinnSgaiAdProxyInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnSgaiAdProxyInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnSgaiAdProxyInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnSgaiAdProxyConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnSgaiAdProxyInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnSgaiAdProxyInstance(
@@ -399,6 +401,13 @@ export async function removeEyevinnSgaiAdProxyInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the proxy to be retrieved
  * @returns {EyevinnSgaiAdProxy} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnSgaiAdProxyInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnSgaiAdProxyInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnSgaiAdProxyInstance(
   ctx: Context,

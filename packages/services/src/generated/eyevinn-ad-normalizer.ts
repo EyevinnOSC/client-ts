@@ -47,6 +47,8 @@ export interface paths {
             S3AccessKey: string;
             S3SecretKey: string;
             S3EndpointUrl?: string;
+            KeyRegex?: string;
+            KeyField?: string;
             RedisUrl?: string;
             OscAccessToken?: string;
           }[];
@@ -74,6 +76,8 @@ export interface paths {
             S3AccessKey: string;
             S3SecretKey: string;
             S3EndpointUrl?: string;
+            KeyRegex?: string;
+            KeyField?: string;
             RedisUrl?: string;
             OscAccessToken?: string;
           };
@@ -108,6 +112,8 @@ export interface paths {
             S3AccessKey: string;
             S3SecretKey: string;
             S3EndpointUrl?: string;
+            KeyRegex?: string;
+            KeyField?: string;
             RedisUrl?: string;
             OscAccessToken?: string;
           };
@@ -174,6 +180,8 @@ export interface paths {
             S3AccessKey: string;
             S3SecretKey: string;
             S3EndpointUrl?: string;
+            KeyRegex?: string;
+            KeyField?: string;
             RedisUrl?: string;
             OscAccessToken?: string;
           };
@@ -338,6 +346,8 @@ import {
  * @property {string} S3AccessKey - S3AccessKey
  * @property {string} S3SecretKey - S3SecretKey
  * @property {string} [S3EndpointUrl] - S3EndpointUrl
+ * @property {string} [KeyRegex] - KeyRegex
+ * @property {string} [KeyField] - KeyField
  * @property {string} [RedisUrl] - RedisUrl
  * @property {string} [OscAccessToken] - OscAccessToken
 
@@ -360,10 +370,12 @@ import {
  * @param {EyevinnAdNormalizerConfig} body - Service instance configuration
  * @returns {EyevinnAdNormalizer} - Service instance
  * @example
- * import { Context, createEyevinnAdNormalizerInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnAdNormalizerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnAdNormalizerInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnAdNormalizerConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnAdNormalizerInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnAdNormalizerInstance(
@@ -409,6 +421,13 @@ export async function removeEyevinnAdNormalizerInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the normalizer to be retrieved
  * @returns {EyevinnAdNormalizer} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnAdNormalizerInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnAdNormalizerInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnAdNormalizerInstance(
   ctx: Context,

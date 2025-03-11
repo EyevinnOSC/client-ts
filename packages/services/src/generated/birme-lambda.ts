@@ -315,10 +315,12 @@ import {
  * @param {BirmeLambdaConfig} body - Service instance configuration
  * @returns {BirmeLambda} - Service instance
  * @example
- * import { Context, createBirmeLambdaInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createBirmeLambdaInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createBirmeLambdaInstance(ctx, { name: 'myinstance' });
+ * const body: BirmeLambdaConfig = { name: 'myinstance', ... };
+ * const instance = await createBirmeLambdaInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createBirmeLambdaInstance(
@@ -360,6 +362,13 @@ export async function removeBirmeLambdaInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the lambda to be retrieved
  * @returns {BirmeLambda} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getBirmeLambdaInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getBirmeLambdaInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getBirmeLambdaInstance(
   ctx: Context,

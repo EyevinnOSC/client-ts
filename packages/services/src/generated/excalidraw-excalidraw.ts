@@ -315,10 +315,12 @@ import {
  * @param {ExcalidrawExcalidrawConfig} body - Service instance configuration
  * @returns {ExcalidrawExcalidraw} - Service instance
  * @example
- * import { Context, createExcalidrawExcalidrawInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createExcalidrawExcalidrawInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createExcalidrawExcalidrawInstance(ctx, { name: 'myinstance' });
+ * const body: ExcalidrawExcalidrawConfig = { name: 'myinstance', ... };
+ * const instance = await createExcalidrawExcalidrawInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createExcalidrawExcalidrawInstance(
@@ -364,6 +366,13 @@ export async function removeExcalidrawExcalidrawInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the editor to be retrieved
  * @returns {ExcalidrawExcalidraw} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getExcalidrawExcalidrawInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getExcalidrawExcalidrawInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getExcalidrawExcalidrawInstance(
   ctx: Context,

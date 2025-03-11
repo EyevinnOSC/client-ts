@@ -340,10 +340,12 @@ import {
  * @param {LmsCommunitySlimserverConfig} body - Service instance configuration
  * @returns {LmsCommunitySlimserver} - Service instance
  * @example
- * import { Context, createLmsCommunitySlimserverInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createLmsCommunitySlimserverInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createLmsCommunitySlimserverInstance(ctx, { name: 'myinstance' });
+ * const body: LmsCommunitySlimserverConfig = { name: 'myinstance', ... };
+ * const instance = await createLmsCommunitySlimserverInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createLmsCommunitySlimserverInstance(
@@ -394,6 +396,13 @@ export async function removeLmsCommunitySlimserverInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the slimserver to be retrieved
  * @returns {LmsCommunitySlimserver} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getLmsCommunitySlimserverInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getLmsCommunitySlimserverInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getLmsCommunitySlimserverInstance(
   ctx: Context,

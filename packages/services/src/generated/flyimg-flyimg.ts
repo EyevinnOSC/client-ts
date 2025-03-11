@@ -231,10 +231,12 @@ Additionally, Flyimg also generates the WebP format, along with the impressive M
  * @param {FlyimgFlyimgConfig} body - Service instance configuration
  * @returns {FlyimgFlyimg} - Service instance
  * @example
- * import { Context, createFlyimgFlyimgInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createFlyimgFlyimgInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createFlyimgFlyimgInstance(ctx, { name: 'myinstance' });
+ * const body: FlyimgFlyimgConfig = { name: 'myinstance', ... };
+ * const instance = await createFlyimgFlyimgInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createFlyimgFlyimgInstance(
@@ -276,6 +278,13 @@ export async function removeFlyimgFlyimgInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the flyimg to be retrieved
  * @returns {FlyimgFlyimg} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getFlyimgFlyimgInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getFlyimgFlyimgInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getFlyimgFlyimgInstance(
   ctx: Context,

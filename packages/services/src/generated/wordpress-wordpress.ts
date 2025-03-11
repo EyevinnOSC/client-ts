@@ -340,10 +340,12 @@ import {
  * @param {WordpressWordpressConfig} body - Service instance configuration
  * @returns {WordpressWordpress} - Service instance
  * @example
- * import { Context, createWordpressWordpressInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createWordpressWordpressInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createWordpressWordpressInstance(ctx, { name: 'myinstance' });
+ * const body: WordpressWordpressConfig = { name: 'myinstance', ... };
+ * const instance = await createWordpressWordpressInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createWordpressWordpressInstance(
@@ -389,6 +391,13 @@ export async function removeWordpressWordpressInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the wordpress to be retrieved
  * @returns {WordpressWordpress} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getWordpressWordpressInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getWordpressWordpressInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getWordpressWordpressInstance(
   ctx: Context,

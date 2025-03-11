@@ -320,10 +320,12 @@ import {
  * @param {AndersnasNodecatConfig} body - Service instance configuration
  * @returns {AndersnasNodecat} - Service instance
  * @example
- * import { Context, createAndersnasNodecatInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createAndersnasNodecatInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createAndersnasNodecatInstance(ctx, { name: 'myinstance' });
+ * const body: AndersnasNodecatConfig = { name: 'myinstance', ... };
+ * const instance = await createAndersnasNodecatInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createAndersnasNodecatInstance(
@@ -369,6 +371,13 @@ export async function removeAndersnasNodecatInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the nodecat to be retrieved
  * @returns {AndersnasNodecat} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getAndersnasNodecatInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getAndersnasNodecatInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getAndersnasNodecatInstance(
   ctx: Context,

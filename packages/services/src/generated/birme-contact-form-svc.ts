@@ -330,10 +330,12 @@ import {
  * @param {BirmeContactFormSvcConfig} body - Service instance configuration
  * @returns {BirmeContactFormSvc} - Service instance
  * @example
- * import { Context, createBirmeContactFormSvcInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createBirmeContactFormSvcInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createBirmeContactFormSvcInstance(ctx, { name: 'myinstance' });
+ * const body: BirmeContactFormSvcConfig = { name: 'myinstance', ... };
+ * const instance = await createBirmeContactFormSvcInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createBirmeContactFormSvcInstance(
@@ -379,6 +381,13 @@ export async function removeBirmeContactFormSvcInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the service to be retrieved
  * @returns {BirmeContactFormSvc} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getBirmeContactFormSvcInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getBirmeContactFormSvcInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getBirmeContactFormSvcInstance(
   ctx: Context,

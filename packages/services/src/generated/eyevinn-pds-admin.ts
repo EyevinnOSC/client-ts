@@ -320,10 +320,12 @@ import {
  * @param {EyevinnPdsAdminConfig} body - Service instance configuration
  * @returns {EyevinnPdsAdmin} - Service instance
  * @example
- * import { Context, createEyevinnPdsAdminInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnPdsAdminInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnPdsAdminInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnPdsAdminConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnPdsAdminInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnPdsAdminInstance(
@@ -369,6 +371,13 @@ export async function removeEyevinnPdsAdminInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the app to be retrieved
  * @returns {EyevinnPdsAdmin} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnPdsAdminInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnPdsAdminInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnPdsAdminInstance(
   ctx: Context,

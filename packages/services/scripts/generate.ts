@@ -107,14 +107,14 @@ ${typeProps}
  )}Config} body - Service instance configuration
  * @returns {${toPascalCase(serviceId)}} - Service instance
  * @example
- * import { Context, create${toPascalCase(
+ * import { Context } from '@osaas/client-core';
+ * import { create${toPascalCase(
    serviceId
  )}Instance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await create${toPascalCase(
-   serviceId
- )}Instance(ctx, { name: 'myinstance' });
+ * const body: ${toPascalCase(serviceId)}Config = { name: 'myinstance', ... };
+ * const instance = await create${toPascalCase(serviceId)}Instance(ctx, body);
  * console.log(instance.url);
  */
 export async function create${toPascalCase(
@@ -164,7 +164,18 @@ export async function remove${toPascalCase(
    service.serviceMetadata.instanceNoun
  } to be retrieved
  * @returns {${toPascalCase(serviceId)}} - Service instance
- */
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { get${toPascalCase(
+   serviceId
+ )}Instance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await get${toPascalCase(
+   serviceId
+ )}Instance(ctx, 'myinstance');
+ * console.log(instance.url);
+ */ 
 export async function get${toPascalCase(
       serviceId
     )}Instance(ctx: Context, name: string): Promise<${toPascalCase(

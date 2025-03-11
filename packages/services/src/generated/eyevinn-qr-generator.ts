@@ -325,10 +325,12 @@ import {
  * @param {EyevinnQrGeneratorConfig} body - Service instance configuration
  * @returns {EyevinnQrGenerator} - Service instance
  * @example
- * import { Context, createEyevinnQrGeneratorInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnQrGeneratorInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnQrGeneratorInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnQrGeneratorConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnQrGeneratorInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnQrGeneratorInstance(
@@ -374,6 +376,13 @@ export async function removeEyevinnQrGeneratorInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the qr-generator to be retrieved
  * @returns {EyevinnQrGenerator} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnQrGeneratorInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnQrGeneratorInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnQrGeneratorInstance(
   ctx: Context,

@@ -315,10 +315,12 @@ import {
  * @param {NfrederiksenHlsViewerConfig} body - Service instance configuration
  * @returns {NfrederiksenHlsViewer} - Service instance
  * @example
- * import { Context, createNfrederiksenHlsViewerInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createNfrederiksenHlsViewerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createNfrederiksenHlsViewerInstance(ctx, { name: 'myinstance' });
+ * const body: NfrederiksenHlsViewerConfig = { name: 'myinstance', ... };
+ * const instance = await createNfrederiksenHlsViewerInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createNfrederiksenHlsViewerInstance(
@@ -369,6 +371,13 @@ export async function removeNfrederiksenHlsViewerInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the viewer to be retrieved
  * @returns {NfrederiksenHlsViewer} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getNfrederiksenHlsViewerInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getNfrederiksenHlsViewerInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getNfrederiksenHlsViewerInstance(
   ctx: Context,

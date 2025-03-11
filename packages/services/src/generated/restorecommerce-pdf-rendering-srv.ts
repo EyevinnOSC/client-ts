@@ -315,10 +315,12 @@ import {
  * @param {RestorecommercePdfRenderingSrvConfig} body - Service instance configuration
  * @returns {RestorecommercePdfRenderingSrv} - Service instance
  * @example
- * import { Context, createRestorecommercePdfRenderingSrvInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createRestorecommercePdfRenderingSrvInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createRestorecommercePdfRenderingSrvInstance(ctx, { name: 'myinstance' });
+ * const body: RestorecommercePdfRenderingSrvConfig = { name: 'myinstance', ... };
+ * const instance = await createRestorecommercePdfRenderingSrvInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createRestorecommercePdfRenderingSrvInstance(
@@ -373,6 +375,13 @@ export async function removeRestorecommercePdfRenderingSrvInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the pdf-rendering-srv to be retrieved
  * @returns {RestorecommercePdfRenderingSrv} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getRestorecommercePdfRenderingSrvInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getRestorecommercePdfRenderingSrvInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getRestorecommercePdfRenderingSrvInstance(
   ctx: Context,

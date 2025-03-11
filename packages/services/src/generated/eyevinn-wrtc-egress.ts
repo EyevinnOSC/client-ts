@@ -325,10 +325,12 @@ import {
  * @param {EyevinnWrtcEgressConfig} body - Service instance configuration
  * @returns {EyevinnWrtcEgress} - Service instance
  * @example
- * import { Context, createEyevinnWrtcEgressInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnWrtcEgressInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnWrtcEgressInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnWrtcEgressConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnWrtcEgressInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnWrtcEgressInstance(
@@ -374,6 +376,13 @@ export async function removeEyevinnWrtcEgressInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the gateway to be retrieved
  * @returns {EyevinnWrtcEgress} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnWrtcEgressInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnWrtcEgressInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnWrtcEgressInstance(
   ctx: Context,

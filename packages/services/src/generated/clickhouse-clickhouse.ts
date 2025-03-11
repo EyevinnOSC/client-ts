@@ -330,10 +330,12 @@ import {
  * @param {ClickhouseClickhouseConfig} body - Service instance configuration
  * @returns {ClickhouseClickhouse} - Service instance
  * @example
- * import { Context, createClickhouseClickhouseInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createClickhouseClickhouseInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createClickhouseClickhouseInstance(ctx, { name: 'myinstance' });
+ * const body: ClickhouseClickhouseConfig = { name: 'myinstance', ... };
+ * const instance = await createClickhouseClickhouseInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createClickhouseClickhouseInstance(
@@ -379,6 +381,13 @@ export async function removeClickhouseClickhouseInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the clickhouse-server to be retrieved
  * @returns {ClickhouseClickhouse} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getClickhouseClickhouseInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getClickhouseClickhouseInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getClickhouseClickhouseInstance(
   ctx: Context,

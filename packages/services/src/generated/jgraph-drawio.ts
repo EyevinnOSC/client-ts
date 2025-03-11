@@ -315,10 +315,12 @@ import {
  * @param {JgraphDrawioConfig} body - Service instance configuration
  * @returns {JgraphDrawio} - Service instance
  * @example
- * import { Context, createJgraphDrawioInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createJgraphDrawioInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createJgraphDrawioInstance(ctx, { name: 'myinstance' });
+ * const body: JgraphDrawioConfig = { name: 'myinstance', ... };
+ * const instance = await createJgraphDrawioInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createJgraphDrawioInstance(
@@ -360,6 +362,13 @@ export async function removeJgraphDrawioInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the editor to be retrieved
  * @returns {JgraphDrawio} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getJgraphDrawioInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getJgraphDrawioInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getJgraphDrawioInstance(
   ctx: Context,

@@ -227,10 +227,12 @@ import {
  * @param {EyevinnFunctionProbeConfig} body - Service instance configuration
  * @returns {EyevinnFunctionProbe} - Service instance
  * @example
- * import { Context, createEyevinnFunctionProbeInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnFunctionProbeInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnFunctionProbeInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnFunctionProbeConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnFunctionProbeInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnFunctionProbeInstance(
@@ -276,6 +278,13 @@ export async function removeEyevinnFunctionProbeInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the probe to be retrieved
  * @returns {EyevinnFunctionProbe} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnFunctionProbeInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnFunctionProbeInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnFunctionProbeInstance(
   ctx: Context,

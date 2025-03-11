@@ -297,7 +297,7 @@ import {
  * @description SRT to WHEP application ingests MPEG-TS over SRT stream and outputs to WebRTC using WHEP signaling protocol, supporting MacOS and Ubuntu. No video transcoding, SDP offer/answer exchange focus, and compliance with popular production software. Get yours now!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- *
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-SRT-WHEP-Bridge.html|Online docs} for further information
  */
 
 /**
@@ -325,10 +325,12 @@ import {
  * @param {EyevinnSrtWhepConfig} body - Service instance configuration
  * @returns {EyevinnSrtWhep} - Service instance
  * @example
- * import { Context, createEyevinnSrtWhepInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnSrtWhepInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnSrtWhepInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnSrtWhepConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnSrtWhepInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnSrtWhepInstance(
@@ -374,6 +376,13 @@ export async function removeEyevinnSrtWhepInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the bridge to be retrieved
  * @returns {EyevinnSrtWhep} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnSrtWhepInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnSrtWhepInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnSrtWhepInstance(
   ctx: Context,

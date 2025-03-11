@@ -320,10 +320,12 @@ import {
  * @param {EyevinnLambdaStitchConfig} body - Service instance configuration
  * @returns {EyevinnLambdaStitch} - Service instance
  * @example
- * import { Context, createEyevinnLambdaStitchInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnLambdaStitchInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnLambdaStitchInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnLambdaStitchConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnLambdaStitchInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnLambdaStitchInstance(
@@ -369,6 +371,13 @@ export async function removeEyevinnLambdaStitchInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the stitcher to be retrieved
  * @returns {EyevinnLambdaStitch} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnLambdaStitchInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnLambdaStitchInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnLambdaStitchInstance(
   ctx: Context,

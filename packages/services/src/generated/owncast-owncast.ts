@@ -277,10 +277,12 @@ import {
  * @param {OwncastOwncastConfig} body - Service instance configuration
  * @returns {OwncastOwncast} - Service instance
  * @example
- * import { Context, createOwncastOwncastInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createOwncastOwncastInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createOwncastOwncastInstance(ctx, { name: 'myinstance' });
+ * const body: OwncastOwncastConfig = { name: 'myinstance', ... };
+ * const instance = await createOwncastOwncastInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createOwncastOwncastInstance(
@@ -322,6 +324,13 @@ export async function removeOwncastOwncastInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the owncast to be retrieved
  * @returns {OwncastOwncast} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getOwncastOwncastInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getOwncastOwncastInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getOwncastOwncastInstance(
   ctx: Context,

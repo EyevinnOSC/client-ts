@@ -320,10 +320,12 @@ import {
  * @param {EyevinnTestAdserverConfig} body - Service instance configuration
  * @returns {EyevinnTestAdserver} - Service instance
  * @example
- * import { Context, createEyevinnTestAdserverInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnTestAdserverInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnTestAdserverInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnTestAdserverConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnTestAdserverInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnTestAdserverInstance(
@@ -369,6 +371,13 @@ export async function removeEyevinnTestAdserverInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the test-adserver to be retrieved
  * @returns {EyevinnTestAdserver} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnTestAdserverInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnTestAdserverInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnTestAdserverInstance(
   ctx: Context,

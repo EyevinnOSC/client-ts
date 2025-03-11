@@ -335,10 +335,12 @@ import {
  * @param {BlueskySocialPdsConfig} body - Service instance configuration
  * @returns {BlueskySocialPds} - Service instance
  * @example
- * import { Context, createBlueskySocialPdsInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createBlueskySocialPdsInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createBlueskySocialPdsInstance(ctx, { name: 'myinstance' });
+ * const body: BlueskySocialPdsConfig = { name: 'myinstance', ... };
+ * const instance = await createBlueskySocialPdsInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createBlueskySocialPdsInstance(
@@ -384,6 +386,13 @@ export async function removeBlueskySocialPdsInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the pds to be retrieved
  * @returns {BlueskySocialPds} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getBlueskySocialPdsInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getBlueskySocialPdsInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getBlueskySocialPdsInstance(
   ctx: Context,

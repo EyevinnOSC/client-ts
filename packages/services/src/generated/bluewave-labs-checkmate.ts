@@ -315,10 +315,12 @@ import {
  * @param {BluewaveLabsCheckmateConfig} body - Service instance configuration
  * @returns {BluewaveLabsCheckmate} - Service instance
  * @example
- * import { Context, createBluewaveLabsCheckmateInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createBluewaveLabsCheckmateInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createBluewaveLabsCheckmateInstance(ctx, { name: 'myinstance' });
+ * const body: BluewaveLabsCheckmateConfig = { name: 'myinstance', ... };
+ * const instance = await createBluewaveLabsCheckmateInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createBluewaveLabsCheckmateInstance(
@@ -369,6 +371,13 @@ export async function removeBluewaveLabsCheckmateInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the monitor to be retrieved
  * @returns {BluewaveLabsCheckmate} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getBluewaveLabsCheckmateInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getBluewaveLabsCheckmateInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getBluewaveLabsCheckmateInstance(
   ctx: Context,

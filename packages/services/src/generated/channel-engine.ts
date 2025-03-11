@@ -265,10 +265,12 @@ import {
  * @param {ChannelEngineConfig} body - Service instance configuration
  * @returns {ChannelEngine} - Service instance
  * @example
- * import { Context, createChannelEngineInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createChannelEngineInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createChannelEngineInstance(ctx, { name: 'myinstance' });
+ * const body: ChannelEngineConfig = { name: 'myinstance', ... };
+ * const instance = await createChannelEngineInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createChannelEngineInstance(
@@ -310,6 +312,13 @@ export async function removeChannelEngineInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the channel to be retrieved
  * @returns {ChannelEngine} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getChannelEngineInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getChannelEngineInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getChannelEngineInstance(
   ctx: Context,

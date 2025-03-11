@@ -277,10 +277,12 @@ import {
  * @param {DatarheiRestreamerConfig} body - Service instance configuration
  * @returns {DatarheiRestreamer} - Service instance
  * @example
- * import { Context, createDatarheiRestreamerInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createDatarheiRestreamerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createDatarheiRestreamerInstance(ctx, { name: 'myinstance' });
+ * const body: DatarheiRestreamerConfig = { name: 'myinstance', ... };
+ * const instance = await createDatarheiRestreamerInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createDatarheiRestreamerInstance(
@@ -326,6 +328,13 @@ export async function removeDatarheiRestreamerInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the restreamer to be retrieved
  * @returns {DatarheiRestreamer} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getDatarheiRestreamerInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getDatarheiRestreamerInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getDatarheiRestreamerInstance(
   ctx: Context,

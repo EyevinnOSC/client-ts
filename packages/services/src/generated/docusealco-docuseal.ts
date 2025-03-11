@@ -315,10 +315,12 @@ import {
  * @param {DocusealcoDocusealConfig} body - Service instance configuration
  * @returns {DocusealcoDocuseal} - Service instance
  * @example
- * import { Context, createDocusealcoDocusealInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createDocusealcoDocusealInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createDocusealcoDocusealInstance(ctx, { name: 'myinstance' });
+ * const body: DocusealcoDocusealConfig = { name: 'myinstance', ... };
+ * const instance = await createDocusealcoDocusealInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createDocusealcoDocusealInstance(
@@ -364,6 +366,13 @@ export async function removeDocusealcoDocusealInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the docuseal to be retrieved
  * @returns {DocusealcoDocuseal} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getDocusealcoDocusealInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getDocusealcoDocusealInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getDocusealcoDocusealInstance(
   ctx: Context,

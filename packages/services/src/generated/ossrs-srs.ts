@@ -279,10 +279,12 @@ Get started easily!
  * @param {OssrsSrsConfig} body - Service instance configuration
  * @returns {OssrsSrs} - Service instance
  * @example
- * import { Context, createOssrsSrsInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createOssrsSrsInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createOssrsSrsInstance(ctx, { name: 'myinstance' });
+ * const body: OssrsSrsConfig = { name: 'myinstance', ... };
+ * const instance = await createOssrsSrsInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createOssrsSrsInstance(
@@ -324,6 +326,13 @@ export async function removeOssrsSrsInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the srs to be retrieved
  * @returns {OssrsSrs} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getOssrsSrsInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getOssrsSrsInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getOssrsSrsInstance(
   ctx: Context,

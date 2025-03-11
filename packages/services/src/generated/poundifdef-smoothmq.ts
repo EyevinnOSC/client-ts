@@ -325,10 +325,12 @@ import {
  * @param {PoundifdefSmoothmqConfig} body - Service instance configuration
  * @returns {PoundifdefSmoothmq} - Service instance
  * @example
- * import { Context, createPoundifdefSmoothmqInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createPoundifdefSmoothmqInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createPoundifdefSmoothmqInstance(ctx, { name: 'myinstance' });
+ * const body: PoundifdefSmoothmqConfig = { name: 'myinstance', ... };
+ * const instance = await createPoundifdefSmoothmqInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createPoundifdefSmoothmqInstance(
@@ -374,6 +376,13 @@ export async function removePoundifdefSmoothmqInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the message-queue to be retrieved
  * @returns {PoundifdefSmoothmq} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getPoundifdefSmoothmqInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getPoundifdefSmoothmqInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getPoundifdefSmoothmqInstance(
   ctx: Context,

@@ -322,10 +322,12 @@ NB! Data persistence not guaranteed
  * @param {ValkeyIoValkeyConfig} body - Service instance configuration
  * @returns {ValkeyIoValkey} - Service instance
  * @example
- * import { Context, createValkeyIoValkeyInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createValkeyIoValkeyInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createValkeyIoValkeyInstance(ctx, { name: 'myinstance' });
+ * const body: ValkeyIoValkeyConfig = { name: 'myinstance', ... };
+ * const instance = await createValkeyIoValkeyInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createValkeyIoValkeyInstance(
@@ -371,6 +373,13 @@ export async function removeValkeyIoValkeyInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the valkey to be retrieved
  * @returns {ValkeyIoValkey} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getValkeyIoValkeyInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getValkeyIoValkeyInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getValkeyIoValkeyInstance(
   ctx: Context,

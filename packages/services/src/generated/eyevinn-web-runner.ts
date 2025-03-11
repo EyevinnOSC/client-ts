@@ -335,10 +335,12 @@ import {
  * @param {EyevinnWebRunnerConfig} body - Service instance configuration
  * @returns {EyevinnWebRunner} - Service instance
  * @example
- * import { Context, createEyevinnWebRunnerInstance } from '@osaas/client-services';
+ * import { Context } from '@osaas/client-core';
+ * import { createEyevinnWebRunnerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await createEyevinnWebRunnerInstance(ctx, { name: 'myinstance' });
+ * const body: EyevinnWebRunnerConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnWebRunnerInstance(ctx, body);
  * console.log(instance.url);
  */
 export async function createEyevinnWebRunnerInstance(
@@ -384,6 +386,13 @@ export async function removeEyevinnWebRunnerInstance(
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} name - Name of the web-runner to be retrieved
  * @returns {EyevinnWebRunner} - Service instance
+ * @example
+ * import { Context } from '@osaas/client-core';
+ * import { getEyevinnWebRunnerInstance } from '@osaas/client-services';
+ *
+ * const ctx = new Context();
+ * const instance = await getEyevinnWebRunnerInstance(ctx, 'myinstance');
+ * console.log(instance.url);
  */
 export async function getEyevinnWebRunnerInstance(
   ctx: Context,
