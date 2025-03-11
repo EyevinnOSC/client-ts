@@ -144,7 +144,7 @@ export async function transcode(ctx: Context, opts: TranscodeOptions) {
  * @returns {Job} - The Encore job
  *
  * @example
- * const job = await getTranscodeJob(ctx, 'tutorial', '12345');
+ * const job = await getTranscodeJob(ctx, 'tutorial', 'fb2baa17-8972-451b-bb1e-1bc773283476');
  * console.log(job);
  */
 export async function getTranscodeJob(
