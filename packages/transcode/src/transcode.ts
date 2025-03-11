@@ -133,3 +133,41 @@ export async function transcode(ctx: Context, opts: TranscodeOptions) {
   Log().debug(job);
   return job;
 }
+
+/**
+ * Get details of an SVT Encore transcode job in Eyevinn Open Source Cloud
+ *
+ * @memberof module:@osaas/client-transcode
+ * @param ctx - Eyevinn OSC context
+ * @param {string} instanceName - Name of Encore instance
+ * @param {string} jobId - Id of the Encore job
+ * @returns {Job} - The Encore job
+ *
+ * @example
+ * const job = await getTranscodeJob(ctx, 'tutorial', '12345');
+ * console.log(job);
+ */
+export async function getTranscodeJob(
+  ctx: Context,
+  instanceName: string,
+  jobId: string
+) {
+  const instance = await getEncoreInstance(ctx, instanceName);
+  if (!instance) {
+    throw new Error(`Encore instance ${instanceName} not found`);
+  }
+  const serviceAccessToken = await ctx.getServiceAccessToken('encore');
+  const response = await fetch(new URL(`/encoreJobs/${jobId}`, instance.url), {
+    headers: {
+      Authorization: `Bearer ${serviceAccessToken}`
+    }
+  });
+  if (!response.ok) {
+    if (response.status === 404) {
+      throw new Error(`Encore job ${jobId} not found`);
+    }
+    throw new Error(`Failed to get Encore job: ${response.status}`);
+  }
+  const job = await response.json();
+  return job;
+}
