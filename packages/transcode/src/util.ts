@@ -74,3 +74,9 @@ export async function transferFile(
   );
   Log().debug(`File transfer job ${job.name} completed`);
 }
+
+export const range = (start: number, stop: number, step: number) =>
+  Array.from(
+    { length: Math.ceil((stop - start) / step) },
+    (_, i) => start + i * step
+  );
