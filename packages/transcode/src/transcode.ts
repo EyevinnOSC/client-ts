@@ -1,5 +1,6 @@
 import { Context, Log } from '@osaas/client-core';
 import { getEncoreInstance } from '@osaas/client-services';
+import { range } from './util';
 
 export interface IDRKeyFrame {
   smpteTimeCode: string;
@@ -170,4 +171,65 @@ export async function getTranscodeJob(
   }
   const job = await response.json();
   return job;
+}
+
+interface JobList {
+  _embedded: {
+    encoreJobs: any[];
+  };
+  page: {
+    size: number;
+    totalElements: number;
+    totalPages: number;
+    number: 0;
+  };
+}
+
+/**
+ * Get a list of all SVT Encore transcode job in Eyevinn Open Source Cloud
+ *
+ * @memberof module:@osaas/client-transcode
+ * @param ctx - Eyevinn OSC context
+ * @param {string} instanceName - Name of Encore instance
+ * @returns {Job[]} - List of Encore jobs
+ *
+ * @example
+ * const jobs = await listTranscodeJobs(ctx, 'tutorial');
+ * console.log(jobs);
+ */
+export async function listTranscodeJobs(ctx: Context, instanceName: string) {
+  const instance = await getEncoreInstance(ctx, instanceName);
+  if (!instance) {
+    throw new Error(`Encore instance ${instanceName} not found`);
+  }
+  const serviceAccessToken = await ctx.getServiceAccessToken('encore');
+  const response = await fetch(new URL('/encoreJobs', instance.url), {
+    headers: {
+      Authorization: `Bearer ${serviceAccessToken}`
+    }
+  });
+  if (!response.ok) {
+    throw new Error(`Failed to list Encore jobs: ${response.status}`);
+  }
+  const jobList = (await response.json()) as JobList;
+  Log().debug(jobList);
+  const jobs = jobList._embedded.encoreJobs;
+  if (jobList.page.totalPages > 1) {
+    for (const page of range(1, jobList.page.totalPages, 1)) {
+      const response = await fetch(
+        new URL(`/encoreJobs?page=${page}`, instance.url),
+        {
+          headers: {
+            Authorization: `Bearer ${serviceAccessToken}`
+          }
+        }
+      );
+      if (!response.ok) {
+        throw new Error(`Failed to list Encore jobs: ${response.status}`);
+      }
+      const pageJobs = (await response.json()) as JobList;
+      jobs.push(...pageJobs._embedded.encoreJobs);
+    }
+  }
+  return jobs;
 }
