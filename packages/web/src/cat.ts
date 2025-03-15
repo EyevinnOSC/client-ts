@@ -73,3 +73,35 @@ export async function generateCommonAccessToken(
   const token = await response.text();
   return token;
 }
+
+export async function validateCommonAccessToken(
+  ctx: Context,
+  token: string,
+  opts: CatOptions
+): Promise<{ status: string; payload: Claims }> {
+  const instanceName = opts.instanceName || 'default';
+  let instance = await getAndersnasNodecatInstance(ctx, instanceName);
+  if (!instance) {
+    const config: AndersnasNodecatConfig = {
+      name: instanceName,
+      SigningKey: opts.signingKey
+    };
+    instance = await createAndersnasNodecatInstance(ctx, config);
+    await waitForInstanceReady('andersnas-nodecat', instanceName, ctx);
+  }
+  const sat = await ctx.getServiceAccessToken('andersnas-nodecat');
+  const apiUrl = new URL('/validateToken', instance.url);
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${sat}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ token })
+  });
+  if (!response.ok) {
+    throw new Error(`Failed to validate token: ${response.statusText}`);
+  }
+  const result = (await response.json()) as { status: string; payload: Claims };
+  return result;
+}
