@@ -15,6 +15,8 @@ interface CatOptions {
 /**
  * Generate a Common Access Token (CTA-5007) using Andersnas Nodecat open webservice
  *
+ * @memberof module:@osaas/client-web
+ * @async
  * @param {Context} ctx - Eyevinn OSC context
  * @param {Claims} claims - Claims to be included in the token
  * @param {CatOptions} opts - Service options
