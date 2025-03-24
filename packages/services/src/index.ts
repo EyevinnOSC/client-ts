@@ -625,3 +625,10 @@ export {
   removeEyevinnPlayerAnalyticsWorkerInstance,
   getEyevinnPlayerAnalyticsWorkerInstance
 } from './generated/eyevinn-player-analytics-worker';
+export {
+  EyevinnCatValidate,
+  EyevinnCatValidateConfig,
+  createEyevinnCatValidateInstance,
+  removeEyevinnCatValidateInstance,
+  getEyevinnCatValidateInstance
+} from './generated/eyevinn-cat-validate';

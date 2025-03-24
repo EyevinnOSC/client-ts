@@ -3063,3 +3063,38 @@ describe('removeEyevinnPlayerAnalyticsWorkerInstance', () => {
     );
   });
 });
+
+describe('createEyevinnCatValidateInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEyevinnCatValidateInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'eyevinn-cat-validate'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-cat-validate',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'eyevinn-cat-validate',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEyevinnCatValidateInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEyevinnCatValidateInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-cat-validate',
+      'sdk',
+      'token'
+    );
+  });
+});

@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/ad-normalizerinstance': {
-    /** List all running ad-normalizer instances */
+  '/cat-validateinstance': {
+    /** List all running cat-validate instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the ad-normalizer instance */
+            /** @description Name of the cat-validate instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,20 +40,10 @@ export interface paths {
                 url: string;
               };
             };
-            EncoreUrl: string;
-            AdServerUrl: string;
-            JitPackaging: boolean;
-            PackagingQueueName: string;
-            OutputBucketUrl: string;
-            S3AccessKey: string;
-            S3SecretKey: string;
-            S3EndpointUrl?: string;
-            EncoreCallbackListenerUrl?: string;
-            EncoreProfile?: string;
-            KeyRegex?: string;
-            KeyField?: string;
+            Keys: string;
+            Issuer?: string;
             RedisUrl?: string;
-            OscAccessToken?: string;
+            ClickHouseUrl?: string;
           }[];
         };
         /** Default Response */
@@ -65,27 +55,17 @@ export interface paths {
         };
       };
     };
-    /** Launch a new ad-normalizer instance */
+    /** Launch a new cat-validate instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the ad-normalizer instance */
+            /** @description Name of the cat-validate instance */
             name: string;
-            EncoreUrl: string;
-            AdServerUrl: string;
-            JitPackaging: boolean;
-            PackagingQueueName: string;
-            OutputBucketUrl: string;
-            S3AccessKey: string;
-            S3SecretKey: string;
-            S3EndpointUrl?: string;
-            EncoreCallbackListenerUrl?: string;
-            EncoreProfile?: string;
-            KeyRegex?: string;
-            KeyField?: string;
+            Keys: string;
+            Issuer?: string;
             RedisUrl?: string;
-            OscAccessToken?: string;
+            ClickHouseUrl?: string;
           };
         };
       };
@@ -93,7 +73,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the ad-normalizer instance */
+            /** @description Name of the cat-validate instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -111,20 +91,10 @@ export interface paths {
                 url: string;
               };
             };
-            EncoreUrl: string;
-            AdServerUrl: string;
-            JitPackaging: boolean;
-            PackagingQueueName: string;
-            OutputBucketUrl: string;
-            S3AccessKey: string;
-            S3SecretKey: string;
-            S3EndpointUrl?: string;
-            EncoreCallbackListenerUrl?: string;
-            EncoreProfile?: string;
-            KeyRegex?: string;
-            KeyField?: string;
+            Keys: string;
+            Issuer?: string;
             RedisUrl?: string;
-            OscAccessToken?: string;
+            ClickHouseUrl?: string;
           };
         };
         /** Default Response */
@@ -151,12 +121,12 @@ export interface paths {
       };
     };
   };
-  '/ad-normalizerinstance/{id}': {
-    /** Obtain status and resource URLs for an ad-normalizer instance */
+  '/cat-validateinstance/{id}': {
+    /** Obtain status and resource URLs for an cat-validate instance */
     get: {
       parameters: {
         path: {
-          /** Name of the ad-normalizer instance */
+          /** Name of the cat-validate instance */
           id: string;
         };
       };
@@ -164,7 +134,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the ad-normalizer instance */
+            /** @description Name of the cat-validate instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -182,20 +152,10 @@ export interface paths {
                 url: string;
               };
             };
-            EncoreUrl: string;
-            AdServerUrl: string;
-            JitPackaging: boolean;
-            PackagingQueueName: string;
-            OutputBucketUrl: string;
-            S3AccessKey: string;
-            S3SecretKey: string;
-            S3EndpointUrl?: string;
-            EncoreCallbackListenerUrl?: string;
-            EncoreProfile?: string;
-            KeyRegex?: string;
-            KeyField?: string;
+            Keys: string;
+            Issuer?: string;
             RedisUrl?: string;
-            OscAccessToken?: string;
+            ClickHouseUrl?: string;
           };
         };
         /** Default Response */
@@ -214,11 +174,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an ad-normalizer instance */
+    /** Stop and remove an cat-validate instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the ad-normalizer instance */
+          /** Name of the cat-validate instance */
           id: string;
         };
       };
@@ -238,11 +198,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of ad-normalizer instance */
+    /** Return status of cat-validate instance */
     get: {
       parameters: {
         path: {
-          /** Name of the ad-normalizer instance */
+          /** Name of the cat-validate instance */
           id: string;
         };
       };
@@ -265,7 +225,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the ad-normalizer instance */
+    /** Return the latest logs from the cat-validate instance */
     get: {
       parameters: {
         query: {
@@ -273,7 +233,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the ad-normalizer instance */
+          /** Name of the cat-validate instance */
           id: string;
         };
       };
@@ -293,11 +253,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for ad-normalizer instance */
+    /** Return the exposed extra ports for cat-validate instance */
     get: {
       parameters: {
         path: {
-          /** Name of the ad-normalizer instance */
+          /** Name of the cat-validate instance */
           id: string;
         };
       };
@@ -328,11 +288,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnAdNormalizer =
-  paths['/ad-normalizerinstance/{id}']['get']['responses']['200']['schema'];
+export type EyevinnCatValidate =
+  paths['/cat-validateinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnAdNormalizerConfig =
-  paths['/ad-normalizerinstance']['post']['parameters']['body']['body'];
+export type EyevinnCatValidateConfig =
+  paths['/cat-validateinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -341,119 +301,109 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-ad-normalizer
- * @description Optimize your ad delivery with Ad Normalizer! Seamlessly transcode and package VAST creatives for your ad server using a Redis-backed workflow. Ensure efficient media processing and reliable ad streaming.
+ * @namespace eyevinn-cat-validate
+ * @description Enhance your security with Common Access Token Validator, the ultimate validation service for CTA-5007 tokens. Seamlessly integrate with Redis and ClickHouse for efficient token management. Secure your apps today!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Ad-Normalizer.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} EyevinnAdNormalizerConfig
- * @property {string} name - Name of ad-normalizer
- * @property {string} EncoreUrl - EncoreUrl
- * @property {string} AdServerUrl - AdServerUrl
- * @property {boolean} JitPackaging - JitPackaging
- * @property {string} PackagingQueueName - PackagingQueueName
- * @property {string} OutputBucketUrl - OutputBucketUrl
- * @property {string} S3AccessKey - S3AccessKey
- * @property {string} S3SecretKey - S3SecretKey
- * @property {string} [S3EndpointUrl] - S3EndpointUrl
- * @property {string} [EncoreCallbackListenerUrl] - EncoreCallbackListenerUrl
- * @property {string} [EncoreProfile] - EncoreProfile
- * @property {string} [KeyRegex] - KeyRegex
- * @property {string} [KeyField] - KeyField
+ * @typedef {Object} EyevinnCatValidateConfig
+ * @property {string} name - Name of cat-validate
+ * @property {string} Keys - Keys
+ * @property {string} [Issuer] - Issuer
  * @property {string} [RedisUrl] - RedisUrl
- * @property {string} [OscAccessToken] - OscAccessToken
+ * @property {string} [ClickHouseUrl] - ClickHouseUrl
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnAdNormalizer
- * @property {string} name - Name of the Ad Normalizer instance
- * @property {string} url - URL of the Ad Normalizer instance
+ * @typedef {Object} EyevinnCatValidate
+ * @property {string} name - Name of the Common Access Token Validator instance
+ * @property {string} url - URL of the Common Access Token Validator instance
  *
  */
 
 /**
- * Create a new Ad Normalizer instance
+ * Create a new Common Access Token Validator instance
  *
- * @memberOf eyevinn-ad-normalizer
+ * @memberOf eyevinn-cat-validate
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnAdNormalizerConfig} body - Service instance configuration
- * @returns {EyevinnAdNormalizer} - Service instance
+ * @param {EyevinnCatValidateConfig} body - Service instance configuration
+ * @returns {EyevinnCatValidate} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnAdNormalizerInstance } from '@osaas/client-services';
+ * import { createEyevinnCatValidateInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnAdNormalizerConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnAdNormalizerInstance(ctx, body);
+ * const body: EyevinnCatValidateConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnCatValidateInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnAdNormalizerInstance(
+export async function createEyevinnCatValidateInstance(
   ctx: Context,
-  body: EyevinnAdNormalizerConfig
-): Promise<EyevinnAdNormalizer> {
+  body: EyevinnCatValidateConfig
+): Promise<EyevinnCatValidate> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-ad-normalizer'
+    'eyevinn-cat-validate'
   );
   const instance = await createInstance(
     ctx,
-    'eyevinn-ad-normalizer',
+    'eyevinn-cat-validate',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-ad-normalizer', instance.name, ctx);
+  await waitForInstanceReady('eyevinn-cat-validate', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Ad Normalizer instance
+ * Remove a Common Access Token Validator instance
  *
- * @memberOf eyevinn-ad-normalizer
+ * @memberOf eyevinn-cat-validate
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the normalizer to be removed
+ * @param {string} name - Name of the validator to be removed
  */
-export async function removeEyevinnAdNormalizerInstance(
+export async function removeEyevinnCatValidateInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-ad-normalizer'
+    'eyevinn-cat-validate'
   );
-  await removeInstance(ctx, 'eyevinn-ad-normalizer', name, serviceAccessToken);
+  await removeInstance(ctx, 'eyevinn-cat-validate', name, serviceAccessToken);
 }
 
 /**
- * Get a Ad Normalizer instance
+ * Get a Common Access Token Validator instance
  *
- * @memberOf eyevinn-ad-normalizer
+ * @memberOf eyevinn-cat-validate
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the normalizer to be retrieved
- * @returns {EyevinnAdNormalizer} - Service instance
+ * @param {string} name - Name of the validator to be retrieved
+ * @returns {EyevinnCatValidate} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnAdNormalizerInstance } from '@osaas/client-services';
+ * import { getEyevinnCatValidateInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnAdNormalizerInstance(ctx, 'myinstance');
+ * const instance = await getEyevinnCatValidateInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnAdNormalizerInstance(
+export async function getEyevinnCatValidateInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnAdNormalizer> {
+): Promise<EyevinnCatValidate> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-ad-normalizer'
+    'eyevinn-cat-validate'
   );
   return await getInstance(
     ctx,
-    'eyevinn-ad-normalizer',
+    'eyevinn-cat-validate',
     name,
     serviceAccessToken
   );
