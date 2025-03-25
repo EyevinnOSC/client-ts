@@ -18,6 +18,12 @@ export interface TranscodeOptions {
   injectIDRKeyFrames?: IDRKeyFrame[];
 }
 
+export interface CustomEndpoint {
+  endpointUrl: URL;
+  bearerToken?: string;
+  beaderTokenHeader?: string;
+}
+
 function isValidSmpteTimecode(smpteTimeCode: string): boolean {
   const smpteRegex = /^([0-1]\d|2[0-3]):([0-5]\d):([0-5]\d):([0-2]\d|3[0-1])$/;
   return smpteRegex.test(smpteTimeCode);
@@ -50,11 +56,18 @@ export function smpteTimecodeToFrames(
  */
 
 /**
+ * @typedef {object} CustomEndpoint
+ * @property {URL} endpointUrl - The URL to the custom Encore endpoint
+ * @property {string} [bearerToken] - The bearer token to use for authentication
+ * @property {string} [beaderTokenHeader] - The header name for the bearer token (default: Authorization)
+ */
+/**
  * Transcode a video file using SVT Encore in Eyevinn Open Source Cloud
  *
  * @memberof module:@osaas/client-transcode
  * @param ctx - Eyevinn OSC context
  * @param {TranscodeOptions} opts - Transcode options
+ * @param {CustomEndpoint} [endpoint] - Use a custom Encore endpoint (optional)
  * @returns {Job} - The created Encore job
  *
  * @example
@@ -66,19 +79,48 @@ export function smpteTimecodeToFrames(
  *    inputUrl: new URL('s3://input/VINN.mp4')
  *  });
  *  console.log(job);
+ *
+ * @example
+ * // Using a custom Encore endpoint
+ * const job = await transcode(ctx, {
+ *   encoreInstanceName: 'dummy',
+ *   profile: 'program',
+ *   externalId: 'tutorial',
+ *   outputUrl: new URL('s3://output/tutorial/'),
+ *   inputUrl: new URL('s3://input/VINN.mp4'),
+ * }, {
+ *  endpointUrl: new URL('https://my-custom-encore-endpoint.example.com/'),
+ * });
+ * console.log(job);
  */
-export async function transcode(ctx: Context, opts: TranscodeOptions) {
+export async function transcode(
+  ctx: Context,
+  opts: TranscodeOptions,
+  endpoint?: CustomEndpoint
+) {
   const baseName = opts.baseName || opts.externalId;
   const profile =
     opts.profile || (!opts.injectIDRKeyFrames ? 'program' : 'program-kf');
   if (opts.injectIDRKeyFrames && !opts.frameRate) {
     throw new Error('frameRate is required when injecting IDR key frames');
   }
-  const instance = await getEncoreInstance(ctx, opts.encoreInstanceName);
-  if (!instance) {
-    throw new Error(`Encore instance ${opts.encoreInstanceName} not found`);
+  let endpointUrl: string;
+  let bearerToken: string | undefined;
+  let bearerTokenHeader = 'Authorization';
+  if (!endpoint) {
+    const instance = await getEncoreInstance(ctx, opts.encoreInstanceName);
+    if (!instance) {
+      throw new Error(`Encore instance ${opts.encoreInstanceName} not found`);
+    }
+    bearerToken = await ctx.getServiceAccessToken('encore');
+    endpointUrl = instance.url;
+  } else {
+    endpointUrl = endpoint.endpointUrl.toString();
+    bearerToken = endpoint.bearerToken;
+    if (endpoint.beaderTokenHeader) {
+      bearerTokenHeader = endpoint.beaderTokenHeader;
+    }
   }
-  const serviceAccessToken = await ctx.getServiceAccessToken('encore');
   if (opts.inputUrl.protocol !== 's3:' && opts.inputUrl.protocol !== 'https:') {
     throw new Error('inputUrl must be an S3 or HTTPS URL');
   }
@@ -119,12 +161,15 @@ export async function transcode(ctx: Context, opts: TranscodeOptions) {
   if (opts.callBackUrl) {
     encoreJob['progressCallbackUri'] = opts.callBackUrl.toString();
   }
-  const response = await fetch(new URL('/encoreJobs', instance.url), {
+  const headers: { [name: string]: string | string[] } = {
+    'Content-Type': 'application/json'
+  };
+  if (bearerToken) {
+    headers[bearerTokenHeader] = `Bearer ${bearerToken}`;
+  }
+  const response = await fetch(new URL('/encoreJobs', endpointUrl), {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${serviceAccessToken}`
-    },
+    headers,
     body: JSON.stringify(encoreJob)
   });
   if (!response.ok) {
@@ -142,6 +187,7 @@ export async function transcode(ctx: Context, opts: TranscodeOptions) {
  * @param ctx - Eyevinn OSC context
  * @param {string} instanceName - Name of Encore instance
  * @param {string} jobId - Id of the Encore job
+ * @param {CustomEndpoint} [endpoint] - Use a custom Encore endpoint (optional)
  * @returns {Job} - The Encore job
  *
  * @example
@@ -151,17 +197,32 @@ export async function transcode(ctx: Context, opts: TranscodeOptions) {
 export async function getTranscodeJob(
   ctx: Context,
   instanceName: string,
-  jobId: string
+  jobId: string,
+  endpoint?: CustomEndpoint
 ) {
-  const instance = await getEncoreInstance(ctx, instanceName);
-  if (!instance) {
-    throw new Error(`Encore instance ${instanceName} not found`);
-  }
-  const serviceAccessToken = await ctx.getServiceAccessToken('encore');
-  const response = await fetch(new URL(`/encoreJobs/${jobId}`, instance.url), {
-    headers: {
-      Authorization: `Bearer ${serviceAccessToken}`
+  let endpointUrl: string;
+  let bearerTokenHeader = 'Authorization';
+  let bearerToken: string | undefined;
+  if (!endpoint) {
+    const instance = await getEncoreInstance(ctx, instanceName);
+    if (!instance) {
+      throw new Error(`Encore instance ${instanceName} not found`);
     }
+    endpointUrl = instance.url;
+    bearerToken = await ctx.getServiceAccessToken('encore');
+  } else {
+    endpointUrl = endpoint.endpointUrl.toString();
+    bearerToken = endpoint.bearerToken;
+    if (endpoint.beaderTokenHeader) {
+      bearerTokenHeader = endpoint.beaderTokenHeader;
+    }
+  }
+  const headers: { [name: string]: string | string[] } = {};
+  if (bearerToken) {
+    headers[bearerTokenHeader] = `Bearer ${bearerToken}`;
+  }
+  const response = await fetch(new URL(`/encoreJobs/${jobId}`, endpointUrl), {
+    headers
   });
   if (!response.ok) {
     if (response.status === 404) {
@@ -191,22 +252,41 @@ interface JobList {
  * @memberof module:@osaas/client-transcode
  * @param ctx - Eyevinn OSC context
  * @param {string} instanceName - Name of Encore instance
+ * @param {CustomEndpoint} [endpoint] - Use a custom Encore endpoint (optional)
  * @returns {Job[]} - List of Encore jobs
  *
  * @example
  * const jobs = await listTranscodeJobs(ctx, 'tutorial');
  * console.log(jobs);
  */
-export async function listTranscodeJobs(ctx: Context, instanceName: string) {
-  const instance = await getEncoreInstance(ctx, instanceName);
-  if (!instance) {
-    throw new Error(`Encore instance ${instanceName} not found`);
-  }
-  const serviceAccessToken = await ctx.getServiceAccessToken('encore');
-  const response = await fetch(new URL('/encoreJobs', instance.url), {
-    headers: {
-      Authorization: `Bearer ${serviceAccessToken}`
+export async function listTranscodeJobs(
+  ctx: Context,
+  instanceName: string,
+  endpoint?: CustomEndpoint
+) {
+  let endpointUrl: string;
+  let bearerTokenHeader = 'Authorization';
+  let bearerToken: string | undefined;
+  if (!endpoint) {
+    const instance = await getEncoreInstance(ctx, instanceName);
+    if (!instance) {
+      throw new Error(`Encore instance ${instanceName} not found`);
     }
+    bearerToken = await ctx.getServiceAccessToken('encore');
+    endpointUrl = instance.url;
+  } else {
+    endpointUrl = endpoint.endpointUrl.toString();
+    bearerToken = endpoint.bearerToken;
+    if (endpoint.beaderTokenHeader) {
+      bearerTokenHeader = endpoint.beaderTokenHeader;
+    }
+  }
+  const headers: { [name: string]: string | string[] } = {};
+  if (bearerToken) {
+    headers[bearerTokenHeader] = `Bearer ${bearerToken}`;
+  }
+  const response = await fetch(new URL('/encoreJobs', endpointUrl), {
+    headers
   });
   if (!response.ok) {
     throw new Error(`Failed to list Encore jobs: ${response.status}`);
@@ -217,11 +297,9 @@ export async function listTranscodeJobs(ctx: Context, instanceName: string) {
   if (jobList.page.totalPages > 1) {
     for (const page of range(1, jobList.page.totalPages, 1)) {
       const response = await fetch(
-        new URL(`/encoreJobs?page=${page}`, instance.url),
+        new URL(`/encoreJobs?page=${page}`, endpointUrl),
         {
-          headers: {
-            Authorization: `Bearer ${serviceAccessToken}`
-          }
+          headers
         }
       );
       if (!response.ok) {
