@@ -11,7 +11,8 @@
     "packages/db",
     "packages/ai",
     "packages/services",
-    "packages/web"
+    "packages/web",
+    "packages/mcp"
   ],
   "author": "Eyevinn Open Source Cloud <osc@eyevinn.se>",
   "repository": {
