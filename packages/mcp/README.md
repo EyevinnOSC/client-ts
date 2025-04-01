@@ -1,11 +1,12 @@
 # Remote MCP client for Eyevinn Open Source Cloud
 
-![Join the community on Slack](https://slack.osaas.io/badge.svg)
+![Join the OSC community on Slack](https://slack.osaas.io/badge.svg)
 
 ## Usage (Claude Desktop)
 
-Add this to the Claude settings file.
+Add this to the Claude settings file (claude_desktop_config.json).
 
+![claude desktop settings](claude_settings.png)
 ```json
 {
   "mcpServers": {
@@ -22,6 +23,8 @@ Add this to the Claude settings file.
 
 Obtain the `<osc-access-token>` under Settings in the Eyevinn Open Source Cloud web user interface.
 
+Restart Claude for the changes to take effect.
+
 ## Development
 
 Using the Model Context Protocol inspector.
@@ -30,7 +33,7 @@ Using the Model Context Protocol inspector.
 % npx @modelcontextprotocol/inspector \
   -e MCP_ENDPOINT=https://mcp.svc.dev.osaas.io \
   -e OSC_ACCESS_TOKEN=<osc-access-token> \
-  npx ts-node src/index.ts
+  npx tsx src/index.ts
 ```
 
 ## About Open Source Cloud
