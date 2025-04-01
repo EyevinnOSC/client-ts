@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 import { RemoteMCPClient } from '@remote-mcp/client/dist/client.js';
 
 const OSC_ACCESS_TOKEN = process.env.OSC_ACCESS_TOKEN;
