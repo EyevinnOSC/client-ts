@@ -1,6 +1,6 @@
 {
   "name": "@osaas/client-mcp",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Open Source Cloud Remote MCP Client",
   "author": "Eyevinn Open Source Cloud <osc@eyevinn.se>",
   "homepage": "https://www.osaas.io",
