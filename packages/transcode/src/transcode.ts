@@ -133,7 +133,7 @@ export async function transcode(
   if (!opts.noReconnect) {
     params = {
       reconnect: '1',
-      reconnect_on_error: '1'
+      reconnect_on_network_error: '1'
     };
   }
   const encoreJob: any = {
