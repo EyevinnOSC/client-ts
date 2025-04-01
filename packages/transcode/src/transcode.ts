@@ -16,6 +16,7 @@ export interface TranscodeOptions {
   profile?: string;
   frameRate?: number;
   injectIDRKeyFrames?: IDRKeyFrame[];
+  noReconnect?: boolean;
 }
 
 export interface CustomEndpoint {
@@ -53,6 +54,7 @@ export function smpteTimecodeToFrames(
  * @property {string} [profile] - Profile to use for transcoding
  * @property {number} [frameRate] - Frame rate of the input video (required when injecting IDR key frames)
  * @property {IDRKeyFrame[]} [injectIDRKeyFrames] - List of SMPTE timecodes for IDR key frames
+ * @property {boolean} [noReconnect] - Do not reconnect to the input stream on network errors
  */
 
 /**
@@ -127,6 +129,13 @@ export async function transcode(
   if (opts.outputUrl.protocol !== 's3:') {
     throw new Error('outputUrl must be an S3 URL');
   }
+  let params = {};
+  if (!opts.noReconnect) {
+    params = {
+      reconnect: '1',
+      reconnect_on_error: '1'
+    };
+  }
   const encoreJob: any = {
     externalId: opts.externalId,
     profile,
@@ -136,7 +145,8 @@ export async function transcode(
       {
         type: 'AudioVideo',
         copyTs: true,
-        uri: opts.inputUrl.toString()
+        uri: opts.inputUrl.toString(),
+        params
       }
     ]
   };
