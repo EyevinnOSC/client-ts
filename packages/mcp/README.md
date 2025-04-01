@@ -11,7 +11,7 @@ Add this to the Claude settings file.
   "mcpServers": {
     "remote-mcp-osc": {
       "command": "npx",
-      "args": [ "-y", "@osaas/client-mcp" ],
+      "args": ["-y", "@osaas/client-mcp"],
       "env": {
         "OSC_ACCESS_TOKEN": "<osc-access-token>"
       }
