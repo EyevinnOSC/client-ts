@@ -1,0 +1,33 @@
+{
+  "name": "@osaas/client-mcp",
+  "version": "0.1.0",
+  "description": "Open Source Cloud Remote MCP Client",
+  "author": "Eyevinn Open Source Cloud <osc@eyevinn.se>",
+  "homepage": "https://www.osaas.io",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EyevinnOSC/client-ts.git"
+  },
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint .",
+    "pretty": "prettier --check --ignore-unknown .",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "jest --passWithNoTests"
+  },
+  "dependencies": {
+    "@remote-mcp/client": "^0.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

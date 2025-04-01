@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./lib"
+  },
+  "ts-node": {
+    "transpileOnly": true
+  },
+  "include": ["./src"]
+}
