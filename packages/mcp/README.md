@@ -33,6 +33,7 @@ Using the Model Context Protocol inspector.
 % npx @modelcontextprotocol/inspector \
   -e MCP_ENDPOINT=https://mcp.svc.dev.osaas.io \
   -e OSC_ACCESS_TOKEN=<osc-access-token> \
+  -e OSC_ENVIRONMENT=dev \
   npx tsx src/index.ts
 ```
 

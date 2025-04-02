@@ -12,7 +12,10 @@ if (!OSC_ACCESS_TOKEN) {
 const client = new RemoteMCPClient({
   remoteUrl: MCP_ENDPOINT,
   headers: {
-    Authorization: `Bearer ${OSC_ACCESS_TOKEN}`
+    Authorization: `Bearer ${OSC_ACCESS_TOKEN}`,
+    ...(process.env.OSC_ENVIRONMENT
+      ? { 'x-osc-environment': process.env.OSC_ENVIRONMENT }
+      : {})
   }
 });
 client.start();
