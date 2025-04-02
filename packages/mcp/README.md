@@ -7,6 +7,7 @@
 Add this to the Claude settings file (claude_desktop_config.json).
 
 ![claude desktop settings](claude_settings.png)
+
 ```json
 {
   "mcpServers": {
