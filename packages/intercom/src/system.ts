@@ -181,6 +181,9 @@ export class IntercomSystem {
    * @param {NewProductionLine} lines - The lines to create in the production
    * @returns {Promise<IntercomProduction>} - The created production
    * @example
+   * import { Context } from '@osaas/client-core';
+   * import { IntercomSystem } from '@osaas/client-intercom';
+   *
    * const ctx = new Context();
    * const intercom = new IntercomSystem({ context: ctx, name: 'example' });
    * await intercom.init();
