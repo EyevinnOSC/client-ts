@@ -94,29 +94,43 @@ export class IntercomSystem {
    * Constructor for IntercomSystem
    * @param {Context} context - Open Source Cloud configuration context
    * @param {string} name - The name of the Intercom system
+   * @param {string} [customEndpoint] - Optional custom endpoint for the Intercom system (if running outside of Open Source Cloud)
    */
-  constructor({ context, name }: { context: Context; name: string }) {
+  constructor({
+    context,
+    name,
+    customEndpoint
+  }: {
+    context: Context;
+    name: string;
+    customEndpoint?: string;
+  }) {
     this.context = context;
     this.name = name;
+    if (customEndpoint) {
+      this.url = customEndpoint;
+    }
   }
 
   /**
    * Initialize the Intercom system
    */
   public async init() {
-    this.token = await this.context.getServiceAccessToken(SERVICE_ID);
-    const instance = await getInstance(
-      this.context,
-      SERVICE_ID,
-      this.name,
-      this.token
-    );
-    if (!instance) {
-      throw new Error(`No Intercom system found with name ${this.name}`);
+    if (!this.url) {
+      this.token = await this.context.getServiceAccessToken(SERVICE_ID);
+      const instance = await getInstance(
+        this.context,
+        SERVICE_ID,
+        this.name,
+        this.token
+      );
+      if (!instance) {
+        throw new Error(`No Intercom system found with name ${this.name}`);
+      }
+      this.url = instance.url;
+      Log().debug(instance);
+      Log().debug(`Intercom system ${this.name} found on ${this.url}`);
     }
-    this.url = instance.url;
-    Log().debug(instance);
-    Log().debug(`Intercom system ${this.name} found on ${this.url}`);
   }
 
   /**
