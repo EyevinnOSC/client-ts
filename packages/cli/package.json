@@ -1,6 +1,6 @@
 {
   "name": "@osaas/cli",
-  "version": "4.12.1",
+  "version": "4.12.2",
   "description": "Open Source Cloud CLI",
   "author": "Eyevinn Open Source Cloud <osc@eyevinn.se>",
   "homepage": "https://www.osaas.io",
@@ -23,9 +23,9 @@
   "dependencies": {
     "@osaas/client-ai": "^0.4.5",
     "@osaas/client-core": "^0.16.1",
-    "@osaas/client-db": "^0.5.6",
+    "@osaas/client-db": "^0.6.0",
     "@osaas/client-intercom": "^0.2.5",
-    "@osaas/client-transcode": "^0.19.3",
+    "@osaas/client-transcode": "^0.19.4",
     "@osaas/client-web": "^0.5.4",
     "@types/promptly": "^3.0.5",
     "chalk": "4.1.2",
