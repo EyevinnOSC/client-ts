@@ -1,3 +1,2 @@
 /** @module @osaas/client-intercom */
-
-export { IntercomSystem } from './system';
+export * from './system';
