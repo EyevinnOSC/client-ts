@@ -16,7 +16,13 @@ export {
   isValidInstanceName,
   waitForInstanceReady
 } from './core';
-export { listSubscriptions, removeSubscription, Subscription } from './admin';
+export {
+  listSubscriptions,
+  removeSubscription,
+  Subscription,
+  listReservedNodes,
+  ReservedNode
+} from './admin';
 export {
   createJob,
   removeJob,

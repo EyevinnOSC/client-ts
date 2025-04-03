@@ -5,6 +5,7 @@ import {
   getLogsForInstance,
   getPortsForInstance,
   listInstances,
+  listReservedNodes,
   removeInstance
 } from '@osaas/client-core';
 import { Command } from 'commander';
@@ -172,6 +173,33 @@ export function cmdLogs() {
       }
     });
   return logs;
+}
+
+export function cmdReservedNodes() {
+  const reservedNodes = new Command('list-reserved-nodes');
+  reservedNodes
+    .description('List all my reserved nodes')
+    .action(async (options, command) => {
+      try {
+        const globalOpts = command.optsWithGlobals();
+        const environment = globalOpts?.env || 'prod';
+        const ctx = new Context({ environment });
+
+        const reservedNodes = await listReservedNodes(ctx);
+        reservedNodes.forEach((node) => {
+          console.log(`${node.name}:`);
+          console.log(`  Purposes: ${node.purposes.join(', ')}`);
+          console.log(`  Public IPs: ${node.publicIps.join(', ')}`);
+          console.log(`  CPU: ${node.capacity.cpu}`);
+          console.log(`  Memory: ${node.capacity.memory}`);
+          console.log(`  Storage: ${node.capacity.storage}`);
+          console.log(`  Reservations: ${node.reservations.join(', ')}`);
+        });
+      } catch (err) {
+        console.log((err as Error).message);
+      }
+    });
+  return reservedNodes;
 }
 
 export function cmdServiceAccessToken() {
