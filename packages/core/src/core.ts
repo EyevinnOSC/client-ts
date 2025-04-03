@@ -202,17 +202,26 @@ export async function getPortsForInstance(
   });
 }
 
+/**
+ * Get logs for an instance of a service in Open Source Cloud
+ * @memberof module:@osaas/client-core
+ * @param {Context} context - Open Source Cloud configuration context
+ * @param {string} serviceId - The service identifier
+ * @param {string} name - The name of the service instance
+ * @param {string} token - Service access token
+ * @returns {string | string[]} - Log rows
+ */
 export async function getLogsForInstance(
   context: Context,
   serviceId: string,
   name: string,
   token: string
-): Promise<string[]> {
+): Promise<string | string[]> {
   const service = await getService(context, serviceId);
   const instanceUrl = new URL(service.apiUrl);
   const logsUrl = new URL('https://' + instanceUrl.host + '/logs/' + name);
 
-  return await createFetch<string[]>(logsUrl, {
+  return await createFetch<string | string[]>(logsUrl, {
     method: 'GET',
     headers: {
       'x-jwt': `Bearer ${token}`
