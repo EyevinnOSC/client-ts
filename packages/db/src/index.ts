@@ -69,16 +69,19 @@ export interface DatabaseOpts {
  * Create a database instance if it does not exists
  * and return the connection URL.
  *
+ * @param {Context} ctx The Open Source Cloud configuration context.
  * @param {DatabaseType} type The type of the database.
  * @param {string} name The name of the database instance.
  * @param {DatabaseOpts} opts The options for the database.
  * @returns The connection URL for the database.
  *
  * @example
+ * import { Context } from '@osaas/client-core';
  * import { setupDatabase } from '@osaas/client-db';
  * import Redis from 'ioredis';
  *
- * const dbUrl = await setupDatabase('valkey', 'myvalkey', { password: 'secret' });
+ * const ctx = new Context();
+ * const dbUrl = await setupDatabase(ctx, 'valkey', 'myvalkey', { password: 'secret' });
  * const client = new Redis(dbUrl);
  * try {
  *   await client.subscribe('messages');
@@ -91,11 +94,11 @@ export interface DatabaseOpts {
  * }
  */
 export async function setupDatabase(
+  ctx: Context,
   type: DatabaseType,
   name: string,
   opts: DatabaseOpts
 ) {
-  const ctx = new Context();
   let instance;
 
   switch (type) {
