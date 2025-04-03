@@ -25,7 +25,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@osaas/client-core": "^0.4.0",
     "chalk": "4.1.2"
   },
   "publishConfig": {
