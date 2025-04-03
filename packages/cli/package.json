@@ -18,8 +18,7 @@
     "lint": "eslint .",
     "pretty": "prettier --check --ignore-unknown .",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "test": "jest --pass-with-no-tests",
-    "dev": "ts-node src/cli.ts"
+    "test": "jest --pass-with-no-tests"
   },
   "dependencies": {
     "@osaas/client-ai": "^0.4.3",
