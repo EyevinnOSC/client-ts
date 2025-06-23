@@ -34,6 +34,7 @@ cli.addCommand(cmdUser.cmdCreate());
 cli.addCommand(cmdUser.cmdDescribe());
 cli.addCommand(cmdUser.cmdRemove());
 cli.addCommand(cmdUser.cmdLogs());
+cli.addCommand(cmdUser.cmdRestart());
 cli.addCommand(cmdUser.cmdServiceAccessToken());
 cli.addCommand(cmdUser.cmdReservedNodes());
 cli.addCommand(cmdUser.cmdSecrets());

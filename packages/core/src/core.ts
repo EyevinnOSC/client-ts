@@ -23,6 +23,37 @@ export async function getService(context: Context, serviceId: string) {
   return service;
 }
 
+async function getInstanceLink(
+  context: Context,
+  token: string,
+  serviceId: string,
+  name: string,
+  linkRel: string
+) {
+  const instance = await getInstance(context, serviceId, name, token);
+  if (!instance) {
+    throw new Error(`Instance ${name} of service ${serviceId} not found`);
+  }
+  const link = instance._links ? instance._links[linkRel] : undefined;
+  const service = await getService(context, serviceId);
+  const serviceApiUrl = new URL(service.apiUrl);
+  if (!link) {
+    // Handle backwards compatibility for old instances
+    if (linkRel === 'ports') {
+      return new URL('https://' + serviceApiUrl.host + '/ports/' + name);
+    } else if (linkRel === 'logs') {
+      return new URL('https://' + serviceApiUrl.host + '/logs/' + name);
+    } else if (linkRel === 'health') {
+      return new URL('https://' + serviceApiUrl.host + '/health/' + name);
+    }
+  } else if (link.href) {
+    return new URL('https://' + serviceApiUrl.host + link.href);
+  }
+  throw new Error(
+    `Link ${linkRel} not found for instance ${name} of service ${serviceId}`
+  );
+}
+
 export const isValidInstanceName = (name: string) => {
   return /^[a-z0-9]+$/.test(name);
 };
@@ -189,9 +220,13 @@ export async function getPortsForInstance(
   name: string,
   token: string
 ): Promise<Port[]> {
-  const service = await getService(context, serviceId);
-  const instanceUrl = new URL(service.apiUrl);
-  const portsUrl = new URL('https://' + instanceUrl.host + '/ports/' + name);
+  const portsUrl = await getInstanceLink(
+    context,
+    token,
+    serviceId,
+    name,
+    'ports'
+  );
 
   return await createFetch<Port[]>(portsUrl, {
     method: 'GET',
@@ -217,9 +252,13 @@ export async function getLogsForInstance(
   name: string,
   token: string
 ): Promise<string | string[]> {
-  const service = await getService(context, serviceId);
-  const instanceUrl = new URL(service.apiUrl);
-  const logsUrl = new URL('https://' + instanceUrl.host + '/logs/' + name);
+  const logsUrl = await getInstanceLink(
+    context,
+    token,
+    serviceId,
+    name,
+    'logs'
+  );
 
   return await createFetch<string | string[]>(logsUrl, {
     method: 'GET',
@@ -235,9 +274,13 @@ export async function getInstanceHealth(
   name: string,
   token: string
 ) {
-  const service = await getService(context, serviceId);
-  const instanceUrl = new URL(service.apiUrl);
-  const healthUrl = new URL('/health/' + name, instanceUrl);
+  const healthUrl = await getInstanceLink(
+    context,
+    token,
+    serviceId,
+    name,
+    'health'
+  );
 
   const { status } = await createFetch<{ status: string }>(healthUrl, {
     method: 'GET',
@@ -246,6 +289,36 @@ export async function getInstanceHealth(
     }
   });
   return status;
+}
+
+/**
+ * Restart an instance of a service in Open Source Cloud
+ * @memberof module:@osaas/client-core
+ * @param {Context} context - Open Source Cloud configuration context
+ * @param {string} serviceId - The service identifier
+ * @param {string} name - The name of the service instance
+ * @param {string} token - Service access token
+ */
+
+export async function restartInstance(
+  context: Context,
+  serviceId: string,
+  name: string,
+  token: string
+) {
+  const restartUrl = await getInstanceLink(
+    context,
+    token,
+    serviceId,
+    name,
+    'restart'
+  );
+  await createFetch(restartUrl, {
+    method: 'POST',
+    headers: {
+      'x-jwt': `Bearer ${token}`
+    }
+  });
 }
 
 export function instanceValue(
