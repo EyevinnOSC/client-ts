@@ -59,6 +59,6 @@ export async function remakeOrder(platform: Platform, orderId: string) {
     } else if (err instanceof FetchError && err.httpCode === 404) {
       return undefined;
     }
+    throw err;
   }
-  return undefined;
 }
