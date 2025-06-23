@@ -11,6 +11,7 @@ import {
 } from '@osaas/client-core';
 import { Command } from 'commander';
 import { confirm, instanceOptsToPayload } from './util';
+import { restartInstance } from '@osaas/client-core/lib/core';
 
 export function cmdList() {
   const list = new Command('list');
@@ -146,6 +147,39 @@ export function cmdRemove() {
       }
     });
   return remove;
+}
+
+export function cmdRestart() {
+  const restart = new Command('restart');
+
+  restart
+    .description('Restart a service instance')
+    .argument('<serviceId>', 'The Service Id')
+    .argument('<name>', 'The instance name')
+    .action(async (serviceId, name, options, command) => {
+      try {
+        const globalOpts = command.optsWithGlobals();
+        const environment = globalOpts?.env || 'prod';
+        const ctx = new Context({ environment });
+        const serviceAccessToken = await ctx.getServiceAccessToken(serviceId);
+
+        const instance = await getInstance(
+          ctx,
+          serviceId,
+          name,
+          serviceAccessToken
+        );
+        if (!instance) {
+          throw new Error(`Instance ${name} of service ${serviceId} not found`);
+        }
+        await restartInstance(ctx, serviceId, name, serviceAccessToken);
+        console.log(`Instance ${name} of service ${serviceId} restarted`);
+      } catch (err) {
+        console.log('Error restarting instance:');
+        console.log((err as Error).message);
+      }
+    });
+  return restart;
 }
 
 export function cmdLogs() {
