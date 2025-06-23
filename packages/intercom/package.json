@@ -1,6 +1,6 @@
 {
   "name": "@osaas/client-intercom",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Open Source Cloud Client SDK intercom library",
   "author": "Eyevinn Open Source Cloud <work@eyevinn.se>",
   "homepage": "https://www.osaas.io",
@@ -25,7 +25,7 @@
     "test": "jest --passWithNoTests"
   },
   "dependencies": {
-    "@osaas/client-core": "^0.17.1",
+    "@osaas/client-core": "^0.18.0",
     "chalk": "4.1.2"
   },
   "publishConfig": {
