@@ -5,11 +5,16 @@ import { Platform } from '../platform';
 
 export interface Order {
   orderId: string;
+  status: {
+    phase: string;
+  };
 }
 
 export interface OutputOrder {
   order: Order;
 }
+
+const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 export async function getOrderIdByName(platform: Platform, orderName: string) {
   try {
@@ -34,6 +39,42 @@ export async function getOrderIdByName(platform: Platform, orderName: string) {
     } else if (err instanceof FetchError && err.httpCode === 404) {
       return undefined;
     }
+  }
+}
+
+export async function waitForOrder(platform: Platform, orderId: string) {
+  try {
+    let running = true;
+    while (running) {
+      const makerUrl = new URL(
+        `https://maker.svc.${platform.getEnvironment()}.osaas.io/maker/${orderId}`
+      );
+      const res = await createFetch<OutputOrder>(makerUrl, {
+        headers: {
+          Authorization: `Bearer ${platform.getApiKey()}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      Log().debug(res.order.status.phase);
+      if (
+        res.order.status.phase === 'NEW' ||
+        res.order.status.phase === 'RUNNING' ||
+        res.order.status.phase === 'PENDING'
+      ) {
+        running = true;
+      } else {
+        running = false;
+      }
+      await delay(5000);
+    }
+  } catch (err) {
+    Log().debug(err);
+    if (err instanceof FetchError && err.httpCode === 401) {
+      throw new UnauthorizedError();
+    } else if (err instanceof FetchError && err.httpCode === 404) {
+      return undefined;
+    }
+    throw err;
   }
 }
 

@@ -4,7 +4,8 @@ import {
   Log,
   Platform,
   getOrderIdByName,
-  remakeOrder
+  remakeOrder,
+  waitForOrder
 } from '@osaas/client-core';
 import { listInstancesForTenant, removeInstanceForTenant } from './instance';
 import { confirm } from '../user/util';
@@ -121,6 +122,7 @@ export default function cmdAdmin() {
     .command('remake-order')
     .description('Remake an order')
     .option('-y, --yes', 'Skip confirmation')
+    .option('-w, --wait', 'Wait for the order to complete')
     .argument('<orderName>', 'The name of the order to remake')
     .action(async (orderName, options, command) => {
       try {
@@ -136,7 +138,16 @@ export default function cmdAdmin() {
               `Are you sure you want to remake the order '${orderName}'? (yes/no) `
             );
           }
-          await remakeOrder(platform, orderId);
+          const newOrderId = await remakeOrder(platform, orderId);
+          if (newOrderId) {
+            if (options.wait) {
+              Log().info(`Waiting for order ${orderName} to complete...`);
+              await waitForOrder(platform, newOrderId);
+              Log().info(`Order ${orderName} has been remade successfully`);
+            }
+          } else {
+            Log().error(`Failed to remake order ${orderName}`);
+          }
         } else {
           Log().info(`Order ${orderName} not found`);
         }
