@@ -97,8 +97,25 @@ export function cmdDescribe() {
           serviceAccessToken
         );
         delete instance['resources'];
+        delete instance['_links'];
         Object.keys(instance).forEach((key) => {
-          console.log(`${key}: ${instance[key]}`);
+          if (typeof instance[key] !== 'object') {
+            console.log(`${key}: ${instance[key]}`);
+          } else {
+            console.log(`${key}:`);
+            Object.keys(instance[key]).forEach((subKey) => {
+              if (typeof instance[key][subKey] !== 'object') {
+                console.log(`  ${subKey}: ${instance[key][subKey]}`);
+              } else {
+                console.log(`  ${subKey}:`);
+                Object.keys(instance[key][subKey]).forEach((subSubKey) => {
+                  console.log(
+                    `    ${subSubKey}: ${instance[key][subKey][subSubKey]}`
+                  );
+                });
+              }
+            });
+          }
         });
         try {
           const ports = await getPortsForInstance(
