@@ -1,5 +1,6 @@
 import { Context, listInstances, removeInstance } from '@osaas/client-core';
 import { generatePat } from './token';
+import { listSubscriptionsForTenant } from './subscription';
 
 export async function listInstancesForTenant(
   tenantId: string,
