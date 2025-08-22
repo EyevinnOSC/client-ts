@@ -73,6 +73,54 @@ export default function cmdAdmin() {
       }
     });
   admin
+    .command('remove-all-instances')
+    .argument('<tenantId>', 'The Tenant Id')
+    .action(async (tenantId, options, command) => {
+      try {
+        const globalOpts = command.optsWithGlobals();
+        const environment = globalOpts?.env || 'prod';
+        const services = await listSubscriptionsForTenant(
+          tenantId,
+          environment
+        );
+        const instancesToRemove: { serviceId: string; instance: string }[] = [];
+        for (const serviceId of services) {
+          const instances = await listInstancesForTenant(
+            tenantId,
+            serviceId,
+            environment
+          );
+          instances.forEach((instance) => {
+            instancesToRemove.push({ serviceId, instance });
+          });
+        }
+        if (instancesToRemove.length === 0) {
+          Log().info(
+            `No instances found for tenant ${tenantId} in ${environment}`
+          );
+          console.log('Tenant has no instances');
+          return;
+        }
+        instancesToRemove.map((item) =>
+          console.log(` - ${item.serviceId}: ${item.instance}`)
+        );
+        await confirm(
+          'Are you really sure you want to remove all above instances for tenant ' +
+            `${tenantId} in ${environment}? (yes/no) `
+        );
+        for (const item of instancesToRemove) {
+          await removeInstanceForTenant(
+            tenantId,
+            item.serviceId,
+            item.instance,
+            environment
+          );
+        }
+      } catch (err) {
+        console.log((err as Error).message);
+      }
+    });
+  admin
     .command('list-subscriptions')
     .description('List all subscriptions for a tenant')
     .argument('<tenantId>', 'The tenant ID')
