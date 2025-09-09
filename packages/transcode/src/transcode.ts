@@ -17,6 +17,8 @@ export interface TranscodeOptions {
   frameRate?: number;
   injectIDRKeyFrames?: IDRKeyFrame[];
   noReconnect?: boolean;
+  seekTo?: number;
+  duration?: number;
 }
 
 export interface CustomEndpoint {
@@ -55,6 +57,8 @@ export function smpteTimecodeToFrames(
  * @property {number} [frameRate] - Frame rate of the input video (required when injecting IDR key frames)
  * @property {IDRKeyFrame[]} [injectIDRKeyFrames] - List of SMPTE timecodes for IDR key frames
  * @property {boolean} [noReconnect] - Do not reconnect to the input stream on network errors
+ * @property {number} [seekTo] - Seek to this position (in seconds) in the input file
+ * @property {number} [duration] - Duration (in seconds) to transcode from the seek position
  */
 
 /**
@@ -141,6 +145,8 @@ export async function transcode(
     profile,
     baseName,
     outputFolder: opts.outputUrl.toString(),
+    seekTo: opts.seekTo,
+    duration: opts.duration,
     inputs: [
       {
         type: 'AudioVideo',
