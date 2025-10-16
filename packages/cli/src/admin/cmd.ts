@@ -7,12 +7,17 @@ import {
   remakeOrder,
   waitForOrder
 } from '@osaas/client-core';
-import { listInstancesForTenant, removeInstanceForTenant } from './instance';
+import {
+  getInstancesToRemove,
+  listInstancesForTenant,
+  removeInstanceForTenant
+} from './instance';
 import { confirm } from '../user/util';
 import {
   listSubscriptionsForTenant,
   removeSubscriptionForTenant
 } from './subscription';
+import { getTenantPlanMap, getTenantTokenCounts } from './money';
 
 export default function cmdAdmin() {
   const admin = new Command('admin');
@@ -73,27 +78,69 @@ export default function cmdAdmin() {
       }
     });
   admin
+    .command('remove-exceeding-tenant-instances')
+    .description(
+      'Remove all instances for all tenants with a negative usage token balance'
+    )
+    .option('--apply', 'Actually remove instances, otherwise just a dry run')
+    .action(async (options, command) => {
+      try {
+        const globalOpts = command.optsWithGlobals();
+        const environment = globalOpts?.env || 'prod';
+        const tenantPlanMap = await getTenantPlanMap(environment);
+        const tokenCounts = await getTenantTokenCounts(environment);
+        const tenantsExceeding = tokenCounts.filter(
+          (tenant) => tenant.remainingTokens < -200
+        );
+        let instancesRemoved = 0;
+        const tenantsExceedingCount = tenantsExceeding.length;
+        for (const tenant of tenantsExceeding) {
+          if (tenantPlanMap[tenant.tenantId]?.planType === 'FREE') {
+            const instancesToRemove = await getInstancesToRemove(
+              tenant.tenantId,
+              environment
+            );
+            if (instancesToRemove.length > 0) {
+              console.log(
+                `Tenant ${tenant.tenantId} has a negative or low token balance of ${tenant.remainingTokens} tokens and is on the 'FREE' plan`
+              );
+              console.log('Removing all instances for this tenant...');
+              for (const item of instancesToRemove) {
+                console.log(` - ${item.serviceId}: ${item.instance}`);
+                if (options.apply) {
+                  await removeInstanceForTenant(
+                    tenant.tenantId,
+                    item.serviceId,
+                    item.instance,
+                    environment
+                  );
+                  instancesRemoved++;
+                  console.log('Removed');
+                }
+              }
+            }
+          }
+        }
+        console.log(
+          `${tenantsExceedingCount} / ${
+            Object.keys(tenantPlanMap).length
+          } tenants below threshold, removed ${instancesRemoved} instances`
+        );
+      } catch (err) {
+        console.log((err as Error).message);
+      }
+    });
+  admin
     .command('remove-all-instances')
     .argument('<tenantId>', 'The Tenant Id')
     .action(async (tenantId, options, command) => {
       try {
         const globalOpts = command.optsWithGlobals();
         const environment = globalOpts?.env || 'prod';
-        const services = await listSubscriptionsForTenant(
+        const instancesToRemove = await getInstancesToRemove(
           tenantId,
           environment
         );
-        const instancesToRemove: { serviceId: string; instance: string }[] = [];
-        for (const serviceId of services) {
-          const instances = await listInstancesForTenant(
-            tenantId,
-            serviceId,
-            environment
-          );
-          instances.forEach((instance) => {
-            instancesToRemove.push({ serviceId, instance });
-          });
-        }
         if (instancesToRemove.length === 0) {
           Log().info(
             `No instances found for tenant ${tenantId} in ${environment}`
