@@ -15,7 +15,11 @@ describe('CLI environment option', () => {
     const cli = new Command();
     cli
       .configureHelp({ showGlobalOptions: true })
-      .option('--env <environment>', 'Environment to use (overrides ENVIRONMENT env var)', process.env.ENVIRONMENT || 'prod');
+      .option(
+        '--env <environment>',
+        'Environment to use (overrides ENVIRONMENT env var)',
+        process.env.ENVIRONMENT || 'prod'
+      );
     return cli;
   };
 
@@ -23,7 +27,7 @@ describe('CLI environment option', () => {
     delete process.env.ENVIRONMENT;
     const cli = createTestCli();
     cli.parse(['node', 'cli.js']);
-    
+
     expect(cli.opts().env).toBe('prod');
   });
 
@@ -31,7 +35,7 @@ describe('CLI environment option', () => {
     process.env.ENVIRONMENT = 'dev';
     const cli = createTestCli();
     cli.parse(['node', 'cli.js']);
-    
+
     expect(cli.opts().env).toBe('dev');
   });
 
@@ -39,7 +43,7 @@ describe('CLI environment option', () => {
     process.env.ENVIRONMENT = 'dev';
     const cli = createTestCli();
     cli.parse(['node', 'cli.js', '--env', 'staging']);
-    
+
     expect(cli.opts().env).toBe('staging');
   });
 
@@ -47,7 +51,7 @@ describe('CLI environment option', () => {
     delete process.env.ENVIRONMENT;
     const cli = createTestCli();
     cli.parse(['node', 'cli.js', '--env', 'staging']);
-    
+
     expect(cli.opts().env).toBe('staging');
   });
 });
