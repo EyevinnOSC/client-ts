@@ -19,6 +19,7 @@ export interface TranscodeOptions {
   noReconnect?: boolean;
   seekTo?: number;
   duration?: number;
+  audioMixPreset?: string;
 }
 
 export interface CustomEndpoint {
@@ -59,6 +60,7 @@ export function smpteTimecodeToFrames(
  * @property {boolean} [noReconnect] - Do not reconnect to the input stream on network errors
  * @property {number} [seekTo] - Seek to this position (in seconds) in the input file
  * @property {number} [duration] - Duration (in seconds) to transcode from the seek position
+ * @property {string} [audioMixPreset] - Audio mix preset to use (e.g., "stereo", "5.1-surround")
  */
 
 /**
@@ -173,6 +175,9 @@ export async function transcode(
     } else {
       throw new Error('Invalid SMPTE timecode in IDR keyframe list');
     }
+  }
+  if (opts.audioMixPreset) {
+    encoreJob['audioMixPreset'] = opts.audioMixPreset;
   }
   if (opts.callBackUrl) {
     encoreJob['progressCallbackUri'] = opts.callBackUrl.toString();
