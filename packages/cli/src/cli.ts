@@ -26,7 +26,7 @@ cli.version(packageJson.version, '-v, --version', 'Output the current version');
 
 cli
   .configureHelp({ showGlobalOptions: true })
-  .option('--env <environment>', 'Environment to use');
+  .option('--env <environment>', 'Environment to use (overrides ENVIRONMENT env var)', process.env.ENVIRONMENT || 'prod');
 
 cli.addCommand(cmdAdmin());
 cli.addCommand(cmdUser.cmdList());
