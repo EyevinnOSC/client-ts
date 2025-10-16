@@ -177,7 +177,10 @@ export async function transcode(
     }
   }
   if (opts.audioMixPreset) {
-    encoreJob['audioMixPreset'] = opts.audioMixPreset;
+    encoreJob['profileParams'] = {
+      ...encoreJob['profileParams'],
+      audioMixPreset: opts.audioMixPreset
+    };
   }
   if (opts.callBackUrl) {
     encoreJob['progressCallbackUri'] = opts.callBackUrl.toString();
