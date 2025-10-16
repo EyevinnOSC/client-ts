@@ -29,3 +29,22 @@ export async function removeInstanceForTenant(
 
   await removeInstance(ctx, serviceId, name, serviceAccessToken);
 }
+
+export async function getInstancesToRemove(
+  tenantId: string,
+  environment: string
+) {
+  const services = await listSubscriptionsForTenant(tenantId, environment);
+  const instancesToRemove: { serviceId: string; instance: string }[] = [];
+  for (const serviceId of services) {
+    const instances = await listInstancesForTenant(
+      tenantId,
+      serviceId,
+      environment
+    );
+    instances.forEach((instance) => {
+      instancesToRemove.push({ serviceId, instance });
+    });
+  }
+  return instancesToRemove;
+}
