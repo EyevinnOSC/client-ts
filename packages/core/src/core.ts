@@ -352,3 +352,26 @@ export async function waitForInstanceReady(
     }
   }
 }
+
+export async function saveSecret(
+  serviceId: string,
+  name: string,
+  value: string,
+  ctx: Context
+) {
+  const secretsUrl = new URL(
+    `/mysecrets/${serviceId}`,
+    `https://deploy.svc.${ctx.getEnvironment()}.osaas.io`
+  );
+  await createFetch(secretsUrl, {
+    method: 'POST',
+    body: JSON.stringify({
+      secretName: name,
+      secretData: value
+    }),
+    headers: {
+      'x-pat-jwt': `Bearer ${ctx.getPersonalAccessToken()}`,
+      'Content-Type': 'application/json'
+    }
+  });
+}
