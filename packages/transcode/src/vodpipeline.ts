@@ -20,7 +20,8 @@ import {
   createEyevinnEncoreCallbackListenerInstance,
   createEyevinnEncorePackagerInstance,
   createMinioMinioInstance,
-  createValkeyIoValkeyInstance
+  createValkeyIoValkeyInstance,
+  getEyevinnEncorePackagerInstance
 } from '@osaas/client-services';
 import * as Minio from 'minio';
 import { delay } from './util';
@@ -34,10 +35,15 @@ export interface VodPipeline {
   output: string;
   endpoint: string;
   inputStorage?: StorageBucket;
+  outputBucketName: string;
 }
 
 export interface VodPipelineOpts {
   createInputBucket?: boolean;
+  outputBucketName?: string;
+  accessKeyId?: string;
+  secretAccessKey?: string;
+  endpoint?: string;
 }
 
 export interface StorageBucketOpts {
@@ -179,12 +185,17 @@ async function createPackager(
   ctx: Context
 ) {
   const sat = await ctx.getServiceAccessToken('eyevinn-encore-packager');
-  let instance: EyevinnEncorePackager = await getInstance(
+  let instance: EyevinnEncorePackager | undefined = await getInstance(
     ctx,
     'eyevinn-encore-packager',
     name,
     sat
   );
+  if (instance && instance.OutputFolder !== outputFolder) {
+    // Output folder has changed, remove and recreate instance
+    await removeInstance(ctx, 'eyevinn-encore-packager', name, sat);
+    instance = undefined;
+  }
   if (!instance) {
     const config: EyevinnEncorePackagerConfig = {
       name,
@@ -256,6 +267,10 @@ async function createStorageBucket(
  * @typedef VodPipelineOpts
  * @type object
  * @property {boolean} [createInputBucket] - If true, create an input storage bucket (default: false)
+ * @property {string} [outputBucketName] - Use an existing storage bucket as output (default: create new)
+ * @property {string} [accessKeyId] - Access key ID for existing output storage bucket
+ * @property {string} [secretAccessKey] - Secret access key for existing output storage bucket
+ * @property {string} [endpoint] - Endpoint URL for existing output storage bucket
  */
 
 /**
@@ -275,7 +290,20 @@ export async function createVodPipeline(
   if (!isValidInstanceName(name)) {
     throw new Error(`Invalid instance name: ${name}`);
   }
-  const storage = await createStorageBucket(name, ctx);
+  let storage: StorageBucket;
+  if (opts?.outputBucketName) {
+    if (!opts.accessKeyId || !opts.secretAccessKey || !opts.endpoint) {
+      throw new Error(`Missing required options for existing output bucket`);
+    }
+    storage = {
+      name: opts.outputBucketName,
+      endpoint: opts.endpoint,
+      accessKeyId: opts.accessKeyId,
+      secretAccessKey: opts.secretAccessKey
+    };
+  } else {
+    storage = await createStorageBucket(name, ctx);
+  }
   const redisUrl = await createRedis(name, ctx);
   let inputStorage;
   if (opts?.createInputBucket) {
@@ -293,7 +321,7 @@ export async function createVodPipeline(
   const packager = await createPackager(
     name,
     redisUrl,
-    `s3://${name}/`,
+    `s3://${opts?.outputBucketName || name}/`,
     storage.accessKeyId,
     storage.secretAccessKey,
     storage.endpoint,
@@ -305,7 +333,8 @@ export async function createVodPipeline(
     callbackUrl: encoreCallback.url,
     output: packager.OutputFolder,
     endpoint: storage.endpoint,
-    inputStorage
+    inputStorage,
+    outputBucketName: opts?.outputBucketName || name
   };
 }
 
@@ -407,7 +436,7 @@ export async function createVod(
     const sourceName = basename(source, extname(source));
     const vod = {
       id: createdJob.id,
-      vodUrl: `${pipeline.endpoint}/${pipeline.name}/${sourceName}/${createdJob.id}/index.m3u8`
+      vodUrl: `${pipeline.endpoint}/${pipeline.outputBucketName}/${sourceName}/${createdJob.id}/index.m3u8`
     };
     return vod;
   }
