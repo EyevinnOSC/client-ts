@@ -1,6 +1,6 @@
 {
   "name": "@osaas/client-web",
-  "version": "0.5.7",
+  "version": "0.5.8",
   "description": "Open Source Cloud Client SDK web library",
   "author": "Eyevinn Open Source Cloud <osc@eyevinn.se>",
   "homepage": "https://www.osaas.io",
@@ -26,8 +26,8 @@
   },
   "dependencies": {
     "@aws-sdk/client-cloudfront": "^3.730.0",
-    "@osaas/client-core": "^0.18.0",
-    "@osaas/client-services": "^0.11.5",
+    "@osaas/client-core": "^0.19.0",
+    "@osaas/client-services": "^0.11.6",
     "chalk": "4.1.2",
     "mime": "^3.0.0",
     "minio": "^8.0.2"
