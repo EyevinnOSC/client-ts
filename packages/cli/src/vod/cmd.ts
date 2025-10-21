@@ -15,13 +15,25 @@ export function cmdVod() {
     )
     .argument('<name>', 'Name of VOD Pipeline')
     .argument('<source>', 'Source URL')
+    .option('--output-bucket-name <name>', 'Name of existing output bucket')
+    .option('--access-key-id <id>', 'Access key ID for existing output bucket')
+    .option(
+      '--secret-access-key <key>',
+      'Secret access key for existing output bucket'
+    )
+    .option('--endpoint <url>', 'Endpoint URL for existing output bucket')
     .action(async (name, source, options, command) => {
       try {
         const globalOpts = command.optsWithGlobals();
         const environment = globalOpts?.env || 'prod';
         const ctx = new Context({ environment });
         Log().info('Creating VOD pipeline');
-        const pipeline = await createVodPipeline(name, ctx);
+        const pipeline = await createVodPipeline(name, ctx, {
+          outputBucketName: options.outputBucketName,
+          accessKeyId: options.accessKeyId,
+          secretAccessKey: options.secretAccessKey,
+          endpoint: options.endpoint
+        });
         Log().info('VOD pipeline created, starting job to create VOD');
         const job = await createVod(pipeline, source, ctx);
         if (job) {
