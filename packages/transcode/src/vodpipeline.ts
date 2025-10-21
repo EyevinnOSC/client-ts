@@ -4,6 +4,7 @@ import {
   getPortsForInstance,
   isValidInstanceName,
   removeInstance,
+  saveSecret,
   waitForInstanceReady
 } from '@osaas/client-core';
 import {
@@ -20,8 +21,7 @@ import {
   createEyevinnEncoreCallbackListenerInstance,
   createEyevinnEncorePackagerInstance,
   createMinioMinioInstance,
-  createValkeyIoValkeyInstance,
-  getEyevinnEncorePackagerInstance
+  createValkeyIoValkeyInstance
 } from '@osaas/client-services';
 import * as Minio from 'minio';
 import { delay } from './util';
@@ -197,6 +197,12 @@ async function createPackager(
     instance = undefined;
   }
   if (!instance) {
+    await saveSecret(
+      'eyevinn-encore-packager',
+      'osctoken',
+      ctx.getPersonalAccessToken() || '',
+      ctx
+    );
     const config: EyevinnEncorePackagerConfig = {
       name,
       RedisUrl: redisUrl,

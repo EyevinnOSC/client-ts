@@ -14,7 +14,8 @@ export {
   instanceValue,
   valueOrSecret,
   isValidInstanceName,
-  waitForInstanceReady
+  waitForInstanceReady,
+  saveSecret
 } from './core';
 export {
   listSubscriptions,
