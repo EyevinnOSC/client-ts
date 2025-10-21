@@ -40,7 +40,7 @@ export interface paths {
                 url: string;
               };
             };
-            SigningKey?: string;
+            SigningKey: string;
           }[];
         };
         /** Default Response */
@@ -59,7 +59,7 @@ export interface paths {
           body?: {
             /** @description Name of the nodecat instance */
             name: string;
-            SigningKey?: string;
+            SigningKey: string;
           };
         };
       };
@@ -85,7 +85,7 @@ export interface paths {
                 url: string;
               };
             };
-            SigningKey?: string;
+            SigningKey: string;
           };
         };
         /** Default Response */
@@ -143,7 +143,7 @@ export interface paths {
                 url: string;
               };
             };
-            SigningKey?: string;
+            SigningKey: string;
           };
         };
         /** Default Response */

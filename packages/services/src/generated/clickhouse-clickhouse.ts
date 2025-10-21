@@ -21,7 +21,7 @@ export interface paths {
       responses: {
         /** Default Response */
         200: {
-          schema: {
+          schema: ({
             /** @description Name of the clickhouse instance */
             name: string;
             /** @description URL to instance API */
@@ -43,7 +43,34 @@ export interface paths {
             Db?: string;
             User?: string;
             Password?: string;
-          }[];
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
+          })[];
         };
         /** Default Response */
         500: {
@@ -92,6 +119,33 @@ export interface paths {
             Db?: string;
             User?: string;
             Password?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
           };
         };
         /** Default Response */
@@ -107,6 +161,30 @@ export interface paths {
             /** @description Reason why something failed */
             reason: string;
           };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
+  '/restart/{id}': {
+    /** Restart clickhouse */
+    post: {
+      parameters: {
+        path: {
+          /** Name of the clickhouse instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        204: {
+          schema: string;
         };
         /** Default Response */
         500: {
@@ -152,6 +230,33 @@ export interface paths {
             Db?: string;
             User?: string;
             Password?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
           };
         };
         /** Default Response */
@@ -182,6 +287,93 @@ export interface paths {
         /** Default Response */
         204: {
           schema: string;
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+    /** Patch clickhouse instance with new parameters and restart */
+    patch: {
+      parameters: {
+        body: {
+          body?: {
+            /** @description Name of the clickhouse instance */
+            name?: string;
+            Db?: string;
+            User?: string;
+            Password?: string;
+          };
+        };
+        path: {
+          /** Name of the clickhouse instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            /** @description Name of the clickhouse instance */
+            name: string;
+            /** @description URL to instance API */
+            url: string;
+            resources: {
+              license: {
+                /** @description URL to license information */
+                url: string;
+              };
+              apiDocs?: {
+                /** @description URL to instance API documentation */
+                url: string;
+              };
+              app?: {
+                /** @description URL to instance application (GUI) */
+                url: string;
+              };
+            };
+            Db?: string;
+            User?: string;
+            Password?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
+          };
+        };
+        /** Default Response */
+        404: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
         /** Default Response */
         500: {

@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance': {
-    /** List all running couchdb instances */
+  '/docker-wrtc-sfuinstance': {
+    /** List all running docker-wrtc-sfu instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the couchdb instance */
+            /** @description Name of the docker-wrtc-sfu instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,7 +67,7 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            ApiKey?: string;
           } & {
             _links: {
               self: {
@@ -106,14 +106,14 @@ export interface paths {
         };
       };
     };
-    /** Launch a new couchdb instance */
+    /** Launch a new docker-wrtc-sfu instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the docker-wrtc-sfu instance */
             name: string;
-            AdminPassword: string;
+            ApiKey?: string;
           };
         };
       };
@@ -121,7 +121,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the docker-wrtc-sfu instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -139,7 +139,7 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            ApiKey?: string;
           } & {
             _links: {
               self: {
@@ -194,11 +194,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart couchdb */
+    /** Restart docker-wrtc-sfu */
     post: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the docker-wrtc-sfu instance */
           id: string;
         };
       };
@@ -217,12 +217,12 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance/{id}': {
-    /** Obtain status and resource URLs for an couchdb instance */
+  '/docker-wrtc-sfuinstance/{id}': {
+    /** Obtain status and resource URLs for an docker-wrtc-sfu instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the docker-wrtc-sfu instance */
           id: string;
         };
       };
@@ -230,7 +230,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the docker-wrtc-sfu instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -248,7 +248,7 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            ApiKey?: string;
           } & {
             _links: {
               self: {
@@ -294,11 +294,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an couchdb instance */
+    /** Stop and remove an docker-wrtc-sfu instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the docker-wrtc-sfu instance */
           id: string;
         };
       };
@@ -316,18 +316,18 @@ export interface paths {
         };
       };
     };
-    /** Patch couchdb instance with new parameters and restart */
+    /** Patch docker-wrtc-sfu instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the docker-wrtc-sfu instance */
             name?: string;
-            AdminPassword?: string;
+            ApiKey?: string;
           };
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the docker-wrtc-sfu instance */
           id: string;
         };
       };
@@ -335,7 +335,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the docker-wrtc-sfu instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -353,7 +353,7 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            ApiKey?: string;
           } & {
             _links: {
               self: {
@@ -381,13 +381,6 @@ export interface paths {
                 href: string;
               };
             };
-          };
-        };
-        /** Default Response */
-        400: {
-          schema: {
-            /** @description Reason why something failed */
-            reason: string;
           };
         };
         /** Default Response */
@@ -408,11 +401,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of couchdb instance */
+    /** Return status of docker-wrtc-sfu instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the docker-wrtc-sfu instance */
           id: string;
         };
       };
@@ -436,7 +429,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the couchdb instance */
+    /** Return the latest logs from the docker-wrtc-sfu instance */
     get: {
       parameters: {
         query: {
@@ -444,7 +437,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the docker-wrtc-sfu instance */
           id: string;
         };
       };
@@ -464,11 +457,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for couchdb instance */
+    /** Return the exposed extra ports for docker-wrtc-sfu instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the docker-wrtc-sfu instance */
           id: string;
         };
       };
@@ -499,11 +492,11 @@ export interface operations {}
 
 export interface external {}
 
-export type ApacheCouchdb =
-  paths['/couchdbinstance/{id}']['get']['responses']['200']['schema'];
+export type EyevinnDockerWrtcSfu =
+  paths['/docker-wrtc-sfuinstance/{id}']['get']['responses']['200']['schema'];
 
-export type ApacheCouchdbConfig =
-  paths['/couchdbinstance']['post']['parameters']['body']['body'];
+export type EyevinnDockerWrtcSfuConfig =
+  paths['/docker-wrtc-sfuinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -512,96 +505,112 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace apache-couchdb
- * @description Unlock seamless data management with Apache CouchDB! Effortlessly scalable and highly available, CouchDB makes storing, retrieving, and syncing data across devices a breeze. Ideal for modern cloud apps!
+ * @namespace eyevinn-docker-wrtc-sfu
+ * @description Elevate your broadcast streaming with docker-wrtc-sfu: a seamless SFU solution, harnessing Symphony Media Bridge in a Docker container. Achieve unparalleled WebRTC performance and flexibility effortlessly.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-CouchDB.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} ApacheCouchdbConfig
- * @property {string} name - Name of couchdb
- * @property {string} AdminPassword - AdminPassword
+ * @typedef {Object} EyevinnDockerWrtcSfuConfig
+ * @property {string} name - Name of docker-wrtc-sfu
+ * @property {string} [ApiKey] - ApiKey
 
  * 
  */
 
 /**
- * @typedef {Object} ApacheCouchdb
- * @property {string} name - Name of the Couch DB instance
- * @property {string} url - URL of the Couch DB instance
+ * @typedef {Object} EyevinnDockerWrtcSfu
+ * @property {string} name - Name of the Symphony Media Bridge instance
+ * @property {string} url - URL of the Symphony Media Bridge instance
  *
  */
 
 /**
- * Create a new Couch DB instance
+ * Create a new Symphony Media Bridge instance
  *
- * @memberOf apache-couchdb
+ * @memberOf eyevinn-docker-wrtc-sfu
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {ApacheCouchdbConfig} body - Service instance configuration
- * @returns {ApacheCouchdb} - Service instance
+ * @param {EyevinnDockerWrtcSfuConfig} body - Service instance configuration
+ * @returns {EyevinnDockerWrtcSfu} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createApacheCouchdbInstance } from '@osaas/client-services';
+ * import { createEyevinnDockerWrtcSfuInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: ApacheCouchdbConfig = { name: 'myinstance', ... };
- * const instance = await createApacheCouchdbInstance(ctx, body);
+ * const body: EyevinnDockerWrtcSfuConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnDockerWrtcSfuInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createApacheCouchdbInstance(
+export async function createEyevinnDockerWrtcSfuInstance(
   ctx: Context,
-  body: ApacheCouchdbConfig
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
+  body: EyevinnDockerWrtcSfuConfig
+): Promise<EyevinnDockerWrtcSfu> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-docker-wrtc-sfu'
+  );
   const instance = await createInstance(
     ctx,
-    'apache-couchdb',
+    'eyevinn-docker-wrtc-sfu',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('apache-couchdb', instance.name, ctx);
+  await waitForInstanceReady('eyevinn-docker-wrtc-sfu', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Couch DB instance
+ * Remove a Symphony Media Bridge instance
  *
- * @memberOf apache-couchdb
+ * @memberOf eyevinn-docker-wrtc-sfu
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be removed
+ * @param {string} name - Name of the sfu to be removed
  */
-export async function removeApacheCouchdbInstance(
+export async function removeEyevinnDockerWrtcSfuInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  await removeInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-docker-wrtc-sfu'
+  );
+  await removeInstance(
+    ctx,
+    'eyevinn-docker-wrtc-sfu',
+    name,
+    serviceAccessToken
+  );
 }
 
 /**
- * Get a Couch DB instance
+ * Get a Symphony Media Bridge instance
  *
- * @memberOf apache-couchdb
+ * @memberOf eyevinn-docker-wrtc-sfu
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be retrieved
- * @returns {ApacheCouchdb} - Service instance
+ * @param {string} name - Name of the sfu to be retrieved
+ * @returns {EyevinnDockerWrtcSfu} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getApacheCouchdbInstance } from '@osaas/client-services';
+ * import { getEyevinnDockerWrtcSfuInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getApacheCouchdbInstance(ctx, 'myinstance');
+ * const instance = await getEyevinnDockerWrtcSfuInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getApacheCouchdbInstance(
+export async function getEyevinnDockerWrtcSfuInstance(
   ctx: Context,
   name: string
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  return await getInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+): Promise<EyevinnDockerWrtcSfu> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-docker-wrtc-sfu'
+  );
+  return await getInstance(
+    ctx,
+    'eyevinn-docker-wrtc-sfu',
+    name,
+    serviceAccessToken
+  );
 }

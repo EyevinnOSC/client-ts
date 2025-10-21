@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance': {
-    /** List all running couchdb instances */
+  '/bxf-managerinstance': {
+    /** List all running bxf-manager instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the couchdb instance */
+            /** @description Name of the bxf-manager instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,7 +67,11 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            s3Endpoint?: string;
+            s3Region?: string;
+            s3AccessKeyId?: string;
+            s3SecretAccessKey?: string;
+            s3BucketName?: string;
           } & {
             _links: {
               self: {
@@ -106,14 +110,18 @@ export interface paths {
         };
       };
     };
-    /** Launch a new couchdb instance */
+    /** Launch a new bxf-manager instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the bxf-manager instance */
             name: string;
-            AdminPassword: string;
+            s3Endpoint?: string;
+            s3Region?: string;
+            s3AccessKeyId?: string;
+            s3SecretAccessKey?: string;
+            s3BucketName?: string;
           };
         };
       };
@@ -121,7 +129,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the bxf-manager instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -139,7 +147,11 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            s3Endpoint?: string;
+            s3Region?: string;
+            s3AccessKeyId?: string;
+            s3SecretAccessKey?: string;
+            s3BucketName?: string;
           } & {
             _links: {
               self: {
@@ -194,11 +206,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart couchdb */
+    /** Restart bxf-manager */
     post: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the bxf-manager instance */
           id: string;
         };
       };
@@ -217,12 +229,12 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance/{id}': {
-    /** Obtain status and resource URLs for an couchdb instance */
+  '/bxf-managerinstance/{id}': {
+    /** Obtain status and resource URLs for an bxf-manager instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the bxf-manager instance */
           id: string;
         };
       };
@@ -230,7 +242,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the bxf-manager instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -248,7 +260,11 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            s3Endpoint?: string;
+            s3Region?: string;
+            s3AccessKeyId?: string;
+            s3SecretAccessKey?: string;
+            s3BucketName?: string;
           } & {
             _links: {
               self: {
@@ -294,11 +310,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an couchdb instance */
+    /** Stop and remove an bxf-manager instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the bxf-manager instance */
           id: string;
         };
       };
@@ -316,18 +332,22 @@ export interface paths {
         };
       };
     };
-    /** Patch couchdb instance with new parameters and restart */
+    /** Patch bxf-manager instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the bxf-manager instance */
             name?: string;
-            AdminPassword?: string;
+            s3Endpoint?: string;
+            s3Region?: string;
+            s3AccessKeyId?: string;
+            s3SecretAccessKey?: string;
+            s3BucketName?: string;
           };
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the bxf-manager instance */
           id: string;
         };
       };
@@ -335,7 +355,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the bxf-manager instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -353,7 +373,11 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            s3Endpoint?: string;
+            s3Region?: string;
+            s3AccessKeyId?: string;
+            s3SecretAccessKey?: string;
+            s3BucketName?: string;
           } & {
             _links: {
               self: {
@@ -408,11 +432,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of couchdb instance */
+    /** Return status of bxf-manager instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the bxf-manager instance */
           id: string;
         };
       };
@@ -436,7 +460,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the couchdb instance */
+    /** Return the latest logs from the bxf-manager instance */
     get: {
       parameters: {
         query: {
@@ -444,7 +468,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the bxf-manager instance */
           id: string;
         };
       };
@@ -464,11 +488,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for couchdb instance */
+    /** Return the exposed extra ports for bxf-manager instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the bxf-manager instance */
           id: string;
         };
       };
@@ -499,11 +523,11 @@ export interface operations {}
 
 export interface external {}
 
-export type ApacheCouchdb =
-  paths['/couchdbinstance/{id}']['get']['responses']['200']['schema'];
+export type JoeldelpilarBxfManager =
+  paths['/bxf-managerinstance/{id}']['get']['responses']['200']['schema'];
 
-export type ApacheCouchdbConfig =
-  paths['/couchdbinstance']['post']['parameters']['body']['body'];
+export type JoeldelpilarBxfManagerConfig =
+  paths['/bxf-managerinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -512,96 +536,116 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace apache-couchdb
- * @description Unlock seamless data management with Apache CouchDB! Effortlessly scalable and highly available, CouchDB makes storing, retrieving, and syncing data across devices a breeze. Ideal for modern cloud apps!
+ * @namespace joeldelpilar-bxf-manager
+ * @description Streamline your broadcast file management with BXF Manager. Effortlessly edit, format, and store BXF files with cloud support, all within a user-friendly interface! Save time and keep organized.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-CouchDB.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} ApacheCouchdbConfig
- * @property {string} name - Name of couchdb
- * @property {string} AdminPassword - AdminPassword
+ * @typedef {Object} JoeldelpilarBxfManagerConfig
+ * @property {string} name - Name of bxf-manager
+ * @property {string} [s3Endpoint] - S3Endpoint
+ * @property {string} [s3Region] - S3Region
+ * @property {string} [s3AccessKeyId] - S3AccessKeyId
+ * @property {string} [s3SecretAccessKey] - S3SecretAccessKey
+ * @property {string} [s3BucketName] - S3BucketName
 
  * 
  */
 
 /**
- * @typedef {Object} ApacheCouchdb
- * @property {string} name - Name of the Couch DB instance
- * @property {string} url - URL of the Couch DB instance
+ * @typedef {Object} JoeldelpilarBxfManager
+ * @property {string} name - Name of the BXF Manager instance
+ * @property {string} url - URL of the BXF Manager instance
  *
  */
 
 /**
- * Create a new Couch DB instance
+ * Create a new BXF Manager instance
  *
- * @memberOf apache-couchdb
+ * @memberOf joeldelpilar-bxf-manager
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {ApacheCouchdbConfig} body - Service instance configuration
- * @returns {ApacheCouchdb} - Service instance
+ * @param {JoeldelpilarBxfManagerConfig} body - Service instance configuration
+ * @returns {JoeldelpilarBxfManager} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createApacheCouchdbInstance } from '@osaas/client-services';
+ * import { createJoeldelpilarBxfManagerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: ApacheCouchdbConfig = { name: 'myinstance', ... };
- * const instance = await createApacheCouchdbInstance(ctx, body);
+ * const body: JoeldelpilarBxfManagerConfig = { name: 'myinstance', ... };
+ * const instance = await createJoeldelpilarBxfManagerInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createApacheCouchdbInstance(
+export async function createJoeldelpilarBxfManagerInstance(
   ctx: Context,
-  body: ApacheCouchdbConfig
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
+  body: JoeldelpilarBxfManagerConfig
+): Promise<JoeldelpilarBxfManager> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'joeldelpilar-bxf-manager'
+  );
   const instance = await createInstance(
     ctx,
-    'apache-couchdb',
+    'joeldelpilar-bxf-manager',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('apache-couchdb', instance.name, ctx);
+  await waitForInstanceReady('joeldelpilar-bxf-manager', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Couch DB instance
+ * Remove a BXF Manager instance
  *
- * @memberOf apache-couchdb
+ * @memberOf joeldelpilar-bxf-manager
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be removed
+ * @param {string} name - Name of the manager to be removed
  */
-export async function removeApacheCouchdbInstance(
+export async function removeJoeldelpilarBxfManagerInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  await removeInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'joeldelpilar-bxf-manager'
+  );
+  await removeInstance(
+    ctx,
+    'joeldelpilar-bxf-manager',
+    name,
+    serviceAccessToken
+  );
 }
 
 /**
- * Get a Couch DB instance
+ * Get a BXF Manager instance
  *
- * @memberOf apache-couchdb
+ * @memberOf joeldelpilar-bxf-manager
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be retrieved
- * @returns {ApacheCouchdb} - Service instance
+ * @param {string} name - Name of the manager to be retrieved
+ * @returns {JoeldelpilarBxfManager} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getApacheCouchdbInstance } from '@osaas/client-services';
+ * import { getJoeldelpilarBxfManagerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getApacheCouchdbInstance(ctx, 'myinstance');
+ * const instance = await getJoeldelpilarBxfManagerInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getApacheCouchdbInstance(
+export async function getJoeldelpilarBxfManagerInstance(
   ctx: Context,
   name: string
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  return await getInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+): Promise<JoeldelpilarBxfManager> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'joeldelpilar-bxf-manager'
+  );
+  return await getInstance(
+    ctx,
+    'joeldelpilar-bxf-manager',
+    name,
+    serviceAccessToken
+  );
 }

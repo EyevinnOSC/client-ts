@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/cat-validateinstance': {
-    /** List all running cat-validate instances */
+  '/ograf-serverinstance': {
+    /** List all running ograf-server instances */
     get: {
       responses: {
         /** Default Response */
         200: {
-          schema: ({
-            /** @description Name of the cat-validate instance */
+          schema: {
+            /** @description Name of the ograf-server instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,34 +40,7 @@ export interface paths {
                 url: string;
               };
             };
-            Keys: string;
-            Issuer?: string;
-            RedisUrl?: string;
-            ClickHouseUrl?: string;
-          } & {
-            _links: {
-              self: {
-                /** @description Instance resource */
-                href: string;
-              };
-              logs?: {
-                /** @description Get logs for this instance */
-                href: string;
-              };
-              health?: {
-                /** @description Get health status for this instance */
-                href: string;
-              };
-              ports?: {
-                /** @description Get exposed ports for this instance */
-                href: string;
-              };
-              restart?: {
-                /** @description Restart this instance */
-                href: string;
-              };
-            };
-          })[];
+          }[];
         };
         /** Default Response */
         500: {
@@ -78,17 +51,13 @@ export interface paths {
         };
       };
     };
-    /** Launch a new cat-validate instance */
+    /** Launch a new ograf-server instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the cat-validate instance */
+            /** @description Name of the ograf-server instance */
             name: string;
-            Keys: string;
-            Issuer?: string;
-            RedisUrl?: string;
-            ClickHouseUrl?: string;
           };
         };
       };
@@ -96,7 +65,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the cat-validate instance */
+            /** @description Name of the ograf-server instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -112,33 +81,6 @@ export interface paths {
               app?: {
                 /** @description URL to instance application (GUI) */
                 url: string;
-              };
-            };
-            Keys: string;
-            Issuer?: string;
-            RedisUrl?: string;
-            ClickHouseUrl?: string;
-          } & {
-            _links: {
-              self: {
-                /** @description Instance resource */
-                href: string;
-              };
-              logs?: {
-                /** @description Get logs for this instance */
-                href: string;
-              };
-              health?: {
-                /** @description Get health status for this instance */
-                href: string;
-              };
-              ports?: {
-                /** @description Get exposed ports for this instance */
-                href: string;
-              };
-              restart?: {
-                /** @description Restart this instance */
-                href: string;
               };
             };
           };
@@ -168,11 +110,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart cat-validate */
+    /** Restart ograf-server */
     post: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the ograf-server instance */
           id: string;
         };
       };
@@ -191,12 +133,12 @@ export interface paths {
       };
     };
   };
-  '/cat-validateinstance/{id}': {
-    /** Obtain status and resource URLs for an cat-validate instance */
+  '/ograf-serverinstance/{id}': {
+    /** Obtain status and resource URLs for an ograf-server instance */
     get: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the ograf-server instance */
           id: string;
         };
       };
@@ -204,7 +146,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the cat-validate instance */
+            /** @description Name of the ograf-server instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -220,33 +162,6 @@ export interface paths {
               app?: {
                 /** @description URL to instance application (GUI) */
                 url: string;
-              };
-            };
-            Keys: string;
-            Issuer?: string;
-            RedisUrl?: string;
-            ClickHouseUrl?: string;
-          } & {
-            _links: {
-              self: {
-                /** @description Instance resource */
-                href: string;
-              };
-              logs?: {
-                /** @description Get logs for this instance */
-                href: string;
-              };
-              health?: {
-                /** @description Get health status for this instance */
-                href: string;
-              };
-              ports?: {
-                /** @description Get exposed ports for this instance */
-                href: string;
-              };
-              restart?: {
-                /** @description Restart this instance */
-                href: string;
               };
             };
           };
@@ -267,11 +182,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an cat-validate instance */
+    /** Stop and remove an ograf-server instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the ograf-server instance */
           id: string;
         };
       };
@@ -291,11 +206,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of cat-validate instance */
+    /** Return status of ograf-server instance */
     get: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the ograf-server instance */
           id: string;
         };
       };
@@ -318,7 +233,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the cat-validate instance */
+    /** Return the latest logs from the ograf-server instance */
     get: {
       parameters: {
         query: {
@@ -326,7 +241,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the ograf-server instance */
           id: string;
         };
       };
@@ -346,11 +261,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for cat-validate instance */
+    /** Return the exposed extra ports for ograf-server instance */
     get: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the ograf-server instance */
           id: string;
         };
       };
@@ -381,11 +296,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnCatValidate =
-  paths['/cat-validateinstance/{id}']['get']['responses']['200']['schema'];
+export type SuperflytvOgrafServer =
+  paths['/ograf-serverinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnCatValidateConfig =
-  paths['/cat-validateinstance']['post']['parameters']['body']['body'];
+export type SuperflytvOgrafServerConfig =
+  paths['/ograf-serverinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -394,109 +309,110 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-cat-validate
- * @description Enhance your security with Common Access Token Validator, the ultimate validation service for CTA-5007 tokens. Seamlessly integrate with Redis and ClickHouse for efficient token management. Secure your apps today!
+ * @namespace superflytv-ograf-server
+ * @description Elevate your live production with OGraf! Seamlessly render, upload, and control graphics across platforms like OBS and Vmix with ease. Streamline workflows with our intuitive web server and controller.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} EyevinnCatValidateConfig
- * @property {string} name - Name of cat-validate
- * @property {string} Keys - Keys
- * @property {string} [Issuer] - Issuer
- * @property {string} [RedisUrl] - RedisUrl
- * @property {string} [ClickHouseUrl] - ClickHouseUrl
+ * @typedef {Object} SuperflytvOgrafServerConfig
+ * @property {string} name - Name of ograf-server
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnCatValidate
- * @property {string} name - Name of the Common Access Token Validator instance
- * @property {string} url - URL of the Common Access Token Validator instance
+ * @typedef {Object} SuperflytvOgrafServer
+ * @property {string} name - Name of the OGraf Rendering Server instance
+ * @property {string} url - URL of the OGraf Rendering Server instance
  *
  */
 
 /**
- * Create a new Common Access Token Validator instance
+ * Create a new OGraf Rendering Server instance
  *
- * @memberOf eyevinn-cat-validate
+ * @memberOf superflytv-ograf-server
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnCatValidateConfig} body - Service instance configuration
- * @returns {EyevinnCatValidate} - Service instance
+ * @param {SuperflytvOgrafServerConfig} body - Service instance configuration
+ * @returns {SuperflytvOgrafServer} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnCatValidateInstance } from '@osaas/client-services';
+ * import { createSuperflytvOgrafServerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnCatValidateConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnCatValidateInstance(ctx, body);
+ * const body: SuperflytvOgrafServerConfig = { name: 'myinstance', ... };
+ * const instance = await createSuperflytvOgrafServerInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnCatValidateInstance(
+export async function createSuperflytvOgrafServerInstance(
   ctx: Context,
-  body: EyevinnCatValidateConfig
-): Promise<EyevinnCatValidate> {
+  body: SuperflytvOgrafServerConfig
+): Promise<SuperflytvOgrafServer> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-cat-validate'
+    'superflytv-ograf-server'
   );
   const instance = await createInstance(
     ctx,
-    'eyevinn-cat-validate',
+    'superflytv-ograf-server',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-cat-validate', instance.name, ctx);
+  await waitForInstanceReady('superflytv-ograf-server', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Common Access Token Validator instance
+ * Remove a OGraf Rendering Server instance
  *
- * @memberOf eyevinn-cat-validate
+ * @memberOf superflytv-ograf-server
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the validator to be removed
+ * @param {string} name - Name of the server to be removed
  */
-export async function removeEyevinnCatValidateInstance(
+export async function removeSuperflytvOgrafServerInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-cat-validate'
+    'superflytv-ograf-server'
   );
-  await removeInstance(ctx, 'eyevinn-cat-validate', name, serviceAccessToken);
+  await removeInstance(
+    ctx,
+    'superflytv-ograf-server',
+    name,
+    serviceAccessToken
+  );
 }
 
 /**
- * Get a Common Access Token Validator instance
+ * Get a OGraf Rendering Server instance
  *
- * @memberOf eyevinn-cat-validate
+ * @memberOf superflytv-ograf-server
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the validator to be retrieved
- * @returns {EyevinnCatValidate} - Service instance
+ * @param {string} name - Name of the server to be retrieved
+ * @returns {SuperflytvOgrafServer} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnCatValidateInstance } from '@osaas/client-services';
+ * import { getSuperflytvOgrafServerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnCatValidateInstance(ctx, 'myinstance');
+ * const instance = await getSuperflytvOgrafServerInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnCatValidateInstance(
+export async function getSuperflytvOgrafServerInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnCatValidate> {
+): Promise<SuperflytvOgrafServer> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-cat-validate'
+    'superflytv-ograf-server'
   );
   return await getInstance(
     ctx,
-    'eyevinn-cat-validate',
+    'superflytv-ograf-server',
     name,
     serviceAccessToken
   );

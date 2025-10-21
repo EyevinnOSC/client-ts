@@ -21,7 +21,7 @@ export interface paths {
       responses: {
         /** Default Response */
         200: {
-          schema: {
+          schema: ({
             /** @description Name of the sgai-ad-proxy instance */
             name: string;
             /** @description URL to instance API */
@@ -43,11 +43,34 @@ export interface paths {
             VastEndpoint: string;
             OriginUrl: string;
             InsertionMode: string;
-            CouchDbEndpoint?: string;
-            CouchDbTable?: string;
-            CouchDbUser?: string;
-            CouchDbPassword?: string;
-          }[];
+            DefaultAdDuration?: string;
+            DefaultRepeatingCycle?: string;
+            DefaultAdNumber?: string;
+            TestAssetUrl?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+            };
+          })[];
         };
         /** Default Response */
         500: {
@@ -68,10 +91,10 @@ export interface paths {
             VastEndpoint: string;
             OriginUrl: string;
             InsertionMode: string;
-            CouchDbEndpoint?: string;
-            CouchDbTable?: string;
-            CouchDbUser?: string;
-            CouchDbPassword?: string;
+            DefaultAdDuration?: string;
+            DefaultRepeatingCycle?: string;
+            DefaultAdNumber?: string;
+            TestAssetUrl?: string;
           };
         };
       };
@@ -100,10 +123,33 @@ export interface paths {
             VastEndpoint: string;
             OriginUrl: string;
             InsertionMode: string;
-            CouchDbEndpoint?: string;
-            CouchDbTable?: string;
-            CouchDbUser?: string;
-            CouchDbPassword?: string;
+            DefaultAdDuration?: string;
+            DefaultRepeatingCycle?: string;
+            DefaultAdNumber?: string;
+            TestAssetUrl?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+            };
           };
         };
         /** Default Response */
@@ -119,6 +165,30 @@ export interface paths {
             /** @description Reason why something failed */
             reason: string;
           };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
+  '/restart/{id}': {
+    /** Restart sgai-ad-proxy */
+    post: {
+      parameters: {
+        path: {
+          /** Name of the sgai-ad-proxy instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        204: {
+          schema: string;
         };
         /** Default Response */
         500: {
@@ -164,10 +234,33 @@ export interface paths {
             VastEndpoint: string;
             OriginUrl: string;
             InsertionMode: string;
-            CouchDbEndpoint?: string;
-            CouchDbTable?: string;
-            CouchDbUser?: string;
-            CouchDbPassword?: string;
+            DefaultAdDuration?: string;
+            DefaultRepeatingCycle?: string;
+            DefaultAdNumber?: string;
+            TestAssetUrl?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+            };
           };
         };
         /** Default Response */
@@ -325,11 +418,11 @@ import {
  * @property {string} name - Name of sgai-ad-proxy
  * @property {string} VastEndpoint - VastEndpoint
  * @property {string} OriginUrl - OriginUrl
- * @property {enum} InsertionMode - InsertionMode
- * @property {string} [CouchDbEndpoint] - CouchDbEndpoint
- * @property {string} [CouchDbTable] - CouchDbTable
- * @property {string} [CouchDbUser] - CouchDbUser
- * @property {string} [CouchDbPassword] - CouchDbPassword
+ * @property {string} InsertionMode - InsertionMode
+ * @property {string} [DefaultAdDuration] - DefaultAdDuration
+ * @property {string} [DefaultRepeatingCycle] - DefaultRepeatingCycle
+ * @property {string} [DefaultAdNumber] - DefaultAdNumber
+ * @property {string} [TestAssetUrl] - TestAssetUrl
 
  * 
  */

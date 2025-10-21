@@ -5,12 +5,39 @@
 
 export interface paths {
   '/': {
-    /** Say hello */
+    /** Health check endpoint */
     get: {
+      parameters: {
+        query: {
+          verbose?: boolean;
+        };
+      };
       responses: {
-        /** The magical words! */
+        /** Default Response */
         200: {
-          schema: string;
+          schema: Partial<string> &
+            Partial<{
+              status: string;
+              versions: {
+                '@osaas/orchestrator': string;
+              };
+              environment: string;
+              _links: {
+                self: {
+                  href: string;
+                };
+                api: {
+                  href: string;
+                };
+              };
+            }>;
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            status: string;
+            reason: string;
+          };
         };
       };
     };
@@ -21,7 +48,7 @@ export interface paths {
       responses: {
         /** Default Response */
         200: {
-          schema: {
+          schema: ({
             /** @description Name of the docker-minecraft-server instance */
             name: string;
             /** @description URL to instance API */
@@ -42,7 +69,46 @@ export interface paths {
             };
             AcceptEula: boolean;
             RconPassword: string;
-          }[];
+            Mode: string;
+            Difficulty?: string;
+            MaxWorldSize?: string;
+            AllowNether?: boolean;
+            AnnouncePlayerAchievements?: boolean;
+            EnableCommandBlock?: boolean;
+            ForceGamemode?: boolean;
+            GeneralStructures?: boolean;
+            Hardcore?: boolean;
+            SpawnAnimals?: boolean;
+            SpawnMonsters?: boolean;
+            SpawnNpcs?: boolean;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
+          })[];
         };
         /** Default Response */
         500: {
@@ -62,6 +128,18 @@ export interface paths {
             name: string;
             AcceptEula: boolean;
             RconPassword: string;
+            Mode: string;
+            Difficulty?: string;
+            MaxWorldSize?: string;
+            AllowNether?: boolean;
+            AnnouncePlayerAchievements?: boolean;
+            EnableCommandBlock?: boolean;
+            ForceGamemode?: boolean;
+            GeneralStructures?: boolean;
+            Hardcore?: boolean;
+            SpawnAnimals?: boolean;
+            SpawnMonsters?: boolean;
+            SpawnNpcs?: boolean;
           };
         };
       };
@@ -89,6 +167,45 @@ export interface paths {
             };
             AcceptEula: boolean;
             RconPassword: string;
+            Mode: string;
+            Difficulty?: string;
+            MaxWorldSize?: string;
+            AllowNether?: boolean;
+            AnnouncePlayerAchievements?: boolean;
+            EnableCommandBlock?: boolean;
+            ForceGamemode?: boolean;
+            GeneralStructures?: boolean;
+            Hardcore?: boolean;
+            SpawnAnimals?: boolean;
+            SpawnMonsters?: boolean;
+            SpawnNpcs?: boolean;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
           };
         };
         /** Default Response */
@@ -104,6 +221,30 @@ export interface paths {
             /** @description Reason why something failed */
             reason: string;
           };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
+  '/restart/{id}': {
+    /** Restart docker-minecraft-server */
+    post: {
+      parameters: {
+        path: {
+          /** Name of the docker-minecraft-server instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        204: {
+          schema: string;
         };
         /** Default Response */
         500: {
@@ -148,6 +289,45 @@ export interface paths {
             };
             AcceptEula: boolean;
             RconPassword: string;
+            Mode: string;
+            Difficulty?: string;
+            MaxWorldSize?: string;
+            AllowNether?: boolean;
+            AnnouncePlayerAchievements?: boolean;
+            EnableCommandBlock?: boolean;
+            ForceGamemode?: boolean;
+            GeneralStructures?: boolean;
+            Hardcore?: boolean;
+            SpawnAnimals?: boolean;
+            SpawnMonsters?: boolean;
+            SpawnNpcs?: boolean;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
           };
         };
         /** Default Response */
@@ -188,6 +368,115 @@ export interface paths {
         };
       };
     };
+    /** Patch docker-minecraft-server instance with new parameters and restart */
+    patch: {
+      parameters: {
+        body: {
+          body?: {
+            /** @description Name of the docker-minecraft-server instance */
+            name?: string;
+            AcceptEula?: boolean;
+            RconPassword?: string;
+            Mode?: string;
+            Difficulty?: string;
+            MaxWorldSize?: string;
+            AllowNether?: boolean;
+            AnnouncePlayerAchievements?: boolean;
+            EnableCommandBlock?: boolean;
+            ForceGamemode?: boolean;
+            GeneralStructures?: boolean;
+            Hardcore?: boolean;
+            SpawnAnimals?: boolean;
+            SpawnMonsters?: boolean;
+            SpawnNpcs?: boolean;
+          };
+        };
+        path: {
+          /** Name of the docker-minecraft-server instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            /** @description Name of the docker-minecraft-server instance */
+            name: string;
+            /** @description URL to instance API */
+            url: string;
+            resources: {
+              license: {
+                /** @description URL to license information */
+                url: string;
+              };
+              apiDocs?: {
+                /** @description URL to instance API documentation */
+                url: string;
+              };
+              app?: {
+                /** @description URL to instance application (GUI) */
+                url: string;
+              };
+            };
+            AcceptEula: boolean;
+            RconPassword: string;
+            Mode: string;
+            Difficulty?: string;
+            MaxWorldSize?: string;
+            AllowNether?: boolean;
+            AnnouncePlayerAchievements?: boolean;
+            EnableCommandBlock?: boolean;
+            ForceGamemode?: boolean;
+            GeneralStructures?: boolean;
+            Hardcore?: boolean;
+            SpawnAnimals?: boolean;
+            SpawnMonsters?: boolean;
+            SpawnNpcs?: boolean;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
+          };
+        };
+        /** Default Response */
+        404: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
   };
   '/health/{id}': {
     /** Return status of docker-minecraft-server instance */
@@ -204,6 +493,7 @@ export interface paths {
           schema: {
             /** @enum {string} */
             status: 'starting' | 'running' | 'stopped' | 'failed' | 'unknown';
+            images?: string[];
           };
         };
         /** Default Response */
@@ -305,6 +595,18 @@ import {
  * @property {string} name - Name of docker-minecraft-server
  * @property {boolean} AcceptEula - AcceptEula
  * @property {string} RconPassword - RconPassword
+ * @property {enum} Mode - Mode
+ * @property {enum} [Difficulty] - Difficulty
+ * @property {string} [MaxWorldSize] - MaxWorldSize
+ * @property {boolean} [AllowNether] - AllowNether
+ * @property {boolean} [AnnouncePlayerAchievements] - AnnouncePlayerAchievements
+ * @property {boolean} [EnableCommandBlock] - EnableCommandBlock
+ * @property {boolean} [ForceGamemode] - ForceGamemode
+ * @property {boolean} [GeneralStructures] - GeneralStructures
+ * @property {boolean} [Hardcore] - Hardcore
+ * @property {boolean} [SpawnAnimals] - SpawnAnimals
+ * @property {boolean} [SpawnMonsters] - SpawnMonsters
+ * @property {boolean} [SpawnNpcs] - SpawnNpcs
 
  * 
  */

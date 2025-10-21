@@ -21,7 +21,7 @@ export interface paths {
       responses: {
         /** Default Response */
         200: {
-          schema: {
+          schema: ({
             /** @description Name of the docker-testsrc-hls-live instance */
             name: string;
             /** @description URL to instance API */
@@ -40,7 +40,30 @@ export interface paths {
                 url: string;
               };
             };
-          }[];
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+            };
+          })[];
         };
         /** Default Response */
         500: {
@@ -83,6 +106,29 @@ export interface paths {
                 url: string;
               };
             };
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+            };
           };
         };
         /** Default Response */
@@ -98,6 +144,30 @@ export interface paths {
             /** @description Reason why something failed */
             reason: string;
           };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
+  '/restart/{id}': {
+    /** Restart docker-testsrc-hls-live */
+    post: {
+      parameters: {
+        path: {
+          /** Name of the docker-testsrc-hls-live instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        204: {
+          schema: string;
         };
         /** Default Response */
         500: {
@@ -138,6 +208,29 @@ export interface paths {
               app?: {
                 /** @description URL to instance application (GUI) */
                 url: string;
+              };
+            };
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
               };
             };
           };

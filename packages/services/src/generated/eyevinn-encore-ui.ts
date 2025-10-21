@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance': {
-    /** List all running couchdb instances */
+  '/encore-uiinstance': {
+    /** List all running encore-ui instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the couchdb instance */
+            /** @description Name of the encore-ui instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,7 +67,7 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            EncoreUrl: string;
           } & {
             _links: {
               self: {
@@ -106,14 +106,14 @@ export interface paths {
         };
       };
     };
-    /** Launch a new couchdb instance */
+    /** Launch a new encore-ui instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the encore-ui instance */
             name: string;
-            AdminPassword: string;
+            EncoreUrl: string;
           };
         };
       };
@@ -121,7 +121,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the encore-ui instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -139,7 +139,7 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            EncoreUrl: string;
           } & {
             _links: {
               self: {
@@ -194,11 +194,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart couchdb */
+    /** Restart encore-ui */
     post: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the encore-ui instance */
           id: string;
         };
       };
@@ -217,12 +217,12 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance/{id}': {
-    /** Obtain status and resource URLs for an couchdb instance */
+  '/encore-uiinstance/{id}': {
+    /** Obtain status and resource URLs for an encore-ui instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the encore-ui instance */
           id: string;
         };
       };
@@ -230,7 +230,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the encore-ui instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -248,7 +248,7 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            EncoreUrl: string;
           } & {
             _links: {
               self: {
@@ -294,11 +294,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an couchdb instance */
+    /** Stop and remove an encore-ui instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the encore-ui instance */
           id: string;
         };
       };
@@ -316,18 +316,18 @@ export interface paths {
         };
       };
     };
-    /** Patch couchdb instance with new parameters and restart */
+    /** Patch encore-ui instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the encore-ui instance */
             name?: string;
-            AdminPassword?: string;
+            EncoreUrl?: string;
           };
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the encore-ui instance */
           id: string;
         };
       };
@@ -335,7 +335,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the encore-ui instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -353,7 +353,7 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            EncoreUrl: string;
           } & {
             _links: {
               self: {
@@ -408,11 +408,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of couchdb instance */
+    /** Return status of encore-ui instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the encore-ui instance */
           id: string;
         };
       };
@@ -436,7 +436,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the couchdb instance */
+    /** Return the latest logs from the encore-ui instance */
     get: {
       parameters: {
         query: {
@@ -444,7 +444,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the encore-ui instance */
           id: string;
         };
       };
@@ -464,11 +464,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for couchdb instance */
+    /** Return the exposed extra ports for encore-ui instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the encore-ui instance */
           id: string;
         };
       };
@@ -499,11 +499,11 @@ export interface operations {}
 
 export interface external {}
 
-export type ApacheCouchdb =
-  paths['/couchdbinstance/{id}']['get']['responses']['200']['schema'];
+export type EyevinnEncoreUi =
+  paths['/encore-uiinstance/{id}']['get']['responses']['200']['schema'];
 
-export type ApacheCouchdbConfig =
-  paths['/couchdbinstance']['post']['parameters']['body']['body'];
+export type EyevinnEncoreUiConfig =
+  paths['/encore-uiinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -512,96 +512,102 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace apache-couchdb
- * @description Unlock seamless data management with Apache CouchDB! Effortlessly scalable and highly available, CouchDB makes storing, retrieving, and syncing data across devices a breeze. Ideal for modern cloud apps!
+ * @namespace eyevinn-encore-ui
+ * @description Upgrade your video encoding process with Encore UI, a sleek React-based interface for seamless job management. Enjoy real-time updates, detailed insights, and ultimate control over encoding workflows.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-CouchDB.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} ApacheCouchdbConfig
- * @property {string} name - Name of couchdb
- * @property {string} AdminPassword - AdminPassword
+ * @typedef {Object} EyevinnEncoreUiConfig
+ * @property {string} name - Name of encore-ui
+ * @property {string} EncoreUrl - EncoreUrl
 
  * 
  */
 
 /**
- * @typedef {Object} ApacheCouchdb
- * @property {string} name - Name of the Couch DB instance
- * @property {string} url - URL of the Couch DB instance
+ * @typedef {Object} EyevinnEncoreUi
+ * @property {string} name - Name of the SVT Encore GUI instance
+ * @property {string} url - URL of the SVT Encore GUI instance
  *
  */
 
 /**
- * Create a new Couch DB instance
+ * Create a new SVT Encore GUI instance
  *
- * @memberOf apache-couchdb
+ * @memberOf eyevinn-encore-ui
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {ApacheCouchdbConfig} body - Service instance configuration
- * @returns {ApacheCouchdb} - Service instance
+ * @param {EyevinnEncoreUiConfig} body - Service instance configuration
+ * @returns {EyevinnEncoreUi} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createApacheCouchdbInstance } from '@osaas/client-services';
+ * import { createEyevinnEncoreUiInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: ApacheCouchdbConfig = { name: 'myinstance', ... };
- * const instance = await createApacheCouchdbInstance(ctx, body);
+ * const body: EyevinnEncoreUiConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnEncoreUiInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createApacheCouchdbInstance(
+export async function createEyevinnEncoreUiInstance(
   ctx: Context,
-  body: ApacheCouchdbConfig
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
+  body: EyevinnEncoreUiConfig
+): Promise<EyevinnEncoreUi> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-encore-ui'
+  );
   const instance = await createInstance(
     ctx,
-    'apache-couchdb',
+    'eyevinn-encore-ui',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('apache-couchdb', instance.name, ctx);
+  await waitForInstanceReady('eyevinn-encore-ui', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Couch DB instance
+ * Remove a SVT Encore GUI instance
  *
- * @memberOf apache-couchdb
+ * @memberOf eyevinn-encore-ui
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be removed
+ * @param {string} name - Name of the encore-ui to be removed
  */
-export async function removeApacheCouchdbInstance(
+export async function removeEyevinnEncoreUiInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  await removeInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-encore-ui'
+  );
+  await removeInstance(ctx, 'eyevinn-encore-ui', name, serviceAccessToken);
 }
 
 /**
- * Get a Couch DB instance
+ * Get a SVT Encore GUI instance
  *
- * @memberOf apache-couchdb
+ * @memberOf eyevinn-encore-ui
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be retrieved
- * @returns {ApacheCouchdb} - Service instance
+ * @param {string} name - Name of the encore-ui to be retrieved
+ * @returns {EyevinnEncoreUi} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getApacheCouchdbInstance } from '@osaas/client-services';
+ * import { getEyevinnEncoreUiInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getApacheCouchdbInstance(ctx, 'myinstance');
+ * const instance = await getEyevinnEncoreUiInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getApacheCouchdbInstance(
+export async function getEyevinnEncoreUiInstance(
   ctx: Context,
   name: string
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  return await getInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+): Promise<EyevinnEncoreUi> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-encore-ui'
+  );
+  return await getInstance(ctx, 'eyevinn-encore-ui', name, serviceAccessToken);
 }

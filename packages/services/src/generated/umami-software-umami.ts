@@ -293,7 +293,7 @@ import {
  * @description Discover Umami, the fast and privacy-centric analytics tool! It's the perfect simple alternative to Google Analytics. Experience seamless data insights without compromising user privacy.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- *
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Umami.html|Online docs} for further information
  */
 
 /**

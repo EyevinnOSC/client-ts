@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance': {
-    /** List all running couchdb instances */
+  '/open-builderinstance': {
+    /** List all running open-builder instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the couchdb instance */
+            /** @description Name of the open-builder instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,7 +67,8 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            AnthropicApiKey: string;
+            OscAccessToken?: string;
           } & {
             _links: {
               self: {
@@ -106,14 +107,15 @@ export interface paths {
         };
       };
     };
-    /** Launch a new couchdb instance */
+    /** Launch a new open-builder instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the open-builder instance */
             name: string;
-            AdminPassword: string;
+            AnthropicApiKey: string;
+            OscAccessToken?: string;
           };
         };
       };
@@ -121,7 +123,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the open-builder instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -139,7 +141,8 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            AnthropicApiKey: string;
+            OscAccessToken?: string;
           } & {
             _links: {
               self: {
@@ -194,11 +197,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart couchdb */
+    /** Restart open-builder */
     post: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the open-builder instance */
           id: string;
         };
       };
@@ -217,12 +220,12 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance/{id}': {
-    /** Obtain status and resource URLs for an couchdb instance */
+  '/open-builderinstance/{id}': {
+    /** Obtain status and resource URLs for an open-builder instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the open-builder instance */
           id: string;
         };
       };
@@ -230,7 +233,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the open-builder instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -248,7 +251,8 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            AnthropicApiKey: string;
+            OscAccessToken?: string;
           } & {
             _links: {
               self: {
@@ -294,11 +298,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an couchdb instance */
+    /** Stop and remove an open-builder instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the open-builder instance */
           id: string;
         };
       };
@@ -316,18 +320,19 @@ export interface paths {
         };
       };
     };
-    /** Patch couchdb instance with new parameters and restart */
+    /** Patch open-builder instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the open-builder instance */
             name?: string;
-            AdminPassword?: string;
+            AnthropicApiKey?: string;
+            OscAccessToken?: string;
           };
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the open-builder instance */
           id: string;
         };
       };
@@ -335,7 +340,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the open-builder instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -353,7 +358,8 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            AnthropicApiKey: string;
+            OscAccessToken?: string;
           } & {
             _links: {
               self: {
@@ -408,11 +414,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of couchdb instance */
+    /** Return status of open-builder instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the open-builder instance */
           id: string;
         };
       };
@@ -436,7 +442,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the couchdb instance */
+    /** Return the latest logs from the open-builder instance */
     get: {
       parameters: {
         query: {
@@ -444,7 +450,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the open-builder instance */
           id: string;
         };
       };
@@ -464,11 +470,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for couchdb instance */
+    /** Return the exposed extra ports for open-builder instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the open-builder instance */
           id: string;
         };
       };
@@ -499,11 +505,11 @@ export interface operations {}
 
 export interface external {}
 
-export type ApacheCouchdb =
-  paths['/couchdbinstance/{id}']['get']['responses']['200']['schema'];
+export type EyevinnOpenBuilder =
+  paths['/open-builderinstance/{id}']['get']['responses']['200']['schema'];
 
-export type ApacheCouchdbConfig =
-  paths['/couchdbinstance']['post']['parameters']['body']['body'];
+export type EyevinnOpenBuilderConfig =
+  paths['/open-builderinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -512,96 +518,108 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace apache-couchdb
- * @description Unlock seamless data management with Apache CouchDB! Effortlessly scalable and highly available, CouchDB makes storing, retrieving, and syncing data across devices a breeze. Ideal for modern cloud apps!
+ * @namespace eyevinn-open-builder
+ * @description Elevate your Claude AI experience with Open Builder's intuitive web interface. Streamline interactions, control permissions, and maintain session continuity effortlessly. Simple deployment with Docker!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-CouchDB.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} ApacheCouchdbConfig
- * @property {string} name - Name of couchdb
- * @property {string} AdminPassword - AdminPassword
+ * @typedef {Object} EyevinnOpenBuilderConfig
+ * @property {string} name - Name of open-builder
+ * @property {string} AnthropicApiKey - AnthropicApiKey
+ * @property {string} [OscAccessToken] - OscAccessToken
 
  * 
  */
 
 /**
- * @typedef {Object} ApacheCouchdb
- * @property {string} name - Name of the Couch DB instance
- * @property {string} url - URL of the Couch DB instance
+ * @typedef {Object} EyevinnOpenBuilder
+ * @property {string} name - Name of the Open Builder instance
+ * @property {string} url - URL of the Open Builder instance
  *
  */
 
 /**
- * Create a new Couch DB instance
+ * Create a new Open Builder instance
  *
- * @memberOf apache-couchdb
+ * @memberOf eyevinn-open-builder
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {ApacheCouchdbConfig} body - Service instance configuration
- * @returns {ApacheCouchdb} - Service instance
+ * @param {EyevinnOpenBuilderConfig} body - Service instance configuration
+ * @returns {EyevinnOpenBuilder} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createApacheCouchdbInstance } from '@osaas/client-services';
+ * import { createEyevinnOpenBuilderInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: ApacheCouchdbConfig = { name: 'myinstance', ... };
- * const instance = await createApacheCouchdbInstance(ctx, body);
+ * const body: EyevinnOpenBuilderConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnOpenBuilderInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createApacheCouchdbInstance(
+export async function createEyevinnOpenBuilderInstance(
   ctx: Context,
-  body: ApacheCouchdbConfig
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
+  body: EyevinnOpenBuilderConfig
+): Promise<EyevinnOpenBuilder> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-open-builder'
+  );
   const instance = await createInstance(
     ctx,
-    'apache-couchdb',
+    'eyevinn-open-builder',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('apache-couchdb', instance.name, ctx);
+  await waitForInstanceReady('eyevinn-open-builder', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Couch DB instance
+ * Remove a Open Builder instance
  *
- * @memberOf apache-couchdb
+ * @memberOf eyevinn-open-builder
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be removed
+ * @param {string} name - Name of the builder to be removed
  */
-export async function removeApacheCouchdbInstance(
+export async function removeEyevinnOpenBuilderInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  await removeInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-open-builder'
+  );
+  await removeInstance(ctx, 'eyevinn-open-builder', name, serviceAccessToken);
 }
 
 /**
- * Get a Couch DB instance
+ * Get a Open Builder instance
  *
- * @memberOf apache-couchdb
+ * @memberOf eyevinn-open-builder
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be retrieved
- * @returns {ApacheCouchdb} - Service instance
+ * @param {string} name - Name of the builder to be retrieved
+ * @returns {EyevinnOpenBuilder} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getApacheCouchdbInstance } from '@osaas/client-services';
+ * import { getEyevinnOpenBuilderInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getApacheCouchdbInstance(ctx, 'myinstance');
+ * const instance = await getEyevinnOpenBuilderInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getApacheCouchdbInstance(
+export async function getEyevinnOpenBuilderInstance(
   ctx: Context,
   name: string
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  return await getInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+): Promise<EyevinnOpenBuilder> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-open-builder'
+  );
+  return await getInstance(
+    ctx,
+    'eyevinn-open-builder',
+    name,
+    serviceAccessToken
+  );
 }

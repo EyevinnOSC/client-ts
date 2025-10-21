@@ -5,12 +5,39 @@
 
 export interface paths {
   '/': {
-    /** Say hello */
+    /** Health check endpoint */
     get: {
+      parameters: {
+        query: {
+          verbose?: boolean;
+        };
+      };
       responses: {
-        /** The magical words! */
+        /** Default Response */
         200: {
-          schema: string;
+          schema: Partial<string> &
+            Partial<{
+              status: string;
+              versions: {
+                '@osaas/orchestrator': string;
+              };
+              environment: string;
+              _links: {
+                self: {
+                  href: string;
+                };
+                api: {
+                  href: string;
+                };
+              };
+            }>;
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            status: string;
+            reason: string;
+          };
         };
       };
     };
@@ -21,7 +48,7 @@ export interface paths {
       responses: {
         /** Default Response */
         200: {
-          schema: {
+          schema: ({
             /** @description Name of the ad-normalizer instance */
             name: string;
             /** @description URL to instance API */
@@ -41,20 +68,44 @@ export interface paths {
               };
             };
             EncoreUrl: string;
+            RedisUrl?: string;
             AdServerUrl: string;
-            JitPackaging: boolean;
-            PackagingQueueName: string;
             OutputBucketUrl: string;
-            S3AccessKey: string;
-            S3SecretKey: string;
-            S3EndpointUrl?: string;
-            EncoreCallbackListenerUrl?: string;
-            EncoreProfile?: string;
             KeyRegex?: string;
             KeyField?: string;
-            RedisUrl?: string;
+            EncoreProfile?: string;
+            AssetServerUrl?: string;
+            JitPackaging?: boolean;
+            PackagingQueueName?: string;
             OscAccessToken?: string;
-          }[];
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
+          })[];
         };
         /** Default Response */
         500: {
@@ -73,18 +124,15 @@ export interface paths {
             /** @description Name of the ad-normalizer instance */
             name: string;
             EncoreUrl: string;
+            RedisUrl?: string;
             AdServerUrl: string;
-            JitPackaging: boolean;
-            PackagingQueueName: string;
             OutputBucketUrl: string;
-            S3AccessKey: string;
-            S3SecretKey: string;
-            S3EndpointUrl?: string;
-            EncoreCallbackListenerUrl?: string;
-            EncoreProfile?: string;
             KeyRegex?: string;
             KeyField?: string;
-            RedisUrl?: string;
+            EncoreProfile?: string;
+            AssetServerUrl?: string;
+            JitPackaging?: boolean;
+            PackagingQueueName?: string;
             OscAccessToken?: string;
           };
         };
@@ -112,19 +160,43 @@ export interface paths {
               };
             };
             EncoreUrl: string;
+            RedisUrl?: string;
             AdServerUrl: string;
-            JitPackaging: boolean;
-            PackagingQueueName: string;
             OutputBucketUrl: string;
-            S3AccessKey: string;
-            S3SecretKey: string;
-            S3EndpointUrl?: string;
-            EncoreCallbackListenerUrl?: string;
-            EncoreProfile?: string;
             KeyRegex?: string;
             KeyField?: string;
-            RedisUrl?: string;
+            EncoreProfile?: string;
+            AssetServerUrl?: string;
+            JitPackaging?: boolean;
+            PackagingQueueName?: string;
             OscAccessToken?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
           };
         };
         /** Default Response */
@@ -140,6 +212,30 @@ export interface paths {
             /** @description Reason why something failed */
             reason: string;
           };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
+  '/restart/{id}': {
+    /** Restart ad-normalizer */
+    post: {
+      parameters: {
+        path: {
+          /** Name of the ad-normalizer instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        204: {
+          schema: string;
         };
         /** Default Response */
         500: {
@@ -183,19 +279,43 @@ export interface paths {
               };
             };
             EncoreUrl: string;
+            RedisUrl?: string;
             AdServerUrl: string;
-            JitPackaging: boolean;
-            PackagingQueueName: string;
             OutputBucketUrl: string;
-            S3AccessKey: string;
-            S3SecretKey: string;
-            S3EndpointUrl?: string;
-            EncoreCallbackListenerUrl?: string;
-            EncoreProfile?: string;
             KeyRegex?: string;
             KeyField?: string;
-            RedisUrl?: string;
+            EncoreProfile?: string;
+            AssetServerUrl?: string;
+            JitPackaging?: boolean;
+            PackagingQueueName?: string;
             OscAccessToken?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
           };
         };
         /** Default Response */
@@ -236,6 +356,116 @@ export interface paths {
         };
       };
     };
+    /** Patch ad-normalizer instance with new parameters and restart */
+    patch: {
+      parameters: {
+        body: {
+          body?: {
+            /** @description Name of the ad-normalizer instance */
+            name?: string;
+            EncoreUrl?: string;
+            RedisUrl?: string;
+            AdServerUrl?: string;
+            OutputBucketUrl?: string;
+            KeyRegex?: string;
+            KeyField?: string;
+            EncoreProfile?: string;
+            AssetServerUrl?: string;
+            JitPackaging?: boolean;
+            PackagingQueueName?: string;
+            OscAccessToken?: string;
+          };
+        };
+        path: {
+          /** Name of the ad-normalizer instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            /** @description Name of the ad-normalizer instance */
+            name: string;
+            /** @description URL to instance API */
+            url: string;
+            resources: {
+              license: {
+                /** @description URL to license information */
+                url: string;
+              };
+              apiDocs?: {
+                /** @description URL to instance API documentation */
+                url: string;
+              };
+              app?: {
+                /** @description URL to instance application (GUI) */
+                url: string;
+              };
+            };
+            EncoreUrl: string;
+            RedisUrl?: string;
+            AdServerUrl: string;
+            OutputBucketUrl: string;
+            KeyRegex?: string;
+            KeyField?: string;
+            EncoreProfile?: string;
+            AssetServerUrl?: string;
+            JitPackaging?: boolean;
+            PackagingQueueName?: string;
+            OscAccessToken?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
+          };
+        };
+        /** Default Response */
+        400: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        404: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
   };
   '/health/{id}': {
     /** Return status of ad-normalizer instance */
@@ -252,6 +482,7 @@ export interface paths {
           schema: {
             /** @enum {string} */
             status: 'starting' | 'running' | 'stopped' | 'failed' | 'unknown';
+            images?: string[];
           };
         };
         /** Default Response */
@@ -351,19 +582,16 @@ import {
 /**
  * @typedef {Object} EyevinnAdNormalizerConfig
  * @property {string} name - Name of ad-normalizer
- * @property {string} EncoreUrl - EncoreUrl
- * @property {string} AdServerUrl - AdServerUrl
- * @property {boolean} JitPackaging - JitPackaging
- * @property {string} PackagingQueueName - PackagingQueueName
- * @property {string} OutputBucketUrl - OutputBucketUrl
- * @property {string} S3AccessKey - S3AccessKey
- * @property {string} S3SecretKey - S3SecretKey
- * @property {string} [S3EndpointUrl] - S3EndpointUrl
- * @property {string} [EncoreCallbackListenerUrl] - EncoreCallbackListenerUrl
- * @property {string} [EncoreProfile] - EncoreProfile
- * @property {string} [KeyRegex] - KeyRegex
- * @property {string} [KeyField] - KeyField
- * @property {string} [RedisUrl] - RedisUrl
+ * @property {string} EncoreUrl - URL of the related encore instance
+ * @property {string} [RedisUrl] - The url to the redis/valkey instance used. Should use the redis protocol and ideally include port
+ * @property {string} AdServerUrl - The url to the ad server endpoint. For the test ad server the path should be /api/v1/ads
+ * @property {string} OutputBucketUrl - The url to the output folder for the packaged assets
+ * @property {string} [KeyRegex] - Defaults to [^a-zA-Z0-9] if not set
+ * @property {string} [KeyField] - Which field that the normalizer should use as key in valkey/redis. Optional, defaults to universalAdId if not set
+ * @property {string} [EncoreProfile] - Optional, defaults to "program" if not set
+ * @property {string} [AssetServerUrl] - Optional, http version of OUTPUT_BUCKET_URL is used if not set
+ * @property {boolean} [JitPackaging] - Signals wether packaging of ads is done JIT or if completed jobs should be put on the packaging queue. optional, defaults to false if not provided
+ * @property {string} [PackagingQueueName] - Name of the redis queue used for packaging jobs. Optional, defaults to "package" if not provided
  * @property {string} [OscAccessToken] - OscAccessToken
 
  * 

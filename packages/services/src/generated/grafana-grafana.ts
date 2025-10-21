@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/cat-validateinstance': {
-    /** List all running cat-validate instances */
+  '/grafanainstance': {
+    /** List all running grafana instances */
     get: {
       responses: {
         /** Default Response */
         200: {
-          schema: ({
-            /** @description Name of the cat-validate instance */
+          schema: {
+            /** @description Name of the grafana instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,34 +40,10 @@ export interface paths {
                 url: string;
               };
             };
-            Keys: string;
-            Issuer?: string;
-            RedisUrl?: string;
-            ClickHouseUrl?: string;
-          } & {
-            _links: {
-              self: {
-                /** @description Instance resource */
-                href: string;
-              };
-              logs?: {
-                /** @description Get logs for this instance */
-                href: string;
-              };
-              health?: {
-                /** @description Get health status for this instance */
-                href: string;
-              };
-              ports?: {
-                /** @description Get exposed ports for this instance */
-                href: string;
-              };
-              restart?: {
-                /** @description Restart this instance */
-                href: string;
-              };
-            };
-          })[];
+            PluginsPreinstall?: string;
+            AllowEmbedOrigins?: string;
+            AnonymousEnabled?: boolean;
+          }[];
         };
         /** Default Response */
         500: {
@@ -78,17 +54,16 @@ export interface paths {
         };
       };
     };
-    /** Launch a new cat-validate instance */
+    /** Launch a new grafana instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the cat-validate instance */
+            /** @description Name of the grafana instance */
             name: string;
-            Keys: string;
-            Issuer?: string;
-            RedisUrl?: string;
-            ClickHouseUrl?: string;
+            PluginsPreinstall?: string;
+            AllowEmbedOrigins?: string;
+            AnonymousEnabled?: boolean;
           };
         };
       };
@@ -96,7 +71,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the cat-validate instance */
+            /** @description Name of the grafana instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -114,33 +89,9 @@ export interface paths {
                 url: string;
               };
             };
-            Keys: string;
-            Issuer?: string;
-            RedisUrl?: string;
-            ClickHouseUrl?: string;
-          } & {
-            _links: {
-              self: {
-                /** @description Instance resource */
-                href: string;
-              };
-              logs?: {
-                /** @description Get logs for this instance */
-                href: string;
-              };
-              health?: {
-                /** @description Get health status for this instance */
-                href: string;
-              };
-              ports?: {
-                /** @description Get exposed ports for this instance */
-                href: string;
-              };
-              restart?: {
-                /** @description Restart this instance */
-                href: string;
-              };
-            };
+            PluginsPreinstall?: string;
+            AllowEmbedOrigins?: string;
+            AnonymousEnabled?: boolean;
           };
         };
         /** Default Response */
@@ -168,11 +119,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart cat-validate */
+    /** Restart grafana */
     post: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the grafana instance */
           id: string;
         };
       };
@@ -191,12 +142,12 @@ export interface paths {
       };
     };
   };
-  '/cat-validateinstance/{id}': {
-    /** Obtain status and resource URLs for an cat-validate instance */
+  '/grafanainstance/{id}': {
+    /** Obtain status and resource URLs for an grafana instance */
     get: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the grafana instance */
           id: string;
         };
       };
@@ -204,7 +155,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the cat-validate instance */
+            /** @description Name of the grafana instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -222,33 +173,9 @@ export interface paths {
                 url: string;
               };
             };
-            Keys: string;
-            Issuer?: string;
-            RedisUrl?: string;
-            ClickHouseUrl?: string;
-          } & {
-            _links: {
-              self: {
-                /** @description Instance resource */
-                href: string;
-              };
-              logs?: {
-                /** @description Get logs for this instance */
-                href: string;
-              };
-              health?: {
-                /** @description Get health status for this instance */
-                href: string;
-              };
-              ports?: {
-                /** @description Get exposed ports for this instance */
-                href: string;
-              };
-              restart?: {
-                /** @description Restart this instance */
-                href: string;
-              };
-            };
+            PluginsPreinstall?: string;
+            AllowEmbedOrigins?: string;
+            AnonymousEnabled?: boolean;
           };
         };
         /** Default Response */
@@ -267,11 +194,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an cat-validate instance */
+    /** Stop and remove an grafana instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the grafana instance */
           id: string;
         };
       };
@@ -291,11 +218,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of cat-validate instance */
+    /** Return status of grafana instance */
     get: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the grafana instance */
           id: string;
         };
       };
@@ -318,7 +245,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the cat-validate instance */
+    /** Return the latest logs from the grafana instance */
     get: {
       parameters: {
         query: {
@@ -326,7 +253,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the grafana instance */
           id: string;
         };
       };
@@ -346,11 +273,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for cat-validate instance */
+    /** Return the exposed extra ports for grafana instance */
     get: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the grafana instance */
           id: string;
         };
       };
@@ -381,11 +308,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnCatValidate =
-  paths['/cat-validateinstance/{id}']['get']['responses']['200']['schema'];
+export type GrafanaGrafana =
+  paths['/grafanainstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnCatValidateConfig =
-  paths['/cat-validateinstance']['post']['parameters']['body']['body'];
+export type GrafanaGrafanaConfig =
+  paths['/grafanainstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -394,110 +321,98 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-cat-validate
- * @description Enhance your security with Common Access Token Validator, the ultimate validation service for CTA-5007 tokens. Seamlessly integrate with Redis and ClickHouse for efficient token management. Secure your apps today!
+ * @namespace grafana-grafana
+ * @description Transform your organization's data viewing experience with Grafana's cutting-edge visualizations and dynamic dashboards. Effortlessly explore metrics, logs, and receive alerts tailored precisely for powerful insights.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} EyevinnCatValidateConfig
- * @property {string} name - Name of cat-validate
- * @property {string} Keys - Keys
- * @property {string} [Issuer] - Issuer
- * @property {string} [RedisUrl] - RedisUrl
- * @property {string} [ClickHouseUrl] - ClickHouseUrl
+ * @typedef {Object} GrafanaGrafanaConfig
+ * @property {string} name - Name of grafana
+ * @property {string} [PluginsPreinstall] - Provide a list of plugins to pre install
+ * @property {string} [AllowEmbedOrigins] - Web origin allowed to embed in an iframe
+ * @property {boolean} [AnonymousEnabled] - Enable anonymous access
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnCatValidate
- * @property {string} name - Name of the Common Access Token Validator instance
- * @property {string} url - URL of the Common Access Token Validator instance
+ * @typedef {Object} GrafanaGrafana
+ * @property {string} name - Name of the Grafana instance
+ * @property {string} url - URL of the Grafana instance
  *
  */
 
 /**
- * Create a new Common Access Token Validator instance
+ * Create a new Grafana instance
  *
- * @memberOf eyevinn-cat-validate
+ * @memberOf grafana-grafana
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnCatValidateConfig} body - Service instance configuration
- * @returns {EyevinnCatValidate} - Service instance
+ * @param {GrafanaGrafanaConfig} body - Service instance configuration
+ * @returns {GrafanaGrafana} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnCatValidateInstance } from '@osaas/client-services';
+ * import { createGrafanaGrafanaInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnCatValidateConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnCatValidateInstance(ctx, body);
+ * const body: GrafanaGrafanaConfig = { name: 'myinstance', ... };
+ * const instance = await createGrafanaGrafanaInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnCatValidateInstance(
+export async function createGrafanaGrafanaInstance(
   ctx: Context,
-  body: EyevinnCatValidateConfig
-): Promise<EyevinnCatValidate> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-cat-validate'
-  );
+  body: GrafanaGrafanaConfig
+): Promise<GrafanaGrafana> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('grafana-grafana');
   const instance = await createInstance(
     ctx,
-    'eyevinn-cat-validate',
+    'grafana-grafana',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-cat-validate', instance.name, ctx);
+  await waitForInstanceReady('grafana-grafana', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Common Access Token Validator instance
+ * Remove a Grafana instance
  *
- * @memberOf eyevinn-cat-validate
+ * @memberOf grafana-grafana
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the validator to be removed
+ * @param {string} name - Name of the grafana to be removed
  */
-export async function removeEyevinnCatValidateInstance(
+export async function removeGrafanaGrafanaInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-cat-validate'
-  );
-  await removeInstance(ctx, 'eyevinn-cat-validate', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken('grafana-grafana');
+  await removeInstance(ctx, 'grafana-grafana', name, serviceAccessToken);
 }
 
 /**
- * Get a Common Access Token Validator instance
+ * Get a Grafana instance
  *
- * @memberOf eyevinn-cat-validate
+ * @memberOf grafana-grafana
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the validator to be retrieved
- * @returns {EyevinnCatValidate} - Service instance
+ * @param {string} name - Name of the grafana to be retrieved
+ * @returns {GrafanaGrafana} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnCatValidateInstance } from '@osaas/client-services';
+ * import { getGrafanaGrafanaInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnCatValidateInstance(ctx, 'myinstance');
+ * const instance = await getGrafanaGrafanaInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnCatValidateInstance(
+export async function getGrafanaGrafanaInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnCatValidate> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-cat-validate'
-  );
-  return await getInstance(
-    ctx,
-    'eyevinn-cat-validate',
-    name,
-    serviceAccessToken
-  );
+): Promise<GrafanaGrafana> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('grafana-grafana');
+  return await getInstance(ctx, 'grafana-grafana', name, serviceAccessToken);
 }

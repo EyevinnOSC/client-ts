@@ -5,12 +5,39 @@
 
 export interface paths {
   '/': {
-    /** Say hello */
+    /** Health check endpoint */
     get: {
+      parameters: {
+        query: {
+          verbose?: boolean;
+        };
+      };
       responses: {
-        /** The magical words! */
+        /** Default Response */
         200: {
-          schema: string;
+          schema: Partial<string> &
+            Partial<{
+              status: string;
+              versions: {
+                '@osaas/orchestrator': string;
+              };
+              environment: string;
+              _links: {
+                self: {
+                  href: string;
+                };
+                api: {
+                  href: string;
+                };
+              };
+            }>;
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            status: string;
+            reason: string;
+          };
         };
       };
     };
@@ -21,7 +48,7 @@ export interface paths {
       responses: {
         /** Default Response */
         200: {
-          schema: {
+          schema: ({
             /** @description Name of the restreamer instance */
             name: string;
             /** @description URL to instance API */
@@ -40,11 +67,41 @@ export interface paths {
                 url: string;
               };
             };
-          }[];
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
+          })[];
         };
         /** Default Response */
         500: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
@@ -80,11 +137,79 @@ export interface paths {
                 url: string;
               };
             };
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
+          };
+        };
+        /** Default Response */
+        403: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        409: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
           };
         };
         /** Default Response */
         500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
+  '/restart/{id}': {
+    /** Restart restreamer */
+    post: {
+      parameters: {
+        path: {
+          /** Name of the restreamer instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        204: {
           schema: string;
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
@@ -120,15 +245,48 @@ export interface paths {
                 url: string;
               };
             };
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
           };
         };
         /** Default Response */
         404: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
         /** Default Response */
         500: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
@@ -147,7 +305,98 @@ export interface paths {
         };
         /** Default Response */
         500: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+    /** Patch restreamer instance with new parameters and restart */
+    patch: {
+      parameters: {
+        body: {
+          body?: {
+            /** @description Name of the restreamer instance */
+            name?: string;
+          };
+        };
+        path: {
+          /** Name of the restreamer instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            /** @description Name of the restreamer instance */
+            name: string;
+            /** @description URL to instance API */
+            url: string;
+            resources: {
+              license: {
+                /** @description URL to license information */
+                url: string;
+              };
+              apiDocs?: {
+                /** @description URL to instance API documentation */
+                url: string;
+              };
+              app?: {
+                /** @description URL to instance application (GUI) */
+                url: string;
+              };
+            };
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
+          };
+        };
+        /** Default Response */
+        400: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        404: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
@@ -167,11 +416,15 @@ export interface paths {
           schema: {
             /** @enum {string} */
             status: 'starting' | 'running' | 'stopped' | 'failed' | 'unknown';
+            images?: string[];
           };
         };
         /** Default Response */
         500: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
@@ -196,7 +449,10 @@ export interface paths {
         };
         /** Default Response */
         500: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
@@ -221,7 +477,10 @@ export interface paths {
         };
         /** Default Response */
         500: {
-          schema: string;
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
       };
     };
@@ -263,13 +522,13 @@ import {
 
 /**
  * @typedef {Object} DatarheiRestreamer
- * @property {string} name - Name of the restreamer instance
- * @property {string} url - URL of the restreamer instance
+ * @property {string} name - Name of the Restreamer instance
+ * @property {string} url - URL of the Restreamer instance
  *
  */
 
 /**
- * Create a new restreamer instance
+ * Create a new Restreamer instance
  *
  * @memberOf datarhei-restreamer
  * @async
@@ -303,7 +562,7 @@ export async function createDatarheiRestreamerInstance(
 }
 
 /**
- * Remove a restreamer instance
+ * Remove a Restreamer instance
  *
  * @memberOf datarhei-restreamer
  * @async
@@ -321,7 +580,7 @@ export async function removeDatarheiRestreamerInstance(
 }
 
 /**
- * Get a restreamer instance
+ * Get a Restreamer instance
  *
  * @memberOf datarhei-restreamer
  * @async

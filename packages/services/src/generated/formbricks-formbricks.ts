@@ -5,51 +5,24 @@
 
 export interface paths {
   '/': {
-    /** Health check endpoint */
+    /** Say hello */
     get: {
-      parameters: {
-        query: {
-          verbose?: boolean;
-        };
-      };
       responses: {
-        /** Default Response */
+        /** The magical words! */
         200: {
-          schema: Partial<string> &
-            Partial<{
-              status: string;
-              versions: {
-                '@osaas/orchestrator': string;
-              };
-              environment: string;
-              _links: {
-                self: {
-                  href: string;
-                };
-                api: {
-                  href: string;
-                };
-              };
-            }>;
-        };
-        /** Default Response */
-        500: {
-          schema: {
-            status: string;
-            reason: string;
-          };
+          schema: string;
         };
       };
     };
   };
-  '/couchdbinstance': {
-    /** List all running couchdb instances */
+  '/formbricksinstance': {
+    /** List all running formbricks instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the couchdb instance */
+            /** @description Name of the formbricks instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,7 +40,12 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            DatabaseUrl: string;
+            AwsAccessKeyId?: string;
+            AwsSecretAccessKey?: string;
+            AwsRegion?: string;
+            S3BucketName?: string;
+            S3EndpointUrl?: string;
           } & {
             _links: {
               self: {
@@ -106,14 +84,19 @@ export interface paths {
         };
       };
     };
-    /** Launch a new couchdb instance */
+    /** Launch a new formbricks instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the formbricks instance */
             name: string;
-            AdminPassword: string;
+            DatabaseUrl: string;
+            AwsAccessKeyId?: string;
+            AwsSecretAccessKey?: string;
+            AwsRegion?: string;
+            S3BucketName?: string;
+            S3EndpointUrl?: string;
           };
         };
       };
@@ -121,7 +104,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the formbricks instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -139,7 +122,12 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            DatabaseUrl: string;
+            AwsAccessKeyId?: string;
+            AwsSecretAccessKey?: string;
+            AwsRegion?: string;
+            S3BucketName?: string;
+            S3EndpointUrl?: string;
           } & {
             _links: {
               self: {
@@ -194,11 +182,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart couchdb */
+    /** Restart formbricks */
     post: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the formbricks instance */
           id: string;
         };
       };
@@ -217,12 +205,12 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance/{id}': {
-    /** Obtain status and resource URLs for an couchdb instance */
+  '/formbricksinstance/{id}': {
+    /** Obtain status and resource URLs for an formbricks instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the formbricks instance */
           id: string;
         };
       };
@@ -230,7 +218,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the formbricks instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -248,7 +236,12 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            DatabaseUrl: string;
+            AwsAccessKeyId?: string;
+            AwsSecretAccessKey?: string;
+            AwsRegion?: string;
+            S3BucketName?: string;
+            S3EndpointUrl?: string;
           } & {
             _links: {
               self: {
@@ -294,11 +287,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an couchdb instance */
+    /** Stop and remove an formbricks instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the formbricks instance */
           id: string;
         };
       };
@@ -316,18 +309,23 @@ export interface paths {
         };
       };
     };
-    /** Patch couchdb instance with new parameters and restart */
+    /** Patch formbricks instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the formbricks instance */
             name?: string;
-            AdminPassword?: string;
+            DatabaseUrl?: string;
+            AwsAccessKeyId?: string;
+            AwsSecretAccessKey?: string;
+            AwsRegion?: string;
+            S3BucketName?: string;
+            S3EndpointUrl?: string;
           };
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the formbricks instance */
           id: string;
         };
       };
@@ -335,7 +333,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the formbricks instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -353,7 +351,12 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            DatabaseUrl: string;
+            AwsAccessKeyId?: string;
+            AwsSecretAccessKey?: string;
+            AwsRegion?: string;
+            S3BucketName?: string;
+            S3EndpointUrl?: string;
           } & {
             _links: {
               self: {
@@ -381,13 +384,6 @@ export interface paths {
                 href: string;
               };
             };
-          };
-        };
-        /** Default Response */
-        400: {
-          schema: {
-            /** @description Reason why something failed */
-            reason: string;
           };
         };
         /** Default Response */
@@ -408,11 +404,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of couchdb instance */
+    /** Return status of formbricks instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the formbricks instance */
           id: string;
         };
       };
@@ -422,7 +418,6 @@ export interface paths {
           schema: {
             /** @enum {string} */
             status: 'starting' | 'running' | 'stopped' | 'failed' | 'unknown';
-            images?: string[];
           };
         };
         /** Default Response */
@@ -436,7 +431,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the couchdb instance */
+    /** Return the latest logs from the formbricks instance */
     get: {
       parameters: {
         query: {
@@ -444,7 +439,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the formbricks instance */
           id: string;
         };
       };
@@ -464,11 +459,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for couchdb instance */
+    /** Return the exposed extra ports for formbricks instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the formbricks instance */
           id: string;
         };
       };
@@ -499,11 +494,11 @@ export interface operations {}
 
 export interface external {}
 
-export type ApacheCouchdb =
-  paths['/couchdbinstance/{id}']['get']['responses']['200']['schema'];
+export type FormbricksFormbricks =
+  paths['/formbricksinstance/{id}']['get']['responses']['200']['schema'];
 
-export type ApacheCouchdbConfig =
-  paths['/couchdbinstance']['post']['parameters']['body']['body'];
+export type FormbricksFormbricksConfig =
+  paths['/formbricksinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -512,96 +507,112 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace apache-couchdb
- * @description Unlock seamless data management with Apache CouchDB! Effortlessly scalable and highly available, CouchDB makes storing, retrieving, and syncing data across devices a breeze. Ideal for modern cloud apps!
+ * @namespace formbricks-formbricks
+ * @description Revolutionize user engagement with Formbricks, the open-source Qualtrics alternative! Create conversion-optimized, privacy-first surveys effortlessly. Empower your team with transformational insights today!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-CouchDB.html|Online docs} for further information
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Formbricks.html|Online docs} for further information
  */
 
 /**
- * @typedef {Object} ApacheCouchdbConfig
- * @property {string} name - Name of couchdb
- * @property {string} AdminPassword - AdminPassword
+ * @typedef {Object} FormbricksFormbricksConfig
+ * @property {string} name - Name of formbricks
+ * @property {string} DatabaseUrl - DatabaseUrl
+ * @property {string} [AwsAccessKeyId] - AwsAccessKeyId
+ * @property {string} [AwsSecretAccessKey] - AwsSecretAccessKey
+ * @property {string} [AwsRegion] - AwsRegion
+ * @property {string} [S3BucketName] - S3BucketName
+ * @property {string} [S3EndpointUrl] - S3EndpointUrl
 
  * 
  */
 
 /**
- * @typedef {Object} ApacheCouchdb
- * @property {string} name - Name of the Couch DB instance
- * @property {string} url - URL of the Couch DB instance
+ * @typedef {Object} FormbricksFormbricks
+ * @property {string} name - Name of the Formbricks instance
+ * @property {string} url - URL of the Formbricks instance
  *
  */
 
 /**
- * Create a new Couch DB instance
+ * Create a new Formbricks instance
  *
- * @memberOf apache-couchdb
+ * @memberOf formbricks-formbricks
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {ApacheCouchdbConfig} body - Service instance configuration
- * @returns {ApacheCouchdb} - Service instance
+ * @param {FormbricksFormbricksConfig} body - Service instance configuration
+ * @returns {FormbricksFormbricks} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createApacheCouchdbInstance } from '@osaas/client-services';
+ * import { createFormbricksFormbricksInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: ApacheCouchdbConfig = { name: 'myinstance', ... };
- * const instance = await createApacheCouchdbInstance(ctx, body);
+ * const body: FormbricksFormbricksConfig = { name: 'myinstance', ... };
+ * const instance = await createFormbricksFormbricksInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createApacheCouchdbInstance(
+export async function createFormbricksFormbricksInstance(
   ctx: Context,
-  body: ApacheCouchdbConfig
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
+  body: FormbricksFormbricksConfig
+): Promise<FormbricksFormbricks> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'formbricks-formbricks'
+  );
   const instance = await createInstance(
     ctx,
-    'apache-couchdb',
+    'formbricks-formbricks',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('apache-couchdb', instance.name, ctx);
+  await waitForInstanceReady('formbricks-formbricks', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Couch DB instance
+ * Remove a Formbricks instance
  *
- * @memberOf apache-couchdb
+ * @memberOf formbricks-formbricks
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be removed
+ * @param {string} name - Name of the formbricks to be removed
  */
-export async function removeApacheCouchdbInstance(
+export async function removeFormbricksFormbricksInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  await removeInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'formbricks-formbricks'
+  );
+  await removeInstance(ctx, 'formbricks-formbricks', name, serviceAccessToken);
 }
 
 /**
- * Get a Couch DB instance
+ * Get a Formbricks instance
  *
- * @memberOf apache-couchdb
+ * @memberOf formbricks-formbricks
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be retrieved
- * @returns {ApacheCouchdb} - Service instance
+ * @param {string} name - Name of the formbricks to be retrieved
+ * @returns {FormbricksFormbricks} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getApacheCouchdbInstance } from '@osaas/client-services';
+ * import { getFormbricksFormbricksInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getApacheCouchdbInstance(ctx, 'myinstance');
+ * const instance = await getFormbricksFormbricksInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getApacheCouchdbInstance(
+export async function getFormbricksFormbricksInstance(
   ctx: Context,
   name: string
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  return await getInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+): Promise<FormbricksFormbricks> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'formbricks-formbricks'
+  );
+  return await getInstance(
+    ctx,
+    'formbricks-formbricks',
+    name,
+    serviceAccessToken
+  );
 }

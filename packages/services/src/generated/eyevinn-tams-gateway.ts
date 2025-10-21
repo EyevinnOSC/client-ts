@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/cat-validateinstance': {
-    /** List all running cat-validate instances */
+  '/tams-gatewayinstance': {
+    /** List all running tams-gateway instances */
     get: {
       responses: {
         /** Default Response */
         200: {
-          schema: ({
-            /** @description Name of the cat-validate instance */
+          schema: {
+            /** @description Name of the tams-gateway instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,34 +40,13 @@ export interface paths {
                 url: string;
               };
             };
-            Keys: string;
-            Issuer?: string;
-            RedisUrl?: string;
-            ClickHouseUrl?: string;
-          } & {
-            _links: {
-              self: {
-                /** @description Instance resource */
-                href: string;
-              };
-              logs?: {
-                /** @description Get logs for this instance */
-                href: string;
-              };
-              health?: {
-                /** @description Get health status for this instance */
-                href: string;
-              };
-              ports?: {
-                /** @description Get exposed ports for this instance */
-                href: string;
-              };
-              restart?: {
-                /** @description Restart this instance */
-                href: string;
-              };
-            };
-          })[];
+            DbUrl: string;
+            DbUsername: string;
+            DbPassword: string;
+            AwsAccessKeyId: string;
+            AwsSecretAccessKey: string;
+            S3EndpointUrl?: string;
+          }[];
         };
         /** Default Response */
         500: {
@@ -78,17 +57,19 @@ export interface paths {
         };
       };
     };
-    /** Launch a new cat-validate instance */
+    /** Launch a new tams-gateway instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the cat-validate instance */
+            /** @description Name of the tams-gateway instance */
             name: string;
-            Keys: string;
-            Issuer?: string;
-            RedisUrl?: string;
-            ClickHouseUrl?: string;
+            DbUrl: string;
+            DbUsername: string;
+            DbPassword: string;
+            AwsAccessKeyId: string;
+            AwsSecretAccessKey: string;
+            S3EndpointUrl?: string;
           };
         };
       };
@@ -96,7 +77,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the cat-validate instance */
+            /** @description Name of the tams-gateway instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -114,33 +95,12 @@ export interface paths {
                 url: string;
               };
             };
-            Keys: string;
-            Issuer?: string;
-            RedisUrl?: string;
-            ClickHouseUrl?: string;
-          } & {
-            _links: {
-              self: {
-                /** @description Instance resource */
-                href: string;
-              };
-              logs?: {
-                /** @description Get logs for this instance */
-                href: string;
-              };
-              health?: {
-                /** @description Get health status for this instance */
-                href: string;
-              };
-              ports?: {
-                /** @description Get exposed ports for this instance */
-                href: string;
-              };
-              restart?: {
-                /** @description Restart this instance */
-                href: string;
-              };
-            };
+            DbUrl: string;
+            DbUsername: string;
+            DbPassword: string;
+            AwsAccessKeyId: string;
+            AwsSecretAccessKey: string;
+            S3EndpointUrl?: string;
           };
         };
         /** Default Response */
@@ -168,11 +128,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart cat-validate */
+    /** Restart tams-gateway */
     post: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the tams-gateway instance */
           id: string;
         };
       };
@@ -191,12 +151,12 @@ export interface paths {
       };
     };
   };
-  '/cat-validateinstance/{id}': {
-    /** Obtain status and resource URLs for an cat-validate instance */
+  '/tams-gatewayinstance/{id}': {
+    /** Obtain status and resource URLs for an tams-gateway instance */
     get: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the tams-gateway instance */
           id: string;
         };
       };
@@ -204,7 +164,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the cat-validate instance */
+            /** @description Name of the tams-gateway instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -222,33 +182,12 @@ export interface paths {
                 url: string;
               };
             };
-            Keys: string;
-            Issuer?: string;
-            RedisUrl?: string;
-            ClickHouseUrl?: string;
-          } & {
-            _links: {
-              self: {
-                /** @description Instance resource */
-                href: string;
-              };
-              logs?: {
-                /** @description Get logs for this instance */
-                href: string;
-              };
-              health?: {
-                /** @description Get health status for this instance */
-                href: string;
-              };
-              ports?: {
-                /** @description Get exposed ports for this instance */
-                href: string;
-              };
-              restart?: {
-                /** @description Restart this instance */
-                href: string;
-              };
-            };
+            DbUrl: string;
+            DbUsername: string;
+            DbPassword: string;
+            AwsAccessKeyId: string;
+            AwsSecretAccessKey: string;
+            S3EndpointUrl?: string;
           };
         };
         /** Default Response */
@@ -267,11 +206,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an cat-validate instance */
+    /** Stop and remove an tams-gateway instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the tams-gateway instance */
           id: string;
         };
       };
@@ -291,11 +230,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of cat-validate instance */
+    /** Return status of tams-gateway instance */
     get: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the tams-gateway instance */
           id: string;
         };
       };
@@ -318,7 +257,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the cat-validate instance */
+    /** Return the latest logs from the tams-gateway instance */
     get: {
       parameters: {
         query: {
@@ -326,7 +265,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the tams-gateway instance */
           id: string;
         };
       };
@@ -346,11 +285,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for cat-validate instance */
+    /** Return the exposed extra ports for tams-gateway instance */
     get: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the tams-gateway instance */
           id: string;
         };
       };
@@ -381,11 +320,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnCatValidate =
-  paths['/cat-validateinstance/{id}']['get']['responses']['200']['schema'];
+export type EyevinnTamsGateway =
+  paths['/tams-gatewayinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnCatValidateConfig =
-  paths['/cat-validateinstance']['post']['parameters']['body']['body'];
+export type EyevinnTamsGatewayConfig =
+  paths['/tams-gatewayinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -394,109 +333,111 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-cat-validate
- * @description Enhance your security with Common Access Token Validator, the ultimate validation service for CTA-5007 tokens. Seamlessly integrate with Redis and ClickHouse for efficient token management. Secure your apps today!
+ * @namespace eyevinn-tams-gateway
+ * @description Revolutionize your media management with TAMS Gateway—effortlessly store and index segmented media flows. Enhance efficiency and access powerfully with an integrated database and flexible service support.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- *
+ * @see {@link https://docs.osaas.io/osaas.wiki/Solution:-TAMS-storage.html|Online docs} for further information
  */
 
 /**
- * @typedef {Object} EyevinnCatValidateConfig
- * @property {string} name - Name of cat-validate
- * @property {string} Keys - Keys
- * @property {string} [Issuer] - Issuer
- * @property {string} [RedisUrl] - RedisUrl
- * @property {string} [ClickHouseUrl] - ClickHouseUrl
+ * @typedef {Object} EyevinnTamsGatewayConfig
+ * @property {string} name - Name of tams-gateway
+ * @property {string} DbUrl - DbUrl
+ * @property {string} DbUsername - DbUsername
+ * @property {string} DbPassword - DbPassword
+ * @property {string} AwsAccessKeyId - AwsAccessKeyId
+ * @property {string} AwsSecretAccessKey - AwsSecretAccessKey
+ * @property {string} [S3EndpointUrl] - S3EndpointUrl
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnCatValidate
- * @property {string} name - Name of the Common Access Token Validator instance
- * @property {string} url - URL of the Common Access Token Validator instance
+ * @typedef {Object} EyevinnTamsGateway
+ * @property {string} name - Name of the TAMS Gateway instance
+ * @property {string} url - URL of the TAMS Gateway instance
  *
  */
 
 /**
- * Create a new Common Access Token Validator instance
+ * Create a new TAMS Gateway instance
  *
- * @memberOf eyevinn-cat-validate
+ * @memberOf eyevinn-tams-gateway
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnCatValidateConfig} body - Service instance configuration
- * @returns {EyevinnCatValidate} - Service instance
+ * @param {EyevinnTamsGatewayConfig} body - Service instance configuration
+ * @returns {EyevinnTamsGateway} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnCatValidateInstance } from '@osaas/client-services';
+ * import { createEyevinnTamsGatewayInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnCatValidateConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnCatValidateInstance(ctx, body);
+ * const body: EyevinnTamsGatewayConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnTamsGatewayInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnCatValidateInstance(
+export async function createEyevinnTamsGatewayInstance(
   ctx: Context,
-  body: EyevinnCatValidateConfig
-): Promise<EyevinnCatValidate> {
+  body: EyevinnTamsGatewayConfig
+): Promise<EyevinnTamsGateway> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-cat-validate'
+    'eyevinn-tams-gateway'
   );
   const instance = await createInstance(
     ctx,
-    'eyevinn-cat-validate',
+    'eyevinn-tams-gateway',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-cat-validate', instance.name, ctx);
+  await waitForInstanceReady('eyevinn-tams-gateway', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Common Access Token Validator instance
+ * Remove a TAMS Gateway instance
  *
- * @memberOf eyevinn-cat-validate
+ * @memberOf eyevinn-tams-gateway
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the validator to be removed
+ * @param {string} name - Name of the gateway to be removed
  */
-export async function removeEyevinnCatValidateInstance(
+export async function removeEyevinnTamsGatewayInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-cat-validate'
+    'eyevinn-tams-gateway'
   );
-  await removeInstance(ctx, 'eyevinn-cat-validate', name, serviceAccessToken);
+  await removeInstance(ctx, 'eyevinn-tams-gateway', name, serviceAccessToken);
 }
 
 /**
- * Get a Common Access Token Validator instance
+ * Get a TAMS Gateway instance
  *
- * @memberOf eyevinn-cat-validate
+ * @memberOf eyevinn-tams-gateway
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the validator to be retrieved
- * @returns {EyevinnCatValidate} - Service instance
+ * @param {string} name - Name of the gateway to be retrieved
+ * @returns {EyevinnTamsGateway} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnCatValidateInstance } from '@osaas/client-services';
+ * import { getEyevinnTamsGatewayInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnCatValidateInstance(ctx, 'myinstance');
+ * const instance = await getEyevinnTamsGatewayInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnCatValidateInstance(
+export async function getEyevinnTamsGatewayInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnCatValidate> {
+): Promise<EyevinnTamsGateway> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-cat-validate'
+    'eyevinn-tams-gateway'
   );
   return await getInstance(
     ctx,
-    'eyevinn-cat-validate',
+    'eyevinn-tams-gateway',
     name,
     serviceAccessToken
   );

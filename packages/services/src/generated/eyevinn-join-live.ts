@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance': {
-    /** List all running couchdb instances */
+  '/join-liveinstance': {
+    /** List all running join-live instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the couchdb instance */
+            /** @description Name of the join-live instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,7 +67,9 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            WhipGatewayUrl: string;
+            WhepGatewayUrl: string;
+            WhipAuthKey?: string;
           } & {
             _links: {
               self: {
@@ -106,14 +108,16 @@ export interface paths {
         };
       };
     };
-    /** Launch a new couchdb instance */
+    /** Launch a new join-live instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the join-live instance */
             name: string;
-            AdminPassword: string;
+            WhipGatewayUrl: string;
+            WhepGatewayUrl: string;
+            WhipAuthKey?: string;
           };
         };
       };
@@ -121,7 +125,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the join-live instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -139,7 +143,9 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            WhipGatewayUrl: string;
+            WhepGatewayUrl: string;
+            WhipAuthKey?: string;
           } & {
             _links: {
               self: {
@@ -194,11 +200,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart couchdb */
+    /** Restart join-live */
     post: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the join-live instance */
           id: string;
         };
       };
@@ -217,12 +223,12 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance/{id}': {
-    /** Obtain status and resource URLs for an couchdb instance */
+  '/join-liveinstance/{id}': {
+    /** Obtain status and resource URLs for an join-live instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the join-live instance */
           id: string;
         };
       };
@@ -230,7 +236,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the join-live instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -248,7 +254,9 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            WhipGatewayUrl: string;
+            WhepGatewayUrl: string;
+            WhipAuthKey?: string;
           } & {
             _links: {
               self: {
@@ -294,11 +302,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an couchdb instance */
+    /** Stop and remove an join-live instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the join-live instance */
           id: string;
         };
       };
@@ -316,18 +324,20 @@ export interface paths {
         };
       };
     };
-    /** Patch couchdb instance with new parameters and restart */
+    /** Patch join-live instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the join-live instance */
             name?: string;
-            AdminPassword?: string;
+            WhipGatewayUrl?: string;
+            WhepGatewayUrl?: string;
+            WhipAuthKey?: string;
           };
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the join-live instance */
           id: string;
         };
       };
@@ -335,7 +345,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the join-live instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -353,7 +363,9 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            WhipGatewayUrl: string;
+            WhepGatewayUrl: string;
+            WhipAuthKey?: string;
           } & {
             _links: {
               self: {
@@ -408,11 +420,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of couchdb instance */
+    /** Return status of join-live instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the join-live instance */
           id: string;
         };
       };
@@ -436,7 +448,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the couchdb instance */
+    /** Return the latest logs from the join-live instance */
     get: {
       parameters: {
         query: {
@@ -444,7 +456,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the join-live instance */
           id: string;
         };
       };
@@ -464,11 +476,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for couchdb instance */
+    /** Return the exposed extra ports for join-live instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the join-live instance */
           id: string;
         };
       };
@@ -499,11 +511,11 @@ export interface operations {}
 
 export interface external {}
 
-export type ApacheCouchdb =
-  paths['/couchdbinstance/{id}']['get']['responses']['200']['schema'];
+export type EyevinnJoinLive =
+  paths['/join-liveinstance/{id}']['get']['responses']['200']['schema'];
 
-export type ApacheCouchdbConfig =
-  paths['/couchdbinstance']['post']['parameters']['body']['body'];
+export type EyevinnJoinLiveConfig =
+  paths['/join-liveinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -512,96 +524,104 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace apache-couchdb
- * @description Unlock seamless data management with Apache CouchDB! Effortlessly scalable and highly available, CouchDB makes storing, retrieving, and syncing data across devices a breeze. Ideal for modern cloud apps!
+ * @namespace eyevinn-join-live
+ * @description Elevate your live broadcasts with "Join Live"—a seamless web app for real-time streaming. Offering a professional editor interface, OBS Studio integration, and responsive design for any device.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-CouchDB.html|Online docs} for further information
+ * @see {@link https://docs.osaas.io/osaas.wiki/Solution:-Crowdcast.html|Online docs} for further information
  */
 
 /**
- * @typedef {Object} ApacheCouchdbConfig
- * @property {string} name - Name of couchdb
- * @property {string} AdminPassword - AdminPassword
+ * @typedef {Object} EyevinnJoinLiveConfig
+ * @property {string} name - Name of join-live
+ * @property {string} WhipGatewayUrl - WhipGatewayUrl
+ * @property {string} WhepGatewayUrl - WhepGatewayUrl
+ * @property {string} [WhipAuthKey] - WhipAuthKey
 
  * 
  */
 
 /**
- * @typedef {Object} ApacheCouchdb
- * @property {string} name - Name of the Couch DB instance
- * @property {string} url - URL of the Couch DB instance
+ * @typedef {Object} EyevinnJoinLive
+ * @property {string} name - Name of the Join Live instance
+ * @property {string} url - URL of the Join Live instance
  *
  */
 
 /**
- * Create a new Couch DB instance
+ * Create a new Join Live instance
  *
- * @memberOf apache-couchdb
+ * @memberOf eyevinn-join-live
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {ApacheCouchdbConfig} body - Service instance configuration
- * @returns {ApacheCouchdb} - Service instance
+ * @param {EyevinnJoinLiveConfig} body - Service instance configuration
+ * @returns {EyevinnJoinLive} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createApacheCouchdbInstance } from '@osaas/client-services';
+ * import { createEyevinnJoinLiveInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: ApacheCouchdbConfig = { name: 'myinstance', ... };
- * const instance = await createApacheCouchdbInstance(ctx, body);
+ * const body: EyevinnJoinLiveConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnJoinLiveInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createApacheCouchdbInstance(
+export async function createEyevinnJoinLiveInstance(
   ctx: Context,
-  body: ApacheCouchdbConfig
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
+  body: EyevinnJoinLiveConfig
+): Promise<EyevinnJoinLive> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-join-live'
+  );
   const instance = await createInstance(
     ctx,
-    'apache-couchdb',
+    'eyevinn-join-live',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('apache-couchdb', instance.name, ctx);
+  await waitForInstanceReady('eyevinn-join-live', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Couch DB instance
+ * Remove a Join Live instance
  *
- * @memberOf apache-couchdb
+ * @memberOf eyevinn-join-live
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be removed
+ * @param {string} name - Name of the application to be removed
  */
-export async function removeApacheCouchdbInstance(
+export async function removeEyevinnJoinLiveInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  await removeInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-join-live'
+  );
+  await removeInstance(ctx, 'eyevinn-join-live', name, serviceAccessToken);
 }
 
 /**
- * Get a Couch DB instance
+ * Get a Join Live instance
  *
- * @memberOf apache-couchdb
+ * @memberOf eyevinn-join-live
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be retrieved
- * @returns {ApacheCouchdb} - Service instance
+ * @param {string} name - Name of the application to be retrieved
+ * @returns {EyevinnJoinLive} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getApacheCouchdbInstance } from '@osaas/client-services';
+ * import { getEyevinnJoinLiveInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getApacheCouchdbInstance(ctx, 'myinstance');
+ * const instance = await getEyevinnJoinLiveInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getApacheCouchdbInstance(
+export async function getEyevinnJoinLiveInstance(
   ctx: Context,
   name: string
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  return await getInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+): Promise<EyevinnJoinLive> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-join-live'
+  );
+  return await getInstance(ctx, 'eyevinn-join-live', name, serviceAccessToken);
 }

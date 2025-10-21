@@ -21,7 +21,7 @@ export interface paths {
       responses: {
         /** Default Response */
         200: {
-          schema: {
+          schema: ({
             /** @description Name of the web-runner instance */
             name: string;
             /** @description URL to instance API */
@@ -40,11 +40,42 @@ export interface paths {
                 url: string;
               };
             };
-            GitHubUrl: string;
-            GitHubToken: string;
+            SourceUrl: string;
+            GitHubToken?: string;
+            AwsAccessKeyId?: string;
+            AwsSecretAccessKey?: string;
+            AwsRegion?: string;
+            S3EndpointUrl?: string;
             OscAccessToken?: string;
             ConfigService?: string;
-          }[];
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
+          })[];
         };
         /** Default Response */
         500: {
@@ -62,8 +93,12 @@ export interface paths {
           body?: {
             /** @description Name of the web-runner instance */
             name: string;
-            GitHubUrl: string;
-            GitHubToken: string;
+            SourceUrl: string;
+            GitHubToken?: string;
+            AwsAccessKeyId?: string;
+            AwsSecretAccessKey?: string;
+            AwsRegion?: string;
+            S3EndpointUrl?: string;
             OscAccessToken?: string;
             ConfigService?: string;
           };
@@ -91,10 +126,41 @@ export interface paths {
                 url: string;
               };
             };
-            GitHubUrl: string;
-            GitHubToken: string;
+            SourceUrl: string;
+            GitHubToken?: string;
+            AwsAccessKeyId?: string;
+            AwsSecretAccessKey?: string;
+            AwsRegion?: string;
+            S3EndpointUrl?: string;
             OscAccessToken?: string;
             ConfigService?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
           };
         };
         /** Default Response */
@@ -110,6 +176,30 @@ export interface paths {
             /** @description Reason why something failed */
             reason: string;
           };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
+  '/restart/{id}': {
+    /** Restart web-runner */
+    post: {
+      parameters: {
+        path: {
+          /** Name of the web-runner instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        204: {
+          schema: string;
         };
         /** Default Response */
         500: {
@@ -152,10 +242,41 @@ export interface paths {
                 url: string;
               };
             };
-            GitHubUrl: string;
-            GitHubToken: string;
+            SourceUrl: string;
+            GitHubToken?: string;
+            AwsAccessKeyId?: string;
+            AwsSecretAccessKey?: string;
+            AwsRegion?: string;
+            S3EndpointUrl?: string;
             OscAccessToken?: string;
             ConfigService?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
           };
         };
         /** Default Response */
@@ -186,6 +307,103 @@ export interface paths {
         /** Default Response */
         204: {
           schema: string;
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+    /** Patch web-runner instance with new parameters and restart */
+    patch: {
+      parameters: {
+        body: {
+          body?: {
+            /** @description Name of the web-runner instance */
+            name?: string;
+            SourceUrl?: string;
+            GitHubToken?: string;
+            AwsAccessKeyId?: string;
+            AwsSecretAccessKey?: string;
+            AwsRegion?: string;
+            S3EndpointUrl?: string;
+            OscAccessToken?: string;
+            ConfigService?: string;
+          };
+        };
+        path: {
+          /** Name of the web-runner instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            /** @description Name of the web-runner instance */
+            name: string;
+            /** @description URL to instance API */
+            url: string;
+            resources: {
+              license: {
+                /** @description URL to license information */
+                url: string;
+              };
+              apiDocs?: {
+                /** @description URL to instance API documentation */
+                url: string;
+              };
+              app?: {
+                /** @description URL to instance application (GUI) */
+                url: string;
+              };
+            };
+            SourceUrl: string;
+            GitHubToken?: string;
+            AwsAccessKeyId?: string;
+            AwsSecretAccessKey?: string;
+            AwsRegion?: string;
+            S3EndpointUrl?: string;
+            OscAccessToken?: string;
+            ConfigService?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
+          };
+        };
+        /** Default Response */
+        404: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
         };
         /** Default Response */
         500: {
@@ -311,8 +529,12 @@ import {
 /**
  * @typedef {Object} EyevinnWebRunnerConfig
  * @property {string} name - Name of web-runner
- * @property {string} GitHubUrl - GitHubUrl
- * @property {string} GitHubToken - GitHubToken
+ * @property {string} SourceUrl - SourceUrl
+ * @property {string} [GitHubToken] - GitHubToken
+ * @property {string} [AwsAccessKeyId] - AwsAccessKeyId
+ * @property {string} [AwsSecretAccessKey] - AwsSecretAccessKey
+ * @property {string} [AwsRegion] - AwsRegion
+ * @property {string} [S3EndpointUrl] - S3EndpointUrl
  * @property {string} [OscAccessToken] - OscAccessToken
  * @property {string} [ConfigService] - ConfigService
 

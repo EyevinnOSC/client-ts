@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/cat-validateinstance': {
-    /** List all running cat-validate instances */
+  '/openai-assistantinstance': {
+    /** List all running openai-assistant instances */
     get: {
       responses: {
         /** Default Response */
         200: {
-          schema: ({
-            /** @description Name of the cat-validate instance */
+          schema: {
+            /** @description Name of the openai-assistant instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,34 +40,10 @@ export interface paths {
                 url: string;
               };
             };
-            Keys: string;
-            Issuer?: string;
-            RedisUrl?: string;
-            ClickHouseUrl?: string;
-          } & {
-            _links: {
-              self: {
-                /** @description Instance resource */
-                href: string;
-              };
-              logs?: {
-                /** @description Get logs for this instance */
-                href: string;
-              };
-              health?: {
-                /** @description Get health status for this instance */
-                href: string;
-              };
-              ports?: {
-                /** @description Get exposed ports for this instance */
-                href: string;
-              };
-              restart?: {
-                /** @description Restart this instance */
-                href: string;
-              };
-            };
-          })[];
+            OpenAiApiKey: string;
+            AssistantId: string;
+            AppUrl?: string;
+          }[];
         };
         /** Default Response */
         500: {
@@ -78,17 +54,16 @@ export interface paths {
         };
       };
     };
-    /** Launch a new cat-validate instance */
+    /** Launch a new openai-assistant instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the cat-validate instance */
+            /** @description Name of the openai-assistant instance */
             name: string;
-            Keys: string;
-            Issuer?: string;
-            RedisUrl?: string;
-            ClickHouseUrl?: string;
+            OpenAiApiKey: string;
+            AssistantId: string;
+            AppUrl?: string;
           };
         };
       };
@@ -96,7 +71,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the cat-validate instance */
+            /** @description Name of the openai-assistant instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -114,33 +89,9 @@ export interface paths {
                 url: string;
               };
             };
-            Keys: string;
-            Issuer?: string;
-            RedisUrl?: string;
-            ClickHouseUrl?: string;
-          } & {
-            _links: {
-              self: {
-                /** @description Instance resource */
-                href: string;
-              };
-              logs?: {
-                /** @description Get logs for this instance */
-                href: string;
-              };
-              health?: {
-                /** @description Get health status for this instance */
-                href: string;
-              };
-              ports?: {
-                /** @description Get exposed ports for this instance */
-                href: string;
-              };
-              restart?: {
-                /** @description Restart this instance */
-                href: string;
-              };
-            };
+            OpenAiApiKey: string;
+            AssistantId: string;
+            AppUrl?: string;
           };
         };
         /** Default Response */
@@ -168,11 +119,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart cat-validate */
+    /** Restart openai-assistant */
     post: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the openai-assistant instance */
           id: string;
         };
       };
@@ -191,12 +142,12 @@ export interface paths {
       };
     };
   };
-  '/cat-validateinstance/{id}': {
-    /** Obtain status and resource URLs for an cat-validate instance */
+  '/openai-assistantinstance/{id}': {
+    /** Obtain status and resource URLs for an openai-assistant instance */
     get: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the openai-assistant instance */
           id: string;
         };
       };
@@ -204,7 +155,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the cat-validate instance */
+            /** @description Name of the openai-assistant instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -222,33 +173,9 @@ export interface paths {
                 url: string;
               };
             };
-            Keys: string;
-            Issuer?: string;
-            RedisUrl?: string;
-            ClickHouseUrl?: string;
-          } & {
-            _links: {
-              self: {
-                /** @description Instance resource */
-                href: string;
-              };
-              logs?: {
-                /** @description Get logs for this instance */
-                href: string;
-              };
-              health?: {
-                /** @description Get health status for this instance */
-                href: string;
-              };
-              ports?: {
-                /** @description Get exposed ports for this instance */
-                href: string;
-              };
-              restart?: {
-                /** @description Restart this instance */
-                href: string;
-              };
-            };
+            OpenAiApiKey: string;
+            AssistantId: string;
+            AppUrl?: string;
           };
         };
         /** Default Response */
@@ -267,11 +194,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an cat-validate instance */
+    /** Stop and remove an openai-assistant instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the openai-assistant instance */
           id: string;
         };
       };
@@ -291,11 +218,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of cat-validate instance */
+    /** Return status of openai-assistant instance */
     get: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the openai-assistant instance */
           id: string;
         };
       };
@@ -318,7 +245,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the cat-validate instance */
+    /** Return the latest logs from the openai-assistant instance */
     get: {
       parameters: {
         query: {
@@ -326,7 +253,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the openai-assistant instance */
           id: string;
         };
       };
@@ -346,11 +273,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for cat-validate instance */
+    /** Return the exposed extra ports for openai-assistant instance */
     get: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the openai-assistant instance */
           id: string;
         };
       };
@@ -381,11 +308,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnCatValidate =
-  paths['/cat-validateinstance/{id}']['get']['responses']['200']['schema'];
+export type BoldareOpenaiAssistant =
+  paths['/openai-assistantinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnCatValidateConfig =
-  paths['/cat-validateinstance']['post']['parameters']['body']['body'];
+export type BoldareOpenaiAssistantConfig =
+  paths['/openai-assistantinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -394,109 +321,113 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-cat-validate
- * @description Enhance your security with Common Access Token Validator, the ultimate validation service for CTA-5007 tokens. Seamlessly integrate with Redis and ClickHouse for efficient token management. Secure your apps today!
+ * @namespace boldare-openai-assistant
+ * @description Transform your NestJS application with our AI Assistant library, offering fast setup and seamless integration with OpenAI for dynamic conversational experiences. Develop efficient chatbots in minutes!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} EyevinnCatValidateConfig
- * @property {string} name - Name of cat-validate
- * @property {string} Keys - Keys
- * @property {string} [Issuer] - Issuer
- * @property {string} [RedisUrl] - RedisUrl
- * @property {string} [ClickHouseUrl] - ClickHouseUrl
+ * @typedef {Object} BoldareOpenaiAssistantConfig
+ * @property {string} name - Name of openai-assistant
+ * @property {string} OpenAiApiKey - Enter Open AI API key
+ * @property {string} AssistantId - AssistantId
+ * @property {string} [AppUrl] - For embedding the assistant in your website
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnCatValidate
- * @property {string} name - Name of the Common Access Token Validator instance
- * @property {string} url - URL of the Common Access Token Validator instance
+ * @typedef {Object} BoldareOpenaiAssistant
+ * @property {string} name - Name of the OpenAI Assistant instance
+ * @property {string} url - URL of the OpenAI Assistant instance
  *
  */
 
 /**
- * Create a new Common Access Token Validator instance
+ * Create a new OpenAI Assistant instance
  *
- * @memberOf eyevinn-cat-validate
+ * @memberOf boldare-openai-assistant
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnCatValidateConfig} body - Service instance configuration
- * @returns {EyevinnCatValidate} - Service instance
+ * @param {BoldareOpenaiAssistantConfig} body - Service instance configuration
+ * @returns {BoldareOpenaiAssistant} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnCatValidateInstance } from '@osaas/client-services';
+ * import { createBoldareOpenaiAssistantInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnCatValidateConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnCatValidateInstance(ctx, body);
+ * const body: BoldareOpenaiAssistantConfig = { name: 'myinstance', ... };
+ * const instance = await createBoldareOpenaiAssistantInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnCatValidateInstance(
+export async function createBoldareOpenaiAssistantInstance(
   ctx: Context,
-  body: EyevinnCatValidateConfig
-): Promise<EyevinnCatValidate> {
+  body: BoldareOpenaiAssistantConfig
+): Promise<BoldareOpenaiAssistant> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-cat-validate'
+    'boldare-openai-assistant'
   );
   const instance = await createInstance(
     ctx,
-    'eyevinn-cat-validate',
+    'boldare-openai-assistant',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-cat-validate', instance.name, ctx);
+  await waitForInstanceReady('boldare-openai-assistant', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Common Access Token Validator instance
+ * Remove a OpenAI Assistant instance
  *
- * @memberOf eyevinn-cat-validate
+ * @memberOf boldare-openai-assistant
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the validator to be removed
+ * @param {string} name - Name of the assistant to be removed
  */
-export async function removeEyevinnCatValidateInstance(
+export async function removeBoldareOpenaiAssistantInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-cat-validate'
+    'boldare-openai-assistant'
   );
-  await removeInstance(ctx, 'eyevinn-cat-validate', name, serviceAccessToken);
+  await removeInstance(
+    ctx,
+    'boldare-openai-assistant',
+    name,
+    serviceAccessToken
+  );
 }
 
 /**
- * Get a Common Access Token Validator instance
+ * Get a OpenAI Assistant instance
  *
- * @memberOf eyevinn-cat-validate
+ * @memberOf boldare-openai-assistant
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the validator to be retrieved
- * @returns {EyevinnCatValidate} - Service instance
+ * @param {string} name - Name of the assistant to be retrieved
+ * @returns {BoldareOpenaiAssistant} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnCatValidateInstance } from '@osaas/client-services';
+ * import { getBoldareOpenaiAssistantInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnCatValidateInstance(ctx, 'myinstance');
+ * const instance = await getBoldareOpenaiAssistantInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnCatValidateInstance(
+export async function getBoldareOpenaiAssistantInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnCatValidate> {
+): Promise<BoldareOpenaiAssistant> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-cat-validate'
+    'boldare-openai-assistant'
   );
   return await getInstance(
     ctx,
-    'eyevinn-cat-validate',
+    'boldare-openai-assistant',
     name,
     serviceAccessToken
   );

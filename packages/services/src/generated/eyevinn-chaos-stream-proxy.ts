@@ -293,7 +293,7 @@ import {
  * @description Chaos Stream Proxy is an open-source tool designed to simulate network impairments in video streaming environments. It acts as a proxy between the client and the streaming server, allowing developers and QA engineers to introduce various network conditions such as latency, jitter, and packet loss to test and improve the resilience and performance of streaming applications. This tool is crucial for ensuring a smooth streaming experience under different network scenarios, making it an invaluable asset for optimizing video delivery in real-world conditions.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://eyevinntechnology.medium.com/delivering-flawless-streams-regardless-of-the-challenges-in-network-conditions-e466bad5b83f|Online docs} for further information
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Chaos-Stream-Proxy.html|Online docs} for further information
  */
 
 /**

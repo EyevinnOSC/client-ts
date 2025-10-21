@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance': {
-    /** List all running couchdb instances */
+  '/freescoutinstance': {
+    /** List all running freescout instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the couchdb instance */
+            /** @description Name of the freescout instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,6 +67,8 @@ export interface paths {
                 url: string;
               };
             };
+            DbUrl: string;
+            AdminEmail: string;
             AdminPassword: string;
           } & {
             _links: {
@@ -106,13 +108,15 @@ export interface paths {
         };
       };
     };
-    /** Launch a new couchdb instance */
+    /** Launch a new freescout instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the freescout instance */
             name: string;
+            DbUrl: string;
+            AdminEmail: string;
             AdminPassword: string;
           };
         };
@@ -121,7 +125,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the freescout instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -139,6 +143,8 @@ export interface paths {
                 url: string;
               };
             };
+            DbUrl: string;
+            AdminEmail: string;
             AdminPassword: string;
           } & {
             _links: {
@@ -194,11 +200,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart couchdb */
+    /** Restart freescout */
     post: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the freescout instance */
           id: string;
         };
       };
@@ -217,12 +223,12 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance/{id}': {
-    /** Obtain status and resource URLs for an couchdb instance */
+  '/freescoutinstance/{id}': {
+    /** Obtain status and resource URLs for an freescout instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the freescout instance */
           id: string;
         };
       };
@@ -230,7 +236,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the freescout instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -248,6 +254,8 @@ export interface paths {
                 url: string;
               };
             };
+            DbUrl: string;
+            AdminEmail: string;
             AdminPassword: string;
           } & {
             _links: {
@@ -294,11 +302,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an couchdb instance */
+    /** Stop and remove an freescout instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the freescout instance */
           id: string;
         };
       };
@@ -316,18 +324,20 @@ export interface paths {
         };
       };
     };
-    /** Patch couchdb instance with new parameters and restart */
+    /** Patch freescout instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the freescout instance */
             name?: string;
+            DbUrl?: string;
+            AdminEmail?: string;
             AdminPassword?: string;
           };
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the freescout instance */
           id: string;
         };
       };
@@ -335,7 +345,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the freescout instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -353,6 +363,8 @@ export interface paths {
                 url: string;
               };
             };
+            DbUrl: string;
+            AdminEmail: string;
             AdminPassword: string;
           } & {
             _links: {
@@ -381,13 +393,6 @@ export interface paths {
                 href: string;
               };
             };
-          };
-        };
-        /** Default Response */
-        400: {
-          schema: {
-            /** @description Reason why something failed */
-            reason: string;
           };
         };
         /** Default Response */
@@ -408,11 +413,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of couchdb instance */
+    /** Return status of freescout instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the freescout instance */
           id: string;
         };
       };
@@ -436,7 +441,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the couchdb instance */
+    /** Return the latest logs from the freescout instance */
     get: {
       parameters: {
         query: {
@@ -444,7 +449,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the freescout instance */
           id: string;
         };
       };
@@ -464,11 +469,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for couchdb instance */
+    /** Return the exposed extra ports for freescout instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the freescout instance */
           id: string;
         };
       };
@@ -499,11 +504,11 @@ export interface operations {}
 
 export interface external {}
 
-export type ApacheCouchdb =
-  paths['/couchdbinstance/{id}']['get']['responses']['200']['schema'];
+export type FreescoutHelpDeskFreescout =
+  paths['/freescoutinstance/{id}']['get']['responses']['200']['schema'];
 
-export type ApacheCouchdbConfig =
-  paths['/couchdbinstance']['post']['parameters']['body']['body'];
+export type FreescoutHelpDeskFreescoutConfig =
+  paths['/freescoutinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -512,96 +517,118 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace apache-couchdb
- * @description Unlock seamless data management with Apache CouchDB! Effortlessly scalable and highly available, CouchDB makes storing, retrieving, and syncing data across devices a breeze. Ideal for modern cloud apps!
+ * @namespace freescout-help-desk-freescout
+ * @description Discover FreeScout, the ultimate self-hosted help desk solution. Enjoy robust features akin to Zendesk & Help Scout without conceding privacy or control. Fully customizable, mobile-friendly, and free!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-CouchDB.html|Online docs} for further information
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-FreeScout.html|Online docs} for further information
  */
 
 /**
- * @typedef {Object} ApacheCouchdbConfig
- * @property {string} name - Name of couchdb
+ * @typedef {Object} FreescoutHelpDeskFreescoutConfig
+ * @property {string} name - Name of freescout
+ * @property {string} DbUrl - Mysql Database url in the format mysql://<user>:<password>@<host>:<port>/<database>
+ * @property {string} AdminEmail - AdminEmail
  * @property {string} AdminPassword - AdminPassword
 
  * 
  */
 
 /**
- * @typedef {Object} ApacheCouchdb
- * @property {string} name - Name of the Couch DB instance
- * @property {string} url - URL of the Couch DB instance
+ * @typedef {Object} FreescoutHelpDeskFreescout
+ * @property {string} name - Name of the FreeScout instance
+ * @property {string} url - URL of the FreeScout instance
  *
  */
 
 /**
- * Create a new Couch DB instance
+ * Create a new FreeScout instance
  *
- * @memberOf apache-couchdb
+ * @memberOf freescout-help-desk-freescout
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {ApacheCouchdbConfig} body - Service instance configuration
- * @returns {ApacheCouchdb} - Service instance
+ * @param {FreescoutHelpDeskFreescoutConfig} body - Service instance configuration
+ * @returns {FreescoutHelpDeskFreescout} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createApacheCouchdbInstance } from '@osaas/client-services';
+ * import { createFreescoutHelpDeskFreescoutInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: ApacheCouchdbConfig = { name: 'myinstance', ... };
- * const instance = await createApacheCouchdbInstance(ctx, body);
+ * const body: FreescoutHelpDeskFreescoutConfig = { name: 'myinstance', ... };
+ * const instance = await createFreescoutHelpDeskFreescoutInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createApacheCouchdbInstance(
+export async function createFreescoutHelpDeskFreescoutInstance(
   ctx: Context,
-  body: ApacheCouchdbConfig
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
+  body: FreescoutHelpDeskFreescoutConfig
+): Promise<FreescoutHelpDeskFreescout> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'freescout-help-desk-freescout'
+  );
   const instance = await createInstance(
     ctx,
-    'apache-couchdb',
+    'freescout-help-desk-freescout',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('apache-couchdb', instance.name, ctx);
+  await waitForInstanceReady(
+    'freescout-help-desk-freescout',
+    instance.name,
+    ctx
+  );
   return instance;
 }
 
 /**
- * Remove a Couch DB instance
+ * Remove a FreeScout instance
  *
- * @memberOf apache-couchdb
+ * @memberOf freescout-help-desk-freescout
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be removed
+ * @param {string} name - Name of the freescout to be removed
  */
-export async function removeApacheCouchdbInstance(
+export async function removeFreescoutHelpDeskFreescoutInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  await removeInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'freescout-help-desk-freescout'
+  );
+  await removeInstance(
+    ctx,
+    'freescout-help-desk-freescout',
+    name,
+    serviceAccessToken
+  );
 }
 
 /**
- * Get a Couch DB instance
+ * Get a FreeScout instance
  *
- * @memberOf apache-couchdb
+ * @memberOf freescout-help-desk-freescout
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be retrieved
- * @returns {ApacheCouchdb} - Service instance
+ * @param {string} name - Name of the freescout to be retrieved
+ * @returns {FreescoutHelpDeskFreescout} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getApacheCouchdbInstance } from '@osaas/client-services';
+ * import { getFreescoutHelpDeskFreescoutInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getApacheCouchdbInstance(ctx, 'myinstance');
+ * const instance = await getFreescoutHelpDeskFreescoutInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getApacheCouchdbInstance(
+export async function getFreescoutHelpDeskFreescoutInstance(
   ctx: Context,
   name: string
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  return await getInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+): Promise<FreescoutHelpDeskFreescout> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'freescout-help-desk-freescout'
+  );
+  return await getInstance(
+    ctx,
+    'freescout-help-desk-freescout',
+    name,
+    serviceAccessToken
+  );
 }

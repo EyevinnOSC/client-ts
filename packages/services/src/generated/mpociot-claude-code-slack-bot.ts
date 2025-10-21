@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance': {
-    /** List all running couchdb instances */
+  '/claude-code-slack-botinstance': {
+    /** List all running claude-code-slack-bot instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the couchdb instance */
+            /** @description Name of the claude-code-slack-bot instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,7 +67,14 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            SlackBotToken: string;
+            SlackAppToken: string;
+            SlackSigningSecret: string;
+            AnthropicApiKey: string;
+            GithubAppId?: string;
+            GithubPrivateKey?: string;
+            GithubInstallationId?: string;
+            GithubToken?: string;
           } & {
             _links: {
               self: {
@@ -106,14 +113,21 @@ export interface paths {
         };
       };
     };
-    /** Launch a new couchdb instance */
+    /** Launch a new claude-code-slack-bot instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the claude-code-slack-bot instance */
             name: string;
-            AdminPassword: string;
+            SlackBotToken: string;
+            SlackAppToken: string;
+            SlackSigningSecret: string;
+            AnthropicApiKey: string;
+            GithubAppId?: string;
+            GithubPrivateKey?: string;
+            GithubInstallationId?: string;
+            GithubToken?: string;
           };
         };
       };
@@ -121,7 +135,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the claude-code-slack-bot instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -139,7 +153,14 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            SlackBotToken: string;
+            SlackAppToken: string;
+            SlackSigningSecret: string;
+            AnthropicApiKey: string;
+            GithubAppId?: string;
+            GithubPrivateKey?: string;
+            GithubInstallationId?: string;
+            GithubToken?: string;
           } & {
             _links: {
               self: {
@@ -194,11 +215,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart couchdb */
+    /** Restart claude-code-slack-bot */
     post: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the claude-code-slack-bot instance */
           id: string;
         };
       };
@@ -217,12 +238,12 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance/{id}': {
-    /** Obtain status and resource URLs for an couchdb instance */
+  '/claude-code-slack-botinstance/{id}': {
+    /** Obtain status and resource URLs for an claude-code-slack-bot instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the claude-code-slack-bot instance */
           id: string;
         };
       };
@@ -230,7 +251,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the claude-code-slack-bot instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -248,7 +269,14 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            SlackBotToken: string;
+            SlackAppToken: string;
+            SlackSigningSecret: string;
+            AnthropicApiKey: string;
+            GithubAppId?: string;
+            GithubPrivateKey?: string;
+            GithubInstallationId?: string;
+            GithubToken?: string;
           } & {
             _links: {
               self: {
@@ -294,11 +322,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an couchdb instance */
+    /** Stop and remove an claude-code-slack-bot instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the claude-code-slack-bot instance */
           id: string;
         };
       };
@@ -316,18 +344,25 @@ export interface paths {
         };
       };
     };
-    /** Patch couchdb instance with new parameters and restart */
+    /** Patch claude-code-slack-bot instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the claude-code-slack-bot instance */
             name?: string;
-            AdminPassword?: string;
+            SlackBotToken?: string;
+            SlackAppToken?: string;
+            SlackSigningSecret?: string;
+            AnthropicApiKey?: string;
+            GithubAppId?: string;
+            GithubPrivateKey?: string;
+            GithubInstallationId?: string;
+            GithubToken?: string;
           };
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the claude-code-slack-bot instance */
           id: string;
         };
       };
@@ -335,7 +370,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the claude-code-slack-bot instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -353,7 +388,14 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            SlackBotToken: string;
+            SlackAppToken: string;
+            SlackSigningSecret: string;
+            AnthropicApiKey: string;
+            GithubAppId?: string;
+            GithubPrivateKey?: string;
+            GithubInstallationId?: string;
+            GithubToken?: string;
           } & {
             _links: {
               self: {
@@ -408,11 +450,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of couchdb instance */
+    /** Return status of claude-code-slack-bot instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the claude-code-slack-bot instance */
           id: string;
         };
       };
@@ -436,7 +478,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the couchdb instance */
+    /** Return the latest logs from the claude-code-slack-bot instance */
     get: {
       parameters: {
         query: {
@@ -444,7 +486,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the claude-code-slack-bot instance */
           id: string;
         };
       };
@@ -464,11 +506,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for couchdb instance */
+    /** Return the exposed extra ports for claude-code-slack-bot instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the claude-code-slack-bot instance */
           id: string;
         };
       };
@@ -499,11 +541,11 @@ export interface operations {}
 
 export interface external {}
 
-export type ApacheCouchdb =
-  paths['/couchdbinstance/{id}']['get']['responses']['200']['schema'];
+export type MpociotClaudeCodeSlackBot =
+  paths['/claude-code-slack-botinstance/{id}']['get']['responses']['200']['schema'];
 
-export type ApacheCouchdbConfig =
-  paths['/couchdbinstance']['post']['parameters']['body']['body'];
+export type MpociotClaudeCodeSlackBotConfig =
+  paths['/claude-code-slack-botinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -512,96 +554,123 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace apache-couchdb
- * @description Unlock seamless data management with Apache CouchDB! Effortlessly scalable and highly available, CouchDB makes storing, retrieving, and syncing data across devices a breeze. Ideal for modern cloud apps!
+ * @namespace mpociot-claude-code-slack-bot
+ * @description Boost productivity with Claude Code Slack Bot! Get AI-driven coding assistance right in Slack. Chat in threads, stream responses, and keep context seamlessly across messages. Transform your coding workflow today!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-CouchDB.html|Online docs} for further information
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Claude-Code-Slackbot.html|Online docs} for further information
  */
 
 /**
- * @typedef {Object} ApacheCouchdbConfig
- * @property {string} name - Name of couchdb
- * @property {string} AdminPassword - AdminPassword
+ * @typedef {Object} MpociotClaudeCodeSlackBotConfig
+ * @property {string} name - Name of claude-code-slack-bot
+ * @property {string} SlackBotToken - SlackBotToken
+ * @property {string} SlackAppToken - SlackAppToken
+ * @property {string} SlackSigningSecret - SlackSigningSecret
+ * @property {string} AnthropicApiKey - AnthropicApiKey
+ * @property {string} [GithubAppId] - GithubAppId
+ * @property {string} [GithubPrivateKey] - GithubPrivateKey
+ * @property {string} [GithubInstallationId] - GithubInstallationId
+ * @property {string} [GithubToken] - GithubToken
 
  * 
  */
 
 /**
- * @typedef {Object} ApacheCouchdb
- * @property {string} name - Name of the Couch DB instance
- * @property {string} url - URL of the Couch DB instance
+ * @typedef {Object} MpociotClaudeCodeSlackBot
+ * @property {string} name - Name of the Claude Code Slack Bot instance
+ * @property {string} url - URL of the Claude Code Slack Bot instance
  *
  */
 
 /**
- * Create a new Couch DB instance
+ * Create a new Claude Code Slack Bot instance
  *
- * @memberOf apache-couchdb
+ * @memberOf mpociot-claude-code-slack-bot
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {ApacheCouchdbConfig} body - Service instance configuration
- * @returns {ApacheCouchdb} - Service instance
+ * @param {MpociotClaudeCodeSlackBotConfig} body - Service instance configuration
+ * @returns {MpociotClaudeCodeSlackBot} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createApacheCouchdbInstance } from '@osaas/client-services';
+ * import { createMpociotClaudeCodeSlackBotInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: ApacheCouchdbConfig = { name: 'myinstance', ... };
- * const instance = await createApacheCouchdbInstance(ctx, body);
+ * const body: MpociotClaudeCodeSlackBotConfig = { name: 'myinstance', ... };
+ * const instance = await createMpociotClaudeCodeSlackBotInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createApacheCouchdbInstance(
+export async function createMpociotClaudeCodeSlackBotInstance(
   ctx: Context,
-  body: ApacheCouchdbConfig
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
+  body: MpociotClaudeCodeSlackBotConfig
+): Promise<MpociotClaudeCodeSlackBot> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'mpociot-claude-code-slack-bot'
+  );
   const instance = await createInstance(
     ctx,
-    'apache-couchdb',
+    'mpociot-claude-code-slack-bot',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('apache-couchdb', instance.name, ctx);
+  await waitForInstanceReady(
+    'mpociot-claude-code-slack-bot',
+    instance.name,
+    ctx
+  );
   return instance;
 }
 
 /**
- * Remove a Couch DB instance
+ * Remove a Claude Code Slack Bot instance
  *
- * @memberOf apache-couchdb
+ * @memberOf mpociot-claude-code-slack-bot
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be removed
+ * @param {string} name - Name of the claude-code-slack-bot to be removed
  */
-export async function removeApacheCouchdbInstance(
+export async function removeMpociotClaudeCodeSlackBotInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  await removeInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'mpociot-claude-code-slack-bot'
+  );
+  await removeInstance(
+    ctx,
+    'mpociot-claude-code-slack-bot',
+    name,
+    serviceAccessToken
+  );
 }
 
 /**
- * Get a Couch DB instance
+ * Get a Claude Code Slack Bot instance
  *
- * @memberOf apache-couchdb
+ * @memberOf mpociot-claude-code-slack-bot
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be retrieved
- * @returns {ApacheCouchdb} - Service instance
+ * @param {string} name - Name of the claude-code-slack-bot to be retrieved
+ * @returns {MpociotClaudeCodeSlackBot} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getApacheCouchdbInstance } from '@osaas/client-services';
+ * import { getMpociotClaudeCodeSlackBotInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getApacheCouchdbInstance(ctx, 'myinstance');
+ * const instance = await getMpociotClaudeCodeSlackBotInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getApacheCouchdbInstance(
+export async function getMpociotClaudeCodeSlackBotInstance(
   ctx: Context,
   name: string
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  return await getInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+): Promise<MpociotClaudeCodeSlackBot> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'mpociot-claude-code-slack-bot'
+  );
+  return await getInstance(
+    ctx,
+    'mpociot-claude-code-slack-bot',
+    name,
+    serviceAccessToken
+  );
 }

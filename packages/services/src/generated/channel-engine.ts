@@ -28,8 +28,60 @@ export interface paths {
             name: string;
             /** @enum {string} */
             type: 'Loop' | 'Playlist' | 'WebHook' | 'Barker';
-            /** @description URL to playlist, VOD to loop or webhook */
+            opts?: {
+              /** @description URL to playlist, VOD to loop or webhook */
+              url: string;
+              /** @description Use demuxed audio (default is true) */
+              useDemuxedAudio?: boolean;
+              /** @description Use VTT subtitles (default is true) */
+              useVttSubtitles?: boolean;
+              /** @description URI to default slate */
+              defaultSlateUri?: string;
+              /** @description Comma separated list of languages, e.g. ("en,ja"). First one is defined to be default */
+              langList?: string;
+              /** @description Comma separated list of subtitle languages, e.g. ("en,ja"). First one is defined to be default */
+              langListSubs?: string;
+              /** @description Channel preset. Available presets are: DD, HEVC, ATMOS */
+              preset?: string;
+              preroll?: {
+                /** @description URL to preroll */
+                url: string;
+                /** @description Duration of preroll in milliseconds */
+                duration: number;
+              };
+              webhook?: {
+                /** @description API key for webhook */
+                apikey?: string;
+              };
+            };
+            /** @description Playback URL */
             url: string;
+            _links?: {
+              self: {
+                /** @description Link to the channel resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
           }[];
         };
       };
@@ -85,6 +137,8 @@ export interface paths {
             /** @description URL to playlist or VOD to loop */
             url: string;
             opts?: {
+              /** @description URL to playlist, VOD to loop or webhook */
+              url: string;
               /** @description Use demuxed audio (default is true) */
               useDemuxedAudio?: boolean;
               /** @description Use VTT subtitles (default is true) */
@@ -110,6 +164,32 @@ export interface paths {
             };
             /** @description Playback URL */
             playback: string;
+            _links?: {
+              self: {
+                /** @description Link to the channel resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
           };
         };
       };
@@ -134,8 +214,60 @@ export interface paths {
             name: string;
             /** @enum {string} */
             type: 'Loop' | 'Playlist' | 'WebHook' | 'Barker';
-            /** @description URL to playlist, VOD to loop or webhook */
+            opts?: {
+              /** @description URL to playlist, VOD to loop or webhook */
+              url: string;
+              /** @description Use demuxed audio (default is true) */
+              useDemuxedAudio?: boolean;
+              /** @description Use VTT subtitles (default is true) */
+              useVttSubtitles?: boolean;
+              /** @description URI to default slate */
+              defaultSlateUri?: string;
+              /** @description Comma separated list of languages, e.g. ("en,ja"). First one is defined to be default */
+              langList?: string;
+              /** @description Comma separated list of subtitle languages, e.g. ("en,ja"). First one is defined to be default */
+              langListSubs?: string;
+              /** @description Channel preset. Available presets are: DD, HEVC, ATMOS */
+              preset?: string;
+              preroll?: {
+                /** @description URL to preroll */
+                url: string;
+                /** @description Duration of preroll in milliseconds */
+                duration: number;
+              };
+              webhook?: {
+                /** @description API key for webhook */
+                apikey?: string;
+              };
+            };
+            /** @description Playback URL */
             url: string;
+            _links?: {
+              self: {
+                /** @description Link to the channel resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
           };
         };
       };
@@ -151,6 +283,27 @@ export interface paths {
       responses: {
         /** Default Response */
         204: {
+          schema: string;
+        };
+      };
+    };
+  };
+  '/restart/{id}': {
+    /** Restart FAST channel */
+    post: {
+      parameters: {
+        path: {
+          /** Channel Id */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        204: {
+          schema: string;
+        };
+        /** Default Response */
+        500: {
           schema: string;
         };
       };

@@ -632,3 +632,206 @@ export {
   removeEyevinnCatValidateInstance,
   getEyevinnCatValidateInstance
 } from './generated/eyevinn-cat-validate';
+export {
+  GrafanaGrafana,
+  GrafanaGrafanaConfig,
+  createGrafanaGrafanaInstance,
+  removeGrafanaGrafanaInstance,
+  getGrafanaGrafanaInstance
+} from './generated/grafana-grafana';
+export {
+  OpfOpenproject,
+  OpfOpenprojectConfig,
+  createOpfOpenprojectInstance,
+  removeOpfOpenprojectInstance,
+  getOpfOpenprojectInstance
+} from './generated/opf-openproject';
+export {
+  XwikiXwikiPlatform,
+  XwikiXwikiPlatformConfig,
+  createXwikiXwikiPlatformInstance,
+  removeXwikiXwikiPlatformInstance,
+  getXwikiXwikiPlatformInstance
+} from './generated/xwiki-xwiki-platform';
+export {
+  BoldareOpenaiAssistant,
+  BoldareOpenaiAssistantConfig,
+  createBoldareOpenaiAssistantInstance,
+  removeBoldareOpenaiAssistantInstance,
+  getBoldareOpenaiAssistantInstance
+} from './generated/boldare-openai-assistant';
+export {
+  SuperflytvOgrafServer,
+  SuperflytvOgrafServerConfig,
+  createSuperflytvOgrafServerInstance,
+  removeSuperflytvOgrafServerInstance,
+  getSuperflytvOgrafServerInstance
+} from './generated/superflytv-ograf-server';
+export {
+  EyevinnTamsGateway,
+  EyevinnTamsGatewayConfig,
+  createEyevinnTamsGatewayInstance,
+  removeEyevinnTamsGatewayInstance,
+  getEyevinnTamsGatewayInstance
+} from './generated/eyevinn-tams-gateway';
+export {
+  EyevinnWasmRunner,
+  EyevinnWasmRunnerConfig,
+  createEyevinnWasmRunnerInstance,
+  removeEyevinnWasmRunnerInstance,
+  getEyevinnWasmRunnerInstance
+} from './generated/eyevinn-wasm-runner';
+export {
+  AutomatischAutomatisch,
+  AutomatischAutomatischConfig,
+  createAutomatischAutomatischInstance,
+  removeAutomatischAutomatischInstance,
+  getAutomatischAutomatischInstance
+} from './generated/automatisch-automatisch';
+export {
+  PgvectorPgvector,
+  PgvectorPgvectorConfig,
+  createPgvectorPgvectorInstance,
+  removePgvectorPgvectorInstance,
+  getPgvectorPgvectorInstance
+} from './generated/pgvector-pgvector';
+export {
+  FormbricksFormbricks,
+  FormbricksFormbricksConfig,
+  createFormbricksFormbricksInstance,
+  removeFormbricksFormbricksInstance,
+  getFormbricksFormbricksInstance
+} from './generated/formbricks-formbricks';
+export {
+  MtlynchPicoshare,
+  MtlynchPicoshareConfig,
+  createMtlynchPicoshareInstance,
+  removeMtlynchPicoshareInstance,
+  getMtlynchPicoshareInstance
+} from './generated/mtlynch-picoshare';
+export {
+  FreescoutHelpDeskFreescout,
+  FreescoutHelpDeskFreescoutConfig,
+  createFreescoutHelpDeskFreescoutInstance,
+  removeFreescoutHelpDeskFreescoutInstance,
+  getFreescoutHelpDeskFreescoutInstance
+} from './generated/freescout-help-desk-freescout';
+export {
+  RoundcubeRoundcubemail,
+  RoundcubeRoundcubemailConfig,
+  createRoundcubeRoundcubemailInstance,
+  removeRoundcubeRoundcubemailInstance,
+  getRoundcubeRoundcubemailInstance
+} from './generated/roundcube-roundcubemail';
+export {
+  EyevinnDockerWrtcSfu,
+  EyevinnDockerWrtcSfuConfig,
+  createEyevinnDockerWrtcSfuInstance,
+  removeEyevinnDockerWrtcSfuInstance,
+  getEyevinnDockerWrtcSfuInstance
+} from './generated/eyevinn-docker-wrtc-sfu';
+export {
+  EyevinnEncoreUi,
+  EyevinnEncoreUiConfig,
+  createEyevinnEncoreUiInstance,
+  removeEyevinnEncoreUiInstance,
+  getEyevinnEncoreUiInstance
+} from './generated/eyevinn-encore-ui';
+export {
+  BirmeVideoUploader,
+  BirmeVideoUploaderConfig,
+  createBirmeVideoUploaderInstance,
+  removeBirmeVideoUploaderInstance,
+  getBirmeVideoUploaderInstance
+} from './generated/birme-video-uploader';
+export {
+  BirmePlayoutUi,
+  BirmePlayoutUiConfig,
+  createBirmePlayoutUiInstance,
+  removeBirmePlayoutUiInstance,
+  getBirmePlayoutUiInstance
+} from './generated/birme-playout-ui';
+export {
+  BirmeStreamGfx,
+  BirmeStreamGfxConfig,
+  createBirmeStreamGfxInstance,
+  removeBirmeStreamGfxInstance,
+  getBirmeStreamGfxInstance
+} from './generated/birme-stream-gfx';
+export {
+  EyevinnTeleprompter,
+  EyevinnTeleprompterConfig,
+  createEyevinnTeleprompterInstance,
+  removeEyevinnTeleprompterInstance,
+  getEyevinnTeleprompterInstance
+} from './generated/eyevinn-teleprompter';
+export {
+  MpociotClaudeCodeSlackBot,
+  MpociotClaudeCodeSlackBotConfig,
+  createMpociotClaudeCodeSlackBotInstance,
+  removeMpociotClaudeCodeSlackBotInstance,
+  getMpociotClaudeCodeSlackBotInstance
+} from './generated/mpociot-claude-code-slack-bot';
+export {
+  EyevinnTfDeployer,
+  EyevinnTfDeployerConfig,
+  createEyevinnTfDeployerInstance,
+  removeEyevinnTfDeployerInstance,
+  getEyevinnTfDeployerInstance
+} from './generated/eyevinn-tf-deployer';
+export {
+  AblindbergAdserverFrontend,
+  AblindbergAdserverFrontendConfig,
+  createAblindbergAdserverFrontendInstance,
+  removeAblindbergAdserverFrontendInstance,
+  getAblindbergAdserverFrontendInstance
+} from './generated/ablindberg-adserver-frontend';
+export {
+  EyevinnJustGoLive,
+  EyevinnJustGoLiveConfig,
+  createEyevinnJustGoLiveInstance,
+  removeEyevinnJustGoLiveInstance,
+  getEyevinnJustGoLiveInstance
+} from './generated/eyevinn-just-go-live';
+export {
+  EyevinnJoinLive,
+  EyevinnJoinLiveConfig,
+  createEyevinnJoinLiveInstance,
+  removeEyevinnJoinLiveInstance,
+  getEyevinnJoinLiveInstance
+} from './generated/eyevinn-join-live';
+export {
+  EyevinnOpenBuilder,
+  EyevinnOpenBuilderConfig,
+  createEyevinnOpenBuilderInstance,
+  removeEyevinnOpenBuilderInstance,
+  getEyevinnOpenBuilderInstance
+} from './generated/eyevinn-open-builder';
+export {
+  JoeldelpilarBxfManager,
+  JoeldelpilarBxfManagerConfig,
+  createJoeldelpilarBxfManagerInstance,
+  removeJoeldelpilarBxfManagerInstance,
+  getJoeldelpilarBxfManagerInstance
+} from './generated/joeldelpilar-bxf-manager';
+export {
+  BjowestmanSrtStreamGenerator,
+  BjowestmanSrtStreamGeneratorConfig,
+  createBjowestmanSrtStreamGeneratorInstance,
+  removeBjowestmanSrtStreamGeneratorInstance,
+  getBjowestmanSrtStreamGeneratorInstance
+} from './generated/bjowestman-srt-stream-generator';
+export {
+  BirmeVacayPlanner,
+  BirmeVacayPlannerConfig,
+  createBirmeVacayPlannerInstance,
+  removeBirmeVacayPlannerInstance,
+  getBirmeVacayPlannerInstance
+} from './generated/birme-vacay-planner';
+export {
+  PenpotPenpot,
+  PenpotPenpotConfig,
+  createPenpotPenpotInstance,
+  removePenpotPenpotInstance,
+  getPenpotPenpotInstance
+} from './generated/penpot-penpot';

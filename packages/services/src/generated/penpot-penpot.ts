@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance': {
-    /** List all running couchdb instances */
+  '/penpotinstance': {
+    /** List all running penpot instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the couchdb instance */
+            /** @description Name of the penpot instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,7 +67,10 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            DbUrl: string;
+            DbUsername: string;
+            DbPassword?: string;
+            RedisUrl: string;
           } & {
             _links: {
               self: {
@@ -106,14 +109,17 @@ export interface paths {
         };
       };
     };
-    /** Launch a new couchdb instance */
+    /** Launch a new penpot instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the penpot instance */
             name: string;
-            AdminPassword: string;
+            DbUrl: string;
+            DbUsername: string;
+            DbPassword?: string;
+            RedisUrl: string;
           };
         };
       };
@@ -121,7 +127,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the penpot instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -139,7 +145,10 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            DbUrl: string;
+            DbUsername: string;
+            DbPassword?: string;
+            RedisUrl: string;
           } & {
             _links: {
               self: {
@@ -194,11 +203,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart couchdb */
+    /** Restart penpot */
     post: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the penpot instance */
           id: string;
         };
       };
@@ -217,12 +226,12 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance/{id}': {
-    /** Obtain status and resource URLs for an couchdb instance */
+  '/penpotinstance/{id}': {
+    /** Obtain status and resource URLs for an penpot instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the penpot instance */
           id: string;
         };
       };
@@ -230,7 +239,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the penpot instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -248,7 +257,10 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            DbUrl: string;
+            DbUsername: string;
+            DbPassword?: string;
+            RedisUrl: string;
           } & {
             _links: {
               self: {
@@ -294,11 +306,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an couchdb instance */
+    /** Stop and remove an penpot instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the penpot instance */
           id: string;
         };
       };
@@ -316,18 +328,21 @@ export interface paths {
         };
       };
     };
-    /** Patch couchdb instance with new parameters and restart */
+    /** Patch penpot instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the penpot instance */
             name?: string;
-            AdminPassword?: string;
+            DbUrl?: string;
+            DbUsername?: string;
+            DbPassword?: string;
+            RedisUrl?: string;
           };
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the penpot instance */
           id: string;
         };
       };
@@ -335,7 +350,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the penpot instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -353,7 +368,10 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            DbUrl: string;
+            DbUsername: string;
+            DbPassword?: string;
+            RedisUrl: string;
           } & {
             _links: {
               self: {
@@ -408,11 +426,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of couchdb instance */
+    /** Return status of penpot instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the penpot instance */
           id: string;
         };
       };
@@ -436,7 +454,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the couchdb instance */
+    /** Return the latest logs from the penpot instance */
     get: {
       parameters: {
         query: {
@@ -444,7 +462,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the penpot instance */
           id: string;
         };
       };
@@ -464,11 +482,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for couchdb instance */
+    /** Return the exposed extra ports for penpot instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the penpot instance */
           id: string;
         };
       };
@@ -499,11 +517,11 @@ export interface operations {}
 
 export interface external {}
 
-export type ApacheCouchdb =
-  paths['/couchdbinstance/{id}']['get']['responses']['200']['schema'];
+export type PenpotPenpot =
+  paths['/penpotinstance/{id}']['get']['responses']['200']['schema'];
 
-export type ApacheCouchdbConfig =
-  paths['/couchdbinstance']['post']['parameters']['body']['body'];
+export type PenpotPenpotConfig =
+  paths['/penpotinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -512,96 +530,99 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace apache-couchdb
- * @description Unlock seamless data management with Apache CouchDB! Effortlessly scalable and highly available, CouchDB makes storing, retrieving, and syncing data across devices a breeze. Ideal for modern cloud apps!
+ * @namespace penpot-penpot
+ * @description Revolutionize your design workflow with Penpot, the open-source tool where design meets code. Create stunning designs, prototypes, and integrate seamlessly with developers. Collaborate effortlessly!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-CouchDB.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} ApacheCouchdbConfig
- * @property {string} name - Name of couchdb
- * @property {string} AdminPassword - AdminPassword
+ * @typedef {Object} PenpotPenpotConfig
+ * @property {string} name - Name of penpot
+ * @property {string} DbUrl - DbUrl
+ * @property {string} DbUsername - DbUsername
+ * @property {string} [DbPassword] - DbPassword
+ * @property {string} RedisUrl - RedisUrl
 
  * 
  */
 
 /**
- * @typedef {Object} ApacheCouchdb
- * @property {string} name - Name of the Couch DB instance
- * @property {string} url - URL of the Couch DB instance
+ * @typedef {Object} PenpotPenpot
+ * @property {string} name - Name of the Penpot instance
+ * @property {string} url - URL of the Penpot instance
  *
  */
 
 /**
- * Create a new Couch DB instance
+ * Create a new Penpot instance
  *
- * @memberOf apache-couchdb
+ * @memberOf penpot-penpot
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {ApacheCouchdbConfig} body - Service instance configuration
- * @returns {ApacheCouchdb} - Service instance
+ * @param {PenpotPenpotConfig} body - Service instance configuration
+ * @returns {PenpotPenpot} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createApacheCouchdbInstance } from '@osaas/client-services';
+ * import { createPenpotPenpotInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: ApacheCouchdbConfig = { name: 'myinstance', ... };
- * const instance = await createApacheCouchdbInstance(ctx, body);
+ * const body: PenpotPenpotConfig = { name: 'myinstance', ... };
+ * const instance = await createPenpotPenpotInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createApacheCouchdbInstance(
+export async function createPenpotPenpotInstance(
   ctx: Context,
-  body: ApacheCouchdbConfig
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
+  body: PenpotPenpotConfig
+): Promise<PenpotPenpot> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('penpot-penpot');
   const instance = await createInstance(
     ctx,
-    'apache-couchdb',
+    'penpot-penpot',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('apache-couchdb', instance.name, ctx);
+  await waitForInstanceReady('penpot-penpot', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Couch DB instance
+ * Remove a Penpot instance
  *
- * @memberOf apache-couchdb
+ * @memberOf penpot-penpot
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be removed
+ * @param {string} name - Name of the penpot to be removed
  */
-export async function removeApacheCouchdbInstance(
+export async function removePenpotPenpotInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  await removeInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken('penpot-penpot');
+  await removeInstance(ctx, 'penpot-penpot', name, serviceAccessToken);
 }
 
 /**
- * Get a Couch DB instance
+ * Get a Penpot instance
  *
- * @memberOf apache-couchdb
+ * @memberOf penpot-penpot
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be retrieved
- * @returns {ApacheCouchdb} - Service instance
+ * @param {string} name - Name of the penpot to be retrieved
+ * @returns {PenpotPenpot} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getApacheCouchdbInstance } from '@osaas/client-services';
+ * import { getPenpotPenpotInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getApacheCouchdbInstance(ctx, 'myinstance');
+ * const instance = await getPenpotPenpotInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getApacheCouchdbInstance(
+export async function getPenpotPenpotInstance(
   ctx: Context,
   name: string
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  return await getInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+): Promise<PenpotPenpot> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('penpot-penpot');
+  return await getInstance(ctx, 'penpot-penpot', name, serviceAccessToken);
 }

@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance': {
-    /** List all running couchdb instances */
+  '/video-uploaderinstance': {
+    /** List all running video-uploader instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the couchdb instance */
+            /** @description Name of the video-uploader instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,7 +67,10 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            s3Endpoint?: string;
+            s3AccessKey: string;
+            s3SecretKey: string;
+            s3AwsRegion?: string;
           } & {
             _links: {
               self: {
@@ -106,14 +109,17 @@ export interface paths {
         };
       };
     };
-    /** Launch a new couchdb instance */
+    /** Launch a new video-uploader instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the video-uploader instance */
             name: string;
-            AdminPassword: string;
+            s3Endpoint?: string;
+            s3AccessKey: string;
+            s3SecretKey: string;
+            s3AwsRegion?: string;
           };
         };
       };
@@ -121,7 +127,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the video-uploader instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -139,7 +145,10 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            s3Endpoint?: string;
+            s3AccessKey: string;
+            s3SecretKey: string;
+            s3AwsRegion?: string;
           } & {
             _links: {
               self: {
@@ -194,11 +203,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart couchdb */
+    /** Restart video-uploader */
     post: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the video-uploader instance */
           id: string;
         };
       };
@@ -217,12 +226,12 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance/{id}': {
-    /** Obtain status and resource URLs for an couchdb instance */
+  '/video-uploaderinstance/{id}': {
+    /** Obtain status and resource URLs for an video-uploader instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the video-uploader instance */
           id: string;
         };
       };
@@ -230,7 +239,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the video-uploader instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -248,7 +257,10 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            s3Endpoint?: string;
+            s3AccessKey: string;
+            s3SecretKey: string;
+            s3AwsRegion?: string;
           } & {
             _links: {
               self: {
@@ -294,11 +306,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an couchdb instance */
+    /** Stop and remove an video-uploader instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the video-uploader instance */
           id: string;
         };
       };
@@ -316,18 +328,21 @@ export interface paths {
         };
       };
     };
-    /** Patch couchdb instance with new parameters and restart */
+    /** Patch video-uploader instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the video-uploader instance */
             name?: string;
-            AdminPassword?: string;
+            s3Endpoint?: string;
+            s3AccessKey?: string;
+            s3SecretKey?: string;
+            s3AwsRegion?: string;
           };
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the video-uploader instance */
           id: string;
         };
       };
@@ -335,7 +350,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the video-uploader instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -353,7 +368,10 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            s3Endpoint?: string;
+            s3AccessKey: string;
+            s3SecretKey: string;
+            s3AwsRegion?: string;
           } & {
             _links: {
               self: {
@@ -408,11 +426,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of couchdb instance */
+    /** Return status of video-uploader instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the video-uploader instance */
           id: string;
         };
       };
@@ -436,7 +454,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the couchdb instance */
+    /** Return the latest logs from the video-uploader instance */
     get: {
       parameters: {
         query: {
@@ -444,7 +462,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the video-uploader instance */
           id: string;
         };
       };
@@ -464,11 +482,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for couchdb instance */
+    /** Return the exposed extra ports for video-uploader instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the video-uploader instance */
           id: string;
         };
       };
@@ -499,11 +517,11 @@ export interface operations {}
 
 export interface external {}
 
-export type ApacheCouchdb =
-  paths['/couchdbinstance/{id}']['get']['responses']['200']['schema'];
+export type BirmeVideoUploader =
+  paths['/video-uploaderinstance/{id}']['get']['responses']['200']['schema'];
 
-export type ApacheCouchdbConfig =
-  paths['/couchdbinstance']['post']['parameters']['body']['body'];
+export type BirmeVideoUploaderConfig =
+  paths['/video-uploaderinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -512,96 +530,110 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace apache-couchdb
- * @description Unlock seamless data management with Apache CouchDB! Effortlessly scalable and highly available, CouchDB makes storing, retrieving, and syncing data across devices a breeze. Ideal for modern cloud apps!
+ * @namespace birme-video-uploader
+ * @description Effortlessly upload and manage your videos with our intuitive Video Uploader. Enjoy seamless drag-and-drop functionality, real-time upload tracking, and support for large files, all on your preferred S3-compatible storage.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-CouchDB.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} ApacheCouchdbConfig
- * @property {string} name - Name of couchdb
- * @property {string} AdminPassword - AdminPassword
+ * @typedef {Object} BirmeVideoUploaderConfig
+ * @property {string} name - Name of video-uploader
+ * @property {string} [s3Endpoint] - S3Endpoint
+ * @property {string} s3AccessKey - S3AccessKey
+ * @property {string} s3SecretKey - S3SecretKey
+ * @property {string} [s3AwsRegion] - S3AwsRegion
 
  * 
  */
 
 /**
- * @typedef {Object} ApacheCouchdb
- * @property {string} name - Name of the Couch DB instance
- * @property {string} url - URL of the Couch DB instance
+ * @typedef {Object} BirmeVideoUploader
+ * @property {string} name - Name of the S3 Video Uploader instance
+ * @property {string} url - URL of the S3 Video Uploader instance
  *
  */
 
 /**
- * Create a new Couch DB instance
+ * Create a new S3 Video Uploader instance
  *
- * @memberOf apache-couchdb
+ * @memberOf birme-video-uploader
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {ApacheCouchdbConfig} body - Service instance configuration
- * @returns {ApacheCouchdb} - Service instance
+ * @param {BirmeVideoUploaderConfig} body - Service instance configuration
+ * @returns {BirmeVideoUploader} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createApacheCouchdbInstance } from '@osaas/client-services';
+ * import { createBirmeVideoUploaderInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: ApacheCouchdbConfig = { name: 'myinstance', ... };
- * const instance = await createApacheCouchdbInstance(ctx, body);
+ * const body: BirmeVideoUploaderConfig = { name: 'myinstance', ... };
+ * const instance = await createBirmeVideoUploaderInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createApacheCouchdbInstance(
+export async function createBirmeVideoUploaderInstance(
   ctx: Context,
-  body: ApacheCouchdbConfig
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
+  body: BirmeVideoUploaderConfig
+): Promise<BirmeVideoUploader> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'birme-video-uploader'
+  );
   const instance = await createInstance(
     ctx,
-    'apache-couchdb',
+    'birme-video-uploader',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('apache-couchdb', instance.name, ctx);
+  await waitForInstanceReady('birme-video-uploader', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Couch DB instance
+ * Remove a S3 Video Uploader instance
  *
- * @memberOf apache-couchdb
+ * @memberOf birme-video-uploader
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be removed
+ * @param {string} name - Name of the uploader to be removed
  */
-export async function removeApacheCouchdbInstance(
+export async function removeBirmeVideoUploaderInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  await removeInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'birme-video-uploader'
+  );
+  await removeInstance(ctx, 'birme-video-uploader', name, serviceAccessToken);
 }
 
 /**
- * Get a Couch DB instance
+ * Get a S3 Video Uploader instance
  *
- * @memberOf apache-couchdb
+ * @memberOf birme-video-uploader
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be retrieved
- * @returns {ApacheCouchdb} - Service instance
+ * @param {string} name - Name of the uploader to be retrieved
+ * @returns {BirmeVideoUploader} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getApacheCouchdbInstance } from '@osaas/client-services';
+ * import { getBirmeVideoUploaderInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getApacheCouchdbInstance(ctx, 'myinstance');
+ * const instance = await getBirmeVideoUploaderInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getApacheCouchdbInstance(
+export async function getBirmeVideoUploaderInstance(
   ctx: Context,
   name: string
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  return await getInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+): Promise<BirmeVideoUploader> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'birme-video-uploader'
+  );
+  return await getInstance(
+    ctx,
+    'birme-video-uploader',
+    name,
+    serviceAccessToken
+  );
 }

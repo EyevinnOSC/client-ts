@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/cat-validateinstance': {
-    /** List all running cat-validate instances */
+  '/xwiki-platforminstance': {
+    /** List all running xwiki-platform instances */
     get: {
       responses: {
         /** Default Response */
         200: {
-          schema: ({
-            /** @description Name of the cat-validate instance */
+          schema: {
+            /** @description Name of the xwiki-platform instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,34 +40,8 @@ export interface paths {
                 url: string;
               };
             };
-            Keys: string;
-            Issuer?: string;
-            RedisUrl?: string;
-            ClickHouseUrl?: string;
-          } & {
-            _links: {
-              self: {
-                /** @description Instance resource */
-                href: string;
-              };
-              logs?: {
-                /** @description Get logs for this instance */
-                href: string;
-              };
-              health?: {
-                /** @description Get health status for this instance */
-                href: string;
-              };
-              ports?: {
-                /** @description Get exposed ports for this instance */
-                href: string;
-              };
-              restart?: {
-                /** @description Restart this instance */
-                href: string;
-              };
-            };
-          })[];
+            DatabaseUrl: string;
+          }[];
         };
         /** Default Response */
         500: {
@@ -78,17 +52,14 @@ export interface paths {
         };
       };
     };
-    /** Launch a new cat-validate instance */
+    /** Launch a new xwiki-platform instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the cat-validate instance */
+            /** @description Name of the xwiki-platform instance */
             name: string;
-            Keys: string;
-            Issuer?: string;
-            RedisUrl?: string;
-            ClickHouseUrl?: string;
+            DatabaseUrl: string;
           };
         };
       };
@@ -96,7 +67,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the cat-validate instance */
+            /** @description Name of the xwiki-platform instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -114,33 +85,7 @@ export interface paths {
                 url: string;
               };
             };
-            Keys: string;
-            Issuer?: string;
-            RedisUrl?: string;
-            ClickHouseUrl?: string;
-          } & {
-            _links: {
-              self: {
-                /** @description Instance resource */
-                href: string;
-              };
-              logs?: {
-                /** @description Get logs for this instance */
-                href: string;
-              };
-              health?: {
-                /** @description Get health status for this instance */
-                href: string;
-              };
-              ports?: {
-                /** @description Get exposed ports for this instance */
-                href: string;
-              };
-              restart?: {
-                /** @description Restart this instance */
-                href: string;
-              };
-            };
+            DatabaseUrl: string;
           };
         };
         /** Default Response */
@@ -168,11 +113,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart cat-validate */
+    /** Restart xwiki-platform */
     post: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the xwiki-platform instance */
           id: string;
         };
       };
@@ -191,12 +136,12 @@ export interface paths {
       };
     };
   };
-  '/cat-validateinstance/{id}': {
-    /** Obtain status and resource URLs for an cat-validate instance */
+  '/xwiki-platforminstance/{id}': {
+    /** Obtain status and resource URLs for an xwiki-platform instance */
     get: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the xwiki-platform instance */
           id: string;
         };
       };
@@ -204,7 +149,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the cat-validate instance */
+            /** @description Name of the xwiki-platform instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -222,33 +167,7 @@ export interface paths {
                 url: string;
               };
             };
-            Keys: string;
-            Issuer?: string;
-            RedisUrl?: string;
-            ClickHouseUrl?: string;
-          } & {
-            _links: {
-              self: {
-                /** @description Instance resource */
-                href: string;
-              };
-              logs?: {
-                /** @description Get logs for this instance */
-                href: string;
-              };
-              health?: {
-                /** @description Get health status for this instance */
-                href: string;
-              };
-              ports?: {
-                /** @description Get exposed ports for this instance */
-                href: string;
-              };
-              restart?: {
-                /** @description Restart this instance */
-                href: string;
-              };
-            };
+            DatabaseUrl: string;
           };
         };
         /** Default Response */
@@ -267,11 +186,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an cat-validate instance */
+    /** Stop and remove an xwiki-platform instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the xwiki-platform instance */
           id: string;
         };
       };
@@ -291,11 +210,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of cat-validate instance */
+    /** Return status of xwiki-platform instance */
     get: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the xwiki-platform instance */
           id: string;
         };
       };
@@ -318,7 +237,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the cat-validate instance */
+    /** Return the latest logs from the xwiki-platform instance */
     get: {
       parameters: {
         query: {
@@ -326,7 +245,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the xwiki-platform instance */
           id: string;
         };
       };
@@ -346,11 +265,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for cat-validate instance */
+    /** Return the exposed extra ports for xwiki-platform instance */
     get: {
       parameters: {
         path: {
-          /** Name of the cat-validate instance */
+          /** Name of the xwiki-platform instance */
           id: string;
         };
       };
@@ -381,11 +300,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnCatValidate =
-  paths['/cat-validateinstance/{id}']['get']['responses']['200']['schema'];
+export type XwikiXwikiPlatform =
+  paths['/xwiki-platforminstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnCatValidateConfig =
-  paths['/cat-validateinstance']['post']['parameters']['body']['body'];
+export type XwikiXwikiPlatformConfig =
+  paths['/xwiki-platforminstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -394,109 +313,106 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-cat-validate
- * @description Enhance your security with Common Access Token Validator, the ultimate validation service for CTA-5007 tokens. Seamlessly integrate with Redis and ClickHouse for efficient token management. Secure your apps today!
+ * @namespace xwiki-xwiki-platform
+ * @description Empower your team's collaboration with XWiki Platform, a versatile and robust wiki solution perfect for building seamless, interactive applications. Share knowledge and streamline workflows effortlessly.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} EyevinnCatValidateConfig
- * @property {string} name - Name of cat-validate
- * @property {string} Keys - Keys
- * @property {string} [Issuer] - Issuer
- * @property {string} [RedisUrl] - RedisUrl
- * @property {string} [ClickHouseUrl] - ClickHouseUrl
+ * @typedef {Object} XwikiXwikiPlatformConfig
+ * @property {string} name - Name of xwiki-platform
+ * @property {string} DatabaseUrl - Postgres Database URL
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnCatValidate
- * @property {string} name - Name of the Common Access Token Validator instance
- * @property {string} url - URL of the Common Access Token Validator instance
+ * @typedef {Object} XwikiXwikiPlatform
+ * @property {string} name - Name of the XWiki instance
+ * @property {string} url - URL of the XWiki instance
  *
  */
 
 /**
- * Create a new Common Access Token Validator instance
+ * Create a new XWiki instance
  *
- * @memberOf eyevinn-cat-validate
+ * @memberOf xwiki-xwiki-platform
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnCatValidateConfig} body - Service instance configuration
- * @returns {EyevinnCatValidate} - Service instance
+ * @param {XwikiXwikiPlatformConfig} body - Service instance configuration
+ * @returns {XwikiXwikiPlatform} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnCatValidateInstance } from '@osaas/client-services';
+ * import { createXwikiXwikiPlatformInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnCatValidateConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnCatValidateInstance(ctx, body);
+ * const body: XwikiXwikiPlatformConfig = { name: 'myinstance', ... };
+ * const instance = await createXwikiXwikiPlatformInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnCatValidateInstance(
+export async function createXwikiXwikiPlatformInstance(
   ctx: Context,
-  body: EyevinnCatValidateConfig
-): Promise<EyevinnCatValidate> {
+  body: XwikiXwikiPlatformConfig
+): Promise<XwikiXwikiPlatform> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-cat-validate'
+    'xwiki-xwiki-platform'
   );
   const instance = await createInstance(
     ctx,
-    'eyevinn-cat-validate',
+    'xwiki-xwiki-platform',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-cat-validate', instance.name, ctx);
+  await waitForInstanceReady('xwiki-xwiki-platform', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Common Access Token Validator instance
+ * Remove a XWiki instance
  *
- * @memberOf eyevinn-cat-validate
+ * @memberOf xwiki-xwiki-platform
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the validator to be removed
+ * @param {string} name - Name of the xwiki-platform to be removed
  */
-export async function removeEyevinnCatValidateInstance(
+export async function removeXwikiXwikiPlatformInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-cat-validate'
+    'xwiki-xwiki-platform'
   );
-  await removeInstance(ctx, 'eyevinn-cat-validate', name, serviceAccessToken);
+  await removeInstance(ctx, 'xwiki-xwiki-platform', name, serviceAccessToken);
 }
 
 /**
- * Get a Common Access Token Validator instance
+ * Get a XWiki instance
  *
- * @memberOf eyevinn-cat-validate
+ * @memberOf xwiki-xwiki-platform
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the validator to be retrieved
- * @returns {EyevinnCatValidate} - Service instance
+ * @param {string} name - Name of the xwiki-platform to be retrieved
+ * @returns {XwikiXwikiPlatform} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnCatValidateInstance } from '@osaas/client-services';
+ * import { getXwikiXwikiPlatformInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnCatValidateInstance(ctx, 'myinstance');
+ * const instance = await getXwikiXwikiPlatformInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnCatValidateInstance(
+export async function getXwikiXwikiPlatformInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnCatValidate> {
+): Promise<XwikiXwikiPlatform> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-cat-validate'
+    'xwiki-xwiki-platform'
   );
   return await getInstance(
     ctx,
-    'eyevinn-cat-validate',
+    'xwiki-xwiki-platform',
     name,
     serviceAccessToken
   );

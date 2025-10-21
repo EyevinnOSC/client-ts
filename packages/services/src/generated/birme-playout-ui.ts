@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance': {
-    /** List all running couchdb instances */
+  '/playout-uiinstance': {
+    /** List all running playout-ui instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the couchdb instance */
+            /** @description Name of the playout-ui instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,7 +67,11 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            DbUrl: string;
+            Database?: string;
+            Username: string;
+            Password: string;
+            CorsOrigins?: string;
           } & {
             _links: {
               self: {
@@ -106,14 +110,18 @@ export interface paths {
         };
       };
     };
-    /** Launch a new couchdb instance */
+    /** Launch a new playout-ui instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the playout-ui instance */
             name: string;
-            AdminPassword: string;
+            DbUrl: string;
+            Database?: string;
+            Username: string;
+            Password: string;
+            CorsOrigins?: string;
           };
         };
       };
@@ -121,7 +129,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the playout-ui instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -139,7 +147,11 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            DbUrl: string;
+            Database?: string;
+            Username: string;
+            Password: string;
+            CorsOrigins?: string;
           } & {
             _links: {
               self: {
@@ -194,11 +206,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart couchdb */
+    /** Restart playout-ui */
     post: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the playout-ui instance */
           id: string;
         };
       };
@@ -217,12 +229,12 @@ export interface paths {
       };
     };
   };
-  '/couchdbinstance/{id}': {
-    /** Obtain status and resource URLs for an couchdb instance */
+  '/playout-uiinstance/{id}': {
+    /** Obtain status and resource URLs for an playout-ui instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the playout-ui instance */
           id: string;
         };
       };
@@ -230,7 +242,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the playout-ui instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -248,7 +260,11 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            DbUrl: string;
+            Database?: string;
+            Username: string;
+            Password: string;
+            CorsOrigins?: string;
           } & {
             _links: {
               self: {
@@ -294,11 +310,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an couchdb instance */
+    /** Stop and remove an playout-ui instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the playout-ui instance */
           id: string;
         };
       };
@@ -316,18 +332,22 @@ export interface paths {
         };
       };
     };
-    /** Patch couchdb instance with new parameters and restart */
+    /** Patch playout-ui instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the playout-ui instance */
             name?: string;
-            AdminPassword?: string;
+            DbUrl?: string;
+            Database?: string;
+            Username?: string;
+            Password?: string;
+            CorsOrigins?: string;
           };
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the playout-ui instance */
           id: string;
         };
       };
@@ -335,7 +355,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the couchdb instance */
+            /** @description Name of the playout-ui instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -353,7 +373,11 @@ export interface paths {
                 url: string;
               };
             };
-            AdminPassword: string;
+            DbUrl: string;
+            Database?: string;
+            Username: string;
+            Password: string;
+            CorsOrigins?: string;
           } & {
             _links: {
               self: {
@@ -408,11 +432,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of couchdb instance */
+    /** Return status of playout-ui instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the playout-ui instance */
           id: string;
         };
       };
@@ -436,7 +460,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the couchdb instance */
+    /** Return the latest logs from the playout-ui instance */
     get: {
       parameters: {
         query: {
@@ -444,7 +468,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the playout-ui instance */
           id: string;
         };
       };
@@ -464,11 +488,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for couchdb instance */
+    /** Return the exposed extra ports for playout-ui instance */
     get: {
       parameters: {
         path: {
-          /** Name of the couchdb instance */
+          /** Name of the playout-ui instance */
           id: string;
         };
       };
@@ -499,11 +523,11 @@ export interface operations {}
 
 export interface external {}
 
-export type ApacheCouchdb =
-  paths['/couchdbinstance/{id}']['get']['responses']['200']['schema'];
+export type BirmePlayoutUi =
+  paths['/playout-uiinstance/{id}']['get']['responses']['200']['schema'];
 
-export type ApacheCouchdbConfig =
-  paths['/couchdbinstance']['post']['parameters']['body']['body'];
+export type BirmePlayoutUiConfig =
+  paths['/playout-uiinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -512,96 +536,106 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace apache-couchdb
- * @description Unlock seamless data management with Apache CouchDB! Effortlessly scalable and highly available, CouchDB makes storing, retrieving, and syncing data across devices a breeze. Ideal for modern cloud apps!
+ * @namespace birme-playout-ui
+ * @description Elevate your media scheduling with Playout UI! Seamlessly manage playlists with live time display, real-time progress tracking, and backend flexibility. Effortlessly organize, edit, and control playback. Ideal for dynamic environments!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-CouchDB.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} ApacheCouchdbConfig
- * @property {string} name - Name of couchdb
- * @property {string} AdminPassword - AdminPassword
+ * @typedef {Object} BirmePlayoutUiConfig
+ * @property {string} name - Name of playout-ui
+ * @property {string} DbUrl - DbUrl
+ * @property {string} [Database] - Database
+ * @property {string} Username - Username
+ * @property {string} Password - Password
+ * @property {string} [CorsOrigins] - CorsOrigins
 
  * 
  */
 
 /**
- * @typedef {Object} ApacheCouchdb
- * @property {string} name - Name of the Couch DB instance
- * @property {string} url - URL of the Couch DB instance
+ * @typedef {Object} BirmePlayoutUi
+ * @property {string} name - Name of the Playout UI instance
+ * @property {string} url - URL of the Playout UI instance
  *
  */
 
 /**
- * Create a new Couch DB instance
+ * Create a new Playout UI instance
  *
- * @memberOf apache-couchdb
+ * @memberOf birme-playout-ui
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {ApacheCouchdbConfig} body - Service instance configuration
- * @returns {ApacheCouchdb} - Service instance
+ * @param {BirmePlayoutUiConfig} body - Service instance configuration
+ * @returns {BirmePlayoutUi} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createApacheCouchdbInstance } from '@osaas/client-services';
+ * import { createBirmePlayoutUiInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: ApacheCouchdbConfig = { name: 'myinstance', ... };
- * const instance = await createApacheCouchdbInstance(ctx, body);
+ * const body: BirmePlayoutUiConfig = { name: 'myinstance', ... };
+ * const instance = await createBirmePlayoutUiInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createApacheCouchdbInstance(
+export async function createBirmePlayoutUiInstance(
   ctx: Context,
-  body: ApacheCouchdbConfig
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
+  body: BirmePlayoutUiConfig
+): Promise<BirmePlayoutUi> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'birme-playout-ui'
+  );
   const instance = await createInstance(
     ctx,
-    'apache-couchdb',
+    'birme-playout-ui',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('apache-couchdb', instance.name, ctx);
+  await waitForInstanceReady('birme-playout-ui', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Couch DB instance
+ * Remove a Playout UI instance
  *
- * @memberOf apache-couchdb
+ * @memberOf birme-playout-ui
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be removed
+ * @param {string} name - Name of the playout-ui to be removed
  */
-export async function removeApacheCouchdbInstance(
+export async function removeBirmePlayoutUiInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  await removeInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'birme-playout-ui'
+  );
+  await removeInstance(ctx, 'birme-playout-ui', name, serviceAccessToken);
 }
 
 /**
- * Get a Couch DB instance
+ * Get a Playout UI instance
  *
- * @memberOf apache-couchdb
+ * @memberOf birme-playout-ui
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the couchdb to be retrieved
- * @returns {ApacheCouchdb} - Service instance
+ * @param {string} name - Name of the playout-ui to be retrieved
+ * @returns {BirmePlayoutUi} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getApacheCouchdbInstance } from '@osaas/client-services';
+ * import { getBirmePlayoutUiInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getApacheCouchdbInstance(ctx, 'myinstance');
+ * const instance = await getBirmePlayoutUiInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getApacheCouchdbInstance(
+export async function getBirmePlayoutUiInstance(
   ctx: Context,
   name: string
-): Promise<ApacheCouchdb> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('apache-couchdb');
-  return await getInstance(ctx, 'apache-couchdb', name, serviceAccessToken);
+): Promise<BirmePlayoutUi> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'birme-playout-ui'
+  );
+  return await getInstance(ctx, 'birme-playout-ui', name, serviceAccessToken);
 }

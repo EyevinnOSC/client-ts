@@ -15,14 +15,14 @@ export interface paths {
       };
     };
   };
-  '/hls-monitorinstance': {
-    /** List all running hls-monitor instances */
+  '/openprojectinstance': {
+    /** List all running openproject instances */
     get: {
       responses: {
         /** Default Response */
         200: {
-          schema: ({
-            /** @description Name of the hls-monitor instance */
+          schema: {
+            /** @description Name of the openproject instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -40,30 +40,8 @@ export interface paths {
                 url: string;
               };
             };
-          } & {
-            _links: {
-              self: {
-                /** @description Instance resource */
-                href: string;
-              };
-              logs?: {
-                /** @description Get logs for this instance */
-                href: string;
-              };
-              health?: {
-                /** @description Get health status for this instance */
-                href: string;
-              };
-              ports?: {
-                /** @description Get exposed ports for this instance */
-                href: string;
-              };
-              restart?: {
-                /** @description Restart this instance */
-                href: string;
-              };
-            };
-          })[];
+            DatabaseUrl: string;
+          }[];
         };
         /** Default Response */
         500: {
@@ -74,13 +52,14 @@ export interface paths {
         };
       };
     };
-    /** Launch a new hls-monitor instance */
+    /** Launch a new openproject instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the hls-monitor instance */
+            /** @description Name of the openproject instance */
             name: string;
+            DatabaseUrl: string;
           };
         };
       };
@@ -88,7 +67,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the hls-monitor instance */
+            /** @description Name of the openproject instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -106,29 +85,7 @@ export interface paths {
                 url: string;
               };
             };
-          } & {
-            _links: {
-              self: {
-                /** @description Instance resource */
-                href: string;
-              };
-              logs?: {
-                /** @description Get logs for this instance */
-                href: string;
-              };
-              health?: {
-                /** @description Get health status for this instance */
-                href: string;
-              };
-              ports?: {
-                /** @description Get exposed ports for this instance */
-                href: string;
-              };
-              restart?: {
-                /** @description Restart this instance */
-                href: string;
-              };
-            };
+            DatabaseUrl: string;
           };
         };
         /** Default Response */
@@ -155,36 +112,12 @@ export interface paths {
       };
     };
   };
-  '/restart/{id}': {
-    /** Restart hls-monitor */
-    post: {
-      parameters: {
-        path: {
-          /** Name of the hls-monitor instance */
-          id: string;
-        };
-      };
-      responses: {
-        /** Default Response */
-        204: {
-          schema: string;
-        };
-        /** Default Response */
-        500: {
-          schema: {
-            /** @description Reason why something failed */
-            reason: string;
-          };
-        };
-      };
-    };
-  };
-  '/hls-monitorinstance/{id}': {
-    /** Obtain status and resource URLs for an hls-monitor instance */
+  '/openprojectinstance/{id}': {
+    /** Obtain status and resource URLs for an openproject instance */
     get: {
       parameters: {
         path: {
-          /** Name of the hls-monitor instance */
+          /** Name of the openproject instance */
           id: string;
         };
       };
@@ -192,7 +125,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the hls-monitor instance */
+            /** @description Name of the openproject instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -210,29 +143,7 @@ export interface paths {
                 url: string;
               };
             };
-          } & {
-            _links: {
-              self: {
-                /** @description Instance resource */
-                href: string;
-              };
-              logs?: {
-                /** @description Get logs for this instance */
-                href: string;
-              };
-              health?: {
-                /** @description Get health status for this instance */
-                href: string;
-              };
-              ports?: {
-                /** @description Get exposed ports for this instance */
-                href: string;
-              };
-              restart?: {
-                /** @description Restart this instance */
-                href: string;
-              };
-            };
+            DatabaseUrl: string;
           };
         };
         /** Default Response */
@@ -251,11 +162,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an hls-monitor instance */
+    /** Stop and remove an openproject instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the hls-monitor instance */
+          /** Name of the openproject instance */
           id: string;
         };
       };
@@ -275,11 +186,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of hls-monitor instance */
+    /** Return status of openproject instance */
     get: {
       parameters: {
         path: {
-          /** Name of the hls-monitor instance */
+          /** Name of the openproject instance */
           id: string;
         };
       };
@@ -302,7 +213,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the hls-monitor instance */
+    /** Return the latest logs from the openproject instance */
     get: {
       parameters: {
         query: {
@@ -310,7 +221,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the hls-monitor instance */
+          /** Name of the openproject instance */
           id: string;
         };
       };
@@ -330,11 +241,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for hls-monitor instance */
+    /** Return the exposed extra ports for openproject instance */
     get: {
       parameters: {
         path: {
-          /** Name of the hls-monitor instance */
+          /** Name of the openproject instance */
           id: string;
         };
       };
@@ -365,11 +276,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnHlsMonitor =
-  paths['/hls-monitorinstance/{id}']['get']['responses']['200']['schema'];
+export type OpfOpenproject =
+  paths['/openprojectinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnHlsMonitorConfig =
-  paths['/hls-monitorinstance']['post']['parameters']['body']['body'];
+export type OpfOpenprojectConfig =
+  paths['/openprojectinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -378,106 +289,96 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-hls-monitor
- * @description Service to monitor one or more HLS-streams for manifest errors and inconsistencies.
+ * @namespace opf-openproject
+ * @description Elevate team productivity with OpenProject, the ultimate web-based project management tool. Seamlessly plan, collaborate, and track your projects with features tailored for agile, scrum, and budgeting excellence.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-HLS-Stream-Monitor.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} EyevinnHlsMonitorConfig
- * @property {string} name - Name of hls-monitor
+ * @typedef {Object} OpfOpenprojectConfig
+ * @property {string} name - Name of openproject
+ * @property {string} DatabaseUrl - PSQL Db Url: postgres://USER:PWD@IP:PORT/DB
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnHlsMonitor
- * @property {string} name - Name of the HLS Stream Monitor instance
- * @property {string} url - URL of the HLS Stream Monitor instance
+ * @typedef {Object} OpfOpenproject
+ * @property {string} name - Name of the OpenProject instance
+ * @property {string} url - URL of the OpenProject instance
  *
  */
 
 /**
- * Create a new HLS Stream Monitor instance
+ * Create a new OpenProject instance
  *
- * @memberOf eyevinn-hls-monitor
+ * @memberOf opf-openproject
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnHlsMonitorConfig} body - Service instance configuration
- * @returns {EyevinnHlsMonitor} - Service instance
+ * @param {OpfOpenprojectConfig} body - Service instance configuration
+ * @returns {OpfOpenproject} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnHlsMonitorInstance } from '@osaas/client-services';
+ * import { createOpfOpenprojectInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnHlsMonitorConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnHlsMonitorInstance(ctx, body);
+ * const body: OpfOpenprojectConfig = { name: 'myinstance', ... };
+ * const instance = await createOpfOpenprojectInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnHlsMonitorInstance(
+export async function createOpfOpenprojectInstance(
   ctx: Context,
-  body: EyevinnHlsMonitorConfig
-): Promise<EyevinnHlsMonitor> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-hls-monitor'
-  );
+  body: OpfOpenprojectConfig
+): Promise<OpfOpenproject> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('opf-openproject');
   const instance = await createInstance(
     ctx,
-    'eyevinn-hls-monitor',
+    'opf-openproject',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-hls-monitor', instance.name, ctx);
+  await waitForInstanceReady('opf-openproject', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a HLS Stream Monitor instance
+ * Remove a OpenProject instance
  *
- * @memberOf eyevinn-hls-monitor
+ * @memberOf opf-openproject
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the monitor to be removed
+ * @param {string} name - Name of the service to be removed
  */
-export async function removeEyevinnHlsMonitorInstance(
+export async function removeOpfOpenprojectInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-hls-monitor'
-  );
-  await removeInstance(ctx, 'eyevinn-hls-monitor', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken('opf-openproject');
+  await removeInstance(ctx, 'opf-openproject', name, serviceAccessToken);
 }
 
 /**
- * Get a HLS Stream Monitor instance
+ * Get a OpenProject instance
  *
- * @memberOf eyevinn-hls-monitor
+ * @memberOf opf-openproject
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the monitor to be retrieved
- * @returns {EyevinnHlsMonitor} - Service instance
+ * @param {string} name - Name of the service to be retrieved
+ * @returns {OpfOpenproject} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnHlsMonitorInstance } from '@osaas/client-services';
+ * import { getOpfOpenprojectInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnHlsMonitorInstance(ctx, 'myinstance');
+ * const instance = await getOpfOpenprojectInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnHlsMonitorInstance(
+export async function getOpfOpenprojectInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnHlsMonitor> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-hls-monitor'
-  );
-  return await getInstance(
-    ctx,
-    'eyevinn-hls-monitor',
-    name,
-    serviceAccessToken
-  );
+): Promise<OpfOpenproject> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('opf-openproject');
+  return await getInstance(ctx, 'opf-openproject', name, serviceAccessToken);
 }
