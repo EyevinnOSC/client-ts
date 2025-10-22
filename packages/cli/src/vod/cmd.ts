@@ -4,6 +4,7 @@ import {
   createVodPipeline,
   removeVodPipeline
 } from '@osaas/client-transcode';
+import { getPipeline } from '@osaas/client-transcode/lib/vodpipeline';
 import { Command } from 'commander';
 
 export function cmdVod() {
@@ -27,14 +28,21 @@ export function cmdVod() {
         const globalOpts = command.optsWithGlobals();
         const environment = globalOpts?.env || 'prod';
         const ctx = new Context({ environment });
-        Log().info('Creating VOD pipeline');
-        const pipeline = await createVodPipeline(name, ctx, {
+        const opts = {
           outputBucketName: options.outputBucketName,
           accessKeyId: options.accessKeyId,
           secretAccessKey: options.secretAccessKey,
           endpoint: options.endpoint
-        });
-        Log().info('VOD pipeline created, starting job to create VOD');
+        };
+        let pipeline = await getPipeline(name, ctx, opts);
+        if (!pipeline) {
+          Log().info('Creating VOD pipeline');
+          pipeline = await createVodPipeline(name, ctx, opts);
+          Log().info('VOD pipeline created, starting job to create VOD');
+        } else {
+          Log().info('Using existing VOD pipeline, starting job to create VOD');
+          Log().debug(pipeline);
+        }
         const job = await createVod(pipeline, source, ctx);
         if (job) {
           Log().info('Created VOD will be available at: ' + job.vodUrl);

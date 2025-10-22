@@ -26,7 +26,7 @@ import {
 import * as Minio from 'minio';
 import { delay } from './util';
 import { randomBytes } from 'crypto';
-import { basename, extname } from 'node:path';
+import path, { basename, extname } from 'node:path';
 
 export interface VodPipeline {
   name: string;
@@ -296,6 +296,11 @@ export async function createVodPipeline(
   if (!isValidInstanceName(name)) {
     throw new Error(`Invalid instance name: ${name}`);
   }
+  const pipeline = await getPipeline(name, ctx, opts);
+  if (pipeline) {
+    return pipeline;
+  }
+
   let storage: StorageBucket;
   if (opts?.outputBucketName) {
     if (!opts.accessKeyId || !opts.secretAccessKey || !opts.endpoint) {
@@ -342,6 +347,65 @@ export async function createVodPipeline(
     inputStorage,
     outputBucketName: opts?.outputBucketName || name
   };
+}
+
+/**
+ * Get a VOD pipeline
+ *
+ * @memberof module:@osaas/client-transcode
+ * @param name - name of pipeline to get
+ * @param context - Eyevinn OSC context
+ * @param {VodPipelineOpts} [opts] - VOD pipeline options
+ * @returns {VodPipeline|undefined} - VOD pipeline object or undefined if not found
+ */
+export async function getPipeline(
+  name: string,
+  ctx: Context,
+  opts?: VodPipelineOpts
+): Promise<VodPipeline | undefined> {
+  const encoreInstance = await getInstance(
+    ctx,
+    'encore',
+    name,
+    await ctx.getServiceAccessToken('encore')
+  );
+  const encoreCallbackListenerInstance = await getInstance(
+    ctx,
+    'eyevinn-encore-callback-listener',
+    name,
+    await ctx.getServiceAccessToken('eyevinn-encore-callback-listener')
+  );
+  const encorePackagerInstance = await getInstance(
+    ctx,
+    'eyevinn-encore-packager',
+    name,
+    await ctx.getServiceAccessToken('eyevinn-encore-packager')
+  );
+  const storageInstance = await getInstance(
+    ctx,
+    'minio-minio',
+    name,
+    await ctx.getServiceAccessToken('minio-minio')
+  );
+  if (
+    encoreInstance &&
+    encoreCallbackListenerInstance &&
+    encorePackagerInstance &&
+    storageInstance
+  ) {
+    return {
+      name,
+      jobs: new URL('/encoreJobs', encoreInstance.url).toString(),
+      callbackUrl: new URL(
+        '/encoreCallback',
+        encoreCallbackListenerInstance.url
+      ).toString(),
+      output: encorePackagerInstance.OutputFolder,
+      endpoint: storageInstance.url,
+      outputBucketName: opts?.outputBucketName || name
+    };
+  }
+  return undefined;
 }
 
 /**
@@ -440,9 +504,16 @@ export async function createVod(
   if (response.ok) {
     const createdJob = (await response.json()) as { id: string };
     const sourceName = basename(source, extname(source));
+    const outputFolder = new URL(pipeline.output).pathname;
     const vod = {
       id: createdJob.id,
-      vodUrl: `${pipeline.endpoint}/${pipeline.outputBucketName}/${sourceName}/${createdJob.id}/index.m3u8`
+      vodUrl: `${pipeline.endpoint}/${path.join(
+        pipeline.outputBucketName,
+        outputFolder,
+        sourceName,
+        createdJob.id,
+        'index.m3u8'
+      )}`
     };
     return vod;
   }
