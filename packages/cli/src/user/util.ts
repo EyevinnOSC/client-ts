@@ -28,6 +28,10 @@ export function instanceOptsToPayload(opts: string[] | undefined) {
   return payload;
 }
 
+export function makeSafeName(name: string): string {
+  return name.toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
 export async function confirm(message: string | undefined): Promise<void> {
   const rl = readline.createInterface({
     input: process.stdin,
