@@ -20,6 +20,7 @@ export interface TranscodeOptions {
   seekTo?: number;
   duration?: number;
   audioMixPreset?: string;
+  insertCreationDateUtc?: boolean;
 }
 
 export interface CustomEndpoint {
@@ -31,6 +32,19 @@ export interface CustomEndpoint {
 function isValidSmpteTimecode(smpteTimeCode: string): boolean {
   const smpteRegex = /^([0-1]\d|2[0-3]):([0-5]\d):([0-5]\d):([0-2]\d|3[0-1])$/;
   return smpteRegex.test(smpteTimeCode);
+}
+
+function formatUtcDateString(): string {
+  const now = new Date();
+  const year = now.getUTCFullYear();
+  const month = String(now.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(now.getUTCDate()).padStart(2, '0');
+  const hours = String(now.getUTCHours()).padStart(2, '0');
+  const minutes = String(now.getUTCMinutes()).padStart(2, '0');
+  const seconds = String(now.getUTCSeconds()).padStart(2, '0');
+  const milliseconds = String(now.getUTCMilliseconds()).padStart(3, '0');
+
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;
 }
 
 export function smpteTimecodeToFrames(
@@ -61,6 +75,7 @@ export function smpteTimecodeToFrames(
  * @property {number} [seekTo] - Seek to this position (in seconds) in the input file
  * @property {number} [duration] - Duration (in seconds) to transcode from the seek position
  * @property {string} [audioMixPreset] - Audio mix preset to use (e.g., "stereo", "5.1-surround")
+ * @property {boolean} [insertCreationDateUtc] - Insert the current UTC date as creation date in the output metadata
  */
 
 /**
@@ -184,6 +199,12 @@ export async function transcode(
   }
   if (opts.callBackUrl) {
     encoreJob['progressCallbackUri'] = opts.callBackUrl.toString();
+  }
+  if (opts.insertCreationDateUtc) {
+    encoreJob['profileParams'] = {
+      ...encoreJob['profileParams'],
+      utcnowstring: formatUtcDateString()
+    };
   }
   const headers: { [name: string]: string | string[] } = {
     'Content-Type': 'application/json'
