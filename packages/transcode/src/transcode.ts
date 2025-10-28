@@ -20,6 +20,7 @@ export interface TranscodeOptions {
   seekTo?: number;
   duration?: number;
   audioMixPreset?: string;
+  insertCreationDateUtc?: boolean;
 }
 
 export interface CustomEndpoint {
@@ -61,6 +62,7 @@ export function smpteTimecodeToFrames(
  * @property {number} [seekTo] - Seek to this position (in seconds) in the input file
  * @property {number} [duration] - Duration (in seconds) to transcode from the seek position
  * @property {string} [audioMixPreset] - Audio mix preset to use (e.g., "stereo", "5.1-surround")
+ * @property {boolean} [insertCreationDateUtc] - Insert the current UTC date as creation date in the output metadata
  */
 
 /**
@@ -184,6 +186,12 @@ export async function transcode(
   }
   if (opts.callBackUrl) {
     encoreJob['progressCallbackUri'] = opts.callBackUrl.toString();
+  }
+  if (opts.insertCreationDateUtc) {
+    encoreJob['profileParams'] = {
+      ...encoreJob['profileParams'],
+      utcnowstring: new Date().toUTCString()
+    };
   }
   const headers: { [name: string]: string | string[] } = {
     'Content-Type': 'application/json'
