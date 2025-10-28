@@ -34,6 +34,19 @@ function isValidSmpteTimecode(smpteTimeCode: string): boolean {
   return smpteRegex.test(smpteTimeCode);
 }
 
+function formatUtcDateString(): string {
+  const now = new Date();
+  const year = now.getUTCFullYear();
+  const month = String(now.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(now.getUTCDate()).padStart(2, '0');
+  const hours = String(now.getUTCHours()).padStart(2, '0');
+  const minutes = String(now.getUTCMinutes()).padStart(2, '0');
+  const seconds = String(now.getUTCSeconds()).padStart(2, '0');
+  const milliseconds = String(now.getUTCMilliseconds()).padStart(3, '0');
+  
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${milliseconds}`;
+}
+
 export function smpteTimecodeToFrames(
   smpteTimeCode: string,
   frameRate: number
@@ -190,7 +203,7 @@ export async function transcode(
   if (opts.insertCreationDateUtc) {
     encoreJob['profileParams'] = {
       ...encoreJob['profileParams'],
-      utcnowstring: new Date().toUTCString()
+      utcnowstring: formatUtcDateString()
     };
   }
   const headers: { [name: string]: string | string[] } = {
