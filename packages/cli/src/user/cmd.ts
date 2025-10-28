@@ -10,7 +10,7 @@ import {
   removeInstance
 } from '@osaas/client-core';
 import { Command } from 'commander';
-import { confirm, instanceOptsToPayload } from './util';
+import { confirm, instanceOptsToPayload, makeSafeName } from './util';
 import { restartInstance } from '@osaas/client-core/lib/core';
 
 export function cmdList() {
@@ -48,6 +48,7 @@ export function cmdCreate() {
     .description('Create a service instance')
     .argument('<serviceId>', 'The Service Id')
     .argument('<name>', 'The instance name')
+    .option('--safe-name', 'Strip invalid characters from the name')
     .option(
       '-o, --instance-options [instanceOptions...]',
       'Instance options as key value pairs (e.g. -o key1=value1 -o key2=value2)'
@@ -56,7 +57,7 @@ export function cmdCreate() {
       try {
         const globalOpts = command.optsWithGlobals();
         const payload = instanceOptsToPayload(options.instanceOptions);
-        payload['name'] = name;
+        payload['name'] = options.safeName ? makeSafeName(name) : name;
         const environment = globalOpts?.env || 'prod';
         const ctx = new Context({ environment });
         const serviceAccessToken = await ctx.getServiceAccessToken(serviceId);
