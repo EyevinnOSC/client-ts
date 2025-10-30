@@ -62,6 +62,10 @@ export interface VodJob {
   vodUrl: string;
 }
 
+export interface VodOptions {
+  profile?: string;
+}
+
 function createPublicBucketPolicy(name: string) {
   return {
     Statement: [
@@ -469,7 +473,8 @@ export async function removeVodPipeline(name: string, context: Context) {
 export async function createVod(
   pipeline: VodPipeline,
   source: string,
-  context: Context
+  context: Context,
+  vodOptions?: VodOptions
 ) {
   const sat = await context.getServiceAccessToken('encore');
   const externalId =
@@ -480,7 +485,7 @@ export async function createVod(
   }
   const job = {
     externalId,
-    profile: 'program',
+    profile: vodOptions?.profile || 'program',
     outputFolder: '/usercontent/',
     baseName: externalId,
     progressCallbackUri: pipeline.callbackUrl,

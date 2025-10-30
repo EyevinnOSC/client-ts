@@ -16,6 +16,10 @@ export function cmdVod() {
     )
     .argument('<name>', 'Name of VOD Pipeline')
     .argument('<source>', 'Source URL')
+    .option(
+      '--profile <profile>',
+      'Transcoding profile to use [default: program]'
+    )
     .option('--output-bucket-name <name>', 'Name of existing output bucket')
     .option('--access-key-id <id>', 'Access key ID for existing output bucket')
     .option(
@@ -43,7 +47,10 @@ export function cmdVod() {
           Log().info('Using existing VOD pipeline, starting job to create VOD');
           Log().debug(pipeline);
         }
-        const job = await createVod(pipeline, source, ctx);
+        const vodOptions = {
+          profile: options.profile
+        };
+        const job = await createVod(pipeline, source, ctx, vodOptions);
         if (job) {
           Log().info('Created VOD will be available at: ' + job.vodUrl);
         }
