@@ -25,23 +25,31 @@ Options:
   -h, --help                           display help for command
 
 Commands:
-  admin
+  admin                                Administrative commands for OSC super admins
   list <serviceId>                     List all my service instances
   create [options] <serviceId> <name>  Create a service instance
   describe <serviceId> <name>          Get details for a service instance
-  remove <serviceId> <name>            Remove a service instance
+  remove [options] <serviceId> <name>  Remove a service instance
+  restart <serviceId> <name>           Restart a service instance
   logs <serviceId> <name>              Get logs for a service instance
+  list-reserved-nodes                  List all my reserved nodes
+  service-access-token <serviceId>     Generate a service access token for a service
+  secrets                              Manage secrets for services (list, create, update, remove)
   packager [options] <source> <dest>   Create streaming package from ABR bundle on S3
                                        and store on another S3 bucket
-  compare
-  live
-  intercom
-  transcribe [options] <source>        Generate subtitles from video or audio using Open
-                                       AI Whisper
-  db
-  architect
-  vod
-  web
+  compare vmaf <reference> <distorted> <result>  Compare two video files using VMAF
+  live                                 Live streaming commands
+  intercom                             Intercom messaging commands
+  transcribe [options] <source>        Generate subtitles from video or audio using OpenAI Whisper
+  db                                   Database management commands
+  architect                            AI chat assistant for architecture guidance
+  vod create [options] <name> <source> Create a VOD file ready for streaming
+  vod cleanup <name>                   Remove VOD pipeline but keep VOD files
+  web publish [options] <name> <dir>   Publish a website
+  web cdn-create [options] <serviceId> <instanceName>  Create a CDN distribution
+  web config-create <name>             Create a configuration service instance
+  web config-delete [options] <name>   Delete a configuration service instance
+  web config-to-env <name>             Export configuration values as environment variables
   help [command]                       display help for command
 ```
 
@@ -141,6 +149,18 @@ Create a VOD file for streaming from using a pipeline named `demo`. Follow the s
 % osc vod create demo https://testcontent.eyevinn.technology/mp4/VINN.mp4
 ```
 
+Create a VOD file with a specific transcoding profile:
+
+```
+% osc vod create demo https://testcontent.eyevinn.technology/mp4/VINN.mp4 --profile x264-high
+```
+
+Remove a VOD pipeline but keep the VOD files:
+
+```
+% osc vod cleanup demo
+```
+
 ### List all channel-engine instance for tenant `eyevinn` as an OSC super admin
 
 ```
@@ -182,4 +202,75 @@ And storing it in the shell.
 
 ```bash
 % eval `osc web config-to-env <config-instance-name>`
+```
+
+### Compare video files using VMAF
+
+Compare two video files and get a VMAF quality score:
+
+```bash
+% osc compare vmaf s3://bucket/reference.mp4 s3://bucket/distorted.mp4 s3://bucket/vmaf-result.json
+```
+
+### Generate subtitles from video or audio
+
+Generate subtitles using OpenAI Whisper:
+
+```bash
+% export OPENAI_API_KEY=<your-openai-api-key>
+% osc transcribe https://example.com/video.mp4 --format vtt --language en
+```
+
+### Manage service secrets
+
+List secrets for a service:
+
+```bash
+% osc secrets list minio-minio
+```
+
+Create a new secret:
+
+```bash
+% osc secrets create minio-minio mysecret myvalue
+```
+
+Update an existing secret:
+
+```bash
+% osc secrets update minio-minio mysecret newvalue
+```
+
+Remove a secret:
+
+```bash
+% osc secrets remove minio-minio mysecret
+```
+
+### Service instance management
+
+Restart a service instance:
+
+```bash
+% osc restart minio-minio mystore
+```
+
+List your reserved nodes:
+
+```bash
+% osc list-reserved-nodes
+```
+
+Generate a service access token:
+
+```bash
+% osc service-access-token minio-minio
+```
+
+### Create a service instance with safe name option
+
+Create a service instance with invalid characters stripped from the name:
+
+```bash
+% osc create minio-minio "my store with spaces!" --safe-name -o RootUser=admin -o RootPassword=abC12345678
 ```
