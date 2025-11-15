@@ -7,11 +7,13 @@ import {
   getPortsForInstance,
   listInstances,
   listReservedNodes,
-  removeInstance
+  removeInstance,
+  getInstanceScaling,
+  restartInstance,
+  scaleInstanceReplicas
 } from '@osaas/client-core';
 import { Command } from 'commander';
 import { confirm, instanceOptsToPayload, makeSafeName } from './util';
-import { restartInstance } from '@osaas/client-core/lib/core';
 
 export function cmdList() {
   const list = new Command('list');
@@ -226,6 +228,66 @@ export function cmdLogs() {
       }
     });
   return logs;
+}
+
+export function cmdGetInstanceReplicas() {
+  const replicas = new Command('get-instance-replicas');
+  replicas
+    .description('Get the number of replicas for a service instance')
+    .argument('<serviceId>', 'The Service Id')
+    .argument('<name>', 'The instance name')
+    .action(async (serviceId, name, options, command) => {
+      try {
+        const globalOpts = command.optsWithGlobals();
+        const environment = globalOpts?.env || 'prod';
+        const ctx = new Context({ environment });
+        const serviceAccessToken = await ctx.getServiceAccessToken(serviceId);
+
+        const scalingInfo = await getInstanceScaling(
+          ctx,
+          serviceId,
+          name,
+          serviceAccessToken
+        );
+        console.log(
+          `Instance ${name} has ${scalingInfo.actualReplicas} actual replicas and ${scalingInfo.desiredReplicas} desired replicas.`
+        );
+      } catch (err) {
+        console.log((err as Error).message);
+      }
+    });
+  return replicas;
+}
+
+export function cmdSetInstanceReplicas() {
+  const setReplicas = new Command('set-instance-replicas');
+  setReplicas
+    .description('Set the number of replicas for a service instance')
+    .argument('<serviceId>', 'The Service Id')
+    .argument('<name>', 'The instance name')
+    .argument('<replicas>', 'The desired number of replicas', parseInt)
+    .action(async (serviceId, name, replicas, options, command) => {
+      try {
+        const globalOpts = command.optsWithGlobals();
+        const environment = globalOpts?.env || 'prod';
+        const ctx = new Context({ environment });
+        const serviceAccessToken = await ctx.getServiceAccessToken(serviceId);
+
+        await scaleInstanceReplicas(
+          ctx,
+          serviceId,
+          name,
+          replicas,
+          serviceAccessToken
+        );
+        console.log(
+          `Set desired replicas for instance ${name} to ${replicas}.`
+        );
+      } catch (err) {
+        console.log((err as Error).message);
+      }
+    });
+  return setReplicas;
 }
 
 export function cmdReservedNodes() {

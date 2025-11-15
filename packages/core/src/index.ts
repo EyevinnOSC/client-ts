@@ -15,7 +15,10 @@ export {
   valueOrSecret,
   isValidInstanceName,
   waitForInstanceReady,
-  saveSecret
+  saveSecret,
+  restartInstance,
+  getInstanceScaling,
+  scaleInstanceReplicas
 } from './core';
 export {
   listSubscriptions,
