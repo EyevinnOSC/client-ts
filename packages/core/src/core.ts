@@ -321,6 +321,87 @@ export async function restartInstance(
   });
 }
 
+/**
+ * Get scaling information for an instance of a service in Open Source Cloud
+ * @memberof module:@osaas/client-core
+ * @param {Context} context - Open Source Cloud configuration context
+ * @param {string} serviceId - The service identifier
+ * @param {string} name - The name of the service instance
+ * @param {string} token - Service access token
+ * @returns {Object} - Scaling information with actualReplicas and desiredReplicas
+ */
+export async function getInstanceScaling(
+  context: Context,
+  serviceId: string,
+  name: string,
+  token: string
+): Promise<{ actualReplicas: number; desiredReplicas: number }> {
+  try {
+    const scaleUrl = await getInstanceLink(
+      context,
+      token,
+      serviceId,
+      name,
+      'scale'
+    );
+    return await createFetch<{
+      actualReplicas: number;
+      desiredReplicas: number;
+    }>(scaleUrl, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+  } catch (err) {
+    Log().debug(err);
+    throw new Error(
+      `Instance ${name} of service ${serviceId} does not support scaling`
+    );
+  }
+}
+
+/**
+ * Scale the number of replicas for an instance of a service in Open Source Cloud
+ * @memberof module:@osaas/client-core
+ * @param {Context} context - Open Source Cloud configuration context
+ * @param {string} serviceId - The service identifier
+ * @param {string} name - The name of the service instance
+ * @param {number} replicas - Desired number of replicas
+ * @param {string} token - Service access token
+ */
+export async function scaleInstanceReplicas(
+  context: Context,
+  serviceId: string,
+  name: string,
+  replicas: number,
+  token: string
+) {
+  try {
+    const scaleUrl = await getInstanceLink(
+      context,
+      token,
+      serviceId,
+      name,
+      'scale'
+    );
+    await createFetch(scaleUrl, {
+      method: 'PUT',
+      body: JSON.stringify({ desiredReplicas: replicas }),
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+  } catch (err) {
+    Log().debug(err);
+    throw new Error(
+      `Instance ${name} of service ${serviceId} could not be scaled`
+    );
+  }
+}
+
 export function instanceValue(
   instance: { [key: string]: string },
   key: string
