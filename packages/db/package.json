@@ -1,6 +1,6 @@
 {
   "name": "@osaas/client-db",
-  "version": "0.6.5",
+  "version": "0.6.6",
   "description": "Open Source Cloud Client SDK database library",
   "author": "Eyevinn Open Source Cloud <osc@eyevinn.se>",
   "homepage": "https://www.osaas.io",
@@ -25,8 +25,8 @@
     "test": "jest --passWithNoTests"
   },
   "dependencies": {
-    "@osaas/client-core": "^0.19.0",
-    "@osaas/client-services": "^0.12.0",
+    "@osaas/client-core": "^0.20.0",
+    "@osaas/client-services": "^0.12.1",
     "chalk": "4.1.2",
     "ioredis": "^5.5.0"
   },
