@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/encore-callback-listenerinstance': {
-    /** List all running encore-callback-listener instances */
+  '/web-video-reviewinstance': {
+    /** List all running web-video-review instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the web-video-review instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,9 +67,12 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
+            AccessKeyId: string;
+            SecretAccessKey: string;
+            Bucket: string;
+            s3Region?: string;
+            s3Endpoint?: string;
+            awsSessionToken?: string;
           } & {
             _links: {
               self: {
@@ -108,16 +111,19 @@ export interface paths {
         };
       };
     };
-    /** Launch a new encore-callback-listener instance */
+    /** Launch a new web-video-review instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the web-video-review instance */
             name: string;
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
+            AccessKeyId: string;
+            SecretAccessKey: string;
+            Bucket: string;
+            s3Region?: string;
+            s3Endpoint?: string;
+            awsSessionToken?: string;
           };
         };
       };
@@ -125,7 +131,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the web-video-review instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -143,9 +149,12 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
+            AccessKeyId: string;
+            SecretAccessKey: string;
+            Bucket: string;
+            s3Region?: string;
+            s3Endpoint?: string;
+            awsSessionToken?: string;
           } & {
             _links: {
               self: {
@@ -200,11 +209,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart encore-callback-listener */
+    /** Restart web-video-review */
     post: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the web-video-review instance */
           id: string;
         };
       };
@@ -223,12 +232,12 @@ export interface paths {
       };
     };
   };
-  '/encore-callback-listenerinstance/{id}': {
-    /** Obtain status and resource URLs for an encore-callback-listener instance */
+  '/web-video-reviewinstance/{id}': {
+    /** Obtain status and resource URLs for an web-video-review instance */
     get: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the web-video-review instance */
           id: string;
         };
       };
@@ -236,7 +245,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the web-video-review instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -254,9 +263,12 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
+            AccessKeyId: string;
+            SecretAccessKey: string;
+            Bucket: string;
+            s3Region?: string;
+            s3Endpoint?: string;
+            awsSessionToken?: string;
           } & {
             _links: {
               self: {
@@ -302,11 +314,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an encore-callback-listener instance */
+    /** Stop and remove an web-video-review instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the web-video-review instance */
           id: string;
         };
       };
@@ -324,20 +336,23 @@ export interface paths {
         };
       };
     };
-    /** Patch encore-callback-listener instance with new parameters and restart */
+    /** Patch web-video-review instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the web-video-review instance */
             name?: string;
-            RedisUrl?: string;
-            EncoreUrl?: string;
-            RedisQueue?: string;
+            AccessKeyId?: string;
+            SecretAccessKey?: string;
+            Bucket?: string;
+            s3Region?: string;
+            s3Endpoint?: string;
+            awsSessionToken?: string;
           };
         };
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the web-video-review instance */
           id: string;
         };
       };
@@ -345,7 +360,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the web-video-review instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -363,9 +378,12 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
+            AccessKeyId: string;
+            SecretAccessKey: string;
+            Bucket: string;
+            s3Region?: string;
+            s3Endpoint?: string;
+            awsSessionToken?: string;
           } & {
             _links: {
               self: {
@@ -420,11 +438,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of encore-callback-listener instance */
+    /** Return status of web-video-review instance */
     get: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the web-video-review instance */
           id: string;
         };
       };
@@ -448,7 +466,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the encore-callback-listener instance */
+    /** Return the latest logs from the web-video-review instance */
     get: {
       parameters: {
         query: {
@@ -456,7 +474,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the web-video-review instance */
           id: string;
         };
       };
@@ -476,11 +494,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for encore-callback-listener instance */
+    /** Return the exposed extra ports for web-video-review instance */
     get: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the web-video-review instance */
           id: string;
         };
       };
@@ -511,11 +529,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnEncoreCallbackListener =
-  paths['/encore-callback-listenerinstance/{id}']['get']['responses']['200']['schema'];
+export type EyevinnWebVideoReview =
+  paths['/web-video-reviewinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnEncoreCallbackListenerConfig =
-  paths['/encore-callback-listenerinstance']['post']['parameters']['body']['body'];
+export type EyevinnWebVideoReviewConfig =
+  paths['/web-video-reviewinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -524,117 +542,116 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-encore-callback-listener
- * @description Encore callback listener is a powerful HTTP server that listens for successful job callbacks, posting jobId and Url on a redis queue. Fully customizable with environment variables. Enhance your project efficiency now! Contact sales@eyevinn.se for further details.
+ * @namespace eyevinn-web-video-review
+ * @description Unlock seamless video review with Web Video Review! Stream, analyze, and navigate broadcast videos straight from S3 storage. Experience real-time analysis, dynamic timeline navigation, and powerful transcoding with unparalleled ease. Deploy effortlessly using Docker and transform your video reviewing process today!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
- *
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Web-Video-Review.html|Online docs} for further information
  */
 
 /**
- * @typedef {Object} EyevinnEncoreCallbackListenerConfig
- * @property {string} name - Name of encore-callback-listener
- * @property {string} RedisUrl - RedisUrl
- * @property {string} EncoreUrl - EncoreUrl
- * @property {string} [RedisQueue] - RedisQueue
+ * @typedef {Object} EyevinnWebVideoReviewConfig
+ * @property {string} name - Name of web-video-review
+ * @property {string} AccessKeyId - AccessKeyId
+ * @property {string} SecretAccessKey - SecretAccessKey
+ * @property {string} Bucket - Bucket
+ * @property {string} [s3Region] - S3Region
+ * @property {string} [s3Endpoint] - S3Endpoint
+ * @property {string} [awsSessionToken] - AwsSessionToken
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnEncoreCallbackListener
- * @property {string} name - Name of the Encore Callback Listener instance
- * @property {string} url - URL of the Encore Callback Listener instance
+ * @typedef {Object} EyevinnWebVideoReview
+ * @property {string} name - Name of the Video Review instance
+ * @property {string} url - URL of the Video Review instance
  *
  */
 
 /**
- * Create a new Encore Callback Listener instance
+ * Create a new Video Review instance
  *
- * @memberOf eyevinn-encore-callback-listener
+ * @memberOf eyevinn-web-video-review
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnEncoreCallbackListenerConfig} body - Service instance configuration
- * @returns {EyevinnEncoreCallbackListener} - Service instance
+ * @param {EyevinnWebVideoReviewConfig} body - Service instance configuration
+ * @returns {EyevinnWebVideoReview} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnEncoreCallbackListenerInstance } from '@osaas/client-services';
+ * import { createEyevinnWebVideoReviewInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnEncoreCallbackListenerConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnEncoreCallbackListenerInstance(ctx, body);
+ * const body: EyevinnWebVideoReviewConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnWebVideoReviewInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnEncoreCallbackListenerInstance(
+export async function createEyevinnWebVideoReviewInstance(
   ctx: Context,
-  body: EyevinnEncoreCallbackListenerConfig
-): Promise<EyevinnEncoreCallbackListener> {
+  body: EyevinnWebVideoReviewConfig
+): Promise<EyevinnWebVideoReview> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-encore-callback-listener'
+    'eyevinn-web-video-review'
   );
   const instance = await createInstance(
     ctx,
-    'eyevinn-encore-callback-listener',
+    'eyevinn-web-video-review',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady(
-    'eyevinn-encore-callback-listener',
-    instance.name,
-    ctx
-  );
+  await waitForInstanceReady('eyevinn-web-video-review', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Encore Callback Listener instance
+ * Remove a Video Review instance
  *
- * @memberOf eyevinn-encore-callback-listener
+ * @memberOf eyevinn-web-video-review
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the callback to be removed
+ * @param {string} name - Name of the application to be removed
  */
-export async function removeEyevinnEncoreCallbackListenerInstance(
+export async function removeEyevinnWebVideoReviewInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-encore-callback-listener'
+    'eyevinn-web-video-review'
   );
   await removeInstance(
     ctx,
-    'eyevinn-encore-callback-listener',
+    'eyevinn-web-video-review',
     name,
     serviceAccessToken
   );
 }
 
 /**
- * Get a Encore Callback Listener instance
+ * Get a Video Review instance
  *
- * @memberOf eyevinn-encore-callback-listener
+ * @memberOf eyevinn-web-video-review
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the callback to be retrieved
- * @returns {EyevinnEncoreCallbackListener} - Service instance
+ * @param {string} name - Name of the application to be retrieved
+ * @returns {EyevinnWebVideoReview} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnEncoreCallbackListenerInstance } from '@osaas/client-services';
+ * import { getEyevinnWebVideoReviewInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnEncoreCallbackListenerInstance(ctx, 'myinstance');
+ * const instance = await getEyevinnWebVideoReviewInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnEncoreCallbackListenerInstance(
+export async function getEyevinnWebVideoReviewInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnEncoreCallbackListener> {
+): Promise<EyevinnWebVideoReview> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-encore-callback-listener'
+    'eyevinn-web-video-review'
   );
   return await getInstance(
     ctx,
-    'eyevinn-encore-callback-listener',
+    'eyevinn-web-video-review',
     name,
     serviceAccessToken
   );

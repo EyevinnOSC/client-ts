@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/encore-callback-listenerinstance': {
-    /** List all running encore-callback-listener instances */
+  '/serverinstance': {
+    /** List all running server instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the server instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,9 +67,9 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
+            AdminUser: string;
+            AdminPassword: string;
+            DatabaseUrl?: string;
           } & {
             _links: {
               self: {
@@ -108,16 +108,16 @@ export interface paths {
         };
       };
     };
-    /** Launch a new encore-callback-listener instance */
+    /** Launch a new server instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the server instance */
             name: string;
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
+            AdminUser: string;
+            AdminPassword: string;
+            DatabaseUrl?: string;
           };
         };
       };
@@ -125,7 +125,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the server instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -143,9 +143,9 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
+            AdminUser: string;
+            AdminPassword: string;
+            DatabaseUrl?: string;
           } & {
             _links: {
               self: {
@@ -200,11 +200,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart encore-callback-listener */
+    /** Restart server */
     post: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the server instance */
           id: string;
         };
       };
@@ -223,12 +223,12 @@ export interface paths {
       };
     };
   };
-  '/encore-callback-listenerinstance/{id}': {
-    /** Obtain status and resource URLs for an encore-callback-listener instance */
+  '/serverinstance/{id}': {
+    /** Obtain status and resource URLs for an server instance */
     get: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the server instance */
           id: string;
         };
       };
@@ -236,7 +236,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the server instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -254,9 +254,9 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
+            AdminUser: string;
+            AdminPassword: string;
+            DatabaseUrl?: string;
           } & {
             _links: {
               self: {
@@ -302,11 +302,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an encore-callback-listener instance */
+    /** Stop and remove an server instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the server instance */
           id: string;
         };
       };
@@ -324,20 +324,20 @@ export interface paths {
         };
       };
     };
-    /** Patch encore-callback-listener instance with new parameters and restart */
+    /** Patch server instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the server instance */
             name?: string;
-            RedisUrl?: string;
-            EncoreUrl?: string;
-            RedisQueue?: string;
+            AdminUser?: string;
+            AdminPassword?: string;
+            DatabaseUrl?: string;
           };
         };
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the server instance */
           id: string;
         };
       };
@@ -345,7 +345,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the server instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -363,9 +363,9 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
+            AdminUser: string;
+            AdminPassword: string;
+            DatabaseUrl?: string;
           } & {
             _links: {
               self: {
@@ -420,11 +420,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of encore-callback-listener instance */
+    /** Return status of server instance */
     get: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the server instance */
           id: string;
         };
       };
@@ -448,7 +448,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the encore-callback-listener instance */
+    /** Return the latest logs from the server instance */
     get: {
       parameters: {
         query: {
@@ -456,7 +456,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the server instance */
           id: string;
         };
       };
@@ -476,11 +476,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for encore-callback-listener instance */
+    /** Return the exposed extra ports for server instance */
     get: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the server instance */
           id: string;
         };
       };
@@ -511,11 +511,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnEncoreCallbackListener =
-  paths['/encore-callback-listenerinstance/{id}']['get']['responses']['200']['schema'];
+export type NextcloudServer =
+  paths['/serverinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnEncoreCallbackListenerConfig =
-  paths['/encore-callback-listenerinstance']['post']['parameters']['body']['body'];
+export type NextcloudServerConfig =
+  paths['/serverinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -524,118 +524,104 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-encore-callback-listener
- * @description Encore callback listener is a powerful HTTP server that listens for successful job callbacks, posting jobId and Url on a redis queue. Fully customizable with environment variables. Enhance your project efficiency now! Contact sales@eyevinn.se for further details.
+ * @namespace nextcloud-server
+ * @description Empower your data with Nextcloud! Securely store, sync, and share your files, contacts, and calendars across devices. With robust security, expandability, and ease of use, your data thrives effortlessly.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} EyevinnEncoreCallbackListenerConfig
- * @property {string} name - Name of encore-callback-listener
- * @property {string} RedisUrl - RedisUrl
- * @property {string} EncoreUrl - EncoreUrl
- * @property {string} [RedisQueue] - RedisQueue
+ * @typedef {Object} NextcloudServerConfig
+ * @property {string} name - Name of server
+ * @property {string} AdminUser - Choose an admin username
+ * @property {string} AdminPassword - Choose an admin password
+ * @property {string} [DatabaseUrl] - DatabaseUrl
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnEncoreCallbackListener
- * @property {string} name - Name of the Encore Callback Listener instance
- * @property {string} url - URL of the Encore Callback Listener instance
+ * @typedef {Object} NextcloudServer
+ * @property {string} name - Name of the Nextcloud instance
+ * @property {string} url - URL of the Nextcloud instance
  *
  */
 
 /**
- * Create a new Encore Callback Listener instance
+ * Create a new Nextcloud instance
  *
- * @memberOf eyevinn-encore-callback-listener
+ * @memberOf nextcloud-server
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnEncoreCallbackListenerConfig} body - Service instance configuration
- * @returns {EyevinnEncoreCallbackListener} - Service instance
+ * @param {NextcloudServerConfig} body - Service instance configuration
+ * @returns {NextcloudServer} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnEncoreCallbackListenerInstance } from '@osaas/client-services';
+ * import { createNextcloudServerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnEncoreCallbackListenerConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnEncoreCallbackListenerInstance(ctx, body);
+ * const body: NextcloudServerConfig = { name: 'myinstance', ... };
+ * const instance = await createNextcloudServerInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnEncoreCallbackListenerInstance(
+export async function createNextcloudServerInstance(
   ctx: Context,
-  body: EyevinnEncoreCallbackListenerConfig
-): Promise<EyevinnEncoreCallbackListener> {
+  body: NextcloudServerConfig
+): Promise<NextcloudServer> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-encore-callback-listener'
+    'nextcloud-server'
   );
   const instance = await createInstance(
     ctx,
-    'eyevinn-encore-callback-listener',
+    'nextcloud-server',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady(
-    'eyevinn-encore-callback-listener',
-    instance.name,
-    ctx
-  );
+  await waitForInstanceReady('nextcloud-server', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Encore Callback Listener instance
+ * Remove a Nextcloud instance
  *
- * @memberOf eyevinn-encore-callback-listener
+ * @memberOf nextcloud-server
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the callback to be removed
+ * @param {string} name - Name of the server to be removed
  */
-export async function removeEyevinnEncoreCallbackListenerInstance(
+export async function removeNextcloudServerInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-encore-callback-listener'
+    'nextcloud-server'
   );
-  await removeInstance(
-    ctx,
-    'eyevinn-encore-callback-listener',
-    name,
-    serviceAccessToken
-  );
+  await removeInstance(ctx, 'nextcloud-server', name, serviceAccessToken);
 }
 
 /**
- * Get a Encore Callback Listener instance
+ * Get a Nextcloud instance
  *
- * @memberOf eyevinn-encore-callback-listener
+ * @memberOf nextcloud-server
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the callback to be retrieved
- * @returns {EyevinnEncoreCallbackListener} - Service instance
+ * @param {string} name - Name of the server to be retrieved
+ * @returns {NextcloudServer} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnEncoreCallbackListenerInstance } from '@osaas/client-services';
+ * import { getNextcloudServerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnEncoreCallbackListenerInstance(ctx, 'myinstance');
+ * const instance = await getNextcloudServerInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnEncoreCallbackListenerInstance(
+export async function getNextcloudServerInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnEncoreCallbackListener> {
+): Promise<NextcloudServer> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-encore-callback-listener'
+    'nextcloud-server'
   );
-  return await getInstance(
-    ctx,
-    'eyevinn-encore-callback-listener',
-    name,
-    serviceAccessToken
-  );
+  return await getInstance(ctx, 'nextcloud-server', name, serviceAccessToken);
 }

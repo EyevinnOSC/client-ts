@@ -47,7 +47,7 @@ export interface paths {
                 /** @description URL to preroll */
                 url: string;
                 /** @description Duration of preroll in milliseconds */
-                duration: number;
+                duration: string;
               };
               webhook?: {
                 /** @description API key for webhook */
@@ -114,7 +114,7 @@ export interface paths {
                 /** @description URL to preroll */
                 url: string;
                 /** @description Duration of preroll in milliseconds */
-                duration: number;
+                duration: string;
               };
               webhook?: {
                 /** @description API key for webhook */
@@ -155,7 +155,7 @@ export interface paths {
                 /** @description URL to preroll */
                 url: string;
                 /** @description Duration of preroll in milliseconds */
-                duration: number;
+                duration: string;
               };
               webhook?: {
                 /** @description API key for webhook */
@@ -233,7 +233,7 @@ export interface paths {
                 /** @description URL to preroll */
                 url: string;
                 /** @description Duration of preroll in milliseconds */
-                duration: number;
+                duration: string;
               };
               webhook?: {
                 /** @description API key for webhook */

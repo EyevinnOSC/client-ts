@@ -72,6 +72,8 @@ export interface paths {
             AwsAccessKeyId: string;
             AwsSecretAccessKey: string;
             SqsEndpoint?: string;
+            NumWorkers?: string;
+            BatchSize?: string;
           } & {
             _links: {
               self: {
@@ -98,6 +100,10 @@ export interface paths {
                 /** @description Update this instance */
                 href: string;
               };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
             };
           })[];
         };
@@ -122,6 +128,8 @@ export interface paths {
             AwsAccessKeyId: string;
             AwsSecretAccessKey: string;
             SqsEndpoint?: string;
+            NumWorkers?: string;
+            BatchSize?: string;
           };
         };
       };
@@ -152,6 +160,8 @@ export interface paths {
             AwsAccessKeyId: string;
             AwsSecretAccessKey: string;
             SqsEndpoint?: string;
+            NumWorkers?: string;
+            BatchSize?: string;
           } & {
             _links: {
               self: {
@@ -176,6 +186,10 @@ export interface paths {
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -265,6 +279,8 @@ export interface paths {
             AwsAccessKeyId: string;
             AwsSecretAccessKey: string;
             SqsEndpoint?: string;
+            NumWorkers?: string;
+            BatchSize?: string;
           } & {
             _links: {
               self: {
@@ -289,6 +305,10 @@ export interface paths {
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -344,6 +364,8 @@ export interface paths {
             AwsAccessKeyId?: string;
             AwsSecretAccessKey?: string;
             SqsEndpoint?: string;
+            NumWorkers?: string;
+            BatchSize?: string;
           };
         };
         path: {
@@ -378,6 +400,8 @@ export interface paths {
             AwsAccessKeyId: string;
             AwsSecretAccessKey: string;
             SqsEndpoint?: string;
+            NumWorkers?: string;
+            BatchSize?: string;
           } & {
             _links: {
               self: {
@@ -404,7 +428,108 @@ export interface paths {
                 /** @description Update this instance */
                 href: string;
               };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
             };
+          };
+        };
+        /** Default Response */
+        400: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        404: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
+  '/player-analytics-workerinstance/{id}/scale': {
+    /** Get number of replicas of player-analytics-worker instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the player-analytics-worker instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            /** @description Number of replicas */
+            actualReplicas: number;
+            /** @description Desired number of replicas */
+            desiredReplicas: number;
+          };
+        };
+        /** Default Response */
+        400: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        404: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+    /** Set desired number of replicas of player-analytics-worker instance */
+    put: {
+      parameters: {
+        body: {
+          body?: {
+            /** @description Desired number of replicas */
+            desiredReplicas: number;
+          };
+        };
+        path: {
+          /** Name of the player-analytics-worker instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            /** @description Number of replicas */
+            actualReplicas: number;
+            /** @description Desired number of replicas */
+            desiredReplicas: number;
+          };
+        };
+        /** Default Response */
+        400: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
           };
         };
         /** Default Response */
@@ -544,6 +669,8 @@ import {
  * @property {string} AwsAccessKeyId - AwsAccessKeyId
  * @property {string} AwsSecretAccessKey - AwsSecretAccessKey
  * @property {string} [SqsEndpoint] - SqsEndpoint
+ * @property {string} [NumWorkers] - NumWorkers
+ * @property {string} [BatchSize] - BatchSize
 
  * 
  */

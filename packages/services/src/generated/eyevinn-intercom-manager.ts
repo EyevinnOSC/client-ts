@@ -556,7 +556,7 @@ Join our Slack community for support and customization. Contact sales@eyevinn.se
  * @property {string} name - Name of intercom-manager
  * @property {string} smbUrl - URL to the Symphony Media Bridge
  * @property {string} smbApiKey - API key for the Symphony Media Bridge
- * @property {string} dbUrl - DbUrl
+ * @property {string} dbUrl - URL to CouchDb
  * @property {string} [oscAccessToken] - OscAccessToken
  * @property {string} [whipAuthKey] - WhipAuthKey
  * @property {string} [iceServers] - IceServers

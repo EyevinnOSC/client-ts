@@ -25,6 +25,41 @@ jest.mock('@osaas/client-core', () => {
   };
 });
 
+describe('createEyevinnChannelEngineBridgeInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEyevinnChannelEngineBridgeInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'eyevinn-channel-engine-bridge'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-channel-engine-bridge',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'eyevinn-channel-engine-bridge',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEyevinnChannelEngineBridgeInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEyevinnChannelEngineBridgeInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-channel-engine-bridge',
+      'sdk',
+      'token'
+    );
+  });
+});
+
 describe('createChannelEngineInstance', () => {
   it('should call createInstance', async () => {
     const ctx = new Context();
@@ -141,41 +176,6 @@ describe('removeEyevinnChaosStreamProxyInstance', () => {
     expect(removeInstance).toHaveBeenCalledWith(
       ctx,
       'eyevinn-chaos-stream-proxy',
-      'sdk',
-      'token'
-    );
-  });
-});
-
-describe('createEyevinnChannelEngineBridgeInstance', () => {
-  it('should call createInstance', async () => {
-    const ctx = new Context();
-    const body = { name: 'sdk' };
-    await sdk.createEyevinnChannelEngineBridgeInstance(ctx, body as any);
-    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
-      'eyevinn-channel-engine-bridge'
-    );
-    expect(createInstance).toHaveBeenCalledWith(
-      ctx,
-      'eyevinn-channel-engine-bridge',
-      'token',
-      body
-    );
-    expect(waitForInstanceReady).toHaveBeenCalledWith(
-      'eyevinn-channel-engine-bridge',
-      'sdk',
-      ctx
-    );
-  });
-});
-
-describe('removeEyevinnChannelEngineBridgeInstance', () => {
-  it('should call removeInstance', async () => {
-    const ctx = new Context();
-    await sdk.removeEyevinnChannelEngineBridgeInstance(ctx, 'sdk');
-    expect(removeInstance).toHaveBeenCalledWith(
-      ctx,
-      'eyevinn-channel-engine-bridge',
       'sdk',
       'token'
     );
@@ -421,41 +421,6 @@ describe('removeEyevinnFunctionProbeInstance', () => {
     expect(removeInstance).toHaveBeenCalledWith(
       ctx,
       'eyevinn-function-probe',
-      'sdk',
-      'token'
-    );
-  });
-});
-
-describe('createEyevinnScheduleServiceInstance', () => {
-  it('should call createInstance', async () => {
-    const ctx = new Context();
-    const body = { name: 'sdk' };
-    await sdk.createEyevinnScheduleServiceInstance(ctx, body as any);
-    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
-      'eyevinn-schedule-service'
-    );
-    expect(createInstance).toHaveBeenCalledWith(
-      ctx,
-      'eyevinn-schedule-service',
-      'token',
-      body
-    );
-    expect(waitForInstanceReady).toHaveBeenCalledWith(
-      'eyevinn-schedule-service',
-      'sdk',
-      ctx
-    );
-  });
-});
-
-describe('removeEyevinnScheduleServiceInstance', () => {
-  it('should call removeInstance', async () => {
-    const ctx = new Context();
-    await sdk.removeEyevinnScheduleServiceInstance(ctx, 'sdk');
-    expect(removeInstance).toHaveBeenCalledWith(
-      ctx,
-      'eyevinn-schedule-service',
       'sdk',
       'token'
     );
@@ -4090,6 +4055,282 @@ describe('removePenpotPenpotInstance', () => {
     expect(removeInstance).toHaveBeenCalledWith(
       ctx,
       'penpot-penpot',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createEyevinnChannelSchedulerInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEyevinnChannelSchedulerInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'eyevinn-channel-scheduler'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-channel-scheduler',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'eyevinn-channel-scheduler',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEyevinnChannelSchedulerInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEyevinnChannelSchedulerInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-channel-scheduler',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createBirmeBucketCommanderInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createBirmeBucketCommanderInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'birme-bucket-commander'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'birme-bucket-commander',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'birme-bucket-commander',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeBirmeBucketCommanderInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeBirmeBucketCommanderInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'birme-bucket-commander',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createEyevinnWebVideoReviewInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEyevinnWebVideoReviewInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'eyevinn-web-video-review'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-web-video-review',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'eyevinn-web-video-review',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEyevinnWebVideoReviewInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEyevinnWebVideoReviewInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-web-video-review',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createNextcloudServerInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createNextcloudServerInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('nextcloud-server');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'nextcloud-server',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'nextcloud-server',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeNextcloudServerInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeNextcloudServerInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'nextcloud-server',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createLocustioLocustInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createLocustioLocustInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('locustio-locust');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'locustio-locust',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'locustio-locust',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeLocustioLocustInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeLocustioLocustInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'locustio-locust',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createNolltreLabTestPrepQuizInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createNolltreLabTestPrepQuizInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'nolltre-lab-test-prep-quiz'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'nolltre-lab-test-prep-quiz',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'nolltre-lab-test-prep-quiz',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeNolltreLabTestPrepQuizInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeNolltreLabTestPrepQuizInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'nolltre-lab-test-prep-quiz',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createAblindbergChaosmakerInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createAblindbergChaosmakerInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'ablindberg-chaosmaker'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'ablindberg-chaosmaker',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'ablindberg-chaosmaker',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeAblindbergChaosmakerInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeAblindbergChaosmakerInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'ablindberg-chaosmaker',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createGrusellEncoreProfileServerInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createGrusellEncoreProfileServerInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'grusell-encore-profile-server'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'grusell-encore-profile-server',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'grusell-encore-profile-server',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeGrusellEncoreProfileServerInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeGrusellEncoreProfileServerInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'grusell-encore-profile-server',
       'sdk',
       'token'
     );

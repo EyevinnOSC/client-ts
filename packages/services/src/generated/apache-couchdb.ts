@@ -522,7 +522,7 @@ import {
 /**
  * @typedef {Object} ApacheCouchdbConfig
  * @property {string} name - Name of couchdb
- * @property {string} AdminPassword - AdminPassword
+ * @property {string} AdminPassword - Choose a password for administrator
 
  * 
  */

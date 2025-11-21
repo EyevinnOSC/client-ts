@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/encore-callback-listenerinstance': {
-    /** List all running encore-callback-listener instances */
+  '/encore-profile-serverinstance': {
+    /** List all running encore-profile-server instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the encore-profile-server instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,9 +67,14 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
+            s3Endpoint?: string;
+            s3Region?: string;
+            s3AccessKey?: string;
+            s3SecretKey?: string;
+            s3Bucket?: string;
+            s3Prefix?: string;
+            anthropicApiKey?: string;
+            anthropicModel?: string;
           } & {
             _links: {
               self: {
@@ -94,6 +99,10 @@ export interface paths {
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -108,16 +117,21 @@ export interface paths {
         };
       };
     };
-    /** Launch a new encore-callback-listener instance */
+    /** Launch a new encore-profile-server instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the encore-profile-server instance */
             name: string;
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
+            s3Endpoint?: string;
+            s3Region?: string;
+            s3AccessKey?: string;
+            s3SecretKey?: string;
+            s3Bucket?: string;
+            s3Prefix?: string;
+            anthropicApiKey?: string;
+            anthropicModel?: string;
           };
         };
       };
@@ -125,7 +139,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the encore-profile-server instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -143,9 +157,14 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
+            s3Endpoint?: string;
+            s3Region?: string;
+            s3AccessKey?: string;
+            s3SecretKey?: string;
+            s3Bucket?: string;
+            s3Prefix?: string;
+            anthropicApiKey?: string;
+            anthropicModel?: string;
           } & {
             _links: {
               self: {
@@ -170,6 +189,10 @@ export interface paths {
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -200,11 +223,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart encore-callback-listener */
+    /** Restart encore-profile-server */
     post: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the encore-profile-server instance */
           id: string;
         };
       };
@@ -223,12 +246,12 @@ export interface paths {
       };
     };
   };
-  '/encore-callback-listenerinstance/{id}': {
-    /** Obtain status and resource URLs for an encore-callback-listener instance */
+  '/encore-profile-serverinstance/{id}': {
+    /** Obtain status and resource URLs for an encore-profile-server instance */
     get: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the encore-profile-server instance */
           id: string;
         };
       };
@@ -236,7 +259,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the encore-profile-server instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -254,9 +277,14 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
+            s3Endpoint?: string;
+            s3Region?: string;
+            s3AccessKey?: string;
+            s3SecretKey?: string;
+            s3Bucket?: string;
+            s3Prefix?: string;
+            anthropicApiKey?: string;
+            anthropicModel?: string;
           } & {
             _links: {
               self: {
@@ -281,6 +309,10 @@ export interface paths {
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -302,11 +334,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an encore-callback-listener instance */
+    /** Stop and remove an encore-profile-server instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the encore-profile-server instance */
           id: string;
         };
       };
@@ -324,20 +356,25 @@ export interface paths {
         };
       };
     };
-    /** Patch encore-callback-listener instance with new parameters and restart */
+    /** Patch encore-profile-server instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the encore-profile-server instance */
             name?: string;
-            RedisUrl?: string;
-            EncoreUrl?: string;
-            RedisQueue?: string;
+            s3Endpoint?: string;
+            s3Region?: string;
+            s3AccessKey?: string;
+            s3SecretKey?: string;
+            s3Bucket?: string;
+            s3Prefix?: string;
+            anthropicApiKey?: string;
+            anthropicModel?: string;
           };
         };
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the encore-profile-server instance */
           id: string;
         };
       };
@@ -345,7 +382,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the encore-profile-server instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -363,9 +400,14 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
+            s3Endpoint?: string;
+            s3Region?: string;
+            s3AccessKey?: string;
+            s3SecretKey?: string;
+            s3Bucket?: string;
+            s3Prefix?: string;
+            anthropicApiKey?: string;
+            anthropicModel?: string;
           } & {
             _links: {
               self: {
@@ -390,6 +432,10 @@ export interface paths {
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -420,11 +466,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of encore-callback-listener instance */
+    /** Return status of encore-profile-server instance */
     get: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the encore-profile-server instance */
           id: string;
         };
       };
@@ -448,7 +494,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the encore-callback-listener instance */
+    /** Return the latest logs from the encore-profile-server instance */
     get: {
       parameters: {
         query: {
@@ -456,7 +502,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the encore-profile-server instance */
           id: string;
         };
       };
@@ -476,11 +522,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for encore-callback-listener instance */
+    /** Return the exposed extra ports for encore-profile-server instance */
     get: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the encore-profile-server instance */
           id: string;
         };
       };
@@ -511,11 +557,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnEncoreCallbackListener =
-  paths['/encore-callback-listenerinstance/{id}']['get']['responses']['200']['schema'];
+export type GrusellEncoreProfileServer =
+  paths['/encore-profile-serverinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnEncoreCallbackListenerConfig =
-  paths['/encore-callback-listenerinstance']['post']['parameters']['body']['body'];
+export type GrusellEncoreProfileServerConfig =
+  paths['/encore-profile-serverinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -524,62 +570,67 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-encore-callback-listener
- * @description Encore callback listener is a powerful HTTP server that listens for successful job callbacks, posting jobId and Url on a redis queue. Fully customizable with environment variables. Enhance your project efficiency now! Contact sales@eyevinn.se for further details.
+ * @namespace grusell-encore-profile-server
+ * @description Transform your video processing with the Encore Profile Server. Serve dynamic transcoding profiles directly from S3-compatible storage, seamlessly integrating AI capabilities for on-demand profile creation.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} EyevinnEncoreCallbackListenerConfig
- * @property {string} name - Name of encore-callback-listener
- * @property {string} RedisUrl - RedisUrl
- * @property {string} EncoreUrl - EncoreUrl
- * @property {string} [RedisQueue] - RedisQueue
+ * @typedef {Object} GrusellEncoreProfileServerConfig
+ * @property {string} name - Name of encore-profile-server
+ * @property {string} [s3Endpoint] - S3Endpoint
+ * @property {string} [s3Region] - S3Region
+ * @property {string} [s3AccessKey] - S3AccessKey
+ * @property {string} [s3SecretKey] - S3SecretKey
+ * @property {string} [s3Bucket] - S3Bucket
+ * @property {string} [s3Prefix] - S3Prefix
+ * @property {string} [anthropicApiKey] - AnthropicApiKey
+ * @property {string} [anthropicModel] - AnthropicModel
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnEncoreCallbackListener
- * @property {string} name - Name of the Encore Callback Listener instance
- * @property {string} url - URL of the Encore Callback Listener instance
+ * @typedef {Object} GrusellEncoreProfileServer
+ * @property {string} name - Name of the Encore Profile Server instance
+ * @property {string} url - URL of the Encore Profile Server instance
  *
  */
 
 /**
- * Create a new Encore Callback Listener instance
+ * Create a new Encore Profile Server instance
  *
- * @memberOf eyevinn-encore-callback-listener
+ * @memberOf grusell-encore-profile-server
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnEncoreCallbackListenerConfig} body - Service instance configuration
- * @returns {EyevinnEncoreCallbackListener} - Service instance
+ * @param {GrusellEncoreProfileServerConfig} body - Service instance configuration
+ * @returns {GrusellEncoreProfileServer} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnEncoreCallbackListenerInstance } from '@osaas/client-services';
+ * import { createGrusellEncoreProfileServerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnEncoreCallbackListenerConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnEncoreCallbackListenerInstance(ctx, body);
+ * const body: GrusellEncoreProfileServerConfig = { name: 'myinstance', ... };
+ * const instance = await createGrusellEncoreProfileServerInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnEncoreCallbackListenerInstance(
+export async function createGrusellEncoreProfileServerInstance(
   ctx: Context,
-  body: EyevinnEncoreCallbackListenerConfig
-): Promise<EyevinnEncoreCallbackListener> {
+  body: GrusellEncoreProfileServerConfig
+): Promise<GrusellEncoreProfileServer> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-encore-callback-listener'
+    'grusell-encore-profile-server'
   );
   const instance = await createInstance(
     ctx,
-    'eyevinn-encore-callback-listener',
+    'grusell-encore-profile-server',
     serviceAccessToken,
     body
   );
   await waitForInstanceReady(
-    'eyevinn-encore-callback-listener',
+    'grusell-encore-profile-server',
     instance.name,
     ctx
   );
@@ -587,54 +638,54 @@ export async function createEyevinnEncoreCallbackListenerInstance(
 }
 
 /**
- * Remove a Encore Callback Listener instance
+ * Remove a Encore Profile Server instance
  *
- * @memberOf eyevinn-encore-callback-listener
+ * @memberOf grusell-encore-profile-server
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the callback to be removed
+ * @param {string} name - Name of the encore-profile-server to be removed
  */
-export async function removeEyevinnEncoreCallbackListenerInstance(
+export async function removeGrusellEncoreProfileServerInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-encore-callback-listener'
+    'grusell-encore-profile-server'
   );
   await removeInstance(
     ctx,
-    'eyevinn-encore-callback-listener',
+    'grusell-encore-profile-server',
     name,
     serviceAccessToken
   );
 }
 
 /**
- * Get a Encore Callback Listener instance
+ * Get a Encore Profile Server instance
  *
- * @memberOf eyevinn-encore-callback-listener
+ * @memberOf grusell-encore-profile-server
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the callback to be retrieved
- * @returns {EyevinnEncoreCallbackListener} - Service instance
+ * @param {string} name - Name of the encore-profile-server to be retrieved
+ * @returns {GrusellEncoreProfileServer} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnEncoreCallbackListenerInstance } from '@osaas/client-services';
+ * import { getGrusellEncoreProfileServerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnEncoreCallbackListenerInstance(ctx, 'myinstance');
+ * const instance = await getGrusellEncoreProfileServerInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnEncoreCallbackListenerInstance(
+export async function getGrusellEncoreProfileServerInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnEncoreCallbackListener> {
+): Promise<GrusellEncoreProfileServer> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-encore-callback-listener'
+    'grusell-encore-profile-server'
   );
   return await getInstance(
     ctx,
-    'eyevinn-encore-callback-listener',
+    'grusell-encore-profile-server',
     name,
     serviceAccessToken
   );
