@@ -95,6 +95,10 @@ export interface paths {
                 /** @description Update this instance */
                 href: string;
               };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
             };
           })[];
         };
@@ -167,6 +171,10 @@ export interface paths {
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -279,6 +287,10 @@ export interface paths {
                 /** @description Update this instance */
                 href: string;
               };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
             };
           };
         };
@@ -386,7 +398,18 @@ export interface paths {
                 /** @description Update this instance */
                 href: string;
               };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
             };
+          };
+        };
+        /** Default Response */
+        400: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
           };
         };
         /** Default Response */
@@ -521,8 +544,8 @@ import {
 /**
  * @typedef {Object} MinioMinioConfig
  * @property {string} name - Name of minio
- * @property {string} [RootUser] - RootUser
- * @property {string} [RootPassword] - RootPassword
+ * @property {string} [RootUser] - Choose an admin user name
+ * @property {string} [RootPassword] - Choose a password for admin user
 
  * 
  */

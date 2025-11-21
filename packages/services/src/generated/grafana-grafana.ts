@@ -5,12 +5,39 @@
 
 export interface paths {
   '/': {
-    /** Say hello */
+    /** Health check endpoint */
     get: {
+      parameters: {
+        query: {
+          verbose?: boolean;
+        };
+      };
       responses: {
-        /** The magical words! */
+        /** Default Response */
         200: {
-          schema: string;
+          schema: Partial<string> &
+            Partial<{
+              status: string;
+              versions: {
+                '@osaas/orchestrator': string;
+              };
+              environment: string;
+              _links: {
+                self: {
+                  href: string;
+                };
+                api: {
+                  href: string;
+                };
+              };
+            }>;
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            status: string;
+            reason: string;
+          };
         };
       };
     };
@@ -21,7 +48,7 @@ export interface paths {
       responses: {
         /** Default Response */
         200: {
-          schema: {
+          schema: ({
             /** @description Name of the grafana instance */
             name: string;
             /** @description URL to instance API */
@@ -43,7 +70,36 @@ export interface paths {
             PluginsPreinstall?: string;
             AllowEmbedOrigins?: string;
             AnonymousEnabled?: boolean;
-          }[];
+            Datasources?: string;
+            DashboardUrls?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
+          })[];
         };
         /** Default Response */
         500: {
@@ -64,6 +120,8 @@ export interface paths {
             PluginsPreinstall?: string;
             AllowEmbedOrigins?: string;
             AnonymousEnabled?: boolean;
+            Datasources?: string;
+            DashboardUrls?: string;
           };
         };
       };
@@ -92,6 +150,35 @@ export interface paths {
             PluginsPreinstall?: string;
             AllowEmbedOrigins?: string;
             AnonymousEnabled?: boolean;
+            Datasources?: string;
+            DashboardUrls?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
           };
         };
         /** Default Response */
@@ -176,6 +263,35 @@ export interface paths {
             PluginsPreinstall?: string;
             AllowEmbedOrigins?: string;
             AnonymousEnabled?: boolean;
+            Datasources?: string;
+            DashboardUrls?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
           };
         };
         /** Default Response */
@@ -216,6 +332,104 @@ export interface paths {
         };
       };
     };
+    /** Patch grafana instance with new parameters and restart */
+    patch: {
+      parameters: {
+        body: {
+          body?: {
+            /** @description Name of the grafana instance */
+            name?: string;
+            PluginsPreinstall?: string;
+            AllowEmbedOrigins?: string;
+            AnonymousEnabled?: boolean;
+            Datasources?: string;
+            DashboardUrls?: string;
+          };
+        };
+        path: {
+          /** Name of the grafana instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            /** @description Name of the grafana instance */
+            name: string;
+            /** @description URL to instance API */
+            url: string;
+            resources: {
+              license: {
+                /** @description URL to license information */
+                url: string;
+              };
+              apiDocs?: {
+                /** @description URL to instance API documentation */
+                url: string;
+              };
+              app?: {
+                /** @description URL to instance application (GUI) */
+                url: string;
+              };
+            };
+            PluginsPreinstall?: string;
+            AllowEmbedOrigins?: string;
+            AnonymousEnabled?: boolean;
+            Datasources?: string;
+            DashboardUrls?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+            };
+          };
+        };
+        /** Default Response */
+        400: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        404: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
   };
   '/health/{id}': {
     /** Return status of grafana instance */
@@ -232,6 +446,7 @@ export interface paths {
           schema: {
             /** @enum {string} */
             status: 'starting' | 'running' | 'stopped' | 'failed' | 'unknown';
+            images?: string[];
           };
         };
         /** Default Response */
@@ -334,6 +549,8 @@ import {
  * @property {string} [PluginsPreinstall] - Provide a list of plugins to pre install
  * @property {string} [AllowEmbedOrigins] - Web origin allowed to embed in an iframe
  * @property {boolean} [AnonymousEnabled] - Enable anonymous access
+ * @property {string} [Datasources] - Datasource to automatically provision at startup in the form, example: "influx:influxdb:http://influxdb:8086;admin;secret"
+ * @property {string} [DashboardUrls] - DashboardUrls
 
  * 
  */

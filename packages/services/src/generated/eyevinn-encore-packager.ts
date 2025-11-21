@@ -78,6 +78,7 @@ export interface paths {
             AwsSessionToken?: string;
             S3EndpointUrl?: string;
             OutputSubfolderTemplate?: string;
+            SkipPackaging?: boolean;
             CallbackUrl?: string;
           } & {
             _links: {
@@ -135,6 +136,7 @@ export interface paths {
             AwsSessionToken?: string;
             S3EndpointUrl?: string;
             OutputSubfolderTemplate?: string;
+            SkipPackaging?: boolean;
             CallbackUrl?: string;
           };
         };
@@ -172,6 +174,7 @@ export interface paths {
             AwsSessionToken?: string;
             S3EndpointUrl?: string;
             OutputSubfolderTemplate?: string;
+            SkipPackaging?: boolean;
             CallbackUrl?: string;
           } & {
             _links: {
@@ -292,6 +295,7 @@ export interface paths {
             AwsSessionToken?: string;
             S3EndpointUrl?: string;
             OutputSubfolderTemplate?: string;
+            SkipPackaging?: boolean;
             CallbackUrl?: string;
           } & {
             _links: {
@@ -378,6 +382,7 @@ export interface paths {
             AwsSessionToken?: string;
             S3EndpointUrl?: string;
             OutputSubfolderTemplate?: string;
+            SkipPackaging?: boolean;
             CallbackUrl?: string;
           };
         };
@@ -419,6 +424,7 @@ export interface paths {
             AwsSessionToken?: string;
             S3EndpointUrl?: string;
             OutputSubfolderTemplate?: string;
+            SkipPackaging?: boolean;
             CallbackUrl?: string;
           } & {
             _links: {
@@ -599,6 +605,7 @@ import {
  * @property {string} [AwsSessionToken] - AwsSessionToken
  * @property {string} [S3EndpointUrl] - S3EndpointUrl
  * @property {string} [OutputSubfolderTemplate] - OutputSubfolderTemplate
+ * @property {boolean} [SkipPackaging] - When enable the output files are copied and a SMIL file is created
  * @property {string} [CallbackUrl] - CallbackUrl
 
  * 

@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/encore-callback-listenerinstance': {
-    /** List all running encore-callback-listener instances */
+  '/chaosmakerinstance': {
+    /** List all running chaosmaker instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the chaosmaker instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,9 +67,6 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
           } & {
             _links: {
               self: {
@@ -94,6 +91,10 @@ export interface paths {
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -108,16 +109,13 @@ export interface paths {
         };
       };
     };
-    /** Launch a new encore-callback-listener instance */
+    /** Launch a new chaosmaker instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the chaosmaker instance */
             name: string;
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
           };
         };
       };
@@ -125,7 +123,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the chaosmaker instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -143,9 +141,6 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
           } & {
             _links: {
               self: {
@@ -170,6 +165,10 @@ export interface paths {
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -200,11 +199,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart encore-callback-listener */
+    /** Restart chaosmaker */
     post: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the chaosmaker instance */
           id: string;
         };
       };
@@ -223,12 +222,12 @@ export interface paths {
       };
     };
   };
-  '/encore-callback-listenerinstance/{id}': {
-    /** Obtain status and resource URLs for an encore-callback-listener instance */
+  '/chaosmakerinstance/{id}': {
+    /** Obtain status and resource URLs for an chaosmaker instance */
     get: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the chaosmaker instance */
           id: string;
         };
       };
@@ -236,7 +235,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the chaosmaker instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -254,9 +253,6 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
           } & {
             _links: {
               self: {
@@ -281,6 +277,10 @@ export interface paths {
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -302,11 +302,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an encore-callback-listener instance */
+    /** Stop and remove an chaosmaker instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the chaosmaker instance */
           id: string;
         };
       };
@@ -324,20 +324,17 @@ export interface paths {
         };
       };
     };
-    /** Patch encore-callback-listener instance with new parameters and restart */
+    /** Patch chaosmaker instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the chaosmaker instance */
             name?: string;
-            RedisUrl?: string;
-            EncoreUrl?: string;
-            RedisQueue?: string;
           };
         };
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the chaosmaker instance */
           id: string;
         };
       };
@@ -345,7 +342,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the chaosmaker instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -363,9 +360,6 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
           } & {
             _links: {
               self: {
@@ -390,6 +384,10 @@ export interface paths {
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -420,11 +418,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of encore-callback-listener instance */
+    /** Return status of chaosmaker instance */
     get: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the chaosmaker instance */
           id: string;
         };
       };
@@ -448,7 +446,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the encore-callback-listener instance */
+    /** Return the latest logs from the chaosmaker instance */
     get: {
       parameters: {
         query: {
@@ -456,7 +454,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the chaosmaker instance */
           id: string;
         };
       };
@@ -476,11 +474,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for encore-callback-listener instance */
+    /** Return the exposed extra ports for chaosmaker instance */
     get: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the chaosmaker instance */
           id: string;
         };
       };
@@ -511,11 +509,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnEncoreCallbackListener =
-  paths['/encore-callback-listenerinstance/{id}']['get']['responses']['200']['schema'];
+export type AblindbergChaosmaker =
+  paths['/chaosmakerinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnEncoreCallbackListenerConfig =
-  paths['/encore-callback-listenerinstance']['post']['parameters']['body']['body'];
+export type AblindbergChaosmakerConfig =
+  paths['/chaosmakerinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -524,117 +522,105 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-encore-callback-listener
- * @description Encore callback listener is a powerful HTTP server that listens for successful job callbacks, posting jobId and Url on a redis queue. Fully customizable with environment variables. Enhance your project efficiency now! Contact sales@eyevinn.se for further details.
+ * @namespace ablindberg-chaosmaker
+ * @description Experience seamless management and enhance video streaming resilience with Chaos Stream Proxy Configurator! Effortlessly handle various network conditions and create chaos configurations through an intuitive interface.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} EyevinnEncoreCallbackListenerConfig
- * @property {string} name - Name of encore-callback-listener
- * @property {string} RedisUrl - RedisUrl
- * @property {string} EncoreUrl - EncoreUrl
- * @property {string} [RedisQueue] - RedisQueue
+ * @typedef {Object} AblindbergChaosmakerConfig
+ * @property {string} name - Name of chaosmaker
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnEncoreCallbackListener
- * @property {string} name - Name of the Encore Callback Listener instance
- * @property {string} url - URL of the Encore Callback Listener instance
+ * @typedef {Object} AblindbergChaosmaker
+ * @property {string} name - Name of the Chaos Maker instance
+ * @property {string} url - URL of the Chaos Maker instance
  *
  */
 
 /**
- * Create a new Encore Callback Listener instance
+ * Create a new Chaos Maker instance
  *
- * @memberOf eyevinn-encore-callback-listener
+ * @memberOf ablindberg-chaosmaker
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnEncoreCallbackListenerConfig} body - Service instance configuration
- * @returns {EyevinnEncoreCallbackListener} - Service instance
+ * @param {AblindbergChaosmakerConfig} body - Service instance configuration
+ * @returns {AblindbergChaosmaker} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnEncoreCallbackListenerInstance } from '@osaas/client-services';
+ * import { createAblindbergChaosmakerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnEncoreCallbackListenerConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnEncoreCallbackListenerInstance(ctx, body);
+ * const body: AblindbergChaosmakerConfig = { name: 'myinstance', ... };
+ * const instance = await createAblindbergChaosmakerInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnEncoreCallbackListenerInstance(
+export async function createAblindbergChaosmakerInstance(
   ctx: Context,
-  body: EyevinnEncoreCallbackListenerConfig
-): Promise<EyevinnEncoreCallbackListener> {
+  body: AblindbergChaosmakerConfig
+): Promise<AblindbergChaosmaker> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-encore-callback-listener'
+    'ablindberg-chaosmaker'
   );
   const instance = await createInstance(
     ctx,
-    'eyevinn-encore-callback-listener',
+    'ablindberg-chaosmaker',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady(
-    'eyevinn-encore-callback-listener',
-    instance.name,
-    ctx
-  );
+  await waitForInstanceReady('ablindberg-chaosmaker', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Encore Callback Listener instance
+ * Remove a Chaos Maker instance
  *
- * @memberOf eyevinn-encore-callback-listener
+ * @memberOf ablindberg-chaosmaker
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the callback to be removed
+ * @param {string} name - Name of the chaosmaker to be removed
  */
-export async function removeEyevinnEncoreCallbackListenerInstance(
+export async function removeAblindbergChaosmakerInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-encore-callback-listener'
+    'ablindberg-chaosmaker'
   );
-  await removeInstance(
-    ctx,
-    'eyevinn-encore-callback-listener',
-    name,
-    serviceAccessToken
-  );
+  await removeInstance(ctx, 'ablindberg-chaosmaker', name, serviceAccessToken);
 }
 
 /**
- * Get a Encore Callback Listener instance
+ * Get a Chaos Maker instance
  *
- * @memberOf eyevinn-encore-callback-listener
+ * @memberOf ablindberg-chaosmaker
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the callback to be retrieved
- * @returns {EyevinnEncoreCallbackListener} - Service instance
+ * @param {string} name - Name of the chaosmaker to be retrieved
+ * @returns {AblindbergChaosmaker} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnEncoreCallbackListenerInstance } from '@osaas/client-services';
+ * import { getAblindbergChaosmakerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnEncoreCallbackListenerInstance(ctx, 'myinstance');
+ * const instance = await getAblindbergChaosmakerInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnEncoreCallbackListenerInstance(
+export async function getAblindbergChaosmakerInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnEncoreCallbackListener> {
+): Promise<AblindbergChaosmaker> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-encore-callback-listener'
+    'ablindberg-chaosmaker'
   );
   return await getInstance(
     ctx,
-    'eyevinn-encore-callback-listener',
+    'ablindberg-chaosmaker',
     name,
     serviceAccessToken
   );

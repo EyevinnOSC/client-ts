@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/encore-callback-listenerinstance': {
-    /** List all running encore-callback-listener instances */
+  '/locustinstance': {
+    /** List all running locust instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the locust instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,9 +67,7 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
+            LocustfileUrl: string;
           } & {
             _links: {
               self: {
@@ -108,16 +106,14 @@ export interface paths {
         };
       };
     };
-    /** Launch a new encore-callback-listener instance */
+    /** Launch a new locust instance */
     post: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the locust instance */
             name: string;
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
+            LocustfileUrl: string;
           };
         };
       };
@@ -125,7 +121,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the locust instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -143,9 +139,7 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
+            LocustfileUrl: string;
           } & {
             _links: {
               self: {
@@ -200,11 +194,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart encore-callback-listener */
+    /** Restart locust */
     post: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the locust instance */
           id: string;
         };
       };
@@ -223,12 +217,12 @@ export interface paths {
       };
     };
   };
-  '/encore-callback-listenerinstance/{id}': {
-    /** Obtain status and resource URLs for an encore-callback-listener instance */
+  '/locustinstance/{id}': {
+    /** Obtain status and resource URLs for an locust instance */
     get: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the locust instance */
           id: string;
         };
       };
@@ -236,7 +230,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the locust instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -254,9 +248,7 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
+            LocustfileUrl: string;
           } & {
             _links: {
               self: {
@@ -302,11 +294,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an encore-callback-listener instance */
+    /** Stop and remove an locust instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the locust instance */
           id: string;
         };
       };
@@ -324,20 +316,18 @@ export interface paths {
         };
       };
     };
-    /** Patch encore-callback-listener instance with new parameters and restart */
+    /** Patch locust instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the locust instance */
             name?: string;
-            RedisUrl?: string;
-            EncoreUrl?: string;
-            RedisQueue?: string;
+            LocustfileUrl?: string;
           };
         };
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the locust instance */
           id: string;
         };
       };
@@ -345,7 +335,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the encore-callback-listener instance */
+            /** @description Name of the locust instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -363,9 +353,7 @@ export interface paths {
                 url: string;
               };
             };
-            RedisUrl: string;
-            EncoreUrl: string;
-            RedisQueue?: string;
+            LocustfileUrl: string;
           } & {
             _links: {
               self: {
@@ -420,11 +408,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of encore-callback-listener instance */
+    /** Return status of locust instance */
     get: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the locust instance */
           id: string;
         };
       };
@@ -448,7 +436,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the encore-callback-listener instance */
+    /** Return the latest logs from the locust instance */
     get: {
       parameters: {
         query: {
@@ -456,7 +444,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the locust instance */
           id: string;
         };
       };
@@ -476,11 +464,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for encore-callback-listener instance */
+    /** Return the exposed extra ports for locust instance */
     get: {
       parameters: {
         path: {
-          /** Name of the encore-callback-listener instance */
+          /** Name of the locust instance */
           id: string;
         };
       };
@@ -511,11 +499,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnEncoreCallbackListener =
-  paths['/encore-callback-listenerinstance/{id}']['get']['responses']['200']['schema'];
+export type LocustioLocust =
+  paths['/locustinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnEncoreCallbackListenerConfig =
-  paths['/encore-callback-listenerinstance']['post']['parameters']['body']['body'];
+export type LocustioLocustConfig =
+  paths['/locustinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -524,118 +512,96 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-encore-callback-listener
- * @description Encore callback listener is a powerful HTTP server that listens for successful job callbacks, posting jobId and Url on a redis queue. Fully customizable with environment variables. Enhance your project efficiency now! Contact sales@eyevinn.se for further details.
+ * @namespace locustio-locust
+ * @description Boost your performance with Locust! This open-source tool empowers you to conduct efficient load testing using the simplicity of Python. Monitor in real-time with a friendly UI and scale effortlessly!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2025 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} EyevinnEncoreCallbackListenerConfig
- * @property {string} name - Name of encore-callback-listener
- * @property {string} RedisUrl - RedisUrl
- * @property {string} EncoreUrl - EncoreUrl
- * @property {string} [RedisQueue] - RedisQueue
+ * @typedef {Object} LocustioLocustConfig
+ * @property {string} name - Name of locust
+ * @property {string} LocustfileUrl - Url to the location of your locustfile.py
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnEncoreCallbackListener
- * @property {string} name - Name of the Encore Callback Listener instance
- * @property {string} url - URL of the Encore Callback Listener instance
+ * @typedef {Object} LocustioLocust
+ * @property {string} name - Name of the Locust instance
+ * @property {string} url - URL of the Locust instance
  *
  */
 
 /**
- * Create a new Encore Callback Listener instance
+ * Create a new Locust instance
  *
- * @memberOf eyevinn-encore-callback-listener
+ * @memberOf locustio-locust
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnEncoreCallbackListenerConfig} body - Service instance configuration
- * @returns {EyevinnEncoreCallbackListener} - Service instance
+ * @param {LocustioLocustConfig} body - Service instance configuration
+ * @returns {LocustioLocust} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnEncoreCallbackListenerInstance } from '@osaas/client-services';
+ * import { createLocustioLocustInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnEncoreCallbackListenerConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnEncoreCallbackListenerInstance(ctx, body);
+ * const body: LocustioLocustConfig = { name: 'myinstance', ... };
+ * const instance = await createLocustioLocustInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnEncoreCallbackListenerInstance(
+export async function createLocustioLocustInstance(
   ctx: Context,
-  body: EyevinnEncoreCallbackListenerConfig
-): Promise<EyevinnEncoreCallbackListener> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-encore-callback-listener'
-  );
+  body: LocustioLocustConfig
+): Promise<LocustioLocust> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('locustio-locust');
   const instance = await createInstance(
     ctx,
-    'eyevinn-encore-callback-listener',
+    'locustio-locust',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady(
-    'eyevinn-encore-callback-listener',
-    instance.name,
-    ctx
-  );
+  await waitForInstanceReady('locustio-locust', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Encore Callback Listener instance
+ * Remove a Locust instance
  *
- * @memberOf eyevinn-encore-callback-listener
+ * @memberOf locustio-locust
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the callback to be removed
+ * @param {string} name - Name of the locust to be removed
  */
-export async function removeEyevinnEncoreCallbackListenerInstance(
+export async function removeLocustioLocustInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-encore-callback-listener'
-  );
-  await removeInstance(
-    ctx,
-    'eyevinn-encore-callback-listener',
-    name,
-    serviceAccessToken
-  );
+  const serviceAccessToken = await ctx.getServiceAccessToken('locustio-locust');
+  await removeInstance(ctx, 'locustio-locust', name, serviceAccessToken);
 }
 
 /**
- * Get a Encore Callback Listener instance
+ * Get a Locust instance
  *
- * @memberOf eyevinn-encore-callback-listener
+ * @memberOf locustio-locust
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the callback to be retrieved
- * @returns {EyevinnEncoreCallbackListener} - Service instance
+ * @param {string} name - Name of the locust to be retrieved
+ * @returns {LocustioLocust} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnEncoreCallbackListenerInstance } from '@osaas/client-services';
+ * import { getLocustioLocustInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnEncoreCallbackListenerInstance(ctx, 'myinstance');
+ * const instance = await getLocustioLocustInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnEncoreCallbackListenerInstance(
+export async function getLocustioLocustInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnEncoreCallbackListener> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-encore-callback-listener'
-  );
-  return await getInstance(
-    ctx,
-    'eyevinn-encore-callback-listener',
-    name,
-    serviceAccessToken
-  );
+): Promise<LocustioLocust> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('locustio-locust');
+  return await getInstance(ctx, 'locustio-locust', name, serviceAccessToken);
 }

@@ -68,6 +68,7 @@ export interface paths {
               };
             };
             EncoreUrl: string;
+            OscAccessToken?: string;
           } & {
             _links: {
               self: {
@@ -114,6 +115,7 @@ export interface paths {
             /** @description Name of the encore-ui instance */
             name: string;
             EncoreUrl: string;
+            OscAccessToken?: string;
           };
         };
       };
@@ -140,6 +142,7 @@ export interface paths {
               };
             };
             EncoreUrl: string;
+            OscAccessToken?: string;
           } & {
             _links: {
               self: {
@@ -249,6 +252,7 @@ export interface paths {
               };
             };
             EncoreUrl: string;
+            OscAccessToken?: string;
           } & {
             _links: {
               self: {
@@ -324,6 +328,7 @@ export interface paths {
             /** @description Name of the encore-ui instance */
             name?: string;
             EncoreUrl?: string;
+            OscAccessToken?: string;
           };
         };
         path: {
@@ -354,6 +359,7 @@ export interface paths {
               };
             };
             EncoreUrl: string;
+            OscAccessToken?: string;
           } & {
             _links: {
               self: {
@@ -523,6 +529,7 @@ import {
  * @typedef {Object} EyevinnEncoreUiConfig
  * @property {string} name - Name of encore-ui
  * @property {string} EncoreUrl - EncoreUrl
+ * @property {string} [OscAccessToken] - OscAccessToken
 
  * 
  */

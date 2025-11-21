@@ -3,6 +3,13 @@
  * Do not make direct changes to the file.
  */
 export {
+  EyevinnChannelEngineBridge,
+  EyevinnChannelEngineBridgeConfig,
+  createEyevinnChannelEngineBridgeInstance,
+  removeEyevinnChannelEngineBridgeInstance,
+  getEyevinnChannelEngineBridgeInstance
+} from './generated/eyevinn-channel-engine-bridge';
+export {
   ChannelEngine,
   ChannelEngineConfig,
   createChannelEngineInstance,
@@ -30,13 +37,6 @@ export {
   removeEyevinnChaosStreamProxyInstance,
   getEyevinnChaosStreamProxyInstance
 } from './generated/eyevinn-chaos-stream-proxy';
-export {
-  EyevinnChannelEngineBridge,
-  EyevinnChannelEngineBridgeConfig,
-  createEyevinnChannelEngineBridgeInstance,
-  removeEyevinnChannelEngineBridgeInstance,
-  getEyevinnChannelEngineBridgeInstance
-} from './generated/eyevinn-channel-engine-bridge';
 export {
   EyevinnAutoSubtitles,
   EyevinnAutoSubtitlesConfig,
@@ -86,13 +86,6 @@ export {
   removeEyevinnFunctionProbeInstance,
   getEyevinnFunctionProbeInstance
 } from './generated/eyevinn-function-probe';
-export {
-  EyevinnScheduleService,
-  EyevinnScheduleServiceConfig,
-  createEyevinnScheduleServiceInstance,
-  removeEyevinnScheduleServiceInstance,
-  getEyevinnScheduleServiceInstance
-} from './generated/eyevinn-schedule-service';
 export {
   EyevinnContinueWatchingApi,
   EyevinnContinueWatchingApiConfig,
@@ -835,3 +828,59 @@ export {
   removePenpotPenpotInstance,
   getPenpotPenpotInstance
 } from './generated/penpot-penpot';
+export {
+  EyevinnChannelScheduler,
+  EyevinnChannelSchedulerConfig,
+  createEyevinnChannelSchedulerInstance,
+  removeEyevinnChannelSchedulerInstance,
+  getEyevinnChannelSchedulerInstance
+} from './generated/eyevinn-channel-scheduler';
+export {
+  BirmeBucketCommander,
+  BirmeBucketCommanderConfig,
+  createBirmeBucketCommanderInstance,
+  removeBirmeBucketCommanderInstance,
+  getBirmeBucketCommanderInstance
+} from './generated/birme-bucket-commander';
+export {
+  EyevinnWebVideoReview,
+  EyevinnWebVideoReviewConfig,
+  createEyevinnWebVideoReviewInstance,
+  removeEyevinnWebVideoReviewInstance,
+  getEyevinnWebVideoReviewInstance
+} from './generated/eyevinn-web-video-review';
+export {
+  NextcloudServer,
+  NextcloudServerConfig,
+  createNextcloudServerInstance,
+  removeNextcloudServerInstance,
+  getNextcloudServerInstance
+} from './generated/nextcloud-server';
+export {
+  LocustioLocust,
+  LocustioLocustConfig,
+  createLocustioLocustInstance,
+  removeLocustioLocustInstance,
+  getLocustioLocustInstance
+} from './generated/locustio-locust';
+export {
+  NolltreLabTestPrepQuiz,
+  NolltreLabTestPrepQuizConfig,
+  createNolltreLabTestPrepQuizInstance,
+  removeNolltreLabTestPrepQuizInstance,
+  getNolltreLabTestPrepQuizInstance
+} from './generated/nolltre-lab-test-prep-quiz';
+export {
+  AblindbergChaosmaker,
+  AblindbergChaosmakerConfig,
+  createAblindbergChaosmakerInstance,
+  removeAblindbergChaosmakerInstance,
+  getAblindbergChaosmakerInstance
+} from './generated/ablindberg-chaosmaker';
+export {
+  GrusellEncoreProfileServer,
+  GrusellEncoreProfileServerConfig,
+  createGrusellEncoreProfileServerInstance,
+  removeGrusellEncoreProfileServerInstance,
+  getGrusellEncoreProfileServerInstance
+} from './generated/grusell-encore-profile-server';

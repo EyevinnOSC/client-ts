@@ -540,10 +540,10 @@ import {
 /**
  * @typedef {Object} BirmeVideoUploaderConfig
  * @property {string} name - Name of video-uploader
- * @property {string} [s3Endpoint] - S3Endpoint
- * @property {string} s3AccessKey - S3AccessKey
- * @property {string} s3SecretKey - S3SecretKey
- * @property {string} [s3AwsRegion] - S3AwsRegion
+ * @property {string} [s3Endpoint] - Your S3 bucket endpoint URL
+ * @property {string} s3AccessKey - Your AWS access key (like a username)
+ * @property {string} s3SecretKey - Your AWS secret key (like a password)
+ * @property {string} [s3AwsRegion] - AWS region (e.g., eu-north-1)
 
  * 
  */
