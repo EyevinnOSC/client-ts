@@ -7,6 +7,23 @@ import {
 import path from 'node:path';
 
 /**
+ * Options for VMAF comparison
+ *
+ * @memberof module:@osaas/client-transcode
+ * @typedef {Object} VmafCompareOptions
+ * @property {string} [awsAccessKeyId] - AWS Access Key ID
+ * @property {string} [awsSecretAccessKey] - AWS Secret Access Key
+ * @property {string} [awsSessionToken] - AWS Session Token
+ * @property {string} [s3EndpointUrl] - S3 Endpoint URL
+ */
+export interface VmafCompareOptions {
+  awsAccessKeyId?: string;
+  awsSecretAccessKey?: string;
+  awsSessionToken?: string;
+  s3EndpointUrl?: string;
+}
+
+/**
  * Compare two video files using VMAF
  *
  * @async
@@ -15,6 +32,7 @@ import path from 'node:path';
  * @param {URL} reference - URL to reference video file (supported protocols: s3)
  * @param {URL} distorted - URL to distorted video file (supported protocols: s3)
  * @param {URL} resultBucket - URL to S3 bucket where result file will be stored
+ * @param {VmafCompareOptions} [opts] - Options for VMAF comparison
  * @returns S3 URL to result file
  * @example
  * import { Context } from '@osaas/client-core';
@@ -30,7 +48,8 @@ export async function vmafCompare(
   ctx: Context,
   reference: URL,
   distorted: URL,
-  resultBucket: URL
+  resultBucket: URL,
+  opts: VmafCompareOptions = {}
 ): Promise<URL> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
     'eyevinn-easyvmaf-s3'
@@ -40,14 +59,15 @@ export async function vmafCompare(
     .toString()
     .replace(/\/$/, '')}/${path.basename(distorted.pathname)}_${jobId}.json`;
 
-  if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
+  if (!opts.awsAccessKeyId || !opts.awsSecretAccessKey) {
     throw new Error('AWS credentials not set');
   }
   const job = await createJob(ctx, 'eyevinn-easyvmaf-s3', serviceAccessToken, {
     name: jobId,
-    AwsAccessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    AwsSecretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    AwsSessionToken: process.env.AWS_SESSION_TOKEN,
+    AwsAccessKeyId: opts.awsAccessKeyId,
+    AwsSecretAccessKey: opts.awsSecretAccessKey,
+    AwsSessionToken: opts.awsSessionToken,
+    S3EndpointUrl: opts.s3EndpointUrl,
     cmdLineArgs: `-r ${reference.toString()} -d ${distorted.toString()} -o ${resultFile}`
   });
   Log().debug(
