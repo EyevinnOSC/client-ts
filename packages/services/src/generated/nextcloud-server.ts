@@ -527,7 +527,7 @@ import {
  * @namespace nextcloud-server
  * @description Empower your data with Nextcloud! Securely store, sync, and share your files, contacts, and calendars across devices. With robust security, expandability, and ease of use, your data thrives effortlessly.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

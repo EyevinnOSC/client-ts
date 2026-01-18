@@ -297,7 +297,7 @@ import {
  * @description Effortlessly manage secure file transfers with our user-friendly SFTP server powered by OpenSSH. Ideal for sharing files securely using SSH, it integrates easily with Docker, ensuring both security and simplicity.
 
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * 
  */
 

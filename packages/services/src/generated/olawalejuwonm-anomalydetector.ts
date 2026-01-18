@@ -288,7 +288,7 @@ import {
  * @namespace olawalejuwonm-anomalydetector
  * @description Safeguard your space with Anomaly Detector, a cutting-edge video surveillance solution. Experience real-time anomaly detection using advanced computer vision, ensuring privacy and reducing false alarms. Enhance security efficiently!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

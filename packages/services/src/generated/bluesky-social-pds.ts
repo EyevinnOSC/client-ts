@@ -304,7 +304,7 @@ import {
  * @namespace bluesky-social-pds
  * @description Empower your network with self-hosted Bluesky PDS! Harness the power of AT Protocol to easily manage your data server. Seamless installation, full control, and enhanced security for your social media presence.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Bluesky-Personal-Data-Server.html|Online docs} for further information
  */
 

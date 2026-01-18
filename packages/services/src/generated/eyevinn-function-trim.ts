@@ -212,7 +212,7 @@ import {
  * @namespace eyevinn-function-trim
  * @description A serverless media function to trim single media file or an ABR bundle of media files and upload the output to an S3 bucket.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

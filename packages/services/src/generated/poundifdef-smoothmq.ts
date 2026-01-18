@@ -114,6 +114,9 @@ export interface paths {
     /** Launch a new smoothmq instance */
     post: {
       parameters: {
+        query: {
+          beta?: boolean;
+        };
         body: {
           body?: {
             /** @description Name of the smoothmq instance */
@@ -537,15 +540,15 @@ import {
  * @namespace poundifdef-smoothmq
  * @description Introducing SmoothMQ, the ultimate drop-in replacement for SQS! Enhance your developer experience with a functional UI, observability, tracing, scheduling, and rate-limiting. Run your own private SQS on any cloud effortlessly.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-SmoothMQ.html|Online docs} for further information
  */
 
 /**
  * @typedef {Object} PoundifdefSmoothmqConfig
  * @property {string} name - Name of smoothmq
- * @property {string} [AccessKey] - AccessKey
- * @property {string} [SecretKey] - SecretKey
+ * @property {string} [AccessKey] - AWS-compatible access key ID for authenticating with the SmoothMQ server. This credential is used by SQS clients to connect to your private SmoothMQ instance.
+ * @property {string} [SecretKey] - AWS-compatible secret access key that pairs with the access key ID for client authentication. This is the private portion of the credential pair used to secure access to your SmoothMQ queues.
 
  * 
  */

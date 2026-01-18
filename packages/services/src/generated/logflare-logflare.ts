@@ -312,7 +312,7 @@ import {
  * @namespace logflare-logflare
  * @description Streamline your log management with Logflare! Integrate effortlessly, visualize in your browser, and leverage your existing BigQuery setup for seamless data insights. Elevate logging today!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Logflare.html|Online docs} for further information
  */
 

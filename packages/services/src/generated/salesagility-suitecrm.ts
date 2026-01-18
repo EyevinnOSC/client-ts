@@ -509,7 +509,7 @@ import {
  * @namespace salesagility-suitecrm
  * @description Transform your business with SuiteCRM, the leading open-source CRM. Seamlessly manage customer relationships, gain full data control, and customize your solution for an unbeatable enterprise edge!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

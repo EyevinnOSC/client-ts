@@ -308,7 +308,7 @@ import {
  * @namespace lms-community-slimserver
  * @description Experience the ultimate audio streaming solution with Lyrion Music Server. Effortlessly stream local and internet music to any device, transforming your listening experience across platforms like Windows, macOS, and Linux.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

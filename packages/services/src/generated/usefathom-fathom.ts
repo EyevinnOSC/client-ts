@@ -296,7 +296,7 @@ import {
  * @namespace usefathom-fathom
  * @description Introducing Fathom Lite - the popular, open-source website analytics tool with millions of downloads! Long-term maintenance, bug fixes, and cookie-free tracking set it apart. Get started today!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Fathom-Lite.html|Online docs} for further information
  */
 

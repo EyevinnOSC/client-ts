@@ -486,7 +486,7 @@ import {
  * @namespace automatisch-automatisch
  * @description Transform your business with Automatisch, the open-source automation tool that seamlessly connects apps like Twitter, Slack, and more. Enhance efficiency and maintain data control with ease and flexibility.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Automatisch.html|Online docs} for further information
  */
 

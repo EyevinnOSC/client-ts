@@ -509,7 +509,7 @@ import {
  * @namespace bjowestman-srt-stream-generator
  * @description Transform your streaming workflow with SRT Stream Generator! Create FFmpeg-powered test streams with video patterns and audio tones. Manage effortlessly via a sleek web UI. Perfect for seamless, low-latency projects!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

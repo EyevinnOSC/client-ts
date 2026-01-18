@@ -296,7 +296,7 @@ import {
  * @namespace supercorp-ai-supergateway
  * @description Unlock seamless stdio MCP server connectivity with Supergateway! Run servers over SSE effortlessly, ideal for remote access and debugging. Start with one command to deliver powerful, real-time interactions!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

@@ -545,7 +545,7 @@ import {
  * @namespace eyevinn-web-video-review
  * @description Unlock seamless video review with Web Video Review! Stream, analyze, and navigate broadcast videos straight from S3 storage. Experience real-time analysis, dynamic timeline navigation, and powerful transcoding with unparalleled ease. Deploy effortlessly using Docker and transform your video reviewing process today!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Web-Video-Review.html|Online docs} for further information
  */
 

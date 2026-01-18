@@ -509,7 +509,7 @@ import {
  * @namespace birme-stream-gfx
  * @description Enhance your live streams with customizable countdowns and overlay slates! Choose from 10 stunning themes to create engaging visuals. Perfect for OBS Studio, making stream setup a breeze. Elevate your stream now!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

@@ -539,7 +539,7 @@ import {
  * @namespace grafana-grafana
  * @description Transform your organization's data viewing experience with Grafana's cutting-edge visualizations and dynamic dashboards. Effortlessly explore metrics, logs, and receive alerts tailored precisely for powerful insights.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

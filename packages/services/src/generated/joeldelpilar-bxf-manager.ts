@@ -539,7 +539,7 @@ import {
  * @namespace joeldelpilar-bxf-manager
  * @description Streamline your broadcast file management with BXF Manager. Effortlessly edit, format, and store BXF files with cloud support, all within a user-friendly interface! Save time and keep organized.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

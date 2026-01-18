@@ -292,7 +292,7 @@ import {
  * @namespace eyevinn-img-alt-gen
  * @description Enhance image accessibility effortlessly with our Image Description Generator. Utilize OpenAI's prowess to create precise alt tags instantly, making your visuals more inclusive and SEO-friendly!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Image-Description-Generator.html|Online docs} for further information
  */
 

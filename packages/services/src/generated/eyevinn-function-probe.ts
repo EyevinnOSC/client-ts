@@ -200,7 +200,7 @@ import {
  * @namespace eyevinn-function-probe
  * @description A serverless media function to obtain media information for a media file or media stream.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://github.com/Eyevinn/function-probe|Online docs} for further information
  */
 

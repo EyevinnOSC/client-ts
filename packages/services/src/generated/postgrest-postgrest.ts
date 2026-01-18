@@ -300,7 +300,7 @@ import {
  * @namespace postgrest-postgrest
  * @description Transform your PostgreSQL database into a high-performance RESTful API with PostgREST. Enjoy rapid response times, enhanced security, and seamless scaling for robust, efficient app development.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-PostgREST.html|Online docs} for further information
  */
 

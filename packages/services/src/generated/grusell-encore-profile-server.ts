@@ -573,7 +573,7 @@ import {
  * @namespace grusell-encore-profile-server
  * @description Transform your video processing with the Encore Profile Server. Serve dynamic transcoding profiles directly from S3-compatible storage, seamlessly integrating AI capabilities for on-demand profile creation.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

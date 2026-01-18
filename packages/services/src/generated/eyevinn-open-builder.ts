@@ -521,7 +521,7 @@ import {
  * @namespace eyevinn-open-builder
  * @description Elevate your Claude AI experience with Open Builder's intuitive web interface. Streamline interactions, control permissions, and maintain session continuity effortlessly. Simple deployment with Docker!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

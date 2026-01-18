@@ -515,7 +515,7 @@ import {
  * @namespace birme-bucket-commander
  * @description Manage your S3 buckets effortlessly with Bucket Commander, offering a Norton Commander-inspired dual-pane interface. Experience seamless navigation, secure credential management, and quick file operations.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

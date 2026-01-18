@@ -492,16 +492,16 @@ import {
  * @namespace clickhouse-clickhouse
  * @description Unlock real-time data insights effortlessly with ClickHouse, the lightning-fast, open-source columnar database. Elevate your analytics and make data-driven decisions with speed and precision like never before!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-ClickHouse.html|Online docs} for further information
  */
 
 /**
  * @typedef {Object} ClickhouseClickhouseConfig
  * @property {string} name - Name of clickhouse
- * @property {string} [Db] - Db
- * @property {string} [User] - User
- * @property {string} [Password] - Password
+ * @property {string} [Db] - Database connection configuration
+ * @property {string} [User] - Configuration option for user
+ * @property {string} [Password] - Configuration option for password
 
  * 
  */

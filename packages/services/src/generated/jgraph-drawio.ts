@@ -288,7 +288,7 @@ import {
  * @namespace jgraph-drawio
  * @description Unleash your creativity with draw.io, the ultimate diagramming tool for visual storytelling and dynamic whiteboarding. Effortlessly craft, design, and export your ideas with a seamless, intuitive interface.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

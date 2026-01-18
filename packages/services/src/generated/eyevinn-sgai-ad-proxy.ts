@@ -5,12 +5,39 @@
 
 export interface paths {
   '/': {
-    /** Say hello */
+    /** Health check endpoint */
     get: {
+      parameters: {
+        query: {
+          verbose?: boolean;
+        };
+      };
       responses: {
-        /** The magical words! */
+        /** Default Response */
         200: {
-          schema: string;
+          schema: Partial<string> &
+            Partial<{
+              status: string;
+              versions: {
+                '@osaas/orchestrator': string;
+              };
+              environment: string;
+              _links: {
+                self: {
+                  href: string;
+                };
+                api: {
+                  href: string;
+                };
+              };
+            }>;
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            status: string;
+            reason: string;
+          };
         };
       };
     };
@@ -41,7 +68,8 @@ export interface paths {
               };
             };
             VastEndpoint: string;
-            OriginUrl: string;
+            OriginHost: string;
+            OriginUrl?: string;
             InsertionMode: string;
             DefaultAdDuration?: string;
             DefaultRepeatingCycle?: string;
@@ -65,8 +93,20 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -84,12 +124,16 @@ export interface paths {
     /** Launch a new sgai-ad-proxy instance */
     post: {
       parameters: {
+        query: {
+          beta?: boolean;
+        };
         body: {
           body?: {
             /** @description Name of the sgai-ad-proxy instance */
             name: string;
             VastEndpoint: string;
-            OriginUrl: string;
+            OriginHost: string;
+            OriginUrl?: string;
             InsertionMode: string;
             DefaultAdDuration?: string;
             DefaultRepeatingCycle?: string;
@@ -121,7 +165,8 @@ export interface paths {
               };
             };
             VastEndpoint: string;
-            OriginUrl: string;
+            OriginHost: string;
+            OriginUrl?: string;
             InsertionMode: string;
             DefaultAdDuration?: string;
             DefaultRepeatingCycle?: string;
@@ -145,8 +190,20 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -232,7 +289,8 @@ export interface paths {
               };
             };
             VastEndpoint: string;
-            OriginUrl: string;
+            OriginHost: string;
+            OriginUrl?: string;
             InsertionMode: string;
             DefaultAdDuration?: string;
             DefaultRepeatingCycle?: string;
@@ -256,8 +314,20 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -301,6 +371,118 @@ export interface paths {
         };
       };
     };
+    /** Patch sgai-ad-proxy instance with new parameters and restart */
+    patch: {
+      parameters: {
+        body: {
+          body?: {
+            /** @description Name of the sgai-ad-proxy instance */
+            name?: string;
+            VastEndpoint?: string;
+            OriginHost?: string;
+            OriginUrl?: string;
+            InsertionMode?: string;
+            DefaultAdDuration?: string;
+            DefaultRepeatingCycle?: string;
+            DefaultAdNumber?: string;
+            TestAssetUrl?: string;
+          };
+        };
+        path: {
+          /** Name of the sgai-ad-proxy instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            /** @description Name of the sgai-ad-proxy instance */
+            name: string;
+            /** @description URL to instance API */
+            url: string;
+            resources: {
+              license: {
+                /** @description URL to license information */
+                url: string;
+              };
+              apiDocs?: {
+                /** @description URL to instance API documentation */
+                url: string;
+              };
+              app?: {
+                /** @description URL to instance application (GUI) */
+                url: string;
+              };
+            };
+            VastEndpoint: string;
+            OriginHost: string;
+            OriginUrl?: string;
+            InsertionMode: string;
+            DefaultAdDuration?: string;
+            DefaultRepeatingCycle?: string;
+            DefaultAdNumber?: string;
+            TestAssetUrl?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+            };
+          };
+        };
+        /** Default Response */
+        400: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        404: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
   };
   '/health/{id}': {
     /** Return status of sgai-ad-proxy instance */
@@ -317,6 +499,7 @@ export interface paths {
           schema: {
             /** @enum {string} */
             status: 'starting' | 'running' | 'stopped' | 'failed' | 'unknown';
+            images?: string[];
           };
         };
         /** Default Response */
@@ -385,6 +568,35 @@ export interface paths {
       };
     };
   };
+  '/nodeports/{id}': {
+    /** Return the assigned NodePorts for sgai-ad-proxy instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the sgai-ad-proxy instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            name: string;
+            protocol: Partial<'TCP'> & Partial<'UDP'>;
+            port: number;
+            ip?: string;
+          }[];
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface definitions {}
@@ -409,20 +621,21 @@ import {
  * @namespace eyevinn-sgai-ad-proxy
  * @description Boost viewer engagement with our Server-Guided Ad Insertion Proxy! Automatically embed ads into video streams with precision timing. Enhance monetization effortlessly while maintaining a seamless user experience.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-SGAI-Proxy.html|Online docs} for further information
  */
 
 /**
  * @typedef {Object} EyevinnSgaiAdProxyConfig
  * @property {string} name - Name of sgai-ad-proxy
- * @property {string} VastEndpoint - VastEndpoint
- * @property {string} OriginUrl - OriginUrl
- * @property {string} InsertionMode - InsertionMode
- * @property {string} [DefaultAdDuration] - DefaultAdDuration
- * @property {string} [DefaultRepeatingCycle] - DefaultRepeatingCycle
- * @property {string} [DefaultAdNumber] - DefaultAdNumber
- * @property {string} [TestAssetUrl] - TestAssetUrl
+ * @property {string} VastEndpoint - The VAST 4.0/4.1 XML compatible ad server endpoint URL that provides advertisement content
+ * @property {string} OriginHost - The hostname or IP address of the origin HLS streaming server that provides the source video content
+ * @property {string} [OriginUrl] - The complete URL to the master playlist of the origin HLS stream
+ * @property {string} InsertionMode - The ad insertion mode to use for placing advertisements in the stream
+ * @property {string} [DefaultAdDuration] - The default duration in seconds for ad breaks when not specified
+ * @property {string} [DefaultRepeatingCycle] - The interval in seconds at which ad breaks repeat in static insertion mode
+ * @property {string} [DefaultAdNumber] - The default number of ad slots to generate in static insertion mode
+ * @property {string} [TestAssetUrl] - A test asset URL to replace raw MP4 assets with a fragmented MP4 VoD media playlist for better compatibility
 
  * 
  */

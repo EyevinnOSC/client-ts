@@ -645,17 +645,17 @@ import {
  * @namespace eyevinn-player-analytics-eventsink
  * @description Unlock seamless video analytics with Eyevinn Player Analytics Eventsink! Streamline data collection from video players and enhance performance insights. Experience modular flexibility and AWS integration today!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Player-Analytics-Eventsink.html|Online docs} for further information
  */
 
 /**
  * @typedef {Object} EyevinnPlayerAnalyticsEventsinkConfig
  * @property {string} name - Name of player-analytics-eventsink
- * @property {string} SqsQueueUrl - SqsQueueUrl
- * @property {string} AwsAccessKeyId - AwsAccessKeyId
- * @property {string} AwsSecretAccessKey - AwsSecretAccessKey
- * @property {string} [SqsEndpoint] - SqsEndpoint
+ * @property {string} SqsQueueUrl - The URL of the Amazon SQS queue where validated analytics events will be sent for processing
+ * @property {string} AwsAccessKeyId - AWS access key ID for authenticating with Amazon Web Services to access SQS and other AWS resources
+ * @property {string} AwsSecretAccessKey - AWS secret access key for authenticating with Amazon Web Services, used in conjunction with the access key ID
+ * @property {string} [SqsEndpoint] - Custom SQS endpoint URL, typically used for local development or alternative SQS-compatible services
  * @property {string} [AllowedOrigins] - Provide a comma separated list of origins to allow. If empty allow all
 
  * 

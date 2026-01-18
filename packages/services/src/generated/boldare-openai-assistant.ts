@@ -324,7 +324,7 @@ import {
  * @namespace boldare-openai-assistant
  * @description Transform your NestJS application with our AI Assistant library, offering fast setup and seamless integration with OpenAI for dynamic conversational experiences. Develop efficient chatbots in minutes!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

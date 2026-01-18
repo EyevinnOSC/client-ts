@@ -515,7 +515,7 @@ import {
  * @namespace eyevinn-test-adserver
  * @description Eyevinn Test Adserver is the ultimate solution for testing CSAI/SSAI stitching and tracking implementation. Open source, easy to use, and flexible for various use cases. Get it now and experience seamless testing!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://github.com/Eyevinn/test-adserver|Online docs} for further information
  */
 

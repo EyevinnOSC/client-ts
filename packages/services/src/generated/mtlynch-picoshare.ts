@@ -480,7 +480,7 @@ import {
  * @namespace mtlynch-picoshare
  * @description Simplify file sharing with PicoShare! Instantly create direct download links without ads, file restrictions, or resizing hassles. Share any file, any size, effortlessly and securely. Try PicoShare today!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-PicoShare.html|Online docs} for further information
  */
 

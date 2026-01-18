@@ -509,7 +509,7 @@ import {
  * @namespace eyevinn-tf-deployer
  * @description Streamline your Terraform deployments with OpenTofu Deployer! Experience seamless GitHub integration, real-time monitoring, and smart variable management, all within a sleek, Docker-ready application.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

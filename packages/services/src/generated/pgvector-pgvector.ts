@@ -504,7 +504,7 @@ import {
  * @namespace pgvector-pgvector
  * @description Enhance your database with pgvector's robust vector similarity search integrated into Postgres. Effortlessly manage vectors alongside traditional data and execute advanced nearest neighbor searches with ease.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

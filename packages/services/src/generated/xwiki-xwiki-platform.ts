@@ -316,7 +316,7 @@ import {
  * @namespace xwiki-xwiki-platform
  * @description Empower your team's collaboration with XWiki Platform, a versatile and robust wiki solution perfect for building seamless, interactive applications. Share knowledge and streamline workflows effortlessly.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

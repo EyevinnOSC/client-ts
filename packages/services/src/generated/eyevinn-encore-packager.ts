@@ -106,6 +106,10 @@ export interface paths {
                 /** @description Update this instance */
                 href: string;
               };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
             };
           })[];
         };
@@ -121,6 +125,9 @@ export interface paths {
     /** Launch a new encore-packager instance */
     post: {
       parameters: {
+        query: {
+          beta?: boolean;
+        };
         body: {
           body?: {
             /** @description Name of the encore-packager instance */
@@ -200,6 +207,10 @@ export interface paths {
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -321,6 +332,10 @@ export interface paths {
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -450,6 +465,10 @@ export interface paths {
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -587,26 +606,26 @@ import {
  * @namespace eyevinn-encore-packager
  * @description Enhance your transcoding workflow with Encore packager! Run as a service, listen for messages on redis queue, and customize packaging events. Boost productivity with this versatile tool.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 
 /**
  * @typedef {Object} EyevinnEncorePackagerConfig
  * @property {string} name - Name of encore-packager
- * @property {string} RedisUrl - RedisUrl
- * @property {string} [RedisQueue] - RedisQueue
- * @property {string} OutputFolder - OutputFolder
- * @property {string} [Concurrency] - Concurrency
- * @property {string} PersonalAccessToken - PersonalAccessToken
- * @property {string} AwsAccessKeyId - AwsAccessKeyId
- * @property {string} AwsSecretAccessKey - AwsSecretAccessKey
- * @property {string} [AwsRegion] - AwsRegion
- * @property {string} [AwsSessionToken] - AwsSessionToken
- * @property {string} [S3EndpointUrl] - S3EndpointUrl
- * @property {string} [OutputSubfolderTemplate] - OutputSubfolderTemplate
+ * @property {string} RedisUrl - URL to the Redis server used for message queuing when running as a service
+ * @property {string} [RedisQueue] - Name of the Redis queue to listen to for packaging job messages
+ * @property {string} OutputFolder - Base folder for packaging output, with actual output stored in subfolders according to OUTPUT_SUBFOLDER_TEMPLATE
+ * @property {string} [Concurrency] - Number of concurrent packaging jobs that can be processed simultaneously
+ * @property {string} PersonalAccessToken - OSC (Open Source Cloud) access token for accessing Encore instances hosted in OSC
+ * @property {string} AwsAccessKeyId - AWS access key ID for authentication when PACKAGE_OUTPUT_FOLDER is an AWS S3 bucket
+ * @property {string} AwsSecretAccessKey - AWS secret access key for authentication when PACKAGE_OUTPUT_FOLDER is an AWS S3 bucket
+ * @property {string} [AwsRegion] - AWS region specification for S3 bucket operations
+ * @property {string} [AwsSessionToken] - AWS session token for temporary credential authentication with S3
+ * @property {string} [S3EndpointUrl] - Custom S3 endpoint URL when PACKAGE_OUTPUT_FOLDER is an S3 bucket not hosted on AWS
+ * @property {string} [OutputSubfolderTemplate] - Template for subfolder structure relative to PACKAGE_OUTPUT_FOLDER where output will be stored
  * @property {boolean} [SkipPackaging] - When enable the output files are copied and a SMIL file is created
- * @property {string} [CallbackUrl] - CallbackUrl
+ * @property {string} [CallbackUrl] - Optional callback service URL for receiving packaging success or failure notifications
 
  * 
  */

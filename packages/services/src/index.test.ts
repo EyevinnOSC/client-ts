@@ -4336,3 +4336,483 @@ describe('removeGrusellEncoreProfileServerInstance', () => {
     );
   });
 });
+
+describe('createEyevinnOgrafEditorInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEyevinnOgrafEditorInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'eyevinn-ograf-editor'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-ograf-editor',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'eyevinn-ograf-editor',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEyevinnOgrafEditorInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEyevinnOgrafEditorInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-ograf-editor',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createEyevinnDashMonitorInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEyevinnDashMonitorInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'eyevinn-dash-monitor'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-dash-monitor',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'eyevinn-dash-monitor',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEyevinnDashMonitorInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEyevinnDashMonitorInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-dash-monitor',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createPsumiyaOptionInsightsInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createPsumiyaOptionInsightsInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'psumiya-option-insights'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'psumiya-option-insights',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'psumiya-option-insights',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removePsumiyaOptionInsightsInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removePsumiyaOptionInsightsInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'psumiya-option-insights',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createAlexbj75AlextodolistInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createAlexbj75AlextodolistInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'alexbj75-alextodolist'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'alexbj75-alextodolist',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'alexbj75-alextodolist',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeAlexbj75AlextodolistInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeAlexbj75AlextodolistInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'alexbj75-alextodolist',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createOshinongitEspressoInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createOshinongitEspressoInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'oshinongit-espresso'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'oshinongit-espresso',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'oshinongit-espresso',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeOshinongitEspressoInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeOshinongitEspressoInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'oshinongit-espresso',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createAblindbergOscVmafStudioInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createAblindbergOscVmafStudioInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'ablindberg-osc-vmaf-studio'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'ablindberg-osc-vmaf-studio',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'ablindberg-osc-vmaf-studio',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeAblindbergOscVmafStudioInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeAblindbergOscVmafStudioInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'ablindberg-osc-vmaf-studio',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createAlexbj75FoodRecipeCollectorAppInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createAlexbj75FoodRecipeCollectorAppInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'alexbj75-food-recipe-collector-app'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'alexbj75-food-recipe-collector-app',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'alexbj75-food-recipe-collector-app',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeAlexbj75FoodRecipeCollectorAppInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeAlexbj75FoodRecipeCollectorAppInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'alexbj75-food-recipe-collector-app',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createEyevinnStromInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEyevinnStromInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('eyevinn-strom');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-strom',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'eyevinn-strom',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEyevinnStromInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEyevinnStromInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-strom',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createApacheAirflowInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createApacheAirflowInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('apache-airflow');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'apache-airflow',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'apache-airflow',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeApacheAirflowInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeApacheAirflowInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'apache-airflow',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createN8nIoN8nInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createN8nIoN8nInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('n8n-io-n8n');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'n8n-io-n8n',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith('n8n-io-n8n', 'sdk', ctx);
+  });
+});
+
+describe('removeN8nIoN8nInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeN8nIoN8nInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'n8n-io-n8n',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createN8nIoTaskRunnerLauncherInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createN8nIoTaskRunnerLauncherInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'n8n-io-task-runner-launcher'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'n8n-io-task-runner-launcher',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'n8n-io-task-runner-launcher',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeN8nIoTaskRunnerLauncherInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeN8nIoTaskRunnerLauncherInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'n8n-io-task-runner-launcher',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createItzgDockerMinecraftBedrockServerInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createItzgDockerMinecraftBedrockServerInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'itzg-docker-minecraft-bedrock-server'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'itzg-docker-minecraft-bedrock-server',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'itzg-docker-minecraft-bedrock-server',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeItzgDockerMinecraftBedrockServerInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeItzgDockerMinecraftBedrockServerInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'itzg-docker-minecraft-bedrock-server',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createSvensson00SpectercrmInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createSvensson00SpectercrmInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'svensson00-spectercrm'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'svensson00-spectercrm',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'svensson00-spectercrm',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeSvensson00SpectercrmInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeSvensson00SpectercrmInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'svensson00-spectercrm',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createEyevinnPythonRunnerInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEyevinnPythonRunnerInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'eyevinn-python-runner'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-python-runner',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'eyevinn-python-runner',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEyevinnPythonRunnerInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEyevinnPythonRunnerInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-python-runner',
+      'sdk',
+      'token'
+    );
+  });
+});

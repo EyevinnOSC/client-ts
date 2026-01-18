@@ -288,7 +288,7 @@ import {
  * @namespace excalidraw-excalidraw
  * @description Transform your creative process with Excalidraw, the ultimate open-source whiteboard perfect for collaborative, hand-drawn style designs. Enjoy infinite canvas, customizable tools, and real-time collaboration.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

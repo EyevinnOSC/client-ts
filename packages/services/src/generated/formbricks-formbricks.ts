@@ -510,7 +510,7 @@ import {
  * @namespace formbricks-formbricks
  * @description Revolutionize user engagement with Formbricks, the open-source Qualtrics alternative! Create conversion-optimized, privacy-first surveys effortlessly. Empower your team with transformational insights today!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Formbricks.html|Online docs} for further information
  */
 

@@ -292,7 +292,7 @@ import {
  * @namespace eyevinn-ephtoken-svc
  * @description Seamlessly integrate with client-side apps by generating ephemeral API tokens for the OpenAI Realtime API. Simplify authentication and enhance security with this easy-to-install solution today!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

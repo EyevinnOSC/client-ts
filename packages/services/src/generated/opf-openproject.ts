@@ -292,7 +292,7 @@ import {
  * @namespace opf-openproject
  * @description Elevate team productivity with OpenProject, the ultimate web-based project management tool. Seamlessly plan, collaborate, and track your projects with features tailored for agile, scrum, and budgeting excellence.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

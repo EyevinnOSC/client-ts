@@ -509,7 +509,7 @@ import {
  * @namespace eyevinn-teleprompter
  * @description Transform your presentations with Open Teleprompter! Our web-based teleprompter app ensures flawless delivery through synchronized display and controller interfaces. Elevate your public speaking experience today!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

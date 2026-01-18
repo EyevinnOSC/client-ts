@@ -176,7 +176,7 @@ import {
  * @namespace eyevinn-function-scenes
  * @description A serverless media function to detect scene changes and extract keyframes in a video file or a stream.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://github.com/Eyevinn/function-scenes|Online docs} for further information
  */
 

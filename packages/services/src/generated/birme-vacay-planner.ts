@@ -521,7 +521,7 @@ import {
  * @namespace birme-vacay-planner
  * @description Simplify team trips with Vacation Planner, a seamless web app for scheduling and managing vacations. Enjoy easy calendar integration, real-time updates, and role-based access control for a stress-free planning experience.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

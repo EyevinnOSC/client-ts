@@ -204,7 +204,7 @@ By default, Flyimg generates the AVIF image format (when the browser supports it
 
 Additionally, Flyimg also generates the WebP format, along with the impressive MozJPEG compression algorithm to optimize images, other formats are supported also such as PNG and GIF.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://github.com/flyimg/flyimg|Online docs} for further information
  */
 

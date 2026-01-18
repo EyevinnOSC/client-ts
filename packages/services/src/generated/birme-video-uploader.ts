@@ -533,7 +533,7 @@ import {
  * @namespace birme-video-uploader
  * @description Effortlessly upload and manage your videos with our intuitive Video Uploader. Enjoy seamless drag-and-drop functionality, real-time upload tracking, and support for large files, all on your preferred S3-compatible storage.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

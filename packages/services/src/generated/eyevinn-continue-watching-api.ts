@@ -216,7 +216,7 @@ import {
  * @namespace eyevinn-continue-watching-api
  * @description A user of a streaming service expects that they can pick up where they left on any of their devices. To handle that you would need to develop a service with endpoints for the application to write and read from. This open source cloud component take care of that and all you need is to have a Redis database running on Redis Cloud for example.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://dev.to/video/how-to-quickly-setup-a-continue-watching-endpoint-for-your-video-players-ek7|Online docs} for further information
  */
 

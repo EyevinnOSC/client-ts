@@ -5,12 +5,39 @@
 
 export interface paths {
   '/': {
-    /** Say hello */
+    /** Health check endpoint */
     get: {
+      parameters: {
+        query: {
+          verbose?: boolean;
+        };
+      };
       responses: {
-        /** The magical words! */
+        /** Default Response */
         200: {
-          schema: string;
+          schema: Partial<string> &
+            Partial<{
+              status: string;
+              versions: {
+                '@osaas/orchestrator': string;
+              };
+              environment: string;
+              _links: {
+                self: {
+                  href: string;
+                };
+                api: {
+                  href: string;
+                };
+              };
+            }>;
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            status: string;
+            reason: string;
+          };
         };
       };
     };
@@ -21,7 +48,7 @@ export interface paths {
       responses: {
         /** Default Response */
         200: {
-          schema: {
+          schema: ({
             /** @description Name of the osc-postgresql instance */
             name: string;
             /** @description URL to instance API */
@@ -45,7 +72,38 @@ export interface paths {
             PostgresDb?: string;
             PostgresInitDbArgs?: string;
             PostgresInitDbSql?: string;
-          }[];
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+            };
+          })[];
         };
         /** Default Response */
         500: {
@@ -59,6 +117,9 @@ export interface paths {
     /** Launch a new osc-postgresql instance */
     post: {
       parameters: {
+        query: {
+          beta?: boolean;
+        };
         body: {
           body?: {
             /** @description Name of the osc-postgresql instance */
@@ -98,6 +159,37 @@ export interface paths {
             PostgresDb?: string;
             PostgresInitDbArgs?: string;
             PostgresInitDbSql?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+            };
           };
         };
         /** Default Response */
@@ -113,6 +205,30 @@ export interface paths {
             /** @description Reason why something failed */
             reason: string;
           };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
+  '/restart/{id}': {
+    /** Restart osc-postgresql */
+    post: {
+      parameters: {
+        path: {
+          /** Name of the osc-postgresql instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        204: {
+          schema: string;
         };
         /** Default Response */
         500: {
@@ -160,6 +276,37 @@ export interface paths {
             PostgresDb?: string;
             PostgresInitDbArgs?: string;
             PostgresInitDbSql?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+            };
           };
         };
         /** Default Response */
@@ -200,6 +347,108 @@ export interface paths {
         };
       };
     };
+    /** Patch osc-postgresql instance with new parameters and restart */
+    patch: {
+      parameters: {
+        body: {
+          body?: {
+            /** @description Name of the osc-postgresql instance */
+            name?: string;
+            PostgresPassword?: string;
+            PostgresUser?: string;
+            PostgresDb?: string;
+            PostgresInitDbArgs?: string;
+            PostgresInitDbSql?: string;
+          };
+        };
+        path: {
+          /** Name of the osc-postgresql instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            /** @description Name of the osc-postgresql instance */
+            name: string;
+            /** @description URL to instance API */
+            url: string;
+            resources: {
+              license: {
+                /** @description URL to license information */
+                url: string;
+              };
+              apiDocs?: {
+                /** @description URL to instance API documentation */
+                url: string;
+              };
+              app?: {
+                /** @description URL to instance application (GUI) */
+                url: string;
+              };
+            };
+            PostgresPassword: string;
+            PostgresUser?: string;
+            PostgresDb?: string;
+            PostgresInitDbArgs?: string;
+            PostgresInitDbSql?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+            };
+          };
+        };
+        /** Default Response */
+        400: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        404: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
   };
   '/health/{id}': {
     /** Return status of osc-postgresql instance */
@@ -216,6 +465,7 @@ export interface paths {
           schema: {
             /** @enum {string} */
             status: 'starting' | 'running' | 'stopped' | 'failed' | 'unknown';
+            images?: string[];
           };
         };
         /** Default Response */
@@ -308,18 +558,18 @@ import {
  * @namespace birme-osc-postgresql
  * @description Unlock the full potential of your data with the PostgreSQL OSC image, seamlessly integrated for use in Eyevinn Open Source Cloud. Experience robust scalability, high security, and unmatched extensibility.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 
 /**
  * @typedef {Object} BirmeOscPostgresqlConfig
  * @property {string} name - Name of osc-postgresql
- * @property {string} PostgresPassword - PostgresPassword
- * @property {string} [PostgresUser] - PostgresUser
- * @property {string} [PostgresDb] - PostgresDb
- * @property {string} [PostgresInitDbArgs] - PostgresInitDbArgs
- * @property {string} [PostgresInitDbSql] - PostgresInitDbSql
+ * @property {string} PostgresPassword - Sets the password for the PostgreSQL superuser account. This is required to secure database access and authenticate connections.
+ * @property {string} [PostgresUser] - Specifies the username for the PostgreSQL superuser account. If not provided, defaults to 'postgres'.
+ * @property {string} [PostgresDb] - Sets the name of the default database to be created when the PostgreSQL container starts. If not specified, it will use the same name as the PostgreSQL user.
+ * @property {string} [PostgresInitDbArgs] - Provides additional command-line arguments to pass to the 'initdb' command during database cluster initialization.
+ * @property {string} [PostgresInitDbSql] - Specifies SQL commands or script content to execute during database initialization, allowing for custom database setup and configuration.
 
  * 
  */

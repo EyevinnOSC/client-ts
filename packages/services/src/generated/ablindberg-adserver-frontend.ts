@@ -509,7 +509,7 @@ import {
  * @namespace ablindberg-adserver-frontend
  * @description Transform your ad operations with our React frontend for Eyevinn Test AdServer. Effortlessly manage sessions, generate VAST/VMAP ads, and delve into insightful analytics—all in real-time!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

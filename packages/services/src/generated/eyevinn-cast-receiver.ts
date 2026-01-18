@@ -220,7 +220,7 @@ import {
  * @namespace eyevinn-cast-receiver
  * @description A basic custom chromecast receiver that can be configured using environment variables. Add your company branding to your own chromecast receiver without writing a single line of code!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://github.com/Eyevinn/cast-receiver|Online docs} for further information
  */
 

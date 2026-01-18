@@ -515,7 +515,7 @@ import {
  * @namespace eyevinn-channel-scheduler
  * @description Streamline your video content scheduling with Channel Scheduler! Experience a professional broadcast-style interface to create and manage linear TV channel schedules in real-time. Ideal for seamless online broadcast management!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Channel-Engine-Scheduler.html|Online docs} for further information
  */
 

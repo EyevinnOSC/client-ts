@@ -288,7 +288,7 @@ import {
  * @namespace bluewave-labs-checkmate
  * @description Monitor servers effortlessly with Checkmate—a powerful open-source tool for tracking server and website performance. Enjoy real-time alerts, in-depth insights, and manage over 1000 servers seamlessly!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

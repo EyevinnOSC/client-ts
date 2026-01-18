@@ -288,7 +288,7 @@ import {
  * @namespace nfrederiksen-hls-viewer
  * @description Effortlessly inspect and analyze HLS playlist manifests directly in your browser. No installation needed—just paste your URL and dive into comprehensive metrics with ease. Ideal for streamlined streaming analysis!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

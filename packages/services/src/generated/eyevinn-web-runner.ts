@@ -522,7 +522,7 @@ import {
  * @namespace eyevinn-web-runner
  * @description Effortlessly deploy NodeJS web apps with Web-Runner! This Docker container seamlessly handles cloning, building, and running your GitHub repositories. Simplify your deployment process today!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Web-Runner.html|Online docs} for further information
  */
 

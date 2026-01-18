@@ -520,7 +520,7 @@ import {
  * @namespace freescout-help-desk-freescout
  * @description Discover FreeScout, the ultimate self-hosted help desk solution. Enjoy robust features akin to Zendesk & Help Scout without conceding privacy or control. Fully customizable, mobile-friendly, and free!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-FreeScout.html|Online docs} for further information
  */
 

@@ -250,7 +250,7 @@ import {
  * @namespace owncast-owncast
  * @description Revolutionize your live streaming experience with Owncast! Take control over your content, interface, and audience with this self-hosted, open-source platform. Explore the possibilities today.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://owncast.online/quickstart/configure/|Online docs} for further information
  */
 

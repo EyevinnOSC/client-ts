@@ -526,7 +526,7 @@ import {
  * @namespace roundcube-roundcubemail
  * @description Transform your email experience with Roundcube Webmail! Enjoy a browser-based multilang IMAP client with intuitive design, customizable skins, and extensive plugin support. Efficiency meets versatility!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Roundcube-Webmail.html|Online docs} for further information
  */
 

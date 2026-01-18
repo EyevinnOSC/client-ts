@@ -381,7 +381,7 @@ import {
  * @namespace eyevinn-hls-monitor
  * @description Service to monitor one or more HLS-streams for manifest errors and inconsistencies.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-HLS-Stream-Monitor.html|Online docs} for further information
  */
 

@@ -292,7 +292,7 @@ import {
  * @namespace searxng-searxng
  * @description Experience the power of privacy with SearXNG, a customizable metasearch engine delivering unmatched confidentiality. Explore the web securely with our easy setup and extensive admin tools.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

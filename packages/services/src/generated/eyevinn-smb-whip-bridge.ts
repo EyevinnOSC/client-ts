@@ -526,7 +526,7 @@ import {
  * @namespace eyevinn-smb-whip-bridge
  * @description Elevate your video streaming with SMB WHIP Bridge! Seamlessly integrate WHIP clients with Symphony Media Bridge SFU for superior media streams.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Symphony-Media-Bridge-WHIP-Gateway.html|Online docs} for further information
  */
 

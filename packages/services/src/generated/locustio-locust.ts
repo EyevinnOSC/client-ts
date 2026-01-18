@@ -515,7 +515,7 @@ import {
  * @namespace locustio-locust
  * @description Boost your performance with Locust! This open-source tool empowers you to conduct efficient load testing using the simplicity of Python. Monitor in real-time with a friendly UI and scale effortlessly!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

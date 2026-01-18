@@ -312,7 +312,7 @@ import {
  * @namespace matomo-org-matomo
  * @description Unleash the power of analytics with Matomo. Own your data with this feature-rich open-source alternative to Google Analytics. Easy installation, real-time stats, and privacy-driven, used by millions!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

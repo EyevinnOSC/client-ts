@@ -292,7 +292,7 @@ import {
  * @namespace eyevinn-lambda-stitch
  * @description A proxy to insert ads in an HLS VOD either using manifest manipulation or HLS interstitials
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-HLS-VOD-Stitcher.html|Online docs} for further information
  */
 

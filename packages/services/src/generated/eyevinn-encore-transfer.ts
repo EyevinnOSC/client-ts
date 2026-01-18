@@ -312,7 +312,7 @@ import {
  * @namespace eyevinn-encore-transfer
  * @description Introducing Encore Transfer - the ultimate service for seamless output transfer in a video processing pipeline. With easy installation and essential environment variables, this service is a game-changer for Open Source Cloud users. Dive into our comprehensive documentation and join our supportive community on Slack. Don't miss out on this opportunity to revolutionize your video workflow with Eyevinn Technology's innovative solution. Get in touch with us for further customization and support options!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

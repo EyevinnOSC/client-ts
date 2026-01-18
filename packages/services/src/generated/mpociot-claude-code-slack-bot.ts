@@ -557,7 +557,7 @@ import {
  * @namespace mpociot-claude-code-slack-bot
  * @description Boost productivity with Claude Code Slack Bot! Get AI-driven coding assistance right in Slack. Chat in threads, stream responses, and keep context seamlessly across messages. Transform your coding workflow today!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Claude-Code-Slackbot.html|Online docs} for further information
  */
 

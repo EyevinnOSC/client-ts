@@ -296,7 +296,7 @@ import {
  * @namespace eyevinn-openauth-pwd
  * @description Boost your cybersecurity with OpenAuth Password Service! This ready-to-deploy solution empowers your authentication processes using a reliable CouchDB database and seamless email verification for impervious ID security.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-OpenAuth-Password.html|Online docs} for further information
  */
 

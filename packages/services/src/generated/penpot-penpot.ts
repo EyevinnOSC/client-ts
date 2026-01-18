@@ -533,17 +533,17 @@ import {
  * @namespace penpot-penpot
  * @description Revolutionize your design workflow with Penpot, the open-source tool where design meets code. Create stunning designs, prototypes, and integrate seamlessly with developers. Collaborate effortlessly!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 
 /**
  * @typedef {Object} PenpotPenpotConfig
  * @property {string} name - Name of penpot
- * @property {string} DbUrl - DbUrl
- * @property {string} DbUsername - DbUsername
- * @property {string} [DbPassword] - DbPassword
- * @property {string} RedisUrl - RedisUrl
+ * @property {string} DbUrl - Database connection URI for Penpot's PostgreSQL database. This is the primary database where all application data including projects, files, users, and teams are stored.
+ * @property {string} DbUsername - Username for authenticating with the PostgreSQL database specified in the database URI.
+ * @property {string} [DbPassword] - Password for the database user specified in DbUsername. Used for PostgreSQL authentication.
+ * @property {string} RedisUrl - Redis connection URI for Penpot's caching and session management. Redis is used for real-time collaboration features, caching, and temporary data storage.
 
  * 
  */

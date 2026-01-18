@@ -401,7 +401,7 @@ import {
  * @namespace eyevinn-auto-subtitles
  * @description Effortlessly transform audio and video files into accurate subtitles with Automatic Subtitle Generator. Utilizing Open AI Whisper, enjoy seamless integration to transcribe and format content efficiently.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Subtitle-Generator.html|Online docs} for further information
  */
 

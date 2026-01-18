@@ -336,7 +336,7 @@ import {
  * @namespace eyevinn-tams-gateway
  * @description Revolutionize your media management with TAMS Gateway—effortlessly store and index segmented media flows. Enhance efficiency and access powerfully with an integrated database and flexible service support.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Solution:-TAMS-storage.html|Online docs} for further information
  */
 

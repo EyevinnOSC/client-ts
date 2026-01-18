@@ -316,7 +316,7 @@ import {
  * @namespace emedvedev-slackin-extended
  * @description Boost your Slack community engagement with Slackin-Extended! Our customizable platform offers real-time user tracking, effortless invites, and abuse prevention. Enhance user experience with personalized themes and simple integration options. Perfect for building and maintaining a vibrant online community!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Slackin.html|Online docs} for further information
  */
 

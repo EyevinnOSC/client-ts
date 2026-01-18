@@ -99,6 +99,10 @@ export interface paths {
                 /** @description Update this instance */
                 href: string;
               };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
             };
           })[];
         };
@@ -114,6 +118,9 @@ export interface paths {
     /** Launch a new intercom-manager instance */
     post: {
       parameters: {
+        query: {
+          beta?: boolean;
+        };
         body: {
           body?: {
             /** @description Name of the intercom-manager instance */
@@ -179,6 +186,10 @@ export interface paths {
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -295,6 +306,10 @@ export interface paths {
                 /** @description Update this instance */
                 href: string;
               };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
             };
           };
         };
@@ -408,6 +423,10 @@ export interface paths {
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -547,7 +566,7 @@ import {
 
 Join our Slack community for support and customization. Contact sales@eyevinn.se for further development and support. Visit Eyevinn Technology for innovative video solutions.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Intercom.html|Online docs} for further information
  */
 
@@ -557,9 +576,9 @@ Join our Slack community for support and customization. Contact sales@eyevinn.se
  * @property {string} smbUrl - URL to the Symphony Media Bridge
  * @property {string} smbApiKey - API key for the Symphony Media Bridge
  * @property {string} dbUrl - URL to CouchDb
- * @property {string} [oscAccessToken] - OscAccessToken
- * @property {string} [whipAuthKey] - WhipAuthKey
- * @property {string} [iceServers] - IceServers
+ * @property {string} [oscAccessToken] - Personal Access Token from Eyevinn Open Source Cloud for link sharing and reauthentication features
+ * @property {string} [whipAuthKey] - Authentication key for WHIP (WebRTC-HTTP Ingestion Protocol) endpoints
+ * @property {string} [iceServers] - Comma-separated list of ICE servers for WebRTC connectivity, including STUN and TURN servers
 
  * 
  */

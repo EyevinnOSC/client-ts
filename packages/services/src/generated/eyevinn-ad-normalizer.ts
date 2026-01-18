@@ -575,7 +575,7 @@ import {
  * @namespace eyevinn-ad-normalizer
  * @description Optimize your ad delivery with Ad Normalizer! Seamlessly transcode and package VAST creatives for your ad server using a Redis-backed workflow. Ensure efficient media processing and reliable ad streaming.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Ad-Normalizer.html|Online docs} for further information
  */
 

@@ -657,20 +657,20 @@ import {
  * @namespace eyevinn-player-analytics-worker
  * @description Unlock powerful insights with Eyevinn Player Analytics Worker – the modular framework designed to streamline video player event tracking. Effortlessly process and store event data, boosting your analytics game!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 
 /**
  * @typedef {Object} EyevinnPlayerAnalyticsWorkerConfig
  * @property {string} name - Name of player-analytics-worker
- * @property {string} ClickHouseUrl - ClickHouseUrl
- * @property {string} SqsQueueUrl - SqsQueueUrl
- * @property {string} AwsAccessKeyId - AwsAccessKeyId
- * @property {string} AwsSecretAccessKey - AwsSecretAccessKey
- * @property {string} [SqsEndpoint] - SqsEndpoint
- * @property {string} [NumWorkers] - NumWorkers
- * @property {string} [BatchSize] - BatchSize
+ * @property {string} ClickHouseUrl - The connection URL for the ClickHouse database where processed analytics events will be stored
+ * @property {string} SqsQueueUrl - The AWS SQS queue URL from which the worker will poll for analytics events to process
+ * @property {string} AwsAccessKeyId - AWS access key ID for authenticating with SQS services to read analytics events from the queue
+ * @property {string} AwsSecretAccessKey - AWS secret access key for authenticating with SQS services to read analytics events from the queue
+ * @property {string} [SqsEndpoint] - Custom SQS endpoint URL for connecting to SQS services hosted outside of standard AWS regions
+ * @property {string} [NumWorkers] - The number of worker processes to spawn for processing analytics events from the SQS queue
+ * @property {string} [BatchSize] - The maximum number of messages to retrieve from the SQS queue in a single batch operation
 
  * 
  */

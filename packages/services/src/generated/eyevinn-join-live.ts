@@ -527,7 +527,7 @@ import {
  * @namespace eyevinn-join-live
  * @description Elevate your live broadcasts with "Join Live"—a seamless web app for real-time streaming. Offering a professional editor interface, OBS Studio integration, and responsive design for any device.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Solution:-Crowdcast.html|Online docs} for further information
  */
 

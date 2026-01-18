@@ -539,7 +539,7 @@ import {
  * @namespace birme-playout-ui
  * @description Elevate your media scheduling with Playout UI! Seamlessly manage playlists with live time display, real-time progress tracking, and backend flexibility. Effortlessly organize, edit, and control playback. Ideal for dynamic environments!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

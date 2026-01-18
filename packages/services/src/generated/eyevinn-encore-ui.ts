@@ -521,7 +521,7 @@ import {
  * @namespace eyevinn-encore-ui
  * @description Upgrade your video encoding process with Encore UI, a sleek React-based interface for seamless job management. Enjoy real-time updates, detailed insights, and ultimate control over encoding workflows.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

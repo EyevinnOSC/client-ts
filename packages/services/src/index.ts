@@ -884,3 +884,101 @@ export {
   removeGrusellEncoreProfileServerInstance,
   getGrusellEncoreProfileServerInstance
 } from './generated/grusell-encore-profile-server';
+export {
+  EyevinnOgrafEditor,
+  EyevinnOgrafEditorConfig,
+  createEyevinnOgrafEditorInstance,
+  removeEyevinnOgrafEditorInstance,
+  getEyevinnOgrafEditorInstance
+} from './generated/eyevinn-ograf-editor';
+export {
+  EyevinnDashMonitor,
+  EyevinnDashMonitorConfig,
+  createEyevinnDashMonitorInstance,
+  removeEyevinnDashMonitorInstance,
+  getEyevinnDashMonitorInstance
+} from './generated/eyevinn-dash-monitor';
+export {
+  PsumiyaOptionInsights,
+  PsumiyaOptionInsightsConfig,
+  createPsumiyaOptionInsightsInstance,
+  removePsumiyaOptionInsightsInstance,
+  getPsumiyaOptionInsightsInstance
+} from './generated/psumiya-option-insights';
+export {
+  Alexbj75Alextodolist,
+  Alexbj75AlextodolistConfig,
+  createAlexbj75AlextodolistInstance,
+  removeAlexbj75AlextodolistInstance,
+  getAlexbj75AlextodolistInstance
+} from './generated/alexbj75-alextodolist';
+export {
+  OshinongitEspresso,
+  OshinongitEspressoConfig,
+  createOshinongitEspressoInstance,
+  removeOshinongitEspressoInstance,
+  getOshinongitEspressoInstance
+} from './generated/oshinongit-espresso';
+export {
+  AblindbergOscVmafStudio,
+  AblindbergOscVmafStudioConfig,
+  createAblindbergOscVmafStudioInstance,
+  removeAblindbergOscVmafStudioInstance,
+  getAblindbergOscVmafStudioInstance
+} from './generated/ablindberg-osc-vmaf-studio';
+export {
+  Alexbj75FoodRecipeCollectorApp,
+  Alexbj75FoodRecipeCollectorAppConfig,
+  createAlexbj75FoodRecipeCollectorAppInstance,
+  removeAlexbj75FoodRecipeCollectorAppInstance,
+  getAlexbj75FoodRecipeCollectorAppInstance
+} from './generated/alexbj75-food-recipe-collector-app';
+export {
+  EyevinnStrom,
+  EyevinnStromConfig,
+  createEyevinnStromInstance,
+  removeEyevinnStromInstance,
+  getEyevinnStromInstance
+} from './generated/eyevinn-strom';
+export {
+  ApacheAirflow,
+  ApacheAirflowConfig,
+  createApacheAirflowInstance,
+  removeApacheAirflowInstance,
+  getApacheAirflowInstance
+} from './generated/apache-airflow';
+export {
+  N8nIoN8n,
+  N8nIoN8nConfig,
+  createN8nIoN8nInstance,
+  removeN8nIoN8nInstance,
+  getN8nIoN8nInstance
+} from './generated/n8n-io-n8n';
+export {
+  N8nIoTaskRunnerLauncher,
+  N8nIoTaskRunnerLauncherConfig,
+  createN8nIoTaskRunnerLauncherInstance,
+  removeN8nIoTaskRunnerLauncherInstance,
+  getN8nIoTaskRunnerLauncherInstance
+} from './generated/n8n-io-task-runner-launcher';
+export {
+  ItzgDockerMinecraftBedrockServer,
+  ItzgDockerMinecraftBedrockServerConfig,
+  createItzgDockerMinecraftBedrockServerInstance,
+  removeItzgDockerMinecraftBedrockServerInstance,
+  getItzgDockerMinecraftBedrockServerInstance
+} from './generated/itzg-docker-minecraft-bedrock-server';
+export {
+  Svensson00Spectercrm,
+  Svensson00SpectercrmConfig,
+  createSvensson00SpectercrmInstance,
+  removeSvensson00SpectercrmInstance,
+  getSvensson00SpectercrmInstance
+} from './generated/svensson00-spectercrm';
+export {
+  EyevinnPythonRunner,
+  EyevinnPythonRunnerConfig,
+  createEyevinnPythonRunnerInstance,
+  removeEyevinnPythonRunnerInstance,
+  getEyevinnPythonRunnerInstance
+} from './generated/eyevinn-python-runner';

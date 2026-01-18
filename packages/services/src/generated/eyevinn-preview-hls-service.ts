@@ -176,7 +176,7 @@ import {
  * @namespace eyevinn-preview-hls-service
  * @description A service to generate a preview video (mp4) or an image (png) from an HLS stream
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://github.com/Eyevinn/preview-hls-service|Online docs} for further information
  */
 

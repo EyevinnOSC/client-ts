@@ -525,7 +525,7 @@ import {
  * @namespace nolltre-lab-test-prep-quiz
  * @description Elevate your events with Test Prep Quiz! Engage and learn with real-time multiplayer quizzes, featuring themed games, avatars, live scoreboards, and Chromecast support. Ideal for education and entertainment!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

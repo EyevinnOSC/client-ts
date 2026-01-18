@@ -515,7 +515,7 @@ import {
  * @namespace eyevinn-just-go-live
  * @description Effortlessly stream live with Just Go Live. One-click setup, generate RTMP URLs for ease, and engage viewers instantly with HLS streaming. Simplify your broadcasting journey with no fuss, just go live!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 

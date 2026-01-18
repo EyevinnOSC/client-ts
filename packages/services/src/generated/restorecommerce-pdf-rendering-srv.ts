@@ -288,7 +288,7 @@ import {
  * @namespace restorecommerce-pdf-rendering-srv
  * @description Elevate your documentation with our PDF Rendering Service. Turn any URL into a PDF effortlessly. Ideal for business reports and archives. Join the future of document management today.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.restorecommerce.io/pdf-rendering-srv/index.html|Online docs} for further information
  */
 

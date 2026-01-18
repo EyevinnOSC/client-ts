@@ -525,7 +525,7 @@ import {
  * @namespace ablindberg-chaosmaker
  * @description Experience seamless management and enhance video streaming resilience with Chaos Stream Proxy Configurator! Effortlessly handle various network conditions and create chaos configurations through an intuitive interface.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
- * @copyright 2025 Eyevinn Technology AB
+ * @copyright 2026 Eyevinn Technology AB
  *
  */
 
