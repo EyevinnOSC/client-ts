@@ -15,14 +15,14 @@ function getTokenPath(environment: string): string {
   return join(TOKEN_DIR, `token${suffix}`);
 }
 
-export function saveToken(token: string, environment: string = 'prod'): void {
+export function saveToken(token: string, environment = 'prod'): void {
   if (!existsSync(TOKEN_DIR)) {
     mkdirSync(TOKEN_DIR, { mode: 0o700 });
   }
   writeFileSync(getTokenPath(environment), token, { mode: 0o600 });
 }
 
-export function loadToken(environment: string = 'prod'): string | undefined {
+export function loadToken(environment = 'prod'): string | undefined {
   const tokenPath = getTokenPath(environment);
   if (existsSync(tokenPath)) {
     return readFileSync(tokenPath, 'utf-8').trim();
@@ -55,7 +55,7 @@ function openBrowser(url: string): void {
   exec(`${command} "${url}"`);
 }
 
-export async function login(environment: string = 'prod'): Promise<string> {
+export async function login(environment = 'prod'): Promise<string> {
   const baseUrl = getBaseUrl(environment);
   const authUrlBase = `${baseUrl}/api/connect/authorize`;
   const tokenUrl = `${baseUrl}/api/connect/token`;

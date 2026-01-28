@@ -52,7 +52,7 @@ export async function confirm(message: string | undefined): Promise<void> {
   });
 }
 
-export async function ensureToken(environment: string = 'prod'): Promise<void> {
+export async function ensureToken(environment = 'prod'): Promise<void> {
   if (process.env.OSC_ACCESS_TOKEN) {
     return;
   }
