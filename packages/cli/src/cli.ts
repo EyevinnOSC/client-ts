@@ -14,6 +14,8 @@ import cmdDb from './db/cmd';
 import { cmdChat } from './architect/cmd';
 import { cmdVod } from './vod/cmd';
 import { cmdWeb } from './web/cmd';
+import { cmdLogin } from './login';
+import { ensureToken } from './user/util';
 
 const cli = new Command();
 
@@ -31,6 +33,16 @@ cli
     'Environment to use (overrides ENVIRONMENT env var)',
     process.env.ENVIRONMENT || 'prod'
   );
+
+cli.addCommand(cmdLogin());
+cli.hook('preAction', async (thisCommand) => {
+  const commandName = thisCommand.args?.[0] || thisCommand.name();
+  if (commandName !== 'login') {
+    const globalOpts = thisCommand.optsWithGlobals();
+    const environment = globalOpts?.env || 'prod';
+    await ensureToken(environment);
+  }
+});
 
 cli.addCommand(cmdAdmin());
 cli.addCommand(cmdUser.cmdList());
