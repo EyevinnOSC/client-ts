@@ -49,8 +49,8 @@ export function cmdMyapp() {
           configService: options.configService
         });
         console.log(`App ${app.name} created successfully.`);
-        if (app.url) {
-          console.log(`URL: ${app.url}`);
+        if (app.appDns) {
+          console.log(`DNS: ${app.appDns}`);
         }
       } catch (err) {
         console.log((err as Error).message);
