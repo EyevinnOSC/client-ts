@@ -56,6 +56,74 @@ const instance = await createInstance(
 console.log(instance.url);
 ```
 
+### Managing Custom Applications
+
+You can deploy and manage custom applications (Node.js or Python) from GitHub repositories using the CLI or the SDK.
+
+#### CLI
+
+List all your deployed apps:
+
+```
+osc myapp list
+```
+
+Deploy a new app from a GitHub repository:
+
+```
+osc myapp create <name> <type> <gitHubUrl>
+```
+
+Where `type` is either `nodejs` or `python`. For private repositories you can provide a GitHub token:
+
+```
+osc myapp create myapp nodejs https://github.com/user/repo --github-token <token>
+```
+
+You can also attach a config service:
+
+```
+osc myapp create myapp nodejs https://github.com/user/repo --config-service <name>
+```
+
+Get details about an app:
+
+```
+osc myapp describe <appId>
+```
+
+Remove an app:
+
+```
+osc myapp remove <appId>
+```
+
+Use the `-y` flag to skip the confirmation prompt.
+
+#### SDK
+
+```javascript
+import { Context, listMyApps, createMyApp, getMyApp, removeMyApp } from '@osaas/client-core';
+
+const ctx = new Context();
+
+// List all apps
+const apps = await listMyApps(ctx);
+
+// Create a new app
+const app = await createMyApp(ctx, {
+  name: 'myapp',
+  type: 'nodejs',
+  gitHubUrl: 'https://github.com/user/repo'
+});
+
+// Get app details
+const details = await getMyApp(ctx, app.id);
+
+// Remove an app
+await removeMyApp(ctx, app.id);
+```
+
 ### What is Open Source Cloud?
 
 A software as a service based on open source with a unique transparent model where revenue is shared with the open source authors. Open Source Cloud offers media industry companies a quick way to incorporate open source in their solutions and the option to run the same software in-house as the source code is publicly available.
