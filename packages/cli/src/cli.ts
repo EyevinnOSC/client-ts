@@ -15,6 +15,7 @@ import { cmdChat } from './architect/cmd';
 import { cmdVod } from './vod/cmd';
 import { cmdWeb } from './web/cmd';
 import { cmdLogin } from './login';
+import { cmdMyapp } from './myapp/cmd';
 import { ensureToken } from './user/util';
 
 const cli = new Command();
@@ -65,4 +66,5 @@ cli.addCommand(cmdDb());
 cli.addCommand(cmdChat());
 cli.addCommand(cmdVod());
 cli.addCommand(cmdWeb());
+cli.addCommand(cmdMyapp());
 cli.parse(process.argv);

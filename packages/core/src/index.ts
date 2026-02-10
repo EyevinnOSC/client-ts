@@ -36,3 +36,4 @@ export {
 } from './job';
 export * from './platform/maker';
 export * from './errors';
+export * from './myapp';
