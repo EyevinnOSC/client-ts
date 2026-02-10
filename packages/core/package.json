@@ -1,6 +1,6 @@
 {
   "name": "@osaas/client-core",
-  "version": "0.20.0",
+  "version": "0.21.0",
   "description": "Open Source Cloud Client SDK core library",
   "author": "Eyevinn Open Source Cloud <osc@eyevinn.se>",
   "homepage": "https://www.osaas.io",
