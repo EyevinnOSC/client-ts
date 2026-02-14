@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/wasm-runnerinstance': {
-    /** List all running wasm-runner instances */
+  '/docker-neo4jinstance': {
+    /** List all running docker-neo4j instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the docker-neo4j instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,11 +67,7 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            Auth?: string;
           } & {
             _links: {
               self: {
@@ -118,7 +114,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new wasm-runner instance */
+    /** Launch a new docker-neo4j instance */
     post: {
       parameters: {
         query: {
@@ -126,13 +122,9 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the docker-neo4j instance */
             name: string;
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            Auth?: string;
           };
         };
       };
@@ -140,7 +132,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the docker-neo4j instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -158,11 +150,7 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            Auth?: string;
           } & {
             _links: {
               self: {
@@ -225,11 +213,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart wasm-runner */
+    /** Restart docker-neo4j */
     post: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the docker-neo4j instance */
           id: string;
         };
       };
@@ -248,12 +236,12 @@ export interface paths {
       };
     };
   };
-  '/wasm-runnerinstance/{id}': {
-    /** Obtain status and resource URLs for an wasm-runner instance */
+  '/docker-neo4jinstance/{id}': {
+    /** Obtain status and resource URLs for an docker-neo4j instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the docker-neo4j instance */
           id: string;
         };
       };
@@ -261,7 +249,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the docker-neo4j instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -279,11 +267,7 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            Auth?: string;
           } & {
             _links: {
               self: {
@@ -337,11 +321,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an wasm-runner instance */
+    /** Stop and remove an docker-neo4j instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the docker-neo4j instance */
           id: string;
         };
       };
@@ -359,22 +343,18 @@ export interface paths {
         };
       };
     };
-    /** Patch wasm-runner instance with new parameters and restart */
+    /** Patch docker-neo4j instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the docker-neo4j instance */
             name?: string;
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            Auth?: string;
           };
         };
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the docker-neo4j instance */
           id: string;
         };
       };
@@ -382,7 +362,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the docker-neo4j instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -400,11 +380,7 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            Auth?: string;
           } & {
             _links: {
               self: {
@@ -467,11 +443,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of wasm-runner instance */
+    /** Return status of docker-neo4j instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the docker-neo4j instance */
           id: string;
         };
       };
@@ -495,7 +471,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the wasm-runner instance */
+    /** Return the latest logs from the docker-neo4j instance */
     get: {
       parameters: {
         query: {
@@ -503,7 +479,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the docker-neo4j instance */
           id: string;
         };
       };
@@ -523,11 +499,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for wasm-runner instance */
+    /** Return the exposed extra ports for docker-neo4j instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the docker-neo4j instance */
           id: string;
         };
       };
@@ -551,11 +527,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for wasm-runner instance */
+    /** Return the assigned NodePorts for docker-neo4j instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the docker-neo4j instance */
           id: string;
         };
       };
@@ -587,11 +563,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnWasmRunner =
-  paths['/wasm-runnerinstance/{id}']['get']['responses']['200']['schema'];
+export type Neo4jDockerNeo4j =
+  paths['/docker-neo4jinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnWasmRunnerConfig =
-  paths['/wasm-runnerinstance']['post']['parameters']['body']['body'];
+export type Neo4jDockerNeo4jConfig =
+  paths['/docker-neo4jinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -600,111 +576,102 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-wasm-runner
- * @description Revolutionize your app deployment with wasm-runner! Seamlessly download and execute WASM files within Docker using the wasmtime runtime. Perfect for efficient, cross-platform applications.
+ * @namespace neo4j-docker-neo4j
+ * @description Harness the power of connected data with Neo4j's easy-to-deploy Docker images! Perfect for both developers and enterprises, Neo4j offers swift setup and data persistence for insightful analytics and graph performance.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-WASM-Runner.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} EyevinnWasmRunnerConfig
- * @property {string} name - Name of wasm-runner
- * @property {string} [WasmUrl] - The URL to your WASM code
- * @property {string} [GithubUrl] - GithubUrl
- * @property {string} [GithubToken] - GithubToken
- * @property {string} [OscAccessToken] - Access token for Eyevinn Open Source Cloud (OSC) integration
- * @property {string} [ConfigService] - Configuration service endpoint URL for external configuration management
+ * @typedef {Object} Neo4jDockerNeo4jConfig
+ * @property {string} name - Name of docker-neo4j
+ * @property {string} [Auth] - Sets the authentication credentials for Neo4j database access. This environment variable typically configures the username and password combination for database authentication.
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnWasmRunner
- * @property {string} name - Name of the WASM Runner instance
- * @property {string} url - URL of the WASM Runner instance
+ * @typedef {Object} Neo4jDockerNeo4j
+ * @property {string} name - Name of the Neo4j instance
+ * @property {string} url - URL of the Neo4j instance
  *
  */
 
 /**
- * Create a new WASM Runner instance
+ * Create a new Neo4j instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf neo4j-docker-neo4j
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnWasmRunnerConfig} body - Service instance configuration
- * @returns {EyevinnWasmRunner} - Service instance
+ * @param {Neo4jDockerNeo4jConfig} body - Service instance configuration
+ * @returns {Neo4jDockerNeo4j} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnWasmRunnerInstance } from '@osaas/client-services';
+ * import { createNeo4jDockerNeo4jInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnWasmRunnerConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnWasmRunnerInstance(ctx, body);
+ * const body: Neo4jDockerNeo4jConfig = { name: 'myinstance', ... };
+ * const instance = await createNeo4jDockerNeo4jInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnWasmRunnerInstance(
+export async function createNeo4jDockerNeo4jInstance(
   ctx: Context,
-  body: EyevinnWasmRunnerConfig
-): Promise<EyevinnWasmRunner> {
+  body: Neo4jDockerNeo4jConfig
+): Promise<Neo4jDockerNeo4j> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
+    'neo4j-docker-neo4j'
   );
   const instance = await createInstance(
     ctx,
-    'eyevinn-wasm-runner',
+    'neo4j-docker-neo4j',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-wasm-runner', instance.name, ctx);
+  await waitForInstanceReady('neo4j-docker-neo4j', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a WASM Runner instance
+ * Remove a Neo4j instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf neo4j-docker-neo4j
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the wasm-runner to be removed
+ * @param {string} name - Name of the docker-neo4j to be removed
  */
-export async function removeEyevinnWasmRunnerInstance(
+export async function removeNeo4jDockerNeo4jInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
+    'neo4j-docker-neo4j'
   );
-  await removeInstance(ctx, 'eyevinn-wasm-runner', name, serviceAccessToken);
+  await removeInstance(ctx, 'neo4j-docker-neo4j', name, serviceAccessToken);
 }
 
 /**
- * Get a WASM Runner instance
+ * Get a Neo4j instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf neo4j-docker-neo4j
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the wasm-runner to be retrieved
- * @returns {EyevinnWasmRunner} - Service instance
+ * @param {string} name - Name of the docker-neo4j to be retrieved
+ * @returns {Neo4jDockerNeo4j} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnWasmRunnerInstance } from '@osaas/client-services';
+ * import { getNeo4jDockerNeo4jInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnWasmRunnerInstance(ctx, 'myinstance');
+ * const instance = await getNeo4jDockerNeo4jInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnWasmRunnerInstance(
+export async function getNeo4jDockerNeo4jInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnWasmRunner> {
+): Promise<Neo4jDockerNeo4j> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
+    'neo4j-docker-neo4j'
   );
-  return await getInstance(
-    ctx,
-    'eyevinn-wasm-runner',
-    name,
-    serviceAccessToken
-  );
+  return await getInstance(ctx, 'neo4j-docker-neo4j', name, serviceAccessToken);
 }

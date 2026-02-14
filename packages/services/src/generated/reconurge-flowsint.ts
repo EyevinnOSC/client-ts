@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/wasm-runnerinstance': {
-    /** List all running wasm-runner instances */
+  '/flowsintinstance': {
+    /** List all running flowsint instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the flowsint instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,11 +67,13 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            DatabaseUrl: string;
+            RedisUrl: string;
+            AuthSecret: string;
+            MasterVaultKeyV1: string;
+            Neo4jUriBolt: string;
+            Neo4jUsername: string;
+            Neo4jPassword: string;
           } & {
             _links: {
               self: {
@@ -118,7 +120,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new wasm-runner instance */
+    /** Launch a new flowsint instance */
     post: {
       parameters: {
         query: {
@@ -126,13 +128,15 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the flowsint instance */
             name: string;
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            DatabaseUrl: string;
+            RedisUrl: string;
+            AuthSecret: string;
+            MasterVaultKeyV1: string;
+            Neo4jUriBolt: string;
+            Neo4jUsername: string;
+            Neo4jPassword: string;
           };
         };
       };
@@ -140,7 +144,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the flowsint instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -158,11 +162,13 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            DatabaseUrl: string;
+            RedisUrl: string;
+            AuthSecret: string;
+            MasterVaultKeyV1: string;
+            Neo4jUriBolt: string;
+            Neo4jUsername: string;
+            Neo4jPassword: string;
           } & {
             _links: {
               self: {
@@ -225,11 +231,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart wasm-runner */
+    /** Restart flowsint */
     post: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the flowsint instance */
           id: string;
         };
       };
@@ -248,12 +254,12 @@ export interface paths {
       };
     };
   };
-  '/wasm-runnerinstance/{id}': {
-    /** Obtain status and resource URLs for an wasm-runner instance */
+  '/flowsintinstance/{id}': {
+    /** Obtain status and resource URLs for an flowsint instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the flowsint instance */
           id: string;
         };
       };
@@ -261,7 +267,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the flowsint instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -279,11 +285,13 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            DatabaseUrl: string;
+            RedisUrl: string;
+            AuthSecret: string;
+            MasterVaultKeyV1: string;
+            Neo4jUriBolt: string;
+            Neo4jUsername: string;
+            Neo4jPassword: string;
           } & {
             _links: {
               self: {
@@ -337,11 +345,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an wasm-runner instance */
+    /** Stop and remove an flowsint instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the flowsint instance */
           id: string;
         };
       };
@@ -359,22 +367,24 @@ export interface paths {
         };
       };
     };
-    /** Patch wasm-runner instance with new parameters and restart */
+    /** Patch flowsint instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the flowsint instance */
             name?: string;
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            DatabaseUrl?: string;
+            RedisUrl?: string;
+            AuthSecret?: string;
+            MasterVaultKeyV1?: string;
+            Neo4jUriBolt?: string;
+            Neo4jUsername?: string;
+            Neo4jPassword?: string;
           };
         };
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the flowsint instance */
           id: string;
         };
       };
@@ -382,7 +392,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the flowsint instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -400,11 +410,13 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            DatabaseUrl: string;
+            RedisUrl: string;
+            AuthSecret: string;
+            MasterVaultKeyV1: string;
+            Neo4jUriBolt: string;
+            Neo4jUsername: string;
+            Neo4jPassword: string;
           } & {
             _links: {
               self: {
@@ -467,11 +479,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of wasm-runner instance */
+    /** Return status of flowsint instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the flowsint instance */
           id: string;
         };
       };
@@ -495,7 +507,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the wasm-runner instance */
+    /** Return the latest logs from the flowsint instance */
     get: {
       parameters: {
         query: {
@@ -503,7 +515,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the flowsint instance */
           id: string;
         };
       };
@@ -523,11 +535,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for wasm-runner instance */
+    /** Return the exposed extra ports for flowsint instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the flowsint instance */
           id: string;
         };
       };
@@ -551,11 +563,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for wasm-runner instance */
+    /** Return the assigned NodePorts for flowsint instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the flowsint instance */
           id: string;
         };
       };
@@ -587,11 +599,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnWasmRunner =
-  paths['/wasm-runnerinstance/{id}']['get']['responses']['200']['schema'];
+export type ReconurgeFlowsint =
+  paths['/flowsintinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnWasmRunnerConfig =
-  paths['/wasm-runnerinstance']['post']['parameters']['body']['body'];
+export type ReconurgeFlowsintConfig =
+  paths['/flowsintinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -600,111 +612,108 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-wasm-runner
- * @description Revolutionize your app deployment with wasm-runner! Seamlessly download and execute WASM files within Docker using the wasmtime runtime. Perfect for efficient, cross-platform applications.
+ * @namespace reconurge-flowsint
+ * @description Unlock the power of ethical intelligence with Flowsint, the ultimate open-source OSINT tool. Dive deep into graph-based investigations with cutting-edge enrichers for domains, IPs, organizations, and more!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-WASM-Runner.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} EyevinnWasmRunnerConfig
- * @property {string} name - Name of wasm-runner
- * @property {string} [WasmUrl] - The URL to your WASM code
- * @property {string} [GithubUrl] - GithubUrl
- * @property {string} [GithubToken] - GithubToken
- * @property {string} [OscAccessToken] - Access token for Eyevinn Open Source Cloud (OSC) integration
- * @property {string} [ConfigService] - Configuration service endpoint URL for external configuration management
+ * @typedef {Object} ReconurgeFlowsintConfig
+ * @property {string} name - Name of flowsint
+ * @property {string} DatabaseUrl - PostgreSQL database connection URL used by Flowsint to store user accounts, investigations, scan results, chat messages, and other application data
+ * @property {string} RedisUrl - Redis connection URL used for caching, session management, and Celery task queue backend for processing enricher jobs asynchronously
+ * @property {string} AuthSecret - Secret key used for JWT token signing and user authentication in the FastAPI backend
+ * @property {string} MasterVaultKeyV1 - Master encryption key for the secure vault system that stores API keys and sensitive credentials used by enrichers
+ * @property {string} Neo4jUriBolt - Neo4j database Bolt protocol connection URI used for storing and querying the OSINT investigation graph data
+ * @property {string} Neo4jUsername - Username for authenticating to the Neo4j graph database
+ * @property {string} Neo4jPassword - Password for authenticating to the Neo4j graph database
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnWasmRunner
- * @property {string} name - Name of the WASM Runner instance
- * @property {string} url - URL of the WASM Runner instance
+ * @typedef {Object} ReconurgeFlowsint
+ * @property {string} name - Name of the Flowsint instance
+ * @property {string} url - URL of the Flowsint instance
  *
  */
 
 /**
- * Create a new WASM Runner instance
+ * Create a new Flowsint instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf reconurge-flowsint
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnWasmRunnerConfig} body - Service instance configuration
- * @returns {EyevinnWasmRunner} - Service instance
+ * @param {ReconurgeFlowsintConfig} body - Service instance configuration
+ * @returns {ReconurgeFlowsint} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnWasmRunnerInstance } from '@osaas/client-services';
+ * import { createReconurgeFlowsintInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnWasmRunnerConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnWasmRunnerInstance(ctx, body);
+ * const body: ReconurgeFlowsintConfig = { name: 'myinstance', ... };
+ * const instance = await createReconurgeFlowsintInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnWasmRunnerInstance(
+export async function createReconurgeFlowsintInstance(
   ctx: Context,
-  body: EyevinnWasmRunnerConfig
-): Promise<EyevinnWasmRunner> {
+  body: ReconurgeFlowsintConfig
+): Promise<ReconurgeFlowsint> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
+    'reconurge-flowsint'
   );
   const instance = await createInstance(
     ctx,
-    'eyevinn-wasm-runner',
+    'reconurge-flowsint',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-wasm-runner', instance.name, ctx);
+  await waitForInstanceReady('reconurge-flowsint', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a WASM Runner instance
+ * Remove a Flowsint instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf reconurge-flowsint
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the wasm-runner to be removed
+ * @param {string} name - Name of the flowsint to be removed
  */
-export async function removeEyevinnWasmRunnerInstance(
+export async function removeReconurgeFlowsintInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
+    'reconurge-flowsint'
   );
-  await removeInstance(ctx, 'eyevinn-wasm-runner', name, serviceAccessToken);
+  await removeInstance(ctx, 'reconurge-flowsint', name, serviceAccessToken);
 }
 
 /**
- * Get a WASM Runner instance
+ * Get a Flowsint instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf reconurge-flowsint
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the wasm-runner to be retrieved
- * @returns {EyevinnWasmRunner} - Service instance
+ * @param {string} name - Name of the flowsint to be retrieved
+ * @returns {ReconurgeFlowsint} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnWasmRunnerInstance } from '@osaas/client-services';
+ * import { getReconurgeFlowsintInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnWasmRunnerInstance(ctx, 'myinstance');
+ * const instance = await getReconurgeFlowsintInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnWasmRunnerInstance(
+export async function getReconurgeFlowsintInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnWasmRunner> {
+): Promise<ReconurgeFlowsint> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
+    'reconurge-flowsint'
   );
-  return await getInstance(
-    ctx,
-    'eyevinn-wasm-runner',
-    name,
-    serviceAccessToken
-  );
+  return await getInstance(ctx, 'reconurge-flowsint', name, serviceAccessToken);
 }

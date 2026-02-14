@@ -628,14 +628,14 @@ import {
 /**
  * @typedef {Object} EyevinnPythonRunnerConfig
  * @property {string} name - Name of python-runner
- * @property {string} SourceUrl - SourceUrl
- * @property {string} [GitHubToken] - GitHubToken
- * @property {string} [AwsAccessKeyId] - AwsAccessKeyId
- * @property {string} [AwsSecretAccessKey] - AwsSecretAccessKey
- * @property {string} [AwsRegion] - AwsRegion
- * @property {string} [S3EndpointUrl] - S3EndpointUrl
- * @property {string} [OscAccessToken] - OscAccessToken
- * @property {string} [ConfigService] - ConfigService
+ * @property {string} SourceUrl - URL to the source code location. Can be either a GitHub repository URL (e.g., https://github.com/org/repo/) or an S3 URL to a zipped application (e.g., s3://bucket/app.zip)
+ * @property {string} [GitHubToken] - GitHub personal access token for accessing private repositories
+ * @property {string} [AwsAccessKeyId] - AWS access key ID for authenticating with S3 or S3-compatible storage services
+ * @property {string} [AwsSecretAccessKey] - AWS secret access key for authenticating with S3 or S3-compatible storage services
+ * @property {string} [AwsRegion] - AWS region where your S3 bucket is located
+ * @property {string} [S3EndpointUrl] - Custom S3 endpoint URL for MinIO or other S3-compatible storage services
+ * @property {string} [OscAccessToken] - Access token for Eyevinn Open Source Cloud configuration service
+ * @property {string} [ConfigService] - URL endpoint for external configuration service
 
  * 
  */

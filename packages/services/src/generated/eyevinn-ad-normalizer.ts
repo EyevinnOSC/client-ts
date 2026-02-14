@@ -592,7 +592,7 @@ import {
  * @property {string} [AssetServerUrl] - Optional, http version of OUTPUT_BUCKET_URL is used if not set
  * @property {boolean} [JitPackaging] - Signals wether packaging of ads is done JIT or if completed jobs should be put on the packaging queue. optional, defaults to false if not provided
  * @property {string} [PackagingQueueName] - Name of the redis queue used for packaging jobs. Optional, defaults to "package" if not provided
- * @property {string} [OscAccessToken] - OscAccessToken
+ * @property {string} [OscAccessToken] - Access token for Eyevinn Open Source Cloud (OSC) when running Encore in that environment
 
  * 
  */

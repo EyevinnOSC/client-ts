@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/wasm-runnerinstance': {
-    /** List all running wasm-runner instances */
+  '/dynamic-oginstance': {
+    /** List all running dynamic-og instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the dynamic-og instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,11 +67,8 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            nextBeamAnalyticsId?: string;
+            nextDocsAiId?: string;
           } & {
             _links: {
               self: {
@@ -118,7 +115,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new wasm-runner instance */
+    /** Launch a new dynamic-og instance */
     post: {
       parameters: {
         query: {
@@ -126,13 +123,10 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the dynamic-og instance */
             name: string;
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            nextBeamAnalyticsId?: string;
+            nextDocsAiId?: string;
           };
         };
       };
@@ -140,7 +134,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the dynamic-og instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -158,11 +152,8 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            nextBeamAnalyticsId?: string;
+            nextDocsAiId?: string;
           } & {
             _links: {
               self: {
@@ -225,11 +216,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart wasm-runner */
+    /** Restart dynamic-og */
     post: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the dynamic-og instance */
           id: string;
         };
       };
@@ -248,12 +239,12 @@ export interface paths {
       };
     };
   };
-  '/wasm-runnerinstance/{id}': {
-    /** Obtain status and resource URLs for an wasm-runner instance */
+  '/dynamic-oginstance/{id}': {
+    /** Obtain status and resource URLs for an dynamic-og instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the dynamic-og instance */
           id: string;
         };
       };
@@ -261,7 +252,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the dynamic-og instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -279,11 +270,8 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            nextBeamAnalyticsId?: string;
+            nextDocsAiId?: string;
           } & {
             _links: {
               self: {
@@ -337,11 +325,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an wasm-runner instance */
+    /** Stop and remove an dynamic-og instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the dynamic-og instance */
           id: string;
         };
       };
@@ -359,22 +347,19 @@ export interface paths {
         };
       };
     };
-    /** Patch wasm-runner instance with new parameters and restart */
+    /** Patch dynamic-og instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the dynamic-og instance */
             name?: string;
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            nextBeamAnalyticsId?: string;
+            nextDocsAiId?: string;
           };
         };
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the dynamic-og instance */
           id: string;
         };
       };
@@ -382,7 +367,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the dynamic-og instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -400,11 +385,8 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            nextBeamAnalyticsId?: string;
+            nextDocsAiId?: string;
           } & {
             _links: {
               self: {
@@ -467,11 +449,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of wasm-runner instance */
+    /** Return status of dynamic-og instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the dynamic-og instance */
           id: string;
         };
       };
@@ -495,7 +477,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the wasm-runner instance */
+    /** Return the latest logs from the dynamic-og instance */
     get: {
       parameters: {
         query: {
@@ -503,7 +485,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the dynamic-og instance */
           id: string;
         };
       };
@@ -523,11 +505,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for wasm-runner instance */
+    /** Return the exposed extra ports for dynamic-og instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the dynamic-og instance */
           id: string;
         };
       };
@@ -551,11 +533,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for wasm-runner instance */
+    /** Return the assigned NodePorts for dynamic-og instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the dynamic-og instance */
           id: string;
         };
       };
@@ -587,11 +569,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnWasmRunner =
-  paths['/wasm-runnerinstance/{id}']['get']['responses']['200']['schema'];
+export type OssAppsDynamicOg =
+  paths['/dynamic-oginstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnWasmRunnerConfig =
-  paths['/wasm-runnerinstance']['post']['parameters']['body']['body'];
+export type OssAppsDynamicOgConfig =
+  paths['/dynamic-oginstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -600,110 +582,107 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-wasm-runner
- * @description Revolutionize your app deployment with wasm-runner! Seamlessly download and execute WASM files within Docker using the wasmtime runtime. Perfect for efficient, cross-platform applications.
+ * @namespace oss-apps-dynamic-og
+ * @description Instantly enhance your content with Dynamic OG's AI-powered dynamic Open Graph images! Save time on design, and choose from weekly template updates to keep your website visually engaging and fresh.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-WASM-Runner.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} EyevinnWasmRunnerConfig
- * @property {string} name - Name of wasm-runner
- * @property {string} [WasmUrl] - The URL to your WASM code
- * @property {string} [GithubUrl] - GithubUrl
- * @property {string} [GithubToken] - GithubToken
- * @property {string} [OscAccessToken] - Access token for Eyevinn Open Source Cloud (OSC) integration
- * @property {string} [ConfigService] - Configuration service endpoint URL for external configuration management
+ * @typedef {Object} OssAppsDynamicOgConfig
+ * @property {string} name - Name of dynamic-og
+ * @property {string} [nextBeamAnalyticsId] - Configuration ID for Beam Analytics integration to track website usage and performance metrics for your Dynamic OG application
+ * @property {string} [nextDocsAiId] - Configuration ID for DocsAI chatbot integration to enhance user interaction and provide automated assistance within your Dynamic OG application
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnWasmRunner
- * @property {string} name - Name of the WASM Runner instance
- * @property {string} url - URL of the WASM Runner instance
+ * @typedef {Object} OssAppsDynamicOg
+ * @property {string} name - Name of the Dynamic OG instance
+ * @property {string} url - URL of the Dynamic OG instance
  *
  */
 
 /**
- * Create a new WASM Runner instance
+ * Create a new Dynamic OG instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf oss-apps-dynamic-og
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnWasmRunnerConfig} body - Service instance configuration
- * @returns {EyevinnWasmRunner} - Service instance
+ * @param {OssAppsDynamicOgConfig} body - Service instance configuration
+ * @returns {OssAppsDynamicOg} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnWasmRunnerInstance } from '@osaas/client-services';
+ * import { createOssAppsDynamicOgInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnWasmRunnerConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnWasmRunnerInstance(ctx, body);
+ * const body: OssAppsDynamicOgConfig = { name: 'myinstance', ... };
+ * const instance = await createOssAppsDynamicOgInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnWasmRunnerInstance(
+export async function createOssAppsDynamicOgInstance(
   ctx: Context,
-  body: EyevinnWasmRunnerConfig
-): Promise<EyevinnWasmRunner> {
+  body: OssAppsDynamicOgConfig
+): Promise<OssAppsDynamicOg> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
+    'oss-apps-dynamic-og'
   );
   const instance = await createInstance(
     ctx,
-    'eyevinn-wasm-runner',
+    'oss-apps-dynamic-og',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-wasm-runner', instance.name, ctx);
+  await waitForInstanceReady('oss-apps-dynamic-og', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a WASM Runner instance
+ * Remove a Dynamic OG instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf oss-apps-dynamic-og
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the wasm-runner to be removed
+ * @param {string} name - Name of the dynamic-og to be removed
  */
-export async function removeEyevinnWasmRunnerInstance(
+export async function removeOssAppsDynamicOgInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
+    'oss-apps-dynamic-og'
   );
-  await removeInstance(ctx, 'eyevinn-wasm-runner', name, serviceAccessToken);
+  await removeInstance(ctx, 'oss-apps-dynamic-og', name, serviceAccessToken);
 }
 
 /**
- * Get a WASM Runner instance
+ * Get a Dynamic OG instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf oss-apps-dynamic-og
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the wasm-runner to be retrieved
- * @returns {EyevinnWasmRunner} - Service instance
+ * @param {string} name - Name of the dynamic-og to be retrieved
+ * @returns {OssAppsDynamicOg} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnWasmRunnerInstance } from '@osaas/client-services';
+ * import { getOssAppsDynamicOgInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnWasmRunnerInstance(ctx, 'myinstance');
+ * const instance = await getOssAppsDynamicOgInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnWasmRunnerInstance(
+export async function getOssAppsDynamicOgInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnWasmRunner> {
+): Promise<OssAppsDynamicOg> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
+    'oss-apps-dynamic-og'
   );
   return await getInstance(
     ctx,
-    'eyevinn-wasm-runner',
+    'oss-apps-dynamic-og',
     name,
     serviceAccessToken
   );

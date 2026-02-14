@@ -982,3 +982,80 @@ export {
   removeEyevinnPythonRunnerInstance,
   getEyevinnPythonRunnerInstance
 } from './generated/eyevinn-python-runner';
+export {
+  TuomokuSpxGc,
+  TuomokuSpxGcConfig,
+  createTuomokuSpxGcInstance,
+  removeTuomokuSpxGcInstance,
+  getTuomokuSpxGcInstance
+} from './generated/tuomoku-spx-gc';
+export {
+  UsememosMemos,
+  UsememosMemosConfig,
+  createUsememosMemosInstance,
+  removeUsememosMemosInstance,
+  getUsememosMemosInstance
+} from './generated/usememos-memos';
+export {
+  EtherEtherpadLite,
+  EtherEtherpadLiteConfig,
+  createEtherEtherpadLiteInstance,
+  removeEtherEtherpadLiteInstance,
+  getEtherEtherpadLiteInstance
+} from './generated/ether-etherpad-lite';
+export {
+  JuiceandthejoeTodoListVibe,
+  JuiceandthejoeTodoListVibeConfig,
+  createJuiceandthejoeTodoListVibeInstance,
+  removeJuiceandthejoeTodoListVibeInstance,
+  getJuiceandthejoeTodoListVibeInstance
+} from './generated/juiceandthejoe-todo-list-vibe';
+export {
+  OssAppsDynamicOg,
+  OssAppsDynamicOgConfig,
+  createOssAppsDynamicOgInstance,
+  removeOssAppsDynamicOgInstance,
+  getOssAppsDynamicOgInstance
+} from './generated/oss-apps-dynamic-og';
+export {
+  Seanzhang414Openadserver,
+  Seanzhang414OpenadserverConfig,
+  createSeanzhang414OpenadserverInstance,
+  removeSeanzhang414OpenadserverInstance,
+  getSeanzhang414OpenadserverInstance
+} from './generated/seanzhang414-openadserver';
+export {
+  MeilisearchMeilisearch,
+  MeilisearchMeilisearchConfig,
+  createMeilisearchMeilisearchInstance,
+  removeMeilisearchMeilisearchInstance,
+  getMeilisearchMeilisearchInstance
+} from './generated/meilisearch-meilisearch';
+export {
+  GoGiteaGitea,
+  GoGiteaGiteaConfig,
+  createGoGiteaGiteaInstance,
+  removeGoGiteaGiteaInstance,
+  getGoGiteaGiteaInstance
+} from './generated/go-gitea-gitea';
+export {
+  SrperensUturn,
+  SrperensUturnConfig,
+  createSrperensUturnInstance,
+  removeSrperensUturnInstance,
+  getSrperensUturnInstance
+} from './generated/srperens-uturn';
+export {
+  Neo4jDockerNeo4j,
+  Neo4jDockerNeo4jConfig,
+  createNeo4jDockerNeo4jInstance,
+  removeNeo4jDockerNeo4jInstance,
+  getNeo4jDockerNeo4jInstance
+} from './generated/neo4j-docker-neo4j';
+export {
+  ReconurgeFlowsint,
+  ReconurgeFlowsintConfig,
+  createReconurgeFlowsintInstance,
+  removeReconurgeFlowsintInstance,
+  getReconurgeFlowsintInstance
+} from './generated/reconurge-flowsint';

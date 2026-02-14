@@ -529,14 +529,14 @@ import {
 /**
  * @typedef {Object} EyevinnWebRunnerConfig
  * @property {string} name - Name of web-runner
- * @property {string} SourceUrl - SourceUrl
- * @property {string} [GitHubToken] - GitHubToken
- * @property {string} [AwsAccessKeyId] - AwsAccessKeyId
- * @property {string} [AwsSecretAccessKey] - AwsSecretAccessKey
- * @property {string} [AwsRegion] - AwsRegion
- * @property {string} [S3EndpointUrl] - S3EndpointUrl
- * @property {string} [OscAccessToken] - OscAccessToken
- * @property {string} [ConfigService] - ConfigService
+ * @property {string} SourceUrl - The URL pointing to the source code location. Can be either a GitHub repository URL (https://github.com/org/repo/) or an S3 bucket URL containing a zip file of the Node.js application source code (s3://bucket/app.zip).
+ * @property {string} [GitHubToken] - GitHub personal access token required for accessing private repositories or to avoid GitHub API rate limits when cloning from GitHub.
+ * @property {string} [AwsAccessKeyId] - AWS access key ID for authenticating with S3 services when the source code is stored in an S3 bucket.
+ * @property {string} [AwsSecretAccessKey] - AWS secret access key for authenticating with S3 services when the source code is stored in an S3 bucket.
+ * @property {string} [AwsRegion] - AWS region where the S3 bucket is located. Specifies the geographic region for S3 operations.
+ * @property {string} [S3EndpointUrl] - Custom S3 endpoint URL for S3-compatible storage services like MinIO or other non-AWS S3 implementations.
+ * @property {string} [OscAccessToken] - Access token for Eyevinn Open Source Cloud (OSC) services integration and authentication.
+ * @property {string} [ConfigService] - Configuration service endpoint URL for external configuration management and service discovery.
 
  * 
  */

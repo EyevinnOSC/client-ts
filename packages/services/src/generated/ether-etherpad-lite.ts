@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/wasm-runnerinstance': {
-    /** List all running wasm-runner instances */
+  '/etherpad-liteinstance': {
+    /** List all running etherpad-lite instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the etherpad-lite instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,11 +67,7 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            DatabaseUrl?: string;
           } & {
             _links: {
               self: {
@@ -118,7 +114,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new wasm-runner instance */
+    /** Launch a new etherpad-lite instance */
     post: {
       parameters: {
         query: {
@@ -126,13 +122,9 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the etherpad-lite instance */
             name: string;
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            DatabaseUrl?: string;
           };
         };
       };
@@ -140,7 +132,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the etherpad-lite instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -158,11 +150,7 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            DatabaseUrl?: string;
           } & {
             _links: {
               self: {
@@ -225,11 +213,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart wasm-runner */
+    /** Restart etherpad-lite */
     post: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the etherpad-lite instance */
           id: string;
         };
       };
@@ -248,12 +236,12 @@ export interface paths {
       };
     };
   };
-  '/wasm-runnerinstance/{id}': {
-    /** Obtain status and resource URLs for an wasm-runner instance */
+  '/etherpad-liteinstance/{id}': {
+    /** Obtain status and resource URLs for an etherpad-lite instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the etherpad-lite instance */
           id: string;
         };
       };
@@ -261,7 +249,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the etherpad-lite instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -279,11 +267,7 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            DatabaseUrl?: string;
           } & {
             _links: {
               self: {
@@ -337,11 +321,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an wasm-runner instance */
+    /** Stop and remove an etherpad-lite instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the etherpad-lite instance */
           id: string;
         };
       };
@@ -359,22 +343,18 @@ export interface paths {
         };
       };
     };
-    /** Patch wasm-runner instance with new parameters and restart */
+    /** Patch etherpad-lite instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the etherpad-lite instance */
             name?: string;
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            DatabaseUrl?: string;
           };
         };
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the etherpad-lite instance */
           id: string;
         };
       };
@@ -382,7 +362,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the etherpad-lite instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -400,11 +380,7 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            DatabaseUrl?: string;
           } & {
             _links: {
               self: {
@@ -467,11 +443,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of wasm-runner instance */
+    /** Return status of etherpad-lite instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the etherpad-lite instance */
           id: string;
         };
       };
@@ -495,7 +471,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the wasm-runner instance */
+    /** Return the latest logs from the etherpad-lite instance */
     get: {
       parameters: {
         query: {
@@ -503,7 +479,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the etherpad-lite instance */
           id: string;
         };
       };
@@ -523,11 +499,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for wasm-runner instance */
+    /** Return the exposed extra ports for etherpad-lite instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the etherpad-lite instance */
           id: string;
         };
       };
@@ -551,11 +527,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for wasm-runner instance */
+    /** Return the assigned NodePorts for etherpad-lite instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the etherpad-lite instance */
           id: string;
         };
       };
@@ -587,11 +563,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnWasmRunner =
-  paths['/wasm-runnerinstance/{id}']['get']['responses']['200']['schema'];
+export type EtherEtherpadLite =
+  paths['/etherpad-liteinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnWasmRunnerConfig =
-  paths['/wasm-runnerinstance']['post']['parameters']['body']['body'];
+export type EtherEtherpadLiteConfig =
+  paths['/etherpad-liteinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -600,110 +576,106 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-wasm-runner
- * @description Revolutionize your app deployment with wasm-runner! Seamlessly download and execute WASM files within Docker using the wasmtime runtime. Perfect for efficient, cross-platform applications.
+ * @namespace ether-etherpad-lite
+ * @description Unleash seamless collaboration with Etherpad, the ultimate real-time web editor! Host unlimited users on your servers, secure data control, and customize with essential plugins. Elevate teamwork today!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-WASM-Runner.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} EyevinnWasmRunnerConfig
- * @property {string} name - Name of wasm-runner
- * @property {string} [WasmUrl] - The URL to your WASM code
- * @property {string} [GithubUrl] - GithubUrl
- * @property {string} [GithubToken] - GithubToken
- * @property {string} [OscAccessToken] - Access token for Eyevinn Open Source Cloud (OSC) integration
- * @property {string} [ConfigService] - Configuration service endpoint URL for external configuration management
+ * @typedef {Object} EtherEtherpadLiteConfig
+ * @property {string} name - Name of etherpad-lite
+ * @property {string} [DatabaseUrl] - Specifies the database connection URL for Etherpad. This allows you to connect to an external database instead of using the default dirtyDB driver.
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnWasmRunner
- * @property {string} name - Name of the WASM Runner instance
- * @property {string} url - URL of the WASM Runner instance
+ * @typedef {Object} EtherEtherpadLite
+ * @property {string} name - Name of the Etherpad Lite instance
+ * @property {string} url - URL of the Etherpad Lite instance
  *
  */
 
 /**
- * Create a new WASM Runner instance
+ * Create a new Etherpad Lite instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf ether-etherpad-lite
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnWasmRunnerConfig} body - Service instance configuration
- * @returns {EyevinnWasmRunner} - Service instance
+ * @param {EtherEtherpadLiteConfig} body - Service instance configuration
+ * @returns {EtherEtherpadLite} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnWasmRunnerInstance } from '@osaas/client-services';
+ * import { createEtherEtherpadLiteInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnWasmRunnerConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnWasmRunnerInstance(ctx, body);
+ * const body: EtherEtherpadLiteConfig = { name: 'myinstance', ... };
+ * const instance = await createEtherEtherpadLiteInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnWasmRunnerInstance(
+export async function createEtherEtherpadLiteInstance(
   ctx: Context,
-  body: EyevinnWasmRunnerConfig
-): Promise<EyevinnWasmRunner> {
+  body: EtherEtherpadLiteConfig
+): Promise<EtherEtherpadLite> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
+    'ether-etherpad-lite'
   );
   const instance = await createInstance(
     ctx,
-    'eyevinn-wasm-runner',
+    'ether-etherpad-lite',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-wasm-runner', instance.name, ctx);
+  await waitForInstanceReady('ether-etherpad-lite', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a WASM Runner instance
+ * Remove a Etherpad Lite instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf ether-etherpad-lite
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the wasm-runner to be removed
+ * @param {string} name - Name of the etherpad to be removed
  */
-export async function removeEyevinnWasmRunnerInstance(
+export async function removeEtherEtherpadLiteInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
+    'ether-etherpad-lite'
   );
-  await removeInstance(ctx, 'eyevinn-wasm-runner', name, serviceAccessToken);
+  await removeInstance(ctx, 'ether-etherpad-lite', name, serviceAccessToken);
 }
 
 /**
- * Get a WASM Runner instance
+ * Get a Etherpad Lite instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf ether-etherpad-lite
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the wasm-runner to be retrieved
- * @returns {EyevinnWasmRunner} - Service instance
+ * @param {string} name - Name of the etherpad to be retrieved
+ * @returns {EtherEtherpadLite} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnWasmRunnerInstance } from '@osaas/client-services';
+ * import { getEtherEtherpadLiteInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnWasmRunnerInstance(ctx, 'myinstance');
+ * const instance = await getEtherEtherpadLiteInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnWasmRunnerInstance(
+export async function getEtherEtherpadLiteInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnWasmRunner> {
+): Promise<EtherEtherpadLite> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
+    'ether-etherpad-lite'
   );
   return await getInstance(
     ctx,
-    'eyevinn-wasm-runner',
+    'ether-etherpad-lite',
     name,
     serviceAccessToken
   );

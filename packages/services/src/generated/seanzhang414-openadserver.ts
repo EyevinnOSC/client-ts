@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/wasm-runnerinstance': {
-    /** List all running wasm-runner instances */
+  '/openadserverinstance': {
+    /** List all running openadserver instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the openadserver instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,11 +67,8 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            DatabaseUrl: string;
+            RedisUrl: string;
           } & {
             _links: {
               self: {
@@ -118,7 +115,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new wasm-runner instance */
+    /** Launch a new openadserver instance */
     post: {
       parameters: {
         query: {
@@ -126,13 +123,10 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the openadserver instance */
             name: string;
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            DatabaseUrl: string;
+            RedisUrl: string;
           };
         };
       };
@@ -140,7 +134,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the openadserver instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -158,11 +152,8 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            DatabaseUrl: string;
+            RedisUrl: string;
           } & {
             _links: {
               self: {
@@ -225,11 +216,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart wasm-runner */
+    /** Restart openadserver */
     post: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the openadserver instance */
           id: string;
         };
       };
@@ -248,12 +239,12 @@ export interface paths {
       };
     };
   };
-  '/wasm-runnerinstance/{id}': {
-    /** Obtain status and resource URLs for an wasm-runner instance */
+  '/openadserverinstance/{id}': {
+    /** Obtain status and resource URLs for an openadserver instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the openadserver instance */
           id: string;
         };
       };
@@ -261,7 +252,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the openadserver instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -279,11 +270,8 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            DatabaseUrl: string;
+            RedisUrl: string;
           } & {
             _links: {
               self: {
@@ -337,11 +325,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an wasm-runner instance */
+    /** Stop and remove an openadserver instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the openadserver instance */
           id: string;
         };
       };
@@ -359,22 +347,19 @@ export interface paths {
         };
       };
     };
-    /** Patch wasm-runner instance with new parameters and restart */
+    /** Patch openadserver instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the openadserver instance */
             name?: string;
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            DatabaseUrl?: string;
+            RedisUrl?: string;
           };
         };
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the openadserver instance */
           id: string;
         };
       };
@@ -382,7 +367,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the openadserver instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -400,11 +385,8 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            DatabaseUrl: string;
+            RedisUrl: string;
           } & {
             _links: {
               self: {
@@ -467,11 +449,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of wasm-runner instance */
+    /** Return status of openadserver instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the openadserver instance */
           id: string;
         };
       };
@@ -495,7 +477,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the wasm-runner instance */
+    /** Return the latest logs from the openadserver instance */
     get: {
       parameters: {
         query: {
@@ -503,7 +485,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the openadserver instance */
           id: string;
         };
       };
@@ -523,11 +505,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for wasm-runner instance */
+    /** Return the exposed extra ports for openadserver instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the openadserver instance */
           id: string;
         };
       };
@@ -551,11 +533,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for wasm-runner instance */
+    /** Return the assigned NodePorts for openadserver instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the openadserver instance */
           id: string;
         };
       };
@@ -587,11 +569,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnWasmRunner =
-  paths['/wasm-runnerinstance/{id}']['get']['responses']['200']['schema'];
+export type Seanzhang414Openadserver =
+  paths['/openadserverinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnWasmRunnerConfig =
-  paths['/wasm-runnerinstance']['post']['parameters']['body']['body'];
+export type Seanzhang414OpenadserverConfig =
+  paths['/openadserverinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -600,110 +582,112 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-wasm-runner
- * @description Revolutionize your app deployment with wasm-runner! Seamlessly download and execute WASM files within Docker using the wasmtime runtime. Perfect for efficient, cross-platform applications.
+ * @namespace seanzhang414-openadserver
+ * @description Elevate your advertising with OpenAdServer's ML-powered CTR predictions. Tailored for SMBs and developers seeking a powerful yet simple solution. Enjoy full control and maximize revenue without complexity.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-WASM-Runner.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} EyevinnWasmRunnerConfig
- * @property {string} name - Name of wasm-runner
- * @property {string} [WasmUrl] - The URL to your WASM code
- * @property {string} [GithubUrl] - GithubUrl
- * @property {string} [GithubToken] - GithubToken
- * @property {string} [OscAccessToken] - Access token for Eyevinn Open Source Cloud (OSC) integration
- * @property {string} [ConfigService] - Configuration service endpoint URL for external configuration management
+ * @typedef {Object} Seanzhang414OpenadserverConfig
+ * @property {string} name - Name of openadserver
+ * @property {string} DatabaseUrl - DatabaseUrl
+ * @property {string} RedisUrl - RedisUrl
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnWasmRunner
- * @property {string} name - Name of the WASM Runner instance
- * @property {string} url - URL of the WASM Runner instance
+ * @typedef {Object} Seanzhang414Openadserver
+ * @property {string} name - Name of the Open Ad Server instance
+ * @property {string} url - URL of the Open Ad Server instance
  *
  */
 
 /**
- * Create a new WASM Runner instance
+ * Create a new Open Ad Server instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf seanzhang414-openadserver
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnWasmRunnerConfig} body - Service instance configuration
- * @returns {EyevinnWasmRunner} - Service instance
+ * @param {Seanzhang414OpenadserverConfig} body - Service instance configuration
+ * @returns {Seanzhang414Openadserver} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnWasmRunnerInstance } from '@osaas/client-services';
+ * import { createSeanzhang414OpenadserverInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnWasmRunnerConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnWasmRunnerInstance(ctx, body);
+ * const body: Seanzhang414OpenadserverConfig = { name: 'myinstance', ... };
+ * const instance = await createSeanzhang414OpenadserverInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnWasmRunnerInstance(
+export async function createSeanzhang414OpenadserverInstance(
   ctx: Context,
-  body: EyevinnWasmRunnerConfig
-): Promise<EyevinnWasmRunner> {
+  body: Seanzhang414OpenadserverConfig
+): Promise<Seanzhang414Openadserver> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
+    'seanzhang414-openadserver'
   );
   const instance = await createInstance(
     ctx,
-    'eyevinn-wasm-runner',
+    'seanzhang414-openadserver',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-wasm-runner', instance.name, ctx);
+  await waitForInstanceReady('seanzhang414-openadserver', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a WASM Runner instance
+ * Remove a Open Ad Server instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf seanzhang414-openadserver
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the wasm-runner to be removed
+ * @param {string} name - Name of the openadserver to be removed
  */
-export async function removeEyevinnWasmRunnerInstance(
+export async function removeSeanzhang414OpenadserverInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
+    'seanzhang414-openadserver'
   );
-  await removeInstance(ctx, 'eyevinn-wasm-runner', name, serviceAccessToken);
+  await removeInstance(
+    ctx,
+    'seanzhang414-openadserver',
+    name,
+    serviceAccessToken
+  );
 }
 
 /**
- * Get a WASM Runner instance
+ * Get a Open Ad Server instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf seanzhang414-openadserver
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the wasm-runner to be retrieved
- * @returns {EyevinnWasmRunner} - Service instance
+ * @param {string} name - Name of the openadserver to be retrieved
+ * @returns {Seanzhang414Openadserver} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnWasmRunnerInstance } from '@osaas/client-services';
+ * import { getSeanzhang414OpenadserverInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnWasmRunnerInstance(ctx, 'myinstance');
+ * const instance = await getSeanzhang414OpenadserverInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnWasmRunnerInstance(
+export async function getSeanzhang414OpenadserverInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnWasmRunner> {
+): Promise<Seanzhang414Openadserver> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
+    'seanzhang414-openadserver'
   );
   return await getInstance(
     ctx,
-    'eyevinn-wasm-runner',
+    'seanzhang414-openadserver',
     name,
     serviceAccessToken
   );

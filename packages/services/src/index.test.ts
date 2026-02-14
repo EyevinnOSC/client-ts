@@ -4816,3 +4816,380 @@ describe('removeEyevinnPythonRunnerInstance', () => {
     );
   });
 });
+
+describe('createTuomokuSpxGcInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createTuomokuSpxGcInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('tuomoku-spx-gc');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'tuomoku-spx-gc',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'tuomoku-spx-gc',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeTuomokuSpxGcInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeTuomokuSpxGcInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'tuomoku-spx-gc',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createUsememosMemosInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createUsememosMemosInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('usememos-memos');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'usememos-memos',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'usememos-memos',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeUsememosMemosInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeUsememosMemosInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'usememos-memos',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createEtherEtherpadLiteInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEtherEtherpadLiteInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'ether-etherpad-lite'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'ether-etherpad-lite',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'ether-etherpad-lite',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEtherEtherpadLiteInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEtherEtherpadLiteInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'ether-etherpad-lite',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createJuiceandthejoeTodoListVibeInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createJuiceandthejoeTodoListVibeInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'juiceandthejoe-todo-list-vibe'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'juiceandthejoe-todo-list-vibe',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'juiceandthejoe-todo-list-vibe',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeJuiceandthejoeTodoListVibeInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeJuiceandthejoeTodoListVibeInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'juiceandthejoe-todo-list-vibe',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createOssAppsDynamicOgInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createOssAppsDynamicOgInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'oss-apps-dynamic-og'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'oss-apps-dynamic-og',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'oss-apps-dynamic-og',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeOssAppsDynamicOgInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeOssAppsDynamicOgInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'oss-apps-dynamic-og',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createSeanzhang414OpenadserverInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createSeanzhang414OpenadserverInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'seanzhang414-openadserver'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'seanzhang414-openadserver',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'seanzhang414-openadserver',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeSeanzhang414OpenadserverInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeSeanzhang414OpenadserverInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'seanzhang414-openadserver',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createMeilisearchMeilisearchInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createMeilisearchMeilisearchInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'meilisearch-meilisearch'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'meilisearch-meilisearch',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'meilisearch-meilisearch',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeMeilisearchMeilisearchInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeMeilisearchMeilisearchInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'meilisearch-meilisearch',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createGoGiteaGiteaInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createGoGiteaGiteaInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('go-gitea-gitea');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'go-gitea-gitea',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'go-gitea-gitea',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeGoGiteaGiteaInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeGoGiteaGiteaInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'go-gitea-gitea',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createSrperensUturnInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createSrperensUturnInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('srperens-uturn');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'srperens-uturn',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'srperens-uturn',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeSrperensUturnInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeSrperensUturnInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'srperens-uturn',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createNeo4jDockerNeo4jInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createNeo4jDockerNeo4jInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'neo4j-docker-neo4j'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'neo4j-docker-neo4j',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'neo4j-docker-neo4j',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeNeo4jDockerNeo4jInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeNeo4jDockerNeo4jInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'neo4j-docker-neo4j',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createReconurgeFlowsintInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createReconurgeFlowsintInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'reconurge-flowsint'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'reconurge-flowsint',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'reconurge-flowsint',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeReconurgeFlowsintInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeReconurgeFlowsintInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'reconurge-flowsint',
+      'sdk',
+      'token'
+    );
+  });
+});

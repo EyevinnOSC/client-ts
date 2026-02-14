@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/wasm-runnerinstance': {
-    /** List all running wasm-runner instances */
+  '/spx-gcinstance': {
+    /** List all running spx-gc instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the spx-gc instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,11 +67,16 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            Username?: string;
+            Password?: string;
+            S3TemplatesUrl?: string;
+            S3ProjectsUrl?: string;
+            S3PluginsUrl?: string;
+            S3MediaUrl?: string;
+            S3EndpointUrl?: string;
+            S3AccessKeyId?: string;
+            S3SecretAccessKey?: string;
+            S3Region?: string;
           } & {
             _links: {
               self: {
@@ -118,7 +123,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new wasm-runner instance */
+    /** Launch a new spx-gc instance */
     post: {
       parameters: {
         query: {
@@ -126,13 +131,18 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the spx-gc instance */
             name: string;
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            Username?: string;
+            Password?: string;
+            S3TemplatesUrl?: string;
+            S3ProjectsUrl?: string;
+            S3PluginsUrl?: string;
+            S3MediaUrl?: string;
+            S3EndpointUrl?: string;
+            S3AccessKeyId?: string;
+            S3SecretAccessKey?: string;
+            S3Region?: string;
           };
         };
       };
@@ -140,7 +150,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the spx-gc instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -158,11 +168,16 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            Username?: string;
+            Password?: string;
+            S3TemplatesUrl?: string;
+            S3ProjectsUrl?: string;
+            S3PluginsUrl?: string;
+            S3MediaUrl?: string;
+            S3EndpointUrl?: string;
+            S3AccessKeyId?: string;
+            S3SecretAccessKey?: string;
+            S3Region?: string;
           } & {
             _links: {
               self: {
@@ -225,11 +240,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart wasm-runner */
+    /** Restart spx-gc */
     post: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the spx-gc instance */
           id: string;
         };
       };
@@ -248,12 +263,12 @@ export interface paths {
       };
     };
   };
-  '/wasm-runnerinstance/{id}': {
-    /** Obtain status and resource URLs for an wasm-runner instance */
+  '/spx-gcinstance/{id}': {
+    /** Obtain status and resource URLs for an spx-gc instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the spx-gc instance */
           id: string;
         };
       };
@@ -261,7 +276,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the spx-gc instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -279,11 +294,16 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            Username?: string;
+            Password?: string;
+            S3TemplatesUrl?: string;
+            S3ProjectsUrl?: string;
+            S3PluginsUrl?: string;
+            S3MediaUrl?: string;
+            S3EndpointUrl?: string;
+            S3AccessKeyId?: string;
+            S3SecretAccessKey?: string;
+            S3Region?: string;
           } & {
             _links: {
               self: {
@@ -337,11 +357,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an wasm-runner instance */
+    /** Stop and remove an spx-gc instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the spx-gc instance */
           id: string;
         };
       };
@@ -359,22 +379,27 @@ export interface paths {
         };
       };
     };
-    /** Patch wasm-runner instance with new parameters and restart */
+    /** Patch spx-gc instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the spx-gc instance */
             name?: string;
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            Username?: string;
+            Password?: string;
+            S3TemplatesUrl?: string;
+            S3ProjectsUrl?: string;
+            S3PluginsUrl?: string;
+            S3MediaUrl?: string;
+            S3EndpointUrl?: string;
+            S3AccessKeyId?: string;
+            S3SecretAccessKey?: string;
+            S3Region?: string;
           };
         };
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the spx-gc instance */
           id: string;
         };
       };
@@ -382,7 +407,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the spx-gc instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -400,11 +425,16 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            Username?: string;
+            Password?: string;
+            S3TemplatesUrl?: string;
+            S3ProjectsUrl?: string;
+            S3PluginsUrl?: string;
+            S3MediaUrl?: string;
+            S3EndpointUrl?: string;
+            S3AccessKeyId?: string;
+            S3SecretAccessKey?: string;
+            S3Region?: string;
           } & {
             _links: {
               self: {
@@ -467,11 +497,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of wasm-runner instance */
+    /** Return status of spx-gc instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the spx-gc instance */
           id: string;
         };
       };
@@ -495,7 +525,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the wasm-runner instance */
+    /** Return the latest logs from the spx-gc instance */
     get: {
       parameters: {
         query: {
@@ -503,7 +533,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the spx-gc instance */
           id: string;
         };
       };
@@ -523,11 +553,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for wasm-runner instance */
+    /** Return the exposed extra ports for spx-gc instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the spx-gc instance */
           id: string;
         };
       };
@@ -551,11 +581,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for wasm-runner instance */
+    /** Return the assigned NodePorts for spx-gc instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the spx-gc instance */
           id: string;
         };
       };
@@ -587,11 +617,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnWasmRunner =
-  paths['/wasm-runnerinstance/{id}']['get']['responses']['200']['schema'];
+export type TuomokuSpxGc =
+  paths['/spx-gcinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnWasmRunnerConfig =
-  paths['/wasm-runnerinstance']['post']['parameters']['body']['body'];
+export type TuomokuSpxGcConfig =
+  paths['/spx-gcinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -600,111 +630,105 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-wasm-runner
- * @description Revolutionize your app deployment with wasm-runner! Seamlessly download and execute WASM files within Docker using the wasmtime runtime. Perfect for efficient, cross-platform applications.
+ * @namespace tuomoku-spx-gc
+ * @description Elevate your live productions with SPX Graphics Controller! Seamlessly manage HTML graphics across platforms like OBS, vMix, and more. Ideal for stunning live streams and broadcasts with powerful customization.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-WASM-Runner.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} EyevinnWasmRunnerConfig
- * @property {string} name - Name of wasm-runner
- * @property {string} [WasmUrl] - The URL to your WASM code
- * @property {string} [GithubUrl] - GithubUrl
- * @property {string} [GithubToken] - GithubToken
- * @property {string} [OscAccessToken] - Access token for Eyevinn Open Source Cloud (OSC) integration
- * @property {string} [ConfigService] - Configuration service endpoint URL for external configuration management
+ * @typedef {Object} TuomokuSpxGcConfig
+ * @property {string} name - Name of spx-gc
+ * @property {string} [Username] - Username for SPX authentication. If provided along with password, users will be required to login to access the application.
+ * @property {string} [Password] - Password for SPX authentication. Works in conjunction with username to enable login protection for the application.
+ * @property {string} [S3TemplatesUrl] - S3 bucket URL or path for storing and retrieving HTML graphics templates used by SPX for live production graphics.
+ * @property {string} [S3ProjectsUrl] - S3 bucket URL or path for storing SPX projects and rundowns data that would normally be stored in the DATAROOT folder.
+ * @property {string} [S3PluginsUrl] - Configures the S3 bucket URL for storing SPX plugins and extensions. Plugins provide additional functionality like custom controls and user interface panels.
+ * @property {string} [S3MediaUrl] - Configures the S3 bucket URL for storing media assets like images, videos, and other files used by graphics templates.
+ * @property {string} [S3EndpointUrl] - Custom S3-compatible endpoint URL for accessing object storage services other than AWS S3, such as MinIO, DigitalOcean Spaces, or other S3-compatible storage providers.
+ * @property {string} [S3AccessKeyId] - AWS access key ID for authenticating with S3 services to access templates, projects, and media assets stored in cloud storage.
+ * @property {string} [S3SecretAccessKey] - AWS secret access key for authenticating with S3 services, paired with the access key ID for secure cloud storage access.
+ * @property {string} [S3Region] - AWS region identifier specifying the geographical region where the S3 buckets are located for optimal performance and compliance.
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnWasmRunner
- * @property {string} name - Name of the WASM Runner instance
- * @property {string} url - URL of the WASM Runner instance
+ * @typedef {Object} TuomokuSpxGc
+ * @property {string} name - Name of the SPX Graphics Controller instance
+ * @property {string} url - URL of the SPX Graphics Controller instance
  *
  */
 
 /**
- * Create a new WASM Runner instance
+ * Create a new SPX Graphics Controller instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf tuomoku-spx-gc
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnWasmRunnerConfig} body - Service instance configuration
- * @returns {EyevinnWasmRunner} - Service instance
+ * @param {TuomokuSpxGcConfig} body - Service instance configuration
+ * @returns {TuomokuSpxGc} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnWasmRunnerInstance } from '@osaas/client-services';
+ * import { createTuomokuSpxGcInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnWasmRunnerConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnWasmRunnerInstance(ctx, body);
+ * const body: TuomokuSpxGcConfig = { name: 'myinstance', ... };
+ * const instance = await createTuomokuSpxGcInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnWasmRunnerInstance(
+export async function createTuomokuSpxGcInstance(
   ctx: Context,
-  body: EyevinnWasmRunnerConfig
-): Promise<EyevinnWasmRunner> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
-  );
+  body: TuomokuSpxGcConfig
+): Promise<TuomokuSpxGc> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('tuomoku-spx-gc');
   const instance = await createInstance(
     ctx,
-    'eyevinn-wasm-runner',
+    'tuomoku-spx-gc',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-wasm-runner', instance.name, ctx);
+  await waitForInstanceReady('tuomoku-spx-gc', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a WASM Runner instance
+ * Remove a SPX Graphics Controller instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf tuomoku-spx-gc
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the wasm-runner to be removed
+ * @param {string} name - Name of the controller to be removed
  */
-export async function removeEyevinnWasmRunnerInstance(
+export async function removeTuomokuSpxGcInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
-  );
-  await removeInstance(ctx, 'eyevinn-wasm-runner', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken('tuomoku-spx-gc');
+  await removeInstance(ctx, 'tuomoku-spx-gc', name, serviceAccessToken);
 }
 
 /**
- * Get a WASM Runner instance
+ * Get a SPX Graphics Controller instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf tuomoku-spx-gc
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the wasm-runner to be retrieved
- * @returns {EyevinnWasmRunner} - Service instance
+ * @param {string} name - Name of the controller to be retrieved
+ * @returns {TuomokuSpxGc} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnWasmRunnerInstance } from '@osaas/client-services';
+ * import { getTuomokuSpxGcInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnWasmRunnerInstance(ctx, 'myinstance');
+ * const instance = await getTuomokuSpxGcInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnWasmRunnerInstance(
+export async function getTuomokuSpxGcInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnWasmRunner> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
-  );
-  return await getInstance(
-    ctx,
-    'eyevinn-wasm-runner',
-    name,
-    serviceAccessToken
-  );
+): Promise<TuomokuSpxGc> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('tuomoku-spx-gc');
+  return await getInstance(ctx, 'tuomoku-spx-gc', name, serviceAccessToken);
 }

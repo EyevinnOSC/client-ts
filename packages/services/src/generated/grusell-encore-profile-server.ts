@@ -580,14 +580,14 @@ import {
 /**
  * @typedef {Object} GrusellEncoreProfileServerConfig
  * @property {string} name - Name of encore-profile-server
- * @property {string} [s3Endpoint] - S3Endpoint
- * @property {string} [s3Region] - S3Region
- * @property {string} [s3AccessKey] - S3AccessKey
- * @property {string} [s3SecretKey] - S3SecretKey
- * @property {string} [s3Bucket] - S3Bucket
- * @property {string} [s3Prefix] - S3Prefix
- * @property {string} [anthropicApiKey] - AnthropicApiKey
- * @property {string} [anthropicModel] - AnthropicModel
+ * @property {string} [s3Endpoint] - The endpoint URL for the S3-compatible storage service where Encore transcoding profiles are stored
+ * @property {string} [s3Region] - The AWS region or region identifier for the S3-compatible storage service
+ * @property {string} [s3AccessKey] - The access key ID for authenticating with the S3-compatible storage service
+ * @property {string} [s3SecretKey] - The secret access key for authenticating with the S3-compatible storage service
+ * @property {string} [s3Bucket] - The name of the S3 bucket containing the Encore transcoding profile files (YAML/JSON)
+ * @property {string} [s3Prefix] - Optional prefix path within the S3 bucket to limit profile file discovery to a specific directory/folder
+ * @property {string} [anthropicApiKey] - API key for accessing Anthropic's Claude AI service to enable AI-powered profile generation via the /feelinglucky endpoint
+ * @property {string} [anthropicModel] - Specifies which Claude AI model to use for generating Encore transcoding profiles
 
  * 
  */

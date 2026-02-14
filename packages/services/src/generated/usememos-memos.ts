@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/wasm-runnerinstance': {
-    /** List all running wasm-runner instances */
+  '/memosinstance': {
+    /** List all running memos instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the memos instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,11 +67,6 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
           } & {
             _links: {
               self: {
@@ -118,7 +113,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new wasm-runner instance */
+    /** Launch a new memos instance */
     post: {
       parameters: {
         query: {
@@ -126,13 +121,8 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the memos instance */
             name: string;
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
           };
         };
       };
@@ -140,7 +130,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the memos instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -158,11 +148,6 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
           } & {
             _links: {
               self: {
@@ -225,11 +210,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart wasm-runner */
+    /** Restart memos */
     post: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the memos instance */
           id: string;
         };
       };
@@ -248,12 +233,12 @@ export interface paths {
       };
     };
   };
-  '/wasm-runnerinstance/{id}': {
-    /** Obtain status and resource URLs for an wasm-runner instance */
+  '/memosinstance/{id}': {
+    /** Obtain status and resource URLs for an memos instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the memos instance */
           id: string;
         };
       };
@@ -261,7 +246,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the memos instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -279,11 +264,6 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
           } & {
             _links: {
               self: {
@@ -337,11 +317,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an wasm-runner instance */
+    /** Stop and remove an memos instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the memos instance */
           id: string;
         };
       };
@@ -359,22 +339,17 @@ export interface paths {
         };
       };
     };
-    /** Patch wasm-runner instance with new parameters and restart */
+    /** Patch memos instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the memos instance */
             name?: string;
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
           };
         };
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the memos instance */
           id: string;
         };
       };
@@ -382,7 +357,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the memos instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -400,11 +375,6 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
           } & {
             _links: {
               self: {
@@ -467,11 +437,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of wasm-runner instance */
+    /** Return status of memos instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the memos instance */
           id: string;
         };
       };
@@ -495,7 +465,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the wasm-runner instance */
+    /** Return the latest logs from the memos instance */
     get: {
       parameters: {
         query: {
@@ -503,7 +473,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the memos instance */
           id: string;
         };
       };
@@ -523,11 +493,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for wasm-runner instance */
+    /** Return the exposed extra ports for memos instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the memos instance */
           id: string;
         };
       };
@@ -551,11 +521,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for wasm-runner instance */
+    /** Return the assigned NodePorts for memos instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the memos instance */
           id: string;
         };
       };
@@ -587,11 +557,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnWasmRunner =
-  paths['/wasm-runnerinstance/{id}']['get']['responses']['200']['schema'];
+export type UsememosMemos =
+  paths['/memosinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnWasmRunnerConfig =
-  paths['/wasm-runnerinstance']['post']['parameters']['body']['body'];
+export type UsememosMemosConfig =
+  paths['/memosinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -600,111 +570,95 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-wasm-runner
- * @description Revolutionize your app deployment with wasm-runner! Seamlessly download and execute WASM files within Docker using the wasmtime runtime. Perfect for efficient, cross-platform applications.
+ * @namespace usememos-memos
+ * @description Memos: Take control of your notes with Memos' open-source, self-hosted platform! Enjoy complete privacy, zero cost, and blazing speed. Perfect for personal and team use without compromises!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-WASM-Runner.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} EyevinnWasmRunnerConfig
- * @property {string} name - Name of wasm-runner
- * @property {string} [WasmUrl] - The URL to your WASM code
- * @property {string} [GithubUrl] - GithubUrl
- * @property {string} [GithubToken] - GithubToken
- * @property {string} [OscAccessToken] - Access token for Eyevinn Open Source Cloud (OSC) integration
- * @property {string} [ConfigService] - Configuration service endpoint URL for external configuration management
+ * @typedef {Object} UsememosMemosConfig
+ * @property {string} name - Name of memos
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnWasmRunner
- * @property {string} name - Name of the WASM Runner instance
- * @property {string} url - URL of the WASM Runner instance
+ * @typedef {Object} UsememosMemos
+ * @property {string} name - Name of the Memos instance
+ * @property {string} url - URL of the Memos instance
  *
  */
 
 /**
- * Create a new WASM Runner instance
+ * Create a new Memos instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf usememos-memos
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnWasmRunnerConfig} body - Service instance configuration
- * @returns {EyevinnWasmRunner} - Service instance
+ * @param {UsememosMemosConfig} body - Service instance configuration
+ * @returns {UsememosMemos} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnWasmRunnerInstance } from '@osaas/client-services';
+ * import { createUsememosMemosInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnWasmRunnerConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnWasmRunnerInstance(ctx, body);
+ * const body: UsememosMemosConfig = { name: 'myinstance', ... };
+ * const instance = await createUsememosMemosInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnWasmRunnerInstance(
+export async function createUsememosMemosInstance(
   ctx: Context,
-  body: EyevinnWasmRunnerConfig
-): Promise<EyevinnWasmRunner> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
-  );
+  body: UsememosMemosConfig
+): Promise<UsememosMemos> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('usememos-memos');
   const instance = await createInstance(
     ctx,
-    'eyevinn-wasm-runner',
+    'usememos-memos',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-wasm-runner', instance.name, ctx);
+  await waitForInstanceReady('usememos-memos', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a WASM Runner instance
+ * Remove a Memos instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf usememos-memos
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the wasm-runner to be removed
+ * @param {string} name - Name of the memos to be removed
  */
-export async function removeEyevinnWasmRunnerInstance(
+export async function removeUsememosMemosInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
-  );
-  await removeInstance(ctx, 'eyevinn-wasm-runner', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken('usememos-memos');
+  await removeInstance(ctx, 'usememos-memos', name, serviceAccessToken);
 }
 
 /**
- * Get a WASM Runner instance
+ * Get a Memos instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf usememos-memos
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the wasm-runner to be retrieved
- * @returns {EyevinnWasmRunner} - Service instance
+ * @param {string} name - Name of the memos to be retrieved
+ * @returns {UsememosMemos} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnWasmRunnerInstance } from '@osaas/client-services';
+ * import { getUsememosMemosInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnWasmRunnerInstance(ctx, 'myinstance');
+ * const instance = await getUsememosMemosInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnWasmRunnerInstance(
+export async function getUsememosMemosInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnWasmRunner> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
-  );
-  return await getInstance(
-    ctx,
-    'eyevinn-wasm-runner',
-    name,
-    serviceAccessToken
-  );
+): Promise<UsememosMemos> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('usememos-memos');
+  return await getInstance(ctx, 'usememos-memos', name, serviceAccessToken);
 }

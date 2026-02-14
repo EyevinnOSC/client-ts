@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/wasm-runnerinstance': {
-    /** List all running wasm-runner instances */
+  '/uturninstance': {
+    /** List all running uturn instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the uturn instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,11 +67,8 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            Realm?: string;
+            Users?: string;
           } & {
             _links: {
               self: {
@@ -118,7 +115,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new wasm-runner instance */
+    /** Launch a new uturn instance */
     post: {
       parameters: {
         query: {
@@ -126,13 +123,10 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the uturn instance */
             name: string;
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            Realm?: string;
+            Users?: string;
           };
         };
       };
@@ -140,7 +134,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the uturn instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -158,11 +152,8 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            Realm?: string;
+            Users?: string;
           } & {
             _links: {
               self: {
@@ -225,11 +216,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart wasm-runner */
+    /** Restart uturn */
     post: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the uturn instance */
           id: string;
         };
       };
@@ -248,12 +239,12 @@ export interface paths {
       };
     };
   };
-  '/wasm-runnerinstance/{id}': {
-    /** Obtain status and resource URLs for an wasm-runner instance */
+  '/uturninstance/{id}': {
+    /** Obtain status and resource URLs for an uturn instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the uturn instance */
           id: string;
         };
       };
@@ -261,7 +252,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the uturn instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -279,11 +270,8 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            Realm?: string;
+            Users?: string;
           } & {
             _links: {
               self: {
@@ -337,11 +325,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an wasm-runner instance */
+    /** Stop and remove an uturn instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the uturn instance */
           id: string;
         };
       };
@@ -359,22 +347,19 @@ export interface paths {
         };
       };
     };
-    /** Patch wasm-runner instance with new parameters and restart */
+    /** Patch uturn instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the uturn instance */
             name?: string;
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            Realm?: string;
+            Users?: string;
           };
         };
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the uturn instance */
           id: string;
         };
       };
@@ -382,7 +367,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the uturn instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -400,11 +385,8 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            Realm?: string;
+            Users?: string;
           } & {
             _links: {
               self: {
@@ -467,11 +449,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of wasm-runner instance */
+    /** Return status of uturn instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the uturn instance */
           id: string;
         };
       };
@@ -495,7 +477,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the wasm-runner instance */
+    /** Return the latest logs from the uturn instance */
     get: {
       parameters: {
         query: {
@@ -503,7 +485,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the uturn instance */
           id: string;
         };
       };
@@ -523,11 +505,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for wasm-runner instance */
+    /** Return the exposed extra ports for uturn instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the uturn instance */
           id: string;
         };
       };
@@ -551,11 +533,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for wasm-runner instance */
+    /** Return the assigned NodePorts for uturn instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the uturn instance */
           id: string;
         };
       };
@@ -587,11 +569,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnWasmRunner =
-  paths['/wasm-runnerinstance/{id}']['get']['responses']['200']['schema'];
+export type SrperensUturn =
+  paths['/uturninstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnWasmRunnerConfig =
-  paths['/wasm-runnerinstance']['post']['parameters']['body']['body'];
+export type SrperensUturnConfig =
+  paths['/uturninstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -600,111 +582,97 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-wasm-runner
- * @description Revolutionize your app deployment with wasm-runner! Seamlessly download and execute WASM files within Docker using the wasmtime runtime. Perfect for efficient, cross-platform applications.
+ * @namespace srperens-uturn
+ * @description Simplify your WebRTC deployments with uTURN—a streamlined TURN server that routes all traffic through a single UDP port. Ideal for Kubernetes and restrictive environments, uTURN keeps communication seamless and efficient.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-WASM-Runner.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} EyevinnWasmRunnerConfig
- * @property {string} name - Name of wasm-runner
- * @property {string} [WasmUrl] - The URL to your WASM code
- * @property {string} [GithubUrl] - GithubUrl
- * @property {string} [GithubToken] - GithubToken
- * @property {string} [OscAccessToken] - Access token for Eyevinn Open Source Cloud (OSC) integration
- * @property {string} [ConfigService] - Configuration service endpoint URL for external configuration management
+ * @typedef {Object} SrperensUturnConfig
+ * @property {string} name - Name of uturn
+ * @property {string} [Realm] - Specifies the TURN realm used for authentication purposes. The realm is a string that identifies the authentication domain for TURN server credentials.
+ * @property {string} [Users] - Defines user credentials for TURN authentication in 'username:password' format. Multiple users can be specified by repeating this option.
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnWasmRunner
- * @property {string} name - Name of the WASM Runner instance
- * @property {string} url - URL of the WASM Runner instance
+ * @typedef {Object} SrperensUturn
+ * @property {string} name - Name of the uTURN instance
+ * @property {string} url - URL of the uTURN instance
  *
  */
 
 /**
- * Create a new WASM Runner instance
+ * Create a new uTURN instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf srperens-uturn
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnWasmRunnerConfig} body - Service instance configuration
- * @returns {EyevinnWasmRunner} - Service instance
+ * @param {SrperensUturnConfig} body - Service instance configuration
+ * @returns {SrperensUturn} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnWasmRunnerInstance } from '@osaas/client-services';
+ * import { createSrperensUturnInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnWasmRunnerConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnWasmRunnerInstance(ctx, body);
+ * const body: SrperensUturnConfig = { name: 'myinstance', ... };
+ * const instance = await createSrperensUturnInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnWasmRunnerInstance(
+export async function createSrperensUturnInstance(
   ctx: Context,
-  body: EyevinnWasmRunnerConfig
-): Promise<EyevinnWasmRunner> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
-  );
+  body: SrperensUturnConfig
+): Promise<SrperensUturn> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('srperens-uturn');
   const instance = await createInstance(
     ctx,
-    'eyevinn-wasm-runner',
+    'srperens-uturn',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-wasm-runner', instance.name, ctx);
+  await waitForInstanceReady('srperens-uturn', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a WASM Runner instance
+ * Remove a uTURN instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf srperens-uturn
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the wasm-runner to be removed
+ * @param {string} name - Name of the uturn to be removed
  */
-export async function removeEyevinnWasmRunnerInstance(
+export async function removeSrperensUturnInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
-  );
-  await removeInstance(ctx, 'eyevinn-wasm-runner', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken('srperens-uturn');
+  await removeInstance(ctx, 'srperens-uturn', name, serviceAccessToken);
 }
 
 /**
- * Get a WASM Runner instance
+ * Get a uTURN instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf srperens-uturn
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the wasm-runner to be retrieved
- * @returns {EyevinnWasmRunner} - Service instance
+ * @param {string} name - Name of the uturn to be retrieved
+ * @returns {SrperensUturn} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnWasmRunnerInstance } from '@osaas/client-services';
+ * import { getSrperensUturnInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnWasmRunnerInstance(ctx, 'myinstance');
+ * const instance = await getSrperensUturnInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnWasmRunnerInstance(
+export async function getSrperensUturnInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnWasmRunner> {
-  const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
-  );
-  return await getInstance(
-    ctx,
-    'eyevinn-wasm-runner',
-    name,
-    serviceAccessToken
-  );
+): Promise<SrperensUturn> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('srperens-uturn');
+  return await getInstance(ctx, 'srperens-uturn', name, serviceAccessToken);
 }

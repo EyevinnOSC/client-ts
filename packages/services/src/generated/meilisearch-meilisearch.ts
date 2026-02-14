@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/wasm-runnerinstance': {
-    /** List all running wasm-runner instances */
+  '/meilisearchinstance': {
+    /** List all running meilisearch instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the meilisearch instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,11 +67,7 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            MasterKey: string;
           } & {
             _links: {
               self: {
@@ -118,7 +114,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new wasm-runner instance */
+    /** Launch a new meilisearch instance */
     post: {
       parameters: {
         query: {
@@ -126,13 +122,9 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the meilisearch instance */
             name: string;
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            MasterKey: string;
           };
         };
       };
@@ -140,7 +132,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the meilisearch instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -158,11 +150,7 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            MasterKey: string;
           } & {
             _links: {
               self: {
@@ -225,11 +213,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart wasm-runner */
+    /** Restart meilisearch */
     post: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the meilisearch instance */
           id: string;
         };
       };
@@ -248,12 +236,12 @@ export interface paths {
       };
     };
   };
-  '/wasm-runnerinstance/{id}': {
-    /** Obtain status and resource URLs for an wasm-runner instance */
+  '/meilisearchinstance/{id}': {
+    /** Obtain status and resource URLs for an meilisearch instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the meilisearch instance */
           id: string;
         };
       };
@@ -261,7 +249,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the meilisearch instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -279,11 +267,7 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            MasterKey: string;
           } & {
             _links: {
               self: {
@@ -337,11 +321,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an wasm-runner instance */
+    /** Stop and remove an meilisearch instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the meilisearch instance */
           id: string;
         };
       };
@@ -359,22 +343,18 @@ export interface paths {
         };
       };
     };
-    /** Patch wasm-runner instance with new parameters and restart */
+    /** Patch meilisearch instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the meilisearch instance */
             name?: string;
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            MasterKey?: string;
           };
         };
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the meilisearch instance */
           id: string;
         };
       };
@@ -382,7 +362,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the wasm-runner instance */
+            /** @description Name of the meilisearch instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -400,11 +380,7 @@ export interface paths {
                 url: string;
               };
             };
-            WasmUrl?: string;
-            GithubUrl?: string;
-            GithubToken?: string;
-            OscAccessToken?: string;
-            ConfigService?: string;
+            MasterKey: string;
           } & {
             _links: {
               self: {
@@ -467,11 +443,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of wasm-runner instance */
+    /** Return status of meilisearch instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the meilisearch instance */
           id: string;
         };
       };
@@ -495,7 +471,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the wasm-runner instance */
+    /** Return the latest logs from the meilisearch instance */
     get: {
       parameters: {
         query: {
@@ -503,7 +479,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the meilisearch instance */
           id: string;
         };
       };
@@ -523,11 +499,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for wasm-runner instance */
+    /** Return the exposed extra ports for meilisearch instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the meilisearch instance */
           id: string;
         };
       };
@@ -551,11 +527,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for wasm-runner instance */
+    /** Return the assigned NodePorts for meilisearch instance */
     get: {
       parameters: {
         path: {
-          /** Name of the wasm-runner instance */
+          /** Name of the meilisearch instance */
           id: string;
         };
       };
@@ -587,11 +563,11 @@ export interface operations {}
 
 export interface external {}
 
-export type EyevinnWasmRunner =
-  paths['/wasm-runnerinstance/{id}']['get']['responses']['200']['schema'];
+export type MeilisearchMeilisearch =
+  paths['/meilisearchinstance/{id}']['get']['responses']['200']['schema'];
 
-export type EyevinnWasmRunnerConfig =
-  paths['/wasm-runnerinstance']['post']['parameters']['body']['body'];
+export type MeilisearchMeilisearchConfig =
+  paths['/meilisearchinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -600,110 +576,111 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace eyevinn-wasm-runner
- * @description Revolutionize your app deployment with wasm-runner! Seamlessly download and execute WASM files within Docker using the wasmtime runtime. Perfect for efficient, cross-platform applications.
+ * @namespace meilisearch-meilisearch
+ * @description Transform your search experience with Meilisearch, the lightning-fast, intuitive search engine that integrates seamlessly into your apps. Boost efficiency with advanced features like hybrid search, typo tolerance, and filtering.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
- * @see {@link https://docs.osaas.io/osaas.wiki/Service:-WASM-Runner.html|Online docs} for further information
+ *
  */
 
 /**
- * @typedef {Object} EyevinnWasmRunnerConfig
- * @property {string} name - Name of wasm-runner
- * @property {string} [WasmUrl] - The URL to your WASM code
- * @property {string} [GithubUrl] - GithubUrl
- * @property {string} [GithubToken] - GithubToken
- * @property {string} [OscAccessToken] - Access token for Eyevinn Open Source Cloud (OSC) integration
- * @property {string} [ConfigService] - Configuration service endpoint URL for external configuration management
+ * @typedef {Object} MeilisearchMeilisearchConfig
+ * @property {string} name - Name of meilisearch
+ * @property {string} MasterKey - The master API key used for authentication and security management in Meilisearch. This key provides full access to all Meilisearch operations and is used to create other API keys with fine-grained permissions.
 
  * 
  */
 
 /**
- * @typedef {Object} EyevinnWasmRunner
- * @property {string} name - Name of the WASM Runner instance
- * @property {string} url - URL of the WASM Runner instance
+ * @typedef {Object} MeilisearchMeilisearch
+ * @property {string} name - Name of the Meilisearch instance
+ * @property {string} url - URL of the Meilisearch instance
  *
  */
 
 /**
- * Create a new WASM Runner instance
+ * Create a new Meilisearch instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf meilisearch-meilisearch
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {EyevinnWasmRunnerConfig} body - Service instance configuration
- * @returns {EyevinnWasmRunner} - Service instance
+ * @param {MeilisearchMeilisearchConfig} body - Service instance configuration
+ * @returns {MeilisearchMeilisearch} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createEyevinnWasmRunnerInstance } from '@osaas/client-services';
+ * import { createMeilisearchMeilisearchInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: EyevinnWasmRunnerConfig = { name: 'myinstance', ... };
- * const instance = await createEyevinnWasmRunnerInstance(ctx, body);
+ * const body: MeilisearchMeilisearchConfig = { name: 'myinstance', ... };
+ * const instance = await createMeilisearchMeilisearchInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createEyevinnWasmRunnerInstance(
+export async function createMeilisearchMeilisearchInstance(
   ctx: Context,
-  body: EyevinnWasmRunnerConfig
-): Promise<EyevinnWasmRunner> {
+  body: MeilisearchMeilisearchConfig
+): Promise<MeilisearchMeilisearch> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
+    'meilisearch-meilisearch'
   );
   const instance = await createInstance(
     ctx,
-    'eyevinn-wasm-runner',
+    'meilisearch-meilisearch',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('eyevinn-wasm-runner', instance.name, ctx);
+  await waitForInstanceReady('meilisearch-meilisearch', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a WASM Runner instance
+ * Remove a Meilisearch instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf meilisearch-meilisearch
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the wasm-runner to be removed
+ * @param {string} name - Name of the meilisearch to be removed
  */
-export async function removeEyevinnWasmRunnerInstance(
+export async function removeMeilisearchMeilisearchInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
+    'meilisearch-meilisearch'
   );
-  await removeInstance(ctx, 'eyevinn-wasm-runner', name, serviceAccessToken);
+  await removeInstance(
+    ctx,
+    'meilisearch-meilisearch',
+    name,
+    serviceAccessToken
+  );
 }
 
 /**
- * Get a WASM Runner instance
+ * Get a Meilisearch instance
  *
- * @memberOf eyevinn-wasm-runner
+ * @memberOf meilisearch-meilisearch
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the wasm-runner to be retrieved
- * @returns {EyevinnWasmRunner} - Service instance
+ * @param {string} name - Name of the meilisearch to be retrieved
+ * @returns {MeilisearchMeilisearch} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getEyevinnWasmRunnerInstance } from '@osaas/client-services';
+ * import { getMeilisearchMeilisearchInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getEyevinnWasmRunnerInstance(ctx, 'myinstance');
+ * const instance = await getMeilisearchMeilisearchInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getEyevinnWasmRunnerInstance(
+export async function getMeilisearchMeilisearchInstance(
   ctx: Context,
   name: string
-): Promise<EyevinnWasmRunner> {
+): Promise<MeilisearchMeilisearch> {
   const serviceAccessToken = await ctx.getServiceAccessToken(
-    'eyevinn-wasm-runner'
+    'meilisearch-meilisearch'
   );
   return await getInstance(
     ctx,
-    'eyevinn-wasm-runner',
+    'meilisearch-meilisearch',
     name,
     serviceAccessToken
   );
