@@ -219,9 +219,7 @@ export function cmdWeb() {
           data.items.map((config) => {
             // Single-quote values to prevent shell expansion of special characters
             const escaped = config.value.replace(/'/g, "'\\''");
-            console.log(
-              `export ${config.key.toUpperCase()}='${escaped}'`
-            );
+            console.log(`export ${config.key.toUpperCase()}='${escaped}'`);
           });
         } else {
           throw new Error(
