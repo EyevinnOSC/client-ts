@@ -207,16 +207,30 @@ export function cmdWeb() {
         );
         if (instance) {
           const url = new URL('/api/v1/config', instance.url);
-          const response = await fetch(url);
-          if (response.ok) {
-            const data: ConfigList = (await response.json()) as ConfigList;
-            data.items.map((config) => {
-              console.log(`export ${config.key.toUpperCase()}=${config.value}`);
-            });
+          const response = await fetch(url, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          if (!response.ok) {
+            throw new Error(
+              `Failed to load config from '${configInstance}': HTTP ${response.status}`
+            );
           }
+          const data: ConfigList = (await response.json()) as ConfigList;
+          data.items.map((config) => {
+            // Single-quote values to prevent shell expansion of special characters
+            const escaped = config.value.replace(/'/g, "'\\''");
+            console.log(
+              `export ${config.key.toUpperCase()}='${escaped}'`
+            );
+          });
+        } else {
+          throw new Error(
+            `Config service instance '${configInstance}' not found`
+          );
         }
       } catch (err) {
-        console.log((err as Error).message);
+        console.error((err as Error).message);
+        process.exit(1);
       }
     });
   return web;
