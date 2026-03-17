@@ -12,7 +12,8 @@
     "packages/ai",
     "packages/services",
     "packages/web",
-    "packages/mcp"
+    "packages/mcp",
+    "packages/mobile-backend"
   ],
   "author": "Eyevinn Open Source Cloud <osc@eyevinn.se>",
   "repository": {
