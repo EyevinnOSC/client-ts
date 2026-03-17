@@ -7,6 +7,7 @@ import {
 } from './types';
 import { ImageModule, ImageTransformOptions } from './image';
 import { DatabaseModule, DatabaseError } from './database';
+import { AuthModule, AuthTokens } from './auth';
 
 export {
   MobileBackendConfig,
@@ -17,13 +18,16 @@ export {
   ImageModule,
   ImageTransformOptions,
   DatabaseModule,
-  DatabaseError
+  DatabaseError,
+  AuthModule,
+  AuthTokens
 };
 
 export class MobileBackendClient {
   private config: MobileBackendConfig;
   private _image?: ImageModule;
   private _db?: DatabaseModule;
+  private _auth?: AuthModule;
 
   constructor(config: MobileBackendConfig) {
     this.config = config;
@@ -54,5 +58,20 @@ export class MobileBackendClient {
       );
     }
     return this._db;
+  }
+
+  get auth(): AuthModule {
+    if (!this._auth) {
+      if (!this.config.auth) {
+        throw new Error(
+          'auth configuration is required to use the auth module'
+        );
+      }
+      this._auth = new AuthModule(
+        this.config.auth.issuer,
+        this.config.auth.clientID
+      );
+    }
+    return this._auth;
   }
 }
