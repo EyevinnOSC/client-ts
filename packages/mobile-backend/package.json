@@ -1,0 +1,27 @@
+{
+  "name": "@osaas/client-mobile-backend",
+  "version": "0.1.0",
+  "description": "OSC Mobile Backend client SDK - auth, database, storage, and image transforms",
+  "author": "Eyevinn Open Source Cloud <osc@eyevinn.se>",
+  "homepage": "https://www.osaas.io",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EyevinnOSC/client-ts.git"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "eslint .",
+    "pretty": "prettier --check --ignore-unknown .",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "jest --passWithNoTests"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
