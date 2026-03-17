@@ -8,6 +8,7 @@ import {
 import { ImageModule, ImageTransformOptions } from './image';
 import { DatabaseModule, DatabaseError } from './database';
 import { AuthModule, AuthTokens } from './auth';
+import { StorageModule, UploadResult, StorageObject } from './storage';
 
 export {
   MobileBackendConfig,
@@ -20,7 +21,10 @@ export {
   DatabaseModule,
   DatabaseError,
   AuthModule,
-  AuthTokens
+  AuthTokens,
+  StorageModule,
+  UploadResult,
+  StorageObject
 };
 
 export class MobileBackendClient {
@@ -28,6 +32,7 @@ export class MobileBackendClient {
   private _image?: ImageModule;
   private _db?: DatabaseModule;
   private _auth?: AuthModule;
+  private _storage?: StorageModule;
 
   constructor(config: MobileBackendConfig) {
     this.config = config;
@@ -73,5 +78,17 @@ export class MobileBackendClient {
       );
     }
     return this._auth;
+  }
+
+  get storage(): StorageModule {
+    if (!this._storage) {
+      if (!this.config.storage) {
+        throw new Error(
+          'storage configuration is required to use the storage module'
+        );
+      }
+      this._storage = new StorageModule(this.config.storage);
+    }
+    return this._storage;
   }
 }
