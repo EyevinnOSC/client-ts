@@ -23,5 +23,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@openauthjs/openauth": "^0.4.3"
   }
 }
