@@ -322,6 +322,40 @@ export async function restartInstance(
 }
 
 /**
+ * Update an instance of a service in Open Source Cloud
+ * @memberof module:@osaas/client-core
+ * @param {Context} context - Open Source Cloud configuration context
+ * @param {string} serviceId - The service identifier
+ * @param {string} name - The name of the service instance
+ * @param {string} token - Service access token
+ * @param {Record<string, string>} body - Fields to update on the instance
+ * @returns {Promise<T>} - Updated instance
+ */
+export async function updateInstance<T>(
+  context: Context,
+  serviceId: string,
+  name: string,
+  token: string,
+  body: Record<string, string>
+): Promise<T> {
+  const updateUrl = await getInstanceLink(
+    context,
+    token,
+    serviceId,
+    name,
+    'self'
+  );
+  return createFetch<T>(updateUrl, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-jwt': `Bearer ${token}`
+    },
+    body: JSON.stringify(body)
+  });
+}
+
+/**
  * Get scaling information for an instance of a service in Open Source Cloud
  * @memberof module:@osaas/client-core
  * @param {Context} context - Open Source Cloud configuration context
