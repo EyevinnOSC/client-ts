@@ -10,7 +10,8 @@ import {
 import {
   getInstancesToRemove,
   listInstancesForTenant,
-  removeInstanceForTenant
+  removeInstanceForTenant,
+  suspendInstanceForTenant
 } from './instance';
 import { confirm } from '../user/util';
 import {
@@ -80,9 +81,9 @@ export default function cmdAdmin() {
   admin
     .command('remove-exceeding-tenant-instances')
     .description(
-      'Remove all instances for all tenants with a negative usage token balance'
+      'Suspend all instances for all tenants with a negative usage token balance'
     )
-    .option('--apply', 'Actually remove instances, otherwise just a dry run')
+    .option('--apply', 'Actually suspend instances, otherwise just a dry run')
     .action(async (options, command) => {
       try {
         const globalOpts = command.optsWithGlobals();
@@ -92,7 +93,7 @@ export default function cmdAdmin() {
         const tenantsExceeding = tokenCounts.filter(
           (tenant) => tenant.remainingTokens < -200
         );
-        let instancesRemoved = 0;
+        let instancesSuspended = 0;
         const tenantsExceedingCount = tenantsExceeding.length;
         for (const tenant of tenantsExceeding) {
           if (tenantPlanMap[tenant.tenantId]?.planType === 'FREE') {
@@ -104,18 +105,18 @@ export default function cmdAdmin() {
               console.log(
                 `Tenant ${tenant.tenantId} has a negative or low token balance of ${tenant.remainingTokens} tokens and is on the 'FREE' plan`
               );
-              console.log('Removing all instances for this tenant...');
+              console.log('Suspending all instances for this tenant...');
               for (const item of instancesToRemove) {
                 console.log(` - ${item.serviceId}: ${item.instance}`);
                 if (options.apply) {
-                  await removeInstanceForTenant(
+                  await suspendInstanceForTenant(
                     tenant.tenantId,
                     item.serviceId,
                     item.instance,
                     environment
                   );
-                  instancesRemoved++;
-                  console.log('Removed');
+                  instancesSuspended++;
+                  console.log('Suspended');
                 }
               }
             }
@@ -124,7 +125,7 @@ export default function cmdAdmin() {
         console.log(
           `${tenantsExceedingCount} / ${
             Object.keys(tenantPlanMap).length
-          } tenants below threshold, removed ${instancesRemoved} instances`
+          } tenants below threshold, suspended ${instancesSuspended} instances`
         );
       } catch (err) {
         console.log((err as Error).message);

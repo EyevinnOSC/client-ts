@@ -1,5 +1,10 @@
-import { Context, listInstances, removeInstance } from '@osaas/client-core';
-import { generatePat } from './token';
+import {
+  Context,
+  createFetch,
+  listInstances,
+  removeInstance
+} from '@osaas/client-core';
+import { generatePat, apiKey } from './token';
 import { listSubscriptionsForTenant } from './subscription';
 
 export async function listInstancesForTenant(
@@ -28,6 +33,27 @@ export async function removeInstanceForTenant(
   const serviceAccessToken = await ctx.getServiceAccessToken(serviceId);
 
   await removeInstance(ctx, serviceId, name, serviceAccessToken);
+}
+
+export async function suspendInstanceForTenant(
+  tenantId: string,
+  serviceId: string,
+  name: string,
+  environment: string,
+  reason?: string
+) {
+  const suspendUrl = new URL(
+    `/suspended/${serviceId}/${name}`,
+    `https://deploy.svc.${environment}.osaas.io`
+  );
+  await createFetch(suspendUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey()}`
+    },
+    body: JSON.stringify({ tenantId, reason: reason ?? 'token_limit_exceeded' })
+  });
 }
 
 export async function getInstancesToRemove(
