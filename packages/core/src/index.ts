@@ -17,6 +17,7 @@ export {
   waitForInstanceReady,
   saveSecret,
   restartInstance,
+  updateInstance,
   getInstanceScaling,
   scaleInstanceReplicas
 } from './core';
