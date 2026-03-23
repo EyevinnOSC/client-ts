@@ -97,28 +97,36 @@ export default function cmdAdmin() {
         const tenantsExceedingCount = tenantsExceeding.length;
         for (const tenant of tenantsExceeding) {
           if (tenantPlanMap[tenant.tenantId]?.planType === 'FREE') {
-            const instancesToRemove = await getInstancesToRemove(
-              tenant.tenantId,
-              environment
-            );
-            if (instancesToRemove.length > 0) {
-              console.log(
-                `Tenant ${tenant.tenantId} has a negative or low token balance of ${tenant.remainingTokens} tokens and is on the 'FREE' plan`
+            try {
+              const instancesToRemove = await getInstancesToRemove(
+                tenant.tenantId,
+                environment
               );
-              console.log('Suspending all instances for this tenant...');
-              for (const item of instancesToRemove) {
-                console.log(` - ${item.serviceId}: ${item.instance}`);
-                if (options.apply) {
-                  await suspendInstanceForTenant(
-                    tenant.tenantId,
-                    item.serviceId,
-                    item.instance,
-                    environment
-                  );
-                  instancesSuspended++;
-                  console.log('Suspended');
+              if (instancesToRemove.length > 0) {
+                console.log(
+                  `Tenant ${tenant.tenantId} has a negative or low token balance of ${tenant.remainingTokens} tokens and is on the 'FREE' plan`
+                );
+                console.log('Suspending all instances for this tenant...');
+                for (const item of instancesToRemove) {
+                  console.log(` - ${item.serviceId}: ${item.instance}`);
+                  if (options.apply) {
+                    await suspendInstanceForTenant(
+                      tenant.tenantId,
+                      item.serviceId,
+                      item.instance,
+                      environment
+                    );
+                    instancesSuspended++;
+                    console.log('Suspended');
+                  }
                 }
               }
+            } catch (err) {
+              console.log(
+                `Failed to process tenant ${tenant.tenantId}: ${
+                  (err as Error).message
+                }`
+              );
             }
           }
         }
