@@ -5,7 +5,6 @@ import {
   removeInstance
 } from '@osaas/client-core';
 import { generatePat, apiKey } from './token';
-import { listSubscriptionsForTenant } from './subscription';
 
 export async function listInstancesForTenant(
   tenantId: string,
@@ -59,18 +58,22 @@ export async function suspendInstanceForTenant(
 export async function getInstancesToRemove(
   tenantId: string,
   environment: string
-) {
-  const services = await listSubscriptionsForTenant(tenantId, environment);
-  const instancesToRemove: { serviceId: string; instance: string }[] = [];
-  for (const serviceId of services) {
-    const instances = await listInstancesForTenant(
-      tenantId,
-      serviceId,
-      environment
-    );
-    instances.forEach((instance) => {
-      instancesToRemove.push({ serviceId, instance });
-    });
-  }
-  return instancesToRemove;
+): Promise<{ serviceId: string; instance: string }[]> {
+  const instancesUrl = `https://deploy.svc.${environment}.osaas.io/instances/${tenantId}`;
+  const instances = await createFetch<
+    Array<{
+      tenantId: string;
+      serviceId: string;
+      instanceName: string;
+      created: string;
+    }>
+  >(instancesUrl, {
+    headers: {
+      Authorization: `Bearer ${apiKey()}`
+    }
+  });
+  return instances.map(({ serviceId, instanceName }) => ({
+    serviceId,
+    instance: instanceName
+  }));
 }
