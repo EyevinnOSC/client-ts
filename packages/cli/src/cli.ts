@@ -33,6 +33,10 @@ cli
     '--env <environment>',
     'Environment to use (overrides ENVIRONMENT env var)',
     process.env.ENVIRONMENT || 'prod'
+  )
+  .option(
+    '--json',
+    'Output as structured JSON (human-readable output goes to stderr)'
   );
 
 cli.addCommand(cmdLogin());
