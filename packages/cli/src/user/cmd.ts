@@ -33,11 +33,23 @@ export function cmdList() {
           serviceId,
           serviceAccessToken
         );
-        return instances.map((instance: { name: string }) =>
-          console.log(instance.name)
-        );
+        const isJson = command.optsWithGlobals().json;
+        if (isJson) {
+          process.stdout.write(JSON.stringify(instances) + '\n');
+        } else {
+          instances.map((instance: { name: string }) =>
+            console.log(instance.name)
+          );
+        }
       } catch (err) {
-        console.log((err as Error).message);
+        const isJson = command.optsWithGlobals().json;
+        if (isJson) {
+          process.stderr.write(
+            JSON.stringify({ error: (err as Error).message }) + '\n'
+          );
+        } else {
+          console.log((err as Error).message);
+        }
       }
     });
   return list;
@@ -70,10 +82,22 @@ export function cmdCreate() {
           serviceAccessToken,
           payload
         );
-        console.log('Instance created:');
-        console.log(instance);
+        const isJson = command.optsWithGlobals().json;
+        if (isJson) {
+          process.stdout.write(JSON.stringify(instance) + '\n');
+        } else {
+          console.log('Instance created:');
+          console.log(instance);
+        }
       } catch (err) {
-        console.log((err as Error).message);
+        const isJson = command.optsWithGlobals().json;
+        if (isJson) {
+          process.stderr.write(
+            JSON.stringify({ error: (err as Error).message }) + '\n'
+          );
+        } else {
+          console.log((err as Error).message);
+        }
       }
     });
   return create;
@@ -99,44 +123,69 @@ export function cmdDescribe() {
           name,
           serviceAccessToken
         );
-        delete instance['resources'];
-        delete instance['_links'];
-        Object.keys(instance).forEach((key) => {
-          if (typeof instance[key] !== 'object') {
-            console.log(`${key}: ${instance[key]}`);
-          } else {
-            console.log(`${key}:`);
-            Object.keys(instance[key]).forEach((subKey) => {
-              if (typeof instance[key][subKey] !== 'object') {
-                console.log(`  ${subKey}: ${instance[key][subKey]}`);
-              } else {
-                console.log(`  ${subKey}:`);
-                Object.keys(instance[key][subKey]).forEach((subSubKey) => {
-                  console.log(
-                    `    ${subSubKey}: ${instance[key][subKey][subSubKey]}`
-                  );
-                });
-              }
-            });
-          }
-        });
-        try {
-          const ports = await getPortsForInstance(
-            ctx,
-            serviceId,
-            name,
-            serviceAccessToken
-          );
-          ports.forEach((port) => {
-            console.log(
-              `${port.externalIp}:${port.externalPort} => ${port.internalPort}`
+        const isJson = command.optsWithGlobals().json;
+        if (isJson) {
+          delete instance['resources'];
+          delete instance['_links'];
+          try {
+            const ports = await getPortsForInstance(
+              ctx,
+              serviceId,
+              name,
+              serviceAccessToken
             );
+            instance['ports'] = ports;
+          } catch (err) {
+            // No ports for this service
+          }
+          process.stdout.write(JSON.stringify(instance) + '\n');
+        } else {
+          delete instance['resources'];
+          delete instance['_links'];
+          Object.keys(instance).forEach((key) => {
+            if (typeof instance[key] !== 'object') {
+              console.log(`${key}: ${instance[key]}`);
+            } else {
+              console.log(`${key}:`);
+              Object.keys(instance[key]).forEach((subKey) => {
+                if (typeof instance[key][subKey] !== 'object') {
+                  console.log(`  ${subKey}: ${instance[key][subKey]}`);
+                } else {
+                  console.log(`  ${subKey}:`);
+                  Object.keys(instance[key][subKey]).forEach((subSubKey) => {
+                    console.log(
+                      `    ${subSubKey}: ${instance[key][subKey][subSubKey]}`
+                    );
+                  });
+                }
+              });
+            }
           });
-        } catch (err) {
-          // No ports for this service
+          try {
+            const ports = await getPortsForInstance(
+              ctx,
+              serviceId,
+              name,
+              serviceAccessToken
+            );
+            ports.forEach((port) => {
+              console.log(
+                `${port.externalIp}:${port.externalPort} => ${port.internalPort}`
+              );
+            });
+          } catch (err) {
+            // No ports for this service
+          }
         }
       } catch (err) {
-        console.log((err as Error).message);
+        const isJson = command.optsWithGlobals().json;
+        if (isJson) {
+          process.stderr.write(
+            JSON.stringify({ error: (err as Error).message }) + '\n'
+          );
+        } else {
+          console.log((err as Error).message);
+        }
       }
     });
   return describe;
@@ -157,13 +206,25 @@ export function cmdRemove() {
         const ctx = new Context({ environment });
         const serviceAccessToken = await ctx.getServiceAccessToken(serviceId);
 
-        if (!options.yes) {
+        const isJson = command.optsWithGlobals().json;
+        if (!options.yes && !isJson) {
           await confirm(`Are you sure you want to remove ${name}? (yes/no) `);
         }
         await removeInstance(ctx, serviceId, name, serviceAccessToken);
-        console.log('Instance removed');
+        if (isJson) {
+          process.stdout.write(JSON.stringify({ removed: true }) + '\n');
+        } else {
+          console.log('Instance removed');
+        }
       } catch (err) {
-        console.log((err as Error).message);
+        const isJson = command.optsWithGlobals().json;
+        if (isJson) {
+          process.stderr.write(
+            JSON.stringify({ error: (err as Error).message }) + '\n'
+          );
+        } else {
+          console.log((err as Error).message);
+        }
       }
     });
   return remove;
@@ -193,10 +254,22 @@ export function cmdRestart() {
           throw new Error(`Instance ${name} of service ${serviceId} not found`);
         }
         await restartInstance(ctx, serviceId, name, serviceAccessToken);
-        console.log(`Instance ${name} of service ${serviceId} restarted`);
+        const isJson = command.optsWithGlobals().json;
+        if (isJson) {
+          process.stdout.write(JSON.stringify({ restarted: true }) + '\n');
+        } else {
+          console.log(`Instance ${name} of service ${serviceId} restarted`);
+        }
       } catch (err) {
-        console.log('Error restarting instance:');
-        console.log((err as Error).message);
+        const isJson = command.optsWithGlobals().json;
+        if (isJson) {
+          process.stderr.write(
+            JSON.stringify({ error: (err as Error).message }) + '\n'
+          );
+        } else {
+          console.log('Error restarting instance:');
+          console.log((err as Error).message);
+        }
       }
     });
   return restart;
@@ -222,9 +295,21 @@ export function cmdLogs() {
           name,
           serviceAccessToken
         );
-        console.log(logs);
+        const isJson = command.optsWithGlobals().json;
+        if (isJson) {
+          process.stdout.write(JSON.stringify({ logs }) + '\n');
+        } else {
+          console.log(logs);
+        }
       } catch (err) {
-        console.log((err as Error).message);
+        const isJson = command.optsWithGlobals().json;
+        if (isJson) {
+          process.stderr.write(
+            JSON.stringify({ error: (err as Error).message }) + '\n'
+          );
+        } else {
+          console.log((err as Error).message);
+        }
       }
     });
   return logs;
