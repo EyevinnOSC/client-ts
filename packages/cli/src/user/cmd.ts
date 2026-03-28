@@ -207,14 +207,12 @@ export function cmdRemove() {
         const serviceAccessToken = await ctx.getServiceAccessToken(serviceId);
 
         const isJson = command.optsWithGlobals().json;
-        if (!options.yes) {
+        if (!options.yes && !isJson) {
           await confirm(`Are you sure you want to remove ${name}? (yes/no) `);
         }
         await removeInstance(ctx, serviceId, name, serviceAccessToken);
         if (isJson) {
-          process.stderr.write(
-            JSON.stringify({ message: 'Instance removed' }) + '\n'
-          );
+          process.stdout.write(JSON.stringify({ removed: true }) + '\n');
         } else {
           console.log('Instance removed');
         }
@@ -258,11 +256,7 @@ export function cmdRestart() {
         await restartInstance(ctx, serviceId, name, serviceAccessToken);
         const isJson = command.optsWithGlobals().json;
         if (isJson) {
-          process.stderr.write(
-            JSON.stringify({
-              message: `Instance ${name} of service ${serviceId} restarted`
-            }) + '\n'
-          );
+          process.stdout.write(JSON.stringify({ restarted: true }) + '\n');
         } else {
           console.log(`Instance ${name} of service ${serviceId} restarted`);
         }
