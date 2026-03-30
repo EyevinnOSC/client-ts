@@ -245,12 +245,48 @@ export async function setupDatabase(
       throw new Error('Failed to get connection URL for database');
     }
     case 'couchdb': {
+      const token = await ctx.getServiceAccessToken(
+        DatabaseTypeToServiceId['couchdb']
+      );
+      if (opts.publicAccess === false) {
+        const endpointInfo = await getInternalEndpoint(
+          ctx,
+          DatabaseTypeToServiceId['couchdb'],
+          name,
+          token
+        );
+        const port = endpointInfo.ports.find(
+          (p) => p.port === DatabaseTypeToPort['couchdb']
+        );
+        if (port) {
+          return `${DatabaseTypeToProtocol['couchdb']}://admin:${(instance as any).AdminPassword}@${endpointInfo.serviceDns}:${port.port}`;
+        }
+        throw new Error('Failed to get internal connection URL for couchdb');
+      }
       const url = new URL(instance.url);
       url.password = (instance as any).AdminPassword;
       url.username = 'admin';
       return url.toString();
     }
     case 'clickhouse': {
+      const token = await ctx.getServiceAccessToken(
+        DatabaseTypeToServiceId['clickhouse']
+      );
+      if (opts.publicAccess === false) {
+        const endpointInfo = await getInternalEndpoint(
+          ctx,
+          DatabaseTypeToServiceId['clickhouse'],
+          name,
+          token
+        );
+        const port = endpointInfo.ports.find(
+          (p) => p.port === DatabaseTypeToPort['clickhouse']
+        );
+        if (port) {
+          return `${DatabaseTypeToProtocol['clickhouse']}://${opts.username || 'default'}${opts.password ? ':' + opts.password : ''}@${endpointInfo.serviceDns}:${port.port}`;
+        }
+        throw new Error('Failed to get internal connection URL for clickhouse');
+      }
       const url = new URL(instance.url);
       url.username = opts.username || 'default';
       url.password = opts.password || '';
