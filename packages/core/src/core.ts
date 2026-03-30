@@ -436,6 +436,44 @@ export async function scaleInstanceReplicas(
   }
 }
 
+export interface InternalEndpointInfo {
+  serviceDns: string;
+  ports: Array<{ name: string; port: number; protocol: string }>;
+  publicAccess: boolean;
+}
+
+/**
+ * Get internal endpoint information for an instance of a service in Open Source Cloud
+ * @memberof module:@osaas/client-core
+ * @param {Context} context - Open Source Cloud configuration context
+ * @param {string} serviceId - The service identifier
+ * @param {string} name - The name of the service instance
+ * @param {string} token - Service access token
+ * @returns {InternalEndpointInfo} - Internal endpoint info including serviceDns, ports, and publicAccess
+ */
+export async function getInternalEndpoint(
+  context: Context,
+  serviceId: string,
+  name: string,
+  token: string
+): Promise<InternalEndpointInfo> {
+  const endpointUrl = await getInstanceLink(
+    context,
+    token,
+    serviceId,
+    name,
+    'internalEndpoint'
+  );
+
+  return await createFetch<InternalEndpointInfo>(endpointUrl, {
+    method: 'GET',
+    headers: {
+      'x-jwt': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  });
+}
+
 export function instanceValue(
   instance: { [key: string]: string },
   key: string

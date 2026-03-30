@@ -19,7 +19,9 @@ export {
   restartInstance,
   updateInstance,
   getInstanceScaling,
-  scaleInstanceReplicas
+  scaleInstanceReplicas,
+  getInternalEndpoint,
+  InternalEndpointInfo
 } from './core';
 export {
   listSubscriptions,

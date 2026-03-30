@@ -1,6 +1,10 @@
 /** @module @osaas/client-db */
 
-import { Context, getPortsForInstance } from '@osaas/client-core';
+import {
+  Context,
+  getPortsForInstance,
+  getInternalEndpoint
+} from '@osaas/client-core';
 import {
   ApacheCouchdbConfig,
   BirmeOscPostgresqlConfig,
@@ -55,6 +59,7 @@ export interface DatabaseOpts {
   password?: string;
   rootPassword?: string;
   database?: string;
+  publicAccess?: boolean;
 }
 
 /**
@@ -121,12 +126,15 @@ export async function setupDatabase(
       throw new Error(`Unsupported database type: ${type}`);
   }
   if (!instance) {
+    const publicAccessOpt =
+      opts.publicAccess === false ? { publicAccess: false } : {};
     switch (type) {
       case 'valkey':
         {
           const options: ValkeyIoValkeyConfig = {
             name,
-            Password: opts.password
+            Password: opts.password,
+            ...publicAccessOpt
           };
           instance = await createValkeyIoValkeyInstance(ctx, options);
         }
@@ -140,7 +148,8 @@ export async function setupDatabase(
             name,
             PostgresUser: opts.username,
             PostgresPassword: opts.password,
-            PostgresDb: opts.database
+            PostgresDb: opts.database,
+            ...publicAccessOpt
           };
           instance = await createBirmeOscPostgresqlInstance(ctx, options);
         }
@@ -155,7 +164,8 @@ export async function setupDatabase(
             RootPassword: opts.rootPassword,
             Database: opts.database,
             User: opts.username,
-            Password: opts.password
+            Password: opts.password,
+            ...publicAccessOpt
           };
           instance = await createLinuxserverDockerMariadbInstance(ctx, options);
         }
@@ -166,7 +176,8 @@ export async function setupDatabase(
             name,
             Password: opts.password,
             User: opts.username,
-            Db: opts.database
+            Db: opts.database,
+            ...publicAccessOpt
           };
           instance = await createClickhouseClickhouseInstance(ctx, options);
         }
@@ -178,7 +189,8 @@ export async function setupDatabase(
           }
           const options: ApacheCouchdbConfig = {
             name,
-            AdminPassword: opts.rootPassword
+            AdminPassword: opts.rootPassword,
+            ...publicAccessOpt
           };
           instance = await createApacheCouchdbInstance(ctx, options);
         }
@@ -195,6 +207,25 @@ export async function setupDatabase(
       const token = await ctx.getServiceAccessToken(
         DatabaseTypeToServiceId[type]
       );
+      if (opts.publicAccess === false) {
+        const endpointInfo = await getInternalEndpoint(
+          ctx,
+          DatabaseTypeToServiceId[type],
+          name,
+          token
+        );
+        const port = endpointInfo.ports.find(
+          (p) => p.port === DatabaseTypeToPort[type]
+        );
+        if (port) {
+          return `${DatabaseTypeToProtocol[type]}://${
+            opts.username || 'default'
+          }${opts.password ? ':' + opts.password : ''}@${
+            endpointInfo.serviceDns
+          }:${port.port}/${opts.database || ''}`;
+        }
+        throw new Error('Failed to get internal connection URL for database');
+      }
       const ports = await getPortsForInstance(
         ctx,
         DatabaseTypeToServiceId[type],
