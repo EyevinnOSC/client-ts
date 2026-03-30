@@ -259,7 +259,9 @@ export async function setupDatabase(
           (p) => p.port === DatabaseTypeToPort['couchdb']
         );
         if (port) {
-          return `${DatabaseTypeToProtocol['couchdb']}://admin:${(instance as any).AdminPassword}@${endpointInfo.serviceDns}:${port.port}`;
+          return `${DatabaseTypeToProtocol['couchdb']}://admin:${
+            (instance as any).AdminPassword
+          }@${endpointInfo.serviceDns}:${port.port}`;
         }
         throw new Error('Failed to get internal connection URL for couchdb');
       }
@@ -283,7 +285,11 @@ export async function setupDatabase(
           (p) => p.port === DatabaseTypeToPort['clickhouse']
         );
         if (port) {
-          return `${DatabaseTypeToProtocol['clickhouse']}://${opts.username || 'default'}${opts.password ? ':' + opts.password : ''}@${endpointInfo.serviceDns}:${port.port}`;
+          return `${DatabaseTypeToProtocol['clickhouse']}://${
+            opts.username || 'default'
+          }${opts.password ? ':' + opts.password : ''}@${
+            endpointInfo.serviceDns
+          }:${port.port}`;
         }
         throw new Error('Failed to get internal connection URL for clickhouse');
       }
