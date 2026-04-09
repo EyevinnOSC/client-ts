@@ -8,6 +8,12 @@ import {
   waitForOrder
 } from '@osaas/client-core';
 import {
+  getServiceRepoUrl,
+  getSyncForkStatus,
+  triggerOrchestratorRemake,
+  triggerSyncFork
+} from './syncfork';
+import {
   getInstancesToRemove,
   listInstancesForTenant,
   removeInstanceForTenant,
@@ -254,6 +260,97 @@ export default function cmdAdmin() {
           }
         } else {
           Log().info(`Order ${orderName} not found`);
+        }
+      } catch (err) {
+        console.log((err as Error).message);
+      }
+    });
+  admin
+    .command('sync-fork')
+    .description('Trigger a fork sync for an OSC service')
+    .argument('<serviceId>', 'The OSC service ID (e.g. eyevinn-web-runner)')
+    .option(
+      '--remake',
+      'After sync, trigger a full remake (image + orchestrator)'
+    )
+    .option(
+      '--orchestrator-only',
+      'After sync, remake orchestrator only (faster)'
+    )
+    .action(async (serviceId, options, command) => {
+      try {
+        const globalOpts = command.optsWithGlobals();
+        const environment = globalOpts?.env || 'prod';
+        const platform = new Platform({ environment });
+
+        Log().info(
+          `Looking up repository URL for service ${serviceId} in ${environment}`
+        );
+        const repoUrl = await getServiceRepoUrl(
+          serviceId,
+          environment,
+          platform.getApiKey()
+        );
+        Log().info(`Repository URL: ${repoUrl}`);
+
+        Log().info(`Triggering sync fork for ${repoUrl}`);
+        const jobId = await triggerSyncFork(repoUrl, platform);
+        Log().info(`Sync fork job started: ${jobId}`);
+        console.log(`Sync fork job started (jobId: ${jobId})`);
+
+        const status = await getSyncForkStatus(repoUrl, platform);
+        if (status) {
+          console.log(`Sync fork status: ${status.status}`);
+          if (status.status === 'failed' && status.error) {
+            console.log(
+              `Sync fork failed: [${status.error.type}] ${status.error.message}`
+            );
+            if (status.error.conflictFiles?.length) {
+              console.log(
+                `Conflict files: ${status.error.conflictFiles.join(', ')}`
+              );
+            }
+            return;
+          }
+        }
+
+        if (options.remake || options.orchestratorOnly) {
+          Log().info(`Looking up order ID for service ${serviceId}`);
+          const orderId = await getOrderIdByName(platform, serviceId);
+          if (!orderId) {
+            Log().error(
+              `Could not find order for service ${serviceId} — skipping remake`
+            );
+            console.log(
+              `Warning: order not found for ${serviceId}, skipping remake`
+            );
+            return;
+          }
+
+          if (options.orchestratorOnly) {
+            Log().info(`Triggering orchestrator-only remake for ${serviceId}`);
+            const newOrderId = await triggerOrchestratorRemake(
+              orderId,
+              platform
+            );
+            if (newOrderId) {
+              console.log(
+                `Orchestrator remake started (orderId: ${newOrderId})`
+              );
+            } else {
+              Log().error(
+                `Failed to trigger orchestrator remake for ${serviceId}`
+              );
+            }
+          } else {
+            Log().info(`Triggering full remake for ${serviceId}`);
+            const newOrderId = await remakeOrder(platform, orderId);
+            if (newOrderId) {
+              console.log(`Full remake started (orderId: ${newOrderId})`);
+            } else {
+              Log().error(`Failed to trigger full remake for ${serviceId}`);
+            }
+          }
         }
       } catch (err) {
         console.log((err as Error).message);
