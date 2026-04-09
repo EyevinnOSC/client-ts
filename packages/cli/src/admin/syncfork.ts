@@ -1,4 +1,4 @@
-import { createFetch, FetchError, Log, Platform } from '@osaas/client-core';
+import { createFetch, FetchError, Platform } from '@osaas/client-core';
 
 interface ServiceMetadata {
   repoUrl?: string;
@@ -83,33 +83,6 @@ export async function getSyncForkStatus(
       }
     });
   } catch (err) {
-    if (err instanceof FetchError && err.httpCode === 404) {
-      return undefined;
-    }
-    throw err;
-  }
-}
-
-export async function triggerOrchestratorRemake(
-  orderId: string,
-  platform: Platform
-): Promise<string | undefined> {
-  try {
-    const remakerUrl = new URL(
-      `https://maker.svc.${platform.getEnvironment()}.osaas.io/remaker/orchestrator`
-    );
-    const res = await createFetch<{ orderId: string }>(remakerUrl, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${platform.getApiKey()}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ orderId })
-    });
-    Log().debug(res);
-    return res.orderId;
-  } catch (err) {
-    Log().debug(err);
     if (err instanceof FetchError && err.httpCode === 404) {
       return undefined;
     }

@@ -10,7 +10,6 @@ import {
 import {
   getServiceRepoUrl,
   getSyncForkStatus,
-  triggerOrchestratorRemake,
   triggerSyncFork
 } from './syncfork';
 import {
@@ -269,14 +268,6 @@ export default function cmdAdmin() {
     .command('sync-fork')
     .description('Trigger a fork sync for an OSC service')
     .argument('<serviceId>', 'The OSC service ID (e.g. eyevinn-web-runner)')
-    .option(
-      '--remake',
-      'After sync, trigger a full remake (image + orchestrator)'
-    )
-    .option(
-      '--orchestrator-only',
-      'After sync, remake orchestrator only (faster)'
-    )
     .action(async (serviceId, options, command) => {
       try {
         const globalOpts = command.optsWithGlobals();
@@ -311,45 +302,6 @@ export default function cmdAdmin() {
               );
             }
             return;
-          }
-        }
-
-        if (options.remake || options.orchestratorOnly) {
-          Log().info(`Looking up order ID for service ${serviceId}`);
-          const orderId = await getOrderIdByName(platform, serviceId);
-          if (!orderId) {
-            Log().error(
-              `Could not find order for service ${serviceId} — skipping remake`
-            );
-            console.log(
-              `Warning: order not found for ${serviceId}, skipping remake`
-            );
-            return;
-          }
-
-          if (options.orchestratorOnly) {
-            Log().info(`Triggering orchestrator-only remake for ${serviceId}`);
-            const newOrderId = await triggerOrchestratorRemake(
-              orderId,
-              platform
-            );
-            if (newOrderId) {
-              console.log(
-                `Orchestrator remake started (orderId: ${newOrderId})`
-              );
-            } else {
-              Log().error(
-                `Failed to trigger orchestrator remake for ${serviceId}`
-              );
-            }
-          } else {
-            Log().info(`Triggering full remake for ${serviceId}`);
-            const newOrderId = await remakeOrder(platform, orderId);
-            if (newOrderId) {
-              console.log(`Full remake started (orderId: ${newOrderId})`);
-            } else {
-              Log().error(`Failed to trigger full remake for ${serviceId}`);
-            }
           }
         }
       } catch (err) {
