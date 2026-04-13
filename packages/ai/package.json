@@ -1,6 +1,6 @@
 {
   "name": "@osaas/client-ai",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Open Source Cloud Client SDK ai library",
   "author": "Eyevinn Open Source Cloud <osc@eyevinn.se>",
   "homepage": "https://www.osaas.io",
@@ -25,7 +25,7 @@
     "test": "jest --passWithNoTests"
   },
   "dependencies": {
-    "@osaas/client-core": "^0.23.0",
+    "@osaas/client-core": "^0.24.0",
     "chalk": "4.1.2"
   },
   "publishConfig": {
