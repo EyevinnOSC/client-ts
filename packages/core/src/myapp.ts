@@ -7,8 +7,9 @@ export type MyApp = {
   type: string;
   gitHubUrl: string;
   url: string;
-  appDns: string;
+  appDns?: string;
   tenantId: string;
+  buildStatus?: 'building' | 'running' | 'failed' | 'unknown';
 };
 
 export type CreateMyAppBody = {
