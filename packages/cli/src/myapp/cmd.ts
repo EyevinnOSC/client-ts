@@ -8,6 +8,38 @@ import {
 } from '@osaas/client-core';
 import { confirm } from '../user/util';
 
+async function waitForAppReady(
+  ctx: Context,
+  appId: string,
+  timeoutMs = 5 * 60 * 1000,
+  intervalMs = 5000
+): Promise<void> {
+  const deadline = Date.now() + timeoutMs;
+  process.stdout.write('Waiting for app to be ready');
+  while (Date.now() < deadline) {
+    await new Promise((r) => setTimeout(r, intervalMs));
+    process.stdout.write('.');
+    const app = await getMyApp(ctx, appId);
+    if (app.buildStatus === 'running') {
+      process.stdout.write('\n');
+      console.log(`App is ready.`);
+      if (app.url) console.log(`URL:    ${app.url}`);
+      if (app.appDns) console.log(`DNS:    ${app.appDns}`);
+      return;
+    }
+    if (app.buildStatus === 'failed') {
+      process.stdout.write('\n');
+      throw new Error(
+        `App build failed. Check logs with: osc myapp describe ${appId}`
+      );
+    }
+  }
+  process.stdout.write('\n');
+  console.log(
+    `Timed out waiting for app readiness. Use 'osc myapp describe ${appId}' to check status.`
+  );
+}
+
 export function cmdMyapp() {
   const myapp = new Command('myapp');
 
@@ -36,6 +68,7 @@ export function cmdMyapp() {
     .argument('<gitHubUrl>', 'GitHub repository URL')
     .option('--github-token <token>', 'GitHub token for private repos')
     .option('--config-service <name>', 'Config service reference')
+    .option('--no-wait', 'Do not wait for app to become ready')
     .action(async (name, type, gitHubUrl, options, command) => {
       try {
         const globalOpts = command.optsWithGlobals();
@@ -48,10 +81,12 @@ export function cmdMyapp() {
           gitHubToken: options.githubToken,
           configService: options.configService
         });
-        console.log(`App ${app.name} created successfully.`);
-        if (app.appDns) {
-          console.log(`DNS: ${app.appDns}`);
+        console.log(`App ${app.name} creation started...`);
+        if (!options.wait) {
+          console.log(`Build status: ${app.buildStatus ?? 'unknown'}`);
+          return;
         }
+        await waitForAppReady(ctx, app.id);
       } catch (err) {
         console.log((err as Error).message);
       }
