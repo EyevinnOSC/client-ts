@@ -9,11 +9,17 @@ import {
 import { createCloudfrontDistribution, publish } from '@osaas/client-web';
 import { Command } from 'commander';
 
+interface ConfigItem {
+  key: string;
+  value: string;
+  secret?: boolean;
+}
+
 interface ConfigList {
   offset: number;
   limit: number;
   total: number;
-  items: [{ key: string; value: string }];
+  items: ConfigItem[];
 }
 
 export function cmdWeb() {
@@ -193,6 +199,10 @@ export function cmdWeb() {
       '<configInstance>',
       'Name of the application configuration service instance'
     )
+    .option(
+      '--config-api-key <key>',
+      'API key for accessing secret parameters (or set CONFIG_API_KEY env var)'
+    )
     .action(async (configInstance, options, command) => {
       try {
         const globalOpts = command.optsWithGlobals();
@@ -206,10 +216,16 @@ export function cmdWeb() {
           token
         );
         if (instance) {
+          const configApiKey =
+            options.configApiKey || process.env.CONFIG_API_KEY;
           const url = new URL('/api/v1/config', instance.url);
-          const response = await fetch(url, {
-            headers: { Authorization: `Bearer ${token}` }
-          });
+          // Use the config API key for secret decryption if provided; omit the
+          // Authorization header otherwise — non-secret params still work but
+          // secrets will be masked as *** by the config service.
+          const fetchHeaders: Record<string, string> = configApiKey
+            ? { Authorization: `Bearer ${configApiKey}` }
+            : {};
+          const response = await fetch(url, { headers: fetchHeaders });
           if (!response.ok) {
             throw new Error(
               `Failed to load config from '${configInstance}': HTTP ${response.status}`
@@ -217,7 +233,9 @@ export function cmdWeb() {
           }
           const data: ConfigList = (await response.json()) as ConfigList;
           data.items.map((config) => {
-            // Single-quote values to prevent shell expansion of special characters
+            // Single-quote values to prevent shell expansion of special characters.
+            // The `secret` field is intentionally not emitted — only the resolved
+            // value (or *** if undecrypted) is written to the shell output.
             const escaped = config.value.replace(/'/g, "'\\''");
             console.log(`export ${config.key.toUpperCase()}='${escaped}'`);
           });
