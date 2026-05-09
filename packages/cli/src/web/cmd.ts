@@ -219,12 +219,15 @@ export function cmdWeb() {
           const configApiKey =
             options.configApiKey || process.env.CONFIG_API_KEY;
           const url = new URL('/api/v1/config', instance.url);
-          // Use the config API key for secret decryption if provided; omit the
-          // Authorization header otherwise — non-secret params still work but
-          // secrets will be masked as *** by the config service.
-          const fetchHeaders: Record<string, string> = configApiKey
-            ? { Authorization: `Bearer ${configApiKey}` }
-            : {};
+          // Always send the service access token (satisfies the OSC token wall).
+          // Additionally send x-config-api-key when available — the config service
+          // uses this dedicated header to authorize secret parameter decryption.
+          const fetchHeaders: Record<string, string> = {
+            Authorization: `Bearer ${token}`
+          };
+          if (configApiKey) {
+            fetchHeaders['x-config-api-key'] = configApiKey;
+          }
           const response = await fetch(url, { headers: fetchHeaders });
           if (!response.ok) {
             throw new Error(
