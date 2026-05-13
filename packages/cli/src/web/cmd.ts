@@ -218,7 +218,6 @@ export function cmdWeb() {
         if (instance) {
           const configApiKey =
             options.configApiKey || process.env.CONFIG_API_KEY;
-          const url = new URL('/api/v1/config', instance.url);
           // Always send the service access token (satisfies the OSC token wall).
           // Additionally send x-config-api-key when available — the config service
           // uses this dedicated header to authorize secret parameter decryption.
@@ -228,14 +227,28 @@ export function cmdWeb() {
           if (configApiKey) {
             fetchHeaders['x-config-api-key'] = configApiKey;
           }
-          const response = await fetch(url, { headers: fetchHeaders });
-          if (!response.ok) {
-            throw new Error(
-              `Failed to load config from '${configInstance}': HTTP ${response.status}`
-            );
-          }
-          const data: ConfigList = (await response.json()) as ConfigList;
-          data.items.map((config) => {
+
+          const pageLimit = 100;
+          let cursor = 0;
+          const allItems: ConfigItem[] = [];
+
+          do {
+            const url = new URL('/api/v1/config', instance.url);
+            url.searchParams.set('limit', String(pageLimit));
+            url.searchParams.set('offset', String(cursor));
+
+            const response = await fetch(url, { headers: fetchHeaders });
+            if (!response.ok) {
+              throw new Error(
+                `Failed to load config from '${configInstance}': HTTP ${response.status}`
+              );
+            }
+            const page: ConfigList = (await response.json()) as ConfigList;
+            allItems.push(...page.items);
+            cursor = page.offset;
+          } while (cursor !== 0);
+
+          allItems.map((config) => {
             // Single-quote values to prevent shell expansion of special characters.
             // The `secret` field is intentionally not emitted — only the resolved
             // value (or *** if undecrypted) is written to the shell output.
