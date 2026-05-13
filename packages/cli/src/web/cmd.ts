@@ -229,14 +229,13 @@ export function cmdWeb() {
           }
 
           const pageLimit = 100;
-          let offset = 0;
-          let hasMore = true;
+          let cursor = 0;
           const allItems: ConfigItem[] = [];
 
-          while (hasMore) {
+          do {
             const url = new URL('/api/v1/config', instance.url);
             url.searchParams.set('limit', String(pageLimit));
-            url.searchParams.set('offset', String(offset));
+            url.searchParams.set('offset', String(cursor));
 
             const response = await fetch(url, { headers: fetchHeaders });
             if (!response.ok) {
@@ -246,9 +245,8 @@ export function cmdWeb() {
             }
             const page: ConfigList = (await response.json()) as ConfigList;
             allItems.push(...page.items);
-            offset += page.items.length;
-            hasMore = offset < page.total;
-          }
+            cursor = page.offset;
+          } while (cursor !== 0);
 
           allItems.map((config) => {
             // Single-quote values to prevent shell expansion of special characters.
