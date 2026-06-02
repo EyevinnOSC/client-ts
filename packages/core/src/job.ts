@@ -124,6 +124,10 @@ export async function listJobs(
  * @param {string} serviceId - Service identifier. The service identifier is {github-organization}-{github-repo}
  * @param {string} name - Name of service job to wait for
  * @param {string} token - Service access token
+ * @throws {Error} If the job reaches a terminal failure state ('Failed')
+ *
+ * Terminal success statuses: 'Complete', 'SuccessCriteriaMet'
+ * Terminal failure statuses: 'Failed'
  */
 export async function waitForJobToComplete(
   context: Context,
@@ -133,8 +137,11 @@ export async function waitForJobToComplete(
 ) {
   for (const _ of Array(MAX_ITER)) {
     const job = await getJob(context, serviceId, name, token);
-    if (job.status === 'Complete') {
+    if (job.status === 'Complete' || job.status === 'SuccessCriteriaMet') {
       break;
+    }
+    if (job.status === 'Failed') {
+      throw new Error(`Job '${name}' failed with status: ${job.status}`);
     }
     await delay(1000);
   }
