@@ -33,7 +33,7 @@ const ctx = new Context();
 It will read the Personal Access Token from the environment variable `OSC_ACCESS_TOKEN`. To override the default configuration and read the token from another environment variable, here called `MY_TOKEN`, and connect to the development environment you setup a context as below.
 
 ```javascript
-const ctx = new Context({ personalAccessToken: process.env.MY_TOKEN })
+const ctx = new Context({ personalAccessToken: process.env.MY_TOKEN });
 ```
 
 To create, list or remove a service instance you then need to obtain a temporary Service Access Token (SAT) first. This is achieved with the `getServiceAccessToken()`. For example to get an SAT for the service `eyevinn-chaos-stream-proxy` you write.
@@ -103,7 +103,13 @@ Use the `-y` flag to skip the confirmation prompt.
 #### SDK
 
 ```javascript
-import { Context, listMyApps, createMyApp, getMyApp, removeMyApp } from '@osaas/client-core';
+import {
+  Context,
+  listMyApps,
+  createMyApp,
+  getMyApp,
+  removeMyApp
+} from '@osaas/client-core';
 
 const ctx = new Context();
 
