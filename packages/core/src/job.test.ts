@@ -85,27 +85,24 @@ describe('waitForJobToComplete', () => {
   });
 
   test('throws on timeout when timeoutMs is exceeded', async () => {
-    // Job never completes — always returns Running
     mockGetInstance.mockResolvedValue({ status: 'Running' });
 
-    jest.useFakeTimers();
-    const promise = waitForJobToComplete(
-      ctx,
-      'eyevinn-test-job',
-      'myjob',
-      'token',
-      { timeoutMs: 5000 }
-    );
-    // Flush microtasks to advance through getService + getInstance + return-await chain
-    // so the loop reaches await delay(1000) before we advance the clock
-    await Promise.resolve();
-    await Promise.resolve();
-    await Promise.resolve();
-    // Advance fake clock 6000ms: fires delay timer AND makes Date.now() = 6000
-    jest.advanceTimersByTime(6000);
-    // Loop continues → deadline check: 6000 >= 5000 → throws
-    await expect(promise).rejects.toThrow("Job 'myjob' timed out after 5000ms");
-  }, 10000);
+    // Spy on Date.now: first call sets the deadline, second call (the
+    // per-iteration check) returns a value well past it — no timers needed.
+    const base = 1_000_000;
+    let calls = 0;
+    const dateSpy = jest
+      .spyOn(Date, 'now')
+      .mockImplementation(() => (calls++ === 0 ? base : base + 10_000));
+
+    await expect(
+      waitForJobToComplete(ctx, 'eyevinn-test-job', 'myjob', 'token', {
+        timeoutMs: 5000
+      })
+    ).rejects.toThrow("Job 'myjob' timed out after 5000ms");
+
+    dateSpy.mockRestore();
+  });
 
   test('backwards compatible: no options parameter works as before', async () => {
     const completedJob = { name: 'myjob', status: 'Complete' };
