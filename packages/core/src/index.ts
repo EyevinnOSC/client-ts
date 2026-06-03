@@ -6,6 +6,7 @@ export { Platform } from './platform';
 export {
   createInstance,
   removeInstance,
+  RemoveInstanceResult,
   getInstance,
   listInstances,
   getPortsForInstance,
