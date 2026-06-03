@@ -162,6 +162,7 @@ async function main() {
   // 1. Provision a Redis queue for callback events
   const queue = new ValkeyDb({ context: ctx, name: 'transfer' });
   const redisUrl = await queue.getRedisUrl();
+  if (!redisUrl) throw new Error('Failed to get Redis URL');
 
   // 2. Create (or reuse) the callback listener — it exposes /encoreCallback
   const callback = new EncoreCallbackListener({
