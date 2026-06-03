@@ -81,24 +81,24 @@ See the [Encore API documentation](https://svt.github.io/encore-doc/) for the fu
 ```typescript
 interface EncoreJobInput {
   type: 'AudioVideo' | 'Audio' | 'Video';
-  uri: string;           // S3 or HTTPS URL
+  uri: string; // S3 or HTTPS URL
   copyTs?: boolean;
-  params?: Record<string, string>;  // e.g. reconnect flags
+  params?: Record<string, string>; // e.g. reconnect flags
 }
 
 interface EncoreJobRequest {
   externalId: string;
-  profile: string;           // e.g. 'program', 'program-kf'
-  baseName: string;          // output file prefix
-  outputFolder: string;      // S3 URL
+  profile: string; // e.g. 'program', 'program-kf'
+  baseName: string; // output file prefix
+  outputFolder: string; // S3 URL
   inputs: EncoreJobInput[];
-  seekTo?: number;           // seconds
-  duration?: number;         // seconds
+  seekTo?: number; // seconds
+  duration?: number; // seconds
   progressCallbackUri?: string;
   profileParams?: {
-    keyframes?: string;      // FFmpeg expr for IDR injection
+    keyframes?: string; // FFmpeg expr for IDR injection
     audioMixPreset?: string; // e.g. 'stereo', '5.1-surround'
-    utcnowstring?: string;   // UTC creation date string
+    utcnowstring?: string; // UTC creation date string
   };
 }
 ```
@@ -109,17 +109,23 @@ The Encore API follows Spring HATEOAS conventions. The response from `POST /enco
 
 ```typescript
 interface EncoreJobResponse {
-  id: string;            // UUID
+  id: string; // UUID
   externalId: string;
-  status: 'NEW' | 'QUEUED' | 'IN_PROGRESS' | 'SUCCESSFUL' | 'FAILED' | 'CANCELLED';
+  status:
+    | 'NEW'
+    | 'QUEUED'
+    | 'IN_PROGRESS'
+    | 'SUCCESSFUL'
+    | 'FAILED'
+    | 'CANCELLED';
   profile: string;
   baseName: string;
   outputFolder: string;
   inputs: EncoreJobInput[];
   output?: FileOutput[];
-  startedDate?: string;  // ISO 8601
+  startedDate?: string; // ISO 8601
   completedDate?: string;
-  message?: string;      // error details on FAILED
+  message?: string; // error details on FAILED
   _links: {
     self: { href: string };
     encoreJob: { href: string };
@@ -131,13 +137,13 @@ interface EncoreJobResponse {
 
 ### Error Codes
 
-| HTTP status | Meaning |
-|---|---|
-| `400` | Invalid job payload (missing required fields, bad profile name) |
-| `401` | Missing or invalid bearer token |
-| `404` | Encore instance not found (when resolving via OSC) |
-| `409` | Job with same `externalId` already exists |
-| `500` | Encore internal error — check `message` field in response |
+| HTTP status | Meaning                                                         |
+| ----------- | --------------------------------------------------------------- |
+| `400`       | Invalid job payload (missing required fields, bad profile name) |
+| `401`       | Missing or invalid bearer token                                 |
+| `404`       | Encore instance not found (when resolving via OSC)              |
+| `409`       | Job with same `externalId` already exists                       |
+| `500`       | Encore internal error — check `message` field in response       |
 
 The SDK throws a plain `Error` for non-2xx responses with the status text in the message.
 
@@ -148,10 +154,7 @@ Encore notifies completion by POSTing the finished job to a `progressCallbackUri
 ```typescript
 import { Context } from '@osaas/client-core';
 import { ValkeyDb } from '@osaas/client-db';
-import {
-  transcode,
-  EncoreCallbackListener
-} from '@osaas/client-transcode';
+import { transcode, EncoreCallbackListener } from '@osaas/client-transcode';
 
 async function main() {
   const ctx = new Context();
@@ -195,6 +198,7 @@ main();
 ```
 
 Key points:
+
 - The listener instance persists across job submissions — `init()` is idempotent.
 - `redisQueue` defaults to undefined; specify it explicitly when pairing with `EncoreTransfer`.
 - The callback URL path is always `/encoreCallback` appended to the instance URL.
