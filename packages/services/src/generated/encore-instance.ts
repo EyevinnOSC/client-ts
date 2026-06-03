@@ -671,7 +671,8 @@ export interface external {}
 // Named type aliases
 export type EncoreJobRequest =
   paths['/encoreJobs']['post']['requestBody']['content']['application/json'];
-export type EncoreJobResponse = components['schemas']['EncoreJob'];
+// EntityModelEncoreJob is the HAL/HATEOAS response wrapper (includes _links)
+export type EncoreJobResponse = components['schemas']['EntityModelEncoreJob'];
 export type EncoreJobInput = components['schemas']['VideoFile'];
 export type EncoreJobOutput = components['schemas']['MediaFile'];
 export type EncoreJobStatus = components['schemas']['EncoreJob']['status'];
