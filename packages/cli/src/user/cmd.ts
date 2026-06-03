@@ -1,16 +1,19 @@
 import {
   Context,
-  createFetch,
   createInstance,
+  deleteSecret,
   getInstance,
   getLogsForInstance,
   getPortsForInstance,
   listInstances,
   listReservedNodes,
+  listSecrets,
   removeInstance,
   getInstanceScaling,
   restartInstance,
-  scaleInstanceReplicas
+  saveSecret,
+  scaleInstanceReplicas,
+  updateSecret
 } from '@osaas/client-core';
 import { Command } from 'commander';
 import { confirm, instanceOptsToPayload, makeSafeName } from './util';
@@ -434,21 +437,8 @@ export function cmdSecrets() {
         const globalOpts = command.optsWithGlobals();
         const environment = globalOpts?.env || 'prod';
         const ctx = new Context({ environment });
-        const personalAccessToken = await ctx.getPersonalAccessToken();
-        const secrets = await createFetch<
-          { serviceId: string; secretName: string }[]
-        >(
-          new URL(
-            '/mysecrets/' + serviceId,
-            `https://deploy.svc.${ctx.getEnvironment()}.osaas.io`
-          ),
-          {
-            headers: {
-              'x-pat-jwt': `Bearer ${personalAccessToken}`
-            }
-          }
-        );
-        secrets.forEach((secret) => {
+        const secretsList = await listSecrets(serviceId, ctx);
+        secretsList.forEach((secret) => {
           console.log(`${secret.secretName}: ***`);
         });
       } catch (err) {
@@ -467,19 +457,7 @@ export function cmdSecrets() {
         const globalOpts = command.optsWithGlobals();
         const environment = globalOpts?.env || 'prod';
         const ctx = new Context({ environment });
-        const personalAccessToken = await ctx.getPersonalAccessToken();
-        const secretUrl = new URL(
-          '/mysecrets/' + serviceId,
-          `https://deploy.svc.${ctx.getEnvironment()}.osaas.io`
-        );
-        await createFetch(secretUrl, {
-          method: 'POST',
-          headers: {
-            'x-pat-jwt': `Bearer ${personalAccessToken}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ secretName, secretData: secretValue })
-        });
+        await saveSecret(serviceId, secretName, secretValue, ctx);
         console.log(`Secret ${secretName} created successfully.`);
       } catch (err) {
         console.log((err as Error).message);
@@ -497,24 +475,13 @@ export function cmdSecrets() {
         const globalOpts = command.optsWithGlobals();
         const environment = globalOpts?.env || 'prod';
         const ctx = new Context({ environment });
-        const personalAccessToken = await ctx.getPersonalAccessToken();
-        const secretUrl = new URL(
-          '/mysecrets/' + serviceId + `/${secretName}`,
-          `https://deploy.svc.${ctx.getEnvironment()}.osaas.io`
-        );
-        await createFetch(secretUrl, {
-          method: 'PUT',
-          headers: {
-            'x-pat-jwt': `Bearer ${personalAccessToken}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ secretData: secretValue })
-        });
+        await updateSecret(serviceId, secretName, secretValue, ctx);
         console.log(`Secret ${secretName} updated successfully.`);
       } catch (err) {
         console.log((err as Error).message);
       }
     });
+
   secrets
     .command('remove')
     .description('Remove a secret for a service')
@@ -525,22 +492,12 @@ export function cmdSecrets() {
         const globalOpts = command.optsWithGlobals();
         const environment = globalOpts?.env || 'prod';
         const ctx = new Context({ environment });
-        const personalAccessToken = await ctx.getPersonalAccessToken();
-        const secretUrl = new URL(
-          '/mysecrets/' + serviceId + `/${secretName}`,
-          `https://deploy.svc.${ctx.getEnvironment()}.osaas.io`
-        );
-        await createFetch(secretUrl, {
-          method: 'DELETE',
-          headers: {
-            'x-pat-jwt': `Bearer ${personalAccessToken}`,
-            'Content-Type': 'application/json'
-          }
-        });
+        await deleteSecret(serviceId, secretName, ctx);
         console.log(`Secret ${secretName} removed successfully.`);
       } catch (err) {
         console.log((err as Error).message);
       }
     });
+
   return secrets;
 }
