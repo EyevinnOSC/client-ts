@@ -1,0 +1,2 @@
+# Allow the docs/ directory in this package (root .gitignore excludes docs/ for jsdoc output)
+!docs/
