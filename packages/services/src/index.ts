@@ -1059,3 +1059,11 @@ export {
   removeReconurgeFlowsintInstance,
   getReconurgeFlowsintInstance
 } from './generated/reconurge-flowsint';
+
+export type {
+  EncoreJobRequest,
+  EncoreJobResponse,
+  EncoreJobInput,
+  EncoreJobOutput,
+  EncoreJobStatus
+} from './generated/encore-instance';
