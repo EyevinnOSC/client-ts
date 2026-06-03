@@ -118,29 +118,54 @@ export async function listJobs(
 }
 
 /**
+ * Options for waitForJobToComplete
+ * @memberof module:@osaas/client-core
+ * @typedef {Object} WaitForJobOptions
+ * @property {number} [timeoutMs] - Maximum time in milliseconds to wait for the job to complete.
+ *   When omitted the function polls up to MAX_ITER (1000) iterations (~16 min).
+ *   When set, the function throws if the wall-clock time exceeds this value.
+ */
+export interface WaitForJobOptions {
+  timeoutMs?: number;
+}
+
+/**
  * Wait for a service job to complete
  * @memberof module:@osaas/client-core
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} serviceId - Service identifier. The service identifier is {github-organization}-{github-repo}
  * @param {string} name - Name of service job to wait for
  * @param {string} token - Service access token
- * @throws {Error} If the job reaches a terminal failure state ('Failed')
+ * @param {WaitForJobOptions} [options] - Optional settings
+ * @param {number} [options.timeoutMs] - Wall-clock timeout in milliseconds; throws if exceeded
+ * @returns {Promise<any>} - The completed job object
+ * @throws {Error} If the job reaches a terminal failure state ('Failed' or 'FailureTarget')
+ * @throws {Error} If timeoutMs is set and the job does not complete within the given time
  *
  * Terminal success statuses: 'Complete', 'SuccessCriteriaMet'
- * Terminal failure statuses: 'Failed'
+ * Terminal failure statuses: 'Failed', 'FailureTarget'
  */
 export async function waitForJobToComplete(
   context: Context,
   serviceId: string,
   name: string,
-  token: string
-) {
+  token: string,
+  options?: WaitForJobOptions
+): Promise<any> {
+  const deadline =
+    options?.timeoutMs !== undefined
+      ? Date.now() + options.timeoutMs
+      : undefined;
+
   for (const _ of Array(MAX_ITER)) {
+    if (deadline !== undefined && Date.now() >= deadline) {
+      throw new Error(`Job '${name}' timed out after ${options!.timeoutMs}ms`);
+    }
     const job = await getJob(context, serviceId, name, token);
     if (job.status === 'Complete' || job.status === 'SuccessCriteriaMet') {
-      break;
+      return job;
     }
-    if (job.status === 'Failed') {
+    if (job.status === 'Failed' || job.status === 'FailureTarget') {
       throw new Error(`Job '${name}' failed with status: ${job.status}`);
     }
     await delay(1000);

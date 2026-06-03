@@ -19,21 +19,32 @@ describe('waitForJobToComplete', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
+    jest.useRealTimers();
   });
 
   test('resolves when job status is Complete', async () => {
-    mockGetInstance.mockResolvedValue({ status: 'Complete' });
-    await expect(
-      waitForJobToComplete(ctx, 'eyevinn-test-job', 'myjob', 'token')
-    ).resolves.toBeUndefined();
+    const completedJob = { name: 'myjob', status: 'Complete' };
+    mockGetInstance.mockResolvedValue(completedJob);
+    const result = await waitForJobToComplete(
+      ctx,
+      'eyevinn-test-job',
+      'myjob',
+      'token'
+    );
+    expect(result).toEqual(completedJob);
     expect(mockGetInstance).toHaveBeenCalledTimes(1);
   });
 
   test('resolves when job status is SuccessCriteriaMet', async () => {
-    mockGetInstance.mockResolvedValue({ status: 'SuccessCriteriaMet' });
-    await expect(
-      waitForJobToComplete(ctx, 'eyevinn-test-job', 'myjob', 'token')
-    ).resolves.toBeUndefined();
+    const completedJob = { name: 'myjob', status: 'SuccessCriteriaMet' };
+    mockGetInstance.mockResolvedValue(completedJob);
+    const result = await waitForJobToComplete(
+      ctx,
+      'eyevinn-test-job',
+      'myjob',
+      'token'
+    );
+    expect(result).toEqual(completedJob);
     expect(mockGetInstance).toHaveBeenCalledTimes(1);
   });
 
@@ -45,13 +56,21 @@ describe('waitForJobToComplete', () => {
     expect(mockGetInstance).toHaveBeenCalledTimes(1);
   });
 
+  test('throws when job status is FailureTarget', async () => {
+    mockGetInstance.mockResolvedValue({ status: 'FailureTarget' });
+    await expect(
+      waitForJobToComplete(ctx, 'eyevinn-test-job', 'myjob', 'token')
+    ).rejects.toThrow("Job 'myjob' failed with status: FailureTarget");
+    expect(mockGetInstance).toHaveBeenCalledTimes(1);
+  });
+
   test('polls until job reaches terminal status', async () => {
+    const completedJob = { name: 'myjob', status: 'SuccessCriteriaMet' };
     mockGetInstance
       .mockResolvedValueOnce({ status: 'Running' })
       .mockResolvedValueOnce({ status: 'Running' })
-      .mockResolvedValueOnce({ status: 'SuccessCriteriaMet' });
+      .mockResolvedValueOnce(completedJob);
 
-    // Speed up the delay for tests
     jest.useFakeTimers();
     const promise = waitForJobToComplete(
       ctx,
@@ -59,10 +78,56 @@ describe('waitForJobToComplete', () => {
       'myjob',
       'token'
     );
-    // Advance timers past each 1s delay
     await jest.runAllTimersAsync();
-    await expect(promise).resolves.toBeUndefined();
+    const result = await promise;
+    expect(result).toEqual(completedJob);
     expect(mockGetInstance).toHaveBeenCalledTimes(3);
-    jest.useRealTimers();
+  });
+
+  test('throws on timeout when timeoutMs is exceeded', async () => {
+    // Job never completes — always returns Running
+    mockGetInstance.mockResolvedValue({ status: 'Running' });
+
+    jest.useFakeTimers();
+    const promise = waitForJobToComplete(
+      ctx,
+      'eyevinn-test-job',
+      'myjob',
+      'token',
+      { timeoutMs: 5000 }
+    );
+    // Advance time past the timeout
+    jest.advanceTimersByTime(6000);
+    await expect(promise).rejects.toThrow("Job 'myjob' timed out after 5000ms");
+  });
+
+  test('backwards compatible: no options parameter works as before', async () => {
+    const completedJob = { name: 'myjob', status: 'Complete' };
+    mockGetInstance.mockResolvedValue(completedJob);
+    // Called without options — should still resolve
+    const result = await waitForJobToComplete(
+      ctx,
+      'eyevinn-test-job',
+      'myjob',
+      'token'
+    );
+    expect(result).toEqual(completedJob);
+  });
+
+  test('returns the completed job object with all fields', async () => {
+    const completedJob = {
+      name: 'myjob',
+      status: 'Complete',
+      output: 's3://bucket/result.mp4'
+    };
+    mockGetInstance.mockResolvedValue(completedJob);
+    const result = await waitForJobToComplete(
+      ctx,
+      'eyevinn-test-job',
+      'myjob',
+      'token'
+    );
+    expect(result).toEqual(completedJob);
+    expect(result.output).toBe('s3://bucket/result.mp4');
   });
 });
