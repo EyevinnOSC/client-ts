@@ -528,3 +528,109 @@ export async function saveSecret(
     }
   });
 }
+
+/**
+ * List all secrets for a service in Open Source Cloud.
+ * Returns metadata only — secret values are write-only by design and are never
+ * returned by the API.
+ * @memberof module:@osaas/client-core
+ * @param {string} serviceId - The service identifier
+ * @param {Context} ctx - Open Source Cloud configuration context
+ * @returns {Promise<Array<{serviceId: string, secretName: string}>>} - List of secret metadata
+ */
+export async function listSecrets(
+  serviceId: string,
+  ctx: Context
+): Promise<{ serviceId: string; secretName: string }[]> {
+  const secretsUrl = new URL(
+    `/mysecrets/${serviceId}`,
+    `https://deploy.svc.${ctx.getEnvironment()}.osaas.io`
+  );
+  return await createFetch<{ serviceId: string; secretName: string }[]>(
+    secretsUrl,
+    {
+      method: 'GET',
+      headers: {
+        'x-pat-jwt': `Bearer ${ctx.getPersonalAccessToken()}`,
+        'Content-Type': 'application/json'
+      }
+    }
+  );
+}
+
+/**
+ * Look up a single secret by name for a service in Open Source Cloud.
+ * Returns metadata only — secret values are write-only by design and are never
+ * returned by the API. Returns undefined if the secret does not exist.
+ *
+ * Note: implemented client-side via listSecrets + .find() because no
+ * single-secret GET endpoint exists on the backend.
+ * @memberof module:@osaas/client-core
+ * @param {string} serviceId - The service identifier
+ * @param {string} secretName - The secret name to look up
+ * @param {Context} ctx - Open Source Cloud configuration context
+ * @returns {Promise<{serviceId: string, secretName: string} | undefined>} - Secret metadata or undefined
+ */
+export async function getSecret(
+  serviceId: string,
+  secretName: string,
+  ctx: Context
+): Promise<{ serviceId: string; secretName: string } | undefined> {
+  const secrets = await listSecrets(serviceId, ctx);
+  return secrets.find((s) => s.secretName === secretName);
+}
+
+/**
+ * Update (upsert) a secret for a service in Open Source Cloud via PUT.
+ * Use saveSecret for initial creation (POST). updateSecret uses PUT and
+ * will overwrite an existing secret of the same name.
+ * @memberof module:@osaas/client-core
+ * @param {string} serviceId - The service identifier
+ * @param {string} secretName - The secret name
+ * @param {string} value - The secret value
+ * @param {Context} ctx - Open Source Cloud configuration context
+ */
+export async function updateSecret(
+  serviceId: string,
+  secretName: string,
+  value: string,
+  ctx: Context
+): Promise<void> {
+  const secretUrl = new URL(
+    `/mysecrets/${serviceId}/${secretName}`,
+    `https://deploy.svc.${ctx.getEnvironment()}.osaas.io`
+  );
+  await createFetch(secretUrl, {
+    method: 'PUT',
+    body: JSON.stringify({ secretData: value }),
+    headers: {
+      'x-pat-jwt': `Bearer ${ctx.getPersonalAccessToken()}`,
+      'Content-Type': 'application/json'
+    }
+  });
+}
+
+/**
+ * Delete a secret for a service in Open Source Cloud.
+ * @memberof module:@osaas/client-core
+ * @param {string} serviceId - The service identifier
+ * @param {string} secretName - The secret name to delete
+ * @param {Context} ctx - Open Source Cloud configuration context
+ */
+export async function deleteSecret(
+  serviceId: string,
+  secretName: string,
+  ctx: Context
+): Promise<void> {
+  const secretUrl = new URL(
+    `/mysecrets/${serviceId}/${secretName}`,
+    `https://deploy.svc.${ctx.getEnvironment()}.osaas.io`
+  );
+  await createFetch(secretUrl, {
+    method: 'DELETE',
+    headers: {
+      'x-pat-jwt': `Bearer ${ctx.getPersonalAccessToken()}`,
+      'Content-Type': 'application/json'
+    }
+  });
+}
