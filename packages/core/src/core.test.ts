@@ -3,7 +3,10 @@ import { createInstance, isValidInstanceName, removeInstance } from './core';
 import { InvalidName } from './errors';
 import { createFetch, FetchError } from './fetch';
 
-jest.mock('./fetch');
+jest.mock('./fetch', () => ({
+  ...jest.requireActual('./fetch'),
+  createFetch: jest.fn()
+}));
 
 describe('Core functionalities', () => {
   afterAll(() => {
