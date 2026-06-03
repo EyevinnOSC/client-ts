@@ -30,7 +30,7 @@ The queue is a **sorted set** (not a list). Pop command:
 BZPOPMIN <queueName> <timeout-seconds>
 ```
 
-The queue name defaults to `package` in the VOD pipeline and is configurable via the `RedisQueue` option on both `EncorePackager` and `EncoreTransfer`.
+The queue name is configurable via the `RedisQueue` option on both `EncorePackager` and `EncoreTransfer`. The code-level default is `packaging-queue`; the OSC platform configures `REDIS_QUEUE=package` for the VOD pipeline deployment.
 
 > **Important**: Consumers using `BLPOP` will silently never receive messages because `BLPOP` operates on lists, not sorted sets.
 
