@@ -112,34 +112,50 @@ export async function createInstance(
 }
 
 /**
+ * Distinguishes a successful deletion from an instance that was already absent.
+ * Callers that do not inspect the return value are unaffected by the type change.
+ */
+export type RemoveInstanceResult = 'success' | 'alreadyAbsent';
+
+/**
  * Remove an instance of a service in Open Source Cloud
  * @memberof module:@osaas/client-core
  * @param {Context} context - Open Source Cloud configuration context
  * @param {string} serviceId - The service identifier
  * @param {string} name - The name of the service instance to remove
  * @param {string} token - Service access token
+ * @returns {RemoveInstanceResult} - 'success' if the instance was deleted, 'alreadyAbsent' if it did not exist
  * @example
  * import { Context, removeInstance } from '@osaas/client-core';
  * const ctx = new Context();
  * const sat = await ctx.getServiceAccessToken('eyevinn-test-adserver');
- * await removeInstance(ctx, 'eyevinn-test-adserver', 'my-instance', sat);
+ * const result = await removeInstance(ctx, 'eyevinn-test-adserver', 'my-instance', sat);
+ * // result === 'success' | 'alreadyAbsent'
  */
 export async function removeInstance(
   context: Context,
   serviceId: string,
   name: string,
   token: string
-) {
+): Promise<RemoveInstanceResult> {
   const service = await getService(context, serviceId);
   const instanceUrl = new URL(service.apiUrl + '/' + name);
 
-  await createFetch<any>(instanceUrl, {
-    method: 'DELETE',
-    headers: {
-      'x-jwt': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+  try {
+    await createFetch<any>(instanceUrl, {
+      method: 'DELETE',
+      headers: {
+        'x-jwt': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    return 'success';
+  } catch (err) {
+    if (err instanceof FetchError && err.httpCode === 404) {
+      return 'alreadyAbsent';
     }
-  });
+    throw err;
+  }
 }
 
 /**
