@@ -15,3 +15,5 @@ export {
 export { SubtitlingPool } from './subtitling';
 export { createVodPipeline, removeVodPipeline, createVod } from './vodpipeline';
 export { transcode, getTranscodeJob, listTranscodeJobs } from './transcode';
+export { probeFile } from './probe';
+export type { ProbeResult } from './probe';
