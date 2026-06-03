@@ -1,5 +1,9 @@
 import { Context, Log } from '@osaas/client-core';
-import { getEncoreInstance } from '@osaas/client-services';
+import {
+  getEncoreInstance,
+  type EncoreJobRequest,
+  type EncoreJobResponse
+} from '@osaas/client-services';
 import { range } from './util';
 
 export interface IDRKeyFrame {
@@ -157,7 +161,18 @@ export async function transcode(
       reconnect_on_network_error: '1'
     };
   }
-  const encoreJob: any = {
+  const encoreJob: Partial<EncoreJobRequest> & {
+    baseName?: string;
+    seekTo?: number;
+    duration?: number;
+    inputs?: { type: string; copyTs?: boolean; uri: string; params?: object }[];
+    profileParams?: {
+      keyframes?: string;
+      audioMixPreset?: string;
+      utcnowstring?: string;
+    };
+    progressCallbackUri?: string;
+  } = {
     externalId: opts.externalId,
     profile,
     baseName,
@@ -183,7 +198,7 @@ export async function transcode(
       const keyframes = opts.injectIDRKeyFrames.map((kf) =>
         smpteTimecodeToFrames(kf.smpteTimeCode, frameRate)
       );
-      encoreJob['profileParams'] = {
+      encoreJob.profileParams = {
         keyframes:
           `expr:not(mod(n,96))` + keyframes.map((f) => `+eq(n,${f})`).join('')
       };
@@ -192,17 +207,17 @@ export async function transcode(
     }
   }
   if (opts.audioMixPreset) {
-    encoreJob['profileParams'] = {
-      ...encoreJob['profileParams'],
+    encoreJob.profileParams = {
+      ...encoreJob.profileParams,
       audioMixPreset: opts.audioMixPreset
     };
   }
   if (opts.callBackUrl) {
-    encoreJob['progressCallbackUri'] = opts.callBackUrl.toString();
+    encoreJob.progressCallbackUri = opts.callBackUrl.toString();
   }
   if (opts.insertCreationDateUtc) {
-    encoreJob['profileParams'] = {
-      ...encoreJob['profileParams'],
+    encoreJob.profileParams = {
+      ...encoreJob.profileParams,
       utcnowstring: formatUtcDateString()
     };
   }
@@ -281,7 +296,7 @@ export async function getTranscodeJob(
 
 interface JobList {
   _embedded: {
-    encoreJobs: any[];
+    encoreJobs: EncoreJobResponse[];
   };
   page: {
     size: number;

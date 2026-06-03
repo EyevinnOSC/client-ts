@@ -1,6 +1,10 @@
 /** @module @osaas/client-transcode */
 export { EncoreCallbackListener, EncorePackager, Encore } from './encore';
 export type { FileOutput } from './encore';
+export type {
+  EncoreJobRequest,
+  EncoreJobResponse
+} from '@osaas/client-services';
 export { QueuePool } from './pool';
 export { vmafCompare } from './vmaf';
 export { createStreamingPackage } from './packager';
