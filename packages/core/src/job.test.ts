@@ -96,10 +96,16 @@ describe('waitForJobToComplete', () => {
       'token',
       { timeoutMs: 5000 }
     );
-    // Advance time past the timeout
+    // Flush microtasks to advance through getService + getInstance + return-await chain
+    // so the loop reaches await delay(1000) before we advance the clock
+    await Promise.resolve();
+    await Promise.resolve();
+    await Promise.resolve();
+    // Advance fake clock 6000ms: fires delay timer AND makes Date.now() = 6000
     jest.advanceTimersByTime(6000);
+    // Loop continues → deadline check: 6000 >= 5000 → throws
     await expect(promise).rejects.toThrow("Job 'myjob' timed out after 5000ms");
-  });
+  }, 10000);
 
   test('backwards compatible: no options parameter works as before', async () => {
     const completedJob = { name: 'myjob', status: 'Complete' };
