@@ -4648,70 +4648,6 @@ describe('removeApacheAirflowInstance', () => {
   });
 });
 
-describe('createN8nIoN8nInstance', () => {
-  it('should call createInstance', async () => {
-    const ctx = new Context();
-    const body = { name: 'sdk' };
-    await sdk.createN8nIoN8nInstance(ctx, body as any);
-    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('n8n-io-n8n');
-    expect(createInstance).toHaveBeenCalledWith(
-      ctx,
-      'n8n-io-n8n',
-      'token',
-      body
-    );
-    expect(waitForInstanceReady).toHaveBeenCalledWith('n8n-io-n8n', 'sdk', ctx);
-  });
-});
-
-describe('removeN8nIoN8nInstance', () => {
-  it('should call removeInstance', async () => {
-    const ctx = new Context();
-    await sdk.removeN8nIoN8nInstance(ctx, 'sdk');
-    expect(removeInstance).toHaveBeenCalledWith(
-      ctx,
-      'n8n-io-n8n',
-      'sdk',
-      'token'
-    );
-  });
-});
-
-describe('createN8nIoTaskRunnerLauncherInstance', () => {
-  it('should call createInstance', async () => {
-    const ctx = new Context();
-    const body = { name: 'sdk' };
-    await sdk.createN8nIoTaskRunnerLauncherInstance(ctx, body as any);
-    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
-      'n8n-io-task-runner-launcher'
-    );
-    expect(createInstance).toHaveBeenCalledWith(
-      ctx,
-      'n8n-io-task-runner-launcher',
-      'token',
-      body
-    );
-    expect(waitForInstanceReady).toHaveBeenCalledWith(
-      'n8n-io-task-runner-launcher',
-      'sdk',
-      ctx
-    );
-  });
-});
-
-describe('removeN8nIoTaskRunnerLauncherInstance', () => {
-  it('should call removeInstance', async () => {
-    const ctx = new Context();
-    await sdk.removeN8nIoTaskRunnerLauncherInstance(ctx, 'sdk');
-    expect(removeInstance).toHaveBeenCalledWith(
-      ctx,
-      'n8n-io-task-runner-launcher',
-      'sdk',
-      'token'
-    );
-  });
-});
-
 describe('createItzgDockerMinecraftBedrockServerInstance', () => {
   it('should call createInstance', async () => {
     const ctx = new Context();
@@ -5188,6 +5124,657 @@ describe('removeReconurgeFlowsintInstance', () => {
     expect(removeInstance).toHaveBeenCalledWith(
       ctx,
       'reconurge-flowsint',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createLouislamUptimeKumaInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createLouislamUptimeKumaInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'louislam-uptime-kuma'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'louislam-uptime-kuma',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'louislam-uptime-kuma',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeLouislamUptimeKumaInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeLouislamUptimeKumaInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'louislam-uptime-kuma',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createEyevinnOpeneventsInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEyevinnOpeneventsInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'eyevinn-openevents'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-openevents',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'eyevinn-openevents',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEyevinnOpeneventsInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEyevinnOpeneventsInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-openevents',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createEyevinnGolangRunnerInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEyevinnGolangRunnerInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'eyevinn-golang-runner'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-golang-runner',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'eyevinn-golang-runner',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEyevinnGolangRunnerInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEyevinnGolangRunnerInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-golang-runner',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createRybbitIoRybbitInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createRybbitIoRybbitInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('rybbit-io-rybbit');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'rybbit-io-rybbit',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'rybbit-io-rybbit',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeRybbitIoRybbitInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeRybbitIoRybbitInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'rybbit-io-rybbit',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createHasuraGraphqlEngineInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createHasuraGraphqlEngineInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'hasura-graphql-engine'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'hasura-graphql-engine',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'hasura-graphql-engine',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeHasuraGraphqlEngineInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeHasuraGraphqlEngineInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'hasura-graphql-engine',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createSupertokensSupertokensCoreInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createSupertokensSupertokensCoreInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'supertokens-supertokens-core'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'supertokens-supertokens-core',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'supertokens-supertokens-core',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeSupertokensSupertokensCoreInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeSupertokensSupertokensCoreInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'supertokens-supertokens-core',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createTemporalioTemporalInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createTemporalioTemporalInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'temporalio-temporal'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'temporalio-temporal',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'temporalio-temporal',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeTemporalioTemporalInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeTemporalioTemporalInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'temporalio-temporal',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createKnadhListmonkInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createKnadhListmonkInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('knadh-listmonk');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'knadh-listmonk',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'knadh-listmonk',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeKnadhListmonkInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeKnadhListmonkInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'knadh-listmonk',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createBinwiederhierNtfyInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createBinwiederhierNtfyInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'binwiederhier-ntfy'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'binwiederhier-ntfy',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'binwiederhier-ntfy',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeBinwiederhierNtfyInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeBinwiederhierNtfyInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'binwiederhier-ntfy',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createCentrifugalCentrifugoInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createCentrifugalCentrifugoInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'centrifugal-centrifugo'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'centrifugal-centrifugo',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'centrifugal-centrifugo',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeCentrifugalCentrifugoInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeCentrifugalCentrifugoInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'centrifugal-centrifugo',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createTryghostGhostInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createTryghostGhostInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('tryghost-ghost');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'tryghost-ghost',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'tryghost-ghost',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeTryghostGhostInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeTryghostGhostInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'tryghost-ghost',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createChatwootChatwootInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createChatwootChatwootInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('chatwoot-chatwoot');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'chatwoot-chatwoot',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'chatwoot-chatwoot',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeChatwootChatwootInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeChatwootChatwootInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'chatwoot-chatwoot',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createUnleashUnleashInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createUnleashUnleashInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('unleash-unleash');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'unleash-unleash',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'unleash-unleash',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeUnleashUnleashInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeUnleashUnleashInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'unleash-unleash',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createEyevinnDotnetRunnerInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEyevinnDotnetRunnerInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'eyevinn-dotnet-runner'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-dotnet-runner',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'eyevinn-dotnet-runner',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEyevinnDotnetRunnerInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEyevinnDotnetRunnerInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-dotnet-runner',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createEyevinnOpenLiveInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEyevinnOpenLiveInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('eyevinn-open-live');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-open-live',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'eyevinn-open-live',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEyevinnOpenLiveInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEyevinnOpenLiveInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-open-live',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createEyevinnOpenLiveStudioInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createEyevinnOpenLiveStudioInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'eyevinn-open-live-studio'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-open-live-studio',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'eyevinn-open-live-studio',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeEyevinnOpenLiveStudioInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeEyevinnOpenLiveStudioInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'eyevinn-open-live-studio',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createBurkeSoftwareGlitchtipInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createBurkeSoftwareGlitchtipInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'burke-software-glitchtip'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'burke-software-glitchtip',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'burke-software-glitchtip',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeBurkeSoftwareGlitchtipInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeBurkeSoftwareGlitchtipInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'burke-software-glitchtip',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createDaniGarciaVaultwardenInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createDaniGarciaVaultwardenInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith(
+      'dani-garcia-vaultwarden'
+    );
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'dani-garcia-vaultwarden',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'dani-garcia-vaultwarden',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeDaniGarciaVaultwardenInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeDaniGarciaVaultwardenInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'dani-garcia-vaultwarden',
+      'sdk',
+      'token'
+    );
+  });
+});
+
+describe('createKeycloakKeycloakInstance', () => {
+  it('should call createInstance', async () => {
+    const ctx = new Context();
+    const body = { name: 'sdk' };
+    await sdk.createKeycloakKeycloakInstance(ctx, body as any);
+    expect(ctx.getServiceAccessToken).toHaveBeenCalledWith('keycloak-keycloak');
+    expect(createInstance).toHaveBeenCalledWith(
+      ctx,
+      'keycloak-keycloak',
+      'token',
+      body
+    );
+    expect(waitForInstanceReady).toHaveBeenCalledWith(
+      'keycloak-keycloak',
+      'sdk',
+      ctx
+    );
+  });
+});
+
+describe('removeKeycloakKeycloakInstance', () => {
+  it('should call removeInstance', async () => {
+    const ctx = new Context();
+    await sdk.removeKeycloakKeycloakInstance(ctx, 'sdk');
+    expect(removeInstance).toHaveBeenCalledWith(
+      ctx,
+      'keycloak-keycloak',
       'sdk',
       'token'
     );
