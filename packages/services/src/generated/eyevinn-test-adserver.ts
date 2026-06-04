@@ -42,6 +42,27 @@ export interface paths {
       };
     };
   };
+  '/token': {
+    /** Generate a trial token */
+    post: {
+      parameters: {
+        body: {
+          body?: {
+            /** @description Name of the company */
+            company: string;
+            /** @description Email to account holder */
+            email: string;
+          };
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: string;
+        };
+      };
+    };
+  };
   '/test-adserverinstance': {
     /** List all running test-adserver instances */
     get: {

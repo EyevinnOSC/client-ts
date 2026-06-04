@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/diceinstance': {
-    /** List all running dice instances */
+  '/graphql-engineinstance': {
+    /** List all running graphql-engine instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the dice instance */
+            /** @description Name of the graphql-engine instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,6 +67,11 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
+            AdminSecret: string;
+            EnableConsole?: boolean;
+            JwtSecret?: string;
+            UnauthorizedRole?: string;
           } & {
             _links: {
               self: {
@@ -113,7 +118,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new dice instance */
+    /** Launch a new graphql-engine instance */
     post: {
       parameters: {
         query: {
@@ -121,8 +126,13 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the graphql-engine instance */
             name: string;
+            DatabaseUrl: string;
+            AdminSecret: string;
+            EnableConsole?: boolean;
+            JwtSecret?: string;
+            UnauthorizedRole?: string;
           };
         };
       };
@@ -130,7 +140,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the graphql-engine instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -148,6 +158,11 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
+            AdminSecret: string;
+            EnableConsole?: boolean;
+            JwtSecret?: string;
+            UnauthorizedRole?: string;
           } & {
             _links: {
               self: {
@@ -210,11 +225,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart dice */
+    /** Restart graphql-engine */
     post: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the graphql-engine instance */
           id: string;
         };
       };
@@ -233,12 +248,12 @@ export interface paths {
       };
     };
   };
-  '/diceinstance/{id}': {
-    /** Obtain status and resource URLs for an dice instance */
+  '/graphql-engineinstance/{id}': {
+    /** Obtain status and resource URLs for an graphql-engine instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the graphql-engine instance */
           id: string;
         };
       };
@@ -246,7 +261,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the graphql-engine instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -264,6 +279,11 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
+            AdminSecret: string;
+            EnableConsole?: boolean;
+            JwtSecret?: string;
+            UnauthorizedRole?: string;
           } & {
             _links: {
               self: {
@@ -317,11 +337,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an dice instance */
+    /** Stop and remove an graphql-engine instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the graphql-engine instance */
           id: string;
         };
       };
@@ -339,17 +359,22 @@ export interface paths {
         };
       };
     };
-    /** Patch dice instance with new parameters and restart */
+    /** Patch graphql-engine instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the graphql-engine instance */
             name?: string;
+            DatabaseUrl?: string;
+            AdminSecret?: string;
+            EnableConsole?: boolean;
+            JwtSecret?: string;
+            UnauthorizedRole?: string;
           };
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the graphql-engine instance */
           id: string;
         };
       };
@@ -357,7 +382,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the graphql-engine instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -375,6 +400,11 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
+            AdminSecret: string;
+            EnableConsole?: boolean;
+            JwtSecret?: string;
+            UnauthorizedRole?: string;
           } & {
             _links: {
               self: {
@@ -437,11 +467,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of dice instance */
+    /** Return status of graphql-engine instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the graphql-engine instance */
           id: string;
         };
       };
@@ -465,7 +495,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the dice instance */
+    /** Return the latest logs from the graphql-engine instance */
     get: {
       parameters: {
         query: {
@@ -473,7 +503,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the graphql-engine instance */
           id: string;
         };
       };
@@ -493,11 +523,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for dice instance */
+    /** Return the exposed extra ports for graphql-engine instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the graphql-engine instance */
           id: string;
         };
       };
@@ -521,11 +551,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for dice instance */
+    /** Return the assigned NodePorts for graphql-engine instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the graphql-engine instance */
           id: string;
         };
       };
@@ -557,11 +587,11 @@ export interface operations {}
 
 export interface external {}
 
-export type DicedbDice =
-  paths['/diceinstance/{id}']['get']['responses']['200']['schema'];
+export type HasuraGraphqlEngine =
+  paths['/graphql-engineinstance/{id}']['get']['responses']['200']['schema'];
 
-export type DicedbDiceConfig =
-  paths['/diceinstance']['post']['parameters']['body']['body'];
+export type HasuraGraphqlEngineConfig =
+  paths['/graphql-engineinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -570,95 +600,111 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace dicedb-dice
- * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @namespace hasura-graphql-engine
+ * @description Elevate your application development with Hasura GraphQL Engine! Experience real-time data access and seamless integration with top databases through secure, composable APIs. Empower innovation today!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} DicedbDiceConfig
- * @property {string} name - Name of dice
+ * @typedef {Object} HasuraGraphqlEngineConfig
+ * @property {string} name - Name of graphql-engine
+ * @property {string} DatabaseUrl - Connection string for the primary database that Hasura will connect to. This database will be used for storing Hasura's metadata and can also serve as a data source for GraphQL operations.
+ * @property {string} AdminSecret - Secret key that provides admin access to the Hasura GraphQL Engine. This is used to authenticate requests that require administrative privileges, such as managing metadata, schema changes, and accessing the Hasura Console.
+ * @property {boolean} [EnableConsole] - Controls whether the Hasura Console web interface is enabled and accessible. When enabled, provides a graphical interface for managing schemas, permissions, and testing GraphQL queries.
+ * @property {string} [JwtSecret] - Configuration for JWT (JSON Web Token) based authentication. Defines the secret key or public key used to verify JWT tokens sent by clients for authentication and authorization.
+ * @property {string} [UnauthorizedRole] - Defines the default role to be used for unauthenticated requests. When set, allows anonymous users to access the GraphQL API with the permissions assigned to this role.
 
  * 
  */
 
 /**
- * @typedef {Object} DicedbDice
- * @property {string} name - Name of the Dice DB instance
- * @property {string} url - URL of the Dice DB instance
+ * @typedef {Object} HasuraGraphqlEngine
+ * @property {string} name - Name of the GraphQL Engine instance
+ * @property {string} url - URL of the GraphQL Engine instance
  *
  */
 
 /**
- * Create a new Dice DB instance
+ * Create a new GraphQL Engine instance
  *
- * @memberOf dicedb-dice
+ * @memberOf hasura-graphql-engine
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DicedbDiceConfig} body - Service instance configuration
- * @returns {DicedbDice} - Service instance
+ * @param {HasuraGraphqlEngineConfig} body - Service instance configuration
+ * @returns {HasuraGraphqlEngine} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createDicedbDiceInstance } from '@osaas/client-services';
+ * import { createHasuraGraphqlEngineInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: DicedbDiceConfig = { name: 'myinstance', ... };
- * const instance = await createDicedbDiceInstance(ctx, body);
+ * const body: HasuraGraphqlEngineConfig = { name: 'myinstance', ... };
+ * const instance = await createHasuraGraphqlEngineInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createDicedbDiceInstance(
+export async function createHasuraGraphqlEngineInstance(
   ctx: Context,
-  body: DicedbDiceConfig
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
+  body: HasuraGraphqlEngineConfig
+): Promise<HasuraGraphqlEngine> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'hasura-graphql-engine'
+  );
   const instance = await createInstance(
     ctx,
-    'dicedb-dice',
+    'hasura-graphql-engine',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('dicedb-dice', instance.name, ctx);
+  await waitForInstanceReady('hasura-graphql-engine', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Dice DB instance
+ * Remove a GraphQL Engine instance
  *
- * @memberOf dicedb-dice
+ * @memberOf hasura-graphql-engine
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be removed
+ * @param {string} name - Name of the engine to be removed
  */
-export async function removeDicedbDiceInstance(
+export async function removeHasuraGraphqlEngineInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  await removeInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'hasura-graphql-engine'
+  );
+  await removeInstance(ctx, 'hasura-graphql-engine', name, serviceAccessToken);
 }
 
 /**
- * Get a Dice DB instance
+ * Get a GraphQL Engine instance
  *
- * @memberOf dicedb-dice
+ * @memberOf hasura-graphql-engine
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be retrieved
- * @returns {DicedbDice} - Service instance
+ * @param {string} name - Name of the engine to be retrieved
+ * @returns {HasuraGraphqlEngine} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getDicedbDiceInstance } from '@osaas/client-services';
+ * import { getHasuraGraphqlEngineInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getDicedbDiceInstance(ctx, 'myinstance');
+ * const instance = await getHasuraGraphqlEngineInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getDicedbDiceInstance(
+export async function getHasuraGraphqlEngineInstance(
   ctx: Context,
   name: string
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  return await getInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+): Promise<HasuraGraphqlEngine> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'hasura-graphql-engine'
+  );
+  return await getInstance(
+    ctx,
+    'hasura-graphql-engine',
+    name,
+    serviceAccessToken
+  );
 }

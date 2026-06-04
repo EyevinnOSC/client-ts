@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/diceinstance': {
-    /** List all running dice instances */
+  '/rybbitinstance': {
+    /** List all running rybbit instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the dice instance */
+            /** @description Name of the rybbit instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,6 +67,21 @@ export interface paths {
                 url: string;
               };
             };
+            PostgresHost: string;
+            PostgresPort?: string;
+            PostgresUser: string;
+            PostgresPassword: string;
+            PostgresDb: string;
+            ClickhouseHost: string;
+            ClickhouseDb?: string;
+            ClickhousePassword: string;
+            BetterAuthSecret: string;
+            RedisHost?: string;
+            RedisPort?: string;
+            RedisPassword?: string;
+            DisableSignup?: boolean;
+            MapboxToken?: string;
+            ResendApiKey?: string;
           } & {
             _links: {
               self: {
@@ -113,7 +128,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new dice instance */
+    /** Launch a new rybbit instance */
     post: {
       parameters: {
         query: {
@@ -121,8 +136,23 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the rybbit instance */
             name: string;
+            PostgresHost: string;
+            PostgresPort?: string;
+            PostgresUser: string;
+            PostgresPassword: string;
+            PostgresDb: string;
+            ClickhouseHost: string;
+            ClickhouseDb?: string;
+            ClickhousePassword: string;
+            BetterAuthSecret: string;
+            RedisHost?: string;
+            RedisPort?: string;
+            RedisPassword?: string;
+            DisableSignup?: boolean;
+            MapboxToken?: string;
+            ResendApiKey?: string;
           };
         };
       };
@@ -130,7 +160,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the rybbit instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -148,6 +178,21 @@ export interface paths {
                 url: string;
               };
             };
+            PostgresHost: string;
+            PostgresPort?: string;
+            PostgresUser: string;
+            PostgresPassword: string;
+            PostgresDb: string;
+            ClickhouseHost: string;
+            ClickhouseDb?: string;
+            ClickhousePassword: string;
+            BetterAuthSecret: string;
+            RedisHost?: string;
+            RedisPort?: string;
+            RedisPassword?: string;
+            DisableSignup?: boolean;
+            MapboxToken?: string;
+            ResendApiKey?: string;
           } & {
             _links: {
               self: {
@@ -210,11 +255,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart dice */
+    /** Restart rybbit */
     post: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the rybbit instance */
           id: string;
         };
       };
@@ -233,12 +278,12 @@ export interface paths {
       };
     };
   };
-  '/diceinstance/{id}': {
-    /** Obtain status and resource URLs for an dice instance */
+  '/rybbitinstance/{id}': {
+    /** Obtain status and resource URLs for an rybbit instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the rybbit instance */
           id: string;
         };
       };
@@ -246,7 +291,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the rybbit instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -264,6 +309,21 @@ export interface paths {
                 url: string;
               };
             };
+            PostgresHost: string;
+            PostgresPort?: string;
+            PostgresUser: string;
+            PostgresPassword: string;
+            PostgresDb: string;
+            ClickhouseHost: string;
+            ClickhouseDb?: string;
+            ClickhousePassword: string;
+            BetterAuthSecret: string;
+            RedisHost?: string;
+            RedisPort?: string;
+            RedisPassword?: string;
+            DisableSignup?: boolean;
+            MapboxToken?: string;
+            ResendApiKey?: string;
           } & {
             _links: {
               self: {
@@ -317,11 +377,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an dice instance */
+    /** Stop and remove an rybbit instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the rybbit instance */
           id: string;
         };
       };
@@ -339,17 +399,32 @@ export interface paths {
         };
       };
     };
-    /** Patch dice instance with new parameters and restart */
+    /** Patch rybbit instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the rybbit instance */
             name?: string;
+            PostgresHost?: string;
+            PostgresPort?: string;
+            PostgresUser?: string;
+            PostgresPassword?: string;
+            PostgresDb?: string;
+            ClickhouseHost?: string;
+            ClickhouseDb?: string;
+            ClickhousePassword?: string;
+            BetterAuthSecret?: string;
+            RedisHost?: string;
+            RedisPort?: string;
+            RedisPassword?: string;
+            DisableSignup?: boolean;
+            MapboxToken?: string;
+            ResendApiKey?: string;
           };
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the rybbit instance */
           id: string;
         };
       };
@@ -357,7 +432,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the rybbit instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -375,6 +450,21 @@ export interface paths {
                 url: string;
               };
             };
+            PostgresHost: string;
+            PostgresPort?: string;
+            PostgresUser: string;
+            PostgresPassword: string;
+            PostgresDb: string;
+            ClickhouseHost: string;
+            ClickhouseDb?: string;
+            ClickhousePassword: string;
+            BetterAuthSecret: string;
+            RedisHost?: string;
+            RedisPort?: string;
+            RedisPassword?: string;
+            DisableSignup?: boolean;
+            MapboxToken?: string;
+            ResendApiKey?: string;
           } & {
             _links: {
               self: {
@@ -437,11 +527,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of dice instance */
+    /** Return status of rybbit instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the rybbit instance */
           id: string;
         };
       };
@@ -465,7 +555,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the dice instance */
+    /** Return the latest logs from the rybbit instance */
     get: {
       parameters: {
         query: {
@@ -473,7 +563,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the rybbit instance */
           id: string;
         };
       };
@@ -493,11 +583,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for dice instance */
+    /** Return the exposed extra ports for rybbit instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the rybbit instance */
           id: string;
         };
       };
@@ -521,11 +611,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for dice instance */
+    /** Return the assigned NodePorts for rybbit instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the rybbit instance */
           id: string;
         };
       };
@@ -557,11 +647,11 @@ export interface operations {}
 
 export interface external {}
 
-export type DicedbDice =
-  paths['/diceinstance/{id}']['get']['responses']['200']['schema'];
+export type RybbitIoRybbit =
+  paths['/rybbitinstance/{id}']['get']['responses']['200']['schema'];
 
-export type DicedbDiceConfig =
-  paths['/diceinstance']['post']['parameters']['body']['body'];
+export type RybbitIoRybbitConfig =
+  paths['/rybbitinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -570,95 +660,116 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace dicedb-dice
- * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @namespace rybbit-io-rybbit
+ * @description Elevate your web analytics with Rybbit! This open-source, privacy-friendly alternative to Google Analytics is easy to set up and use. Gain insights with advanced features like session replays and real-time dashboards.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
- *
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Rybbit.html|Online docs} for further information
  */
 
 /**
- * @typedef {Object} DicedbDiceConfig
- * @property {string} name - Name of dice
+ * @typedef {Object} RybbitIoRybbitConfig
+ * @property {string} name - Name of rybbit
+ * @property {string} PostgresHost - The hostname or IP address of your PostgreSQL database server. PostgreSQL is used by Rybbit to store user accounts, site configurations, organization settings, and other application metadata.
+ * @property {string} [PostgresPort] - The port number on which your PostgreSQL database server is listening. If not specified, the default PostgreSQL port (5432) will be used.
+ * @property {string} PostgresUser - The username for authenticating with your PostgreSQL database. This user must have the necessary permissions to create, read, update, and delete data in the specified database.
+ * @property {string} PostgresPassword - The password for authenticating with your PostgreSQL database using the specified username.
+ * @property {string} PostgresDb - The name of the PostgreSQL database that Rybbit will use to store its application data. This database will contain tables for users, sites, organizations, and other metadata.
+ * @property {string} ClickhouseHost - The hostname or IP address of your ClickHouse database server. ClickHouse is used by Rybbit to store and analyze high-volume analytics data including pageviews, events, sessions, and user interactions.
+ * @property {string} [ClickhouseDb] - The name of the ClickHouse database that Rybbit will use for storing analytics data. If not specified, a default database name will be used.
+ * @property {string} ClickhousePassword - The password for authenticating with your ClickHouse database server. This is required for secure access to the analytics database.
+ * @property {string} BetterAuthSecret - A secret key used by Rybbit's authentication system to encrypt and sign tokens, sessions, and other security-related data. This should be a long, random string.
+ * @property {string} [RedisHost] - The hostname or IP address of your Redis server. Redis is used by Rybbit for caching, session storage, and improving application performance.
+ * @property {string} [RedisPort] - The port number on which your Redis server is listening. If not specified, the default Redis port (6379) will be used.
+ * @property {string} [RedisPassword] - The password for authenticating with your Redis server, if authentication is enabled on your Redis instance.
+ * @property {boolean} [DisableSignup] - When set to true, prevents new users from creating accounts through the signup process. Useful for private installations where you want to control user access.
+ * @property {string} [MapboxToken] - Your Mapbox API token for enabling advanced map visualizations in Rybbit's analytics dashboard. Required for the geographic analytics features including the interactive globe and detailed location maps.
+ * @property {string} [ResendApiKey] - Your Resend API key for sending transactional emails such as password resets, account invitations, and other notifications from your Rybbit installation.
 
  * 
  */
 
 /**
- * @typedef {Object} DicedbDice
- * @property {string} name - Name of the Dice DB instance
- * @property {string} url - URL of the Dice DB instance
+ * @typedef {Object} RybbitIoRybbit
+ * @property {string} name - Name of the Rybbit instance
+ * @property {string} url - URL of the Rybbit instance
  *
  */
 
 /**
- * Create a new Dice DB instance
+ * Create a new Rybbit instance
  *
- * @memberOf dicedb-dice
+ * @memberOf rybbit-io-rybbit
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DicedbDiceConfig} body - Service instance configuration
- * @returns {DicedbDice} - Service instance
+ * @param {RybbitIoRybbitConfig} body - Service instance configuration
+ * @returns {RybbitIoRybbit} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createDicedbDiceInstance } from '@osaas/client-services';
+ * import { createRybbitIoRybbitInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: DicedbDiceConfig = { name: 'myinstance', ... };
- * const instance = await createDicedbDiceInstance(ctx, body);
+ * const body: RybbitIoRybbitConfig = { name: 'myinstance', ... };
+ * const instance = await createRybbitIoRybbitInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createDicedbDiceInstance(
+export async function createRybbitIoRybbitInstance(
   ctx: Context,
-  body: DicedbDiceConfig
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
+  body: RybbitIoRybbitConfig
+): Promise<RybbitIoRybbit> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'rybbit-io-rybbit'
+  );
   const instance = await createInstance(
     ctx,
-    'dicedb-dice',
+    'rybbit-io-rybbit',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('dicedb-dice', instance.name, ctx);
+  await waitForInstanceReady('rybbit-io-rybbit', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Dice DB instance
+ * Remove a Rybbit instance
  *
- * @memberOf dicedb-dice
+ * @memberOf rybbit-io-rybbit
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be removed
+ * @param {string} name - Name of the rybbit to be removed
  */
-export async function removeDicedbDiceInstance(
+export async function removeRybbitIoRybbitInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  await removeInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'rybbit-io-rybbit'
+  );
+  await removeInstance(ctx, 'rybbit-io-rybbit', name, serviceAccessToken);
 }
 
 /**
- * Get a Dice DB instance
+ * Get a Rybbit instance
  *
- * @memberOf dicedb-dice
+ * @memberOf rybbit-io-rybbit
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be retrieved
- * @returns {DicedbDice} - Service instance
+ * @param {string} name - Name of the rybbit to be retrieved
+ * @returns {RybbitIoRybbit} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getDicedbDiceInstance } from '@osaas/client-services';
+ * import { getRybbitIoRybbitInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getDicedbDiceInstance(ctx, 'myinstance');
+ * const instance = await getRybbitIoRybbitInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getDicedbDiceInstance(
+export async function getRybbitIoRybbitInstance(
   ctx: Context,
   name: string
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  return await getInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+): Promise<RybbitIoRybbit> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'rybbit-io-rybbit'
+  );
+  return await getInstance(ctx, 'rybbit-io-rybbit', name, serviceAccessToken);
 }

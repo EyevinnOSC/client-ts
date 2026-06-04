@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/diceinstance': {
-    /** List all running dice instances */
+  '/uptime-kumainstance': {
+    /** List all running uptime-kuma instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the dice instance */
+            /** @description Name of the uptime-kuma instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,6 +67,7 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
           } & {
             _links: {
               self: {
@@ -113,7 +114,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new dice instance */
+    /** Launch a new uptime-kuma instance */
     post: {
       parameters: {
         query: {
@@ -121,8 +122,9 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the uptime-kuma instance */
             name: string;
+            DatabaseUrl: string;
           };
         };
       };
@@ -130,7 +132,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the uptime-kuma instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -148,6 +150,7 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
           } & {
             _links: {
               self: {
@@ -210,11 +213,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart dice */
+    /** Restart uptime-kuma */
     post: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the uptime-kuma instance */
           id: string;
         };
       };
@@ -233,12 +236,12 @@ export interface paths {
       };
     };
   };
-  '/diceinstance/{id}': {
-    /** Obtain status and resource URLs for an dice instance */
+  '/uptime-kumainstance/{id}': {
+    /** Obtain status and resource URLs for an uptime-kuma instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the uptime-kuma instance */
           id: string;
         };
       };
@@ -246,7 +249,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the uptime-kuma instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -264,6 +267,7 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
           } & {
             _links: {
               self: {
@@ -317,11 +321,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an dice instance */
+    /** Stop and remove an uptime-kuma instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the uptime-kuma instance */
           id: string;
         };
       };
@@ -339,17 +343,18 @@ export interface paths {
         };
       };
     };
-    /** Patch dice instance with new parameters and restart */
+    /** Patch uptime-kuma instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the uptime-kuma instance */
             name?: string;
+            DatabaseUrl?: string;
           };
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the uptime-kuma instance */
           id: string;
         };
       };
@@ -357,7 +362,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the uptime-kuma instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -375,6 +380,7 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
           } & {
             _links: {
               self: {
@@ -437,11 +443,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of dice instance */
+    /** Return status of uptime-kuma instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the uptime-kuma instance */
           id: string;
         };
       };
@@ -465,7 +471,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the dice instance */
+    /** Return the latest logs from the uptime-kuma instance */
     get: {
       parameters: {
         query: {
@@ -473,7 +479,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the uptime-kuma instance */
           id: string;
         };
       };
@@ -493,11 +499,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for dice instance */
+    /** Return the exposed extra ports for uptime-kuma instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the uptime-kuma instance */
           id: string;
         };
       };
@@ -521,11 +527,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for dice instance */
+    /** Return the assigned NodePorts for uptime-kuma instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the uptime-kuma instance */
           id: string;
         };
       };
@@ -557,11 +563,11 @@ export interface operations {}
 
 export interface external {}
 
-export type DicedbDice =
-  paths['/diceinstance/{id}']['get']['responses']['200']['schema'];
+export type LouislamUptimeKuma =
+  paths['/uptime-kumainstance/{id}']['get']['responses']['200']['schema'];
 
-export type DicedbDiceConfig =
-  paths['/diceinstance']['post']['parameters']['body']['body'];
+export type LouislamUptimeKumaConfig =
+  paths['/uptime-kumainstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -570,95 +576,107 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace dicedb-dice
- * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @namespace louislam-uptime-kuma
+ * @description Experience seamless uptime monitoring with Uptime Kuma. This intuitive, self-hosted tool tracks diverse services and delivers rapid notifications to ensure your operations remain uninterrupted.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
- *
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Uptime-Kuma.html|Online docs} for further information
  */
 
 /**
- * @typedef {Object} DicedbDiceConfig
- * @property {string} name - Name of dice
+ * @typedef {Object} LouislamUptimeKumaConfig
+ * @property {string} name - Name of uptime-kuma
+ * @property {string} DatabaseUrl - DatabaseUrl
 
  * 
  */
 
 /**
- * @typedef {Object} DicedbDice
- * @property {string} name - Name of the Dice DB instance
- * @property {string} url - URL of the Dice DB instance
+ * @typedef {Object} LouislamUptimeKuma
+ * @property {string} name - Name of the Uptime Kuma instance
+ * @property {string} url - URL of the Uptime Kuma instance
  *
  */
 
 /**
- * Create a new Dice DB instance
+ * Create a new Uptime Kuma instance
  *
- * @memberOf dicedb-dice
+ * @memberOf louislam-uptime-kuma
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DicedbDiceConfig} body - Service instance configuration
- * @returns {DicedbDice} - Service instance
+ * @param {LouislamUptimeKumaConfig} body - Service instance configuration
+ * @returns {LouislamUptimeKuma} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createDicedbDiceInstance } from '@osaas/client-services';
+ * import { createLouislamUptimeKumaInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: DicedbDiceConfig = { name: 'myinstance', ... };
- * const instance = await createDicedbDiceInstance(ctx, body);
+ * const body: LouislamUptimeKumaConfig = { name: 'myinstance', ... };
+ * const instance = await createLouislamUptimeKumaInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createDicedbDiceInstance(
+export async function createLouislamUptimeKumaInstance(
   ctx: Context,
-  body: DicedbDiceConfig
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
+  body: LouislamUptimeKumaConfig
+): Promise<LouislamUptimeKuma> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'louislam-uptime-kuma'
+  );
   const instance = await createInstance(
     ctx,
-    'dicedb-dice',
+    'louislam-uptime-kuma',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('dicedb-dice', instance.name, ctx);
+  await waitForInstanceReady('louislam-uptime-kuma', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Dice DB instance
+ * Remove a Uptime Kuma instance
  *
- * @memberOf dicedb-dice
+ * @memberOf louislam-uptime-kuma
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be removed
+ * @param {string} name - Name of the monitor to be removed
  */
-export async function removeDicedbDiceInstance(
+export async function removeLouislamUptimeKumaInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  await removeInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'louislam-uptime-kuma'
+  );
+  await removeInstance(ctx, 'louislam-uptime-kuma', name, serviceAccessToken);
 }
 
 /**
- * Get a Dice DB instance
+ * Get a Uptime Kuma instance
  *
- * @memberOf dicedb-dice
+ * @memberOf louislam-uptime-kuma
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be retrieved
- * @returns {DicedbDice} - Service instance
+ * @param {string} name - Name of the monitor to be retrieved
+ * @returns {LouislamUptimeKuma} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getDicedbDiceInstance } from '@osaas/client-services';
+ * import { getLouislamUptimeKumaInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getDicedbDiceInstance(ctx, 'myinstance');
+ * const instance = await getLouislamUptimeKumaInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getDicedbDiceInstance(
+export async function getLouislamUptimeKumaInstance(
   ctx: Context,
   name: string
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  return await getInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+): Promise<LouislamUptimeKuma> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'louislam-uptime-kuma'
+  );
+  return await getInstance(
+    ctx,
+    'louislam-uptime-kuma',
+    name,
+    serviceAccessToken
+  );
 }

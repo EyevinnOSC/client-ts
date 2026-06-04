@@ -540,7 +540,7 @@ import {
  * @description Transform your organization's data viewing experience with Grafana's cutting-edge visualizations and dynamic dashboards. Effortlessly explore metrics, logs, and receive alerts tailored precisely for powerful insights.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
- *
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Grafana.html|Online docs} for further information
  */
 
 /**

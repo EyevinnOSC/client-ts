@@ -15,6 +15,27 @@ export interface paths {
       };
     };
   };
+  '/token': {
+    /** Generate a trial token */
+    post: {
+      parameters: {
+        body: {
+          body?: {
+            /** @description Name of the company */
+            company: string;
+            /** @description Email to account holder */
+            email: string;
+          };
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: string;
+        };
+      };
+    };
+  };
   '/chaos-stream-proxyinstance': {
     /** List all running chaos-stream-proxy instances */
     get: {

@@ -94,6 +94,10 @@ export interface paths {
                 /** @description Update this instance */
                 href: string;
               };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
             };
           })[];
         };
@@ -109,6 +113,9 @@ export interface paths {
     /** Launch a new bucket-commander instance */
     post: {
       parameters: {
+        query: {
+          beta?: boolean;
+        };
         body: {
           body?: {
             /** @description Name of the bucket-commander instance */
@@ -164,6 +171,10 @@ export interface paths {
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -275,6 +286,10 @@ export interface paths {
                 /** @description Update this instance */
                 href: string;
               };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
             };
           };
         };
@@ -378,6 +393,10 @@ export interface paths {
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };

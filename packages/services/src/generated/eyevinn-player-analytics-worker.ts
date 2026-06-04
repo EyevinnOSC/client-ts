@@ -119,6 +119,9 @@ export interface paths {
     /** Launch a new player-analytics-worker instance */
     post: {
       parameters: {
+        query: {
+          beta?: boolean;
+        };
         body: {
           body?: {
             /** @description Name of the player-analytics-worker instance */
@@ -658,7 +661,7 @@ import {
  * @description Unlock powerful insights with Eyevinn Player Analytics Worker – the modular framework designed to streamline video player event tracking. Effortlessly process and store event data, boosting your analytics game!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
- *
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Player-Analytics-Worker.html|Online docs} for further information
  */
 
 /**

@@ -5,12 +5,39 @@
 
 export interface paths {
   '/': {
-    /** Say hello */
+    /** Health check endpoint */
     get: {
+      parameters: {
+        query: {
+          verbose?: boolean;
+        };
+      };
       responses: {
-        /** The magical words! */
+        /** Default Response */
         200: {
-          schema: string;
+          schema: Partial<string> &
+            Partial<{
+              status: string;
+              versions: {
+                '@osaas/orchestrator': string;
+              };
+              environment: string;
+              _links: {
+                self: {
+                  href: string;
+                };
+                api: {
+                  href: string;
+                };
+              };
+            }>;
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            status: string;
+            reason: string;
+          };
         };
       };
     };
@@ -63,12 +90,24 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
                 href: string;
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -86,6 +125,9 @@ export interface paths {
     /** Launch a new pgvector instance */
     post: {
       parameters: {
+        query: {
+          beta?: boolean;
+        };
         body: {
           body?: {
             /** @description Name of the pgvector instance */
@@ -143,12 +185,24 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
                 href: string;
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -256,12 +310,24 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
                 href: string;
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -369,6 +435,10 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
                 href: string;
@@ -377,7 +447,22 @@ export interface paths {
                 /** @description Update this instance */
                 href: string;
               };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
+                href: string;
+              };
             };
+          };
+        };
+        /** Default Response */
+        400: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
           };
         };
         /** Default Response */
@@ -412,6 +497,7 @@ export interface paths {
           schema: {
             /** @enum {string} */
             status: 'starting' | 'running' | 'stopped' | 'failed' | 'unknown';
+            images?: string[];
           };
         };
         /** Default Response */
@@ -480,6 +566,67 @@ export interface paths {
       };
     };
   };
+  '/nodeports/{id}': {
+    /** Return the assigned NodePorts for pgvector instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the pgvector instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            name: string;
+            protocol: Partial<'TCP'> & Partial<'UDP'>;
+            port: number;
+            ip?: string;
+          }[];
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
+  '/internal-endpoint/{id}': {
+    /** Get internal K8s endpoint for a pgvector instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the pgvector instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            serviceDns: string;
+            ports: {
+              name: string;
+              port: number;
+              protocol: string;
+            }[];
+            publicAccess: boolean;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface definitions {}
@@ -511,11 +658,11 @@ import {
 /**
  * @typedef {Object} PgvectorPgvectorConfig
  * @property {string} name - Name of pgvector
- * @property {string} PostgresPassword - PostgresPassword
- * @property {string} [PostgresUser] - PostgresUser
- * @property {string} [PostgresDb] - PostgresDb
- * @property {string} [PostgresInitDbArgs] - PostgresInitDbArgs
- * @property {string} [PostgresInitDbSql] - PostgresInitDbSql
+ * @property {string} PostgresPassword - Sets the password for the PostgreSQL database superuser. This is required to secure access to the database instance.
+ * @property {string} [PostgresUser] - Specifies the name of the PostgreSQL superuser account to create. If not provided, defaults to 'postgres'.
+ * @property {string} [PostgresDb] - Sets the name of the default database to create when the PostgreSQL instance starts. If not specified, the database name will match the user name.
+ * @property {string} [PostgresInitDbArgs] - Provides additional command-line arguments to pass to the 'initdb' command during database cluster initialization.
+ * @property {string} [PostgresInitDbSql] - Specifies SQL commands to execute during database initialization, such as creating extensions or setting up initial schema.
 
  * 
  */

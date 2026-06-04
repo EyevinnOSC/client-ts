@@ -580,7 +580,7 @@ import {
  * @description Transform your search experience with Meilisearch, the lightning-fast, intuitive search engine that integrates seamlessly into your apps. Boost efficiency with advanced features like hybrid search, typo tolerance, and filtering.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
- *
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Meilisearch.html|Online docs} for further information
  */
 
 /**

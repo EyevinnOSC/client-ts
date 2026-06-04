@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/diceinstance': {
-    /** List all running dice instances */
+  '/dotnet-runnerinstance': {
+    /** List all running dotnet-runner instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the dice instance */
+            /** @description Name of the dotnet-runner instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,6 +67,14 @@ export interface paths {
                 url: string;
               };
             };
+            SourceUrl: string;
+            GitHubToken?: string;
+            OscAccessToken?: string;
+            ConfigService?: string;
+            ConfigApiKey?: string;
+            SubPath?: string;
+            OscBuildCmd?: string;
+            OscEntry?: string;
           } & {
             _links: {
               self: {
@@ -99,6 +107,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -113,7 +125,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new dice instance */
+    /** Launch a new dotnet-runner instance */
     post: {
       parameters: {
         query: {
@@ -121,8 +133,16 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the dotnet-runner instance */
             name: string;
+            SourceUrl: string;
+            GitHubToken?: string;
+            OscAccessToken?: string;
+            ConfigService?: string;
+            ConfigApiKey?: string;
+            SubPath?: string;
+            OscBuildCmd?: string;
+            OscEntry?: string;
           };
         };
       };
@@ -130,7 +150,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the dotnet-runner instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -148,6 +168,14 @@ export interface paths {
                 url: string;
               };
             };
+            SourceUrl: string;
+            GitHubToken?: string;
+            OscAccessToken?: string;
+            ConfigService?: string;
+            ConfigApiKey?: string;
+            SubPath?: string;
+            OscBuildCmd?: string;
+            OscEntry?: string;
           } & {
             _links: {
               self: {
@@ -180,6 +208,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -210,11 +242,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart dice */
+    /** Restart dotnet-runner */
     post: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the dotnet-runner instance */
           id: string;
         };
       };
@@ -233,12 +265,12 @@ export interface paths {
       };
     };
   };
-  '/diceinstance/{id}': {
-    /** Obtain status and resource URLs for an dice instance */
+  '/dotnet-runnerinstance/{id}': {
+    /** Obtain status and resource URLs for an dotnet-runner instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the dotnet-runner instance */
           id: string;
         };
       };
@@ -246,7 +278,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the dotnet-runner instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -264,6 +296,14 @@ export interface paths {
                 url: string;
               };
             };
+            SourceUrl: string;
+            GitHubToken?: string;
+            OscAccessToken?: string;
+            ConfigService?: string;
+            ConfigApiKey?: string;
+            SubPath?: string;
+            OscBuildCmd?: string;
+            OscEntry?: string;
           } & {
             _links: {
               self: {
@@ -296,6 +336,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -317,11 +361,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an dice instance */
+    /** Stop and remove an dotnet-runner instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the dotnet-runner instance */
           id: string;
         };
       };
@@ -339,17 +383,25 @@ export interface paths {
         };
       };
     };
-    /** Patch dice instance with new parameters and restart */
+    /** Patch dotnet-runner instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the dotnet-runner instance */
             name?: string;
+            SourceUrl?: string;
+            GitHubToken?: string;
+            OscAccessToken?: string;
+            ConfigService?: string;
+            ConfigApiKey?: string;
+            SubPath?: string;
+            OscBuildCmd?: string;
+            OscEntry?: string;
           };
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the dotnet-runner instance */
           id: string;
         };
       };
@@ -357,7 +409,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the dotnet-runner instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -375,6 +427,14 @@ export interface paths {
                 url: string;
               };
             };
+            SourceUrl: string;
+            GitHubToken?: string;
+            OscAccessToken?: string;
+            ConfigService?: string;
+            ConfigApiKey?: string;
+            SubPath?: string;
+            OscBuildCmd?: string;
+            OscEntry?: string;
           } & {
             _links: {
               self: {
@@ -407,6 +467,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -437,11 +501,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of dice instance */
+    /** Return status of dotnet-runner instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the dotnet-runner instance */
           id: string;
         };
       };
@@ -465,7 +529,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the dice instance */
+    /** Return the latest logs from the dotnet-runner instance */
     get: {
       parameters: {
         query: {
@@ -473,7 +537,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the dotnet-runner instance */
           id: string;
         };
       };
@@ -493,11 +557,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for dice instance */
+    /** Return the exposed extra ports for dotnet-runner instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the dotnet-runner instance */
           id: string;
         };
       };
@@ -521,11 +585,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for dice instance */
+    /** Return the assigned NodePorts for dotnet-runner instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the dotnet-runner instance */
           id: string;
         };
       };
@@ -549,6 +613,38 @@ export interface paths {
       };
     };
   };
+  '/internal-endpoint/{id}': {
+    /** Get internal K8s endpoint for a dotnet-runner instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the dotnet-runner instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            serviceDns: string;
+            ports: {
+              name: string;
+              port: number;
+              protocol: string;
+            }[];
+            publicAccess: boolean;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface definitions {}
@@ -557,11 +653,11 @@ export interface operations {}
 
 export interface external {}
 
-export type DicedbDice =
-  paths['/diceinstance/{id}']['get']['responses']['200']['schema'];
+export type EyevinnDotnetRunner =
+  paths['/dotnet-runnerinstance/{id}']['get']['responses']['200']['schema'];
 
-export type DicedbDiceConfig =
-  paths['/diceinstance']['post']['parameters']['body']['body'];
+export type EyevinnDotnetRunnerConfig =
+  paths['/dotnet-runnerinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -570,95 +666,114 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace dicedb-dice
- * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @namespace eyevinn-dotnet-runner
+ * @description Effortlessly run your .NET apps on Open Source Cloud with dotnet-runner! Seamlessly build, deploy, and manage applications right from your repository, ensuring smooth operation on port 8080.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} DicedbDiceConfig
- * @property {string} name - Name of dice
+ * @typedef {Object} EyevinnDotnetRunnerConfig
+ * @property {string} name - Name of dotnet-runner
+ * @property {string} SourceUrl - HTTPS URL to the Git repository containing your .NET application. You can append '#branch' to checkout a specific branch.
+ * @property {string} [GitHubToken] - Personal access token for accessing private repositories. Not required for public repositories.
+ * @property {string} [OscAccessToken] - OSC personal access token required for authentication when using the CONFIG_SVC option to load environment variables from an OSC app-config-svc instance.
+ * @property {string} [ConfigService] - Name of an OSC app-config-svc instance to load additional environment variables from for your application.
+ * @property {string} [ConfigApiKey] - ConfigApiKey
+ * @property {string} [SubPath] - Sub-directory within the repository to build, useful when your .NET project is not located in the repository root.
+ * @property {string} [OscBuildCmd] - Override the default build command used to compile your .NET application. This replaces the auto-detected 'dotnet publish' invocation.
+ * @property {string} [OscEntry] - Override the entry DLL filename inside the published output directory. Specify the exact DLL name to run your application.
 
  * 
  */
 
 /**
- * @typedef {Object} DicedbDice
- * @property {string} name - Name of the Dice DB instance
- * @property {string} url - URL of the Dice DB instance
+ * @typedef {Object} EyevinnDotnetRunner
+ * @property {string} name - Name of the .NET Runner instance
+ * @property {string} url - URL of the .NET Runner instance
  *
  */
 
 /**
- * Create a new Dice DB instance
+ * Create a new .NET Runner instance
  *
- * @memberOf dicedb-dice
+ * @memberOf eyevinn-dotnet-runner
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DicedbDiceConfig} body - Service instance configuration
- * @returns {DicedbDice} - Service instance
+ * @param {EyevinnDotnetRunnerConfig} body - Service instance configuration
+ * @returns {EyevinnDotnetRunner} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createDicedbDiceInstance } from '@osaas/client-services';
+ * import { createEyevinnDotnetRunnerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: DicedbDiceConfig = { name: 'myinstance', ... };
- * const instance = await createDicedbDiceInstance(ctx, body);
+ * const body: EyevinnDotnetRunnerConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnDotnetRunnerInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createDicedbDiceInstance(
+export async function createEyevinnDotnetRunnerInstance(
   ctx: Context,
-  body: DicedbDiceConfig
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
+  body: EyevinnDotnetRunnerConfig
+): Promise<EyevinnDotnetRunner> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-dotnet-runner'
+  );
   const instance = await createInstance(
     ctx,
-    'dicedb-dice',
+    'eyevinn-dotnet-runner',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('dicedb-dice', instance.name, ctx);
+  await waitForInstanceReady('eyevinn-dotnet-runner', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Dice DB instance
+ * Remove a .NET Runner instance
  *
- * @memberOf dicedb-dice
+ * @memberOf eyevinn-dotnet-runner
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be removed
+ * @param {string} name - Name of the dotnet-runner to be removed
  */
-export async function removeDicedbDiceInstance(
+export async function removeEyevinnDotnetRunnerInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  await removeInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-dotnet-runner'
+  );
+  await removeInstance(ctx, 'eyevinn-dotnet-runner', name, serviceAccessToken);
 }
 
 /**
- * Get a Dice DB instance
+ * Get a .NET Runner instance
  *
- * @memberOf dicedb-dice
+ * @memberOf eyevinn-dotnet-runner
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be retrieved
- * @returns {DicedbDice} - Service instance
+ * @param {string} name - Name of the dotnet-runner to be retrieved
+ * @returns {EyevinnDotnetRunner} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getDicedbDiceInstance } from '@osaas/client-services';
+ * import { getEyevinnDotnetRunnerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getDicedbDiceInstance(ctx, 'myinstance');
+ * const instance = await getEyevinnDotnetRunnerInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getDicedbDiceInstance(
+export async function getEyevinnDotnetRunnerInstance(
   ctx: Context,
   name: string
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  return await getInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+): Promise<EyevinnDotnetRunner> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-dotnet-runner'
+  );
+  return await getInstance(
+    ctx,
+    'eyevinn-dotnet-runner',
+    name,
+    serviceAccessToken
+  );
 }

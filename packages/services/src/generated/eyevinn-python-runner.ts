@@ -75,6 +75,7 @@ export interface paths {
             S3EndpointUrl?: string;
             OscAccessToken?: string;
             ConfigService?: string;
+            ConfigApiKey?: string;
           } & {
             _links: {
               self: {
@@ -109,6 +110,10 @@ export interface paths {
                 /** @description Scale this instance */
                 href: string;
               };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
+                href: string;
+              };
             };
           })[];
         };
@@ -139,6 +144,7 @@ export interface paths {
             S3EndpointUrl?: string;
             OscAccessToken?: string;
             ConfigService?: string;
+            ConfigApiKey?: string;
           };
         };
       };
@@ -172,6 +178,7 @@ export interface paths {
             S3EndpointUrl?: string;
             OscAccessToken?: string;
             ConfigService?: string;
+            ConfigApiKey?: string;
           } & {
             _links: {
               self: {
@@ -204,6 +211,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -296,6 +307,7 @@ export interface paths {
             S3EndpointUrl?: string;
             OscAccessToken?: string;
             ConfigService?: string;
+            ConfigApiKey?: string;
           } & {
             _links: {
               self: {
@@ -328,6 +340,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -386,6 +402,7 @@ export interface paths {
             S3EndpointUrl?: string;
             OscAccessToken?: string;
             ConfigService?: string;
+            ConfigApiKey?: string;
           };
         };
         path: {
@@ -423,6 +440,7 @@ export interface paths {
             S3EndpointUrl?: string;
             OscAccessToken?: string;
             ConfigService?: string;
+            ConfigApiKey?: string;
           } & {
             _links: {
               self: {
@@ -455,6 +473,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -597,6 +619,38 @@ export interface paths {
       };
     };
   };
+  '/internal-endpoint/{id}': {
+    /** Get internal K8s endpoint for a python-runner instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the python-runner instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            serviceDns: string;
+            ports: {
+              name: string;
+              port: number;
+              protocol: string;
+            }[];
+            publicAccess: boolean;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface definitions {}
@@ -636,6 +690,7 @@ import {
  * @property {string} [S3EndpointUrl] - Custom S3 endpoint URL for MinIO or other S3-compatible storage services
  * @property {string} [OscAccessToken] - Access token for Eyevinn Open Source Cloud configuration service
  * @property {string} [ConfigService] - URL endpoint for external configuration service
+ * @property {string} [ConfigApiKey] - ConfigApiKey
 
  * 
  */

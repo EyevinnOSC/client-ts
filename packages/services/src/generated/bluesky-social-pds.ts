@@ -5,12 +5,39 @@
 
 export interface paths {
   '/': {
-    /** Say hello */
+    /** Health check endpoint */
     get: {
+      parameters: {
+        query: {
+          verbose?: boolean;
+        };
+      };
       responses: {
-        /** The magical words! */
+        /** Default Response */
         200: {
-          schema: string;
+          schema: Partial<string> &
+            Partial<{
+              status: string;
+              versions: {
+                '@osaas/orchestrator': string;
+              };
+              environment: string;
+              _links: {
+                self: {
+                  href: string;
+                };
+                api: {
+                  href: string;
+                };
+              };
+            }>;
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            status: string;
+            reason: string;
+          };
         };
       };
     };
@@ -21,7 +48,7 @@ export interface paths {
       responses: {
         /** Default Response */
         200: {
-          schema: {
+          schema: ({
             /** @description Name of the pds instance */
             name: string;
             /** @description URL to instance API */
@@ -44,7 +71,42 @@ export interface paths {
             DnsName?: string;
             EmailSmtpUrl?: string;
             EmailFromAddress?: string;
-          }[];
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+            };
+          })[];
         };
         /** Default Response */
         500: {
@@ -58,6 +120,9 @@ export interface paths {
     /** Launch a new pds instance */
     post: {
       parameters: {
+        query: {
+          beta?: boolean;
+        };
         body: {
           body?: {
             /** @description Name of the pds instance */
@@ -95,6 +160,41 @@ export interface paths {
             DnsName?: string;
             EmailSmtpUrl?: string;
             EmailFromAddress?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+            };
           };
         };
         /** Default Response */
@@ -110,6 +210,30 @@ export interface paths {
             /** @description Reason why something failed */
             reason: string;
           };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
+  '/restart/{id}': {
+    /** Restart pds */
+    post: {
+      parameters: {
+        path: {
+          /** Name of the pds instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        204: {
+          schema: string;
         };
         /** Default Response */
         500: {
@@ -156,6 +280,41 @@ export interface paths {
             DnsName?: string;
             EmailSmtpUrl?: string;
             EmailFromAddress?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+            };
           };
         };
         /** Default Response */
@@ -196,6 +355,110 @@ export interface paths {
         };
       };
     };
+    /** Patch pds instance with new parameters and restart */
+    patch: {
+      parameters: {
+        body: {
+          body?: {
+            /** @description Name of the pds instance */
+            name?: string;
+            AdminPassword?: string;
+            DnsName?: string;
+            EmailSmtpUrl?: string;
+            EmailFromAddress?: string;
+          };
+        };
+        path: {
+          /** Name of the pds instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            /** @description Name of the pds instance */
+            name: string;
+            /** @description URL to instance API */
+            url: string;
+            resources: {
+              license: {
+                /** @description URL to license information */
+                url: string;
+              };
+              apiDocs?: {
+                /** @description URL to instance API documentation */
+                url: string;
+              };
+              app?: {
+                /** @description URL to instance application (GUI) */
+                url: string;
+              };
+            };
+            AdminPassword: string;
+            DnsName?: string;
+            EmailSmtpUrl?: string;
+            EmailFromAddress?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+            };
+          };
+        };
+        /** Default Response */
+        400: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        404: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
   };
   '/health/{id}': {
     /** Return status of pds instance */
@@ -212,6 +475,7 @@ export interface paths {
           schema: {
             /** @enum {string} */
             status: 'starting' | 'running' | 'stopped' | 'failed' | 'unknown';
+            images?: string[];
           };
         };
         /** Default Response */
@@ -280,6 +544,35 @@ export interface paths {
       };
     };
   };
+  '/nodeports/{id}': {
+    /** Return the assigned NodePorts for pds instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the pds instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            name: string;
+            protocol: Partial<'TCP'> & Partial<'UDP'>;
+            port: number;
+            ip?: string;
+          }[];
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface definitions {}
@@ -311,10 +604,10 @@ import {
 /**
  * @typedef {Object} BlueskySocialPdsConfig
  * @property {string} name - Name of pds
- * @property {string} AdminPassword - AdminPassword
- * @property {string} [DnsName] - DnsName
- * @property {string} [EmailSmtpUrl] - EmailSmtpUrl
- * @property {string} [EmailFromAddress] - EmailFromAddress
+ * @property {string} AdminPassword - Administrative password for PDS admin operations and account management
+ * @property {string} [DnsName] - Public DNS hostname for the PDS server that clients will use to connect
+ * @property {string} [EmailSmtpUrl] - SMTP server URL for sending verification emails and other notifications to users
+ * @property {string} [EmailFromAddress] - Email address that appears as the sender for emails sent by the PDS
 
  * 
  */

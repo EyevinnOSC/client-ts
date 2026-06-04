@@ -67,6 +67,11 @@ export interface paths {
                 url: string;
               };
             };
+            S3GraphicsUrl?: string;
+            S3EndpointUrl?: string;
+            S3AccessKeyId?: string;
+            S3SecretAccessKey?: string;
+            S3Region?: string;
           } & {
             _links: {
               self: {
@@ -83,6 +88,10 @@ export interface paths {
               };
               ports?: {
                 /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
                 href: string;
               };
               restart?: {
@@ -119,6 +128,11 @@ export interface paths {
           body?: {
             /** @description Name of the ograf-server instance */
             name: string;
+            S3GraphicsUrl?: string;
+            S3EndpointUrl?: string;
+            S3AccessKeyId?: string;
+            S3SecretAccessKey?: string;
+            S3Region?: string;
           };
         };
       };
@@ -144,6 +158,11 @@ export interface paths {
                 url: string;
               };
             };
+            S3GraphicsUrl?: string;
+            S3EndpointUrl?: string;
+            S3AccessKeyId?: string;
+            S3SecretAccessKey?: string;
+            S3Region?: string;
           } & {
             _links: {
               self: {
@@ -160,6 +179,10 @@ export interface paths {
               };
               ports?: {
                 /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
                 href: string;
               };
               restart?: {
@@ -256,6 +279,11 @@ export interface paths {
                 url: string;
               };
             };
+            S3GraphicsUrl?: string;
+            S3EndpointUrl?: string;
+            S3AccessKeyId?: string;
+            S3SecretAccessKey?: string;
+            S3Region?: string;
           } & {
             _links: {
               self: {
@@ -272,6 +300,10 @@ export interface paths {
               };
               ports?: {
                 /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
                 href: string;
               };
               restart?: {
@@ -334,6 +366,11 @@ export interface paths {
           body?: {
             /** @description Name of the ograf-server instance */
             name?: string;
+            S3GraphicsUrl?: string;
+            S3EndpointUrl?: string;
+            S3AccessKeyId?: string;
+            S3SecretAccessKey?: string;
+            S3Region?: string;
           };
         };
         path: {
@@ -363,6 +400,11 @@ export interface paths {
                 url: string;
               };
             };
+            S3GraphicsUrl?: string;
+            S3EndpointUrl?: string;
+            S3AccessKeyId?: string;
+            S3SecretAccessKey?: string;
+            S3Region?: string;
           } & {
             _links: {
               self: {
@@ -379,6 +421,10 @@ export interface paths {
               };
               ports?: {
                 /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
                 href: string;
               };
               restart?: {
@@ -504,6 +550,35 @@ export interface paths {
       };
     };
   };
+  '/nodeports/{id}': {
+    /** Return the assigned NodePorts for ograf-server instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the ograf-server instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            name: string;
+            protocol: Partial<'TCP'> & Partial<'UDP'>;
+            port: number;
+            ip?: string;
+          }[];
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface definitions {}
@@ -535,6 +610,11 @@ import {
 /**
  * @typedef {Object} SuperflytvOgrafServerConfig
  * @property {string} name - Name of ograf-server
+ * @property {string} [S3GraphicsUrl] - The base URL for accessing OGraf graphics stored in an S3-compatible storage service. This would be used by the renderer to load graphics assets from cloud storage rather than local storage.
+ * @property {string} [S3EndpointUrl] - The endpoint URL for the S3-compatible storage service. This allows the server to connect to custom S3 implementations or alternative cloud storage providers beyond AWS S3.
+ * @property {string} [S3AccessKeyId] - The access key ID for authenticating with the S3 storage service. This is part of the AWS credentials used to securely access the storage bucket containing OGraf graphics.
+ * @property {string} [S3SecretAccessKey] - The secret access key for authenticating with the S3 storage service. This works together with the access key ID to provide secure access to the storage bucket.
+ * @property {string} [S3Region] - The AWS region where the S3 bucket is located. This ensures the server connects to the correct regional endpoint for optimal performance and compliance.
 
  * 
  */

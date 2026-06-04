@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/diceinstance': {
-    /** List all running dice instances */
+  '/ntfyinstance': {
+    /** List all running ntfy instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the dice instance */
+            /** @description Name of the ntfy instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,6 +67,7 @@ export interface paths {
                 url: string;
               };
             };
+            databaseUrl: string;
           } & {
             _links: {
               self: {
@@ -113,7 +114,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new dice instance */
+    /** Launch a new ntfy instance */
     post: {
       parameters: {
         query: {
@@ -121,8 +122,9 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the ntfy instance */
             name: string;
+            databaseUrl: string;
           };
         };
       };
@@ -130,7 +132,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the ntfy instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -148,6 +150,7 @@ export interface paths {
                 url: string;
               };
             };
+            databaseUrl: string;
           } & {
             _links: {
               self: {
@@ -210,11 +213,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart dice */
+    /** Restart ntfy */
     post: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the ntfy instance */
           id: string;
         };
       };
@@ -233,12 +236,12 @@ export interface paths {
       };
     };
   };
-  '/diceinstance/{id}': {
-    /** Obtain status and resource URLs for an dice instance */
+  '/ntfyinstance/{id}': {
+    /** Obtain status and resource URLs for an ntfy instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the ntfy instance */
           id: string;
         };
       };
@@ -246,7 +249,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the ntfy instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -264,6 +267,7 @@ export interface paths {
                 url: string;
               };
             };
+            databaseUrl: string;
           } & {
             _links: {
               self: {
@@ -317,11 +321,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an dice instance */
+    /** Stop and remove an ntfy instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the ntfy instance */
           id: string;
         };
       };
@@ -339,17 +343,18 @@ export interface paths {
         };
       };
     };
-    /** Patch dice instance with new parameters and restart */
+    /** Patch ntfy instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the ntfy instance */
             name?: string;
+            databaseUrl?: string;
           };
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the ntfy instance */
           id: string;
         };
       };
@@ -357,7 +362,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the ntfy instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -375,6 +380,7 @@ export interface paths {
                 url: string;
               };
             };
+            databaseUrl: string;
           } & {
             _links: {
               self: {
@@ -437,11 +443,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of dice instance */
+    /** Return status of ntfy instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the ntfy instance */
           id: string;
         };
       };
@@ -465,7 +471,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the dice instance */
+    /** Return the latest logs from the ntfy instance */
     get: {
       parameters: {
         query: {
@@ -473,7 +479,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the ntfy instance */
           id: string;
         };
       };
@@ -493,11 +499,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for dice instance */
+    /** Return the exposed extra ports for ntfy instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the ntfy instance */
           id: string;
         };
       };
@@ -521,11 +527,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for dice instance */
+    /** Return the assigned NodePorts for ntfy instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the ntfy instance */
           id: string;
         };
       };
@@ -557,11 +563,11 @@ export interface operations {}
 
 export interface external {}
 
-export type DicedbDice =
-  paths['/diceinstance/{id}']['get']['responses']['200']['schema'];
+export type BinwiederhierNtfy =
+  paths['/ntfyinstance/{id}']['get']['responses']['200']['schema'];
 
-export type DicedbDiceConfig =
-  paths['/diceinstance']['post']['parameters']['body']['body'];
+export type BinwiederhierNtfyConfig =
+  paths['/ntfyinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -570,95 +576,102 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace dicedb-dice
- * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @namespace binwiederhier-ntfy
+ * @description Elevate your communication game with ntfy.sh! Effortlessly send push notifications to any device using simple HTTP requests. Stay connected without sign-ups or fees. Perfect for automation and alerts!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} DicedbDiceConfig
- * @property {string} name - Name of dice
+ * @typedef {Object} BinwiederhierNtfyConfig
+ * @property {string} name - Name of ntfy
+ * @property {string} databaseUrl - Database connection URL for ntfy's persistent storage. Based on the project structure, ntfy supports both SQLite and PostgreSQL databases for storing messages, user data, subscriptions, and other persistent information.
 
  * 
  */
 
 /**
- * @typedef {Object} DicedbDice
- * @property {string} name - Name of the Dice DB instance
- * @property {string} url - URL of the Dice DB instance
+ * @typedef {Object} BinwiederhierNtfy
+ * @property {string} name - Name of the ntfy instance
+ * @property {string} url - URL of the ntfy instance
  *
  */
 
 /**
- * Create a new Dice DB instance
+ * Create a new ntfy instance
  *
- * @memberOf dicedb-dice
+ * @memberOf binwiederhier-ntfy
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DicedbDiceConfig} body - Service instance configuration
- * @returns {DicedbDice} - Service instance
+ * @param {BinwiederhierNtfyConfig} body - Service instance configuration
+ * @returns {BinwiederhierNtfy} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createDicedbDiceInstance } from '@osaas/client-services';
+ * import { createBinwiederhierNtfyInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: DicedbDiceConfig = { name: 'myinstance', ... };
- * const instance = await createDicedbDiceInstance(ctx, body);
+ * const body: BinwiederhierNtfyConfig = { name: 'myinstance', ... };
+ * const instance = await createBinwiederhierNtfyInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createDicedbDiceInstance(
+export async function createBinwiederhierNtfyInstance(
   ctx: Context,
-  body: DicedbDiceConfig
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
+  body: BinwiederhierNtfyConfig
+): Promise<BinwiederhierNtfy> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'binwiederhier-ntfy'
+  );
   const instance = await createInstance(
     ctx,
-    'dicedb-dice',
+    'binwiederhier-ntfy',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('dicedb-dice', instance.name, ctx);
+  await waitForInstanceReady('binwiederhier-ntfy', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Dice DB instance
+ * Remove a ntfy instance
  *
- * @memberOf dicedb-dice
+ * @memberOf binwiederhier-ntfy
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be removed
+ * @param {string} name - Name of the ntfy to be removed
  */
-export async function removeDicedbDiceInstance(
+export async function removeBinwiederhierNtfyInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  await removeInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'binwiederhier-ntfy'
+  );
+  await removeInstance(ctx, 'binwiederhier-ntfy', name, serviceAccessToken);
 }
 
 /**
- * Get a Dice DB instance
+ * Get a ntfy instance
  *
- * @memberOf dicedb-dice
+ * @memberOf binwiederhier-ntfy
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be retrieved
- * @returns {DicedbDice} - Service instance
+ * @param {string} name - Name of the ntfy to be retrieved
+ * @returns {BinwiederhierNtfy} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getDicedbDiceInstance } from '@osaas/client-services';
+ * import { getBinwiederhierNtfyInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getDicedbDiceInstance(ctx, 'myinstance');
+ * const instance = await getBinwiederhierNtfyInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getDicedbDiceInstance(
+export async function getBinwiederhierNtfyInstance(
   ctx: Context,
   name: string
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  return await getInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+): Promise<BinwiederhierNtfy> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'binwiederhier-ntfy'
+  );
+  return await getInstance(ctx, 'binwiederhier-ntfy', name, serviceAccessToken);
 }

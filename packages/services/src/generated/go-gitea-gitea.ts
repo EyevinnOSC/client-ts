@@ -580,7 +580,7 @@ import {
  * @description Discover Gitea, your lightweight, self-hosted Git solution designed for speed and simplicity. Cross-platform and scalable, Gitea empowers seamless code collaboration for teams of all sizes. Try it today!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
- *
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Gitea.html|Online docs} for further information
  */
 
 /**

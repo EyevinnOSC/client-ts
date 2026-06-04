@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/diceinstance': {
-    /** List all running dice instances */
+  '/open-live-studioinstance': {
+    /** List all running open-live-studio instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the dice instance */
+            /** @description Name of the open-live-studio instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,6 +67,8 @@ export interface paths {
                 url: string;
               };
             };
+            OpenLiveUrl: string;
+            OscAccessToken?: string;
           } & {
             _links: {
               self: {
@@ -99,6 +101,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -113,7 +119,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new dice instance */
+    /** Launch a new open-live-studio instance */
     post: {
       parameters: {
         query: {
@@ -121,8 +127,10 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the open-live-studio instance */
             name: string;
+            OpenLiveUrl: string;
+            OscAccessToken?: string;
           };
         };
       };
@@ -130,7 +138,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the open-live-studio instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -148,6 +156,8 @@ export interface paths {
                 url: string;
               };
             };
+            OpenLiveUrl: string;
+            OscAccessToken?: string;
           } & {
             _links: {
               self: {
@@ -180,6 +190,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -210,11 +224,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart dice */
+    /** Restart open-live-studio */
     post: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the open-live-studio instance */
           id: string;
         };
       };
@@ -233,12 +247,12 @@ export interface paths {
       };
     };
   };
-  '/diceinstance/{id}': {
-    /** Obtain status and resource URLs for an dice instance */
+  '/open-live-studioinstance/{id}': {
+    /** Obtain status and resource URLs for an open-live-studio instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the open-live-studio instance */
           id: string;
         };
       };
@@ -246,7 +260,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the open-live-studio instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -264,6 +278,8 @@ export interface paths {
                 url: string;
               };
             };
+            OpenLiveUrl: string;
+            OscAccessToken?: string;
           } & {
             _links: {
               self: {
@@ -296,6 +312,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -317,11 +337,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an dice instance */
+    /** Stop and remove an open-live-studio instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the open-live-studio instance */
           id: string;
         };
       };
@@ -339,17 +359,19 @@ export interface paths {
         };
       };
     };
-    /** Patch dice instance with new parameters and restart */
+    /** Patch open-live-studio instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the open-live-studio instance */
             name?: string;
+            OpenLiveUrl?: string;
+            OscAccessToken?: string;
           };
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the open-live-studio instance */
           id: string;
         };
       };
@@ -357,7 +379,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the open-live-studio instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -375,6 +397,8 @@ export interface paths {
                 url: string;
               };
             };
+            OpenLiveUrl: string;
+            OscAccessToken?: string;
           } & {
             _links: {
               self: {
@@ -407,6 +431,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -437,11 +465,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of dice instance */
+    /** Return status of open-live-studio instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the open-live-studio instance */
           id: string;
         };
       };
@@ -465,7 +493,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the dice instance */
+    /** Return the latest logs from the open-live-studio instance */
     get: {
       parameters: {
         query: {
@@ -473,7 +501,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the open-live-studio instance */
           id: string;
         };
       };
@@ -493,11 +521,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for dice instance */
+    /** Return the exposed extra ports for open-live-studio instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the open-live-studio instance */
           id: string;
         };
       };
@@ -521,11 +549,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for dice instance */
+    /** Return the assigned NodePorts for open-live-studio instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the open-live-studio instance */
           id: string;
         };
       };
@@ -549,6 +577,38 @@ export interface paths {
       };
     };
   };
+  '/internal-endpoint/{id}': {
+    /** Get internal K8s endpoint for a open-live-studio instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the open-live-studio instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            serviceDns: string;
+            ports: {
+              name: string;
+              port: number;
+              protocol: string;
+            }[];
+            publicAccess: boolean;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface definitions {}
@@ -557,11 +617,11 @@ export interface operations {}
 
 export interface external {}
 
-export type DicedbDice =
-  paths['/diceinstance/{id}']['get']['responses']['200']['schema'];
+export type EyevinnOpenLiveStudio =
+  paths['/open-live-studioinstance/{id}']['get']['responses']['200']['schema'];
 
-export type DicedbDiceConfig =
-  paths['/diceinstance']['post']['parameters']['body']['body'];
+export type EyevinnOpenLiveStudioConfig =
+  paths['/open-live-studioinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -570,95 +630,113 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace dicedb-dice
- * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @namespace eyevinn-open-live-studio
+ * @description Revolutionize your broadcasting with Open Live Studio, the ultimate browser-based production controller. Seamlessly integrate and manage broadcasts using cutting-edge tech for a flawless live experience.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} DicedbDiceConfig
- * @property {string} name - Name of dice
+ * @typedef {Object} EyevinnOpenLiveStudioConfig
+ * @property {string} name - Name of open-live-studio
+ * @property {string} OpenLiveUrl - The URL of the open-live backend API that this production controller will connect to for managing sources and productions
+ * @property {string} [OscAccessToken] - Personal Access Token for Open Source Cloud (OSC) authentication and deployment operations
 
  * 
  */
 
 /**
- * @typedef {Object} DicedbDice
- * @property {string} name - Name of the Dice DB instance
- * @property {string} url - URL of the Dice DB instance
+ * @typedef {Object} EyevinnOpenLiveStudio
+ * @property {string} name - Name of the Open Live Studio instance
+ * @property {string} url - URL of the Open Live Studio instance
  *
  */
 
 /**
- * Create a new Dice DB instance
+ * Create a new Open Live Studio instance
  *
- * @memberOf dicedb-dice
+ * @memberOf eyevinn-open-live-studio
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DicedbDiceConfig} body - Service instance configuration
- * @returns {DicedbDice} - Service instance
+ * @param {EyevinnOpenLiveStudioConfig} body - Service instance configuration
+ * @returns {EyevinnOpenLiveStudio} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createDicedbDiceInstance } from '@osaas/client-services';
+ * import { createEyevinnOpenLiveStudioInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: DicedbDiceConfig = { name: 'myinstance', ... };
- * const instance = await createDicedbDiceInstance(ctx, body);
+ * const body: EyevinnOpenLiveStudioConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnOpenLiveStudioInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createDicedbDiceInstance(
+export async function createEyevinnOpenLiveStudioInstance(
   ctx: Context,
-  body: DicedbDiceConfig
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
+  body: EyevinnOpenLiveStudioConfig
+): Promise<EyevinnOpenLiveStudio> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-open-live-studio'
+  );
   const instance = await createInstance(
     ctx,
-    'dicedb-dice',
+    'eyevinn-open-live-studio',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('dicedb-dice', instance.name, ctx);
+  await waitForInstanceReady('eyevinn-open-live-studio', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Dice DB instance
+ * Remove a Open Live Studio instance
  *
- * @memberOf dicedb-dice
+ * @memberOf eyevinn-open-live-studio
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be removed
+ * @param {string} name - Name of the open-live-studio to be removed
  */
-export async function removeDicedbDiceInstance(
+export async function removeEyevinnOpenLiveStudioInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  await removeInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-open-live-studio'
+  );
+  await removeInstance(
+    ctx,
+    'eyevinn-open-live-studio',
+    name,
+    serviceAccessToken
+  );
 }
 
 /**
- * Get a Dice DB instance
+ * Get a Open Live Studio instance
  *
- * @memberOf dicedb-dice
+ * @memberOf eyevinn-open-live-studio
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be retrieved
- * @returns {DicedbDice} - Service instance
+ * @param {string} name - Name of the open-live-studio to be retrieved
+ * @returns {EyevinnOpenLiveStudio} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getDicedbDiceInstance } from '@osaas/client-services';
+ * import { getEyevinnOpenLiveStudioInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getDicedbDiceInstance(ctx, 'myinstance');
+ * const instance = await getEyevinnOpenLiveStudioInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getDicedbDiceInstance(
+export async function getEyevinnOpenLiveStudioInstance(
   ctx: Context,
   name: string
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  return await getInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+): Promise<EyevinnOpenLiveStudio> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-open-live-studio'
+  );
+  return await getInstance(
+    ctx,
+    'eyevinn-open-live-studio',
+    name,
+    serviceAccessToken
+  );
 }

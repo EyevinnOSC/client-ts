@@ -102,6 +102,10 @@ export interface paths {
                 /** @description Scale this instance */
                 href: string;
               };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
+                href: string;
+              };
             };
           })[];
         };
@@ -183,6 +187,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -302,6 +310,10 @@ export interface paths {
                 /** @description Scale this instance */
                 href: string;
               };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
+                href: string;
+              };
             };
           };
         };
@@ -413,6 +425,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -555,6 +571,38 @@ export interface paths {
       };
     };
   };
+  '/internal-endpoint/{id}': {
+    /** Get internal K8s endpoint for a valkey instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the valkey instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            serviceDns: string;
+            ports: {
+              name: string;
+              port: number;
+              protocol: string;
+            }[];
+            publicAccess: boolean;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface definitions {}
@@ -578,8 +626,6 @@ import {
 /**
  * @namespace valkey-io-valkey
  * @description Introducing Valkey: a Redis-compatible high-performance key-value store with wide range support. Build on various systems, extensible plugin system, and TLS support available.
-
-NB! Data persistence not guaranteed
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
  * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Valkey.html|Online docs} for further information

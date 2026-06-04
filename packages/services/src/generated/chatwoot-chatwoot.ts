@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/diceinstance': {
-    /** List all running dice instances */
+  '/chatwootinstance': {
+    /** List all running chatwoot instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the dice instance */
+            /** @description Name of the chatwoot instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,6 +67,14 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
+            RedisUrl: string;
+            SecretKeyBase: string;
+            SmtpAddress?: string;
+            SmtpPort?: string;
+            SmtpUsername?: string;
+            SmtpPassword?: string;
+            MailerSenderEmail?: string;
           } & {
             _links: {
               self: {
@@ -99,6 +107,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -113,7 +125,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new dice instance */
+    /** Launch a new chatwoot instance */
     post: {
       parameters: {
         query: {
@@ -121,8 +133,16 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the chatwoot instance */
             name: string;
+            DatabaseUrl: string;
+            RedisUrl: string;
+            SecretKeyBase: string;
+            SmtpAddress?: string;
+            SmtpPort?: string;
+            SmtpUsername?: string;
+            SmtpPassword?: string;
+            MailerSenderEmail?: string;
           };
         };
       };
@@ -130,7 +150,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the chatwoot instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -148,6 +168,14 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
+            RedisUrl: string;
+            SecretKeyBase: string;
+            SmtpAddress?: string;
+            SmtpPort?: string;
+            SmtpUsername?: string;
+            SmtpPassword?: string;
+            MailerSenderEmail?: string;
           } & {
             _links: {
               self: {
@@ -180,6 +208,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -210,11 +242,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart dice */
+    /** Restart chatwoot */
     post: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the chatwoot instance */
           id: string;
         };
       };
@@ -233,12 +265,12 @@ export interface paths {
       };
     };
   };
-  '/diceinstance/{id}': {
-    /** Obtain status and resource URLs for an dice instance */
+  '/chatwootinstance/{id}': {
+    /** Obtain status and resource URLs for an chatwoot instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the chatwoot instance */
           id: string;
         };
       };
@@ -246,7 +278,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the chatwoot instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -264,6 +296,14 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
+            RedisUrl: string;
+            SecretKeyBase: string;
+            SmtpAddress?: string;
+            SmtpPort?: string;
+            SmtpUsername?: string;
+            SmtpPassword?: string;
+            MailerSenderEmail?: string;
           } & {
             _links: {
               self: {
@@ -296,6 +336,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -317,11 +361,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an dice instance */
+    /** Stop and remove an chatwoot instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the chatwoot instance */
           id: string;
         };
       };
@@ -339,17 +383,25 @@ export interface paths {
         };
       };
     };
-    /** Patch dice instance with new parameters and restart */
+    /** Patch chatwoot instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the chatwoot instance */
             name?: string;
+            DatabaseUrl?: string;
+            RedisUrl?: string;
+            SecretKeyBase?: string;
+            SmtpAddress?: string;
+            SmtpPort?: string;
+            SmtpUsername?: string;
+            SmtpPassword?: string;
+            MailerSenderEmail?: string;
           };
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the chatwoot instance */
           id: string;
         };
       };
@@ -357,7 +409,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the chatwoot instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -375,6 +427,14 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
+            RedisUrl: string;
+            SecretKeyBase: string;
+            SmtpAddress?: string;
+            SmtpPort?: string;
+            SmtpUsername?: string;
+            SmtpPassword?: string;
+            MailerSenderEmail?: string;
           } & {
             _links: {
               self: {
@@ -407,6 +467,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -437,11 +501,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of dice instance */
+    /** Return status of chatwoot instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the chatwoot instance */
           id: string;
         };
       };
@@ -465,7 +529,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the dice instance */
+    /** Return the latest logs from the chatwoot instance */
     get: {
       parameters: {
         query: {
@@ -473,7 +537,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the chatwoot instance */
           id: string;
         };
       };
@@ -493,11 +557,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for dice instance */
+    /** Return the exposed extra ports for chatwoot instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the chatwoot instance */
           id: string;
         };
       };
@@ -521,11 +585,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for dice instance */
+    /** Return the assigned NodePorts for chatwoot instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the chatwoot instance */
           id: string;
         };
       };
@@ -549,6 +613,38 @@ export interface paths {
       };
     };
   };
+  '/internal-endpoint/{id}': {
+    /** Get internal K8s endpoint for a chatwoot instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the chatwoot instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            serviceDns: string;
+            ports: {
+              name: string;
+              port: number;
+              protocol: string;
+            }[];
+            publicAccess: boolean;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface definitions {}
@@ -557,11 +653,11 @@ export interface operations {}
 
 export interface external {}
 
-export type DicedbDice =
-  paths['/diceinstance/{id}']['get']['responses']['200']['schema'];
+export type ChatwootChatwoot =
+  paths['/chatwootinstance/{id}']['get']['responses']['200']['schema'];
 
-export type DicedbDiceConfig =
-  paths['/diceinstance']['post']['parameters']['body']['body'];
+export type ChatwootChatwootConfig =
+  paths['/chatwootinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -570,95 +666,109 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace dicedb-dice
- * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @namespace chatwoot-chatwoot
+ * @description Transform your customer service with Chatwoot, the open-source platform that centralizes conversations across channels. Empower your team with AI-driven support, omnichannel integration, and insightful analytics.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} DicedbDiceConfig
- * @property {string} name - Name of dice
+ * @typedef {Object} ChatwootChatwootConfig
+ * @property {string} name - Name of chatwoot
+ * @property {string} DatabaseUrl - Database connection URL for PostgreSQL database that stores all Chatwoot data including conversations, contacts, agents, and configuration
+ * @property {string} RedisUrl - Redis connection URL used for caching, session storage, background job processing, and real-time features like live chat
+ * @property {string} SecretKeyBase - Rails application secret key used for encrypting sessions, cookies, and other sensitive data within the application
+ * @property {string} [SmtpAddress] - SMTP server hostname or IP address for sending outbound emails including notifications, password resets, and conversation replies
+ * @property {string} [SmtpPort] - SMTP server port number for email delivery, typically 587 for TLS or 465 for SSL connections
+ * @property {string} [SmtpUsername] - Username for authenticating with the SMTP server when sending emails from Chatwoot
+ * @property {string} [SmtpPassword] - Password or app-specific password for SMTP server authentication when sending emails
+ * @property {string} [MailerSenderEmail] - Email address that appears as the sender for all outbound emails from Chatwoot including notifications and system messages
 
  * 
  */
 
 /**
- * @typedef {Object} DicedbDice
- * @property {string} name - Name of the Dice DB instance
- * @property {string} url - URL of the Dice DB instance
+ * @typedef {Object} ChatwootChatwoot
+ * @property {string} name - Name of the Chatwoot instance
+ * @property {string} url - URL of the Chatwoot instance
  *
  */
 
 /**
- * Create a new Dice DB instance
+ * Create a new Chatwoot instance
  *
- * @memberOf dicedb-dice
+ * @memberOf chatwoot-chatwoot
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DicedbDiceConfig} body - Service instance configuration
- * @returns {DicedbDice} - Service instance
+ * @param {ChatwootChatwootConfig} body - Service instance configuration
+ * @returns {ChatwootChatwoot} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createDicedbDiceInstance } from '@osaas/client-services';
+ * import { createChatwootChatwootInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: DicedbDiceConfig = { name: 'myinstance', ... };
- * const instance = await createDicedbDiceInstance(ctx, body);
+ * const body: ChatwootChatwootConfig = { name: 'myinstance', ... };
+ * const instance = await createChatwootChatwootInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createDicedbDiceInstance(
+export async function createChatwootChatwootInstance(
   ctx: Context,
-  body: DicedbDiceConfig
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
+  body: ChatwootChatwootConfig
+): Promise<ChatwootChatwoot> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'chatwoot-chatwoot'
+  );
   const instance = await createInstance(
     ctx,
-    'dicedb-dice',
+    'chatwoot-chatwoot',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('dicedb-dice', instance.name, ctx);
+  await waitForInstanceReady('chatwoot-chatwoot', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Dice DB instance
+ * Remove a Chatwoot instance
  *
- * @memberOf dicedb-dice
+ * @memberOf chatwoot-chatwoot
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be removed
+ * @param {string} name - Name of the chatwoot to be removed
  */
-export async function removeDicedbDiceInstance(
+export async function removeChatwootChatwootInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  await removeInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'chatwoot-chatwoot'
+  );
+  await removeInstance(ctx, 'chatwoot-chatwoot', name, serviceAccessToken);
 }
 
 /**
- * Get a Dice DB instance
+ * Get a Chatwoot instance
  *
- * @memberOf dicedb-dice
+ * @memberOf chatwoot-chatwoot
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be retrieved
- * @returns {DicedbDice} - Service instance
+ * @param {string} name - Name of the chatwoot to be retrieved
+ * @returns {ChatwootChatwoot} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getDicedbDiceInstance } from '@osaas/client-services';
+ * import { getChatwootChatwootInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getDicedbDiceInstance(ctx, 'myinstance');
+ * const instance = await getChatwootChatwootInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getDicedbDiceInstance(
+export async function getChatwootChatwootInstance(
   ctx: Context,
   name: string
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  return await getInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+): Promise<ChatwootChatwoot> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'chatwoot-chatwoot'
+  );
+  return await getInstance(ctx, 'chatwoot-chatwoot', name, serviceAccessToken);
 }

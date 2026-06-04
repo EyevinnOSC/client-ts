@@ -73,6 +73,7 @@ export interface paths {
             S3ProjectsUrl?: string;
             S3PluginsUrl?: string;
             S3MediaUrl?: string;
+            S3JsonUrl?: string;
             S3EndpointUrl?: string;
             S3AccessKeyId?: string;
             S3SecretAccessKey?: string;
@@ -111,6 +112,10 @@ export interface paths {
                 /** @description Scale this instance */
                 href: string;
               };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
+                href: string;
+              };
             };
           })[];
         };
@@ -139,6 +144,7 @@ export interface paths {
             S3ProjectsUrl?: string;
             S3PluginsUrl?: string;
             S3MediaUrl?: string;
+            S3JsonUrl?: string;
             S3EndpointUrl?: string;
             S3AccessKeyId?: string;
             S3SecretAccessKey?: string;
@@ -174,6 +180,7 @@ export interface paths {
             S3ProjectsUrl?: string;
             S3PluginsUrl?: string;
             S3MediaUrl?: string;
+            S3JsonUrl?: string;
             S3EndpointUrl?: string;
             S3AccessKeyId?: string;
             S3SecretAccessKey?: string;
@@ -210,6 +217,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -300,6 +311,7 @@ export interface paths {
             S3ProjectsUrl?: string;
             S3PluginsUrl?: string;
             S3MediaUrl?: string;
+            S3JsonUrl?: string;
             S3EndpointUrl?: string;
             S3AccessKeyId?: string;
             S3SecretAccessKey?: string;
@@ -336,6 +348,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -392,6 +408,7 @@ export interface paths {
             S3ProjectsUrl?: string;
             S3PluginsUrl?: string;
             S3MediaUrl?: string;
+            S3JsonUrl?: string;
             S3EndpointUrl?: string;
             S3AccessKeyId?: string;
             S3SecretAccessKey?: string;
@@ -431,6 +448,7 @@ export interface paths {
             S3ProjectsUrl?: string;
             S3PluginsUrl?: string;
             S3MediaUrl?: string;
+            S3JsonUrl?: string;
             S3EndpointUrl?: string;
             S3AccessKeyId?: string;
             S3SecretAccessKey?: string;
@@ -467,6 +485,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -609,6 +631,38 @@ export interface paths {
       };
     };
   };
+  '/internal-endpoint/{id}': {
+    /** Get internal K8s endpoint for a spx-gc instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the spx-gc instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            serviceDns: string;
+            ports: {
+              name: string;
+              port: number;
+              protocol: string;
+            }[];
+            publicAccess: boolean;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface definitions {}
@@ -646,6 +700,7 @@ import {
  * @property {string} [S3ProjectsUrl] - S3 bucket URL or path for storing SPX projects and rundowns data that would normally be stored in the DATAROOT folder.
  * @property {string} [S3PluginsUrl] - Configures the S3 bucket URL for storing SPX plugins and extensions. Plugins provide additional functionality like custom controls and user interface panels.
  * @property {string} [S3MediaUrl] - Configures the S3 bucket URL for storing media assets like images, videos, and other files used by graphics templates.
+ * @property {string} [S3JsonUrl] - Specifies the S3 bucket URL for storing and retrieving JSON data files used for data-driven graphics and external data integration.
  * @property {string} [S3EndpointUrl] - Custom S3-compatible endpoint URL for accessing object storage services other than AWS S3, such as MinIO, DigitalOcean Spaces, or other S3-compatible storage providers.
  * @property {string} [S3AccessKeyId] - AWS access key ID for authenticating with S3 services to access templates, projects, and media assets stored in cloud storage.
  * @property {string} [S3SecretAccessKey] - AWS secret access key for authenticating with S3 services, paired with the access key ID for secure cloud storage access.

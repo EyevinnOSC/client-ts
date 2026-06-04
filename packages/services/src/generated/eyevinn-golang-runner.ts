@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/diceinstance': {
-    /** List all running dice instances */
+  '/golang-runnerinstance': {
+    /** List all running golang-runner instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the dice instance */
+            /** @description Name of the golang-runner instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,6 +67,15 @@ export interface paths {
                 url: string;
               };
             };
+            SourceUrl: string;
+            GitHubToken?: string;
+            OscAccessToken?: string;
+            ConfigService?: string;
+            ConfigApiKey?: string;
+            SubPath?: string;
+            OscBuildCmd?: string;
+            OscEntry?: string;
+            CGoEnabled?: string;
           } & {
             _links: {
               self: {
@@ -99,6 +108,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -113,7 +126,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new dice instance */
+    /** Launch a new golang-runner instance */
     post: {
       parameters: {
         query: {
@@ -121,8 +134,17 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the golang-runner instance */
             name: string;
+            SourceUrl: string;
+            GitHubToken?: string;
+            OscAccessToken?: string;
+            ConfigService?: string;
+            ConfigApiKey?: string;
+            SubPath?: string;
+            OscBuildCmd?: string;
+            OscEntry?: string;
+            CGoEnabled?: string;
           };
         };
       };
@@ -130,7 +152,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the golang-runner instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -148,6 +170,15 @@ export interface paths {
                 url: string;
               };
             };
+            SourceUrl: string;
+            GitHubToken?: string;
+            OscAccessToken?: string;
+            ConfigService?: string;
+            ConfigApiKey?: string;
+            SubPath?: string;
+            OscBuildCmd?: string;
+            OscEntry?: string;
+            CGoEnabled?: string;
           } & {
             _links: {
               self: {
@@ -180,6 +211,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -210,11 +245,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart dice */
+    /** Restart golang-runner */
     post: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the golang-runner instance */
           id: string;
         };
       };
@@ -233,12 +268,12 @@ export interface paths {
       };
     };
   };
-  '/diceinstance/{id}': {
-    /** Obtain status and resource URLs for an dice instance */
+  '/golang-runnerinstance/{id}': {
+    /** Obtain status and resource URLs for an golang-runner instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the golang-runner instance */
           id: string;
         };
       };
@@ -246,7 +281,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the golang-runner instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -264,6 +299,15 @@ export interface paths {
                 url: string;
               };
             };
+            SourceUrl: string;
+            GitHubToken?: string;
+            OscAccessToken?: string;
+            ConfigService?: string;
+            ConfigApiKey?: string;
+            SubPath?: string;
+            OscBuildCmd?: string;
+            OscEntry?: string;
+            CGoEnabled?: string;
           } & {
             _links: {
               self: {
@@ -296,6 +340,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -317,11 +365,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an dice instance */
+    /** Stop and remove an golang-runner instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the golang-runner instance */
           id: string;
         };
       };
@@ -339,17 +387,26 @@ export interface paths {
         };
       };
     };
-    /** Patch dice instance with new parameters and restart */
+    /** Patch golang-runner instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the golang-runner instance */
             name?: string;
+            SourceUrl?: string;
+            GitHubToken?: string;
+            OscAccessToken?: string;
+            ConfigService?: string;
+            ConfigApiKey?: string;
+            SubPath?: string;
+            OscBuildCmd?: string;
+            OscEntry?: string;
+            CGoEnabled?: string;
           };
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the golang-runner instance */
           id: string;
         };
       };
@@ -357,7 +414,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the golang-runner instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -375,6 +432,15 @@ export interface paths {
                 url: string;
               };
             };
+            SourceUrl: string;
+            GitHubToken?: string;
+            OscAccessToken?: string;
+            ConfigService?: string;
+            ConfigApiKey?: string;
+            SubPath?: string;
+            OscBuildCmd?: string;
+            OscEntry?: string;
+            CGoEnabled?: string;
           } & {
             _links: {
               self: {
@@ -407,6 +473,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -437,11 +507,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of dice instance */
+    /** Return status of golang-runner instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the golang-runner instance */
           id: string;
         };
       };
@@ -465,7 +535,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the dice instance */
+    /** Return the latest logs from the golang-runner instance */
     get: {
       parameters: {
         query: {
@@ -473,7 +543,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the golang-runner instance */
           id: string;
         };
       };
@@ -493,11 +563,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for dice instance */
+    /** Return the exposed extra ports for golang-runner instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the golang-runner instance */
           id: string;
         };
       };
@@ -521,11 +591,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for dice instance */
+    /** Return the assigned NodePorts for golang-runner instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the golang-runner instance */
           id: string;
         };
       };
@@ -549,6 +619,38 @@ export interface paths {
       };
     };
   };
+  '/internal-endpoint/{id}': {
+    /** Get internal K8s endpoint for a golang-runner instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the golang-runner instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            serviceDns: string;
+            ports: {
+              name: string;
+              port: number;
+              protocol: string;
+            }[];
+            publicAccess: boolean;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface definitions {}
@@ -557,11 +659,11 @@ export interface operations {}
 
 export interface external {}
 
-export type DicedbDice =
-  paths['/diceinstance/{id}']['get']['responses']['200']['schema'];
+export type EyevinnGolangRunner =
+  paths['/golang-runnerinstance/{id}']['get']['responses']['200']['schema'];
 
-export type DicedbDiceConfig =
-  paths['/diceinstance']['post']['parameters']['body']['body'];
+export type EyevinnGolangRunnerConfig =
+  paths['/golang-runnerinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -570,95 +672,115 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace dicedb-dice
- * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @namespace eyevinn-golang-runner
+ * @description Elevate your Go projects effortlessly with Golang-Runner. Deploy apps as "My Apps" on the Eyevinn Open Source Cloud, simplifying builds and integrations. Secure and customizable for all your cloud needs!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} DicedbDiceConfig
- * @property {string} name - Name of dice
+ * @typedef {Object} EyevinnGolangRunnerConfig
+ * @property {string} name - Name of golang-runner
+ * @property {string} SourceUrl - HTTPS URL of the Git repository to clone and build. This is the primary source location for your Go application code.
+ * @property {string} [GitHubToken] - Personal access token for authenticating with private Git repositories. This is a fallback option that gets used if GIT_TOKEN is not provided.
+ * @property {string} [OscAccessToken] - OSC (Open Source Cloud) runner token used for authenticating with the OSC config service to load environment variables at startup.
+ * @property {string} [ConfigService] - OSC config service endpoint URL for loading environment variables at startup. Works in conjunction with OSC_ACCESS_TOKEN.
+ * @property {string} [ConfigApiKey] - ConfigApiKey
+ * @property {string} [SubPath] - Subdirectory within the cloned repository to use as the build root. This enables support for monorepo structures where your Go application is located in a specific folder.
+ * @property {string} [OscBuildCmd] - Override the auto-detected build command with a custom Go build command. When not set, the runner automatically detects your project structure and chooses an appropriate build command.
+ * @property {string} [OscEntry] - Override the binary executable path that will be run after the build completes. Allows you to specify a different binary to execute instead of the default.
+ * @property {string} [CGoEnabled] - Enable or disable CGO during the Go build process. Set to '1' to enable CGO, which allows calling C code from Go but requires gcc and increases image size.
 
  * 
  */
 
 /**
- * @typedef {Object} DicedbDice
- * @property {string} name - Name of the Dice DB instance
- * @property {string} url - URL of the Dice DB instance
+ * @typedef {Object} EyevinnGolangRunner
+ * @property {string} name - Name of the Golang Runner instance
+ * @property {string} url - URL of the Golang Runner instance
  *
  */
 
 /**
- * Create a new Dice DB instance
+ * Create a new Golang Runner instance
  *
- * @memberOf dicedb-dice
+ * @memberOf eyevinn-golang-runner
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DicedbDiceConfig} body - Service instance configuration
- * @returns {DicedbDice} - Service instance
+ * @param {EyevinnGolangRunnerConfig} body - Service instance configuration
+ * @returns {EyevinnGolangRunner} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createDicedbDiceInstance } from '@osaas/client-services';
+ * import { createEyevinnGolangRunnerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: DicedbDiceConfig = { name: 'myinstance', ... };
- * const instance = await createDicedbDiceInstance(ctx, body);
+ * const body: EyevinnGolangRunnerConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnGolangRunnerInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createDicedbDiceInstance(
+export async function createEyevinnGolangRunnerInstance(
   ctx: Context,
-  body: DicedbDiceConfig
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
+  body: EyevinnGolangRunnerConfig
+): Promise<EyevinnGolangRunner> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-golang-runner'
+  );
   const instance = await createInstance(
     ctx,
-    'dicedb-dice',
+    'eyevinn-golang-runner',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('dicedb-dice', instance.name, ctx);
+  await waitForInstanceReady('eyevinn-golang-runner', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Dice DB instance
+ * Remove a Golang Runner instance
  *
- * @memberOf dicedb-dice
+ * @memberOf eyevinn-golang-runner
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be removed
+ * @param {string} name - Name of the golang-runner to be removed
  */
-export async function removeDicedbDiceInstance(
+export async function removeEyevinnGolangRunnerInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  await removeInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-golang-runner'
+  );
+  await removeInstance(ctx, 'eyevinn-golang-runner', name, serviceAccessToken);
 }
 
 /**
- * Get a Dice DB instance
+ * Get a Golang Runner instance
  *
- * @memberOf dicedb-dice
+ * @memberOf eyevinn-golang-runner
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be retrieved
- * @returns {DicedbDice} - Service instance
+ * @param {string} name - Name of the golang-runner to be retrieved
+ * @returns {EyevinnGolangRunner} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getDicedbDiceInstance } from '@osaas/client-services';
+ * import { getEyevinnGolangRunnerInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getDicedbDiceInstance(ctx, 'myinstance');
+ * const instance = await getEyevinnGolangRunnerInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getDicedbDiceInstance(
+export async function getEyevinnGolangRunnerInstance(
   ctx: Context,
   name: string
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  return await getInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+): Promise<EyevinnGolangRunner> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-golang-runner'
+  );
+  return await getInstance(
+    ctx,
+    'eyevinn-golang-runner',
+    name,
+    serviceAccessToken
+  );
 }

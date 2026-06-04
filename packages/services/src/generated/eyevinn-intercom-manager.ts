@@ -91,6 +91,10 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
                 href: string;
@@ -178,6 +182,10 @@ export interface paths {
               };
               ports?: {
                 /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
                 href: string;
               };
               restart?: {
@@ -298,6 +306,10 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
                 href: string;
@@ -415,6 +427,10 @@ export interface paths {
               };
               ports?: {
                 /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
                 href: string;
               };
               restart?: {
@@ -540,6 +556,35 @@ export interface paths {
       };
     };
   };
+  '/nodeports/{id}': {
+    /** Return the assigned NodePorts for intercom-manager instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the intercom-manager instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            name: string;
+            protocol: Partial<'TCP'> & Partial<'UDP'>;
+            port: number;
+            ip?: string;
+          }[];
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface definitions {}
@@ -575,7 +620,7 @@ Join our Slack community for support and customization. Contact sales@eyevinn.se
  * @property {string} name - Name of intercom-manager
  * @property {string} smbUrl - URL to the Symphony Media Bridge
  * @property {string} smbApiKey - API key for the Symphony Media Bridge
- * @property {string} dbUrl - URL to CouchDb
+ * @property {string} dbUrl - URL including credentials to couchdb. Database expected as path
  * @property {string} [oscAccessToken] - Personal Access Token from Eyevinn Open Source Cloud for link sharing and reauthentication features
  * @property {string} [whipAuthKey] - Authentication key for WHIP (WebRTC-HTTP Ingestion Protocol) endpoints
  * @property {string} [iceServers] - Comma-separated list of ICE servers for WebRTC connectivity, including STUN and TURN servers

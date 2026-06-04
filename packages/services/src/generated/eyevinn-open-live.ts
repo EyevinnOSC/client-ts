@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/diceinstance': {
-    /** List all running dice instances */
+  '/open-liveinstance': {
+    /** List all running open-live instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the dice instance */
+            /** @description Name of the open-live instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,6 +67,11 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
+            StromUrl: string;
+            StromAuthMode?: string;
+            StromAccessToken?: string;
+            CorsOrigin?: string;
           } & {
             _links: {
               self: {
@@ -99,6 +104,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -113,7 +122,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new dice instance */
+    /** Launch a new open-live instance */
     post: {
       parameters: {
         query: {
@@ -121,8 +130,13 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the open-live instance */
             name: string;
+            DatabaseUrl: string;
+            StromUrl: string;
+            StromAuthMode?: string;
+            StromAccessToken?: string;
+            CorsOrigin?: string;
           };
         };
       };
@@ -130,7 +144,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the open-live instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -148,6 +162,11 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
+            StromUrl: string;
+            StromAuthMode?: string;
+            StromAccessToken?: string;
+            CorsOrigin?: string;
           } & {
             _links: {
               self: {
@@ -180,6 +199,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -210,11 +233,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart dice */
+    /** Restart open-live */
     post: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the open-live instance */
           id: string;
         };
       };
@@ -233,12 +256,12 @@ export interface paths {
       };
     };
   };
-  '/diceinstance/{id}': {
-    /** Obtain status and resource URLs for an dice instance */
+  '/open-liveinstance/{id}': {
+    /** Obtain status and resource URLs for an open-live instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the open-live instance */
           id: string;
         };
       };
@@ -246,7 +269,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the open-live instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -264,6 +287,11 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
+            StromUrl: string;
+            StromAuthMode?: string;
+            StromAccessToken?: string;
+            CorsOrigin?: string;
           } & {
             _links: {
               self: {
@@ -296,6 +324,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -317,11 +349,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an dice instance */
+    /** Stop and remove an open-live instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the open-live instance */
           id: string;
         };
       };
@@ -339,17 +371,22 @@ export interface paths {
         };
       };
     };
-    /** Patch dice instance with new parameters and restart */
+    /** Patch open-live instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the open-live instance */
             name?: string;
+            DatabaseUrl?: string;
+            StromUrl?: string;
+            StromAuthMode?: string;
+            StromAccessToken?: string;
+            CorsOrigin?: string;
           };
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the open-live instance */
           id: string;
         };
       };
@@ -357,7 +394,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the open-live instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -375,6 +412,11 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
+            StromUrl: string;
+            StromAuthMode?: string;
+            StromAccessToken?: string;
+            CorsOrigin?: string;
           } & {
             _links: {
               self: {
@@ -407,6 +449,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -437,11 +483,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of dice instance */
+    /** Return status of open-live instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the open-live instance */
           id: string;
         };
       };
@@ -465,7 +511,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the dice instance */
+    /** Return the latest logs from the open-live instance */
     get: {
       parameters: {
         query: {
@@ -473,7 +519,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the open-live instance */
           id: string;
         };
       };
@@ -493,11 +539,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for dice instance */
+    /** Return the exposed extra ports for open-live instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the open-live instance */
           id: string;
         };
       };
@@ -521,11 +567,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for dice instance */
+    /** Return the assigned NodePorts for open-live instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the open-live instance */
           id: string;
         };
       };
@@ -549,6 +595,38 @@ export interface paths {
       };
     };
   };
+  '/internal-endpoint/{id}': {
+    /** Get internal K8s endpoint for a open-live instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the open-live instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            serviceDns: string;
+            ports: {
+              name: string;
+              port: number;
+              protocol: string;
+            }[];
+            publicAccess: boolean;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface definitions {}
@@ -557,11 +635,11 @@ export interface operations {}
 
 export interface external {}
 
-export type DicedbDice =
-  paths['/diceinstance/{id}']['get']['responses']['200']['schema'];
+export type EyevinnOpenLive =
+  paths['/open-liveinstance/{id}']['get']['responses']['200']['schema'];
 
-export type DicedbDiceConfig =
-  paths['/diceinstance']['post']['parameters']['body']['body'];
+export type EyevinnOpenLiveConfig =
+  paths['/open-liveinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -570,95 +648,106 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace dicedb-dice
- * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @namespace eyevinn-open-live
+ * @description Supercharge your broadcast productions with Open Live's central API server. Built with cutting-edge tech, streamline workflows, activate productions swiftly, and manage sources seamlessly. Elevate now!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
- *
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Open-Live.html|Online docs} for further information
  */
 
 /**
- * @typedef {Object} DicedbDiceConfig
- * @property {string} name - Name of dice
+ * @typedef {Object} EyevinnOpenLiveConfig
+ * @property {string} name - Name of open-live
+ * @property {string} DatabaseUrl - Full CouchDB connection URL including credentials for data persistence
+ * @property {string} StromUrl - Base URL of the Strom pipeline engine used for video flow processing
+ * @property {string} [StromAuthMode] - Authentication mode for connecting to the Strom pipeline engine
+ * @property {string} [StromAccessToken] - OSC Personal Access Token for authenticating against OSC-hosted Strom instances
+ * @property {string} [CorsOrigin] - Allowed CORS origin URL for the studio frontend to enable cross-origin requests to the API server.
 
  * 
  */
 
 /**
- * @typedef {Object} DicedbDice
- * @property {string} name - Name of the Dice DB instance
- * @property {string} url - URL of the Dice DB instance
+ * @typedef {Object} EyevinnOpenLive
+ * @property {string} name - Name of the Open Live instance
+ * @property {string} url - URL of the Open Live instance
  *
  */
 
 /**
- * Create a new Dice DB instance
+ * Create a new Open Live instance
  *
- * @memberOf dicedb-dice
+ * @memberOf eyevinn-open-live
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DicedbDiceConfig} body - Service instance configuration
- * @returns {DicedbDice} - Service instance
+ * @param {EyevinnOpenLiveConfig} body - Service instance configuration
+ * @returns {EyevinnOpenLive} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createDicedbDiceInstance } from '@osaas/client-services';
+ * import { createEyevinnOpenLiveInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: DicedbDiceConfig = { name: 'myinstance', ... };
- * const instance = await createDicedbDiceInstance(ctx, body);
+ * const body: EyevinnOpenLiveConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnOpenLiveInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createDicedbDiceInstance(
+export async function createEyevinnOpenLiveInstance(
   ctx: Context,
-  body: DicedbDiceConfig
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
+  body: EyevinnOpenLiveConfig
+): Promise<EyevinnOpenLive> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-open-live'
+  );
   const instance = await createInstance(
     ctx,
-    'dicedb-dice',
+    'eyevinn-open-live',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('dicedb-dice', instance.name, ctx);
+  await waitForInstanceReady('eyevinn-open-live', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Dice DB instance
+ * Remove a Open Live instance
  *
- * @memberOf dicedb-dice
+ * @memberOf eyevinn-open-live
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be removed
+ * @param {string} name - Name of the open-live to be removed
  */
-export async function removeDicedbDiceInstance(
+export async function removeEyevinnOpenLiveInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  await removeInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-open-live'
+  );
+  await removeInstance(ctx, 'eyevinn-open-live', name, serviceAccessToken);
 }
 
 /**
- * Get a Dice DB instance
+ * Get a Open Live instance
  *
- * @memberOf dicedb-dice
+ * @memberOf eyevinn-open-live
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be retrieved
- * @returns {DicedbDice} - Service instance
+ * @param {string} name - Name of the open-live to be retrieved
+ * @returns {EyevinnOpenLive} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getDicedbDiceInstance } from '@osaas/client-services';
+ * import { getEyevinnOpenLiveInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getDicedbDiceInstance(ctx, 'myinstance');
+ * const instance = await getEyevinnOpenLiveInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getDicedbDiceInstance(
+export async function getEyevinnOpenLiveInstance(
   ctx: Context,
   name: string
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  return await getInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+): Promise<EyevinnOpenLive> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-open-live'
+  );
+  return await getInstance(ctx, 'eyevinn-open-live', name, serviceAccessToken);
 }

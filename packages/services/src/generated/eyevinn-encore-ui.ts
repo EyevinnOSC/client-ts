@@ -522,7 +522,7 @@ import {
  * @description Upgrade your video encoding process with Encore UI, a sleek React-based interface for seamless job management. Enjoy real-time updates, detailed insights, and ultimate control over encoding workflows.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
- *
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-SVT-Encore.html|Online docs} for further information
  */
 
 /**

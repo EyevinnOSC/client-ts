@@ -5,12 +5,39 @@
 
 export interface paths {
   '/': {
-    /** Say hello */
+    /** Health check endpoint */
     get: {
+      parameters: {
+        query: {
+          verbose?: boolean;
+        };
+      };
       responses: {
-        /** The magical words! */
+        /** Default Response */
         200: {
-          schema: string;
+          schema: Partial<string> &
+            Partial<{
+              status: string;
+              versions: {
+                '@osaas/orchestrator': string;
+              };
+              environment: string;
+              _links: {
+                self: {
+                  href: string;
+                };
+                api: {
+                  href: string;
+                };
+              };
+            }>;
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            status: string;
+            reason: string;
+          };
         };
       };
     };
@@ -48,6 +75,9 @@ export interface paths {
             S3EndpointUrl?: string;
             OscAccessToken?: string;
             ConfigService?: string;
+            ConfigApiKey?: string;
+            SubPath?: string;
+            AnalyticsService?: string;
           } & {
             _links: {
               self: {
@@ -66,12 +96,24 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
                 href: string;
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -89,6 +131,9 @@ export interface paths {
     /** Launch a new web-runner instance */
     post: {
       parameters: {
+        query: {
+          beta?: boolean;
+        };
         body: {
           body?: {
             /** @description Name of the web-runner instance */
@@ -101,6 +146,9 @@ export interface paths {
             S3EndpointUrl?: string;
             OscAccessToken?: string;
             ConfigService?: string;
+            ConfigApiKey?: string;
+            SubPath?: string;
+            AnalyticsService?: string;
           };
         };
       };
@@ -134,6 +182,9 @@ export interface paths {
             S3EndpointUrl?: string;
             OscAccessToken?: string;
             ConfigService?: string;
+            ConfigApiKey?: string;
+            SubPath?: string;
+            AnalyticsService?: string;
           } & {
             _links: {
               self: {
@@ -152,12 +203,24 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
                 href: string;
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -250,6 +313,9 @@ export interface paths {
             S3EndpointUrl?: string;
             OscAccessToken?: string;
             ConfigService?: string;
+            ConfigApiKey?: string;
+            SubPath?: string;
+            AnalyticsService?: string;
           } & {
             _links: {
               self: {
@@ -268,12 +334,24 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
                 href: string;
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -332,6 +410,9 @@ export interface paths {
             S3EndpointUrl?: string;
             OscAccessToken?: string;
             ConfigService?: string;
+            ConfigApiKey?: string;
+            SubPath?: string;
+            AnalyticsService?: string;
           };
         };
         path: {
@@ -369,6 +450,9 @@ export interface paths {
             S3EndpointUrl?: string;
             OscAccessToken?: string;
             ConfigService?: string;
+            ConfigApiKey?: string;
+            SubPath?: string;
+            AnalyticsService?: string;
           } & {
             _links: {
               self: {
@@ -387,6 +471,10 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
                 href: string;
@@ -395,7 +483,22 @@ export interface paths {
                 /** @description Update this instance */
                 href: string;
               };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
+                href: string;
+              };
             };
+          };
+        };
+        /** Default Response */
+        400: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
           };
         };
         /** Default Response */
@@ -430,6 +533,7 @@ export interface paths {
           schema: {
             /** @enum {string} */
             status: 'starting' | 'running' | 'stopped' | 'failed' | 'unknown';
+            images?: string[];
           };
         };
         /** Default Response */
@@ -498,6 +602,67 @@ export interface paths {
       };
     };
   };
+  '/nodeports/{id}': {
+    /** Return the assigned NodePorts for web-runner instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the web-runner instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            name: string;
+            protocol: Partial<'TCP'> & Partial<'UDP'>;
+            port: number;
+            ip?: string;
+          }[];
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
+  '/internal-endpoint/{id}': {
+    /** Get internal K8s endpoint for a web-runner instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the web-runner instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            serviceDns: string;
+            ports: {
+              name: string;
+              port: number;
+              protocol: string;
+            }[];
+            publicAccess: boolean;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface definitions {}
@@ -537,6 +702,9 @@ import {
  * @property {string} [S3EndpointUrl] - Custom S3 endpoint URL for S3-compatible storage services like MinIO or other non-AWS S3 implementations.
  * @property {string} [OscAccessToken] - Access token for Eyevinn Open Source Cloud (OSC) services integration and authentication.
  * @property {string} [ConfigService] - Configuration service endpoint URL for external configuration management and service discovery.
+ * @property {string} [ConfigApiKey] - ConfigApiKey
+ * @property {string} [SubPath] - Subdirectory path within the source repository or zip file where the NodeJS application is located.
+ * @property {string} [AnalyticsService] - AnalyticsService
 
  * 
  */

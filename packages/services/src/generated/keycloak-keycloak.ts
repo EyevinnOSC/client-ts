@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/diceinstance': {
-    /** List all running dice instances */
+  '/keycloakinstance': {
+    /** List all running keycloak instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the dice instance */
+            /** @description Name of the keycloak instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,6 +67,9 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
+            AdminUser: string;
+            AdminPassword: string;
           } & {
             _links: {
               self: {
@@ -99,6 +102,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -113,7 +120,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new dice instance */
+    /** Launch a new keycloak instance */
     post: {
       parameters: {
         query: {
@@ -121,8 +128,11 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the keycloak instance */
             name: string;
+            DatabaseUrl: string;
+            AdminUser: string;
+            AdminPassword: string;
           };
         };
       };
@@ -130,7 +140,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the keycloak instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -148,6 +158,9 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
+            AdminUser: string;
+            AdminPassword: string;
           } & {
             _links: {
               self: {
@@ -180,6 +193,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -210,11 +227,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart dice */
+    /** Restart keycloak */
     post: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the keycloak instance */
           id: string;
         };
       };
@@ -233,12 +250,12 @@ export interface paths {
       };
     };
   };
-  '/diceinstance/{id}': {
-    /** Obtain status and resource URLs for an dice instance */
+  '/keycloakinstance/{id}': {
+    /** Obtain status and resource URLs for an keycloak instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the keycloak instance */
           id: string;
         };
       };
@@ -246,7 +263,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the keycloak instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -264,6 +281,9 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
+            AdminUser: string;
+            AdminPassword: string;
           } & {
             _links: {
               self: {
@@ -296,6 +316,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -317,11 +341,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an dice instance */
+    /** Stop and remove an keycloak instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the keycloak instance */
           id: string;
         };
       };
@@ -339,17 +363,20 @@ export interface paths {
         };
       };
     };
-    /** Patch dice instance with new parameters and restart */
+    /** Patch keycloak instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the keycloak instance */
             name?: string;
+            DatabaseUrl?: string;
+            AdminUser?: string;
+            AdminPassword?: string;
           };
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the keycloak instance */
           id: string;
         };
       };
@@ -357,7 +384,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the keycloak instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -375,6 +402,9 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
+            AdminUser: string;
+            AdminPassword: string;
           } & {
             _links: {
               self: {
@@ -407,6 +437,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -437,11 +471,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of dice instance */
+    /** Return status of keycloak instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the keycloak instance */
           id: string;
         };
       };
@@ -465,7 +499,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the dice instance */
+    /** Return the latest logs from the keycloak instance */
     get: {
       parameters: {
         query: {
@@ -473,7 +507,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the keycloak instance */
           id: string;
         };
       };
@@ -493,11 +527,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for dice instance */
+    /** Return the exposed extra ports for keycloak instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the keycloak instance */
           id: string;
         };
       };
@@ -521,11 +555,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for dice instance */
+    /** Return the assigned NodePorts for keycloak instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the keycloak instance */
           id: string;
         };
       };
@@ -549,6 +583,38 @@ export interface paths {
       };
     };
   };
+  '/internal-endpoint/{id}': {
+    /** Get internal K8s endpoint for a keycloak instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the keycloak instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            serviceDns: string;
+            ports: {
+              name: string;
+              port: number;
+              protocol: string;
+            }[];
+            publicAccess: boolean;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface definitions {}
@@ -557,11 +623,11 @@ export interface operations {}
 
 export interface external {}
 
-export type DicedbDice =
-  paths['/diceinstance/{id}']['get']['responses']['200']['schema'];
+export type KeycloakKeycloak =
+  paths['/keycloakinstance/{id}']['get']['responses']['200']['schema'];
 
-export type DicedbDiceConfig =
-  paths['/diceinstance']['post']['parameters']['body']['body'];
+export type KeycloakKeycloakConfig =
+  paths['/keycloakinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -570,95 +636,104 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace dicedb-dice
- * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @namespace keycloak-keycloak
+ * @description Effortlessly add authentication to your applications with Keycloak. Secure services, manage users, and implement strong authentication—all with minimal setup. Transform your identity management now!
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} DicedbDiceConfig
- * @property {string} name - Name of dice
+ * @typedef {Object} KeycloakKeycloakConfig
+ * @property {string} name - Name of keycloak
+ * @property {string} DatabaseUrl - DatabaseUrl
+ * @property {string} AdminUser - AdminUser
+ * @property {string} AdminPassword - AdminPassword
 
  * 
  */
 
 /**
- * @typedef {Object} DicedbDice
- * @property {string} name - Name of the Dice DB instance
- * @property {string} url - URL of the Dice DB instance
+ * @typedef {Object} KeycloakKeycloak
+ * @property {string} name - Name of the Keycloak instance
+ * @property {string} url - URL of the Keycloak instance
  *
  */
 
 /**
- * Create a new Dice DB instance
+ * Create a new Keycloak instance
  *
- * @memberOf dicedb-dice
+ * @memberOf keycloak-keycloak
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DicedbDiceConfig} body - Service instance configuration
- * @returns {DicedbDice} - Service instance
+ * @param {KeycloakKeycloakConfig} body - Service instance configuration
+ * @returns {KeycloakKeycloak} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createDicedbDiceInstance } from '@osaas/client-services';
+ * import { createKeycloakKeycloakInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: DicedbDiceConfig = { name: 'myinstance', ... };
- * const instance = await createDicedbDiceInstance(ctx, body);
+ * const body: KeycloakKeycloakConfig = { name: 'myinstance', ... };
+ * const instance = await createKeycloakKeycloakInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createDicedbDiceInstance(
+export async function createKeycloakKeycloakInstance(
   ctx: Context,
-  body: DicedbDiceConfig
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
+  body: KeycloakKeycloakConfig
+): Promise<KeycloakKeycloak> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'keycloak-keycloak'
+  );
   const instance = await createInstance(
     ctx,
-    'dicedb-dice',
+    'keycloak-keycloak',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('dicedb-dice', instance.name, ctx);
+  await waitForInstanceReady('keycloak-keycloak', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Dice DB instance
+ * Remove a Keycloak instance
  *
- * @memberOf dicedb-dice
+ * @memberOf keycloak-keycloak
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be removed
+ * @param {string} name - Name of the keycloak to be removed
  */
-export async function removeDicedbDiceInstance(
+export async function removeKeycloakKeycloakInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  await removeInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'keycloak-keycloak'
+  );
+  await removeInstance(ctx, 'keycloak-keycloak', name, serviceAccessToken);
 }
 
 /**
- * Get a Dice DB instance
+ * Get a Keycloak instance
  *
- * @memberOf dicedb-dice
+ * @memberOf keycloak-keycloak
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be retrieved
- * @returns {DicedbDice} - Service instance
+ * @param {string} name - Name of the keycloak to be retrieved
+ * @returns {KeycloakKeycloak} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getDicedbDiceInstance } from '@osaas/client-services';
+ * import { getKeycloakKeycloakInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getDicedbDiceInstance(ctx, 'myinstance');
+ * const instance = await getKeycloakKeycloakInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getDicedbDiceInstance(
+export async function getKeycloakKeycloakInstance(
   ctx: Context,
   name: string
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  return await getInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+): Promise<KeycloakKeycloak> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'keycloak-keycloak'
+  );
+  return await getInstance(ctx, 'keycloak-keycloak', name, serviceAccessToken);
 }

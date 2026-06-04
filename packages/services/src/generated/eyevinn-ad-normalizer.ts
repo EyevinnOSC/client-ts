@@ -96,12 +96,20 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
                 href: string;
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -119,6 +127,9 @@ export interface paths {
     /** Launch a new ad-normalizer instance */
     post: {
       parameters: {
+        query: {
+          beta?: boolean;
+        };
         body: {
           body?: {
             /** @description Name of the ad-normalizer instance */
@@ -188,12 +199,20 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
                 href: string;
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -307,12 +326,20 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
                 href: string;
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -432,12 +459,20 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
                 href: string;
               };
               update?: {
                 /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
                 href: string;
               };
             };
@@ -539,6 +574,35 @@ export interface paths {
             externalIp: string;
             externalPort: number;
             internalPort: number;
+          }[];
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
+  '/nodeports/{id}': {
+    /** Return the assigned NodePorts for ad-normalizer instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the ad-normalizer instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            name: string;
+            protocol: Partial<'TCP'> & Partial<'UDP'>;
+            port: number;
+            ip?: string;
           }[];
         };
         /** Default Response */

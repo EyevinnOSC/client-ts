@@ -89,6 +89,10 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
                 href: string;
@@ -99,6 +103,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -174,6 +182,10 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
                 href: string;
@@ -184,6 +196,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -290,6 +306,10 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
                 href: string;
@@ -300,6 +320,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -405,6 +429,10 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
                 href: string;
@@ -415,6 +443,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -517,6 +549,67 @@ export interface paths {
             externalPort: number;
             internalPort: number;
           }[];
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
+  '/nodeports/{id}': {
+    /** Return the assigned NodePorts for docker-mariadb instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the docker-mariadb instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            name: string;
+            protocol: Partial<'TCP'> & Partial<'UDP'>;
+            port: number;
+            ip?: string;
+          }[];
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
+  '/internal-endpoint/{id}': {
+    /** Get internal K8s endpoint for a docker-mariadb instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the docker-mariadb instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            serviceDns: string;
+            ports: {
+              name: string;
+              port: number;
+              protocol: string;
+            }[];
+            publicAccess: boolean;
+          };
         };
         /** Default Response */
         500: {

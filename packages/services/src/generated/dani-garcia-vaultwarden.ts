@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/diceinstance': {
-    /** List all running dice instances */
+  '/vaultwardeninstance': {
+    /** List all running vaultwarden instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the dice instance */
+            /** @description Name of the vaultwarden instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,6 +67,17 @@ export interface paths {
                 url: string;
               };
             };
+            adminToken?: string;
+            webVaultEnabled?: boolean;
+            smtpHost?: string;
+            smtpPort?: string;
+            smtpFrom?: string;
+            smtpUsername?: string;
+            smtpPassword?: string;
+            signupsAllowed?: boolean;
+            invitationsAllowed?: boolean;
+            showPasswordHint?: boolean;
+            databaseUrl: string;
           } & {
             _links: {
               self: {
@@ -99,6 +110,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -113,7 +128,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new dice instance */
+    /** Launch a new vaultwarden instance */
     post: {
       parameters: {
         query: {
@@ -121,8 +136,19 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the vaultwarden instance */
             name: string;
+            adminToken?: string;
+            webVaultEnabled?: boolean;
+            smtpHost?: string;
+            smtpPort?: string;
+            smtpFrom?: string;
+            smtpUsername?: string;
+            smtpPassword?: string;
+            signupsAllowed?: boolean;
+            invitationsAllowed?: boolean;
+            showPasswordHint?: boolean;
+            databaseUrl: string;
           };
         };
       };
@@ -130,7 +156,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the vaultwarden instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -148,6 +174,17 @@ export interface paths {
                 url: string;
               };
             };
+            adminToken?: string;
+            webVaultEnabled?: boolean;
+            smtpHost?: string;
+            smtpPort?: string;
+            smtpFrom?: string;
+            smtpUsername?: string;
+            smtpPassword?: string;
+            signupsAllowed?: boolean;
+            invitationsAllowed?: boolean;
+            showPasswordHint?: boolean;
+            databaseUrl: string;
           } & {
             _links: {
               self: {
@@ -180,6 +217,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -210,11 +251,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart dice */
+    /** Restart vaultwarden */
     post: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the vaultwarden instance */
           id: string;
         };
       };
@@ -233,12 +274,12 @@ export interface paths {
       };
     };
   };
-  '/diceinstance/{id}': {
-    /** Obtain status and resource URLs for an dice instance */
+  '/vaultwardeninstance/{id}': {
+    /** Obtain status and resource URLs for an vaultwarden instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the vaultwarden instance */
           id: string;
         };
       };
@@ -246,7 +287,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the vaultwarden instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -264,6 +305,17 @@ export interface paths {
                 url: string;
               };
             };
+            adminToken?: string;
+            webVaultEnabled?: boolean;
+            smtpHost?: string;
+            smtpPort?: string;
+            smtpFrom?: string;
+            smtpUsername?: string;
+            smtpPassword?: string;
+            signupsAllowed?: boolean;
+            invitationsAllowed?: boolean;
+            showPasswordHint?: boolean;
+            databaseUrl: string;
           } & {
             _links: {
               self: {
@@ -296,6 +348,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -317,11 +373,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an dice instance */
+    /** Stop and remove an vaultwarden instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the vaultwarden instance */
           id: string;
         };
       };
@@ -339,17 +395,28 @@ export interface paths {
         };
       };
     };
-    /** Patch dice instance with new parameters and restart */
+    /** Patch vaultwarden instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the vaultwarden instance */
             name?: string;
+            adminToken?: string;
+            webVaultEnabled?: boolean;
+            smtpHost?: string;
+            smtpPort?: string;
+            smtpFrom?: string;
+            smtpUsername?: string;
+            smtpPassword?: string;
+            signupsAllowed?: boolean;
+            invitationsAllowed?: boolean;
+            showPasswordHint?: boolean;
+            databaseUrl?: string;
           };
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the vaultwarden instance */
           id: string;
         };
       };
@@ -357,7 +424,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the vaultwarden instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -375,6 +442,17 @@ export interface paths {
                 url: string;
               };
             };
+            adminToken?: string;
+            webVaultEnabled?: boolean;
+            smtpHost?: string;
+            smtpPort?: string;
+            smtpFrom?: string;
+            smtpUsername?: string;
+            smtpPassword?: string;
+            signupsAllowed?: boolean;
+            invitationsAllowed?: boolean;
+            showPasswordHint?: boolean;
+            databaseUrl: string;
           } & {
             _links: {
               self: {
@@ -407,6 +485,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -437,11 +519,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of dice instance */
+    /** Return status of vaultwarden instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the vaultwarden instance */
           id: string;
         };
       };
@@ -465,7 +547,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the dice instance */
+    /** Return the latest logs from the vaultwarden instance */
     get: {
       parameters: {
         query: {
@@ -473,7 +555,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the vaultwarden instance */
           id: string;
         };
       };
@@ -493,11 +575,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for dice instance */
+    /** Return the exposed extra ports for vaultwarden instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the vaultwarden instance */
           id: string;
         };
       };
@@ -521,11 +603,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for dice instance */
+    /** Return the assigned NodePorts for vaultwarden instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the vaultwarden instance */
           id: string;
         };
       };
@@ -549,6 +631,38 @@ export interface paths {
       };
     };
   };
+  '/internal-endpoint/{id}': {
+    /** Get internal K8s endpoint for a vaultwarden instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the vaultwarden instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            serviceDns: string;
+            ports: {
+              name: string;
+              port: number;
+              protocol: string;
+            }[];
+            publicAccess: boolean;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface definitions {}
@@ -557,11 +671,11 @@ export interface operations {}
 
 export interface external {}
 
-export type DicedbDice =
-  paths['/diceinstance/{id}']['get']['responses']['200']['schema'];
+export type DaniGarciaVaultwarden =
+  paths['/vaultwardeninstance/{id}']['get']['responses']['200']['schema'];
 
-export type DicedbDiceConfig =
-  paths['/diceinstance']['post']['parameters']['body']['body'];
+export type DaniGarciaVaultwardenConfig =
+  paths['/vaultwardeninstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -570,95 +684,122 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace dicedb-dice
- * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @namespace dani-garcia-vaultwarden
+ * @description Experience seamless, lightweight password management with Vaultwarden! Our Rust-based server implementation is fully compatible with Bitwarden clients, offering top-notch security for self-hosted setups without resource-heavy overhead.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} DicedbDiceConfig
- * @property {string} name - Name of dice
+ * @typedef {Object} DaniGarciaVaultwardenConfig
+ * @property {string} name - Name of vaultwarden
+ * @property {string} [adminToken] - Authentication token for accessing the Vaultwarden admin backend interface
+ * @property {boolean} [webVaultEnabled] - Controls whether the web vault interface is enabled and accessible
+ * @property {string} [smtpHost] - SMTP server hostname or IP address for sending emails
+ * @property {string} [smtpPort] - Port number for the SMTP server connection
+ * @property {string} [smtpFrom] - Email address that appears as the sender for all outgoing emails from Vaultwarden
+ * @property {string} [smtpUsername] - Username for authenticating with the SMTP server
+ * @property {string} [smtpPassword] - Password for authenticating with the SMTP server
+ * @property {boolean} [signupsAllowed] - Controls whether new users can create accounts directly on the Vaultwarden instance
+ * @property {boolean} [invitationsAllowed] - Controls whether existing users can invite new users to join the Vaultwarden instance
+ * @property {boolean} [showPasswordHint] - Controls whether password hints are displayed to users who request them
+ * @property {string} databaseUrl - Connection string for the database where Vaultwarden stores all data including user accounts, passwords, and organizational information
 
  * 
  */
 
 /**
- * @typedef {Object} DicedbDice
- * @property {string} name - Name of the Dice DB instance
- * @property {string} url - URL of the Dice DB instance
+ * @typedef {Object} DaniGarciaVaultwarden
+ * @property {string} name - Name of the Vaultwarden instance
+ * @property {string} url - URL of the Vaultwarden instance
  *
  */
 
 /**
- * Create a new Dice DB instance
+ * Create a new Vaultwarden instance
  *
- * @memberOf dicedb-dice
+ * @memberOf dani-garcia-vaultwarden
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DicedbDiceConfig} body - Service instance configuration
- * @returns {DicedbDice} - Service instance
+ * @param {DaniGarciaVaultwardenConfig} body - Service instance configuration
+ * @returns {DaniGarciaVaultwarden} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createDicedbDiceInstance } from '@osaas/client-services';
+ * import { createDaniGarciaVaultwardenInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: DicedbDiceConfig = { name: 'myinstance', ... };
- * const instance = await createDicedbDiceInstance(ctx, body);
+ * const body: DaniGarciaVaultwardenConfig = { name: 'myinstance', ... };
+ * const instance = await createDaniGarciaVaultwardenInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createDicedbDiceInstance(
+export async function createDaniGarciaVaultwardenInstance(
   ctx: Context,
-  body: DicedbDiceConfig
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
+  body: DaniGarciaVaultwardenConfig
+): Promise<DaniGarciaVaultwarden> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'dani-garcia-vaultwarden'
+  );
   const instance = await createInstance(
     ctx,
-    'dicedb-dice',
+    'dani-garcia-vaultwarden',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('dicedb-dice', instance.name, ctx);
+  await waitForInstanceReady('dani-garcia-vaultwarden', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Dice DB instance
+ * Remove a Vaultwarden instance
  *
- * @memberOf dicedb-dice
+ * @memberOf dani-garcia-vaultwarden
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be removed
+ * @param {string} name - Name of the vaultwarden to be removed
  */
-export async function removeDicedbDiceInstance(
+export async function removeDaniGarciaVaultwardenInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  await removeInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'dani-garcia-vaultwarden'
+  );
+  await removeInstance(
+    ctx,
+    'dani-garcia-vaultwarden',
+    name,
+    serviceAccessToken
+  );
 }
 
 /**
- * Get a Dice DB instance
+ * Get a Vaultwarden instance
  *
- * @memberOf dicedb-dice
+ * @memberOf dani-garcia-vaultwarden
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be retrieved
- * @returns {DicedbDice} - Service instance
+ * @param {string} name - Name of the vaultwarden to be retrieved
+ * @returns {DaniGarciaVaultwarden} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getDicedbDiceInstance } from '@osaas/client-services';
+ * import { getDaniGarciaVaultwardenInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getDicedbDiceInstance(ctx, 'myinstance');
+ * const instance = await getDaniGarciaVaultwardenInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getDicedbDiceInstance(
+export async function getDaniGarciaVaultwardenInstance(
   ctx: Context,
   name: string
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  return await getInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+): Promise<DaniGarciaVaultwarden> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'dani-garcia-vaultwarden'
+  );
+  return await getInstance(
+    ctx,
+    'dani-garcia-vaultwarden',
+    name,
+    serviceAccessToken
+  );
 }

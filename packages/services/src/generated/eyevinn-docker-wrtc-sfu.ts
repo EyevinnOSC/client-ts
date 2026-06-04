@@ -580,7 +580,7 @@ import {
  * @description Elevate your broadcast streaming with docker-wrtc-sfu: a seamless SFU solution, harnessing Symphony Media Bridge in a Docker container. Achieve unparalleled WebRTC performance and flexibility effortlessly.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
- *
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Symphony-Media-Bridge-WHIP-Gateway.html|Online docs} for further information
  */
 
 /**

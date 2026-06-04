@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/diceinstance': {
-    /** List all running dice instances */
+  '/openeventsinstance': {
+    /** List all running openevents instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the dice instance */
+            /** @description Name of the openevents instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,6 +67,23 @@ export interface paths {
                 url: string;
               };
             };
+            nextauthSecret: string;
+            stripeSecretKey: string;
+            stripePublishableKey: string;
+            stripeWebhookSecret: string;
+            s3Endpoint: string;
+            s3Region: string;
+            s3BucketName: string;
+            s3AccessKeyId: string;
+            s3SecretAccessKey: string;
+            smtpHost?: string;
+            smtpPort?: string;
+            smtpUser?: string;
+            smtpPassword?: string;
+            fromEmail?: string;
+            siteName?: string;
+            siteUrl?: string;
+            databaseUrl: string;
           } & {
             _links: {
               self: {
@@ -113,7 +130,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new dice instance */
+    /** Launch a new openevents instance */
     post: {
       parameters: {
         query: {
@@ -121,8 +138,25 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the openevents instance */
             name: string;
+            nextauthSecret: string;
+            stripeSecretKey: string;
+            stripePublishableKey: string;
+            stripeWebhookSecret: string;
+            s3Endpoint: string;
+            s3Region: string;
+            s3BucketName: string;
+            s3AccessKeyId: string;
+            s3SecretAccessKey: string;
+            smtpHost?: string;
+            smtpPort?: string;
+            smtpUser?: string;
+            smtpPassword?: string;
+            fromEmail?: string;
+            siteName?: string;
+            siteUrl?: string;
+            databaseUrl: string;
           };
         };
       };
@@ -130,7 +164,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the openevents instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -148,6 +182,23 @@ export interface paths {
                 url: string;
               };
             };
+            nextauthSecret: string;
+            stripeSecretKey: string;
+            stripePublishableKey: string;
+            stripeWebhookSecret: string;
+            s3Endpoint: string;
+            s3Region: string;
+            s3BucketName: string;
+            s3AccessKeyId: string;
+            s3SecretAccessKey: string;
+            smtpHost?: string;
+            smtpPort?: string;
+            smtpUser?: string;
+            smtpPassword?: string;
+            fromEmail?: string;
+            siteName?: string;
+            siteUrl?: string;
+            databaseUrl: string;
           } & {
             _links: {
               self: {
@@ -210,11 +261,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart dice */
+    /** Restart openevents */
     post: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the openevents instance */
           id: string;
         };
       };
@@ -233,12 +284,12 @@ export interface paths {
       };
     };
   };
-  '/diceinstance/{id}': {
-    /** Obtain status and resource URLs for an dice instance */
+  '/openeventsinstance/{id}': {
+    /** Obtain status and resource URLs for an openevents instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the openevents instance */
           id: string;
         };
       };
@@ -246,7 +297,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the openevents instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -264,6 +315,23 @@ export interface paths {
                 url: string;
               };
             };
+            nextauthSecret: string;
+            stripeSecretKey: string;
+            stripePublishableKey: string;
+            stripeWebhookSecret: string;
+            s3Endpoint: string;
+            s3Region: string;
+            s3BucketName: string;
+            s3AccessKeyId: string;
+            s3SecretAccessKey: string;
+            smtpHost?: string;
+            smtpPort?: string;
+            smtpUser?: string;
+            smtpPassword?: string;
+            fromEmail?: string;
+            siteName?: string;
+            siteUrl?: string;
+            databaseUrl: string;
           } & {
             _links: {
               self: {
@@ -317,11 +385,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an dice instance */
+    /** Stop and remove an openevents instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the openevents instance */
           id: string;
         };
       };
@@ -339,17 +407,34 @@ export interface paths {
         };
       };
     };
-    /** Patch dice instance with new parameters and restart */
+    /** Patch openevents instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the openevents instance */
             name?: string;
+            nextauthSecret?: string;
+            stripeSecretKey?: string;
+            stripePublishableKey?: string;
+            stripeWebhookSecret?: string;
+            s3Endpoint?: string;
+            s3Region?: string;
+            s3BucketName?: string;
+            s3AccessKeyId?: string;
+            s3SecretAccessKey?: string;
+            smtpHost?: string;
+            smtpPort?: string;
+            smtpUser?: string;
+            smtpPassword?: string;
+            fromEmail?: string;
+            siteName?: string;
+            siteUrl?: string;
+            databaseUrl?: string;
           };
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the openevents instance */
           id: string;
         };
       };
@@ -357,7 +442,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the openevents instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -375,6 +460,23 @@ export interface paths {
                 url: string;
               };
             };
+            nextauthSecret: string;
+            stripeSecretKey: string;
+            stripePublishableKey: string;
+            stripeWebhookSecret: string;
+            s3Endpoint: string;
+            s3Region: string;
+            s3BucketName: string;
+            s3AccessKeyId: string;
+            s3SecretAccessKey: string;
+            smtpHost?: string;
+            smtpPort?: string;
+            smtpUser?: string;
+            smtpPassword?: string;
+            fromEmail?: string;
+            siteName?: string;
+            siteUrl?: string;
+            databaseUrl: string;
           } & {
             _links: {
               self: {
@@ -437,11 +539,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of dice instance */
+    /** Return status of openevents instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the openevents instance */
           id: string;
         };
       };
@@ -465,7 +567,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the dice instance */
+    /** Return the latest logs from the openevents instance */
     get: {
       parameters: {
         query: {
@@ -473,7 +575,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the openevents instance */
           id: string;
         };
       };
@@ -493,11 +595,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for dice instance */
+    /** Return the exposed extra ports for openevents instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the openevents instance */
           id: string;
         };
       };
@@ -521,11 +623,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for dice instance */
+    /** Return the assigned NodePorts for openevents instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the openevents instance */
           id: string;
         };
       };
@@ -557,11 +659,11 @@ export interface operations {}
 
 export interface external {}
 
-export type DicedbDice =
-  paths['/diceinstance/{id}']['get']['responses']['200']['schema'];
+export type EyevinnOpenevents =
+  paths['/openeventsinstance/{id}']['get']['responses']['200']['schema'];
 
-export type DicedbDiceConfig =
-  paths['/diceinstance']['post']['parameters']['body']['body'];
+export type EyevinnOpeneventsConfig =
+  paths['/openeventsinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -570,95 +672,118 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace dicedb-dice
- * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @namespace eyevinn-openevents
+ * @description Streamline your event management with OpenEvents, the comprehensive platform for dynamic event planning and seamless ticketing. Enhance attendee experience with real-time tracking, multiple ticketing options, and secure payment integration, all effortlessly managed through an intuitive dashboard.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} DicedbDiceConfig
- * @property {string} name - Name of dice
+ * @typedef {Object} EyevinnOpeneventsConfig
+ * @property {string} name - Name of openevents
+ * @property {string} nextauthSecret - Secret key used by NextAuth.js for encrypting JWT tokens and session data
+ * @property {string} stripeSecretKey - Stripe secret API key for processing online payments
+ * @property {string} stripePublishableKey - Stripe publishable API key for client-side payment form integration
+ * @property {string} stripeWebhookSecret - Stripe webhook endpoint secret for verifying payment event notifications
+ * @property {string} s3Endpoint - S3-compatible storage endpoint URL for file uploads
+ * @property {string} s3Region - AWS region or S3-compatible storage region setting
+ * @property {string} s3BucketName - Name of the S3 bucket for storing uploaded files
+ * @property {string} s3AccessKeyId - Access key ID for S3-compatible storage authentication
+ * @property {string} s3SecretAccessKey - Secret access key for S3-compatible storage authentication
+ * @property {string} [smtpHost] - SMTP server hostname for sending emails
+ * @property {string} [smtpPort] - SMTP server port number for email delivery
+ * @property {string} [smtpUser] - Username for SMTP server authentication
+ * @property {string} [smtpPassword] - Password for SMTP server authentication
+ * @property {string} [fromEmail] - Email address used as the sender for outgoing emails
+ * @property {string} [siteName] - Name of the event platform displayed in the application
+ * @property {string} [siteUrl] - Base URL of the deployed application
+ * @property {string} databaseUrl - PostgreSQL database connection string
 
  * 
  */
 
 /**
- * @typedef {Object} DicedbDice
- * @property {string} name - Name of the Dice DB instance
- * @property {string} url - URL of the Dice DB instance
+ * @typedef {Object} EyevinnOpenevents
+ * @property {string} name - Name of the Open Events instance
+ * @property {string} url - URL of the Open Events instance
  *
  */
 
 /**
- * Create a new Dice DB instance
+ * Create a new Open Events instance
  *
- * @memberOf dicedb-dice
+ * @memberOf eyevinn-openevents
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DicedbDiceConfig} body - Service instance configuration
- * @returns {DicedbDice} - Service instance
+ * @param {EyevinnOpeneventsConfig} body - Service instance configuration
+ * @returns {EyevinnOpenevents} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createDicedbDiceInstance } from '@osaas/client-services';
+ * import { createEyevinnOpeneventsInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: DicedbDiceConfig = { name: 'myinstance', ... };
- * const instance = await createDicedbDiceInstance(ctx, body);
+ * const body: EyevinnOpeneventsConfig = { name: 'myinstance', ... };
+ * const instance = await createEyevinnOpeneventsInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createDicedbDiceInstance(
+export async function createEyevinnOpeneventsInstance(
   ctx: Context,
-  body: DicedbDiceConfig
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
+  body: EyevinnOpeneventsConfig
+): Promise<EyevinnOpenevents> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-openevents'
+  );
   const instance = await createInstance(
     ctx,
-    'dicedb-dice',
+    'eyevinn-openevents',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('dicedb-dice', instance.name, ctx);
+  await waitForInstanceReady('eyevinn-openevents', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Dice DB instance
+ * Remove a Open Events instance
  *
- * @memberOf dicedb-dice
+ * @memberOf eyevinn-openevents
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be removed
+ * @param {string} name - Name of the openevents to be removed
  */
-export async function removeDicedbDiceInstance(
+export async function removeEyevinnOpeneventsInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  await removeInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-openevents'
+  );
+  await removeInstance(ctx, 'eyevinn-openevents', name, serviceAccessToken);
 }
 
 /**
- * Get a Dice DB instance
+ * Get a Open Events instance
  *
- * @memberOf dicedb-dice
+ * @memberOf eyevinn-openevents
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be retrieved
- * @returns {DicedbDice} - Service instance
+ * @param {string} name - Name of the openevents to be retrieved
+ * @returns {EyevinnOpenevents} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getDicedbDiceInstance } from '@osaas/client-services';
+ * import { getEyevinnOpeneventsInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getDicedbDiceInstance(ctx, 'myinstance');
+ * const instance = await getEyevinnOpeneventsInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getDicedbDiceInstance(
+export async function getEyevinnOpeneventsInstance(
   ctx: Context,
   name: string
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  return await getInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+): Promise<EyevinnOpenevents> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'eyevinn-openevents'
+  );
+  return await getInstance(ctx, 'eyevinn-openevents', name, serviceAccessToken);
 }

@@ -528,8 +528,8 @@ import {
  * @typedef {Object} FreescoutHelpDeskFreescoutConfig
  * @property {string} name - Name of freescout
  * @property {string} DbUrl - Mysql Database url in the format mysql://<user>:<password>@<host>:<port>/<database>
- * @property {string} AdminEmail - AdminEmail
- * @property {string} AdminPassword - AdminPassword
+ * @property {string} AdminEmail - Email address for the administrator account that will be created during FreeScout installation. This will be the primary admin user who can manage the help desk system.
+ * @property {string} AdminPassword - Password for the administrator account that will be created during FreeScout installation. This should be a secure password for the primary admin user.
 
  * 
  */

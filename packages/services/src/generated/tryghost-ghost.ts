@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/diceinstance': {
-    /** List all running dice instances */
+  '/ghostinstance': {
+    /** List all running ghost instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the dice instance */
+            /** @description Name of the ghost instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,6 +67,12 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
+            SmtpHost?: string;
+            SmtpPort?: string;
+            SmtpUser?: string;
+            SmtpPass?: string;
+            MailFrom?: string;
           } & {
             _links: {
               self: {
@@ -113,7 +119,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new dice instance */
+    /** Launch a new ghost instance */
     post: {
       parameters: {
         query: {
@@ -121,8 +127,14 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the ghost instance */
             name: string;
+            DatabaseUrl: string;
+            SmtpHost?: string;
+            SmtpPort?: string;
+            SmtpUser?: string;
+            SmtpPass?: string;
+            MailFrom?: string;
           };
         };
       };
@@ -130,7 +142,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the ghost instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -148,6 +160,12 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
+            SmtpHost?: string;
+            SmtpPort?: string;
+            SmtpUser?: string;
+            SmtpPass?: string;
+            MailFrom?: string;
           } & {
             _links: {
               self: {
@@ -210,11 +228,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart dice */
+    /** Restart ghost */
     post: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the ghost instance */
           id: string;
         };
       };
@@ -233,12 +251,12 @@ export interface paths {
       };
     };
   };
-  '/diceinstance/{id}': {
-    /** Obtain status and resource URLs for an dice instance */
+  '/ghostinstance/{id}': {
+    /** Obtain status and resource URLs for an ghost instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the ghost instance */
           id: string;
         };
       };
@@ -246,7 +264,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the ghost instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -264,6 +282,12 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
+            SmtpHost?: string;
+            SmtpPort?: string;
+            SmtpUser?: string;
+            SmtpPass?: string;
+            MailFrom?: string;
           } & {
             _links: {
               self: {
@@ -317,11 +341,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an dice instance */
+    /** Stop and remove an ghost instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the ghost instance */
           id: string;
         };
       };
@@ -339,17 +363,23 @@ export interface paths {
         };
       };
     };
-    /** Patch dice instance with new parameters and restart */
+    /** Patch ghost instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the ghost instance */
             name?: string;
+            DatabaseUrl?: string;
+            SmtpHost?: string;
+            SmtpPort?: string;
+            SmtpUser?: string;
+            SmtpPass?: string;
+            MailFrom?: string;
           };
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the ghost instance */
           id: string;
         };
       };
@@ -357,7 +387,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the ghost instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -375,6 +405,12 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
+            SmtpHost?: string;
+            SmtpPort?: string;
+            SmtpUser?: string;
+            SmtpPass?: string;
+            MailFrom?: string;
           } & {
             _links: {
               self: {
@@ -437,11 +473,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of dice instance */
+    /** Return status of ghost instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the ghost instance */
           id: string;
         };
       };
@@ -465,7 +501,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the dice instance */
+    /** Return the latest logs from the ghost instance */
     get: {
       parameters: {
         query: {
@@ -473,7 +509,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the ghost instance */
           id: string;
         };
       };
@@ -493,11 +529,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for dice instance */
+    /** Return the exposed extra ports for ghost instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the ghost instance */
           id: string;
         };
       };
@@ -521,11 +557,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for dice instance */
+    /** Return the assigned NodePorts for ghost instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the ghost instance */
           id: string;
         };
       };
@@ -557,11 +593,11 @@ export interface operations {}
 
 export interface external {}
 
-export type DicedbDice =
-  paths['/diceinstance/{id}']['get']['responses']['200']['schema'];
+export type TryghostGhost =
+  paths['/ghostinstance/{id}']['get']['responses']['200']['schema'];
 
-export type DicedbDiceConfig =
-  paths['/diceinstance']['post']['parameters']['body']['body'];
+export type TryghostGhostConfig =
+  paths['/ghostinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -570,95 +606,101 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace dicedb-dice
- * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @namespace tryghost-ghost
+ * @description Experience the power of Ghost, the leading open-source Node.js CMS! With Ghost(Pro), launch a secure, high-performance site in 2 minutes, featuring worldwide CDN, backups, and maintenance.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
- *
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Ghost.html|Online docs} for further information
  */
 
 /**
- * @typedef {Object} DicedbDiceConfig
- * @property {string} name - Name of dice
+ * @typedef {Object} TryghostGhostConfig
+ * @property {string} name - Name of ghost
+ * @property {string} DatabaseUrl - Database connection string for Ghost's primary data storage. Ghost requires a database to store all content, users, settings, and metadata.
+ * @property {string} [SmtpHost] - SMTP server hostname for sending emails. Ghost uses this to send member notifications, password resets, and newsletter emails.
+ * @property {string} [SmtpPort] - SMTP server port number for email delivery. Common ports are 587 (TLS) or 465 (SSL) for secure email transmission.
+ * @property {string} [SmtpUser] - Username for SMTP server authentication. Required when the email provider needs authentication credentials for sending emails.
+ * @property {string} [SmtpPass] - Password for SMTP server authentication. Used alongside SMTP_USER to authenticate with the email provider for sending emails.
+ * @property {string} [MailFrom] - Default 'from' email address for all emails sent by Ghost. This appears as the sender address for newsletters, notifications, and system emails.
 
  * 
  */
 
 /**
- * @typedef {Object} DicedbDice
- * @property {string} name - Name of the Dice DB instance
- * @property {string} url - URL of the Dice DB instance
+ * @typedef {Object} TryghostGhost
+ * @property {string} name - Name of the Ghost instance
+ * @property {string} url - URL of the Ghost instance
  *
  */
 
 /**
- * Create a new Dice DB instance
+ * Create a new Ghost instance
  *
- * @memberOf dicedb-dice
+ * @memberOf tryghost-ghost
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DicedbDiceConfig} body - Service instance configuration
- * @returns {DicedbDice} - Service instance
+ * @param {TryghostGhostConfig} body - Service instance configuration
+ * @returns {TryghostGhost} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createDicedbDiceInstance } from '@osaas/client-services';
+ * import { createTryghostGhostInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: DicedbDiceConfig = { name: 'myinstance', ... };
- * const instance = await createDicedbDiceInstance(ctx, body);
+ * const body: TryghostGhostConfig = { name: 'myinstance', ... };
+ * const instance = await createTryghostGhostInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createDicedbDiceInstance(
+export async function createTryghostGhostInstance(
   ctx: Context,
-  body: DicedbDiceConfig
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
+  body: TryghostGhostConfig
+): Promise<TryghostGhost> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('tryghost-ghost');
   const instance = await createInstance(
     ctx,
-    'dicedb-dice',
+    'tryghost-ghost',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('dicedb-dice', instance.name, ctx);
+  await waitForInstanceReady('tryghost-ghost', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Dice DB instance
+ * Remove a Ghost instance
  *
- * @memberOf dicedb-dice
+ * @memberOf tryghost-ghost
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be removed
+ * @param {string} name - Name of the ghost to be removed
  */
-export async function removeDicedbDiceInstance(
+export async function removeTryghostGhostInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  await removeInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken('tryghost-ghost');
+  await removeInstance(ctx, 'tryghost-ghost', name, serviceAccessToken);
 }
 
 /**
- * Get a Dice DB instance
+ * Get a Ghost instance
  *
- * @memberOf dicedb-dice
+ * @memberOf tryghost-ghost
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be retrieved
- * @returns {DicedbDice} - Service instance
+ * @param {string} name - Name of the ghost to be retrieved
+ * @returns {TryghostGhost} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getDicedbDiceInstance } from '@osaas/client-services';
+ * import { getTryghostGhostInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getDicedbDiceInstance(ctx, 'myinstance');
+ * const instance = await getTryghostGhostInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getDicedbDiceInstance(
+export async function getTryghostGhostInstance(
   ctx: Context,
   name: string
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  return await getInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+): Promise<TryghostGhost> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('tryghost-ghost');
+  return await getInstance(ctx, 'tryghost-ghost', name, serviceAccessToken);
 }

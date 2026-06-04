@@ -5,12 +5,39 @@
 
 export interface paths {
   '/': {
-    /** Say hello */
+    /** Health check endpoint */
     get: {
+      parameters: {
+        query: {
+          verbose?: boolean;
+        };
+      };
       responses: {
-        /** The magical words! */
+        /** Default Response */
         200: {
-          schema: string;
+          schema: Partial<string> &
+            Partial<{
+              status: string;
+              versions: {
+                '@osaas/orchestrator': string;
+              };
+              environment: string;
+              _links: {
+                self: {
+                  href: string;
+                };
+                api: {
+                  href: string;
+                };
+              };
+            }>;
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            status: string;
+            reason: string;
+          };
         };
       };
     };
@@ -21,7 +48,7 @@ export interface paths {
       responses: {
         /** Default Response */
         200: {
-          schema: {
+          schema: ({
             /** @description Name of the slimserver instance */
             name: string;
             /** @description URL to instance API */
@@ -45,7 +72,42 @@ export interface paths {
             S3AccessKeyId?: string;
             S3SecretAccessKey?: string;
             S3Region?: string;
-          }[];
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+            };
+          })[];
         };
         /** Default Response */
         500: {
@@ -59,6 +121,9 @@ export interface paths {
     /** Launch a new slimserver instance */
     post: {
       parameters: {
+        query: {
+          beta?: boolean;
+        };
         body: {
           body?: {
             /** @description Name of the slimserver instance */
@@ -98,6 +163,41 @@ export interface paths {
             S3AccessKeyId?: string;
             S3SecretAccessKey?: string;
             S3Region?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+            };
           };
         };
         /** Default Response */
@@ -113,6 +213,30 @@ export interface paths {
             /** @description Reason why something failed */
             reason: string;
           };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
+  '/restart/{id}': {
+    /** Restart slimserver */
+    post: {
+      parameters: {
+        path: {
+          /** Name of the slimserver instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        204: {
+          schema: string;
         };
         /** Default Response */
         500: {
@@ -160,6 +284,41 @@ export interface paths {
             S3AccessKeyId?: string;
             S3SecretAccessKey?: string;
             S3Region?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+            };
           };
         };
         /** Default Response */
@@ -200,6 +359,112 @@ export interface paths {
         };
       };
     };
+    /** Patch slimserver instance with new parameters and restart */
+    patch: {
+      parameters: {
+        body: {
+          body?: {
+            /** @description Name of the slimserver instance */
+            name?: string;
+            MusicBucketUrl?: string;
+            S3EndpointUrl?: string;
+            S3AccessKeyId?: string;
+            S3SecretAccessKey?: string;
+            S3Region?: string;
+          };
+        };
+        path: {
+          /** Name of the slimserver instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            /** @description Name of the slimserver instance */
+            name: string;
+            /** @description URL to instance API */
+            url: string;
+            resources: {
+              license: {
+                /** @description URL to license information */
+                url: string;
+              };
+              apiDocs?: {
+                /** @description URL to instance API documentation */
+                url: string;
+              };
+              app?: {
+                /** @description URL to instance application (GUI) */
+                url: string;
+              };
+            };
+            MusicBucketUrl?: string;
+            S3EndpointUrl?: string;
+            S3AccessKeyId?: string;
+            S3SecretAccessKey?: string;
+            S3Region?: string;
+          } & {
+            _links: {
+              self: {
+                /** @description Instance resource */
+                href: string;
+              };
+              logs?: {
+                /** @description Get logs for this instance */
+                href: string;
+              };
+              health?: {
+                /** @description Get health status for this instance */
+                href: string;
+              };
+              ports?: {
+                /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
+              restart?: {
+                /** @description Restart this instance */
+                href: string;
+              };
+              update?: {
+                /** @description Update this instance */
+                href: string;
+              };
+              scale?: {
+                /** @description Scale this instance */
+                href: string;
+              };
+            };
+          };
+        };
+        /** Default Response */
+        400: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        404: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
   };
   '/health/{id}': {
     /** Return status of slimserver instance */
@@ -216,6 +481,7 @@ export interface paths {
           schema: {
             /** @enum {string} */
             status: 'starting' | 'running' | 'stopped' | 'failed' | 'unknown';
+            images?: string[];
           };
         };
         /** Default Response */
@@ -284,6 +550,35 @@ export interface paths {
       };
     };
   };
+  '/nodeports/{id}': {
+    /** Return the assigned NodePorts for slimserver instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the slimserver instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            name: string;
+            protocol: Partial<'TCP'> & Partial<'UDP'>;
+            port: number;
+            ip?: string;
+          }[];
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface definitions {}
@@ -315,11 +610,11 @@ import {
 /**
  * @typedef {Object} LmsCommunitySlimserverConfig
  * @property {string} name - Name of slimserver
- * @property {string} [MusicBucketUrl] - MusicBucketUrl
- * @property {string} [S3EndpointUrl] - S3EndpointUrl
- * @property {string} [S3AccessKeyId] - S3AccessKeyId
- * @property {string} [S3SecretAccessKey] - S3SecretAccessKey
- * @property {string} [S3Region] - S3Region
+ * @property {string} [MusicBucketUrl] - Specifies the URL or path to a cloud storage bucket containing music files that the Lyrion Music Server should access and stream from
+ * @property {string} [S3EndpointUrl] - Sets the endpoint URL for S3-compatible storage services, allowing connection to custom S3 implementations or alternative cloud storage providers
+ * @property {string} [S3AccessKeyId] - Provides the access key ID for authenticating with AWS S3 or S3-compatible storage services to access music files stored in cloud buckets
+ * @property {string} [S3SecretAccessKey] - Provides the secret access key for authenticating with AWS S3 or S3-compatible storage services, paired with the access key ID for secure bucket access
+ * @property {string} [S3Region] - Specifies the AWS region where the S3 bucket containing music files is located, ensuring proper routing and compliance with data locality requirements
 
  * 
  */

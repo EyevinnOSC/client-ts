@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/diceinstance': {
-    /** List all running dice instances */
+  '/temporalinstance': {
+    /** List all running temporal instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the dice instance */
+            /** @description Name of the temporal instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,6 +67,7 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
           } & {
             _links: {
               self: {
@@ -113,7 +114,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new dice instance */
+    /** Launch a new temporal instance */
     post: {
       parameters: {
         query: {
@@ -121,8 +122,9 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the temporal instance */
             name: string;
+            DatabaseUrl: string;
           };
         };
       };
@@ -130,7 +132,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the temporal instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -148,6 +150,7 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
           } & {
             _links: {
               self: {
@@ -210,11 +213,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart dice */
+    /** Restart temporal */
     post: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the temporal instance */
           id: string;
         };
       };
@@ -233,12 +236,12 @@ export interface paths {
       };
     };
   };
-  '/diceinstance/{id}': {
-    /** Obtain status and resource URLs for an dice instance */
+  '/temporalinstance/{id}': {
+    /** Obtain status and resource URLs for an temporal instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the temporal instance */
           id: string;
         };
       };
@@ -246,7 +249,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the temporal instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -264,6 +267,7 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
           } & {
             _links: {
               self: {
@@ -317,11 +321,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an dice instance */
+    /** Stop and remove an temporal instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the temporal instance */
           id: string;
         };
       };
@@ -339,17 +343,18 @@ export interface paths {
         };
       };
     };
-    /** Patch dice instance with new parameters and restart */
+    /** Patch temporal instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the temporal instance */
             name?: string;
+            DatabaseUrl?: string;
           };
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the temporal instance */
           id: string;
         };
       };
@@ -357,7 +362,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the temporal instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -375,6 +380,7 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
           } & {
             _links: {
               self: {
@@ -437,11 +443,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of dice instance */
+    /** Return status of temporal instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the temporal instance */
           id: string;
         };
       };
@@ -465,7 +471,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the dice instance */
+    /** Return the latest logs from the temporal instance */
     get: {
       parameters: {
         query: {
@@ -473,7 +479,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the temporal instance */
           id: string;
         };
       };
@@ -493,11 +499,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for dice instance */
+    /** Return the exposed extra ports for temporal instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the temporal instance */
           id: string;
         };
       };
@@ -521,11 +527,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for dice instance */
+    /** Return the assigned NodePorts for temporal instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the temporal instance */
           id: string;
         };
       };
@@ -557,11 +563,11 @@ export interface operations {}
 
 export interface external {}
 
-export type DicedbDice =
-  paths['/diceinstance/{id}']['get']['responses']['200']['schema'];
+export type TemporalioTemporal =
+  paths['/temporalinstance/{id}']['get']['responses']['200']['schema'];
 
-export type DicedbDiceConfig =
-  paths['/diceinstance']['post']['parameters']['body']['body'];
+export type TemporalioTemporalConfig =
+  paths['/temporalinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -570,95 +576,107 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace dicedb-dice
- * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @namespace temporalio-temporal
+ * @description Boost your app's reliability with Temporal! As a durable execution platform, it handles failures and retries seamlessly, empowering developers to build scalable applications without losing productivity.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} DicedbDiceConfig
- * @property {string} name - Name of dice
+ * @typedef {Object} TemporalioTemporalConfig
+ * @property {string} name - Name of temporal
+ * @property {string} DatabaseUrl - Database connection URL for Temporal server persistence layer. Temporal supports multiple database backends including Cassandra, MySQL, PostgreSQL, and SQLite for storing workflow execution state, history, and metadata.
 
  * 
  */
 
 /**
- * @typedef {Object} DicedbDice
- * @property {string} name - Name of the Dice DB instance
- * @property {string} url - URL of the Dice DB instance
+ * @typedef {Object} TemporalioTemporal
+ * @property {string} name - Name of the Temporal instance
+ * @property {string} url - URL of the Temporal instance
  *
  */
 
 /**
- * Create a new Dice DB instance
+ * Create a new Temporal instance
  *
- * @memberOf dicedb-dice
+ * @memberOf temporalio-temporal
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DicedbDiceConfig} body - Service instance configuration
- * @returns {DicedbDice} - Service instance
+ * @param {TemporalioTemporalConfig} body - Service instance configuration
+ * @returns {TemporalioTemporal} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createDicedbDiceInstance } from '@osaas/client-services';
+ * import { createTemporalioTemporalInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: DicedbDiceConfig = { name: 'myinstance', ... };
- * const instance = await createDicedbDiceInstance(ctx, body);
+ * const body: TemporalioTemporalConfig = { name: 'myinstance', ... };
+ * const instance = await createTemporalioTemporalInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createDicedbDiceInstance(
+export async function createTemporalioTemporalInstance(
   ctx: Context,
-  body: DicedbDiceConfig
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
+  body: TemporalioTemporalConfig
+): Promise<TemporalioTemporal> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'temporalio-temporal'
+  );
   const instance = await createInstance(
     ctx,
-    'dicedb-dice',
+    'temporalio-temporal',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('dicedb-dice', instance.name, ctx);
+  await waitForInstanceReady('temporalio-temporal', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Dice DB instance
+ * Remove a Temporal instance
  *
- * @memberOf dicedb-dice
+ * @memberOf temporalio-temporal
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be removed
+ * @param {string} name - Name of the temporal to be removed
  */
-export async function removeDicedbDiceInstance(
+export async function removeTemporalioTemporalInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  await removeInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'temporalio-temporal'
+  );
+  await removeInstance(ctx, 'temporalio-temporal', name, serviceAccessToken);
 }
 
 /**
- * Get a Dice DB instance
+ * Get a Temporal instance
  *
- * @memberOf dicedb-dice
+ * @memberOf temporalio-temporal
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be retrieved
- * @returns {DicedbDice} - Service instance
+ * @param {string} name - Name of the temporal to be retrieved
+ * @returns {TemporalioTemporal} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getDicedbDiceInstance } from '@osaas/client-services';
+ * import { getTemporalioTemporalInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getDicedbDiceInstance(ctx, 'myinstance');
+ * const instance = await getTemporalioTemporalInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getDicedbDiceInstance(
+export async function getTemporalioTemporalInstance(
   ctx: Context,
   name: string
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  return await getInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+): Promise<TemporalioTemporal> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'temporalio-temporal'
+  );
+  return await getInstance(
+    ctx,
+    'temporalio-temporal',
+    name,
+    serviceAccessToken
+  );
 }

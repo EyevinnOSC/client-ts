@@ -87,6 +87,10 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
                 href: string;
@@ -166,6 +170,10 @@ export interface paths {
               };
               ports?: {
                 /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
                 href: string;
               };
               restart?: {
@@ -282,6 +290,10 @@ export interface paths {
                 /** @description Get exposed ports for this instance */
                 href: string;
               };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
+                href: string;
+              };
               restart?: {
                 /** @description Restart this instance */
                 href: string;
@@ -391,6 +403,10 @@ export interface paths {
               };
               ports?: {
                 /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
                 href: string;
               };
               restart?: {
@@ -504,6 +520,35 @@ export interface paths {
             externalIp: string;
             externalPort: number;
             internalPort: number;
+          }[];
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
+  '/nodeports/{id}': {
+    /** Return the assigned NodePorts for smoothmq instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the smoothmq instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            name: string;
+            protocol: Partial<'TCP'> & Partial<'UDP'>;
+            port: number;
+            ip?: string;
           }[];
         };
         /** Default Response */

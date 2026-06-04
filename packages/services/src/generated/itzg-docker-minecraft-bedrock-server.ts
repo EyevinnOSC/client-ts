@@ -105,6 +105,10 @@ export interface paths {
                 /** @description Scale this instance */
                 href: string;
               };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
+                href: string;
+              };
             };
           })[];
         };
@@ -192,6 +196,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -314,6 +322,10 @@ export interface paths {
                 /** @description Scale this instance */
                 href: string;
               };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
+                href: string;
+              };
             };
           };
         };
@@ -431,6 +443,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -562,6 +578,38 @@ export interface paths {
             port: number;
             ip?: string;
           }[];
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
+  '/internal-endpoint/{id}': {
+    /** Get internal K8s endpoint for a docker-minecraft-bedrock-server instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the docker-minecraft-bedrock-server instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            serviceDns: string;
+            ports: {
+              name: string;
+              port: number;
+              protocol: string;
+            }[];
+            publicAccess: boolean;
+          };
         };
         /** Default Response */
         500: {

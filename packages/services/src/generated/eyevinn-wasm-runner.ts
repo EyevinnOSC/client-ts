@@ -611,8 +611,8 @@ import {
  * @typedef {Object} EyevinnWasmRunnerConfig
  * @property {string} name - Name of wasm-runner
  * @property {string} [WasmUrl] - The URL to your WASM code
- * @property {string} [GithubUrl] - GithubUrl
- * @property {string} [GithubToken] - GithubToken
+ * @property {string} [GithubUrl] - GitHub repository URL containing a .wasm file. The runner will clone the repository and find the first .wasm file to execute
+ * @property {string} [GithubToken] - GitHub personal access token for accessing private repositories when using GITHUB_URL option
  * @property {string} [OscAccessToken] - Access token for Eyevinn Open Source Cloud (OSC) integration
  * @property {string} [ConfigService] - Configuration service endpoint URL for external configuration management
 

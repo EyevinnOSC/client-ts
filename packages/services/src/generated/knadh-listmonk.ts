@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/diceinstance': {
-    /** List all running dice instances */
+  '/listmonkinstance': {
+    /** List all running listmonk instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the dice instance */
+            /** @description Name of the listmonk instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,6 +67,7 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
           } & {
             _links: {
               self: {
@@ -113,7 +114,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new dice instance */
+    /** Launch a new listmonk instance */
     post: {
       parameters: {
         query: {
@@ -121,8 +122,9 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the listmonk instance */
             name: string;
+            DatabaseUrl: string;
           };
         };
       };
@@ -130,7 +132,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the listmonk instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -148,6 +150,7 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
           } & {
             _links: {
               self: {
@@ -210,11 +213,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart dice */
+    /** Restart listmonk */
     post: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the listmonk instance */
           id: string;
         };
       };
@@ -233,12 +236,12 @@ export interface paths {
       };
     };
   };
-  '/diceinstance/{id}': {
-    /** Obtain status and resource URLs for an dice instance */
+  '/listmonkinstance/{id}': {
+    /** Obtain status and resource URLs for an listmonk instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the listmonk instance */
           id: string;
         };
       };
@@ -246,7 +249,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the listmonk instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -264,6 +267,7 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
           } & {
             _links: {
               self: {
@@ -317,11 +321,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an dice instance */
+    /** Stop and remove an listmonk instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the listmonk instance */
           id: string;
         };
       };
@@ -339,17 +343,18 @@ export interface paths {
         };
       };
     };
-    /** Patch dice instance with new parameters and restart */
+    /** Patch listmonk instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the listmonk instance */
             name?: string;
+            DatabaseUrl?: string;
           };
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the listmonk instance */
           id: string;
         };
       };
@@ -357,7 +362,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the listmonk instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -375,6 +380,7 @@ export interface paths {
                 url: string;
               };
             };
+            DatabaseUrl: string;
           } & {
             _links: {
               self: {
@@ -437,11 +443,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of dice instance */
+    /** Return status of listmonk instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the listmonk instance */
           id: string;
         };
       };
@@ -465,7 +471,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the dice instance */
+    /** Return the latest logs from the listmonk instance */
     get: {
       parameters: {
         query: {
@@ -473,7 +479,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the listmonk instance */
           id: string;
         };
       };
@@ -493,11 +499,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for dice instance */
+    /** Return the exposed extra ports for listmonk instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the listmonk instance */
           id: string;
         };
       };
@@ -521,11 +527,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for dice instance */
+    /** Return the assigned NodePorts for listmonk instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the listmonk instance */
           id: string;
         };
       };
@@ -557,11 +563,11 @@ export interface operations {}
 
 export interface external {}
 
-export type DicedbDice =
-  paths['/diceinstance/{id}']['get']['responses']['200']['schema'];
+export type KnadhListmonk =
+  paths['/listmonkinstance/{id}']['get']['responses']['200']['schema'];
 
-export type DicedbDiceConfig =
-  paths['/diceinstance']['post']['parameters']['body']['body'];
+export type KnadhListmonkConfig =
+  paths['/listmonkinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -570,95 +576,96 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace dicedb-dice
- * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @namespace knadh-listmonk
+ * @description Elevate your email marketing with listmonk! Fast, feature-packed self-hosted newsletter and mailing list manager in a single binary, backed by PostgreSQL. Perfect for seamless campaigns and data control.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} DicedbDiceConfig
- * @property {string} name - Name of dice
+ * @typedef {Object} KnadhListmonkConfig
+ * @property {string} name - Name of listmonk
+ * @property {string} DatabaseUrl - PostgreSQL database connection URL for listmonk's data store. This is the primary database where all subscriber lists, campaigns, templates, and application data are stored.
 
  * 
  */
 
 /**
- * @typedef {Object} DicedbDice
- * @property {string} name - Name of the Dice DB instance
- * @property {string} url - URL of the Dice DB instance
+ * @typedef {Object} KnadhListmonk
+ * @property {string} name - Name of the Listmonk instance
+ * @property {string} url - URL of the Listmonk instance
  *
  */
 
 /**
- * Create a new Dice DB instance
+ * Create a new Listmonk instance
  *
- * @memberOf dicedb-dice
+ * @memberOf knadh-listmonk
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DicedbDiceConfig} body - Service instance configuration
- * @returns {DicedbDice} - Service instance
+ * @param {KnadhListmonkConfig} body - Service instance configuration
+ * @returns {KnadhListmonk} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createDicedbDiceInstance } from '@osaas/client-services';
+ * import { createKnadhListmonkInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: DicedbDiceConfig = { name: 'myinstance', ... };
- * const instance = await createDicedbDiceInstance(ctx, body);
+ * const body: KnadhListmonkConfig = { name: 'myinstance', ... };
+ * const instance = await createKnadhListmonkInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createDicedbDiceInstance(
+export async function createKnadhListmonkInstance(
   ctx: Context,
-  body: DicedbDiceConfig
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
+  body: KnadhListmonkConfig
+): Promise<KnadhListmonk> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('knadh-listmonk');
   const instance = await createInstance(
     ctx,
-    'dicedb-dice',
+    'knadh-listmonk',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('dicedb-dice', instance.name, ctx);
+  await waitForInstanceReady('knadh-listmonk', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Dice DB instance
+ * Remove a Listmonk instance
  *
- * @memberOf dicedb-dice
+ * @memberOf knadh-listmonk
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be removed
+ * @param {string} name - Name of the listmonk to be removed
  */
-export async function removeDicedbDiceInstance(
+export async function removeKnadhListmonkInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  await removeInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken('knadh-listmonk');
+  await removeInstance(ctx, 'knadh-listmonk', name, serviceAccessToken);
 }
 
 /**
- * Get a Dice DB instance
+ * Get a Listmonk instance
  *
- * @memberOf dicedb-dice
+ * @memberOf knadh-listmonk
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be retrieved
- * @returns {DicedbDice} - Service instance
+ * @param {string} name - Name of the listmonk to be retrieved
+ * @returns {KnadhListmonk} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getDicedbDiceInstance } from '@osaas/client-services';
+ * import { getKnadhListmonkInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getDicedbDiceInstance(ctx, 'myinstance');
+ * const instance = await getKnadhListmonkInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getDicedbDiceInstance(
+export async function getKnadhListmonkInstance(
   ctx: Context,
   name: string
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  return await getInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+): Promise<KnadhListmonk> {
+  const serviceAccessToken = await ctx.getServiceAccessToken('knadh-listmonk');
+  return await getInstance(ctx, 'knadh-listmonk', name, serviceAccessToken);
 }

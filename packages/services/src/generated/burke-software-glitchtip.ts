@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/diceinstance': {
-    /** List all running dice instances */
+  '/glitchtipinstance': {
+    /** List all running glitchtip instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the dice instance */
+            /** @description Name of the glitchtip instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,6 +67,8 @@ export interface paths {
                 url: string;
               };
             };
+            secretKey: string;
+            databaseUrl: string;
           } & {
             _links: {
               self: {
@@ -99,6 +101,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -113,7 +119,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new dice instance */
+    /** Launch a new glitchtip instance */
     post: {
       parameters: {
         query: {
@@ -121,8 +127,10 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the glitchtip instance */
             name: string;
+            secretKey: string;
+            databaseUrl: string;
           };
         };
       };
@@ -130,7 +138,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the glitchtip instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -148,6 +156,8 @@ export interface paths {
                 url: string;
               };
             };
+            secretKey: string;
+            databaseUrl: string;
           } & {
             _links: {
               self: {
@@ -180,6 +190,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -210,11 +224,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart dice */
+    /** Restart glitchtip */
     post: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the glitchtip instance */
           id: string;
         };
       };
@@ -233,12 +247,12 @@ export interface paths {
       };
     };
   };
-  '/diceinstance/{id}': {
-    /** Obtain status and resource URLs for an dice instance */
+  '/glitchtipinstance/{id}': {
+    /** Obtain status and resource URLs for an glitchtip instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the glitchtip instance */
           id: string;
         };
       };
@@ -246,7 +260,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the glitchtip instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -264,6 +278,8 @@ export interface paths {
                 url: string;
               };
             };
+            secretKey: string;
+            databaseUrl: string;
           } & {
             _links: {
               self: {
@@ -296,6 +312,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -317,11 +337,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an dice instance */
+    /** Stop and remove an glitchtip instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the glitchtip instance */
           id: string;
         };
       };
@@ -339,17 +359,19 @@ export interface paths {
         };
       };
     };
-    /** Patch dice instance with new parameters and restart */
+    /** Patch glitchtip instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the glitchtip instance */
             name?: string;
+            secretKey?: string;
+            databaseUrl?: string;
           };
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the glitchtip instance */
           id: string;
         };
       };
@@ -357,7 +379,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the glitchtip instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -375,6 +397,8 @@ export interface paths {
                 url: string;
               };
             };
+            secretKey: string;
+            databaseUrl: string;
           } & {
             _links: {
               self: {
@@ -407,6 +431,10 @@ export interface paths {
               };
               scale?: {
                 /** @description Scale this instance */
+                href: string;
+              };
+              internalEndpoint?: {
+                /** @description Get internal K8s endpoint for this instance */
                 href: string;
               };
             };
@@ -437,11 +465,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of dice instance */
+    /** Return status of glitchtip instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the glitchtip instance */
           id: string;
         };
       };
@@ -465,7 +493,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the dice instance */
+    /** Return the latest logs from the glitchtip instance */
     get: {
       parameters: {
         query: {
@@ -473,7 +501,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the glitchtip instance */
           id: string;
         };
       };
@@ -493,11 +521,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for dice instance */
+    /** Return the exposed extra ports for glitchtip instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the glitchtip instance */
           id: string;
         };
       };
@@ -521,11 +549,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for dice instance */
+    /** Return the assigned NodePorts for glitchtip instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the glitchtip instance */
           id: string;
         };
       };
@@ -549,6 +577,38 @@ export interface paths {
       };
     };
   };
+  '/internal-endpoint/{id}': {
+    /** Get internal K8s endpoint for a glitchtip instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the glitchtip instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            serviceDns: string;
+            ports: {
+              name: string;
+              port: number;
+              protocol: string;
+            }[];
+            publicAccess: boolean;
+          };
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface definitions {}
@@ -557,11 +617,11 @@ export interface operations {}
 
 export interface external {}
 
-export type DicedbDice =
-  paths['/diceinstance/{id}']['get']['responses']['200']['schema'];
+export type BurkeSoftwareGlitchtip =
+  paths['/glitchtipinstance/{id}']['get']['responses']['200']['schema'];
 
-export type DicedbDiceConfig =
-  paths['/diceinstance']['post']['parameters']['body']['body'];
+export type BurkeSoftwareGlitchtipConfig =
+  paths['/glitchtipinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -570,95 +630,113 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace dicedb-dice
- * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @namespace burke-software-glitchtip
+ * @description Seamlessly monitor and track app issues with GlitchTip! Experience smooth deployment on DigitalOcean or Heroku, complete with robust backend and frontend integration, plus Postgres and Redis flexibility.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} DicedbDiceConfig
- * @property {string} name - Name of dice
+ * @typedef {Object} BurkeSoftwareGlitchtipConfig
+ * @property {string} name - Name of glitchtip
+ * @property {string} secretKey - SecretKey
+ * @property {string} databaseUrl - DatabaseUrl
 
  * 
  */
 
 /**
- * @typedef {Object} DicedbDice
- * @property {string} name - Name of the Dice DB instance
- * @property {string} url - URL of the Dice DB instance
+ * @typedef {Object} BurkeSoftwareGlitchtip
+ * @property {string} name - Name of the GlitchTip instance
+ * @property {string} url - URL of the GlitchTip instance
  *
  */
 
 /**
- * Create a new Dice DB instance
+ * Create a new GlitchTip instance
  *
- * @memberOf dicedb-dice
+ * @memberOf burke-software-glitchtip
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DicedbDiceConfig} body - Service instance configuration
- * @returns {DicedbDice} - Service instance
+ * @param {BurkeSoftwareGlitchtipConfig} body - Service instance configuration
+ * @returns {BurkeSoftwareGlitchtip} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createDicedbDiceInstance } from '@osaas/client-services';
+ * import { createBurkeSoftwareGlitchtipInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: DicedbDiceConfig = { name: 'myinstance', ... };
- * const instance = await createDicedbDiceInstance(ctx, body);
+ * const body: BurkeSoftwareGlitchtipConfig = { name: 'myinstance', ... };
+ * const instance = await createBurkeSoftwareGlitchtipInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createDicedbDiceInstance(
+export async function createBurkeSoftwareGlitchtipInstance(
   ctx: Context,
-  body: DicedbDiceConfig
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
+  body: BurkeSoftwareGlitchtipConfig
+): Promise<BurkeSoftwareGlitchtip> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'burke-software-glitchtip'
+  );
   const instance = await createInstance(
     ctx,
-    'dicedb-dice',
+    'burke-software-glitchtip',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('dicedb-dice', instance.name, ctx);
+  await waitForInstanceReady('burke-software-glitchtip', instance.name, ctx);
   return instance;
 }
 
 /**
- * Remove a Dice DB instance
+ * Remove a GlitchTip instance
  *
- * @memberOf dicedb-dice
+ * @memberOf burke-software-glitchtip
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be removed
+ * @param {string} name - Name of the glitchtip to be removed
  */
-export async function removeDicedbDiceInstance(
+export async function removeBurkeSoftwareGlitchtipInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  await removeInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'burke-software-glitchtip'
+  );
+  await removeInstance(
+    ctx,
+    'burke-software-glitchtip',
+    name,
+    serviceAccessToken
+  );
 }
 
 /**
- * Get a Dice DB instance
+ * Get a GlitchTip instance
  *
- * @memberOf dicedb-dice
+ * @memberOf burke-software-glitchtip
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be retrieved
- * @returns {DicedbDice} - Service instance
+ * @param {string} name - Name of the glitchtip to be retrieved
+ * @returns {BurkeSoftwareGlitchtip} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getDicedbDiceInstance } from '@osaas/client-services';
+ * import { getBurkeSoftwareGlitchtipInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getDicedbDiceInstance(ctx, 'myinstance');
+ * const instance = await getBurkeSoftwareGlitchtipInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getDicedbDiceInstance(
+export async function getBurkeSoftwareGlitchtipInstance(
   ctx: Context,
   name: string
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  return await getInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+): Promise<BurkeSoftwareGlitchtip> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'burke-software-glitchtip'
+  );
+  return await getInstance(
+    ctx,
+    'burke-software-glitchtip',
+    name,
+    serviceAccessToken
+  );
 }

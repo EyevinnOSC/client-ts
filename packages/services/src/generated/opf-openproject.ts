@@ -293,7 +293,7 @@ import {
  * @description Elevate team productivity with OpenProject, the ultimate web-based project management tool. Seamlessly plan, collaborate, and track your projects with features tailored for agile, scrum, and budgeting excellence.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
- *
+ * @see {@link https://docs.osaas.io/osaas.wiki/Service:-Open-Project.html|Online docs} for further information
  */
 
 /**

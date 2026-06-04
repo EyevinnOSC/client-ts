@@ -70,6 +70,7 @@ export interface paths {
             DatabaseUrl: string;
             JwtSecret?: string;
             RefreshTokenSecret?: string;
+            CorsOrigin?: string;
           } & {
             _links: {
               self: {
@@ -86,6 +87,10 @@ export interface paths {
               };
               ports?: {
                 /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
                 href: string;
               };
               restart?: {
@@ -125,6 +130,7 @@ export interface paths {
             DatabaseUrl: string;
             JwtSecret?: string;
             RefreshTokenSecret?: string;
+            CorsOrigin?: string;
           };
         };
       };
@@ -153,6 +159,7 @@ export interface paths {
             DatabaseUrl: string;
             JwtSecret?: string;
             RefreshTokenSecret?: string;
+            CorsOrigin?: string;
           } & {
             _links: {
               self: {
@@ -169,6 +176,10 @@ export interface paths {
               };
               ports?: {
                 /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
                 href: string;
               };
               restart?: {
@@ -268,6 +279,7 @@ export interface paths {
             DatabaseUrl: string;
             JwtSecret?: string;
             RefreshTokenSecret?: string;
+            CorsOrigin?: string;
           } & {
             _links: {
               self: {
@@ -284,6 +296,10 @@ export interface paths {
               };
               ports?: {
                 /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
                 href: string;
               };
               restart?: {
@@ -349,6 +365,7 @@ export interface paths {
             DatabaseUrl?: string;
             JwtSecret?: string;
             RefreshTokenSecret?: string;
+            CorsOrigin?: string;
           };
         };
         path: {
@@ -381,6 +398,7 @@ export interface paths {
             DatabaseUrl: string;
             JwtSecret?: string;
             RefreshTokenSecret?: string;
+            CorsOrigin?: string;
           } & {
             _links: {
               self: {
@@ -397,6 +415,10 @@ export interface paths {
               };
               ports?: {
                 /** @description Get exposed ports for this instance */
+                href: string;
+              };
+              nodePorts?: {
+                /** @description Get assigned NodePorts for this instance */
                 href: string;
               };
               restart?: {
@@ -522,6 +544,35 @@ export interface paths {
       };
     };
   };
+  '/nodeports/{id}': {
+    /** Return the assigned NodePorts for spectercrm instance */
+    get: {
+      parameters: {
+        path: {
+          /** Name of the spectercrm instance */
+          id: string;
+        };
+      };
+      responses: {
+        /** Default Response */
+        200: {
+          schema: {
+            name: string;
+            protocol: Partial<'TCP'> & Partial<'UDP'>;
+            port: number;
+            ip?: string;
+          }[];
+        };
+        /** Default Response */
+        500: {
+          schema: {
+            /** @description Reason why something failed */
+            reason: string;
+          };
+        };
+      };
+    };
+  };
 }
 
 export interface definitions {}
@@ -556,6 +607,7 @@ import {
  * @property {string} DatabaseUrl - PostgreSQL database connection string used by Prisma ORM to connect to the database. This is the primary database configuration for the multi-tenant CRM application.
  * @property {string} [JwtSecret] - Secret key used to sign and verify JWT access tokens for user authentication. This ensures the security and integrity of authentication tokens.
  * @property {string} [RefreshTokenSecret] - Secret key used to sign and verify JWT refresh tokens, which are used to obtain new access tokens without requiring users to re-authenticate.
+ * @property {string} [CorsOrigin] - Defines the allowed origins for Cross-Origin Resource Sharing (CORS) requests to the API. This controls which frontend URLs can make requests to the backend.
 
  * 
  */

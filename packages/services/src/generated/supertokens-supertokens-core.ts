@@ -42,14 +42,14 @@ export interface paths {
       };
     };
   };
-  '/diceinstance': {
-    /** List all running dice instances */
+  '/supertokens-coreinstance': {
+    /** List all running supertokens-core instances */
     get: {
       responses: {
         /** Default Response */
         200: {
           schema: ({
-            /** @description Name of the dice instance */
+            /** @description Name of the supertokens-core instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -67,6 +67,8 @@ export interface paths {
                 url: string;
               };
             };
+            bulkMigrationCronEnabled?: boolean;
+            databaseUrl: string;
           } & {
             _links: {
               self: {
@@ -113,7 +115,7 @@ export interface paths {
         };
       };
     };
-    /** Launch a new dice instance */
+    /** Launch a new supertokens-core instance */
     post: {
       parameters: {
         query: {
@@ -121,8 +123,10 @@ export interface paths {
         };
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the supertokens-core instance */
             name: string;
+            bulkMigrationCronEnabled?: boolean;
+            databaseUrl: string;
           };
         };
       };
@@ -130,7 +134,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the supertokens-core instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -148,6 +152,8 @@ export interface paths {
                 url: string;
               };
             };
+            bulkMigrationCronEnabled?: boolean;
+            databaseUrl: string;
           } & {
             _links: {
               self: {
@@ -210,11 +216,11 @@ export interface paths {
     };
   };
   '/restart/{id}': {
-    /** Restart dice */
+    /** Restart supertokens-core */
     post: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the supertokens-core instance */
           id: string;
         };
       };
@@ -233,12 +239,12 @@ export interface paths {
       };
     };
   };
-  '/diceinstance/{id}': {
-    /** Obtain status and resource URLs for an dice instance */
+  '/supertokens-coreinstance/{id}': {
+    /** Obtain status and resource URLs for an supertokens-core instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the supertokens-core instance */
           id: string;
         };
       };
@@ -246,7 +252,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the supertokens-core instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -264,6 +270,8 @@ export interface paths {
                 url: string;
               };
             };
+            bulkMigrationCronEnabled?: boolean;
+            databaseUrl: string;
           } & {
             _links: {
               self: {
@@ -317,11 +325,11 @@ export interface paths {
         };
       };
     };
-    /** Stop and remove an dice instance */
+    /** Stop and remove an supertokens-core instance */
     delete: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the supertokens-core instance */
           id: string;
         };
       };
@@ -339,17 +347,19 @@ export interface paths {
         };
       };
     };
-    /** Patch dice instance with new parameters and restart */
+    /** Patch supertokens-core instance with new parameters and restart */
     patch: {
       parameters: {
         body: {
           body?: {
-            /** @description Name of the dice instance */
+            /** @description Name of the supertokens-core instance */
             name?: string;
+            bulkMigrationCronEnabled?: boolean;
+            databaseUrl?: string;
           };
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the supertokens-core instance */
           id: string;
         };
       };
@@ -357,7 +367,7 @@ export interface paths {
         /** Default Response */
         200: {
           schema: {
-            /** @description Name of the dice instance */
+            /** @description Name of the supertokens-core instance */
             name: string;
             /** @description URL to instance API */
             url: string;
@@ -375,6 +385,8 @@ export interface paths {
                 url: string;
               };
             };
+            bulkMigrationCronEnabled?: boolean;
+            databaseUrl: string;
           } & {
             _links: {
               self: {
@@ -437,11 +449,11 @@ export interface paths {
     };
   };
   '/health/{id}': {
-    /** Return status of dice instance */
+    /** Return status of supertokens-core instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the supertokens-core instance */
           id: string;
         };
       };
@@ -465,7 +477,7 @@ export interface paths {
     };
   };
   '/logs/{id}': {
-    /** Return the latest logs from the dice instance */
+    /** Return the latest logs from the supertokens-core instance */
     get: {
       parameters: {
         query: {
@@ -473,7 +485,7 @@ export interface paths {
           sinceSeconds?: number;
         };
         path: {
-          /** Name of the dice instance */
+          /** Name of the supertokens-core instance */
           id: string;
         };
       };
@@ -493,11 +505,11 @@ export interface paths {
     };
   };
   '/ports/{id}': {
-    /** Return the exposed extra ports for dice instance */
+    /** Return the exposed extra ports for supertokens-core instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the supertokens-core instance */
           id: string;
         };
       };
@@ -521,11 +533,11 @@ export interface paths {
     };
   };
   '/nodeports/{id}': {
-    /** Return the assigned NodePorts for dice instance */
+    /** Return the assigned NodePorts for supertokens-core instance */
     get: {
       parameters: {
         path: {
-          /** Name of the dice instance */
+          /** Name of the supertokens-core instance */
           id: string;
         };
       };
@@ -557,11 +569,11 @@ export interface operations {}
 
 export interface external {}
 
-export type DicedbDice =
-  paths['/diceinstance/{id}']['get']['responses']['200']['schema'];
+export type SupertokensSupertokensCore =
+  paths['/supertokens-coreinstance/{id}']['get']['responses']['200']['schema'];
 
-export type DicedbDiceConfig =
-  paths['/diceinstance']['post']['parameters']['body']['body'];
+export type SupertokensSupertokensCoreConfig =
+  paths['/supertokens-coreinstance']['post']['parameters']['body']['body'];
 import {
   Context,
   createInstance,
@@ -570,95 +582,117 @@ import {
   getInstance
 } from '@osaas/client-core';
 /**
- * @namespace dicedb-dice
- * @description Experience real-time data management with DiceDB, the open-source, redis-compliant, reactive cache. Its scalable and multithreaded architecture enhances modern hardware utilization, perfect for cutting-edge applications.
+ * @namespace supertokens-supertokens-core
+ * @description Boost your app's security and user experience with SuperTokens' open-source auth solution. Integrate seamless login, multi-factor auth, and session management, all with no vendor lock-in.
  * @author Eyevinn Technology AB <osc@eyevinn.se>
  * @copyright 2026 Eyevinn Technology AB
  *
  */
 
 /**
- * @typedef {Object} DicedbDiceConfig
- * @property {string} name - Name of dice
+ * @typedef {Object} SupertokensSupertokensCoreConfig
+ * @property {string} name - Name of supertokens-core
+ * @property {boolean} [bulkMigrationCronEnabled] - Enables or disables the bulk migration cron job that handles periodic data migration tasks in the SuperTokens core service
+ * @property {string} databaseUrl - Specifies the database connection URL for SuperTokens core to connect to the underlying database for storing authentication data and session information
 
  * 
  */
 
 /**
- * @typedef {Object} DicedbDice
- * @property {string} name - Name of the Dice DB instance
- * @property {string} url - URL of the Dice DB instance
+ * @typedef {Object} SupertokensSupertokensCore
+ * @property {string} name - Name of the SuperTokens instance
+ * @property {string} url - URL of the SuperTokens instance
  *
  */
 
 /**
- * Create a new Dice DB instance
+ * Create a new SuperTokens instance
  *
- * @memberOf dicedb-dice
+ * @memberOf supertokens-supertokens-core
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {DicedbDiceConfig} body - Service instance configuration
- * @returns {DicedbDice} - Service instance
+ * @param {SupertokensSupertokensCoreConfig} body - Service instance configuration
+ * @returns {SupertokensSupertokensCore} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { createDicedbDiceInstance } from '@osaas/client-services';
+ * import { createSupertokensSupertokensCoreInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const body: DicedbDiceConfig = { name: 'myinstance', ... };
- * const instance = await createDicedbDiceInstance(ctx, body);
+ * const body: SupertokensSupertokensCoreConfig = { name: 'myinstance', ... };
+ * const instance = await createSupertokensSupertokensCoreInstance(ctx, body);
  * console.log(instance.url);
  */
-export async function createDicedbDiceInstance(
+export async function createSupertokensSupertokensCoreInstance(
   ctx: Context,
-  body: DicedbDiceConfig
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
+  body: SupertokensSupertokensCoreConfig
+): Promise<SupertokensSupertokensCore> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'supertokens-supertokens-core'
+  );
   const instance = await createInstance(
     ctx,
-    'dicedb-dice',
+    'supertokens-supertokens-core',
     serviceAccessToken,
     body
   );
-  await waitForInstanceReady('dicedb-dice', instance.name, ctx);
+  await waitForInstanceReady(
+    'supertokens-supertokens-core',
+    instance.name,
+    ctx
+  );
   return instance;
 }
 
 /**
- * Remove a Dice DB instance
+ * Remove a SuperTokens instance
  *
- * @memberOf dicedb-dice
+ * @memberOf supertokens-supertokens-core
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be removed
+ * @param {string} name - Name of the core to be removed
  */
-export async function removeDicedbDiceInstance(
+export async function removeSupertokensSupertokensCoreInstance(
   ctx: Context,
   name: string
 ): Promise<void> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  await removeInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'supertokens-supertokens-core'
+  );
+  await removeInstance(
+    ctx,
+    'supertokens-supertokens-core',
+    name,
+    serviceAccessToken
+  );
 }
 
 /**
- * Get a Dice DB instance
+ * Get a SuperTokens instance
  *
- * @memberOf dicedb-dice
+ * @memberOf supertokens-supertokens-core
  * @async
  * @param {Context} context - Open Source Cloud configuration context
- * @param {string} name - Name of the dice to be retrieved
- * @returns {DicedbDice} - Service instance
+ * @param {string} name - Name of the core to be retrieved
+ * @returns {SupertokensSupertokensCore} - Service instance
  * @example
  * import { Context } from '@osaas/client-core';
- * import { getDicedbDiceInstance } from '@osaas/client-services';
+ * import { getSupertokensSupertokensCoreInstance } from '@osaas/client-services';
  *
  * const ctx = new Context();
- * const instance = await getDicedbDiceInstance(ctx, 'myinstance');
+ * const instance = await getSupertokensSupertokensCoreInstance(ctx, 'myinstance');
  * console.log(instance.url);
  */
-export async function getDicedbDiceInstance(
+export async function getSupertokensSupertokensCoreInstance(
   ctx: Context,
   name: string
-): Promise<DicedbDice> {
-  const serviceAccessToken = await ctx.getServiceAccessToken('dicedb-dice');
-  return await getInstance(ctx, 'dicedb-dice', name, serviceAccessToken);
+): Promise<SupertokensSupertokensCore> {
+  const serviceAccessToken = await ctx.getServiceAccessToken(
+    'supertokens-supertokens-core'
+  );
+  return await getInstance(
+    ctx,
+    'supertokens-supertokens-core',
+    name,
+    serviceAccessToken
+  );
 }
