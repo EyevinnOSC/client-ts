@@ -21,7 +21,9 @@ import {
   createEyevinnEncoreCallbackListenerInstance,
   createEyevinnEncorePackagerInstance,
   createMinioMinioInstance,
-  createValkeyIoValkeyInstance
+  createValkeyIoValkeyInstance,
+  type EncoreJobRequest,
+  type EncoreJobResponse
 } from '@osaas/client-services';
 import * as Minio from 'minio';
 import { delay } from './util';
@@ -483,7 +485,11 @@ export async function createVod(
   if (sourceUrl.protocol === 's3:' && !pipeline.inputStorage) {
     throw new Error('Input storage bucket required for S3 input');
   }
-  const job = {
+  const job: Partial<EncoreJobRequest> & {
+    baseName?: string;
+    progressCallbackUri?: string;
+    inputs?: { uri: string; seekTo?: number; copyTs?: boolean; type: string }[];
+  } = {
     externalId,
     profile: vodOptions?.profile || 'program',
     outputFolder: '/usercontent/',
@@ -507,7 +513,7 @@ export async function createVod(
     body: JSON.stringify(job)
   });
   if (response.ok) {
-    const createdJob = (await response.json()) as { id: string };
+    const createdJob = (await response.json()) as EncoreJobResponse;
     const sourceName = basename(source, extname(source));
     const outputFolder = new URL(pipeline.output).pathname;
     const vod = {
@@ -516,7 +522,7 @@ export async function createVod(
         pipeline.outputBucketName,
         outputFolder,
         sourceName,
-        createdJob.id,
+        createdJob.id!,
         'index.m3u8'
       )}`
     };

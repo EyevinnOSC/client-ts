@@ -8,6 +8,7 @@ import {
   removeInstance,
   valueOrSecret
 } from '@osaas/client-core';
+import type { EncoreJobResponse } from '@osaas/client-services';
 import { ValkeyDb } from '@osaas/client-db';
 import { delay } from './util';
 
@@ -481,7 +482,7 @@ export class Encore {
     );
     const jobId = Math.random().toString(36).substring(7);
     const encoreJobUrl = new URL('/encoreJobs', instance.url);
-    const data = await createFetch<any>(encoreJobUrl, {
+    const data = await createFetch<EncoreJobResponse>(encoreJobUrl, {
       method: 'POST',
       body: JSON.stringify({
         profile: profile || 'program',
@@ -501,8 +502,7 @@ export class Encore {
         'Content-Type': 'application/json'
       }
     });
-    const encoreJob = JSON.parse(data);
-    Log().debug(encoreJob);
+    Log().debug(data);
   }
 
   public async destroy() {
