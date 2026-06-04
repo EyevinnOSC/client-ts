@@ -28,11 +28,24 @@ const defaultErrorFactory: ErrorFactory = async (response) => {
 export const createFetch = async <T>(
   url: string | URL,
   options?: RequestInit,
-  errorFactory: ErrorFactory = defaultErrorFactory
+  errorFactory: ErrorFactory = defaultErrorFactory,
+  tlsRejectUnauthorized = true
 ): Promise<T> => {
   try {
     Log().debug(`${options?.method}: ${url}`);
-    const response = await fetch(url, { ...options });
+    const fetchOptions: RequestInit = { ...options };
+    if (!tlsRejectUnauthorized) {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const { Agent } = require('undici') as {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        Agent: new (opts: { connect: { rejectUnauthorized: boolean } }) => any;
+      };
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (fetchOptions as any).dispatcher = new Agent({
+        connect: { rejectUnauthorized: false }
+      });
+    }
+    const response = await fetch(url, fetchOptions);
 
     Log().debug(
       response.status + ': ' + response.statusText + ': ' + response.ok

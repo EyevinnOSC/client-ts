@@ -8,6 +8,29 @@ jest.mock('./fetch', () => ({
   createFetch: jest.fn()
 }));
 
+describe('Context tlsRejectUnauthorized', () => {
+  test('defaults to true when not specified', () => {
+    const ctx = new Context({ personalAccessToken: 'dummy' });
+    expect(ctx.tlsRejectUnauthorized).toBe(true);
+  });
+
+  test('stores false when explicitly set to false', () => {
+    const ctx = new Context({
+      personalAccessToken: 'dummy',
+      tlsRejectUnauthorized: false
+    });
+    expect(ctx.tlsRejectUnauthorized).toBe(false);
+  });
+
+  test('stores true when explicitly set to true', () => {
+    const ctx = new Context({
+      personalAccessToken: 'dummy',
+      tlsRejectUnauthorized: true
+    });
+    expect(ctx.tlsRejectUnauthorized).toBe(true);
+  });
+});
+
 describe('Core functionalities', () => {
   afterAll(() => {
     jest.clearAllMocks();

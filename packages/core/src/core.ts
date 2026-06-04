@@ -298,12 +298,17 @@ export async function getInstanceHealth(
     'health'
   );
 
-  const { status } = await createFetch<{ status: string }>(healthUrl, {
-    method: 'GET',
-    headers: {
-      'x-jwt': `Bearer ${token}`
-    }
-  });
+  const { status } = await createFetch<{ status: string }>(
+    healthUrl,
+    {
+      method: 'GET',
+      headers: {
+        'x-jwt': `Bearer ${token}`
+      }
+    },
+    undefined,
+    context.tlsRejectUnauthorized
+  );
   return status;
 }
 
