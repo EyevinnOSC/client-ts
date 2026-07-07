@@ -64,6 +64,45 @@ describe('waitForJobToComplete', () => {
     expect(mockGetInstance).toHaveBeenCalledTimes(1);
   });
 
+  test('resolves when job health is SuccessCriteriaMet (status field absent)', async () => {
+    const completedJob = { name: 'myjob', health: 'SuccessCriteriaMet' };
+    mockGetInstance.mockResolvedValue(completedJob);
+    const result = await waitForJobToComplete(
+      ctx,
+      'eyevinn-ffmpeg-s3',
+      'myjob',
+      'token'
+    );
+    expect(result).toEqual(completedJob);
+    expect(mockGetInstance).toHaveBeenCalledTimes(1);
+  });
+
+  test('resolves when job health is Complete (status field absent)', async () => {
+    const completedJob = { name: 'myjob', health: 'Complete' };
+    mockGetInstance.mockResolvedValue(completedJob);
+    const result = await waitForJobToComplete(
+      ctx,
+      'eyevinn-ffmpeg-s3',
+      'myjob',
+      'token'
+    );
+    expect(result).toEqual(completedJob);
+  });
+
+  test('throws when job health is Failed (status field absent)', async () => {
+    mockGetInstance.mockResolvedValue({ health: 'Failed' });
+    await expect(
+      waitForJobToComplete(ctx, 'eyevinn-ffmpeg-s3', 'myjob', 'token')
+    ).rejects.toThrow("Job 'myjob' failed with status: Failed");
+  });
+
+  test('throws when job health is FailureTarget (status field absent)', async () => {
+    mockGetInstance.mockResolvedValue({ health: 'FailureTarget' });
+    await expect(
+      waitForJobToComplete(ctx, 'eyevinn-ffmpeg-s3', 'myjob', 'token')
+    ).rejects.toThrow("Job 'myjob' failed with status: FailureTarget");
+  });
+
   test('polls until job reaches terminal status', async () => {
     const completedJob = { name: 'myjob', status: 'SuccessCriteriaMet' };
     mockGetInstance
