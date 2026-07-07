@@ -142,8 +142,8 @@ export interface WaitForJobOptions {
  * @throws {Error} If the job reaches a terminal failure state ('Failed' or 'FailureTarget')
  * @throws {Error} If timeoutMs is set and the job does not complete within the given time
  *
- * Terminal success statuses: 'Complete', 'SuccessCriteriaMet'
- * Terminal failure statuses: 'Failed', 'FailureTarget'
+ * Terminal success statuses (status or health field): 'Complete', 'SuccessCriteriaMet'
+ * Terminal failure statuses (status or health field): 'Failed', 'FailureTarget'
  */
 export async function waitForJobToComplete(
   context: Context,
@@ -162,11 +162,14 @@ export async function waitForJobToComplete(
       throw new Error(`Job '${name}' timed out after ${options!.timeoutMs}ms`);
     }
     const job = await getJob(context, serviceId, name, token);
-    if (job.status === 'Complete' || job.status === 'SuccessCriteriaMet') {
+    const terminalSuccess = new Set(['Complete', 'SuccessCriteriaMet']);
+    const terminalFailure = new Set(['Failed', 'FailureTarget']);
+    if (terminalSuccess.has(job.status) || terminalSuccess.has(job.health)) {
       return job;
     }
-    if (job.status === 'Failed' || job.status === 'FailureTarget') {
-      throw new Error(`Job '${name}' failed with status: ${job.status}`);
+    if (terminalFailure.has(job.status) || terminalFailure.has(job.health)) {
+      const signal = terminalFailure.has(job.status) ? job.status : job.health;
+      throw new Error(`Job '${name}' failed with status: ${signal}`);
     }
     await delay(1000);
   }
