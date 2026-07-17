@@ -54,6 +54,22 @@ export const DatabaseTypeToProtocol: Record<DatabaseType, string> = {
   couchdb: 'https'
 };
 
+/**
+ * Protocol to use when connecting to the *internal* (cluster-local) endpoint
+ * of a database, as opposed to its public ingress URL.
+ *
+ * This only needs an entry for database types whose `DatabaseTypeToProtocol`
+ * value is not valid for the raw container port. CouchDB's public URL is
+ * HTTPS (TLS terminated at the ingress on port 443), but its internal
+ * container port (5984) speaks plaintext HTTP - there is no in-cluster TLS
+ * termination on that port. Other database types use non-HTTP schemes
+ * (postgres://, mysql://, redis://, clickhouse://) for both paths and are
+ * unaffected.
+ */
+const DatabaseTypeToInternalProtocol: Partial<Record<DatabaseType, string>> = {
+  couchdb: 'http'
+};
+
 export interface DatabaseOpts {
   username?: string;
   password?: string;
@@ -259,7 +275,7 @@ export async function setupDatabase(
           (p) => p.port === DatabaseTypeToPort['couchdb']
         );
         if (port) {
-          return `${DatabaseTypeToProtocol['couchdb']}://admin:${
+          return `${DatabaseTypeToInternalProtocol['couchdb']}://admin:${
             (instance as any).AdminPassword
           }@${endpointInfo.serviceDns}:${port.port}`;
         }
