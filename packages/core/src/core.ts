@@ -7,7 +7,7 @@ const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 export async function getService(context: Context, serviceId: string) {
   const serviceUrl = new URL(
-    `https://catalog.svc.${context.getEnvironment()}.osaas.io/mysubscriptions`
+    `https://catalog.svc.${context.getPlatformEnvironment()}.osaas.io/mysubscriptions`
   );
   const services = await createFetch<Service[]>(serviceUrl, {
     method: 'GET',

@@ -49,7 +49,7 @@ export async function listSubscriptions(
   context: Context
 ): Promise<Subscription[]> {
   const serviceUrl = new URL(
-    `https://catalog.svc.${context.getEnvironment()}.osaas.io/mysubscriptions`
+    `https://catalog.svc.${context.getPlatformEnvironment()}.osaas.io/mysubscriptions`
   );
 
   return await createFetch<Subscription[]>(serviceUrl, {
@@ -73,7 +73,7 @@ export async function removeSubscription(
   serviceId: string
 ): Promise<void> {
   const serviceUrl = new URL(
-    `https://catalog.svc.${context.getEnvironment()}.osaas.io/mysubscriptions/${serviceId}`
+    `https://catalog.svc.${context.getPlatformEnvironment()}.osaas.io/mysubscriptions/${serviceId}`
   );
 
   await createFetch<{ reason: string } | string>(serviceUrl, {
