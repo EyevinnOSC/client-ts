@@ -1,5 +1,10 @@
 import { Context } from './context';
-import { createInstance, isValidInstanceName, removeInstance } from './core';
+import {
+  createInstance,
+  isValidInstanceName,
+  removeInstance,
+  saveSecret
+} from './core';
 import { InvalidName } from './errors';
 import { createFetch, FetchError } from './fetch';
 
@@ -107,5 +112,34 @@ describe('removeInstance', () => {
     await expect(
       removeInstance(ctx, 'eyevinn-test-adserver', 'myinstance', 'my-token')
     ).rejects.toThrow(FetchError);
+  });
+});
+
+describe('site-scoped calls (deploy-manager) still use environment, not platformEnv', () => {
+  const mockCreateFetch = createFetch as jest.MockedFunction<
+    typeof createFetch
+  >;
+
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test('saveSecret targets deploy.svc.<environment>, not platformEnv, even when they diverge on prod-se', async () => {
+    const ctx = new Context({
+      personalAccessToken: 'dummy',
+      environment: 'prod-se'
+    });
+    // platformEnv should have collapsed to 'prod' for this context, while
+    // environment (site) stays 'prod-se' — saveSecret must follow the site.
+    expect(ctx.getPlatformEnvironment()).toBe('prod');
+    expect(ctx.getEnvironment()).toBe('prod-se');
+
+    mockCreateFetch.mockResolvedValueOnce(undefined);
+
+    await saveSecret('eyevinn-test-adserver', 'my-secret', 'value', ctx);
+
+    expect(mockCreateFetch).toHaveBeenCalledTimes(1);
+    const calledUrl = mockCreateFetch.mock.calls[0][0] as URL;
+    expect(calledUrl.hostname).toBe('deploy.svc.prod-se.osaas.io');
   });
 });
