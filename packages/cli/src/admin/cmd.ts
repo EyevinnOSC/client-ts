@@ -4,13 +4,15 @@ import {
   Log,
   Platform,
   getOrderIdByName,
+  getOrderIdByRepositoryUrl,
   remakeOrder,
   waitForOrder
 } from '@osaas/client-core';
 import {
   getServiceRepoUrl,
   getSyncForkStatus,
-  triggerSyncFork
+  triggerSyncFork,
+  waitForSyncFork
 } from './syncfork';
 import {
   getInstancesToRemove,
@@ -24,6 +26,8 @@ import {
   removeSubscriptionForTenant
 } from './subscription';
 import { getTenantPlanMap, getTenantTokenCounts } from './money';
+
+const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 export default function cmdAdmin() {
   const admin = new Command('admin');
@@ -267,6 +271,7 @@ export default function cmdAdmin() {
   admin
     .command('sync-fork')
     .description('Trigger a fork sync for an OSC service')
+    .option('-w, --wait', 'Wait for sync fork and remake to complete')
     .argument('<serviceId>', 'The OSC service ID (e.g. eyevinn-web-runner)')
     .action(async (serviceId, options, command) => {
       try {
@@ -303,6 +308,53 @@ export default function cmdAdmin() {
             }
             return;
           }
+        }
+
+        if (options.wait) {
+          Log().info('Waiting for sync fork to complete...');
+          const finalSyncStatus = await waitForSyncFork(repoUrl, platform);
+          if (finalSyncStatus?.status === 'failed') {
+            console.log(`Sync fork status: ${finalSyncStatus.status}`);
+            if (finalSyncStatus.error) {
+              console.log(
+                `Sync fork failed: [${finalSyncStatus.error.type}] ${finalSyncStatus.error.message}`
+              );
+              if (finalSyncStatus.error.conflictFiles?.length) {
+                console.log(
+                  `Conflict files: ${finalSyncStatus.error.conflictFiles.join(
+                    ', '
+                  )}`
+                );
+              }
+            }
+            return;
+          }
+
+          const maxAttempts = 24;
+          const pollIntervalMs = 5000;
+          let orderId: string | undefined;
+          for (let attempt = 0; attempt < maxAttempts; attempt++) {
+            orderId = await getOrderIdByRepositoryUrl(platform, repoUrl);
+            if (orderId) {
+              break;
+            }
+            await delay(pollIntervalMs);
+          }
+
+          if (!orderId) {
+            Log().error(
+              `No remake order found for ${repoUrl} after waiting ${
+                (maxAttempts * pollIntervalMs) / 1000
+              }s — it may not have started yet; check with 'osc admin remake-order' once it appears`
+            );
+            return;
+          }
+
+          Log().info('Waiting for remake to complete...');
+          await waitForOrder(platform, orderId);
+          Log().info(
+            `Sync fork and remake for ${serviceId} completed successfully`
+          );
         }
       } catch (err) {
         console.log((err as Error).message);

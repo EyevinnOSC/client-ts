@@ -89,3 +89,25 @@ export async function getSyncForkStatus(
     throw err;
   }
 }
+
+const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
+export async function waitForSyncFork(
+  repositoryUrl: string,
+  platform: Platform
+): Promise<SyncForkStatus | undefined> {
+  let running = true;
+  while (running) {
+    const status = await getSyncForkStatus(repositoryUrl, platform);
+    if (!status) {
+      return undefined;
+    }
+    if (status.status === 'pending' || status.status === 'running') {
+      await delay(5000);
+    } else {
+      running = false;
+      return status;
+    }
+  }
+  return undefined;
+}

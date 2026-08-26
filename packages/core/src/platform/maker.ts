@@ -42,6 +42,43 @@ export async function getOrderIdByName(platform: Platform, orderName: string) {
   }
 }
 
+const ACTIVE_ORDER_PHASES = new Set(['NEW', 'PENDING', 'RUNNING']);
+
+export async function getOrderIdByRepositoryUrl(
+  platform: Platform,
+  repositoryUrl: string
+) {
+  try {
+    const makerUrl = new URL(
+      `https://maker.svc.${platform.getEnvironment()}.osaas.io/maker`
+    );
+    makerUrl.searchParams.append('repositoryUrl', repositoryUrl);
+    const res = await createFetch<OutputOrder[]>(makerUrl, {
+      headers: {
+        Authorization: `Bearer ${platform.getApiKey()}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    const activeOrder = res.find((o) =>
+      ACTIVE_ORDER_PHASES.has(o.order.status?.phase || '')
+    );
+    if (activeOrder) {
+      return activeOrder.order.orderId;
+    }
+    if (res[0]) {
+      return res[0].order.orderId;
+    }
+    return undefined;
+  } catch (err) {
+    Log().debug(err);
+    if (err instanceof FetchError && err.httpCode === 401) {
+      throw new UnauthorizedError();
+    } else if (err instanceof FetchError && err.httpCode === 404) {
+      return undefined;
+    }
+  }
+}
+
 export async function waitForOrder(platform: Platform, orderId: string) {
   try {
     let running = true;
