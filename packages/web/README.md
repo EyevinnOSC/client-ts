@@ -16,30 +16,11 @@ npm install --save @osaas/client-web
 
 Example code
 
-```javascript
-import { Context, Log } from '@osaas/client-core';
-import { publish } from '@osaas/client-web';
-
-async function main() {
-  const ctx = new Context();
-
-  try {
-    const ctx = new Context({ environment });
-    await publish('www', '/Users/birme/Code/eyevinn/www/dist', ctx, {
-      sync: true
-    });
-  } catch (err) {
-    Log().error(err);
-  }
-}
-
-main();
-```
-
-There is also an opt-in `publishToMyPages` function that publishes via
-`osaas-deploy-manager`'s `/mypages` API (a shared per-tenant storage instance
-with a `*.pages.osaas.io` URL and directory-index support) instead of
-provisioning a dedicated MinIO bucket per site:
+Publishing uses `osaas-deploy-manager`'s `/mypages` API (a shared per-tenant
+storage instance with a `*.pages.osaas.io` URL and directory-index support).
+It does not provision a dedicated storage bucket per site, so `web cdn-create`
+/ custom domains cannot be pointed at a published site yet (see
+`Eyevinn/osaas-deploy-manager#1409`):
 
 ```javascript
 import { Context, Log } from '@osaas/client-core';
