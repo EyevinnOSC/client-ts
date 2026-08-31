@@ -378,11 +378,25 @@ Remove a secret:
 
 ### Web publishing and configuration
 
-Publish a website:
+Publish a website (default backend: a dedicated MinIO bucket per site):
 
 ```bash
 % osc web publish mysite ./dist
 ```
+
+Publish a website using the My Pages backend instead (`osaas-deploy-manager`'s
+`/mypages` API — a shared per-tenant storage instance, a directory-index-aware
+publish step, and a `*.pages.osaas.io` URL). This is opt-in; the default
+backend above is unchanged:
+
+```bash
+% osc web publish mysite ./dist --backend mypages
+```
+
+Note: sites published with `--backend mypages` do not provision a dedicated
+storage bucket, so `osc web cdn-create` cannot be pointed at them the way it
+can for the default `minio` backend — custom domains/CDN in front of a
+`mypages` site are not yet supported.
 
 Create a CDN distribution:
 

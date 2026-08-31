@@ -6,7 +6,11 @@ import {
   removeInstance,
   waitForInstanceReady
 } from '@osaas/client-core';
-import { createCloudfrontDistribution, publish } from '@osaas/client-web';
+import {
+  createCloudfrontDistribution,
+  publish,
+  publishToMyPages
+} from '@osaas/client-web';
 import { Command } from 'commander';
 
 interface ConfigItem {
@@ -30,12 +34,37 @@ export function cmdWeb() {
     .description('Publish a website')
     .argument('<name>', 'Name of website')
     .argument('<dir>', 'Directory to publish')
-    .option('-s, --sync', 'Synchronize the bucket')
+    .option('-s, --sync', 'Synchronize the bucket (minio backend only)')
+    .option(
+      '--backend <backend>',
+      "Publish backend to use: 'minio' (default) or 'mypages'"
+    )
     .action(async (name, dir, options, command) => {
+      const backend = options.backend || 'minio';
+      if (backend !== 'minio' && backend !== 'mypages') {
+        console.log(
+          `Unknown --backend '${backend}'. Supported values: minio, mypages`
+        );
+        return;
+      }
+
       try {
         const globalOpts = command.optsWithGlobals();
         const environment = globalOpts?.env || 'prod';
         const ctx = new Context({ environment });
+
+        if (backend === 'mypages') {
+          const page = await publishToMyPages(name, dir, ctx);
+          console.log(`Website published at: ${page.url}`);
+          console.log(
+            'Note: the mypages backend does not provision a dedicated ' +
+              "storage bucket, so 'osc web cdn-create' cannot be pointed at " +
+              'it the way it can for the default minio backend. Custom ' +
+              'domains/CDN in front of a mypages site are not yet supported ' +
+              '(see Eyevinn/osaas-deploy-manager#1409).'
+          );
+          return;
+        }
 
         const website = await publish(name, dir, ctx, { sync: options.sync });
         console.log(`Website published at: ${website.url}`);

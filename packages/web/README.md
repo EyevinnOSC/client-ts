@@ -36,6 +36,33 @@ async function main() {
 main();
 ```
 
+There is also an opt-in `publishToMyPages` function that publishes via
+`osaas-deploy-manager`'s `/mypages` API (a shared per-tenant storage instance
+with a `*.pages.osaas.io` URL and directory-index support) instead of
+provisioning a dedicated MinIO bucket per site:
+
+```javascript
+import { Context, Log } from '@osaas/client-core';
+import { publishToMyPages } from '@osaas/client-web';
+
+async function main() {
+  const ctx = new Context({ environment });
+
+  try {
+    const page = await publishToMyPages(
+      'www',
+      '/Users/birme/Code/eyevinn/www/dist',
+      ctx
+    );
+    console.log(page.url);
+  } catch (err) {
+    Log().error(err);
+  }
+}
+
+main();
+```
+
 ## About Open Source Cloud
 
 Open Source Cloud reduces the barrier to get started with open source without having to host it on your own infrastructure.
