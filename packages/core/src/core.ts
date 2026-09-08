@@ -3,8 +3,6 @@ import { InvalidName, UnauthorizedError } from './errors';
 import { FetchError, createFetch } from './fetch';
 import { Log } from './log';
 
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
-
 export async function getService(context: Context, serviceId: string) {
   const serviceUrl = new URL(
     `https://catalog.svc.${context.getPlatformEnvironment()}.osaas.io/mysubscriptions`
@@ -501,26 +499,10 @@ export function valueOrSecret(value: string) {
   return value.match(/^{{secrets}}/) ? '***' : value;
 }
 
-export async function waitForInstanceReady(
-  serviceId: string,
-  name: string,
-  ctx: Context
-) {
-  const serviceAccessToken = await ctx.getServiceAccessToken(serviceId);
-  let instanceOk = false;
-  while (!instanceOk) {
-    await delay(1000);
-    const status = await getInstanceHealth(
-      ctx,
-      serviceId,
-      name,
-      serviceAccessToken
-    );
-    if (status && status === 'running') {
-      instanceOk = true;
-    }
-  }
-}
+export {
+  WaitForInstanceReadyOptions,
+  waitForInstanceReady
+} from './waitForInstanceReady';
 
 export async function saveSecret(
   serviceId: string,
