@@ -16,6 +16,7 @@ export {
   valueOrSecret,
   isValidInstanceName,
   waitForInstanceReady,
+  WaitForInstanceReadyOptions,
   saveSecret,
   listSecrets,
   getSecret,

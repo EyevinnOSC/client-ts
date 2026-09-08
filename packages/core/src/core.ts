@@ -1,5 +1,9 @@
 import { Context, Service } from './context';
-import { InvalidName, UnauthorizedError } from './errors';
+import {
+  InvalidName,
+  InstanceReadyTimeoutError,
+  UnauthorizedError
+} from './errors';
 import { FetchError, createFetch } from './fetch';
 import { Log } from './log';
 
@@ -501,15 +505,35 @@ export function valueOrSecret(value: string) {
   return value.match(/^{{secrets}}/) ? '***' : value;
 }
 
+export interface WaitForInstanceReadyOptions {
+  /**
+   * Maximum wall-clock time to wait in milliseconds. Defaults to 300,000 (5 min).
+   * Pass Infinity to restore the old unbounded behaviour.
+   */
+  timeoutMs?: number;
+  /** Poll interval in milliseconds. Defaults to 1,000. */
+  pollIntervalMs?: number;
+  /** AbortSignal to cancel the wait early. */
+  signal?: AbortSignal;
+}
+
 export async function waitForInstanceReady(
   serviceId: string,
   name: string,
-  ctx: Context
-) {
+  ctx: Context,
+  opts?: WaitForInstanceReadyOptions
+): Promise<void> {
   const serviceAccessToken = await ctx.getServiceAccessToken(serviceId);
-  let instanceOk = false;
-  while (!instanceOk) {
-    await delay(1000);
+  const deadline = Date.now() + (opts?.timeoutMs ?? 300_000);
+  const pollInterval = opts?.pollIntervalMs ?? 1000;
+
+  while (Date.now() < deadline && !opts?.signal?.aborted) {
+    await delay(pollInterval);
+    if (opts?.signal?.aborted) {
+      const abortErr = new Error('waitForInstanceReady was aborted');
+      abortErr.name = 'AbortError';
+      throw abortErr;
+    }
     const status = await getInstanceHealth(
       ctx,
       serviceId,
@@ -517,9 +541,20 @@ export async function waitForInstanceReady(
       serviceAccessToken
     );
     if (status && status === 'running') {
-      instanceOk = true;
+      return;
     }
   }
+
+  if (opts?.signal?.aborted) {
+    const abortErr = new Error('waitForInstanceReady was aborted');
+    abortErr.name = 'AbortError';
+    throw abortErr;
+  }
+  throw new InstanceReadyTimeoutError(
+    `Instance '${name}' of service '${serviceId}' did not reach running state within ${
+      opts?.timeoutMs ?? 300_000
+    }ms`
+  );
 }
 
 export async function saveSecret(

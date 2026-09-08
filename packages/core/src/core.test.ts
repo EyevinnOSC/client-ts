@@ -3,9 +3,10 @@ import {
   createInstance,
   isValidInstanceName,
   removeInstance,
-  saveSecret
+  saveSecret,
+  waitForInstanceReady
 } from './core';
-import { InvalidName } from './errors';
+import { InvalidName, InstanceReadyTimeoutError } from './errors';
 import { createFetch, FetchError } from './fetch';
 
 jest.mock('./fetch', () => ({

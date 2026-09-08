@@ -15,3 +15,10 @@ export class InvalidName extends Error {
     super(`Invalid name: ${name}. Only alphanumeric characters are allowed.`);
   }
 }
+
+export class InstanceReadyTimeoutError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'InstanceReadyTimeoutError';
+  }
+}
