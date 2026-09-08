@@ -36,15 +36,14 @@ describe('waitForInstanceReady', () => {
   test('resolves when instance status is running on the first poll', async () => {
     mockGetInstanceHealth.mockResolvedValue('running');
 
-    jest.useFakeTimers();
-    const promise = waitForInstanceReady(
-      'eyevinn-test-svc',
-      'myinstance',
-      ctx,
-      { timeoutMs: 10_000, pollIntervalMs: 100 }
-    );
-    await jest.runAllTimersAsync();
-    await expect(promise).resolves.toBeUndefined();
+    // Use pollIntervalMs: 0 so delay(0) resolves immediately as a macrotask
+    // without needing fake timers (real setTimeout(fn, 0) fires on next tick).
+    await expect(
+      waitForInstanceReady('eyevinn-test-svc', 'myinstance', ctx, {
+        timeoutMs: 10_000,
+        pollIntervalMs: 0
+      })
+    ).resolves.toBeUndefined();
     expect(mockGetInstanceHealth).toHaveBeenCalledTimes(1);
   });
 
@@ -54,15 +53,12 @@ describe('waitForInstanceReady', () => {
       .mockResolvedValueOnce('starting')
       .mockResolvedValueOnce('running');
 
-    jest.useFakeTimers();
-    const promise = waitForInstanceReady(
-      'eyevinn-test-svc',
-      'myinstance',
-      ctx,
-      { timeoutMs: 10_000, pollIntervalMs: 100 }
-    );
-    await jest.runAllTimersAsync();
-    await expect(promise).resolves.toBeUndefined();
+    await expect(
+      waitForInstanceReady('eyevinn-test-svc', 'myinstance', ctx, {
+        timeoutMs: 10_000,
+        pollIntervalMs: 0
+      })
+    ).resolves.toBeUndefined();
     expect(mockGetInstanceHealth).toHaveBeenCalledTimes(3);
   });
 
@@ -78,7 +74,8 @@ describe('waitForInstanceReady', () => {
 
     await expect(
       waitForInstanceReady('eyevinn-test-svc', 'myinstance', ctx, {
-        timeoutMs: 5_000
+        timeoutMs: 5_000,
+        pollIntervalMs: 0
       })
     ).rejects.toThrow(InstanceReadyTimeoutError);
 
@@ -96,7 +93,8 @@ describe('waitForInstanceReady', () => {
 
     await expect(
       waitForInstanceReady('eyevinn-test-svc', 'myinstance', ctx, {
-        timeoutMs: 5_000
+        timeoutMs: 5_000,
+        pollIntervalMs: 0
       })
     ).rejects.toThrow("Instance 'myinstance' of service 'eyevinn-test-svc'");
 
@@ -113,7 +111,9 @@ describe('waitForInstanceReady', () => {
       .mockImplementation(() => (calls++ === 0 ? base : base + 400_000));
 
     await expect(
-      waitForInstanceReady('eyevinn-test-svc', 'myinstance', ctx)
+      waitForInstanceReady('eyevinn-test-svc', 'myinstance', ctx, {
+        pollIntervalMs: 0
+      })
     ).rejects.toThrow('300000ms');
 
     dateSpy.mockRestore();
@@ -125,16 +125,15 @@ describe('waitForInstanceReady', () => {
     const controller = new AbortController();
     controller.abort();
 
-    jest.useFakeTimers();
-    const promise = waitForInstanceReady(
-      'eyevinn-test-svc',
-      'myinstance',
-      ctx,
-      { signal: controller.signal, pollIntervalMs: 100 }
-    );
-    await jest.runAllTimersAsync();
-
-    await expect(promise).rejects.toMatchObject({
+    // Signal is already aborted — the while loop never executes so no delay
+    // occurs. The implementation throws a plain Error with .name = 'AbortError'
+    // (DOMException is not available in the es2022 lib target).
+    await expect(
+      waitForInstanceReady('eyevinn-test-svc', 'myinstance', ctx, {
+        signal: controller.signal,
+        pollIntervalMs: 0
+      })
+    ).rejects.toMatchObject({
       name: 'AbortError',
       message: 'waitForInstanceReady was aborted'
     });
@@ -145,34 +144,36 @@ describe('waitForInstanceReady', () => {
   test('rejects with AbortError when signal is aborted during polling', async () => {
     const controller = new AbortController();
 
-    // Return 'starting' once then abort after the delay
+    // Health check aborts the signal then returns 'starting'. With
+    // pollIntervalMs: 0 the delay resolves immediately so no fake timers
+    // are needed. The implementation uses a plain Error with .name = 'AbortError'.
     mockGetInstanceHealth.mockImplementationOnce(async () => {
       controller.abort();
       return 'starting';
     });
 
-    jest.useFakeTimers();
-    const promise = waitForInstanceReady(
-      'eyevinn-test-svc',
-      'myinstance',
-      ctx,
-      { signal: controller.signal, pollIntervalMs: 100, timeoutMs: 60_000 }
-    );
-    await jest.runAllTimersAsync();
-
-    await expect(promise).rejects.toMatchObject({ name: 'AbortError' });
+    await expect(
+      waitForInstanceReady('eyevinn-test-svc', 'myinstance', ctx, {
+        signal: controller.signal,
+        pollIntervalMs: 0,
+        timeoutMs: 60_000
+      })
+    ).rejects.toMatchObject({ name: 'AbortError' });
   });
 
   test('backwards compatible: no opts parameter still works (resolves on running)', async () => {
     mockGetInstanceHealth.mockResolvedValue('running');
 
+    // Pin Date.now so the default 300 s deadline is always in the future.
     const base = 1_000_000;
-    // Date.now always returns base — well within 300 s window
     const dateSpy = jest.spyOn(Date, 'now').mockImplementation(() => base);
 
+    // No opts means pollIntervalMs defaults to 1000. Use fake timers so the
+    // delay(1000) resolves without a real one-second wait.
     jest.useFakeTimers();
     const promise = waitForInstanceReady('eyevinn-test-svc', 'myinstance', ctx);
-    await jest.runAllTimersAsync();
+    // Advance past the 1000 ms poll interval and drain pending microtasks.
+    await jest.advanceTimersByTimeAsync(1100);
     await expect(promise).resolves.toBeUndefined();
 
     dateSpy.mockRestore();
