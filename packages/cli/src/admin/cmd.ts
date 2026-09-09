@@ -119,14 +119,25 @@ export default function cmdAdmin() {
                 for (const item of instancesToRemove) {
                   console.log(` - ${item.serviceId}: ${item.instance}`);
                   if (options.apply) {
-                    await suspendInstanceForTenant(
-                      tenant.tenantId,
-                      item.serviceId,
-                      item.instance,
-                      environment
-                    );
-                    instancesSuspended++;
-                    console.log('Suspended');
+                    try {
+                      await suspendInstanceForTenant(
+                        tenant.tenantId,
+                        item.serviceId,
+                        item.instance,
+                        environment
+                      );
+                      instancesSuspended++;
+                      console.log('Suspended');
+                    } catch (err) {
+                      console.log(
+                        `Failed to suspend ${item.serviceId}: ${
+                          item.instance
+                        } for tenant ${tenant.tenantId}: ${
+                          (err as Error).message
+                        }`
+                      );
+                      continue;
+                    }
                   }
                 }
               }
