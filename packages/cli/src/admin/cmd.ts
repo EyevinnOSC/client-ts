@@ -103,6 +103,8 @@ export default function cmdAdmin() {
           (tenant) => tenant.remainingTokens < -200
         );
         let instancesSuspended = 0;
+        let instancesFailed = 0;
+        let tenantsFailed = 0;
         const tenantsExceedingCount = tenantsExceeding.length;
         for (const tenant of tenantsExceeding) {
           if (tenantPlanMap[tenant.tenantId]?.planType === 'FREE') {
@@ -129,6 +131,7 @@ export default function cmdAdmin() {
                       instancesSuspended++;
                       console.log('Suspended');
                     } catch (err) {
+                      instancesFailed++;
                       console.log(
                         `Failed to suspend ${item.serviceId}: ${
                           item.instance
@@ -142,6 +145,7 @@ export default function cmdAdmin() {
                 }
               }
             } catch (err) {
+              tenantsFailed++;
               console.log(
                 `Failed to process tenant ${tenant.tenantId}: ${
                   (err as Error).message
@@ -153,8 +157,11 @@ export default function cmdAdmin() {
         console.log(
           `${tenantsExceedingCount} / ${
             Object.keys(tenantPlanMap).length
-          } tenants below threshold, suspended ${instancesSuspended} instances`
+          } tenants below threshold, suspended ${instancesSuspended} instances, ${instancesFailed} instance failures, ${tenantsFailed} tenant failures`
         );
+        if (instancesFailed > 0 || tenantsFailed > 0) {
+          process.exitCode = 1;
+        }
       } catch (err) {
         console.log((err as Error).message);
       }
@@ -184,13 +191,29 @@ export default function cmdAdmin() {
           'Are you really sure you want to remove all above instances for tenant ' +
             `${tenantId} in ${environment}? (yes/no) `
         );
+        let instancesRemoved = 0;
+        let instancesFailed = 0;
         for (const item of instancesToRemove) {
-          await removeInstanceForTenant(
-            tenantId,
-            item.serviceId,
-            item.instance,
-            environment
-          );
+          try {
+            await removeInstanceForTenant(
+              tenantId,
+              item.serviceId,
+              item.instance,
+              environment
+            );
+            instancesRemoved++;
+          } catch (innerErr) {
+            instancesFailed++;
+            console.error(
+              `Failed to remove ${item.serviceId}/${item.instance}: ${(innerErr as Error).message}`
+            );
+          }
+        }
+        console.log(
+          `Removed ${instancesRemoved} instances, ${instancesFailed} failed`
+        );
+        if (instancesFailed > 0) {
+          process.exitCode = 1;
         }
       } catch (err) {
         console.log((err as Error).message);
