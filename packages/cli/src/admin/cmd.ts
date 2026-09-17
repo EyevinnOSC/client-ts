@@ -205,7 +205,9 @@ export default function cmdAdmin() {
           } catch (innerErr) {
             instancesFailed++;
             console.error(
-              `Failed to remove ${item.serviceId}/${item.instance}: ${(innerErr as Error).message}`
+              `Failed to remove ${item.serviceId}/${item.instance}: ${
+                (innerErr as Error).message
+              }`
             );
           }
         }
