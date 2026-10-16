@@ -72,8 +72,14 @@ export async function getInstancesToRemove(
       Authorization: `Bearer ${apiKey()}`
     }
   });
-  return instances.map(({ serviceId, instanceName }) => ({
-    serviceId,
-    instance: instanceName
-  }));
+  // deploy-manager lists every pod of an instance separately, so dedupe
+  const seen = new Set<string>();
+  const unique: { serviceId: string; instance: string }[] = [];
+  for (const { serviceId, instanceName } of instances) {
+    const key = JSON.stringify([serviceId, instanceName]);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    unique.push({ serviceId, instance: instanceName });
+  }
+  return unique;
 }
