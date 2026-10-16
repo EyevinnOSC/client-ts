@@ -1,6 +1,7 @@
 import { Command } from 'commander';
 import { generatePat } from './token';
 import {
+  FetchError,
   Log,
   Platform,
   getOrderIdByName,
@@ -26,6 +27,8 @@ import {
   removeSubscriptionForTenant
 } from './subscription';
 import { getTenantPlanMap, getTenantTokenCounts } from './money';
+
+const ALREADY_SUSPENDED_REASON = 'Instance is already suspended';
 
 const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
@@ -104,6 +107,7 @@ export default function cmdAdmin() {
         );
         let instancesSuspended = 0;
         let instancesFailed = 0;
+        let instancesAlreadySuspended = 0;
         let tenantsFailed = 0;
         const tenantsExceedingCount = tenantsExceeding.length;
         for (const tenant of tenantsExceeding) {
@@ -131,6 +135,17 @@ export default function cmdAdmin() {
                       instancesSuspended++;
                       console.log('Suspended');
                     } catch (err) {
+                      if (
+                        err instanceof FetchError &&
+                        err.httpCode === 409 &&
+                        err.message === ALREADY_SUSPENDED_REASON
+                      ) {
+                        instancesAlreadySuspended++;
+                        console.log(
+                          `Already suspended ${item.serviceId}: ${item.instance}, skipping`
+                        );
+                        continue;
+                      }
                       instancesFailed++;
                       console.log(
                         `Failed to suspend ${item.serviceId}: ${
@@ -157,7 +172,7 @@ export default function cmdAdmin() {
         console.log(
           `${tenantsExceedingCount} / ${
             Object.keys(tenantPlanMap).length
-          } tenants below threshold, suspended ${instancesSuspended} instances, ${instancesFailed} instance failures, ${tenantsFailed} tenant failures`
+          } tenants below threshold, suspended ${instancesSuspended} instances, ${instancesFailed} instance failures, ${tenantsFailed} tenant failures, ${instancesAlreadySuspended} already suspended`
         );
         if (instancesFailed > 0 || tenantsFailed > 0) {
           process.exitCode = 1;
