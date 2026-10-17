@@ -1,4 +1,5 @@
 import {
+  clearSuspensionRecord,
   Context,
   createInstance,
   deleteSecret,
@@ -85,6 +86,7 @@ export function cmdCreate() {
           serviceAccessToken,
           payload
         );
+        await clearSuspensionRecord(ctx, serviceId, payload['name']);
         const isJson = command.optsWithGlobals().json;
         if (isJson) {
           process.stdout.write(JSON.stringify(instance) + '\n');

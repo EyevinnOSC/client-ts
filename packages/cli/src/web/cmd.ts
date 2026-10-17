@@ -1,4 +1,5 @@
 import {
+  clearSuspensionRecord,
   Context,
   createInstance,
   getInstance,
@@ -119,6 +120,7 @@ export function cmdWeb() {
                 name
               }
             );
+            await clearSuspensionRecord(ctx, 'valkey-io-valkey', name);
             await waitForInstanceReady('valkey-io-valkey', name, ctx);
           }
           const ports = await getPortsForInstance(
@@ -140,6 +142,7 @@ export function cmdWeb() {
               RedisUrl: `redis://${redisPort.externalIp}:${redisPort.externalPort}`
             }
           );
+          await clearSuspensionRecord(ctx, 'eyevinn-app-config-svc', name);
           await waitForInstanceReady('eyevinn-app-config-svc', name, ctx);
         }
         console.log(
