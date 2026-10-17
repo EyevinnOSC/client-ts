@@ -46,3 +46,4 @@ export {
 export * from './platform/maker';
 export * from './errors';
 export * from './myapp';
+export { clearSuspensionRecord } from './suspension';
