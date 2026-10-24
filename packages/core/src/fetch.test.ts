@@ -52,12 +52,44 @@ describe('fetch', () => {
   test('can handle error response', async () => {
     jest.spyOn(global, 'fetch').mockImplementation(fetchMockResponseTextError);
 
-    try {
-      const data = await createFetch<string>('https://mock.com/test');
-    } catch (error) {
-      const fetchError = error as FetchError;
-      expect(fetchError.message).toEqual('unexpected error');
-      expect(fetchError.httpCode).toEqual(400);
-    }
+    let caught: unknown;
+    await expect(
+      createFetch<string>('https://mock.com/test').catch((e) => {
+        caught = e;
+        throw e;
+      })
+    ).rejects.toMatchObject({ message: 'unexpected error', httpCode: 400 });
+    expect(caught).toBeInstanceOf(FetchError);
+    expect(Object.prototype.hasOwnProperty.call(caught, 'cause')).toBe(false);
+  });
+
+  test('keeps the original error as cause', async () => {
+    const original = new TypeError('fetch failed', {
+      cause: { code: 'ECONNRESET' }
+    });
+    jest.spyOn(global, 'fetch').mockRejectedValue(original);
+
+    const result = createFetch<string>('https://mock.com/test');
+    await expect(result).rejects.toBeInstanceOf(FetchError);
+    await expect(result).rejects.toMatchObject({
+      message: 'fetch failed',
+      httpCode: undefined,
+      cause: original
+    });
+    await expect(result).rejects.toHaveProperty(
+      'cause.cause.code',
+      'ECONNRESET'
+    );
+    await expect(result).rejects.toHaveProperty('cause', original);
+  });
+
+  test('keeps a non-Error rejection as cause', async () => {
+    jest.spyOn(global, 'fetch').mockRejectedValue('boom');
+
+    const result = createFetch<string>('https://mock.com/test');
+    await expect(result).rejects.toMatchObject({
+      message: JSON.stringify('boom'),
+      cause: 'boom'
+    });
   });
 });

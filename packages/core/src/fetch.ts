@@ -53,7 +53,7 @@ export const createFetch = async <T>(
       Log().debug(error.httpCode + ': ' + error.message);
       throw error;
     }
-    throw new FetchError({ message: getErrorMessage(error) });
+    throw new FetchError({ message: getErrorMessage(error), cause: error });
   }
 };
 
@@ -65,8 +65,16 @@ const getErrorMessage = (error: unknown) => {
 export class FetchError extends Error {
   httpCode?: number;
 
-  constructor({ message, httpCode }: { message: string; httpCode?: number }) {
-    super(message);
+  constructor({
+    message,
+    httpCode,
+    cause
+  }: {
+    message: string;
+    httpCode?: number;
+    cause?: unknown;
+  }) {
+    super(message, cause === undefined ? undefined : { cause });
     this.httpCode = httpCode;
   }
 }
