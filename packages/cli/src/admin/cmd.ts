@@ -10,9 +10,13 @@ import {
   waitForOrder
 } from '@osaas/client-core';
 import {
+  assertGithubRepositoryUrl,
   getServiceRepoUrl,
   getSyncForkStatus,
+  listOrdersByRepositoryUrl,
+  REMAKE_GRACE_MS,
   triggerSyncFork,
+  waitForRemakeByRepositoryUrl,
   waitForSyncFork
 } from './syncfork';
 import {
@@ -323,22 +327,65 @@ export default function cmdAdmin() {
     .command('sync-fork')
     .description('Trigger a fork sync for an OSC service')
     .option('-w, --wait', 'Wait for sync fork and remake to complete')
-    .argument('<serviceId>', 'The OSC service ID (e.g. eyevinn-web-runner)')
+    .option(
+      '--repository-url <url>',
+      'GitHub repository URL (https://github.com/<owner>/<repo>) to sync instead of a service ID. Skips the catalog lookup and works with the dedicated sync-fork API key. With --wait the remake is followed by polling the order list for the repository'
+    )
+    .argument('[serviceId]', 'The OSC service ID (e.g. eyevinn-web-runner)')
     .action(async (serviceId, options, command) => {
+      const byUrl = options.repositoryUrl !== undefined;
+      // On the --repository-url path every failure exits non-zero
+      const fail = () => {
+        if (byUrl) {
+          process.exitCode = 1;
+        }
+      };
+      if (byUrl && serviceId) {
+        console.error(
+          'Specify either <serviceId> or --repository-url, not both'
+        );
+        process.exitCode = 1;
+        return;
+      }
+      if (!byUrl && !serviceId) {
+        console.error('Either <serviceId> or --repository-url is required');
+        process.exitCode = 1;
+        return;
+      }
+      if (byUrl) {
+        try {
+          assertGithubRepositoryUrl(options.repositoryUrl);
+        } catch (err) {
+          console.error((err as Error).message);
+          process.exitCode = 1;
+          return;
+        }
+      }
       try {
         const globalOpts = command.optsWithGlobals();
         const environment = globalOpts?.env || 'prod';
         const platform = new Platform({ environment });
 
-        Log().info(
-          `Looking up repository URL for service ${serviceId} in ${environment}`
-        );
-        const repoUrl = await getServiceRepoUrl(
-          serviceId,
-          environment,
-          platform.getApiKey()
-        );
+        let repoUrl: string;
+        if (byUrl) {
+          repoUrl = options.repositoryUrl;
+        } else {
+          Log().info(
+            `Looking up repository URL for service ${serviceId} in ${environment}`
+          );
+          repoUrl = await getServiceRepoUrl(
+            serviceId,
+            environment,
+            platform.getApiKey()
+          );
+        }
         Log().info(`Repository URL: ${repoUrl}`);
+
+        // Snapshot existing orders so the wait does not accept a stale one
+        const ordersBefore =
+          byUrl && options.wait
+            ? await listOrdersByRepositoryUrl(repoUrl, platform)
+            : [];
 
         Log().info(`Triggering sync fork for ${repoUrl}`);
         const jobId = await triggerSyncFork(repoUrl, platform);
@@ -357,6 +404,7 @@ export default function cmdAdmin() {
                 `Conflict files: ${status.error.conflictFiles.join(', ')}`
               );
             }
+            fail();
             return;
           }
         }
@@ -377,6 +425,32 @@ export default function cmdAdmin() {
                   )}`
                 );
               }
+            }
+            fail();
+            return;
+          }
+
+          if (byUrl) {
+            const result = await waitForRemakeByRepositoryUrl(
+              repoUrl,
+              platform,
+              ordersBefore
+            );
+            if (result.outcome === 'done') {
+              Log().info(
+                `Sync fork and remake for ${repoUrl} completed successfully`
+              );
+            } else if (result.outcome === 'failed') {
+              console.error(
+                `Remake order ${result.orderId} for ${repoUrl} ended in phase ${result.phase}`
+              );
+              process.exitCode = 1;
+            } else {
+              console.log(
+                `Sync fork succeeded; no remake order appeared within ${
+                  REMAKE_GRACE_MS / 1000
+                }s (fork was likely already up to date)`
+              );
             }
             return;
           }
@@ -409,6 +483,7 @@ export default function cmdAdmin() {
         }
       } catch (err) {
         console.log((err as Error).message);
+        fail();
       }
     });
   return admin;
