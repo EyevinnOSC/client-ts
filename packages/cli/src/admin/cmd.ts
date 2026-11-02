@@ -14,8 +14,7 @@ import {
   getServiceRepoUrl,
   getSyncForkStatus,
   listOrdersByRepositoryUrl,
-  REMAKE_MAX_ATTEMPTS,
-  REMAKE_POLL_INTERVAL_MS,
+  REMAKE_GRACE_MS,
   triggerSyncFork,
   waitForRemakeByRepositoryUrl,
   waitForSyncFork
@@ -447,12 +446,11 @@ export default function cmdAdmin() {
               );
               process.exitCode = 1;
             } else {
-              console.error(
-                `No remake order found for ${repoUrl} after waiting ${
-                  (REMAKE_MAX_ATTEMPTS * REMAKE_POLL_INTERVAL_MS) / 1000
-                }s`
+              console.log(
+                `Sync fork succeeded; no remake order appeared within ${
+                  REMAKE_GRACE_MS / 1000
+                }s (fork was likely already up to date)`
               );
-              process.exitCode = 1;
             }
             return;
           }

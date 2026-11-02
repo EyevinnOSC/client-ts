@@ -185,11 +185,43 @@ describe('admin sync-fork --repository-url', () => {
     expect(errSpy.mock.calls.join('\n')).toContain('ERROR');
   });
 
-  it('--wait: stale DONE order is not accepted, times out non-zero', async () => {
+  it('--wait: no-change run (only stale DONE order) exits 0 after the 60s grace and stops polling', async () => {
     setup({ makerLists: [[{ orderId: 'old', phase: 'DONE' }]] });
     await run(['sync-fork', '--repository-url', REPO, '--wait']);
+    expect(process.exitCode).toBeUndefined();
+    expect(logSpy.mock.calls.join('\n')).toContain(
+      'Sync fork succeeded; no remake order appeared within 60s (fork was likely already up to date)'
+    );
+    // 1 snapshot + polls at 0s, 5s, ..., 60s = 13, and nothing after the grace
+    const makerCalls = urls().filter((u) =>
+      u.includes('/maker?repositoryUrl=')
+    );
+    expect(makerCalls).toHaveLength(14);
+    expect(urls().some((u) => /\/maker\/[^?]/.test(u))).toBe(false);
+  });
+
+  it('--wait: order appearing late inside the grace is still waited to DONE', async () => {
+    const stale = [{ orderId: 'old', phase: 'DONE' }];
+    setup({
+      makerLists: [
+        stale,
+        ...Array(10).fill(stale),
+        [...stale, { orderId: 'new', phase: 'RUNNING' }],
+        [...stale, { orderId: 'new', phase: 'DONE' }]
+      ]
+    });
+    await run(['sync-fork', '--repository-url', REPO, '--wait']);
+    expect(process.exitCode).toBeUndefined();
+    expect(logSpy.mock.calls.join('\n')).not.toContain('no remake order');
+  });
+
+  it('--wait: order appearing inside the grace and failing exits 1', async () => {
+    const stale = [{ orderId: 'old', phase: 'DONE' }];
+    setup({
+      makerLists: [stale, stale, [...stale, { orderId: 'new', phase: 'ERROR' }]]
+    });
+    await run(['sync-fork', '--repository-url', REPO, '--wait']);
     expect(process.exitCode).toBe(1);
-    expect(errSpy.mock.calls.join('\n')).toContain('No remake order found');
   });
 
   it('--wait: sync-fork failure exits non-zero', async () => {

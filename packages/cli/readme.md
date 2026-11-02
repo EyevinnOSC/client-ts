@@ -450,7 +450,7 @@ Sync the fork of an OSC service with its upstream repository (looks up the repos
 osc admin sync-fork eyevinn-web-runner --wait
 ```
 
-Sync a fork by repository URL. This skips the catalog lookup and works with the dedicated sync-fork API key (`OSC_API_KEY=<API_KEY_SYNC_FORK>`). Give either `<serviceId>` or `--repository-url`, not both. The URL must be `https://github.com/<owner>/<repo>[.git]`. With `--wait` the remake order is followed by polling the order list for the repository (`GET /maker?repositoryUrl=`) instead of fetching the order by id, and any failure or timeout exits non-zero:
+Sync a fork by repository URL. This skips the catalog lookup and works with the dedicated sync-fork API key (`OSC_API_KEY=<API_KEY_SYNC_FORK>`). Give either `<serviceId>` or `--repository-url`, not both. The URL must be `https://github.com/<owner>/<repo>[.git]`. With `--wait` the remake order is followed by polling the order list for the repository (`GET /maker?repositoryUrl=`) instead of fetching the order by id, and any failure exits non-zero. The sync status has no "changed" flag, so this is a heuristic: if no new or changed order appears within 60 seconds after the sync job has succeeded, the command exits 0 with "no remake order appeared within 60s (fork was likely already up to date)". A remake that only starts after those 60 seconds is not waited for.
 
 ```
 osc --env prod admin sync-fork --repository-url https://github.com/Eyevinn/open-live --wait

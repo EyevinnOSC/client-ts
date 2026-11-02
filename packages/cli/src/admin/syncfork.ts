@@ -198,16 +198,22 @@ export async function listOrdersByRepositoryUrl(
 // Same non-terminal phases as waitForOrder / getOrderIdByRepositoryUrl in client-core
 const ACTIVE_PHASES = new Set(['NEW', 'PENDING', 'RUNNING']);
 
-export const REMAKE_MAX_ATTEMPTS = 24;
+/**
+ * Heuristic: the by-repo status carries no "changed" flag, so after the sync
+ * job has succeeded we wait this long for a remake order to show up and then
+ * assume the fork was already up to date.
+ */
+export const REMAKE_GRACE_MS = 60000;
 export const REMAKE_POLL_INTERVAL_MS = 5000;
 
 export type RemakeResult =
   | { outcome: 'done'; orderId: string }
   | { outcome: 'failed'; orderId: string; phase: string }
-  | { outcome: 'not_found' };
+  | { outcome: 'no_remake' };
 
 /**
- * Waits for the remake order started by a sync fork, using only
+ * Waits for the remake order started by a sync fork (call it once the sync
+ * job has succeeded; the grace period REMAKE_GRACE_MS runs from the call), using only
  * GET /maker?repositoryUrl=. `before` is the order list captured before the
  * sync was triggered. An order is only accepted when it is new (orderId not in
  * `before`), is in an active phase, or its phase differs from the snapshot, so
@@ -221,7 +227,7 @@ export async function waitForRemakeByRepositoryUrl(
 ): Promise<RemakeResult> {
   const snapshot = new Map(before.map((o) => [o.orderId, o.phase]));
   let trackedId: string | undefined;
-  let attempt = 0;
+  let elapsedMs = 0;
   for (;;) {
     const orders = await listOrdersByRepositoryUrl(repositoryUrl, platform);
     let order: RepoOrder | undefined;
@@ -244,12 +250,10 @@ export async function waitForRemakeByRepositoryUrl(
           ? { outcome: 'done', orderId: order.orderId }
           : { outcome: 'failed', orderId: order.orderId, phase: order.phase };
       }
-    } else {
-      attempt++;
-      if (attempt >= REMAKE_MAX_ATTEMPTS) {
-        return { outcome: 'not_found' };
-      }
+    } else if (elapsedMs >= REMAKE_GRACE_MS) {
+      return { outcome: 'no_remake' };
     }
     await delay(REMAKE_POLL_INTERVAL_MS);
+    elapsedMs += REMAKE_POLL_INTERVAL_MS;
   }
 }
