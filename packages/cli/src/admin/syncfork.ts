@@ -111,3 +111,145 @@ export async function waitForSyncFork(
   }
   return undefined;
 }
+
+const GITHUB_SEGMENT = /^[A-Za-z0-9_.-]+$/;
+
+/**
+ * Validates that the value is https://github.com/<owner>/<repo>[.git] and
+ * throws a descriptive error otherwise. The URL is passed on unmodified since
+ * maker-manager matches registered repositories on the exact string.
+ */
+export function assertGithubRepositoryUrl(value: string): void {
+  const invalid = () =>
+    new Error(
+      `Invalid repository URL '${value}': expected https://github.com/<owner>/<repo>[.git]`
+    );
+  let url: URL;
+  try {
+    url = new URL(value);
+  } catch {
+    throw invalid();
+  }
+  if (
+    url.protocol !== 'https:' ||
+    url.hostname !== 'github.com' ||
+    url.port !== '' ||
+    url.username !== '' ||
+    url.password !== '' ||
+    url.search !== '' ||
+    url.hash !== '' ||
+    value.endsWith('?') ||
+    value.endsWith('#')
+  ) {
+    throw invalid();
+  }
+  const segments = url.pathname.split('/');
+  // ['', owner, repo]
+  if (segments.length !== 3 || segments[0] !== '') {
+    throw invalid();
+  }
+  const owner = segments[1];
+  const repo = segments[2].replace(/\.git$/, '');
+  const ok = (s: string) => GITHUB_SEGMENT.test(s) && s !== '.' && s !== '..';
+  if (!ok(owner) || !ok(repo)) {
+    throw invalid();
+  }
+}
+
+export interface RepoOrder {
+  orderId: string;
+  phase: string;
+}
+
+/**
+ * Lists the orders for a repository with GET /maker?repositoryUrl=<url>, the
+ * only query parameter, which is the one order lookup the dedicated sync-fork
+ * key is accepted on. Errors are propagated (404 means no orders).
+ */
+export async function listOrdersByRepositoryUrl(
+  repositoryUrl: string,
+  platform: Platform
+): Promise<RepoOrder[]> {
+  const makerUrl = new URL(
+    `https://maker.svc.${platform.getEnvironment()}.osaas.io/maker`
+  );
+  makerUrl.searchParams.append('repositoryUrl', repositoryUrl);
+  try {
+    const res = await createFetch<
+      { order: { orderId: string; status?: { phase?: string } } }[]
+    >(makerUrl, {
+      headers: {
+        Authorization: `Bearer ${platform.getApiKey()}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    return res.map((o) => ({
+      orderId: o.order.orderId,
+      phase: o.order.status?.phase || ''
+    }));
+  } catch (err) {
+    if (err instanceof FetchError && err.httpCode === 404) {
+      return [];
+    }
+    throw err;
+  }
+}
+
+// Same non-terminal phases as waitForOrder / getOrderIdByRepositoryUrl in client-core
+const ACTIVE_PHASES = new Set(['NEW', 'PENDING', 'RUNNING']);
+
+export const REMAKE_MAX_ATTEMPTS = 24;
+export const REMAKE_POLL_INTERVAL_MS = 5000;
+
+export type RemakeResult =
+  | { outcome: 'done'; orderId: string }
+  | { outcome: 'failed'; orderId: string; phase: string }
+  | { outcome: 'not_found' };
+
+/**
+ * Waits for the remake order started by a sync fork, using only
+ * GET /maker?repositoryUrl=. `before` is the order list captured before the
+ * sync was triggered. An order is only accepted when it is new (orderId not in
+ * `before`), is in an active phase, or its phase differs from the snapshot, so
+ * a stale earlier DONE order is never mistaken for the new remake. A rebuild
+ * can reuse the orderId, which is why the phase is compared as well.
+ */
+export async function waitForRemakeByRepositoryUrl(
+  repositoryUrl: string,
+  platform: Platform,
+  before: RepoOrder[]
+): Promise<RemakeResult> {
+  const snapshot = new Map(before.map((o) => [o.orderId, o.phase]));
+  let trackedId: string | undefined;
+  let attempt = 0;
+  for (;;) {
+    const orders = await listOrdersByRepositoryUrl(repositoryUrl, platform);
+    let order: RepoOrder | undefined;
+    if (trackedId) {
+      order = orders.find((o) => o.orderId === trackedId);
+    } else {
+      order = orders.find(
+        (o) =>
+          !snapshot.has(o.orderId) ||
+          ACTIVE_PHASES.has(o.phase) ||
+          snapshot.get(o.orderId) !== o.phase
+      );
+      if (order) {
+        trackedId = order.orderId;
+      }
+    }
+    if (order) {
+      if (!ACTIVE_PHASES.has(order.phase)) {
+        return order.phase === 'DONE'
+          ? { outcome: 'done', orderId: order.orderId }
+          : { outcome: 'failed', orderId: order.orderId, phase: order.phase };
+      }
+    } else {
+      attempt++;
+      if (attempt >= REMAKE_MAX_ATTEMPTS) {
+        return { outcome: 'not_found' };
+      }
+    }
+    await delay(REMAKE_POLL_INTERVAL_MS);
+  }
+}

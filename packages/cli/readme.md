@@ -443,3 +443,15 @@ Remove a channel-engine instance in dev env for tenant `asdasd` as an OSC super 
 ```
 PAT_SECRET=<pat-secret> osc --env dev admin remove-instance asdasd channel-engine mychannel
 ```
+
+Sync the fork of an OSC service with its upstream repository (looks up the repository URL in the catalog, which needs the platform API key):
+
+```
+osc admin sync-fork eyevinn-web-runner --wait
+```
+
+Sync a fork by repository URL. This skips the catalog lookup and works with the dedicated sync-fork API key (`OSC_API_KEY=<API_KEY_SYNC_FORK>`). Give either `<serviceId>` or `--repository-url`, not both. The URL must be `https://github.com/<owner>/<repo>[.git]`. With `--wait` the remake order is followed by polling the order list for the repository (`GET /maker?repositoryUrl=`) instead of fetching the order by id, and any failure or timeout exits non-zero:
+
+```
+osc --env prod admin sync-fork --repository-url https://github.com/Eyevinn/open-live --wait
+```
