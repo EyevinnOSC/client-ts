@@ -1,10 +1,14 @@
 import {
+  buildRedisUrl,
   clearSuspensionRecord,
   Context,
   createInstance,
+  createValkeyPasswordSecret,
+  GeneratedValkeyPassword,
   getInstance,
   getPortsForInstance,
   removeInstance,
+  saveSecret,
   waitForInstanceReady
 } from '@osaas/client-core';
 import {
@@ -105,6 +109,7 @@ export function cmdWeb() {
           const valkeyToken = await ctx.getServiceAccessToken(
             'valkey-io-valkey'
           );
+          let generated: GeneratedValkeyPassword | undefined;
           let valkeyInstance = await getInstance(
             ctx,
             'valkey-io-valkey',
@@ -112,12 +117,14 @@ export function cmdWeb() {
             valkeyToken
           );
           if (!valkeyInstance) {
+            generated = await createValkeyPasswordSecret(ctx, name);
             valkeyInstance = await createInstance(
               ctx,
               'valkey-io-valkey',
               valkeyToken,
               {
-                name
+                name,
+                Password: generated.secretRef
               }
             );
             await clearSuspensionRecord(ctx, 'valkey-io-valkey', name);
@@ -133,13 +140,33 @@ export function cmdWeb() {
           if (!redisPort) {
             throw new Error(`Failed to get redis port for instance ${name}`);
           }
+          let redisUrl = `redis://${redisPort.externalIp}:${redisPort.externalPort}`;
+          if (generated) {
+            // The orchestrator only resolves a secret reference that is the
+            // entire value, so the whole URL is stored as one secret.
+            const redisUrlSecretName = `redisurl${name}`;
+            await saveSecret(
+              'eyevinn-app-config-svc',
+              redisUrlSecretName,
+              buildRedisUrl(
+                redisPort.externalIp,
+                redisPort.externalPort,
+                generated.password
+              ),
+              ctx
+            );
+            redisUrl = `{{secrets.${redisUrlSecretName}}}`;
+            console.log(
+              `Stored the Valkey password as secret '${generated.secretName}' and the Redis URL as secret '${redisUrlSecretName}'`
+            );
+          }
           configInstance = await createInstance(
             ctx,
             'eyevinn-app-config-svc',
             configToken,
             {
               name,
-              RedisUrl: `redis://${redisPort.externalIp}:${redisPort.externalPort}`
+              RedisUrl: redisUrl
             }
           );
           await clearSuspensionRecord(ctx, 'eyevinn-app-config-svc', name);

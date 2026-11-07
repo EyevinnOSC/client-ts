@@ -1,5 +1,6 @@
 import { Context, Service } from './context';
-import { InvalidName, UnauthorizedError } from './errors';
+import { randomBytes } from 'crypto';
+import { InvalidName, PasswordRequired, UnauthorizedError } from './errors';
 import { FetchError, createFetch } from './fetch';
 import { Log } from './log';
 
@@ -62,6 +63,8 @@ export type Port = {
   internalPort: number;
 };
 
+const VALKEY_SERVICE_ID = 'valkey-io-valkey';
+
 /**
  * @typedef ServiceInstance
  * @type object
@@ -94,6 +97,12 @@ export async function createInstance(
 ): Promise<any> {
   if (!isValidInstanceName(body.name)) {
     throw new InvalidName(body.name);
+  }
+  if (
+    serviceId === VALKEY_SERVICE_ID &&
+    (typeof body.Password !== 'string' || body.Password.trim() === '')
+  ) {
+    throw new PasswordRequired(serviceId);
   }
   const service = await getService(context, serviceId);
   const instanceUrl = new URL(service.apiUrl);
@@ -631,4 +640,43 @@ export async function deleteSecret(
       'Content-Type': 'application/json'
     }
   });
+}
+
+export type GeneratedValkeyPassword = {
+  /** The generated password. Never print or log this value. */
+  password: string;
+  /** Name of the secret (service id valkey-io-valkey) that holds the password */
+  secretName: string;
+  /** Value to pass as the Password parameter when creating the instance */
+  secretRef: string;
+};
+
+/**
+ * Generate a random password for a new Valkey instance and store it as a
+ * secret for the valkey-io-valkey service. The secret is named after the
+ * instance. Pass `secretRef` as the `Password` parameter to `createInstance`.
+ * @memberof module:@osaas/client-core
+ * @param {Context} ctx - Open Source Cloud configuration context
+ * @param {string} name - Name of the Valkey instance
+ * @returns {GeneratedValkeyPassword} - The password, secret name and secret reference
+ */
+export async function createValkeyPasswordSecret(
+  ctx: Context,
+  name: string
+): Promise<GeneratedValkeyPassword> {
+  const password = randomBytes(32).toString('base64');
+  await saveSecret(VALKEY_SERVICE_ID, name, password, ctx);
+  return { password, secretName: name, secretRef: `{{secrets.${name}}}` };
+}
+
+/**
+ * Build a redis URL including the (URL-encoded) password
+ * @memberof module:@osaas/client-core
+ */
+export function buildRedisUrl(
+  host: string,
+  port: number | string,
+  password: string
+): string {
+  return `redis://:${encodeURIComponent(password)}@${host}:${port}`;
 }

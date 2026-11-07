@@ -147,6 +147,9 @@ export async function setupDatabase(
     switch (type) {
       case 'valkey':
         {
+          if (!opts.password) {
+            throw new Error('Password is required for valkey');
+          }
           const options: ValkeyIoValkeyConfig = {
             name,
             Password: opts.password,

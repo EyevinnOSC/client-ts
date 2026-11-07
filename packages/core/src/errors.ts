@@ -22,3 +22,13 @@ export class InstanceReadyTimeoutError extends Error {
     this.name = 'InstanceReadyTimeoutError';
   }
 }
+
+export class PasswordRequired extends Error {
+  constructor(serviceId: string) {
+    super(
+      `A Password is required to create a ${serviceId} instance. ` +
+        `Supply a Password parameter or a {{secrets.<name>}} reference.`
+    );
+    this.name = 'PasswordRequired';
+  }
+}
