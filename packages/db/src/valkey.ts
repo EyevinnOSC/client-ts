@@ -1,6 +1,9 @@
 import {
   Context,
   Log,
+  buildRedisUrl,
+  GeneratedValkeyPassword,
+  createValkeyPasswordSecret,
   getPortsForInstance,
   listInstances
 } from '@osaas/client-core';
@@ -44,13 +47,24 @@ export class ValkeyDb {
 
   public async init() {
     const instance = await getValkeyIoValkeyInstance(this.context, this.name);
+    let generated: GeneratedValkeyPassword | undefined;
     if (!instance) {
-      await createValkeyIoValkeyInstance(this.context, { name: this.name });
+      generated = await createValkeyPasswordSecret(this.context, this.name);
+      await createValkeyIoValkeyInstance(this.context, {
+        name: this.name,
+        Password: generated.secretRef
+      });
     }
     const redisPort = await this.getRedisPort();
     if (redisPort) {
       this.url = new URL(
-        `redis://${redisPort.externalIp}:${redisPort.externalPort}`
+        generated
+          ? buildRedisUrl(
+              redisPort.externalIp,
+              redisPort.externalPort,
+              generated.password
+            )
+          : `redis://${redisPort.externalIp}:${redisPort.externalPort}`
       );
     }
   }

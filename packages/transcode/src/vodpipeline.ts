@@ -1,5 +1,8 @@
 import {
   Context,
+  buildRedisUrl,
+  createValkeyPasswordSecret,
+  GeneratedValkeyPassword,
   getInstance,
   getPortsForInstance,
   isValidInstanceName,
@@ -127,8 +130,13 @@ async function createRedis(name: string, ctx: Context) {
     name,
     sat
   );
+  let generated: GeneratedValkeyPassword | undefined;
   if (!instance) {
-    const config: ValkeyIoValkeyConfig = { name };
+    generated = await createValkeyPasswordSecret(ctx, name);
+    const config: ValkeyIoValkeyConfig = {
+      name,
+      Password: generated.secretRef
+    };
     const newInstance = await createValkeyIoValkeyInstance(ctx, config);
     await waitForInstanceReady('valkey-io-valkey', name, ctx);
     await delay(2000);
@@ -141,7 +149,33 @@ async function createRedis(name: string, ctx: Context) {
   if (!redisPort) {
     throw new Error(`Failed to get redis port for instance ${name}`);
   }
+  if (generated) {
+    return buildRedisUrl(
+      redisPort.externalIp,
+      redisPort.externalPort,
+      generated.password
+    );
+  }
   return `redis://${redisPort.externalIp}:${redisPort.externalPort}`;
+}
+
+/**
+ * A Redis URL that carries a password must not be passed as a plain instance
+ * parameter. The orchestrator only resolves a secret reference that is the
+ * entire value, so the whole URL is stored as one secret per consuming service.
+ */
+async function redisUrlParam(
+  ctx: Context,
+  serviceId: string,
+  name: string,
+  redisUrl: string
+) {
+  if (!redisUrl.includes('@')) {
+    return redisUrl;
+  }
+  const secretName = `redisurl${name}`;
+  await saveSecret(serviceId, secretName, redisUrl, ctx);
+  return `{{secrets.${secretName}}}`;
 }
 
 async function createCallbackListener(
@@ -162,7 +196,12 @@ async function createCallbackListener(
   if (!instance) {
     const config: EyevinnEncoreCallbackListenerConfig = {
       name,
-      RedisUrl: redisUrl,
+      RedisUrl: await redisUrlParam(
+        ctx,
+        'eyevinn-encore-callback-listener',
+        name,
+        redisUrl
+      ),
       RedisQueue: 'package',
       EncoreUrl: encoreUrl
     };
@@ -211,7 +250,12 @@ async function createPackager(
     );
     const config: EyevinnEncorePackagerConfig = {
       name,
-      RedisUrl: redisUrl,
+      RedisUrl: await redisUrlParam(
+        ctx,
+        'eyevinn-encore-packager',
+        name,
+        redisUrl
+      ),
       RedisQueue: 'package',
       OutputFolder: outputFolder,
       AwsAccessKeyId: accessKeyId,

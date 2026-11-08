@@ -2,6 +2,7 @@ import {
   clearSuspensionRecord,
   Context,
   createInstance,
+  createValkeyPasswordSecret,
   deleteSecret,
   getInstance,
   getLogsForInstance,
@@ -79,6 +80,17 @@ export function cmdCreate() {
         const environment = globalOpts?.env || 'prod';
         const ctx = new Context({ environment });
         const serviceAccessToken = await ctx.getServiceAccessToken(serviceId);
+
+        if (serviceId === 'valkey-io-valkey' && !payload['Password']) {
+          const generated = await createValkeyPasswordSecret(
+            ctx,
+            payload['name']
+          );
+          payload['Password'] = generated.secretRef;
+          console.error(
+            `Generated a password and stored it as secret '${generated.secretName}' for valkey-io-valkey`
+          );
+        }
 
         const instance = await createInstance(
           ctx,
