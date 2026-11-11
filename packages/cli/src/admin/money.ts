@@ -11,6 +11,8 @@ export type TenantTokenCount = {
 export type TenantPlan = {
   tenantId: string;
   planType: string;
+  managedTenant?: boolean;
+  subWorkspaceBillingException?: boolean;
 };
 
 export async function getTenantTokenCounts(environment: string) {
