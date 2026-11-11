@@ -65,6 +65,7 @@ Commands:
   remove [options] <serviceId> <name>              Remove a service instance
   logs <serviceId> <name>                          Get logs for a service instance
   restart <serviceId> <name>                       Restart a service instance
+  events [options] <serviceId> <name>              Show lifecycle events (restarts, crashes, replacements) of a service instance
   get-instance-replicas <serviceId> <name>         Get the number of replicas for a service instance
   set-instance-replicas <serviceId> <name> <n>     Set the number of replicas for a service instance
   service-access-token <serviceId>                 Generate a service access token for a service
