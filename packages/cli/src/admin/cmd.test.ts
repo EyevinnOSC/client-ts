@@ -119,7 +119,8 @@ describe('remove-exceeding-tenant-instances', () => {
       'billing exception',
       { planType: 'BUSINESS', subWorkspaceBillingException: true }
     ],
-    ['no plan type', { planType: '' }]
+    ['no plan type', { planType: '' }],
+    ['an unknown plan type', { planType: 'FUTURE_PLAN' }]
   ])('does not suspend %s', async (_name, plan) => {
     (getTenantPlanMap as jest.Mock).mockResolvedValue({ t1: plan });
     await run();
@@ -142,5 +143,18 @@ describe('remove-exceeding-tenant-instances', () => {
     (getTenantPlanMap as jest.Mock).mockResolvedValue({});
     await run();
     expect(mockSuspend).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    ['managed sub-workspace', { planType: 'FREE', managedTenant: true }],
+    [
+      'billing exception',
+      { planType: 'FREE', subWorkspaceBillingException: true }
+    ]
+  ])('still suspends a FREE tenant flagged as %s', async (_name, plan) => {
+    (getTenantPlanMap as jest.Mock).mockResolvedValue({ t1: plan });
+    mockSuspend.mockResolvedValue(undefined);
+    await run();
+    expect(mockSuspend).toHaveBeenCalledTimes(1);
   });
 });
