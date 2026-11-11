@@ -56,6 +56,7 @@ cli.addCommand(cmdUser.cmdDescribe());
 cli.addCommand(cmdUser.cmdRemove());
 cli.addCommand(cmdUser.cmdLogs());
 cli.addCommand(cmdUser.cmdRestart());
+cli.addCommand(cmdUser.cmdEvents());
 cli.addCommand(cmdUser.cmdGetInstanceReplicas());
 cli.addCommand(cmdUser.cmdSetInstanceReplicas());
 cli.addCommand(cmdUser.cmdServiceAccessToken());

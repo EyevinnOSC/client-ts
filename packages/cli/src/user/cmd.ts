@@ -5,6 +5,7 @@ import {
   createValkeyPasswordSecret,
   deleteSecret,
   getInstance,
+  getInstanceEvents,
   getLogsForInstance,
   getPortsForInstance,
   listInstances,
@@ -330,6 +331,102 @@ export function cmdLogs() {
       }
     });
   return logs;
+}
+
+export const EVENTS_HELP =
+  'Show the recorded lifecycle events of a service instance, newest first. ' +
+  'The second slot of a High-Availability My App is the instance <name>b, and ' +
+  'the serving instance can be <name>b after a blue-green roll. The history of ' +
+  '<name>b stays readable after HA is disabled (until retention removes it). ' +
+  'The whole history of such an app needs this command for each name.';
+
+export function cmdEvents() {
+  const events = new Command('events');
+
+  events
+    .description(EVENTS_HELP)
+    .argument('<serviceId>', 'The Service Id')
+    .argument('<name>', 'The instance name')
+    .option(
+      '--from <timestamp>',
+      'Only events last seen at or after (ISO-8601 UTC)'
+    )
+    .option('--to <timestamp>', 'Only events last seen before (ISO-8601 UTC)')
+    .option(
+      '--type <types>',
+      'Comma-separated event types, for example crash,oom,restart'
+    )
+    .option('--limit <n>', 'Maximum number of events (1-200, default 50)')
+    .option('--cursor <cursor>', 'The nextCursor of a previous response')
+    .action(async (serviceId, name, options, command) => {
+      const isJson = command.optsWithGlobals().json;
+      try {
+        const globalOpts = command.optsWithGlobals();
+        const environment = globalOpts?.env || 'prod';
+        const ctx = new Context({ environment });
+
+        const result = await getInstanceEvents(ctx, serviceId, name, {
+          from: options.from,
+          to: options.to,
+          type: options.type
+            ? String(options.type)
+                .split(',')
+                .map((t) => t.trim())
+                .filter((t) => t.length > 0)
+            : undefined,
+          limit:
+            options.limit !== undefined ? Number(options.limit) : undefined,
+          cursor: options.cursor
+        });
+        if (isJson) {
+          process.stdout.write(JSON.stringify(result) + '\n');
+          return;
+        }
+        console.log(
+          `Events captured since ${result.capturedSince} (retention ${result.retentionDays} days)`
+        );
+        if (result.truncated) {
+          console.log(
+            `Notice: the history is truncated. The oldest retained event starts at ${
+              result.oldestRetainedAt ?? 'unknown'
+            }.`
+          );
+        }
+        if (result.events.length === 0) {
+          console.log('No events found');
+        }
+        for (const e of result.events) {
+          const times =
+            e.count > 1 ? `${e.firstAt} - ${e.lastAt} (x${e.count})` : e.lastAt;
+          const details = [
+            e.reason,
+            e.container ? `container=${e.container}` : undefined,
+            e.exitCode !== undefined ? `exitCode=${e.exitCode}` : undefined
+          ]
+            .filter((d) => d !== undefined)
+            .join(' ');
+          console.log(
+            `${times} ${e.type} ${e.outcome} actor=${e.actor} trigger=${
+              e.trigger
+            }${details ? ' ' + details : ''}`
+          );
+        }
+        if (result.nextCursor) {
+          console.log(
+            `More events exist. Use --cursor ${result.nextCursor} to get the next page.`
+          );
+        }
+      } catch (err) {
+        if (isJson) {
+          process.stderr.write(
+            JSON.stringify({ error: (err as Error).message }) + '\n'
+          );
+        } else {
+          console.log((err as Error).message);
+        }
+      }
+    });
+  return events;
 }
 
 export function cmdGetInstanceReplicas() {
