@@ -97,4 +97,50 @@ describe('remove-exceeding-tenant-instances', () => {
     expect(summary()).toContain('1 instance failures');
     expect(process.exitCode).toBe(1);
   });
+
+  it.each(['PERSONAL', 'PROFESSIONAL', 'BUSINESS'])(
+    'suspends tenants on the paid plan %s below the threshold',
+    async (planType) => {
+      (getTenantPlanMap as jest.Mock).mockResolvedValue({ t1: { planType } });
+      mockSuspend.mockResolvedValue(undefined);
+      await run();
+      expect(mockSuspend).toHaveBeenCalledTimes(1);
+      expect(summary()).toContain('suspended 1 instances');
+    }
+  );
+
+  it.each([
+    ['ENTERPRISE', { planType: 'ENTERPRISE' }],
+    [
+      'managed sub-workspace',
+      { planType: 'PROFESSIONAL', managedTenant: true }
+    ],
+    [
+      'billing exception',
+      { planType: 'BUSINESS', subWorkspaceBillingException: true }
+    ],
+    ['no plan type', { planType: '' }]
+  ])('does not suspend %s', async (_name, plan) => {
+    (getTenantPlanMap as jest.Mock).mockResolvedValue({ t1: plan });
+    await run();
+    expect(mockSuspend).not.toHaveBeenCalled();
+    expect(summary()).toContain('suspended 0 instances');
+  });
+
+  it('does not suspend a paid tenant at or above the threshold', async () => {
+    (getTenantPlanMap as jest.Mock).mockResolvedValue({
+      t1: { planType: 'PERSONAL' }
+    });
+    (getTenantTokenCounts as jest.Mock).mockResolvedValue([
+      { tenantId: 't1', remainingTokens: -200 }
+    ]);
+    await run();
+    expect(mockSuspend).not.toHaveBeenCalled();
+  });
+
+  it('does not suspend a tenant that has no plan record', async () => {
+    (getTenantPlanMap as jest.Mock).mockResolvedValue({});
+    await run();
+    expect(mockSuspend).not.toHaveBeenCalled();
+  });
 });

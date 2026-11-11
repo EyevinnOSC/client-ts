@@ -31,6 +31,10 @@ import {
   removeSubscriptionForTenant
 } from './subscription';
 import { getTenantPlanMap, getTenantTokenCounts } from './money';
+import {
+  isSuspendableByTokenBalance,
+  TOKEN_SUSPEND_THRESHOLD
+} from './suspend-policy';
 
 const ALREADY_SUSPENDED_REASON = 'Instance is already suspended';
 
@@ -97,7 +101,7 @@ export default function cmdAdmin() {
   admin
     .command('remove-exceeding-tenant-instances')
     .description(
-      'Suspend all instances for all tenants with a negative usage token balance'
+      'Suspend all instances for tenants below the token balance threshold (-200), on the Free plan and on self-service paid plans'
     )
     .option('--apply', 'Actually suspend instances, otherwise just a dry run')
     .action(async (options, command) => {
@@ -107,7 +111,7 @@ export default function cmdAdmin() {
         const tenantPlanMap = await getTenantPlanMap(environment);
         const tokenCounts = await getTenantTokenCounts(environment);
         const tenantsExceeding = tokenCounts.filter(
-          (tenant) => tenant.remainingTokens < -200
+          (tenant) => tenant.remainingTokens < TOKEN_SUSPEND_THRESHOLD
         );
         let instancesSuspended = 0;
         let instancesFailed = 0;
@@ -115,7 +119,8 @@ export default function cmdAdmin() {
         let tenantsFailed = 0;
         const tenantsExceedingCount = tenantsExceeding.length;
         for (const tenant of tenantsExceeding) {
-          if (tenantPlanMap[tenant.tenantId]?.planType === 'FREE') {
+          const plan = tenantPlanMap[tenant.tenantId];
+          if (isSuspendableByTokenBalance(plan)) {
             try {
               const instancesToRemove = await getInstancesToRemove(
                 tenant.tenantId,
@@ -123,7 +128,7 @@ export default function cmdAdmin() {
               );
               if (instancesToRemove.length > 0) {
                 console.log(
-                  `Tenant ${tenant.tenantId} has a negative or low token balance of ${tenant.remainingTokens} tokens and is on the 'FREE' plan`
+                  `Tenant ${tenant.tenantId} has a negative or low token balance of ${tenant.remainingTokens} tokens and is on the '${plan.planType}' plan`
                 );
                 console.log('Suspending all instances for this tenant...');
                 for (const item of instancesToRemove) {
