@@ -755,7 +755,7 @@ describe('osc token', () => {
 });
 
 describe('terminal safety', () => {
-  const evil = 'bad\u001b[2J\nname';
+  const evil = 'bad\u001b[2J\n‮​name';
   let out: string[];
   beforeEach(() => {
     out = [];
@@ -786,12 +786,15 @@ describe('terminal safety', () => {
       'a\\x1bb\\x0ac\\x9bd\\x7f'
     );
     expect(safeText('plain åäö')).toBe('plain åäö');
+    expect(safeText('a\u202eb\u200bc')).toBe('a\\u202eb\\u200bc');
   });
 
   it('prints a hostile name escaped in text mode and unchanged with --json', async () => {
     await run('token', 'list');
     const text = out.join('\n');
-    expect(text).toContain('bad\\x1b[2J\\x0aname');
+    expect(text).toContain('bad\\x1b[2J\\x0a\\u202e\\u200bname');
+    expect(text).not.toContain('‮');
+    expect(text).not.toContain('​');
     expect(text).not.toContain('\u001b');
     out.length = 0;
     await run('--json', 'token', 'list');
@@ -811,6 +814,21 @@ describe('csv formula safety', () => {
       '2026-11-25T10:00:00.000Z'
     );
     expect(csvField(-5)).toBe('-5');
+    expect(csvField(3.5)).toBe('3.5');
+  });
+
+  it('also covers non-strings, leading whitespace, pipe and fullwidth look-alikes', () => {
+    expect(csvField({ toString: () => '=1+1' })).toBe(`"'=1+1"`);
+    expect(csvField(true)).toBe('true');
+    expect(csvField(NaN)).toBe('NaN');
+    expect(csvField(' =1+1')).toBe(`"' =1+1"`);
+    expect(csvField('  \t-2')).toBe(`"'  \t-2"`);
+    expect(csvField('|cmd')).toBe(`"'|cmd"`);
+    expect(csvField('\uFF1D1')).toBe(`"'\uFF1D1"`);
+    expect(csvField('\uFF0B1')).toBe(`"'\uFF0B1"`);
+    expect(csvField('\uFF0D1')).toBe(`"'\uFF0D1"`);
+    expect(csvField('\uFF201')).toBe(`"'\uFF201"`);
+    expect(csvField('a =b')).toBe('a =b');
   });
 
   it('applies to every column and leaves NDJSON bytes unchanged', async () => {

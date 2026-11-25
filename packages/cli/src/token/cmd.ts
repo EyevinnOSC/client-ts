@@ -23,15 +23,19 @@ import { MAX_EXPORT_ROWS, csvHeader, csvRow, splitWindows } from './export';
 
 const TEMPLATES =
   'viewer, deployer, ci-publisher, agent-runner, mcp-readonly, full';
-// eslint-disable-next-line no-control-regex
-const CONTROL_CHARS = /[\x00-\x1f\x7f-\x9f]/g;
+const CONTROL_CHARS = /[\p{Cc}\p{Cf}]/gu;
 
-/** Text mode only: show control characters as \xNN so output cannot drive the terminal. */
+/**
+ * Text mode only: show control and format characters (C0, C1, zero-width,
+ * bidi overrides) as \xNN or \uXXXX so output cannot drive or spoof the terminal.
+ */
 export function safeText(value: unknown): string {
-  return String(value).replace(
-    CONTROL_CHARS,
-    (ch) => `\\x${ch.charCodeAt(0).toString(16).padStart(2, '0')}`
-  );
+  return String(value).replace(CONTROL_CHARS, (ch) => {
+    const code = ch.charCodeAt(0);
+    return code <= 0xff
+      ? `\\x${code.toString(16).padStart(2, '0')}`
+      : `\\u${code.toString(16).padStart(4, '0')}`;
+  });
 }
 
 const AUDIT_PAGE_MAX = 500;

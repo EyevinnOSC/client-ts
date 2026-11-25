@@ -41,15 +41,14 @@ export const MAX_EXPORT_ROWS = 500000;
  */
 export function csvField(value: unknown): string {
   if (value === undefined || value === null) return '';
-  let text = typeof value === 'string' ? value : String(value);
-  let forceQuote = false;
-  if (typeof value === 'string' && /^[=+\-@\t\r]/.test(text)) {
-    text = `'${text}`;
-    forceQuote = true;
-  }
-  return forceQuote || /[",\r\n]/.test(text)
-    ? `"${text.replace(/"/g, '""')}"`
-    : text;
+  const text = typeof value === 'string' ? value : String(value);
+  const isNumber = typeof value === 'number' && Number.isFinite(value);
+  // Test the final text (any non-number, however it became a string), also
+  // after leading whitespace, and include the fullwidth look-alikes.
+  const formula =
+    !isNumber && /^[\t\r]|^\s*[=+\-@|\uFF1D\uFF0B\uFF0D\uFF20]/.test(text);
+  const out = formula ? `'${text}` : text;
+  return formula || /[",\r\n]/.test(out) ? `"${out.replace(/"/g, '""')}"` : out;
 }
 
 export function csvHeader(): string {
