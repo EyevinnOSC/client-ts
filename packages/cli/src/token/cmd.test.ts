@@ -2,8 +2,8 @@ import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 import { Command } from 'commander';
-import { cmdToken } from './cmd';
-import { csvField, splitWindows } from './export';
+import { cmdToken, safeText } from './cmd';
+import { csvField, csvRow, splitWindows } from './export';
 import { confirm } from '../user/util';
 
 jest.mock('fs', () => {
@@ -751,6 +751,110 @@ describe('osc token', () => {
       );
       expect(consoleErr.join('').match(/own tokens only/g)).toHaveLength(1);
     });
+  });
+});
+
+describe('terminal safety', () => {
+  const evil = 'bad\u001b[2J\nname';
+  let out: string[];
+  beforeEach(() => {
+    out = [];
+    process.env.OSC_ACCESS_TOKEN = 'fake-pat';
+    global.fetch = (async () =>
+      new Response(
+        JSON.stringify({
+          items: [{ ...record, name: evil }],
+          scope: 'tenant'
+        }),
+        { status: 200, headers: { 'content-type': 'application/json' } }
+      )) as unknown as typeof fetch;
+    jest
+      .spyOn(console, 'log')
+      .mockImplementation((...a) => void out.push(a.join(' ')));
+    jest.spyOn(process.stdout, 'write').mockImplementation(((c: unknown) => {
+      out.push(String(c));
+      return true;
+    }) as never);
+  });
+  afterEach(() => {
+    jest.restoreAllMocks();
+    global.fetch = realFetch;
+  });
+
+  it('safeText escapes C0 and C1 controls and keeps ordinary text', () => {
+    expect(safeText('a\u001bb\nc\u009bd\u007f')).toBe(
+      'a\\x1bb\\x0ac\\x9bd\\x7f'
+    );
+    expect(safeText('plain åäö')).toBe('plain åäö');
+  });
+
+  it('prints a hostile name escaped in text mode and unchanged with --json', async () => {
+    await run('token', 'list');
+    const text = out.join('\n');
+    expect(text).toContain('bad\\x1b[2J\\x0aname');
+    expect(text).not.toContain('\u001b');
+    out.length = 0;
+    await run('--json', 'token', 'list');
+    expect(JSON.parse(out.join('')).items[0].name).toBe(evil);
+  });
+});
+
+describe('csv formula safety', () => {
+  it('prefixes and quotes a formula-like value, leaves ordinary values alone', () => {
+    expect(csvField('=1+1')).toBe(`"'=1+1"`);
+    expect(csvField('+1')).toBe(`"'+1"`);
+    expect(csvField('-1x')).toBe(`"'-1x"`);
+    expect(csvField('@a')).toBe(`"'@a"`);
+    expect(csvField('\tx')).toBe(`"'\tx"`);
+    expect(csvField('ordinary')).toBe('ordinary');
+    expect(csvField('2026-11-25T10:00:00.000Z')).toBe(
+      '2026-11-25T10:00:00.000Z'
+    );
+    expect(csvField(-5)).toBe('-5');
+  });
+
+  it('applies to every column and leaves NDJSON bytes unchanged', async () => {
+    const event = {
+      eventId: 'e1',
+      ts: '2026-11-25T10:00:00.000Z',
+      kind: 'token.created',
+      reason: '=cmd',
+      resource: '@x',
+      details: { name: '=1+1' }
+    };
+    const row = csvRow(event);
+    expect(row).toContain(`"'=cmd"`);
+    expect(row).toContain(`"'@x"`);
+    expect(row).toContain('e1,2026-11-25T10:00:00.000Z');
+    // NDJSON is JSON.stringify of the event, byte for byte.
+    const out: string[] = [];
+    process.env.OSC_ACCESS_TOKEN = 'fake-pat';
+    global.fetch = (async () =>
+      new Response(JSON.stringify({ items: [event], scope: 'tenant' }), {
+        status: 200,
+        headers: { 'content-type': 'application/json' }
+      })) as unknown as typeof fetch;
+    jest.spyOn(process.stdout, 'write').mockImplementation(((
+      c: unknown,
+      cb?: unknown
+    ) => {
+      out.push(String(c));
+      if (typeof cb === 'function') cb();
+      return true;
+    }) as never);
+    await run(
+      'token',
+      'audit',
+      '--export',
+      'ndjson',
+      '--from',
+      '2026-11-25T10:00:00.000Z',
+      '--to',
+      '2026-11-25T11:00:00.000Z'
+    );
+    jest.restoreAllMocks();
+    global.fetch = realFetch;
+    expect(out.join('')).toBe(JSON.stringify(event) + '\n');
   });
 });
 

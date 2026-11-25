@@ -23,6 +23,17 @@ import { MAX_EXPORT_ROWS, csvHeader, csvRow, splitWindows } from './export';
 
 const TEMPLATES =
   'viewer, deployer, ci-publisher, agent-runner, mcp-readonly, full';
+// eslint-disable-next-line no-control-regex
+const CONTROL_CHARS = /[\x00-\x1f\x7f-\x9f]/g;
+
+/** Text mode only: show control characters as \xNN so output cannot drive the terminal. */
+export function safeText(value: unknown): string {
+  return String(value).replace(
+    CONTROL_CHARS,
+    (ch) => `\\x${ch.charCodeAt(0).toString(16).padStart(2, '0')}`
+  );
+}
+
 const AUDIT_PAGE_MAX = 500;
 const AUDIT_READ_DEFAULT = 100;
 
@@ -42,7 +53,7 @@ function fail(command: Cmd, message: string) {
   if (isJson(command)) {
     process.stderr.write(JSON.stringify({ error: message }) + '\n');
   } else {
-    console.error(message);
+    console.error(safeText(message));
   }
   process.exitCode = 1;
 }
@@ -84,19 +95,21 @@ function isoOf(epochSeconds: number): string {
 
 function describeToken(token: AccessToken): string[] {
   return [
-    `Id:             ${token.patId}`,
-    `Name:           ${token.name}`,
-    `Description:    ${token.description || '-'}`,
-    `Status:         ${token.status}`,
+    `Id:             ${safeText(token.patId)}`,
+    `Name:           ${safeText(token.name)}`,
+    `Description:    ${safeText(token.description || '-')}`,
+    `Status:         ${safeText(token.status)}`,
     `Expires:        ${isoOf(token.exp)}`,
-    `Policy version: ${token.policyVersion}`,
-    `Enforcement:    ${token.enforcement}`,
-    `Audit level:    ${token.auditLevel}${
-      token.auditUntil ? ` (until ${token.auditUntil})` : ''
+    `Policy version: ${safeText(token.policyVersion)}`,
+    `Enforcement:    ${safeText(token.enforcement)}`,
+    `Audit level:    ${safeText(token.auditLevel)}${
+      token.auditUntil ? ` (until ${safeText(token.auditUntil)})` : ''
     }`,
-    `Last used:      ${token.lastUsedAt ?? '-'}`,
-    `Created:        ${token.createdAt} by ${token.createdBy}`,
-    `Policy:         ${JSON.stringify(token.policy)}`
+    `Last used:      ${safeText(token.lastUsedAt ?? '-')}`,
+    `Created:        ${safeText(token.createdAt)} by ${safeText(
+      token.createdBy
+    )}`,
+    `Policy:         ${safeText(JSON.stringify(token.policy))}`
   ];
 }
 
@@ -191,7 +204,9 @@ export function cmdToken() {
               isoOf(t.exp),
               `v${t.policyVersion}`,
               t.lastUsedAt ?? '-'
-            ].join('\t')
+            ]
+              .map(safeText)
+              .join('\t')
           );
         }
       } catch (err) {
@@ -444,7 +459,9 @@ export function cmdToken() {
         } else if (result.allowed) {
           console.log('allowed');
         } else {
-          console.log(`denied${result.reason ? `: ${result.reason}` : ''}`);
+          console.log(
+            `denied${result.reason ? `: ${safeText(result.reason)}` : ''}`
+          );
         }
       } catch (err) {
         fail(command, messageOf(err));
@@ -536,7 +553,9 @@ async function readAudit(
         e.patId ?? '-',
         e.userId ?? '-',
         e.reason ?? '-'
-      ].join('\t')
+      ]
+        .map(safeText)
+        .join('\t')
     );
   }
 }

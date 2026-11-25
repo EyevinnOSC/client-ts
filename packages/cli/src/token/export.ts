@@ -33,11 +33,23 @@ export const MAX_WINDOW_MS = 31 * 24 * 3600 * 1000;
 /** ADR-0068 decision 8: and at most 500,000 events. */
 export const MAX_EXPORT_ROWS = 500000;
 
-/** RFC 4180: quote a field that holds a comma, a quote or a line break. */
+/**
+ * RFC 4180: quote a field that holds a comma, a quote or a line break.
+ * A string that starts with = + - @ tab or CR would run as a formula in a
+ * spreadsheet, so it gets a leading single quote and is always quoted. This is
+ * a deliberate deviation from a literal "flat CSV"; NDJSON stays unmodified.
+ */
 export function csvField(value: unknown): string {
   if (value === undefined || value === null) return '';
-  const text = typeof value === 'string' ? value : String(value);
-  return /[",\r\n]/.test(text) ? `"${text.replace(/"/g, '""')}"` : text;
+  let text = typeof value === 'string' ? value : String(value);
+  let forceQuote = false;
+  if (typeof value === 'string' && /^[=+\-@\t\r]/.test(text)) {
+    text = `'${text}`;
+    forceQuote = true;
+  }
+  return forceQuote || /[",\r\n]/.test(text)
+    ? `"${text.replace(/"/g, '""')}"`
+    : text;
 }
 
 export function csvHeader(): string {
