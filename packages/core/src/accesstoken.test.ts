@@ -205,35 +205,21 @@ describe('accessTokenErrorFactory', () => {
       headers: { 'content-type': 'application/json' }
     });
 
-  test('keeps reason and code of a 403 in the message', async () => {
+  test('turns a 403 {reason} into a FetchError with the reason and status', async () => {
     const err = await accessTokenErrorFactory(
-      jsonResponse(403, {
-        reason: 'denied for you',
-        code: 'insufficient_scope'
-      })
+      jsonResponse(403, { reason: 'insufficient_scope' })
     );
     expect(err).toBeInstanceOf(FetchError);
     expect(err.httpCode).toEqual(403);
-    expect(err.message).toContain('denied for you');
-    expect(err.message).toContain('insufficient_scope');
+    expect(err.message).toEqual('insufficient_scope');
   });
 
-  test('uses the reason alone when there is no code', async () => {
+  test('keeps a multi-word reason as the message', async () => {
     const err = await accessTokenErrorFactory(
       jsonResponse(409, { reason: 'policy version mismatch' })
     );
     expect(err.httpCode).toEqual(409);
     expect(err.message).toEqual('policy version mismatch');
-  });
-
-  test('does not repeat a code that the reason already contains', async () => {
-    const err = await accessTokenErrorFactory(
-      jsonResponse(403, {
-        reason: 'insufficient_scope',
-        code: 'insufficient_scope'
-      })
-    );
-    expect(err.message).toEqual('insufficient_scope');
   });
 
   test('uses the body text of a non-JSON error', async () => {

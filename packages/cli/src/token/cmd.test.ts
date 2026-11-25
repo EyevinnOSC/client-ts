@@ -787,6 +787,7 @@ describe('terminal safety', () => {
     );
     expect(safeText('plain åäö')).toBe('plain åäö');
     expect(safeText('a\u202eb\u200bc')).toBe('a\\u202eb\\u200bc');
+    expect(safeText('a\u{e0001}b')).toBe('a\\u{e0001}b');
   });
 
   it('prints a hostile name escaped in text mode and unchanged with --json', async () => {

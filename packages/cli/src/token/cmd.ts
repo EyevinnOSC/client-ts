@@ -31,10 +31,11 @@ const CONTROL_CHARS = /[\p{Cc}\p{Cf}]/gu;
  */
 export function safeText(value: unknown): string {
   return String(value).replace(CONTROL_CHARS, (ch) => {
-    const code = ch.charCodeAt(0);
-    return code <= 0xff
-      ? `\\x${code.toString(16).padStart(2, '0')}`
-      : `\\u${code.toString(16).padStart(4, '0')}`;
+    const code = ch.codePointAt(0) as number;
+    if (code <= 0xff) return `\\x${code.toString(16).padStart(2, '0')}`;
+    return code <= 0xffff
+      ? `\\u${code.toString(16).padStart(4, '0')}`
+      : `\\u{${code.toString(16)}}`;
   });
 }
 

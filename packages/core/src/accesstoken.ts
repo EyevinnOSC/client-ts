@@ -153,24 +153,22 @@ export interface AuditEventsOptions {
 }
 
 /**
- * Error factory of this module. Keeps the server's `code` next to its
- * `reason` in the message (for example `insufficient_scope`), which the
- * default factory drops. `FetchError` and the default factory are unchanged.
+ * Error factory of this module. token-service answers errors with
+ * `{ reason }` (for example `insufficient_scope`, `insufficient_role`,
+ * `policy version mismatch`); the reason becomes the `FetchError` message and
+ * the status becomes `httpCode`. `FetchError` and the default factory are
+ * unchanged for existing callers.
  */
 export const accessTokenErrorFactory: ErrorFactory = async (response) => {
   if (response.headers.get('content-type')?.includes('application/json')) {
     const res = (await response.json()) as {
       message?: string;
       reason?: string;
-      code?: unknown;
     } | null;
-    const text: string = res?.message ?? res?.reason ?? JSON.stringify(res);
-    const code: unknown = res?.code;
-    const message =
-      typeof code === 'string' && code.length > 0 && !text.includes(code)
-        ? `${text} (${code})`
-        : text;
-    return new FetchError({ message, httpCode: response.status });
+    return new FetchError({
+      message: res?.message ?? res?.reason ?? JSON.stringify(res),
+      httpCode: response.status
+    });
   }
   return new FetchError({
     message: await response.text(),
