@@ -56,3 +56,31 @@ export {
   InstanceEventsOptions,
   InstanceEventsResponse
 } from './instance-events';
+export {
+  listAccessTokens,
+  getAccessToken,
+  createAccessToken,
+  replaceAccessTokenPolicy,
+  updateAccessToken,
+  deleteAccessToken,
+  simulateAccessToken,
+  listAuditEvents,
+  iterateAuditEvents,
+  accessTokenErrorFactory,
+  AccessToken,
+  AccessTokenStatus,
+  AccessTokenEnforcement,
+  AccessTokenAuditLevel,
+  AccessTokenPage,
+  AccessTokenPatch,
+  CreatedAccessToken,
+  CreateAccessTokenBody,
+  ListAccessTokensOptions,
+  SimulateAccessTokenResult,
+  TokenPolicy,
+  PolicyStatement,
+  AuditEvent,
+  AuditFilter,
+  AuditEventsPage,
+  AuditEventsOptions
+} from './accesstoken';
